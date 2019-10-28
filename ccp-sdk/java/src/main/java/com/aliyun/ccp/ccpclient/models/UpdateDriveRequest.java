@@ -17,7 +17,7 @@ public class UpdateDriveRequest extends TeaModel {
     public String status;
 
     @NameInMap("total_size")
-    public long totalSize;
+    public Long totalSize;
 
 }
 

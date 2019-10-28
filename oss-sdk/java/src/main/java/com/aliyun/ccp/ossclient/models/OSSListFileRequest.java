@@ -14,7 +14,7 @@ public class OSSListFileRequest extends TeaModel {
     public String imageUrlProcess;
 
     @NameInMap("limit")
-    public long limit;
+    public Long limit;
 
     @NameInMap("marker")
     public String marker;

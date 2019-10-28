@@ -17,7 +17,7 @@ public class BaseCreateFileRequest extends TeaModel {
     public UploadPartInfo[] partInfoList;
 
     @NameInMap("size")
-    public long size;
+    public Long size;
 
     @NameInMap("type")
     public String type;

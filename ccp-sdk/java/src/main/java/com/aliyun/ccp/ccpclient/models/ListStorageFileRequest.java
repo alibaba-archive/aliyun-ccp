@@ -5,7 +5,7 @@ import com.aliyun.tea.*;
 
 public class ListStorageFileRequest extends TeaModel {
     @NameInMap("limit")
-    public long limit;
+    public Long limit;
 
     @NameInMap("marker")
     public String marker;

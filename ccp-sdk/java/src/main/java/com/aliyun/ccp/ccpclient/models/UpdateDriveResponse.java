@@ -38,10 +38,10 @@ public class UpdateDriveResponse extends TeaModel {
     public String storeId;
 
     @NameInMap("total_size")
-    public long totalSize;
+    public Long totalSize;
 
     @NameInMap("used_size")
-    public long usedSize;
+    public Long usedSize;
 
 }
 

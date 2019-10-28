@@ -10,11 +10,26 @@ public class AccountAccessTokenResponse extends TeaModel {
     @NameInMap("access_token")
     public String accessToken;
 
+    @NameInMap("avatar")
+    public String avatar;
+
+    @NameInMap("default_drive_id")
+    public String defaultDriveId;
+
+    @NameInMap("exist_link")
+    public LinkInfo[] existLink;
+
     @NameInMap("expire_time")
     public String expireTime;
 
     @NameInMap("expires_in")
-    public long expiresIn;
+    public Long expiresIn;
+
+    @NameInMap("need_link")
+    public boolean needLink;
+
+    @NameInMap("nick_name")
+    public String nickName;
 
     @NameInMap("refresh_token")
     public String refreshToken;
@@ -30,6 +45,9 @@ public class AccountAccessTokenResponse extends TeaModel {
 
     @NameInMap("user_id")
     public String userId;
+
+    @NameInMap("user_name")
+    public String userName;
 
 }
 

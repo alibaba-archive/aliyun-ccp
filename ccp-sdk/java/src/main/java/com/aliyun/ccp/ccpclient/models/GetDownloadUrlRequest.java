@@ -8,7 +8,7 @@ public class GetDownloadUrlRequest extends TeaModel {
     public String driveId;
 
     @NameInMap("expire_sec")
-    public long expireSec;
+    public Long expireSec;
 
     @NameInMap("file_id")
     public String fileId;

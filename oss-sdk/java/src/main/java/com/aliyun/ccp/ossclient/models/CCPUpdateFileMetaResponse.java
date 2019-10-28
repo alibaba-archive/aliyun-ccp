@@ -46,6 +46,12 @@ public class CCPUpdateFileMetaResponse extends TeaModel {
     @NameInMap("hidden")
     public boolean hidden;
 
+    @NameInMap("image_media_metadata")
+    public ImageMediaResponse[] imageMediaMetadata;
+
+    @NameInMap("labels")
+    public String[] labels;
+
     @NameInMap("meta")
     public String meta;
 
@@ -56,16 +62,13 @@ public class CCPUpdateFileMetaResponse extends TeaModel {
     public String parentFileId;
 
     @NameInMap("size")
-    public long size;
+    public Long size;
 
     @NameInMap("starred")
     public boolean starred;
 
     @NameInMap("status")
     public String status;
-
-    @NameInMap("tags")
-    public java.util.Map<String, Object> tags;
 
     @NameInMap("thumbnail")
     public String thumbnail;
