@@ -11,10 +11,7 @@
     "namespace": "Aliyun.SDK.CCP.CCPClient",
     "baseClient": ""
   },
-  "go": {
-    "baseClient": "gitlab.alibaba-inc.com/alicloud-sdk/ccp-sdk-release/baseclient/"
-  },
   "typescript": {
-    "baseClient": "@ali/ccp_baseclient"
+    "baseClient": "@alicloud/ccp-baseclient"
   }
 }

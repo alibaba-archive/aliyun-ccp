@@ -12,6 +12,6 @@
     "baseClient": ""
   },
   "typescript": {
-    "baseClient": "@ali/ccp_baseclient"
+    "baseClient": "@alicloud/ccp-baseclient"
   }
 }
