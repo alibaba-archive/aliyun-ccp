@@ -64,6 +64,14 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         [Validation(Required=false)]
         public bool Hidden { get; set; }
 
+        [NameInMap("image_media_metadata")]
+        [Validation(Required=false)]
+        public List<ImageMediaResponse> ImageMediaMetadata { get; set; }
+
+        [NameInMap("labels")]
+        [Validation(Required=false)]
+        public List<string> Labels { get; set; }
+
         [NameInMap("meta")]
         [Validation(Required=false)]
         public string Meta { get; set; }
@@ -87,10 +95,6 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         [NameInMap("status")]
         [Validation(Required=false)]
         public string Status { get; set; }
-
-        [NameInMap("tags")]
-        [Validation(Required=false)]
-        public object Tags { get; set; }
 
         [NameInMap("thumbnail")]
         [Validation(Required=false)]

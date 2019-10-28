@@ -14,6 +14,291 @@ namespace Aliyun.SDK.CCP.CCPClient
         public Client(Config config): base(config.ToMap())
         { }
 
+        public AccountAccessTokenResponse cancelLink(CancelLinkRequest request, RuntimeOptions runtime) {
+            request.Validate();
+            runtime.Validate();
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>(){
+                {"timeouted", "retry"},
+                {"readTimeout", runtime.ReadTimeout},
+                {"connectTimeout", runtime.ConnectTimeout},
+                {"localAddr", runtime.LocalAddr},
+                {"httpProxy", runtime.HttpProxy},
+                {"httpsProxy", runtime.HttpsProxy},
+                {"noProxy", runtime.NoProxy},
+                {"maxIdleConns", runtime.MaxIdleConns},
+                {"socks5Proxy", runtime.Socks5Proxy},
+                {"socks5NetWork", runtime.Socks5NetWork},
+                {"retry", new Dictionary<string, object>(){
+                    {"retryable", runtime.Autoretry},
+                    {"maxAttempts", this._defaultNumber(runtime.MaxAttempts, 3)},
+                }},
+                {"backoff", new Dictionary<string, object>(){
+                    {"policy", this._default(runtime.BackoffPolicy, "no")},
+                    {"period", this._defaultNumber(runtime.BackoffPeriod, 1)},
+                }},
+                {"ignoreSSL", runtime.IgnoreSSL},
+            };
+
+            TeaRequest _lastRequest = null;
+            Exception _lastException = null;
+            long _now = System.DateTime.Now.Millisecond;
+            int _retryTimes = 0;
+            while (TeaCore.AllowRetry((Dictionary<string, object>) runtime_["retry"], _retryTimes, _now)) {
+                if (_retryTimes > 0) {
+                    int backoffTime = TeaCore.GetBackoffTime((Dictionary<string, object>)runtime_["backoff"], _retryTimes);
+                    if (backoffTime > 0) {
+                        TeaCore.Sleep(backoffTime);
+                    }
+                }
+                _retryTimes = _retryTimes + 1;
+                try {
+                    TeaRequest request_ = new TeaRequest();
+                    string accesskeyId = this._getAccessKeyId();
+                    string accessKeySecret = this._getAccessKeySecret();
+                    string accessToken = this._getAccessToken();
+                    request_.Protocol = this._getProtocol(_protocol, "https");
+                    request_.Method = "POST";
+                    request_.Pathname = "/v2/account/cancel_link";
+                    request_.Headers = new Dictionary<string, string>(){
+                        {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"content-type", "application/json; charset=utf-8"},
+                    };
+                    if (this._notEmpty(accessToken)) {
+                        request_.Headers["authorization"] = "Bearer " + accessToken;
+                    } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
+                        request_.Headers["date"] = this._getRFC2616Date();
+                        request_.Headers["accept"] = "application/json";
+                        request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
+                        request_.Headers["x-acs-signature-version"] = "1.0";
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
+                    }
+                    request_.Body = this._toJSONString(request);
+                    _lastRequest = request_;
+                    TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
+
+                    if (this._isStatusCode(response_, 200)) {
+                        return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge(
+                            new Dictionary<string, object>(){
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                            },
+                            this._readAsJSON(response_)
+                        ));
+                    }
+                    if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
+                        return TeaModel.ToObject<AccountAccessTokenResponse>(new Dictionary<string, object>(){
+                            {"data", new Dictionary<string, object>(){
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"statusCode", response_.StatusCode},
+                                {"statusMessage", response_.StatusMessage},
+                            }},
+                            {"message", response_.Headers["x-ca-error-message"]},
+                        });
+                    }
+                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge(
+                        new Dictionary<string, object>(){
+                            {"data", new Dictionary<string, object>(){
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"statusCode", response_.StatusCode},
+                                {"statusMessage", response_.StatusMessage},
+                            }},
+                        },
+                        this._readAsJSON(response_)
+                    ));
+                } catch (Exception e) {
+                    if (TeaCore.IsRetryable(e)) {
+                        _lastException = e;
+                        continue;
+                    }
+                    throw e;
+                }
+            }
+
+            throw new TeaUnretryableException(_lastRequest, _lastException);
+        }
+
+        public AccountAccessTokenResponse confirmLink(ConfirmLinkRequest request, RuntimeOptions runtime) {
+            request.Validate();
+            runtime.Validate();
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>(){
+                {"timeouted", "retry"},
+                {"readTimeout", runtime.ReadTimeout},
+                {"connectTimeout", runtime.ConnectTimeout},
+                {"localAddr", runtime.LocalAddr},
+                {"httpProxy", runtime.HttpProxy},
+                {"httpsProxy", runtime.HttpsProxy},
+                {"noProxy", runtime.NoProxy},
+                {"maxIdleConns", runtime.MaxIdleConns},
+                {"socks5Proxy", runtime.Socks5Proxy},
+                {"socks5NetWork", runtime.Socks5NetWork},
+                {"retry", new Dictionary<string, object>(){
+                    {"retryable", runtime.Autoretry},
+                    {"maxAttempts", this._defaultNumber(runtime.MaxAttempts, 3)},
+                }},
+                {"backoff", new Dictionary<string, object>(){
+                    {"policy", this._default(runtime.BackoffPolicy, "no")},
+                    {"period", this._defaultNumber(runtime.BackoffPeriod, 1)},
+                }},
+                {"ignoreSSL", runtime.IgnoreSSL},
+            };
+
+            TeaRequest _lastRequest = null;
+            Exception _lastException = null;
+            long _now = System.DateTime.Now.Millisecond;
+            int _retryTimes = 0;
+            while (TeaCore.AllowRetry((Dictionary<string, object>) runtime_["retry"], _retryTimes, _now)) {
+                if (_retryTimes > 0) {
+                    int backoffTime = TeaCore.GetBackoffTime((Dictionary<string, object>)runtime_["backoff"], _retryTimes);
+                    if (backoffTime > 0) {
+                        TeaCore.Sleep(backoffTime);
+                    }
+                }
+                _retryTimes = _retryTimes + 1;
+                try {
+                    TeaRequest request_ = new TeaRequest();
+                    string accesskeyId = this._getAccessKeyId();
+                    string accessKeySecret = this._getAccessKeySecret();
+                    string accessToken = this._getAccessToken();
+                    request_.Protocol = this._getProtocol(_protocol, "https");
+                    request_.Method = "POST";
+                    request_.Pathname = "/v2/account/confirm_link";
+                    request_.Headers = new Dictionary<string, string>(){
+                        {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"content-type", "application/json; charset=utf-8"},
+                    };
+                    if (this._notEmpty(accessToken)) {
+                        request_.Headers["authorization"] = "Bearer " + accessToken;
+                    } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
+                        request_.Headers["date"] = this._getRFC2616Date();
+                        request_.Headers["accept"] = "application/json";
+                        request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
+                        request_.Headers["x-acs-signature-version"] = "1.0";
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
+                    }
+                    request_.Body = this._toJSONString(request);
+                    _lastRequest = request_;
+                    TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
+
+                    if (this._isStatusCode(response_, 200)) {
+                        return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge(
+                            new Dictionary<string, object>(){
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                            },
+                            this._readAsJSON(response_)
+                        ));
+                    }
+                    if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
+                        return TeaModel.ToObject<AccountAccessTokenResponse>(new Dictionary<string, object>(){
+                            {"data", new Dictionary<string, object>(){
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"statusCode", response_.StatusCode},
+                                {"statusMessage", response_.StatusMessage},
+                            }},
+                            {"message", response_.Headers["x-ca-error-message"]},
+                        });
+                    }
+                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge(
+                        new Dictionary<string, object>(){
+                            {"data", new Dictionary<string, object>(){
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"statusCode", response_.StatusCode},
+                                {"statusMessage", response_.StatusMessage},
+                            }},
+                        },
+                        this._readAsJSON(response_)
+                    ));
+                } catch (Exception e) {
+                    if (TeaCore.IsRetryable(e)) {
+                        _lastException = e;
+                        continue;
+                    }
+                    throw e;
+                }
+            }
+
+            throw new TeaUnretryableException(_lastRequest, _lastException);
+        }
+
+        public void changePassword(DefaultChangePasswordRequest request, RuntimeOptions runtime) {
+            request.Validate();
+            runtime.Validate();
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>(){
+                {"timeouted", "retry"},
+                {"readTimeout", runtime.ReadTimeout},
+                {"connectTimeout", runtime.ConnectTimeout},
+                {"localAddr", runtime.LocalAddr},
+                {"httpProxy", runtime.HttpProxy},
+                {"httpsProxy", runtime.HttpsProxy},
+                {"noProxy", runtime.NoProxy},
+                {"maxIdleConns", runtime.MaxIdleConns},
+                {"socks5Proxy", runtime.Socks5Proxy},
+                {"socks5NetWork", runtime.Socks5NetWork},
+                {"retry", new Dictionary<string, object>(){
+                    {"retryable", runtime.Autoretry},
+                    {"maxAttempts", this._defaultNumber(runtime.MaxAttempts, 3)},
+                }},
+                {"backoff", new Dictionary<string, object>(){
+                    {"policy", this._default(runtime.BackoffPolicy, "no")},
+                    {"period", this._defaultNumber(runtime.BackoffPeriod, 1)},
+                }},
+                {"ignoreSSL", runtime.IgnoreSSL},
+            };
+
+            TeaRequest _lastRequest = null;
+            Exception _lastException = null;
+            long _now = System.DateTime.Now.Millisecond;
+            int _retryTimes = 0;
+            while (TeaCore.AllowRetry((Dictionary<string, object>) runtime_["retry"], _retryTimes, _now)) {
+                if (_retryTimes > 0) {
+                    int backoffTime = TeaCore.GetBackoffTime((Dictionary<string, object>)runtime_["backoff"], _retryTimes);
+                    if (backoffTime > 0) {
+                        TeaCore.Sleep(backoffTime);
+                    }
+                }
+                _retryTimes = _retryTimes + 1;
+                try {
+                    TeaRequest request_ = new TeaRequest();
+                    string accesskeyId = this._getAccessKeyId();
+                    string accessKeySecret = this._getAccessKeySecret();
+                    string accessToken = this._getAccessToken();
+                    request_.Protocol = this._getProtocol(_protocol, "https");
+                    request_.Method = "POST";
+                    request_.Pathname = "/v2/account/default/change_password";
+                    request_.Headers = new Dictionary<string, string>(){
+                        {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"content-type", "application/json; charset=utf-8"},
+                    };
+                    if (this._notEmpty(accessToken)) {
+                        request_.Headers["authorization"] = "Bearer " + accessToken;
+                    } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
+                        request_.Headers["date"] = this._getRFC2616Date();
+                        request_.Headers["accept"] = "application/json";
+                        request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
+                        request_.Headers["x-acs-signature-version"] = "1.0";
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
+                    }
+                    request_.Body = this._toJSONString(request);
+                    _lastRequest = request_;
+                    TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
+
+                    if (this._isStatusCode(response_, 204)) {
+                        return ;
+                    }
+                    if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
+                        return ;
+                    }
+                    return ;
+                } catch (Exception e) {
+                    if (TeaCore.IsRetryable(e)) {
+                        _lastException = e;
+                        continue;
+                    }
+                    throw e;
+                }
+            }
+
+            throw new TeaUnretryableException(_lastRequest, _lastException);
+        }
+
         public void setPassword(DefaultSetPasswordRequest request, RuntimeOptions runtime) {
             request.Validate();
             runtime.Validate();
@@ -95,7 +380,7 @@ namespace Aliyun.SDK.CCP.CCPClient
             throw new TeaUnretryableException(_lastRequest, _lastException);
         }
 
-        public AccountAccessTokenResponse loginByCode(LoginByCodeRequest request, RuntimeOptions runtime) {
+        public AccountAccessTokenResponse getAccessTokenByLinkInfo(GetAccessTokenByLinkInfoRequest request, RuntimeOptions runtime) {
             request.Validate();
             runtime.Validate();
             Dictionary<string, object> runtime_ = new Dictionary<string, object>(){
@@ -139,7 +424,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/account/external/login_by_code";
+                    request_.Pathname = "/v2/account/get_access_token_by_link_info";
                     request_.Headers = new Dictionary<string, string>(){
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
@@ -278,6 +563,312 @@ namespace Aliyun.SDK.CCP.CCPClient
                         });
                     }
                     return TeaModel.ToObject<Captcha>(TeaConverter.merge(
+                        new Dictionary<string, object>(){
+                            {"data", new Dictionary<string, object>(){
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"statusCode", response_.StatusCode},
+                                {"statusMessage", response_.StatusMessage},
+                            }},
+                        },
+                        this._readAsJSON(response_)
+                    ));
+                } catch (Exception e) {
+                    if (TeaCore.IsRetryable(e)) {
+                        _lastException = e;
+                        continue;
+                    }
+                    throw e;
+                }
+            }
+
+            throw new TeaUnretryableException(_lastRequest, _lastException);
+        }
+
+        public LinkInfoResponse getLinkInfo(GetByLinkInfoRequest request, RuntimeOptions runtime) {
+            request.Validate();
+            runtime.Validate();
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>(){
+                {"timeouted", "retry"},
+                {"readTimeout", runtime.ReadTimeout},
+                {"connectTimeout", runtime.ConnectTimeout},
+                {"localAddr", runtime.LocalAddr},
+                {"httpProxy", runtime.HttpProxy},
+                {"httpsProxy", runtime.HttpsProxy},
+                {"noProxy", runtime.NoProxy},
+                {"maxIdleConns", runtime.MaxIdleConns},
+                {"socks5Proxy", runtime.Socks5Proxy},
+                {"socks5NetWork", runtime.Socks5NetWork},
+                {"retry", new Dictionary<string, object>(){
+                    {"retryable", runtime.Autoretry},
+                    {"maxAttempts", this._defaultNumber(runtime.MaxAttempts, 3)},
+                }},
+                {"backoff", new Dictionary<string, object>(){
+                    {"policy", this._default(runtime.BackoffPolicy, "no")},
+                    {"period", this._defaultNumber(runtime.BackoffPeriod, 1)},
+                }},
+                {"ignoreSSL", runtime.IgnoreSSL},
+            };
+
+            TeaRequest _lastRequest = null;
+            Exception _lastException = null;
+            long _now = System.DateTime.Now.Millisecond;
+            int _retryTimes = 0;
+            while (TeaCore.AllowRetry((Dictionary<string, object>) runtime_["retry"], _retryTimes, _now)) {
+                if (_retryTimes > 0) {
+                    int backoffTime = TeaCore.GetBackoffTime((Dictionary<string, object>)runtime_["backoff"], _retryTimes);
+                    if (backoffTime > 0) {
+                        TeaCore.Sleep(backoffTime);
+                    }
+                }
+                _retryTimes = _retryTimes + 1;
+                try {
+                    TeaRequest request_ = new TeaRequest();
+                    string accesskeyId = this._getAccessKeyId();
+                    string accessKeySecret = this._getAccessKeySecret();
+                    string accessToken = this._getAccessToken();
+                    request_.Protocol = this._getProtocol(_protocol, "https");
+                    request_.Method = "POST";
+                    request_.Pathname = "/v2/account/get_link_info";
+                    request_.Headers = new Dictionary<string, string>(){
+                        {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"content-type", "application/json; charset=utf-8"},
+                    };
+                    if (this._notEmpty(accessToken)) {
+                        request_.Headers["authorization"] = "Bearer " + accessToken;
+                    } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
+                        request_.Headers["date"] = this._getRFC2616Date();
+                        request_.Headers["accept"] = "application/json";
+                        request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
+                        request_.Headers["x-acs-signature-version"] = "1.0";
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
+                    }
+                    request_.Body = this._toJSONString(request);
+                    _lastRequest = request_;
+                    TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
+
+                    if (this._isStatusCode(response_, 200)) {
+                        return TeaModel.ToObject<LinkInfoResponse>(TeaConverter.merge(
+                            new Dictionary<string, object>(){
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                            },
+                            this._readAsJSON(response_)
+                        ));
+                    }
+                    if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
+                        return TeaModel.ToObject<LinkInfoResponse>(new Dictionary<string, object>(){
+                            {"data", new Dictionary<string, object>(){
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"statusCode", response_.StatusCode},
+                                {"statusMessage", response_.StatusMessage},
+                            }},
+                            {"message", response_.Headers["x-ca-error-message"]},
+                        });
+                    }
+                    return TeaModel.ToObject<LinkInfoResponse>(TeaConverter.merge(
+                        new Dictionary<string, object>(){
+                            {"data", new Dictionary<string, object>(){
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"statusCode", response_.StatusCode},
+                                {"statusMessage", response_.StatusMessage},
+                            }},
+                        },
+                        this._readAsJSON(response_)
+                    ));
+                } catch (Exception e) {
+                    if (TeaCore.IsRetryable(e)) {
+                        _lastException = e;
+                        continue;
+                    }
+                    throw e;
+                }
+            }
+
+            throw new TeaUnretryableException(_lastRequest, _lastException);
+        }
+
+        public LinkInfoListResponse getLinkInfoByUserId(GetLinkInfoByUserIDRequest request, RuntimeOptions runtime) {
+            request.Validate();
+            runtime.Validate();
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>(){
+                {"timeouted", "retry"},
+                {"readTimeout", runtime.ReadTimeout},
+                {"connectTimeout", runtime.ConnectTimeout},
+                {"localAddr", runtime.LocalAddr},
+                {"httpProxy", runtime.HttpProxy},
+                {"httpsProxy", runtime.HttpsProxy},
+                {"noProxy", runtime.NoProxy},
+                {"maxIdleConns", runtime.MaxIdleConns},
+                {"socks5Proxy", runtime.Socks5Proxy},
+                {"socks5NetWork", runtime.Socks5NetWork},
+                {"retry", new Dictionary<string, object>(){
+                    {"retryable", runtime.Autoretry},
+                    {"maxAttempts", this._defaultNumber(runtime.MaxAttempts, 3)},
+                }},
+                {"backoff", new Dictionary<string, object>(){
+                    {"policy", this._default(runtime.BackoffPolicy, "no")},
+                    {"period", this._defaultNumber(runtime.BackoffPeriod, 1)},
+                }},
+                {"ignoreSSL", runtime.IgnoreSSL},
+            };
+
+            TeaRequest _lastRequest = null;
+            Exception _lastException = null;
+            long _now = System.DateTime.Now.Millisecond;
+            int _retryTimes = 0;
+            while (TeaCore.AllowRetry((Dictionary<string, object>) runtime_["retry"], _retryTimes, _now)) {
+                if (_retryTimes > 0) {
+                    int backoffTime = TeaCore.GetBackoffTime((Dictionary<string, object>)runtime_["backoff"], _retryTimes);
+                    if (backoffTime > 0) {
+                        TeaCore.Sleep(backoffTime);
+                    }
+                }
+                _retryTimes = _retryTimes + 1;
+                try {
+                    TeaRequest request_ = new TeaRequest();
+                    string accesskeyId = this._getAccessKeyId();
+                    string accessKeySecret = this._getAccessKeySecret();
+                    string accessToken = this._getAccessToken();
+                    request_.Protocol = this._getProtocol(_protocol, "https");
+                    request_.Method = "POST";
+                    request_.Pathname = "/v2/account/get_link_info_by_user_id";
+                    request_.Headers = new Dictionary<string, string>(){
+                        {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"content-type", "application/json; charset=utf-8"},
+                    };
+                    if (this._notEmpty(accessToken)) {
+                        request_.Headers["authorization"] = "Bearer " + accessToken;
+                    } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
+                        request_.Headers["date"] = this._getRFC2616Date();
+                        request_.Headers["accept"] = "application/json";
+                        request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
+                        request_.Headers["x-acs-signature-version"] = "1.0";
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
+                    }
+                    request_.Body = this._toJSONString(request);
+                    _lastRequest = request_;
+                    TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
+
+                    if (this._isStatusCode(response_, 200)) {
+                        return TeaModel.ToObject<LinkInfoListResponse>(TeaConverter.merge(
+                            new Dictionary<string, object>(){
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                            },
+                            this._readAsJSON(response_)
+                        ));
+                    }
+                    if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
+                        return TeaModel.ToObject<LinkInfoListResponse>(new Dictionary<string, object>(){
+                            {"data", new Dictionary<string, object>(){
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"statusCode", response_.StatusCode},
+                                {"statusMessage", response_.StatusMessage},
+                            }},
+                            {"message", response_.Headers["x-ca-error-message"]},
+                        });
+                    }
+                    return TeaModel.ToObject<LinkInfoListResponse>(TeaConverter.merge(
+                        new Dictionary<string, object>(){
+                            {"data", new Dictionary<string, object>(){
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"statusCode", response_.StatusCode},
+                                {"statusMessage", response_.StatusMessage},
+                            }},
+                        },
+                        this._readAsJSON(response_)
+                    ));
+                } catch (Exception e) {
+                    if (TeaCore.IsRetryable(e)) {
+                        _lastException = e;
+                        continue;
+                    }
+                    throw e;
+                }
+            }
+
+            throw new TeaUnretryableException(_lastRequest, _lastException);
+        }
+
+        public AccountAccessTokenResponse link(AccountLinkRequest request, RuntimeOptions runtime) {
+            request.Validate();
+            runtime.Validate();
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>(){
+                {"timeouted", "retry"},
+                {"readTimeout", runtime.ReadTimeout},
+                {"connectTimeout", runtime.ConnectTimeout},
+                {"localAddr", runtime.LocalAddr},
+                {"httpProxy", runtime.HttpProxy},
+                {"httpsProxy", runtime.HttpsProxy},
+                {"noProxy", runtime.NoProxy},
+                {"maxIdleConns", runtime.MaxIdleConns},
+                {"socks5Proxy", runtime.Socks5Proxy},
+                {"socks5NetWork", runtime.Socks5NetWork},
+                {"retry", new Dictionary<string, object>(){
+                    {"retryable", runtime.Autoretry},
+                    {"maxAttempts", this._defaultNumber(runtime.MaxAttempts, 3)},
+                }},
+                {"backoff", new Dictionary<string, object>(){
+                    {"policy", this._default(runtime.BackoffPolicy, "no")},
+                    {"period", this._defaultNumber(runtime.BackoffPeriod, 1)},
+                }},
+                {"ignoreSSL", runtime.IgnoreSSL},
+            };
+
+            TeaRequest _lastRequest = null;
+            Exception _lastException = null;
+            long _now = System.DateTime.Now.Millisecond;
+            int _retryTimes = 0;
+            while (TeaCore.AllowRetry((Dictionary<string, object>) runtime_["retry"], _retryTimes, _now)) {
+                if (_retryTimes > 0) {
+                    int backoffTime = TeaCore.GetBackoffTime((Dictionary<string, object>)runtime_["backoff"], _retryTimes);
+                    if (backoffTime > 0) {
+                        TeaCore.Sleep(backoffTime);
+                    }
+                }
+                _retryTimes = _retryTimes + 1;
+                try {
+                    TeaRequest request_ = new TeaRequest();
+                    string accesskeyId = this._getAccessKeyId();
+                    string accessKeySecret = this._getAccessKeySecret();
+                    string accessToken = this._getAccessToken();
+                    request_.Protocol = this._getProtocol(_protocol, "https");
+                    request_.Method = "POST";
+                    request_.Pathname = "/v2/account/link";
+                    request_.Headers = new Dictionary<string, string>(){
+                        {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"content-type", "application/json; charset=utf-8"},
+                    };
+                    if (this._notEmpty(accessToken)) {
+                        request_.Headers["authorization"] = "Bearer " + accessToken;
+                    } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
+                        request_.Headers["date"] = this._getRFC2616Date();
+                        request_.Headers["accept"] = "application/json";
+                        request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
+                        request_.Headers["x-acs-signature-version"] = "1.0";
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
+                    }
+                    request_.Body = this._toJSONString(request);
+                    _lastRequest = request_;
+                    TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
+
+                    if (this._isStatusCode(response_, 200)) {
+                        return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge(
+                            new Dictionary<string, object>(){
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                            },
+                            this._readAsJSON(response_)
+                        ));
+                    }
+                    if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
+                        return TeaModel.ToObject<AccountAccessTokenResponse>(new Dictionary<string, object>(){
+                            {"data", new Dictionary<string, object>(){
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"statusCode", response_.StatusCode},
+                                {"statusMessage", response_.StatusMessage},
+                            }},
+                            {"message", response_.Headers["x-ca-error-message"]},
+                        });
+                    }
+                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
