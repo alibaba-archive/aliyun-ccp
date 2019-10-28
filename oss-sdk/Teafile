@@ -1,0 +1,17 @@
+{
+  "scope": "alibabacloud",
+  "name": "OSSClient",
+  "version": "1.0.0",
+  "main": "./oss.tea",
+  "java": {
+    "package": "com.aliyun.ccp.ossclient",
+    "baseClient": "com.aliyun.ccp.baseclient.BaseClient"
+  },
+  "csharp": {
+    "namespace": "Aliyun.SDK.CCP.OSSClient",
+    "baseClient": ""
+  },
+  "typescript": {
+    "baseClient": "@ali/ccp_baseclient"
+  }
+}

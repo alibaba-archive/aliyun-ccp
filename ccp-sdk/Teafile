@@ -1,0 +1,20 @@
+{
+  "scope": "alibabacloud",
+  "name": "CCPClient",
+  "version": "1.0.0",
+  "main": "./ccp.tea",
+  "java": {
+    "package": "com.aliyun.ccp.ccpclient",
+    "baseClient": "com.aliyun.ccp.baseclient.BaseClient"
+  },
+  "csharp": {
+    "namespace": "Aliyun.SDK.CCP.CCPClient",
+    "baseClient": ""
+  },
+  "go": {
+    "baseClient": "gitlab.alibaba-inc.com/alicloud-sdk/ccp-sdk-release/baseclient/"
+  },
+  "typescript": {
+    "baseClient": "@ali/ccp_baseclient"
+  }
+}
