@@ -11,10 +11,10 @@ public class OSSListUploadedPartRequest extends TeaModel {
     public String filePath;
 
     @NameInMap("limit")
-    public long limit;
+    public Long limit;
 
     @NameInMap("part_number_marker")
-    public long partNumberMarker;
+    public Long partNumberMarker;
 
     @NameInMap("share_id")
     public String shareId;

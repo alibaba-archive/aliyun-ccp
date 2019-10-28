@@ -11,6 +11,299 @@ public class Client extends BaseClient {
         super(config.toMap());
     }
 
+    public AccountAccessTokenResponse cancelLink(CancelLinkRequest request, RuntimeOptions runtime) throws Exception {
+        java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
+            new TeaPair("timeouted", "retry"),
+            new TeaPair("readTimeout", runtime.readTimeout),
+            new TeaPair("connectTimeout", runtime.connectTimeout),
+            new TeaPair("localAddr", runtime.localAddr),
+            new TeaPair("httpProxy", runtime.httpProxy),
+            new TeaPair("httpsProxy", runtime.httpsProxy),
+            new TeaPair("noProxy", runtime.noProxy),
+            new TeaPair("maxIdleConns", runtime.maxIdleConns),
+            new TeaPair("socks5Proxy", runtime.socks5Proxy),
+            new TeaPair("socks5NetWork", runtime.socks5NetWork),
+            new TeaPair("retry", TeaConverter.buildMap(
+                new TeaPair("retryable", runtime.autoretry),
+                new TeaPair("maxAttempts", this._defaultNumber(runtime.maxAttempts, 3))
+            )),
+            new TeaPair("backoff", TeaConverter.buildMap(
+                new TeaPair("policy", this._default(runtime.backoffPolicy, "no")),
+                new TeaPair("period", this._defaultNumber(runtime.backoffPeriod, 1))
+            )),
+            new TeaPair("ignoreSSL", runtime.ignoreSSL)
+        );
+
+        TeaRequest _lastRequest = null;
+        long _now = System.currentTimeMillis();
+        int _retryTimes = 0;
+        while (Tea.allowRetry((java.util.Map<String, Object>) runtime_.get("retry"), _retryTimes, _now)) {
+            if (_retryTimes > 0) {
+                int backoffTime = Tea.getBackoffTime(runtime_.get("backoff"), _retryTimes);
+                if (backoffTime > 0) {
+                    Tea.sleep(backoffTime);
+                }
+            }
+            _retryTimes = _retryTimes + 1;
+            try {
+                TeaRequest request_ = new TeaRequest();
+                String accesskeyId = this._getAccessKeyId();
+                String accessKeySecret = this._getAccessKeySecret();
+                String accessToken = this._getAccessToken();
+                request_.protocol = this._getProtocol(_protocol, "https");
+                request_.method = "POST";
+                request_.pathname = "/v2/account/cancel_link";
+                request_.headers = TeaConverter.buildMap(
+                    new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                    new TeaPair("content-type", "application/json; charset=utf-8")
+                );
+                if (this._notEmpty(accessToken)) {
+                    request_.headers.put("authorization", "Bearer " + accessToken + "");
+                } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
+                    request_.headers.put("date", this._getRFC2616Date());
+                    request_.headers.put("accept", "application/json");
+                    request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
+                    request_.headers.put("x-acs-signature-version", "1.0");
+                    request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
+                }
+
+                request_.body = this._toJSONString(request.toMap());
+                _lastRequest = request_;
+                TeaResponse response_ = Tea.doAction(request_, runtime_);
+
+                if (this._isStatusCode(response_, 200)) {
+                    return TeaModel.toModel(TeaConverter.merge(
+                        TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
+                        this._readAsJSON(response_)
+                    ), new AccountAccessTokenResponse());
+                }
+
+                if (this._notEmpty(response_.headers.get("x-ca-error-message"))) {
+                    throw new TeaException(TeaConverter.buildMap(
+                        new TeaPair("data", TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
+                            new TeaPair("statusCode", response_.statusCode),
+                            new TeaPair("statusMessage", response_.statusMessage)
+                        )),
+                        new TeaPair("message", response_.headers.get("x-ca-error-message"))
+                    ));
+                }
+
+                throw new TeaException(TeaConverter.merge(
+                    TeaConverter.buildMap(
+                        new TeaPair("data", TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
+                            new TeaPair("statusCode", response_.statusCode),
+                            new TeaPair("statusMessage", response_.statusMessage)
+                        ))),
+                    this._readAsJSON(response_)
+                ));
+            } catch (Exception e) {
+                if (Tea.isRetryable(e)) {
+                    continue;
+                }
+                throw e;
+            }
+        }
+
+        throw new TeaUnretryableException(_lastRequest);
+    }
+
+    public AccountAccessTokenResponse confirmLink(ConfirmLinkRequest request, RuntimeOptions runtime) throws Exception {
+        java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
+            new TeaPair("timeouted", "retry"),
+            new TeaPair("readTimeout", runtime.readTimeout),
+            new TeaPair("connectTimeout", runtime.connectTimeout),
+            new TeaPair("localAddr", runtime.localAddr),
+            new TeaPair("httpProxy", runtime.httpProxy),
+            new TeaPair("httpsProxy", runtime.httpsProxy),
+            new TeaPair("noProxy", runtime.noProxy),
+            new TeaPair("maxIdleConns", runtime.maxIdleConns),
+            new TeaPair("socks5Proxy", runtime.socks5Proxy),
+            new TeaPair("socks5NetWork", runtime.socks5NetWork),
+            new TeaPair("retry", TeaConverter.buildMap(
+                new TeaPair("retryable", runtime.autoretry),
+                new TeaPair("maxAttempts", this._defaultNumber(runtime.maxAttempts, 3))
+            )),
+            new TeaPair("backoff", TeaConverter.buildMap(
+                new TeaPair("policy", this._default(runtime.backoffPolicy, "no")),
+                new TeaPair("period", this._defaultNumber(runtime.backoffPeriod, 1))
+            )),
+            new TeaPair("ignoreSSL", runtime.ignoreSSL)
+        );
+
+        TeaRequest _lastRequest = null;
+        long _now = System.currentTimeMillis();
+        int _retryTimes = 0;
+        while (Tea.allowRetry((java.util.Map<String, Object>) runtime_.get("retry"), _retryTimes, _now)) {
+            if (_retryTimes > 0) {
+                int backoffTime = Tea.getBackoffTime(runtime_.get("backoff"), _retryTimes);
+                if (backoffTime > 0) {
+                    Tea.sleep(backoffTime);
+                }
+            }
+            _retryTimes = _retryTimes + 1;
+            try {
+                TeaRequest request_ = new TeaRequest();
+                String accesskeyId = this._getAccessKeyId();
+                String accessKeySecret = this._getAccessKeySecret();
+                String accessToken = this._getAccessToken();
+                request_.protocol = this._getProtocol(_protocol, "https");
+                request_.method = "POST";
+                request_.pathname = "/v2/account/confirm_link";
+                request_.headers = TeaConverter.buildMap(
+                    new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                    new TeaPair("content-type", "application/json; charset=utf-8")
+                );
+                if (this._notEmpty(accessToken)) {
+                    request_.headers.put("authorization", "Bearer " + accessToken + "");
+                } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
+                    request_.headers.put("date", this._getRFC2616Date());
+                    request_.headers.put("accept", "application/json");
+                    request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
+                    request_.headers.put("x-acs-signature-version", "1.0");
+                    request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
+                }
+
+                request_.body = this._toJSONString(request.toMap());
+                _lastRequest = request_;
+                TeaResponse response_ = Tea.doAction(request_, runtime_);
+
+                if (this._isStatusCode(response_, 200)) {
+                    return TeaModel.toModel(TeaConverter.merge(
+                        TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
+                        this._readAsJSON(response_)
+                    ), new AccountAccessTokenResponse());
+                }
+
+                if (this._notEmpty(response_.headers.get("x-ca-error-message"))) {
+                    throw new TeaException(TeaConverter.buildMap(
+                        new TeaPair("data", TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
+                            new TeaPair("statusCode", response_.statusCode),
+                            new TeaPair("statusMessage", response_.statusMessage)
+                        )),
+                        new TeaPair("message", response_.headers.get("x-ca-error-message"))
+                    ));
+                }
+
+                throw new TeaException(TeaConverter.merge(
+                    TeaConverter.buildMap(
+                        new TeaPair("data", TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
+                            new TeaPair("statusCode", response_.statusCode),
+                            new TeaPair("statusMessage", response_.statusMessage)
+                        ))),
+                    this._readAsJSON(response_)
+                ));
+            } catch (Exception e) {
+                if (Tea.isRetryable(e)) {
+                    continue;
+                }
+                throw e;
+            }
+        }
+
+        throw new TeaUnretryableException(_lastRequest);
+    }
+
+    public void changePassword(DefaultChangePasswordRequest request, RuntimeOptions runtime) throws Exception {
+        java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
+            new TeaPair("timeouted", "retry"),
+            new TeaPair("readTimeout", runtime.readTimeout),
+            new TeaPair("connectTimeout", runtime.connectTimeout),
+            new TeaPair("localAddr", runtime.localAddr),
+            new TeaPair("httpProxy", runtime.httpProxy),
+            new TeaPair("httpsProxy", runtime.httpsProxy),
+            new TeaPair("noProxy", runtime.noProxy),
+            new TeaPair("maxIdleConns", runtime.maxIdleConns),
+            new TeaPair("socks5Proxy", runtime.socks5Proxy),
+            new TeaPair("socks5NetWork", runtime.socks5NetWork),
+            new TeaPair("retry", TeaConverter.buildMap(
+                new TeaPair("retryable", runtime.autoretry),
+                new TeaPair("maxAttempts", this._defaultNumber(runtime.maxAttempts, 3))
+            )),
+            new TeaPair("backoff", TeaConverter.buildMap(
+                new TeaPair("policy", this._default(runtime.backoffPolicy, "no")),
+                new TeaPair("period", this._defaultNumber(runtime.backoffPeriod, 1))
+            )),
+            new TeaPair("ignoreSSL", runtime.ignoreSSL)
+        );
+
+        TeaRequest _lastRequest = null;
+        long _now = System.currentTimeMillis();
+        int _retryTimes = 0;
+        while (Tea.allowRetry((java.util.Map<String, Object>) runtime_.get("retry"), _retryTimes, _now)) {
+            if (_retryTimes > 0) {
+                int backoffTime = Tea.getBackoffTime(runtime_.get("backoff"), _retryTimes);
+                if (backoffTime > 0) {
+                    Tea.sleep(backoffTime);
+                }
+            }
+            _retryTimes = _retryTimes + 1;
+            try {
+                TeaRequest request_ = new TeaRequest();
+                String accesskeyId = this._getAccessKeyId();
+                String accessKeySecret = this._getAccessKeySecret();
+                String accessToken = this._getAccessToken();
+                request_.protocol = this._getProtocol(_protocol, "https");
+                request_.method = "POST";
+                request_.pathname = "/v2/account/default/change_password";
+                request_.headers = TeaConverter.buildMap(
+                    new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                    new TeaPair("content-type", "application/json; charset=utf-8")
+                );
+                if (this._notEmpty(accessToken)) {
+                    request_.headers.put("authorization", "Bearer " + accessToken + "");
+                } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
+                    request_.headers.put("date", this._getRFC2616Date());
+                    request_.headers.put("accept", "application/json");
+                    request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
+                    request_.headers.put("x-acs-signature-version", "1.0");
+                    request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
+                }
+
+                request_.body = this._toJSONString(request.toMap());
+                _lastRequest = request_;
+                TeaResponse response_ = Tea.doAction(request_, runtime_);
+
+                if (this._isStatusCode(response_, 204)) {
+                    return ;
+                }
+
+                if (this._notEmpty(response_.headers.get("x-ca-error-message"))) {
+                    throw new TeaException(TeaConverter.buildMap(
+                        new TeaPair("data", TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
+                            new TeaPair("statusCode", response_.statusCode),
+                            new TeaPair("statusMessage", response_.statusMessage)
+                        )),
+                        new TeaPair("message", response_.headers.get("x-ca-error-message"))
+                    ));
+                }
+
+                throw new TeaException(TeaConverter.merge(
+                    TeaConverter.buildMap(
+                        new TeaPair("data", TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
+                            new TeaPair("statusCode", response_.statusCode),
+                            new TeaPair("statusMessage", response_.statusMessage)
+                        ))),
+                    this._readAsJSON(response_)
+                ));
+            } catch (Exception e) {
+                if (Tea.isRetryable(e)) {
+                    continue;
+                }
+                throw e;
+            }
+        }
+
+        throw new TeaUnretryableException(_lastRequest);
+    }
+
     public void setPassword(DefaultSetPasswordRequest request, RuntimeOptions runtime) throws Exception {
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
@@ -57,7 +350,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -65,10 +358,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -110,7 +399,7 @@ public class Client extends BaseClient {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public AccountAccessTokenResponse loginByCode(LoginByCodeRequest request, RuntimeOptions runtime) throws Exception {
+    public AccountAccessTokenResponse getAccessTokenByLinkInfo(GetAccessTokenByLinkInfoRequest request, RuntimeOptions runtime) throws Exception {
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -151,12 +440,12 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/account/external/login_by_code";
+                request_.pathname = "/v2/account/get_access_token_by_link_info";
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -164,10 +453,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -259,7 +544,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -267,10 +552,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -283,6 +564,303 @@ public class Client extends BaseClient {
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
                         this._readAsJSON(response_)
                     ), new Captcha());
+                }
+
+                if (this._notEmpty(response_.headers.get("x-ca-error-message"))) {
+                    throw new TeaException(TeaConverter.buildMap(
+                        new TeaPair("data", TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
+                            new TeaPair("statusCode", response_.statusCode),
+                            new TeaPair("statusMessage", response_.statusMessage)
+                        )),
+                        new TeaPair("message", response_.headers.get("x-ca-error-message"))
+                    ));
+                }
+
+                throw new TeaException(TeaConverter.merge(
+                    TeaConverter.buildMap(
+                        new TeaPair("data", TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
+                            new TeaPair("statusCode", response_.statusCode),
+                            new TeaPair("statusMessage", response_.statusMessage)
+                        ))),
+                    this._readAsJSON(response_)
+                ));
+            } catch (Exception e) {
+                if (Tea.isRetryable(e)) {
+                    continue;
+                }
+                throw e;
+            }
+        }
+
+        throw new TeaUnretryableException(_lastRequest);
+    }
+
+    public LinkInfoResponse getLinkInfo(GetByLinkInfoRequest request, RuntimeOptions runtime) throws Exception {
+        java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
+            new TeaPair("timeouted", "retry"),
+            new TeaPair("readTimeout", runtime.readTimeout),
+            new TeaPair("connectTimeout", runtime.connectTimeout),
+            new TeaPair("localAddr", runtime.localAddr),
+            new TeaPair("httpProxy", runtime.httpProxy),
+            new TeaPair("httpsProxy", runtime.httpsProxy),
+            new TeaPair("noProxy", runtime.noProxy),
+            new TeaPair("maxIdleConns", runtime.maxIdleConns),
+            new TeaPair("socks5Proxy", runtime.socks5Proxy),
+            new TeaPair("socks5NetWork", runtime.socks5NetWork),
+            new TeaPair("retry", TeaConverter.buildMap(
+                new TeaPair("retryable", runtime.autoretry),
+                new TeaPair("maxAttempts", this._defaultNumber(runtime.maxAttempts, 3))
+            )),
+            new TeaPair("backoff", TeaConverter.buildMap(
+                new TeaPair("policy", this._default(runtime.backoffPolicy, "no")),
+                new TeaPair("period", this._defaultNumber(runtime.backoffPeriod, 1))
+            )),
+            new TeaPair("ignoreSSL", runtime.ignoreSSL)
+        );
+
+        TeaRequest _lastRequest = null;
+        long _now = System.currentTimeMillis();
+        int _retryTimes = 0;
+        while (Tea.allowRetry((java.util.Map<String, Object>) runtime_.get("retry"), _retryTimes, _now)) {
+            if (_retryTimes > 0) {
+                int backoffTime = Tea.getBackoffTime(runtime_.get("backoff"), _retryTimes);
+                if (backoffTime > 0) {
+                    Tea.sleep(backoffTime);
+                }
+            }
+            _retryTimes = _retryTimes + 1;
+            try {
+                TeaRequest request_ = new TeaRequest();
+                String accesskeyId = this._getAccessKeyId();
+                String accessKeySecret = this._getAccessKeySecret();
+                String accessToken = this._getAccessToken();
+                request_.protocol = this._getProtocol(_protocol, "https");
+                request_.method = "POST";
+                request_.pathname = "/v2/account/get_link_info";
+                request_.headers = TeaConverter.buildMap(
+                    new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                    new TeaPair("content-type", "application/json; charset=utf-8")
+                );
+                if (this._notEmpty(accessToken)) {
+                    request_.headers.put("authorization", "Bearer " + accessToken + "");
+                } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
+                    request_.headers.put("date", this._getRFC2616Date());
+                    request_.headers.put("accept", "application/json");
+                    request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
+                    request_.headers.put("x-acs-signature-version", "1.0");
+                    request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
+                }
+
+                request_.body = this._toJSONString(request.toMap());
+                _lastRequest = request_;
+                TeaResponse response_ = Tea.doAction(request_, runtime_);
+
+                if (this._isStatusCode(response_, 200)) {
+                    return TeaModel.toModel(TeaConverter.merge(
+                        TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
+                        this._readAsJSON(response_)
+                    ), new LinkInfoResponse());
+                }
+
+                if (this._notEmpty(response_.headers.get("x-ca-error-message"))) {
+                    throw new TeaException(TeaConverter.buildMap(
+                        new TeaPair("data", TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
+                            new TeaPair("statusCode", response_.statusCode),
+                            new TeaPair("statusMessage", response_.statusMessage)
+                        )),
+                        new TeaPair("message", response_.headers.get("x-ca-error-message"))
+                    ));
+                }
+
+                throw new TeaException(TeaConverter.merge(
+                    TeaConverter.buildMap(
+                        new TeaPair("data", TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
+                            new TeaPair("statusCode", response_.statusCode),
+                            new TeaPair("statusMessage", response_.statusMessage)
+                        ))),
+                    this._readAsJSON(response_)
+                ));
+            } catch (Exception e) {
+                if (Tea.isRetryable(e)) {
+                    continue;
+                }
+                throw e;
+            }
+        }
+
+        throw new TeaUnretryableException(_lastRequest);
+    }
+
+    public LinkInfoListResponse getLinkInfoByUserId(GetLinkInfoByUserIDRequest request, RuntimeOptions runtime) throws Exception {
+        java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
+            new TeaPair("timeouted", "retry"),
+            new TeaPair("readTimeout", runtime.readTimeout),
+            new TeaPair("connectTimeout", runtime.connectTimeout),
+            new TeaPair("localAddr", runtime.localAddr),
+            new TeaPair("httpProxy", runtime.httpProxy),
+            new TeaPair("httpsProxy", runtime.httpsProxy),
+            new TeaPair("noProxy", runtime.noProxy),
+            new TeaPair("maxIdleConns", runtime.maxIdleConns),
+            new TeaPair("socks5Proxy", runtime.socks5Proxy),
+            new TeaPair("socks5NetWork", runtime.socks5NetWork),
+            new TeaPair("retry", TeaConverter.buildMap(
+                new TeaPair("retryable", runtime.autoretry),
+                new TeaPair("maxAttempts", this._defaultNumber(runtime.maxAttempts, 3))
+            )),
+            new TeaPair("backoff", TeaConverter.buildMap(
+                new TeaPair("policy", this._default(runtime.backoffPolicy, "no")),
+                new TeaPair("period", this._defaultNumber(runtime.backoffPeriod, 1))
+            )),
+            new TeaPair("ignoreSSL", runtime.ignoreSSL)
+        );
+
+        TeaRequest _lastRequest = null;
+        long _now = System.currentTimeMillis();
+        int _retryTimes = 0;
+        while (Tea.allowRetry((java.util.Map<String, Object>) runtime_.get("retry"), _retryTimes, _now)) {
+            if (_retryTimes > 0) {
+                int backoffTime = Tea.getBackoffTime(runtime_.get("backoff"), _retryTimes);
+                if (backoffTime > 0) {
+                    Tea.sleep(backoffTime);
+                }
+            }
+            _retryTimes = _retryTimes + 1;
+            try {
+                TeaRequest request_ = new TeaRequest();
+                String accesskeyId = this._getAccessKeyId();
+                String accessKeySecret = this._getAccessKeySecret();
+                String accessToken = this._getAccessToken();
+                request_.protocol = this._getProtocol(_protocol, "https");
+                request_.method = "POST";
+                request_.pathname = "/v2/account/get_link_info_by_user_id";
+                request_.headers = TeaConverter.buildMap(
+                    new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                    new TeaPair("content-type", "application/json; charset=utf-8")
+                );
+                if (this._notEmpty(accessToken)) {
+                    request_.headers.put("authorization", "Bearer " + accessToken + "");
+                } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
+                    request_.headers.put("date", this._getRFC2616Date());
+                    request_.headers.put("accept", "application/json");
+                    request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
+                    request_.headers.put("x-acs-signature-version", "1.0");
+                    request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
+                }
+
+                request_.body = this._toJSONString(request.toMap());
+                _lastRequest = request_;
+                TeaResponse response_ = Tea.doAction(request_, runtime_);
+
+                if (this._isStatusCode(response_, 200)) {
+                    return TeaModel.toModel(TeaConverter.merge(
+                        TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
+                        this._readAsJSON(response_)
+                    ), new LinkInfoListResponse());
+                }
+
+                if (this._notEmpty(response_.headers.get("x-ca-error-message"))) {
+                    throw new TeaException(TeaConverter.buildMap(
+                        new TeaPair("data", TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
+                            new TeaPair("statusCode", response_.statusCode),
+                            new TeaPair("statusMessage", response_.statusMessage)
+                        )),
+                        new TeaPair("message", response_.headers.get("x-ca-error-message"))
+                    ));
+                }
+
+                throw new TeaException(TeaConverter.merge(
+                    TeaConverter.buildMap(
+                        new TeaPair("data", TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
+                            new TeaPair("statusCode", response_.statusCode),
+                            new TeaPair("statusMessage", response_.statusMessage)
+                        ))),
+                    this._readAsJSON(response_)
+                ));
+            } catch (Exception e) {
+                if (Tea.isRetryable(e)) {
+                    continue;
+                }
+                throw e;
+            }
+        }
+
+        throw new TeaUnretryableException(_lastRequest);
+    }
+
+    public AccountAccessTokenResponse link(AccountLinkRequest request, RuntimeOptions runtime) throws Exception {
+        java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
+            new TeaPair("timeouted", "retry"),
+            new TeaPair("readTimeout", runtime.readTimeout),
+            new TeaPair("connectTimeout", runtime.connectTimeout),
+            new TeaPair("localAddr", runtime.localAddr),
+            new TeaPair("httpProxy", runtime.httpProxy),
+            new TeaPair("httpsProxy", runtime.httpsProxy),
+            new TeaPair("noProxy", runtime.noProxy),
+            new TeaPair("maxIdleConns", runtime.maxIdleConns),
+            new TeaPair("socks5Proxy", runtime.socks5Proxy),
+            new TeaPair("socks5NetWork", runtime.socks5NetWork),
+            new TeaPair("retry", TeaConverter.buildMap(
+                new TeaPair("retryable", runtime.autoretry),
+                new TeaPair("maxAttempts", this._defaultNumber(runtime.maxAttempts, 3))
+            )),
+            new TeaPair("backoff", TeaConverter.buildMap(
+                new TeaPair("policy", this._default(runtime.backoffPolicy, "no")),
+                new TeaPair("period", this._defaultNumber(runtime.backoffPeriod, 1))
+            )),
+            new TeaPair("ignoreSSL", runtime.ignoreSSL)
+        );
+
+        TeaRequest _lastRequest = null;
+        long _now = System.currentTimeMillis();
+        int _retryTimes = 0;
+        while (Tea.allowRetry((java.util.Map<String, Object>) runtime_.get("retry"), _retryTimes, _now)) {
+            if (_retryTimes > 0) {
+                int backoffTime = Tea.getBackoffTime(runtime_.get("backoff"), _retryTimes);
+                if (backoffTime > 0) {
+                    Tea.sleep(backoffTime);
+                }
+            }
+            _retryTimes = _retryTimes + 1;
+            try {
+                TeaRequest request_ = new TeaRequest();
+                String accesskeyId = this._getAccessKeyId();
+                String accessKeySecret = this._getAccessKeySecret();
+                String accessToken = this._getAccessToken();
+                request_.protocol = this._getProtocol(_protocol, "https");
+                request_.method = "POST";
+                request_.pathname = "/v2/account/link";
+                request_.headers = TeaConverter.buildMap(
+                    new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                    new TeaPair("content-type", "application/json; charset=utf-8")
+                );
+                if (this._notEmpty(accessToken)) {
+                    request_.headers.put("authorization", "Bearer " + accessToken + "");
+                } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
+                    request_.headers.put("date", this._getRFC2616Date());
+                    request_.headers.put("accept", "application/json");
+                    request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
+                    request_.headers.put("x-acs-signature-version", "1.0");
+                    request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
+                }
+
+                request_.body = this._toJSONString(request.toMap());
+                _lastRequest = request_;
+                TeaResponse response_ = Tea.doAction(request_, runtime_);
+
+                if (this._isStatusCode(response_, 200)) {
+                    return TeaModel.toModel(TeaConverter.merge(
+                        TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
+                        this._readAsJSON(response_)
+                    ), new AccountAccessTokenResponse());
                 }
 
                 if (this._notEmpty(response_.headers.get("x-ca-error-message"))) {
@@ -362,7 +940,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -370,10 +948,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -465,7 +1039,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -473,10 +1047,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -568,7 +1138,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -576,10 +1146,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -671,7 +1237,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -679,10 +1245,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -774,7 +1336,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -782,10 +1344,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -877,7 +1435,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -885,10 +1443,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -980,7 +1534,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -988,10 +1542,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -1079,7 +1629,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -1087,10 +1637,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -1182,7 +1728,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -1190,10 +1736,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -1285,7 +1827,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -1293,10 +1835,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -1388,7 +1926,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -1396,10 +1934,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -1491,7 +2025,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -1499,10 +2033,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -1594,7 +2124,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -1602,10 +2132,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -1697,7 +2223,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -1705,10 +2231,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -1800,7 +2322,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -1808,10 +2330,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -1903,7 +2421,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -1911,10 +2429,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -2002,7 +2516,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -2010,10 +2524,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -2105,7 +2615,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -2113,10 +2623,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -2208,7 +2714,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -2216,10 +2722,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -2311,7 +2813,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -2319,10 +2821,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -2414,7 +2912,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -2422,10 +2920,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -2517,7 +3011,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -2525,10 +3019,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -2620,7 +3110,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -2628,10 +3118,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -2723,7 +3209,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -2731,10 +3217,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -2822,7 +3304,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -2830,10 +3312,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -2917,7 +3395,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -2925,10 +3403,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -3020,7 +3494,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -3028,10 +3502,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -3123,7 +3593,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -3131,10 +3601,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -3226,7 +3692,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -3234,10 +3700,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -3329,7 +3791,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -3337,10 +3799,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -3432,7 +3890,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -3440,10 +3898,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -3531,7 +3985,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -3539,10 +3993,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -3634,7 +4084,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -3642,10 +4092,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -3737,7 +4183,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -3745,10 +4191,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());
@@ -3840,7 +4282,7 @@ public class Client extends BaseClient {
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
-                if (this._notEmpty(_userId) && this._notEmpty(accessToken)) {
+                if (this._notEmpty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
                     request_.headers.put("date", this._getRFC2616Date());
@@ -3848,10 +4290,6 @@ public class Client extends BaseClient {
                     request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
                     request_.headers.put("x-acs-signature-version", "1.0");
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
-                } else {
-                    throw new TeaException(TeaConverter.buildMap(
-                        new TeaPair("message", "No valid Credential.")
-                    ));
                 }
 
                 request_.body = this._toJSONString(request.toMap());

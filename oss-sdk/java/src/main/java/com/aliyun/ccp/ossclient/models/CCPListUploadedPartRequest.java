@@ -11,10 +11,10 @@ public class CCPListUploadedPartRequest extends TeaModel {
     public String fileId;
 
     @NameInMap("limit")
-    public long limit;
+    public Long limit;
 
     @NameInMap("part_number_marker")
-    public long partNumberMarker;
+    public Long partNumberMarker;
 
     @NameInMap("upload_id")
     public String uploadId;

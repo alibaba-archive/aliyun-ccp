@@ -7,6 +7,9 @@ public class MobileLoginRequest extends TeaModel {
     @NameInMap("app_id")
     public String appId;
 
+    @NameInMap("auto_register")
+    public boolean autoRegister;
+
     @NameInMap("captcha_id")
     public String captchaId;
 

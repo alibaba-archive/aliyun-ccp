@@ -47,7 +47,7 @@ public class CreateFileRequest extends TeaModel {
     public String shareId;
 
     @NameInMap("size")
-    public long size;
+    public Long size;
 
     @NameInMap("tags")
     public java.util.Map<String, Object> tags;

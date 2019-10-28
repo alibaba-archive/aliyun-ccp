@@ -13,9 +13,6 @@ public class Config extends TeaModel {
     @NameInMap("protocol")
     public String protocol;
 
-    @NameInMap("userId")
-    public String userId;
-
     @NameInMap("credentialType")
     public String credentialType;
 
@@ -36,6 +33,12 @@ public class Config extends TeaModel {
 
     @NameInMap("clientSecret")
     public String clientSecret;
+
+    @NameInMap("accessToken")
+    public String accessToken;
+
+    @NameInMap("expireTime")
+    public String expireTime;
 
 }
 

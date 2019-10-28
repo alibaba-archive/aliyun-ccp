@@ -50,7 +50,7 @@ public class OSSGetFileResponse extends TeaModel {
     public String shareId;
 
     @NameInMap("size")
-    public long size;
+    public Long size;
 
     @NameInMap("status")
     public String status;

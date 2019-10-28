@@ -8,10 +8,10 @@ public class UploadPartInfo extends TeaModel {
     public String etag;
 
     @NameInMap("part_number")
-    public long partNumber;
+    public Long partNumber;
 
     @NameInMap("part_size")
-    public long partSize;
+    public Long partSize;
 
     @NameInMap("upload_url")
     public String uploadUrl;

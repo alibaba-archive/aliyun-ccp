@@ -11,7 +11,7 @@ public class GetUserResponse extends TeaModel {
     public String avatar;
 
     @NameInMap("created_at")
-    public long createdAt;
+    public Long createdAt;
 
     @NameInMap("default_drive_id")
     public String defaultDriveId;
@@ -38,7 +38,7 @@ public class GetUserResponse extends TeaModel {
     public String status;
 
     @NameInMap("updated_at")
-    public long updatedAt;
+    public Long updatedAt;
 
     @NameInMap("user_id")
     public String userId;
