@@ -12,6 +12,10 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         [Validation(Required=false)]
         public string RequestId { get; set; }
 
+        [NameInMap("category")]
+        [Validation(Required=false)]
+        public string Category { get; set; }
+
         [NameInMap("content_hash")]
         [Validation(Required=false)]
         public string ContentHash { get; set; }
@@ -60,6 +64,14 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         [Validation(Required=false)]
         public bool Hidden { get; set; }
 
+        [NameInMap("image_media_metadata")]
+        [Validation(Required=false)]
+        public List<ImageMediaResponse> ImageMediaMetadata { get; set; }
+
+        [NameInMap("labels")]
+        [Validation(Required=false)]
+        public List<string> Labels { get; set; }
+
         [NameInMap("meta")]
         [Validation(Required=false)]
         public string Meta { get; set; }
@@ -83,10 +95,6 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         [NameInMap("status")]
         [Validation(Required=false)]
         public string Status { get; set; }
-
-        [NameInMap("tags")]
-        [Validation(Required=false)]
-        public object Tags { get; set; }
 
         [NameInMap("thumbnail")]
         [Validation(Required=false)]

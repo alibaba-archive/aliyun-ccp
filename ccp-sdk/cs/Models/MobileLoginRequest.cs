@@ -12,6 +12,10 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         [Validation(Required=true)]
         public string AppId { get; set; }
 
+        [NameInMap("auto_register")]
+        [Validation(Required=false)]
+        public bool AutoRegister { get; set; }
+
         [NameInMap("captcha_id")]
         [Validation(Required=false)]
         public string CaptchaId { get; set; }
