@@ -217,7 +217,7 @@ func Test_GetAccessToken(t *testing.T) {
 func Test_Expiretimme(t *testing.T) {
 	client.accessToken = nil
 	err := client.SetExpireTime("2006-01-T15:04:05Z")
-	utils.AssertContains(t, `parsing time "2006-01-T15:04:05Z" as "2006-01-02T15:04:05Z07:00"`, err.Error())
+	utils.AssertContains(t, err.Error(), `parsing time "2006-01-T15:04:05Z" as "2006-01-02T15:04:05Z07:00"`)
 
 	expiretime := client.GetExpireTime()
 	utils.AssertEqual(t, expiretime, "")
