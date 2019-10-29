@@ -14,9 +14,5 @@ func Test_isNil(t *testing.T) {
 	AssertNil(t, nil)
 	AssertNotNil(t, "sdk")
 
-	isContains := AssertContains(t, "tea test", "test")
-	AssertEqual(t, true, isContains)
-
-	isContains = AssertContains(t, "tea test", "txt")
-	AssertEqual(t, false, isContains)
+	AssertContains(t, "tea test", "test")
 }
