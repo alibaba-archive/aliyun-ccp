@@ -47,9 +47,9 @@
     </distributionManagement>
 
     <scm>
-        <connection>scm:git:git:</connection>
-        <developerConnection>scm:git:</developerConnection>
-        <url></url>
+        <connection>scm:git:git://github.com/aliyun/aliyun-ccp.git</connection>
+        <developerConnection>scm:git:git@github.com:aliyun/aliyun-ccp.git</developerConnection>
+        <url>https://github.com/aliyun/aliyun-ccp</url>
     </scm>
 
     <dependencies>
