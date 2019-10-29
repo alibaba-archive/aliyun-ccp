@@ -5,11 +5,11 @@
 
 ## Installation
 ### Java
-[ccp-baseclient](./baseclient/java/README-CN.md)
+- [baseclient](./baseclient/java/README-CN.md)
 
-[ccp-client](./ccppath-sdk/java/README-CN.md)
+- [ccppath-sdk](./ccppath-sdk/java/README-CN.md)
 
-[ccp-oss-client](./osspath-sdk/java/README-CN.md)
+- [osspath-sdk](./osspath-sdk/java/README-CN.md)
 
 ## Issues
 [Opening an Issue](https://github.com/aliyun/aliyun-ccp/issues/new)，不符合指南的问题可能会立即关闭。
