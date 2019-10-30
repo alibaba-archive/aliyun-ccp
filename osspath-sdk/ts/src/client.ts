@@ -3462,6 +3462,754 @@ export class UserAuthentication extends $tea.Model {
   }
 }
 
+export class AccessTokenResponse extends $tea.Model {
+  requestId?: string
+  accessToken: string
+  expiresTime?: string
+  refreshToken?: string
+  role?: string
+  tokenType?: string
+  userId?: string
+  static names(): { [key: string]: string } {
+    return {
+      requestId: 'requestId',
+      accessToken: 'access_token',
+      expiresTime: 'expires_time',
+      refreshToken: 'refresh_token',
+      role: 'role',
+      tokenType: 'token_type',
+      userId: 'user_id',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      requestId: 'string',
+      accessToken: 'string',
+      expiresTime: 'string',
+      refreshToken: 'string',
+      role: 'string',
+      tokenType: 'string',
+      userId: 'string',
+    };
+  }
+
+  constructor(map: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class AddStoreResponse extends $tea.Model {
+  requestId?: string
+  accelerateEndpoint?: string
+  basePath?: string
+  bucket: string
+  customizedEndpoint?: string
+  domainId: string
+  endpoint: string
+  internalEndpoint?: string
+  ownership: string
+  policy: string
+  roleArn?: string
+  storeId: string
+  type: string
+  static names(): { [key: string]: string } {
+    return {
+      requestId: 'requestId',
+      accelerateEndpoint: 'accelerate_endpoint',
+      basePath: 'base_path',
+      bucket: 'bucket',
+      customizedEndpoint: 'customized_endpoint',
+      domainId: 'domain_id',
+      endpoint: 'endpoint',
+      internalEndpoint: 'internal_endpoint',
+      ownership: 'ownership',
+      policy: 'policy',
+      roleArn: 'role_arn',
+      storeId: 'store_id',
+      type: 'type',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      requestId: 'string',
+      accelerateEndpoint: 'string',
+      basePath: 'string',
+      bucket: 'string',
+      customizedEndpoint: 'string',
+      domainId: 'string',
+      endpoint: 'string',
+      internalEndpoint: 'string',
+      ownership: 'string',
+      policy: 'string',
+      roleArn: 'string',
+      storeId: 'string',
+      type: 'string',
+    };
+  }
+
+  constructor(map: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class AdminListStoresRequest extends $tea.Model {
+  static names(): { [key: string]: string } {
+    return {
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+    };
+  }
+
+  constructor(map: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class BaseDomainResponse extends $tea.Model {
+  requestId?: string
+  authAlipayAppId?: string
+  authAlipayEnable?: boolean
+  authAlipayPrivateKey?: string
+  authConfig?: object
+  authDingdingAppId?: string
+  authDingdingAppSecret?: string
+  authDingdingEnable?: boolean
+  authEndpointEnable?: boolean
+  authRamAppId?: string
+  authRamAppSecret?: string
+  authRamEnable?: boolean
+  createdAt?: string
+  dataHashName?: string
+  description?: string
+  domainId?: string
+  domainName?: string
+  eventFilenameMatches?: string
+  eventMnsEndpoint?: string
+  eventMnsTopic?: string
+  eventNames?: string[]
+  eventRoleArn?: string
+  initDriveEnable?: boolean
+  initDriveSize?: number
+  initDriveStoreId?: string
+  pathType?: string
+  publishedAppAccessStrategy?: AppAccessStrategy[]
+  sharable?: boolean
+  storeLevel?: string
+  storeRegionList?: string[]
+  updatedAt?: string
+  static names(): { [key: string]: string } {
+    return {
+      requestId: 'requestId',
+      authAlipayAppId: 'auth_alipay_app_id',
+      authAlipayEnable: 'auth_alipay_enable',
+      authAlipayPrivateKey: 'auth_alipay_private_key',
+      authConfig: 'auth_config',
+      authDingdingAppId: 'auth_dingding_app_id',
+      authDingdingAppSecret: 'auth_dingding_app_secret',
+      authDingdingEnable: 'auth_dingding_enable',
+      authEndpointEnable: 'auth_endpoint_enable',
+      authRamAppId: 'auth_ram_app_id',
+      authRamAppSecret: 'auth_ram_app_secret',
+      authRamEnable: 'auth_ram_enable',
+      createdAt: 'created_at',
+      dataHashName: 'data_hash_name',
+      description: 'description',
+      domainId: 'domain_id',
+      domainName: 'domain_name',
+      eventFilenameMatches: 'event_filename_matches',
+      eventMnsEndpoint: 'event_mns_endpoint',
+      eventMnsTopic: 'event_mns_topic',
+      eventNames: 'event_names',
+      eventRoleArn: 'event_role_arn',
+      initDriveEnable: 'init_drive_enable',
+      initDriveSize: 'init_drive_size',
+      initDriveStoreId: 'init_drive_store_id',
+      pathType: 'path_type',
+      publishedAppAccessStrategy: 'published_app_access_strategy',
+      sharable: 'sharable',
+      storeLevel: 'store_level',
+      storeRegionList: 'store_region_list',
+      updatedAt: 'updated_at',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      requestId: 'string',
+      authAlipayAppId: 'string',
+      authAlipayEnable: 'boolean',
+      authAlipayPrivateKey: 'string',
+      authConfig: 'object',
+      authDingdingAppId: 'string',
+      authDingdingAppSecret: 'string',
+      authDingdingEnable: 'boolean',
+      authEndpointEnable: 'boolean',
+      authRamAppId: 'string',
+      authRamAppSecret: 'string',
+      authRamEnable: 'boolean',
+      createdAt: 'string',
+      dataHashName: 'string',
+      description: 'string',
+      domainId: 'string',
+      domainName: 'string',
+      eventFilenameMatches: 'string',
+      eventMnsEndpoint: 'string',
+      eventMnsTopic: 'string',
+      eventNames: { 'type': 'array', 'itemType': 'string' },
+      eventRoleArn: 'string',
+      initDriveEnable: 'boolean',
+      initDriveSize: 'number',
+      initDriveStoreId: 'string',
+      pathType: 'string',
+      publishedAppAccessStrategy: { 'type': 'array', 'itemType': AppAccessStrategy },
+      sharable: 'boolean',
+      storeLevel: 'string',
+      storeRegionList: { 'type': 'array', 'itemType': 'string' },
+      updatedAt: 'string',
+    };
+  }
+
+  constructor(map: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class CreateDomainResponse extends $tea.Model {
+  requestId?: string
+  authAlipayAppId?: string
+  authAlipayEnable?: boolean
+  authAlipayPrivateKey?: string
+  authConfig?: object
+  authDingdingAppId?: string
+  authDingdingAppSecret?: string
+  authDingdingEnable?: boolean
+  authEndpointEnable?: boolean
+  authRamAppId?: string
+  authRamAppSecret?: string
+  authRamEnable?: boolean
+  createdAt?: string
+  dataHashName?: string
+  description?: string
+  domainId?: string
+  domainName?: string
+  eventFilenameMatches?: string
+  eventMnsEndpoint?: string
+  eventMnsTopic?: string
+  eventNames?: string[]
+  eventRoleArn?: string
+  initDriveEnable?: boolean
+  initDriveSize?: number
+  initDriveStoreId?: string
+  pathType?: string
+  publishedAppAccessStrategy?: AppAccessStrategy[]
+  sharable?: boolean
+  storeLevel?: string
+  storeRegionList?: string[]
+  updatedAt?: string
+  static names(): { [key: string]: string } {
+    return {
+      requestId: 'requestId',
+      authAlipayAppId: 'auth_alipay_app_id',
+      authAlipayEnable: 'auth_alipay_enable',
+      authAlipayPrivateKey: 'auth_alipay_private_key',
+      authConfig: 'auth_config',
+      authDingdingAppId: 'auth_dingding_app_id',
+      authDingdingAppSecret: 'auth_dingding_app_secret',
+      authDingdingEnable: 'auth_dingding_enable',
+      authEndpointEnable: 'auth_endpoint_enable',
+      authRamAppId: 'auth_ram_app_id',
+      authRamAppSecret: 'auth_ram_app_secret',
+      authRamEnable: 'auth_ram_enable',
+      createdAt: 'created_at',
+      dataHashName: 'data_hash_name',
+      description: 'description',
+      domainId: 'domain_id',
+      domainName: 'domain_name',
+      eventFilenameMatches: 'event_filename_matches',
+      eventMnsEndpoint: 'event_mns_endpoint',
+      eventMnsTopic: 'event_mns_topic',
+      eventNames: 'event_names',
+      eventRoleArn: 'event_role_arn',
+      initDriveEnable: 'init_drive_enable',
+      initDriveSize: 'init_drive_size',
+      initDriveStoreId: 'init_drive_store_id',
+      pathType: 'path_type',
+      publishedAppAccessStrategy: 'published_app_access_strategy',
+      sharable: 'sharable',
+      storeLevel: 'store_level',
+      storeRegionList: 'store_region_list',
+      updatedAt: 'updated_at',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      requestId: 'string',
+      authAlipayAppId: 'string',
+      authAlipayEnable: 'boolean',
+      authAlipayPrivateKey: 'string',
+      authConfig: 'object',
+      authDingdingAppId: 'string',
+      authDingdingAppSecret: 'string',
+      authDingdingEnable: 'boolean',
+      authEndpointEnable: 'boolean',
+      authRamAppId: 'string',
+      authRamAppSecret: 'string',
+      authRamEnable: 'boolean',
+      createdAt: 'string',
+      dataHashName: 'string',
+      description: 'string',
+      domainId: 'string',
+      domainName: 'string',
+      eventFilenameMatches: 'string',
+      eventMnsEndpoint: 'string',
+      eventMnsTopic: 'string',
+      eventNames: { 'type': 'array', 'itemType': 'string' },
+      eventRoleArn: 'string',
+      initDriveEnable: 'boolean',
+      initDriveSize: 'number',
+      initDriveStoreId: 'string',
+      pathType: 'string',
+      publishedAppAccessStrategy: { 'type': 'array', 'itemType': AppAccessStrategy },
+      sharable: 'boolean',
+      storeLevel: 'string',
+      storeRegionList: { 'type': 'array', 'itemType': 'string' },
+      updatedAt: 'string',
+    };
+  }
+
+  constructor(map: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetAppResponse extends $tea.Model {
+  requestId?: string
+  aliOwnerId: string
+  appId: string
+  appName: string
+  appSecret: string
+  createdAt: string
+  description: string
+  logo: string
+  provider: string
+  redirectUri: string
+  scope: string[]
+  screenshots: string[]
+  stage: string
+  type: string
+  updatedAt: string
+  static names(): { [key: string]: string } {
+    return {
+      requestId: 'requestId',
+      aliOwnerId: 'ali_owner_id',
+      appId: 'app_id',
+      appName: 'app_name',
+      appSecret: 'app_secret',
+      createdAt: 'created_at',
+      description: 'description',
+      logo: 'logo',
+      provider: 'provider',
+      redirectUri: 'redirect_uri',
+      scope: 'scope',
+      screenshots: 'screenshots',
+      stage: 'stage',
+      type: 'type',
+      updatedAt: 'updated_at',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      requestId: 'string',
+      aliOwnerId: 'string',
+      appId: 'string',
+      appName: 'string',
+      appSecret: 'string',
+      createdAt: 'string',
+      description: 'string',
+      logo: 'string',
+      provider: 'string',
+      redirectUri: 'string',
+      scope: { 'type': 'array', 'itemType': 'string' },
+      screenshots: { 'type': 'array', 'itemType': 'string' },
+      stage: 'string',
+      type: 'string',
+      updatedAt: 'string',
+    };
+  }
+
+  constructor(map: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetDomainResponse extends $tea.Model {
+  requestId?: string
+  authAlipayAppId?: string
+  authAlipayEnable?: boolean
+  authAlipayPrivateKey?: string
+  authConfig?: object
+  authDingdingAppId?: string
+  authDingdingAppSecret?: string
+  authDingdingEnable?: boolean
+  authEndpointEnable?: boolean
+  authRamAppId?: string
+  authRamAppSecret?: string
+  authRamEnable?: boolean
+  createdAt?: string
+  dataHashName?: string
+  description?: string
+  domainId?: string
+  domainName?: string
+  eventFilenameMatches?: string
+  eventMnsEndpoint?: string
+  eventMnsTopic?: string
+  eventNames?: string[]
+  eventRoleArn?: string
+  initDriveEnable?: boolean
+  initDriveSize?: number
+  initDriveStoreId?: string
+  pathType?: string
+  publishedAppAccessStrategy?: AppAccessStrategy[]
+  sharable?: boolean
+  storeLevel?: string
+  storeRegionList?: string[]
+  updatedAt?: string
+  static names(): { [key: string]: string } {
+    return {
+      requestId: 'requestId',
+      authAlipayAppId: 'auth_alipay_app_id',
+      authAlipayEnable: 'auth_alipay_enable',
+      authAlipayPrivateKey: 'auth_alipay_private_key',
+      authConfig: 'auth_config',
+      authDingdingAppId: 'auth_dingding_app_id',
+      authDingdingAppSecret: 'auth_dingding_app_secret',
+      authDingdingEnable: 'auth_dingding_enable',
+      authEndpointEnable: 'auth_endpoint_enable',
+      authRamAppId: 'auth_ram_app_id',
+      authRamAppSecret: 'auth_ram_app_secret',
+      authRamEnable: 'auth_ram_enable',
+      createdAt: 'created_at',
+      dataHashName: 'data_hash_name',
+      description: 'description',
+      domainId: 'domain_id',
+      domainName: 'domain_name',
+      eventFilenameMatches: 'event_filename_matches',
+      eventMnsEndpoint: 'event_mns_endpoint',
+      eventMnsTopic: 'event_mns_topic',
+      eventNames: 'event_names',
+      eventRoleArn: 'event_role_arn',
+      initDriveEnable: 'init_drive_enable',
+      initDriveSize: 'init_drive_size',
+      initDriveStoreId: 'init_drive_store_id',
+      pathType: 'path_type',
+      publishedAppAccessStrategy: 'published_app_access_strategy',
+      sharable: 'sharable',
+      storeLevel: 'store_level',
+      storeRegionList: 'store_region_list',
+      updatedAt: 'updated_at',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      requestId: 'string',
+      authAlipayAppId: 'string',
+      authAlipayEnable: 'boolean',
+      authAlipayPrivateKey: 'string',
+      authConfig: 'object',
+      authDingdingAppId: 'string',
+      authDingdingAppSecret: 'string',
+      authDingdingEnable: 'boolean',
+      authEndpointEnable: 'boolean',
+      authRamAppId: 'string',
+      authRamAppSecret: 'string',
+      authRamEnable: 'boolean',
+      createdAt: 'string',
+      dataHashName: 'string',
+      description: 'string',
+      domainId: 'string',
+      domainName: 'string',
+      eventFilenameMatches: 'string',
+      eventMnsEndpoint: 'string',
+      eventMnsTopic: 'string',
+      eventNames: { 'type': 'array', 'itemType': 'string' },
+      eventRoleArn: 'string',
+      initDriveEnable: 'boolean',
+      initDriveSize: 'number',
+      initDriveStoreId: 'string',
+      pathType: 'string',
+      publishedAppAccessStrategy: { 'type': 'array', 'itemType': AppAccessStrategy },
+      sharable: 'boolean',
+      storeLevel: 'string',
+      storeRegionList: { 'type': 'array', 'itemType': 'string' },
+      updatedAt: 'string',
+    };
+  }
+
+  constructor(map: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetUserAccessTokenRequest extends $tea.Model {
+  role?: string
+  userId: string
+  static names(): { [key: string]: string } {
+    return {
+      role: 'role',
+      userId: 'user_id',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      role: 'string',
+      userId: 'string',
+    };
+  }
+
+  constructor(map: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListAppsResponse extends $tea.Model {
+  requestId?: string
+  items: GetAppResponse[]
+  nextMarker?: string
+  static names(): { [key: string]: string } {
+    return {
+      requestId: 'requestId',
+      items: 'items',
+      nextMarker: 'next_marker',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      requestId: 'string',
+      items: { 'type': 'array', 'itemType': GetAppResponse },
+      nextMarker: 'string',
+    };
+  }
+
+  constructor(map: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListDomainsResponse extends $tea.Model {
+  requestId?: string
+  items?: BaseDomainResponse[]
+  nextMarker?: string
+  static names(): { [key: string]: string } {
+    return {
+      requestId: 'requestId',
+      items: 'items',
+      nextMarker: 'next_marker',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      requestId: 'string',
+      items: { 'type': 'array', 'itemType': BaseDomainResponse },
+      nextMarker: 'string',
+    };
+  }
+
+  constructor(map: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListStoresResponse extends $tea.Model {
+  requestId?: string
+  items: Store[]
+  static names(): { [key: string]: string } {
+    return {
+      requestId: 'requestId',
+      items: 'items',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      requestId: 'string',
+      items: { 'type': 'array', 'itemType': Store },
+    };
+  }
+
+  constructor(map: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class Store extends $tea.Model {
+  accelerateEndpoint?: string
+  basePath?: string
+  bucket: string
+  customizedEndpoint?: string
+  endpoint: string
+  internalEndpoint?: string
+  ownership: string
+  policy: string
+  roleArn?: string
+  storeId: string
+  type: string
+  static names(): { [key: string]: string } {
+    return {
+      accelerateEndpoint: 'accelerate_endpoint',
+      basePath: 'base_path',
+      bucket: 'bucket',
+      customizedEndpoint: 'customized_endpoint',
+      endpoint: 'endpoint',
+      internalEndpoint: 'internal_endpoint',
+      ownership: 'ownership',
+      policy: 'policy',
+      roleArn: 'role_arn',
+      storeId: 'store_id',
+      type: 'type',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      accelerateEndpoint: 'string',
+      basePath: 'string',
+      bucket: 'string',
+      customizedEndpoint: 'string',
+      endpoint: 'string',
+      internalEndpoint: 'string',
+      ownership: 'string',
+      policy: 'string',
+      roleArn: 'string',
+      storeId: 'string',
+      type: 'string',
+    };
+  }
+
+  constructor(map: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class UpdateDomainResponse extends $tea.Model {
+  requestId?: string
+  authAlipayAppId?: string
+  authAlipayEnable?: boolean
+  authAlipayPrivateKey?: string
+  authConfig?: object
+  authDingdingAppId?: string
+  authDingdingAppSecret?: string
+  authDingdingEnable?: boolean
+  authEndpointEnable?: boolean
+  authRamAppId?: string
+  authRamAppSecret?: string
+  authRamEnable?: boolean
+  createdAt?: string
+  dataHashName?: string
+  description?: string
+  domainId?: string
+  domainName?: string
+  eventFilenameMatches?: string
+  eventMnsEndpoint?: string
+  eventMnsTopic?: string
+  eventNames?: string[]
+  eventRoleArn?: string
+  initDriveEnable?: boolean
+  initDriveSize?: number
+  initDriveStoreId?: string
+  pathType?: string
+  publishedAppAccessStrategy?: AppAccessStrategy[]
+  sharable?: boolean
+  storeLevel?: string
+  storeRegionList?: string[]
+  updatedAt?: string
+  static names(): { [key: string]: string } {
+    return {
+      requestId: 'requestId',
+      authAlipayAppId: 'auth_alipay_app_id',
+      authAlipayEnable: 'auth_alipay_enable',
+      authAlipayPrivateKey: 'auth_alipay_private_key',
+      authConfig: 'auth_config',
+      authDingdingAppId: 'auth_dingding_app_id',
+      authDingdingAppSecret: 'auth_dingding_app_secret',
+      authDingdingEnable: 'auth_dingding_enable',
+      authEndpointEnable: 'auth_endpoint_enable',
+      authRamAppId: 'auth_ram_app_id',
+      authRamAppSecret: 'auth_ram_app_secret',
+      authRamEnable: 'auth_ram_enable',
+      createdAt: 'created_at',
+      dataHashName: 'data_hash_name',
+      description: 'description',
+      domainId: 'domain_id',
+      domainName: 'domain_name',
+      eventFilenameMatches: 'event_filename_matches',
+      eventMnsEndpoint: 'event_mns_endpoint',
+      eventMnsTopic: 'event_mns_topic',
+      eventNames: 'event_names',
+      eventRoleArn: 'event_role_arn',
+      initDriveEnable: 'init_drive_enable',
+      initDriveSize: 'init_drive_size',
+      initDriveStoreId: 'init_drive_store_id',
+      pathType: 'path_type',
+      publishedAppAccessStrategy: 'published_app_access_strategy',
+      sharable: 'sharable',
+      storeLevel: 'store_level',
+      storeRegionList: 'store_region_list',
+      updatedAt: 'updated_at',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      requestId: 'string',
+      authAlipayAppId: 'string',
+      authAlipayEnable: 'boolean',
+      authAlipayPrivateKey: 'string',
+      authConfig: 'object',
+      authDingdingAppId: 'string',
+      authDingdingAppSecret: 'string',
+      authDingdingEnable: 'boolean',
+      authEndpointEnable: 'boolean',
+      authRamAppId: 'string',
+      authRamAppSecret: 'string',
+      authRamEnable: 'boolean',
+      createdAt: 'string',
+      dataHashName: 'string',
+      description: 'string',
+      domainId: 'string',
+      domainName: 'string',
+      eventFilenameMatches: 'string',
+      eventMnsEndpoint: 'string',
+      eventMnsTopic: 'string',
+      eventNames: { 'type': 'array', 'itemType': 'string' },
+      eventRoleArn: 'string',
+      initDriveEnable: 'boolean',
+      initDriveSize: 'number',
+      initDriveStoreId: 'string',
+      pathType: 'string',
+      publishedAppAccessStrategy: { 'type': 'array', 'itemType': AppAccessStrategy },
+      sharable: 'boolean',
+      storeLevel: 'string',
+      storeRegionList: { 'type': 'array', 'itemType': 'string' },
+      updatedAt: 'string',
+    };
+  }
+
+  constructor(map: { [key: string]: any }) {
+    super(map);
+  }
+}
+
 export class BaseCompleteFileRequest extends $tea.Model {
   driveId: string
   partInfoList?: UploadPartInfo[]
@@ -7070,6 +7818,200 @@ export default class Client extends BaseClient {
             requestId: response_.headers["x-ca-request-id"],
             ...await this._readAsJSON(response_),
           }, new AccountAccessTokenResponse({}));
+        }
+
+        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...await this._readAsJSON(response_),
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  async adminListStores(request: AdminListStoresRequest, runtime: RuntimeOptions): Promise<ListStoresResponse>  {
+    let _runtime : {[key: string]: any} = {
+      timeouted: "retry",
+      readTimeout: runtime["readTimeout"],
+      connectTimeout: runtime["connectTimeout"],
+      localAddr: runtime["localAddr"],
+      httpProxy: runtime["httpProxy"],
+      httpsProxy: runtime["httpsProxy"],
+      noProxy: runtime["noProxy"],
+      maxIdleConns: runtime["maxIdleConns"],
+      socks5Proxy: runtime["socks5Proxy"],
+      socks5NetWork: runtime["socks5NetWork"],
+      retry: {
+        retryable: runtime["autoretry"],
+        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+      },
+      backoff: {
+        policy: this._default(runtime["backoffPolicy"], "no"),
+        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+      },
+      ignoreSSL: runtime["ignoreSSL"],
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this._getAccessKeyId();
+        let accessKeySecret = await this._getAccessKeySecret();
+        let accessToken = await this._getAccessToken();
+        request_.protocol = this._getProtocol(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = `/v2/domain/list_stores`;
+        request_.headers = {
+          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+        };
+        if (this._notEmpty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
+          request_.headers["date"] = this._getRFC2616Date();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+        }
+        request_.body = this._toJSONString(request.toMap());
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        if (this._isStatusCode(response_, 200)) {
+          return $tea.cast<ListStoresResponse>({
+            requestId: response_.headers["x-ca-request-id"],
+            ...await this._readAsJSON(response_),
+          }, new ListStoresResponse({}));
+        }
+
+        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...await this._readAsJSON(response_),
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  async getAccessToken(request: GetUserAccessTokenRequest, runtime: RuntimeOptions): Promise<AccessTokenResponse>  {
+    let _runtime : {[key: string]: any} = {
+      timeouted: "retry",
+      readTimeout: runtime["readTimeout"],
+      connectTimeout: runtime["connectTimeout"],
+      localAddr: runtime["localAddr"],
+      httpProxy: runtime["httpProxy"],
+      httpsProxy: runtime["httpsProxy"],
+      noProxy: runtime["noProxy"],
+      maxIdleConns: runtime["maxIdleConns"],
+      socks5Proxy: runtime["socks5Proxy"],
+      socks5NetWork: runtime["socks5NetWork"],
+      retry: {
+        retryable: runtime["autoretry"],
+        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+      },
+      backoff: {
+        policy: this._default(runtime["backoffPolicy"], "no"),
+        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+      },
+      ignoreSSL: runtime["ignoreSSL"],
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this._getAccessKeyId();
+        let accessKeySecret = await this._getAccessKeySecret();
+        let accessToken = await this._getAccessToken();
+        request_.protocol = this._getProtocol(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = `/v2/user/get_access_token`;
+        request_.headers = {
+          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+        };
+        if (this._notEmpty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
+          request_.headers["date"] = this._getRFC2616Date();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+        }
+        request_.body = this._toJSONString(request.toMap());
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        if (this._isStatusCode(response_, 200)) {
+          return $tea.cast<AccessTokenResponse>({
+            requestId: response_.headers["x-ca-request-id"],
+            ...await this._readAsJSON(response_),
+          }, new AccessTokenResponse({}));
         }
 
         if (this._notEmpty(response_.headers["x-ca-error-message"])) {
