@@ -56,7 +56,7 @@ namespace Aliyun.SDK.CCP.Credentials
 
         public bool WithShouldRefresh()
         {
-            if (string.IsNullOrWhiteSpace(this.accessToken) || string.IsNullOrWhiteSpace(this.expireTime))
+            if (string.IsNullOrWhiteSpace(this.refreshToken) || string.IsNullOrWhiteSpace(this.expireTime))
             {
                 return false;
             }
