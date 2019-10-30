@@ -155,10 +155,7 @@ func (client *BaseClient) GetSignature(request *tea.Request) string {
 		request.Headers["x-acs-security-token"] = token
 	}
 
-	secret, err := client.credential.GetAccessSecret()
-	if err != nil {
-		return ""
-	}
+	secret, _ := client.GetAccessKeySecret()
 	return getSignature(request, secret)
 }
 
@@ -166,10 +163,7 @@ func (client *BaseClient) GetAccessKeyId() (string, error) {
 	if client.credential == nil {
 		return "", nil
 	}
-	accesskey, err := client.credential.GetAccessKeyID()
-	if err != nil {
-		return "", err
-	}
+	accesskey, _ := client.credential.GetAccessKeyID()
 	return accesskey, nil
 }
 
@@ -199,10 +193,7 @@ func (client *BaseClient) GetAccessKeySecret() (string, error) {
 	if client.credential == nil {
 		return "", nil
 	}
-	secret, err := client.credential.GetAccessSecret()
-	if err != nil {
-		return "", err
-	}
+	secret, _ := client.credential.GetAccessSecret()
 	return secret, nil
 }
 
@@ -224,10 +215,7 @@ func (client *BaseClient) ToQuery(request interface{}) map[string]string {
 	result := make(map[string]string)
 	for key, value := range tmp {
 		filterValue := reflect.ValueOf(value)
-		err := flatRepeatedList(filterValue, result, key)
-		if err != nil {
-			return nil
-		}
+		flatRepeatedList(filterValue, result, key)
 	}
 
 	return result

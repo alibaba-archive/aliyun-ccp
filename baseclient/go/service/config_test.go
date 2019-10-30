@@ -110,10 +110,13 @@ func Test_flatRepeatedList(t *testing.T) {
 				"key": "value",
 			},
 		},
+		"Nil": nil,
 	}
 	result := map[string]string{}
-	err := flatRepeatedList(reflect.ValueOf(input), result, "")
-	utils.AssertNil(t, err)
+	flatRepeatedList(reflect.ValueOf(input), result, "")
+	utils.AssertEqual(t, "2", result["Nums.2"])
+	utils.AssertEqual(t, "1", result["Nums.1"])
+	utils.AssertEqual(t, "value", result["Maps.1.key"])
 }
 
 func Test_refreshAccessToken(t *testing.T) {

@@ -36,3 +36,8 @@ func Test_Prettify(t *testing.T) {
 	str = Prettify(nil)
 	AssertEqual(t, "null", str)
 }
+
+func Test_GetRFC2616Date(t *testing.T) {
+	time := GetRFC2616Date()
+	AssertEqual(t, 29, len(time))
+}
