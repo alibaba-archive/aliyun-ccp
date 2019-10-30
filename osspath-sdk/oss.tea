@@ -1244,6 +1244,264 @@ file list', example='', items='{"$ref":"#/definitions/StoreFile"}', x-go-name='F
   }
 
   /**
+   * 
+   */
+  model AccessTokenResponse {
+    requestId?: string(name='requestId', description='request Id', example='0BA8CF68-9769E-4469-A14B-8772004287E2', x-go-name='requestId'),
+    accessToken: string(name='access_token', description='用于调用业务接口的accessToken', example='cnskjajkahwdhwialsnd', x-go-name='AccessToken'),
+    expiresTime?: string(name='expires_time', description='accessToken过期时间，ISO时间', example='2019-09-01T06:57:48.813Z', x-go-name='ExpiresTime'),
+    refreshToken?: string(name='refresh_token', description='用于刷新accessToken', example='cnskjajkahwdhwialsnd', x-go-name='RefreshToken'),
+    role?: string(name='role', description='当前用户角色', example='user', x-go-name='Role'),
+    tokenType?: string(name='token_type', description='accessToken类型，Bearer', example='Bearer', x-go-name='TokenType'),
+    userId?: string(name='user_id', description='当前用户ID', example='DING-xxxxx', x-go-name='UserID'),
+  }
+
+  /**
+   * 
+   */
+  model AddStoreResponse {
+    requestId?: string(name='requestId', description='request Id', example='0BA8CF68-9769E-4469-A14B-8772004287E2', x-go-name='requestId'),
+    accelerateEndpoint?: string(name='accelerate_endpoint', description='全球加速域名', example='https://oss-cn-shenzhen.aliyuncs.com/', x-go-name='AccelerateEndpoint'),
+    basePath?: string(name='base_path', description='存储公共前缀', example='ccp-data', x-go-name='BasePath'),
+    bucket: string(name='bucket', description='bucket名称', example='data-sz-bucket', x-go-name='Bucket'),
+    customizedEndpoint?: string(name='customized_endpoint', description='用户自定义绑定存储地址', example='https://oss-cn-shenzhen.aliyuncs.com/', x-go-name='CustomizedEndpoint'),
+    domainId: string(name='domain_id', description='domain ID', example='sz100', x-go-name='DomainID'),
+    endpoint: string(name='endpoint', description='存储访问地址', example='https://oss-cn-shenzhen.aliyuncs.com/', x-go-name='Endpoint'),
+    internalEndpoint?: string(name='internal_endpoint', description='内网存储地址', example='https://oss-cn-shenzhen.aliyuncs.com/', x-go-name='InternalEndpoint'),
+    ownership: string(name='ownership', description='存储归属，system表示系统提供，custom表示使用自己的存储', enum='system, custom', example='system', x-go-name='Ownership'),
+    policy: string(name='policy', description='Policy授权,system类型store会将bucket权限授予当前云账号', x-go-name='Policy'),
+    roleArn?: string(name='role_arn', description='访问Bucket的角色ARN', example='acs:oss:*:*:*', x-go-name='RoleArn'),
+    storeId: string(name='store_id', description='store ID', example='cdjaksbwuiqbxuiassd', x-go-name='StoreID'),
+    type: string(name='type', description='存储类型，当前只支持oss', enum='oss', example='oss', x-go-name='Type'),
+  }
+
+  /**
+   * 
+   */
+  model AdminListStoresRequest {
+  }
+
+  /**
+   * base domain response
+   */
+  model BaseDomainResponse {
+    requestId?: string(name='requestId', description='request Id', example='0BA8CF68-9769E-4469-A14B-8772004287E2', x-go-name='requestId'),
+    authAlipayAppId?: string(name='auth_alipay_app_id', description='支付宝 App Id', example='abc', x-go-name='AuthAlipayAppId'),
+    authAlipayEnable?: boolean(name='auth_alipay_enable', description='是否开启了支付宝认证', example=true, x-go-name='AuthAlipayEnable'),
+    authAlipayPrivateKey?: string(name='auth_alipay_private_key', description='支付宝 App Secret', example='abc', x-go-name='AuthAlipayPrivateKey'),
+    authConfig?: object(name='auth_config', additionalProperties='{"$ref":"#/definitions/AuthConfig"}', description='登录相关信息', example='{}', x-go-name='AuthConfig'),
+    authDingdingAppId?: string(name='auth_dingding_app_id', description='钉钉 App Id', example='abc', x-go-name='AuthDingdingAppId'),
+    authDingdingAppSecret?: string(name='auth_dingding_app_secret', description='钉钉 App Secret', example='abc', x-go-name='AuthDingdingAppSecret'),
+    authDingdingEnable?: boolean(name='auth_dingding_enable', description='是否开启了钉钉认证', example=true, x-go-name='AuthDingdingEnable'),
+    authEndpointEnable?: boolean(name='auth_endpoint_enable', x-go-name='AuthEndpointEnable'),
+    authRamAppId?: string(name='auth_ram_app_id', description='RAM App Id', example='abc', x-go-name='AuthRamAppId'),
+    authRamAppSecret?: string(name='auth_ram_app_secret', description='RAM App Secret', example='abc', x-go-name='AuthRamAppSecret'),
+    authRamEnable?: boolean(name='auth_ram_enable', description='是否开启了 RAM 认证', example=true, x-go-name='AuthRamEnable'),
+    createdAt?: string(name='created_at', description='Domain 创建时间', example='"2019-08-31T12:58:31.137Z"', x-go-name='CreatedAt'),
+    dataHashName?: string(name='data_hash_name', description='数据 Hash 算法', example='sha1', x-go-name='DataHashName'),
+    description?: string(name='description', description='Domain 描述', example='my test domain', x-go-name='Description'),
+    domainId?: string(name='domain_id', description='Domain ID', example='sz111', x-go-name='DomainID'),
+    domainName?: string(name='domain_name', description='Domain 描述', example='my test domain', x-go-name='DomainName'),
+    eventFilenameMatches?: string(name='event_filename_matches', description='事件通知 MNS 匹配文件名', example='abc', x-go-name='EventFileNameMatches'),
+    eventMnsEndpoint?: string(name='event_mns_endpoint', description='事件通知 MNS Endpoint', example='http://abc.mns.cn-shenzhen.aliyuncs.com', x-go-name='EventMnsEndpoint'),
+    eventMnsTopic?: string(name='event_mns_topic', description='事件通知 MNS Topic', example='abc', x-go-name='EventMnsTopic'),
+    eventNames?: [ string ](name='event_names', description='事件名列表', example='abc', items='{"type":"string"}', x-go-name='EventNames'),
+    eventRoleArn?: string(name='event_role_arn', description='事件通知 Role Arn', x-go-name='EventRoleArn'),
+    initDriveEnable?: boolean(name='init_drive_enable', description='是否开启了自动初始化 Drive', example=true, x-go-name='InitDriveEnable'),
+    initDriveSize?: long(name='init_drive_size', description='自动初始化 Drive 大小', example=1024, format='int64', x-go-name='InitDriveSize'),
+    initDriveStoreId?: string(name='init_drive_store_id', description='自动初始化 Drive 所用 Store ID', example='1', x-go-name='InitDriveStoreID'),
+    pathType?: string(name='path_type', description='Domain 类型', example='CCPPath', x-go-name='PathType'),
+    publishedAppAccessStrategy?: [ AppAccessStrategy ](name='published_app_access_strategy', $ref='#/definitions/AppAccessStrategy'),
+    sharable?: boolean(name='sharable', description='是否开启了分享', example=true, x-go-name='Sharable'),
+    storeLevel?: string(name='store_level', description='存储级别', example='Standard', x-go-name='StoreLevel'),
+    storeRegionList?: [ string ](name='store_region_list', description='存储 Region 列表', example='cn-hangzhou', items='{"type":"string"}', x-go-name='StoreRegionList'),
+    updatedAt?: string(name='updated_at', description='Domain 更新时间', example='"2019-08-31T12:58:31.137Z"', x-go-name='UpdatedAt'),
+  }
+
+  /**
+   * create domain response
+   */
+  model CreateDomainResponse {
+    requestId?: string(name='requestId', description='request Id', example='0BA8CF68-9769E-4469-A14B-8772004287E2', x-go-name='requestId'),
+    authAlipayAppId?: string(name='auth_alipay_app_id', description='支付宝 App Id', example='abc', x-go-name='AuthAlipayAppId'),
+    authAlipayEnable?: boolean(name='auth_alipay_enable', description='是否开启了支付宝认证', example=true, x-go-name='AuthAlipayEnable'),
+    authAlipayPrivateKey?: string(name='auth_alipay_private_key', description='支付宝 App Secret', example='abc', x-go-name='AuthAlipayPrivateKey'),
+    authConfig?: object(name='auth_config', additionalProperties='{"$ref":"#/definitions/AuthConfig"}', description='登录相关信息', example='{}', x-go-name='AuthConfig'),
+    authDingdingAppId?: string(name='auth_dingding_app_id', description='钉钉 App Id', example='abc', x-go-name='AuthDingdingAppId'),
+    authDingdingAppSecret?: string(name='auth_dingding_app_secret', description='钉钉 App Secret', example='abc', x-go-name='AuthDingdingAppSecret'),
+    authDingdingEnable?: boolean(name='auth_dingding_enable', description='是否开启了钉钉认证', example=true, x-go-name='AuthDingdingEnable'),
+    authEndpointEnable?: boolean(name='auth_endpoint_enable', x-go-name='AuthEndpointEnable'),
+    authRamAppId?: string(name='auth_ram_app_id', description='RAM App Id', example='abc', x-go-name='AuthRamAppId'),
+    authRamAppSecret?: string(name='auth_ram_app_secret', description='RAM App Secret', example='abc', x-go-name='AuthRamAppSecret'),
+    authRamEnable?: boolean(name='auth_ram_enable', description='是否开启了 RAM 认证', example=true, x-go-name='AuthRamEnable'),
+    createdAt?: string(name='created_at', description='Domain 创建时间', example='"2019-08-31T12:58:31.137Z"', x-go-name='CreatedAt'),
+    dataHashName?: string(name='data_hash_name', description='数据 Hash 算法', example='sha1', x-go-name='DataHashName'),
+    description?: string(name='description', description='Domain 描述', example='my test domain', x-go-name='Description'),
+    domainId?: string(name='domain_id', description='Domain ID', example='sz111', x-go-name='DomainID'),
+    domainName?: string(name='domain_name', description='Domain 描述', example='my test domain', x-go-name='DomainName'),
+    eventFilenameMatches?: string(name='event_filename_matches', description='事件通知 MNS 匹配文件名', example='abc', x-go-name='EventFileNameMatches'),
+    eventMnsEndpoint?: string(name='event_mns_endpoint', description='事件通知 MNS Endpoint', example='http://abc.mns.cn-shenzhen.aliyuncs.com', x-go-name='EventMnsEndpoint'),
+    eventMnsTopic?: string(name='event_mns_topic', description='事件通知 MNS Topic', example='abc', x-go-name='EventMnsTopic'),
+    eventNames?: [ string ](name='event_names', description='事件名列表', example='abc', items='{"type":"string"}', x-go-name='EventNames'),
+    eventRoleArn?: string(name='event_role_arn', description='事件通知 Role Arn', x-go-name='EventRoleArn'),
+    initDriveEnable?: boolean(name='init_drive_enable', description='是否开启了自动初始化 Drive', example=true, x-go-name='InitDriveEnable'),
+    initDriveSize?: long(name='init_drive_size', description='自动初始化 Drive 大小', example=1024, format='int64', x-go-name='InitDriveSize'),
+    initDriveStoreId?: string(name='init_drive_store_id', description='自动初始化 Drive 所用 Store ID', example='1', x-go-name='InitDriveStoreID'),
+    pathType?: string(name='path_type', description='Domain 类型', example='CCPPath', x-go-name='PathType'),
+    publishedAppAccessStrategy?: [ AppAccessStrategy ](name='published_app_access_strategy', $ref='#/definitions/AppAccessStrategy'),
+    sharable?: boolean(name='sharable', description='是否开启了分享', example=true, x-go-name='Sharable'),
+    storeLevel?: string(name='store_level', description='存储级别', example='Standard', x-go-name='StoreLevel'),
+    storeRegionList?: [ string ](name='store_region_list', description='存储 Region 列表', example='cn-hangzhou', items='{"type":"string"}', x-go-name='StoreRegionList'),
+    updatedAt?: string(name='updated_at', description='Domain 更新时间', example='"2019-08-31T12:58:31.137Z"', x-go-name='UpdatedAt'),
+  }
+
+  /**
+   * 
+   */
+  model GetAppResponse {
+    requestId?: string(name='requestId', description='request Id', example='0BA8CF68-9769E-4469-A14B-8772004287E2', x-go-name='requestId'),
+    aliOwnerId: string(name='ali_owner_id', description='App 拥有者', example='172***430', x-go-name='AliOwnerID'),
+    appId: string(name='app_id', description='App ID', example='cksaljkfiwasdn', x-go-name='AppID'),
+    appName: string(name='app_name', description='App名称', example='图片分享应用', maxLength=128, minLength=1, pattern='[0-9a-zA-Z]+', x-go-name='AppName'),
+    appSecret: string(name='app_secret', description='App 秘钥', example='sax***Js9', x-go-name='AppSecret'),
+    createdAt: string(name='created_at', description='App 创建时间', example='"2019-08-31T12:58:31.137Z"', x-go-name='CreatedAt'),
+    description: string(name='description', description='App描述', example='测试专用', maxLength=128, minLength=0, x-go-name='Description'),
+    logo: string(name='logo', description='App图标', example='https://app.com/logo.jpg', x-go-name='Logo'),
+    provider: string(name='provider', description='App 提供方', example='Alibaba Inc.', x-go-name='Provider'),
+    redirectUri: string(name='redirect_uri', description='App回调地址', example='https://app.com/callback', x-go-name='RedirectUri'),
+    scope: [ string ](name='scope', description='App权限列表', enum='FILE.ALL, SHARE.ALL, STORAGEFILE.ALL, STORAGE.ALL, DRIVE.ALL, USER.ALL', items='{"type":"string"}', x-go-name='Scope'),
+    screenshots: [ string ](name='screenshots', description='App 屏幕截图', example='http://app.com/screenshot_1.jpg', items='{"type":"string"}', x-go-name='Screenshots'),
+    stage: string(name='stage', default='UnPublished,Pending,Published', description='App 当前阶段', example='UnPublished', x-go-name='Stage'),
+    type: string(name='type', default='WebServer', description='App类型', enum='WebServer, WebBrowser, Native', example='WebServer', x-go-name='Type'),
+    updatedAt: string(name='updated_at', description='App 修改时间', example='"2019-08-31T12:58:31.137Z"', x-go-name='UpdatedAt'),
+  }
+
+  /**
+   * get domain response
+   */
+  model GetDomainResponse {
+    requestId?: string(name='requestId', description='request Id', example='0BA8CF68-9769E-4469-A14B-8772004287E2', x-go-name='requestId'),
+    authAlipayAppId?: string(name='auth_alipay_app_id', description='支付宝 App Id', example='abc', x-go-name='AuthAlipayAppId'),
+    authAlipayEnable?: boolean(name='auth_alipay_enable', description='是否开启了支付宝认证', example=true, x-go-name='AuthAlipayEnable'),
+    authAlipayPrivateKey?: string(name='auth_alipay_private_key', description='支付宝 App Secret', example='abc', x-go-name='AuthAlipayPrivateKey'),
+    authConfig?: object(name='auth_config', additionalProperties='{"$ref":"#/definitions/AuthConfig"}', description='登录相关信息', example='{}', x-go-name='AuthConfig'),
+    authDingdingAppId?: string(name='auth_dingding_app_id', description='钉钉 App Id', example='abc', x-go-name='AuthDingdingAppId'),
+    authDingdingAppSecret?: string(name='auth_dingding_app_secret', description='钉钉 App Secret', example='abc', x-go-name='AuthDingdingAppSecret'),
+    authDingdingEnable?: boolean(name='auth_dingding_enable', description='是否开启了钉钉认证', example=true, x-go-name='AuthDingdingEnable'),
+    authEndpointEnable?: boolean(name='auth_endpoint_enable', x-go-name='AuthEndpointEnable'),
+    authRamAppId?: string(name='auth_ram_app_id', description='RAM App Id', example='abc', x-go-name='AuthRamAppId'),
+    authRamAppSecret?: string(name='auth_ram_app_secret', description='RAM App Secret', example='abc', x-go-name='AuthRamAppSecret'),
+    authRamEnable?: boolean(name='auth_ram_enable', description='是否开启了 RAM 认证', example=true, x-go-name='AuthRamEnable'),
+    createdAt?: string(name='created_at', description='Domain 创建时间', example='"2019-08-31T12:58:31.137Z"', x-go-name='CreatedAt'),
+    dataHashName?: string(name='data_hash_name', description='数据 Hash 算法', example='sha1', x-go-name='DataHashName'),
+    description?: string(name='description', description='Domain 描述', example='my test domain', x-go-name='Description'),
+    domainId?: string(name='domain_id', description='Domain ID', example='sz111', x-go-name='DomainID'),
+    domainName?: string(name='domain_name', description='Domain 描述', example='my test domain', x-go-name='DomainName'),
+    eventFilenameMatches?: string(name='event_filename_matches', description='事件通知 MNS 匹配文件名', example='abc', x-go-name='EventFileNameMatches'),
+    eventMnsEndpoint?: string(name='event_mns_endpoint', description='事件通知 MNS Endpoint', example='http://abc.mns.cn-shenzhen.aliyuncs.com', x-go-name='EventMnsEndpoint'),
+    eventMnsTopic?: string(name='event_mns_topic', description='事件通知 MNS Topic', example='abc', x-go-name='EventMnsTopic'),
+    eventNames?: [ string ](name='event_names', description='事件名列表', example='abc', items='{"type":"string"}', x-go-name='EventNames'),
+    eventRoleArn?: string(name='event_role_arn', description='事件通知 Role Arn', x-go-name='EventRoleArn'),
+    initDriveEnable?: boolean(name='init_drive_enable', description='是否开启了自动初始化 Drive', example=true, x-go-name='InitDriveEnable'),
+    initDriveSize?: long(name='init_drive_size', description='自动初始化 Drive 大小', example=1024, format='int64', x-go-name='InitDriveSize'),
+    initDriveStoreId?: string(name='init_drive_store_id', description='自动初始化 Drive 所用 Store ID', example='1', x-go-name='InitDriveStoreID'),
+    pathType?: string(name='path_type', description='Domain 类型', example='CCPPath', x-go-name='PathType'),
+    publishedAppAccessStrategy?: [ AppAccessStrategy ](name='published_app_access_strategy', $ref='#/definitions/AppAccessStrategy'),
+    sharable?: boolean(name='sharable', description='是否开启了分享', example=true, x-go-name='Sharable'),
+    storeLevel?: string(name='store_level', description='存储级别', example='Standard', x-go-name='StoreLevel'),
+    storeRegionList?: [ string ](name='store_region_list', description='存储 Region 列表', example='cn-hangzhou', items='{"type":"string"}', x-go-name='StoreRegionList'),
+    updatedAt?: string(name='updated_at', description='Domain 更新时间', example='"2019-08-31T12:58:31.137Z"', x-go-name='UpdatedAt'),
+  }
+
+  /**
+   * 
+   */
+  model GetUserAccessTokenRequest {
+    role?: string(name='role', default='user', description='角色', enum='superadmin, admin, user', example='user', x-go-name='Role'),
+    userId: string(name='user_id', description='用户 ID', example='ccpuserid', x-go-name='UserID'),
+  }
+
+  /**
+   * 
+   */
+  model ListAppsResponse {
+    requestId?: string(name='requestId', description='request Id', example='0BA8CF68-9769E-4469-A14B-8772004287E2', x-go-name='requestId'),
+    items: [ GetAppResponse ](name='items', description='App 列表', example='', items='{"$ref":"#/definitions/GetAppResponse"}', x-go-name='Items'),
+    nextMarker?: string(name='next_marker', description='App 分批查询游标', example='ncsajnsalsa=', x-go-name='NextMarker'),
+  }
+
+  /**
+   * list domain response
+   */
+  model ListDomainsResponse {
+    requestId?: string(name='requestId', description='request Id', example='0BA8CF68-9769E-4469-A14B-8772004287E2', x-go-name='requestId'),
+    items?: [ BaseDomainResponse ](name='items', description='domain 列表', example='', items='{"$ref":"#/definitions/BaseDomainResponse"}', x-go-name='DomainList'),
+    nextMarker?: string(name='next_marker', description='下次分页查询游标', example='NWQ1YmI4MjA0ZGU1ZWNjYzAzODM0ZDVkODlkMWJiMzcyNzM1NTU4OA', x-go-name='NextMarker'),
+  }
+
+  /**
+   * 
+   */
+  model ListStoresResponse {
+    requestId?: string(name='requestId', description='request Id', example='0BA8CF68-9769E-4469-A14B-8772004287E2', x-go-name='requestId'),
+    items: [ Store ](name='items', description='Store 列表', example='', items='{"$ref":"#/definitions/Store"}', x-go-name='Items'),
+  }
+
+  /**
+   * 
+   */
+  model Store {
+    accelerateEndpoint?: string(name='accelerate_endpoint', description='全球加速域名', example='https://oss-cn-shenzhen.aliyuncs.com/', x-go-name='AccelerateEndpoint'),
+    basePath?: string(name='base_path', description='存储公共前缀', example='ccp-data', x-go-name='BasePath'),
+    bucket: string(name='bucket', description='bucket名称', example='data-sz-bucket', x-go-name='Bucket'),
+    customizedEndpoint?: string(name='customized_endpoint', description='用户自定义绑定存储地址', example='https://oss-cn-shenzhen.aliyuncs.com/', x-go-name='CustomizedEndpoint'),
+    endpoint: string(name='endpoint', description='存储访问地址', example='https://oss-cn-shenzhen.aliyuncs.com/', x-go-name='Endpoint'),
+    internalEndpoint?: string(name='internal_endpoint', description='内网存储地址', example='https://oss-cn-shenzhen.aliyuncs.com/', x-go-name='InternalEndpoint'),
+    ownership: string(name='ownership', description='存储归属，system表示系统提供，custom表示使用自己的存储', enum='system, custom', example='system', x-go-name='Ownership'),
+    policy: string(name='policy', description='Policy授权,system类型store会将bucket权限授予当前云账号', x-go-name='Policy'),
+    roleArn?: string(name='role_arn', description='访问Bucket的角色ARN', example='acs:oss:*:*:*', x-go-name='RoleArn'),
+    storeId: string(name='store_id', description='store ID', example='cdjaksbwuiqbxuiassd', x-go-name='StoreID'),
+    type: string(name='type', description='存储类型，当前只支持oss', enum='oss', example='oss', x-go-name='Type'),
+  }
+
+  /**
+   * create domain response
+   */
+  model UpdateDomainResponse {
+    requestId?: string(name='requestId', description='request Id', example='0BA8CF68-9769E-4469-A14B-8772004287E2', x-go-name='requestId'),
+    authAlipayAppId?: string(name='auth_alipay_app_id', description='支付宝 App Id', example='abc', x-go-name='AuthAlipayAppId'),
+    authAlipayEnable?: boolean(name='auth_alipay_enable', description='是否开启了支付宝认证', example=true, x-go-name='AuthAlipayEnable'),
+    authAlipayPrivateKey?: string(name='auth_alipay_private_key', description='支付宝 App Secret', example='abc', x-go-name='AuthAlipayPrivateKey'),
+    authConfig?: object(name='auth_config', additionalProperties='{"$ref":"#/definitions/AuthConfig"}', description='登录相关信息', example='{}', x-go-name='AuthConfig'),
+    authDingdingAppId?: string(name='auth_dingding_app_id', description='钉钉 App Id', example='abc', x-go-name='AuthDingdingAppId'),
+    authDingdingAppSecret?: string(name='auth_dingding_app_secret', description='钉钉 App Secret', example='abc', x-go-name='AuthDingdingAppSecret'),
+    authDingdingEnable?: boolean(name='auth_dingding_enable', description='是否开启了钉钉认证', example=true, x-go-name='AuthDingdingEnable'),
+    authEndpointEnable?: boolean(name='auth_endpoint_enable', x-go-name='AuthEndpointEnable'),
+    authRamAppId?: string(name='auth_ram_app_id', description='RAM App Id', example='abc', x-go-name='AuthRamAppId'),
+    authRamAppSecret?: string(name='auth_ram_app_secret', description='RAM App Secret', example='abc', x-go-name='AuthRamAppSecret'),
+    authRamEnable?: boolean(name='auth_ram_enable', description='是否开启了 RAM 认证', example=true, x-go-name='AuthRamEnable'),
+    createdAt?: string(name='created_at', description='Domain 创建时间', example='"2019-08-31T12:58:31.137Z"', x-go-name='CreatedAt'),
+    dataHashName?: string(name='data_hash_name', description='数据 Hash 算法', example='sha1', x-go-name='DataHashName'),
+    description?: string(name='description', description='Domain 描述', example='my test domain', x-go-name='Description'),
+    domainId?: string(name='domain_id', description='Domain ID', example='sz111', x-go-name='DomainID'),
+    domainName?: string(name='domain_name', description='Domain 描述', example='my test domain', x-go-name='DomainName'),
+    eventFilenameMatches?: string(name='event_filename_matches', description='事件通知 MNS 匹配文件名', example='abc', x-go-name='EventFileNameMatches'),
+    eventMnsEndpoint?: string(name='event_mns_endpoint', description='事件通知 MNS Endpoint', example='http://abc.mns.cn-shenzhen.aliyuncs.com', x-go-name='EventMnsEndpoint'),
+    eventMnsTopic?: string(name='event_mns_topic', description='事件通知 MNS Topic', example='abc', x-go-name='EventMnsTopic'),
+    eventNames?: [ string ](name='event_names', description='事件名列表', example='abc', items='{"type":"string"}', x-go-name='EventNames'),
+    eventRoleArn?: string(name='event_role_arn', description='事件通知 Role Arn', x-go-name='EventRoleArn'),
+    initDriveEnable?: boolean(name='init_drive_enable', description='是否开启了自动初始化 Drive', example=true, x-go-name='InitDriveEnable'),
+    initDriveSize?: long(name='init_drive_size', description='自动初始化 Drive 大小', example=1024, format='int64', x-go-name='InitDriveSize'),
+    initDriveStoreId?: string(name='init_drive_store_id', description='自动初始化 Drive 所用 Store ID', example='1', x-go-name='InitDriveStoreID'),
+    pathType?: string(name='path_type', description='Domain 类型', example='CCPPath', x-go-name='PathType'),
+    publishedAppAccessStrategy?: [ AppAccessStrategy ](name='published_app_access_strategy', $ref='#/definitions/AppAccessStrategy'),
+    sharable?: boolean(name='sharable', description='是否开启了分享', example=true, x-go-name='Sharable'),
+    storeLevel?: string(name='store_level', description='存储级别', example='Standard', x-go-name='StoreLevel'),
+    storeRegionList?: [ string ](name='store_region_list', description='存储 Region 列表', example='cn-hangzhou', items='{"type":"string"}', x-go-name='StoreRegionList'),
+    updatedAt?: string(name='updated_at', description='Domain 更新时间', example='"2019-08-31T12:58:31.137Z"', x-go-name='UpdatedAt'),
+  }
+
+  /**
    * complete file request
    */
   model BaseCompleteFileRequest {
@@ -3093,6 +3351,162 @@ example', x-go-name='UserID'),
     pathname = `/v2/account/token`;
     headers = {
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
+      content-type = 'application/json; charset=utf-8',
+    };
+
+    if (@notEmpty(accessToken)) {
+      headers.authorization = `Bearer ${accessToken}`;
+    } else if (@notEmpty(accesskeyId) && @notEmpty(accessKeySecret)) {
+      headers.date = @getRFC2616Date();
+      headers.accept = 'application/json';
+      headers.x-acs-signature-method = 'HMAC-SHA1';
+      headers.x-acs-signature-version = '1.0';
+      headers.authorization = `acs ${accesskeyId}:${@getSignature(__request)}`;
+    }
+    body = @toJSONString(request);
+  } returns {
+    if (@isStatusCode(__response, 200)) {
+      return {
+        requestId = __response.headers.x-ca-request-id,
+        ...@readAsJSON(__response),
+      };
+    }
+
+    if (@notEmpty(__response.headers.x-ca-error-message)) {
+      throw {
+        data = {
+          requestId = __response.headers.x-ca-request-id,
+          statusCode = __response.statusCode,
+          statusMessage = __response.statusMessage,
+        },
+        message = __response.headers.x-ca-error-message,
+      };
+    }
+    throw {
+      data = {
+        requestId = __response.headers.x-ca-request-id,
+        statusCode = __response.statusCode,
+        statusMessage = __response.statusMessage,
+      },
+      ...@readAsJSON(__response),
+    };
+  } runtime {
+    timeouted = 'retry',
+    readTimeout = runtime.readTimeout,
+    connectTimeout = runtime.connectTimeout,
+    localAddr = runtime.localAddr,
+    httpProxy = runtime.httpProxy,
+    httpsProxy = runtime.httpsProxy,
+    noProxy = runtime.noProxy,
+    maxIdleConns = runtime.maxIdleConns,
+    socks5Proxy = runtime.socks5Proxy,
+    socks5NetWork = runtime.socks5NetWork,
+    retry = {
+      retryable = runtime.autoretry,
+      maxAttempts = @defaultNumber(runtime.maxAttempts, 3),
+    },
+    backoff = {
+      policy = @default(runtime.backoffPolicy, 'no'),
+      period = @defaultNumber(runtime.backoffPeriod, 1),
+    },
+    ignoreSSL = runtime.ignoreSSL
+  }
+
+  /**
+   * 列举Store列表
+   * @tags admin
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error Forbidden User not authorized to operate on the specified APIs.
+   * @error InternalError The request has been failed due to some unknown error.
+   */
+  api adminListStores(request: AdminListStoresRequest, runtime: RuntimeOptions): ListStoresResponse  {
+    var accesskeyId = @getAccessKeyId();
+    var accessKeySecret = @getAccessKeySecret();
+    var accessToken = @getAccessToken();
+    protocol = @getProtocol(@protocol, 'https');
+    method = 'POST';
+    pathname = `/v2/domain/list_stores`;
+    headers = {
+      host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
+      content-type = 'application/json; charset=utf-8',
+    };
+
+    if (@notEmpty(accessToken)) {
+      headers.authorization = `Bearer ${accessToken}`;
+    } else if (@notEmpty(accesskeyId) && @notEmpty(accessKeySecret)) {
+      headers.date = @getRFC2616Date();
+      headers.accept = 'application/json';
+      headers.x-acs-signature-method = 'HMAC-SHA1';
+      headers.x-acs-signature-version = '1.0';
+      headers.authorization = `acs ${accesskeyId}:${@getSignature(__request)}`;
+    }
+    body = @toJSONString(request);
+  } returns {
+    if (@isStatusCode(__response, 200)) {
+      return {
+        requestId = __response.headers.x-ca-request-id,
+        ...@readAsJSON(__response),
+      };
+    }
+
+    if (@notEmpty(__response.headers.x-ca-error-message)) {
+      throw {
+        data = {
+          requestId = __response.headers.x-ca-request-id,
+          statusCode = __response.statusCode,
+          statusMessage = __response.statusMessage,
+        },
+        message = __response.headers.x-ca-error-message,
+      };
+    }
+    throw {
+      data = {
+        requestId = __response.headers.x-ca-request-id,
+        statusCode = __response.statusCode,
+        statusMessage = __response.statusMessage,
+      },
+      ...@readAsJSON(__response),
+    };
+  } runtime {
+    timeouted = 'retry',
+    readTimeout = runtime.readTimeout,
+    connectTimeout = runtime.connectTimeout,
+    localAddr = runtime.localAddr,
+    httpProxy = runtime.httpProxy,
+    httpsProxy = runtime.httpsProxy,
+    noProxy = runtime.noProxy,
+    maxIdleConns = runtime.maxIdleConns,
+    socks5Proxy = runtime.socks5Proxy,
+    socks5NetWork = runtime.socks5NetWork,
+    retry = {
+      retryable = runtime.autoretry,
+      maxAttempts = @defaultNumber(runtime.maxAttempts, 3),
+    },
+    backoff = {
+      policy = @default(runtime.backoffPolicy, 'no'),
+      period = @defaultNumber(runtime.backoffPeriod, 1),
+    },
+    ignoreSSL = runtime.ignoreSSL
+  }
+
+  /**
+   * This will get a user info
+   * @tags admin
+   * @error undefined undefined
+   * @error undefined undefined
+   * @error undefined undefined
+   * @error undefined undefined
+   * @error undefined undefined
+   */
+  api getAccessToken(request: GetUserAccessTokenRequest, runtime: RuntimeOptions): AccessTokenResponse  {
+    var accesskeyId = @getAccessKeyId();
+    var accessKeySecret = @getAccessKeySecret();
+    var accessToken = @getAccessToken();
+    protocol = @getProtocol(@protocol, 'https');
+    method = 'POST';
+    pathname = `/v2/user/get_access_token`;
+    headers = {
+      host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
 
