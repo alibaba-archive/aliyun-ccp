@@ -1,5 +1,7 @@
 module github.com/aliyun/aliyun-ccp/baseclient/go
 
+go 1.12
+
 require (
 	github.com/alibabacloud-go/debug v0.0.0-20190504072949-9472017b5c68 // indirect
 	github.com/alibabacloud-go/tea v0.0.0-20191011054747-c132d91088dc
