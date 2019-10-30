@@ -263,81 +263,62 @@ func getSignedStr(req *tea.Request, canonicalizedResource, accessKeySecret strin
 
 	signStr := req.Method + "\n" + accept + "\n" + contentMd5 + "\n" + contentType + "\n" + date + "\n" + canonicalizedOSSHeaders + canonicalizedResource
 	h := hmac.New(func() hash.Hash { return sha1.New() }, []byte(accessKeySecret))
-	_, err := io.WriteString(h, signStr)
-	if err != nil {
-		return ""
-	}
+	_, _ = io.WriteString(h, signStr)
 	signedStr := base64.StdEncoding.EncodeToString(h.Sum(nil))
 
 	return signedStr
 }
 
-func flatRepeatedList(dataValue reflect.Value, result map[string]string, prefix string) (err error) {
+func flatRepeatedList(dataValue reflect.Value, result map[string]string, prefix string) {
 	if !dataValue.IsValid() {
 		return
 	}
 
 	dataType := dataValue.Type()
 	if dataType.Kind().String() == "slice" {
-		err = handleRepeatedParams(dataValue, result, prefix)
-		if err != nil {
-			return
-		}
+		handleRepeatedParams(dataValue, result, prefix)
 	} else if dataType.Kind().String() == "map" {
-		err = handleMap(dataValue, result, prefix)
-		if err != nil {
-			return
-		}
+		handleMap(dataValue, result, prefix)
 	} else {
 		result[prefix] = fmt.Sprintf("%v", dataValue.Interface())
 	}
-	return
 }
 
-func handleRepeatedParams(repeatedFieldValue reflect.Value, result map[string]string, prefix string) (err error) {
+func handleRepeatedParams(repeatedFieldValue reflect.Value, result map[string]string, prefix string) {
 	if repeatedFieldValue.IsValid() && !repeatedFieldValue.IsNil() {
 		for m := 0; m < repeatedFieldValue.Len(); m++ {
 			elementValue := repeatedFieldValue.Index(m)
 			key := prefix + "." + strconv.Itoa(m+1)
 			fieldValue := reflect.ValueOf(elementValue.Interface())
 			if fieldValue.Kind().String() == "map" {
-				err = handleMap(fieldValue, result, key)
-				if err != nil {
-					return
-				}
+				handleMap(fieldValue, result, key)
 			} else {
 				result[key] = fmt.Sprintf("%v", fieldValue.Interface())
 			}
 		}
 	}
-	return nil
 }
 
-func handleMap(valueField reflect.Value, result map[string]string, prefix string) (err error) {
+func handleMap(valueField reflect.Value, result map[string]string, prefix string) {
 	if valueField.IsValid() && valueField.String() != "" {
 		valueFieldType := valueField.Type()
 		if valueFieldType.Kind().String() == "map" {
 			var byt []byte
-			byt, err = json.Marshal(valueField.Interface())
-			if err != nil {
-				return
-			}
+			byt, _ = json.Marshal(valueField.Interface())
 			cache := make(map[string]interface{})
-			err = json.Unmarshal(byt, &cache)
-			if err != nil {
-				return
-			}
+			_ = json.Unmarshal(byt, &cache)
 			for key, value := range cache {
-				pre := prefix + "." + key
-				fieldValue := reflect.ValueOf(value)
-				err = flatRepeatedList(fieldValue, result, pre)
-				if err != nil {
-					return
+				pre := ""
+				if prefix != "" {
+					pre = prefix + "." + key
+				} else {
+					pre = key
 				}
+				fieldValue := reflect.ValueOf(value)
+				flatRepeatedList(fieldValue, result, pre)
 			}
 		}
 	}
-	return nil
 }
 
 func refreshAccessToken(domainId, refreshToken, clientId, clientSecret string) (string, string, *credentialUpdater, error) {

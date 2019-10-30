@@ -6,6 +6,10 @@ import (
 	"testing"
 )
 
+var hookdo = func(errorf func(format string, args ...interface{})) func(format string, args ...interface{}) {
+	return errorf
+}
+
 func isNil(object interface{}) bool {
 	if object == nil {
 		return true
@@ -39,26 +43,26 @@ func containsKind(kinds []reflect.Kind, kind reflect.Kind) bool {
 
 func AssertEqual(t *testing.T, a, b interface{}) {
 	if !reflect.DeepEqual(a, b) {
-		t.Errorf("%v != %v", a, b)
+		hookdo(t.Errorf)("%v != %v", a, b)
 	}
 }
 
 func AssertNil(t *testing.T, object interface{}) {
 	if !isNil(object) {
-		t.Errorf("%v is not nil", object)
+		hookdo(t.Errorf)("%v is not nil", object)
 	}
 }
 
 func AssertNotNil(t *testing.T, object interface{}) {
 	if isNil(object) {
-		t.Errorf("%v is nil", object)
+		hookdo(t.Errorf)("%v is nil", object)
 	}
 }
 
 func AssertContains(t *testing.T, contains string, msgAndArgs ...string) {
 	for _, value := range msgAndArgs {
 		if ok := strings.Contains(contains, value); !ok {
-			t.Errorf("%v does not contanin %v", contains, value)
+			hookdo(t.Errorf)("%v does not contanin %v", contains, value)
 		}
 	}
 }
