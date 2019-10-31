@@ -12,6 +12,8 @@ public class Client extends BaseClient {
     }
 
     public AccountAccessTokenResponse cancelLink(CancelLinkRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -111,6 +113,8 @@ public class Client extends BaseClient {
     }
 
     public AccountAccessTokenResponse confirmLink(ConfirmLinkRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -210,6 +214,8 @@ public class Client extends BaseClient {
     }
 
     public void changePassword(DefaultChangePasswordRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -305,6 +311,8 @@ public class Client extends BaseClient {
     }
 
     public void setPassword(DefaultSetPasswordRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -400,6 +408,8 @@ public class Client extends BaseClient {
     }
 
     public AccountAccessTokenResponse getAccessTokenByLinkInfo(GetAccessTokenByLinkInfoRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -499,6 +509,8 @@ public class Client extends BaseClient {
     }
 
     public Captcha getCaptcha(GetCaptchaRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -598,6 +610,8 @@ public class Client extends BaseClient {
     }
 
     public LinkInfoResponse getLinkInfo(GetByLinkInfoRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -697,6 +711,8 @@ public class Client extends BaseClient {
     }
 
     public LinkInfoListResponse getLinkInfoByUserId(GetLinkInfoByUserIDRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -796,6 +812,8 @@ public class Client extends BaseClient {
     }
 
     public AccountAccessTokenResponse link(AccountLinkRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -895,6 +913,8 @@ public class Client extends BaseClient {
     }
 
     public MobileCheckExistResponse checkExist(MobileCheckExistRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -994,6 +1014,8 @@ public class Client extends BaseClient {
     }
 
     public AccountAccessTokenResponse login(MobileLoginRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -1093,6 +1115,8 @@ public class Client extends BaseClient {
     }
 
     public AccountAccessTokenResponse register(MobileRegisterRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -1192,6 +1216,8 @@ public class Client extends BaseClient {
     }
 
     public MobileSendSmsCodeResponse mobileSendSmsCode(MobileSendSmsCodeRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -1291,6 +1317,8 @@ public class Client extends BaseClient {
     }
 
     public AccountAccessTokenResponse token(TokenRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -1390,6 +1418,8 @@ public class Client extends BaseClient {
     }
 
     public ListStoresResponse adminListStores(AdminListStoresRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -1489,6 +1519,8 @@ public class Client extends BaseClient {
     }
 
     public AccessTokenResponse getAccessToken(GetUserAccessTokenRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -1588,6 +1620,8 @@ public class Client extends BaseClient {
     }
 
     public CreateDriveResponse createDrive(CreateDriveRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -1687,6 +1721,8 @@ public class Client extends BaseClient {
     }
 
     public void deleteDrive(DeleteDriveRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -1782,6 +1818,8 @@ public class Client extends BaseClient {
     }
 
     public GetDriveResponse getDrive(GetDriveRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -1881,6 +1919,8 @@ public class Client extends BaseClient {
     }
 
     public GetDriveResponse getDefaultDrive(GetDefaultDriveRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -1980,6 +2020,8 @@ public class Client extends BaseClient {
     }
 
     public ListDriveResponse listDrives(ListDriveRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -2079,6 +2121,8 @@ public class Client extends BaseClient {
     }
 
     public ListDriveResponse listMyDrives(ListMyDriveRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -2178,6 +2222,8 @@ public class Client extends BaseClient {
     }
 
     public UpdateDriveResponse updateDrive(UpdateDriveRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -2277,6 +2323,8 @@ public class Client extends BaseClient {
     }
 
     public OSSCompleteFileResponse completeFile(OSSCompleteFileRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -2376,6 +2424,8 @@ public class Client extends BaseClient {
     }
 
     public OSSCopyFileResponse copyFile(OSSCopyFileRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -2475,6 +2525,8 @@ public class Client extends BaseClient {
     }
 
     public OSSCreateFileResponse createFile(OSSCreateFileRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -2574,6 +2626,8 @@ public class Client extends BaseClient {
     }
 
     public void deleteFile(OSSDeleteFileRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -2669,6 +2723,8 @@ public class Client extends BaseClient {
     }
 
     public OSSGetFileResponse getFile(OSSGetFileRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -2768,6 +2824,8 @@ public class Client extends BaseClient {
     }
 
     public OSSGetDownloadUrlResponse getDownloadUrl(OSSGetDownloadUrlRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -2867,6 +2925,8 @@ public class Client extends BaseClient {
     }
 
     public OSSGetUploadUrlResponse getUploadUrl(OSSGetUploadUrlRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -2966,6 +3026,8 @@ public class Client extends BaseClient {
     }
 
     public OSSListFileResponse listFile(OSSListFileRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -3065,6 +3127,8 @@ public class Client extends BaseClient {
     }
 
     public OSSListUploadedPartResponse listUploadedParts(OSSListUploadedPartRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -3164,6 +3228,8 @@ public class Client extends BaseClient {
     }
 
     public OSSMoveFileResponse moveFile(OSSMoveFileRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -3263,6 +3329,8 @@ public class Client extends BaseClient {
     }
 
     public CreateShareResponse createShare(CreateShareRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -3362,6 +3430,8 @@ public class Client extends BaseClient {
     }
 
     public void deleteShare(DeleteShareRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -3457,6 +3527,8 @@ public class Client extends BaseClient {
     }
 
     public GetShareResponse getShare(GetShareRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -3548,6 +3620,8 @@ public class Client extends BaseClient {
     }
 
     public ListShareResponse listShare(ListShareRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -3647,6 +3721,8 @@ public class Client extends BaseClient {
     }
 
     public UpdateShareResponse updateShare(UpdateShareRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -3746,6 +3822,8 @@ public class Client extends BaseClient {
     }
 
     public ListStorageResponse listStorage(ListStorageRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -3845,6 +3923,8 @@ public class Client extends BaseClient {
     }
 
     public ListStorageFileResponse listStoragefile(ListStorageFileRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -3944,6 +4024,8 @@ public class Client extends BaseClient {
     }
 
     public CreateUserResponse createUser(CreateUserRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -4043,6 +4125,8 @@ public class Client extends BaseClient {
     }
 
     public void deleteUser(DeleteUserRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -4138,6 +4222,8 @@ public class Client extends BaseClient {
     }
 
     public GetUserResponse getUser(GetUserRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -4237,6 +4323,8 @@ public class Client extends BaseClient {
     }
 
     public ListUserResponse listUsers(ListUserRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -4336,6 +4424,8 @@ public class Client extends BaseClient {
     }
 
     public ListUserResponse searchUser(SearchUserRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
@@ -4435,6 +4525,8 @@ public class Client extends BaseClient {
     }
 
     public UpdateUserResponse updateUser(UpdateUserRequest request, RuntimeOptions runtime) throws Exception {
+        request.validate();
+        runtime.validate();
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
             new TeaPair("timeouted", "retry"),
             new TeaPair("readTimeout", runtime.readTimeout),
