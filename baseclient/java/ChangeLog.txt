@@ -1,3 +1,7 @@
+2019-10-31 Version: 1.2-SNAPSHOT
+1.improve sts credential
+2.add test
+
 2019-10-29 Version: 1.1-SNAPSHOT
 1.support sts credential
 
