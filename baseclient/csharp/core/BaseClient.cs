@@ -26,13 +26,14 @@ namespace Aliyun.SDK.CCP
         protected Dictionary<string, object> _config;
         protected AccessKeyCredential _accessKeyCredential;
         protected AccessTokenCredential _accessTokenCredential;
+        protected StsCredential _stsCredential;
 
         public BaseClient(Dictionary<string, object> config)
         {
             _domainId = DictUtils.GetDicValue(config, "DomainId").ToSafeString();
             _protocol = DictUtils.GetDicValue(config, "Protocol").ToSafeString();
             _endpoint = DictUtils.GetDicValue(config, "Endpoint").ToSafeString();
-            _userId=DictUtils.GetDicValue(config, "UserId").ToSafeString();
+            _userId = DictUtils.GetDicValue(config, "UserId").ToSafeString();
             SetCredential(config);
             this._config = config;
         }
@@ -42,7 +43,12 @@ namespace Aliyun.SDK.CCP
             string accessKeyId = DictUtils.GetDicValue(config, "AccessKeyId").ToSafeString();
             string accessKeySecret = DictUtils.GetDicValue(config, "AccessKeySecret").ToSafeString();
             string refreshToken = DictUtils.GetDicValue(config, "RefreshToken").ToSafeString();
-            if (!string.IsNullOrWhiteSpace(accessKeyId) && !string.IsNullOrWhiteSpace(accessKeySecret))
+            string securityToken = DictUtils.GetDicValue(config, "SecurityToken").ToSafeString();
+            if (!string.IsNullOrWhiteSpace(securityToken))
+            {
+                _stsCredential = new StsCredential(accessKeyId, accessKeySecret, securityToken);
+            }
+            else if (!string.IsNullOrWhiteSpace(accessKeyId) && !string.IsNullOrWhiteSpace(accessKeySecret))
             {
                 _accessKeyCredential = new AccessKeyCredential(accessKeyId, accessKeySecret);
             }
@@ -58,11 +64,14 @@ namespace Aliyun.SDK.CCP
             {
                 return _accessKeyCredential.AccessKeyId;
             }
+            else if (_stsCredential != null)
+            {
+                return _stsCredential.AccessKeyId;
+            }
             else
             {
                 return null;
             }
-
         }
 
         protected string _getAccessKeySecret()
@@ -71,11 +80,23 @@ namespace Aliyun.SDK.CCP
             {
                 return _accessKeyCredential.AccessKeySecret;
             }
+            else if (_stsCredential != null)
+            {
+                return _stsCredential.AccessKeySecret;
+            }
             else
             {
                 return null;
             }
+        }
 
+        public string _getSecurityToken()
+        {
+            if (_stsCredential != null)
+            {
+                return _stsCredential.SecurityToken;
+            }
+            return null;
         }
 
         protected string _getAccessToken()
@@ -113,7 +134,7 @@ namespace Aliyun.SDK.CCP
 
         protected string _getRFC2616Date()
         {
-            return DateTime.Now.ToUniversalTime().GetDateTimeFormats('r') [0];
+            return DateTime.Now.ToUniversalTime().GetDateTimeFormats('r')[0];
         }
 
         protected string _getSignature(TeaRequest request)
@@ -131,7 +152,7 @@ namespace Aliyun.SDK.CCP
             string canonicalizedResource = getCanonicalizedResource(pathname, query);
             string stringToSign = header + "\n" + canonicalizedHeaders + "\n" + canonicalizedResource;
             byte[] signData;
-            using(KeyedHashAlgorithm algorithm = CryptoConfig.CreateFromName("HMACSHA1") as KeyedHashAlgorithm)
+            using (KeyedHashAlgorithm algorithm = CryptoConfig.CreateFromName("HMACSHA1") as KeyedHashAlgorithm)
             {
                 algorithm.Key = Encoding.UTF8.GetBytes(_getAccessKeySecret());
                 signData = algorithm.ComputeHash(Encoding.UTF8.GetBytes(stringToSign.ToCharArray()));
@@ -224,7 +245,7 @@ namespace Aliyun.SDK.CCP
             {
                 if (dicObj[key] is JArray)
                 {
-                    List<Dictionary<string, object>> dicObjList = ((JArray) dicObj[key]).ToObject<List<Dictionary<string, object>>>();
+                    List<Dictionary<string, object>> dicObjList = ((JArray)dicObj[key]).ToObject<List<Dictionary<string, object>>>();
                     List<Dictionary<string, object>> dicList = new List<Dictionary<string, object>>();
                     foreach (Dictionary<string, object> objItem in dicObjList)
                     {
@@ -234,7 +255,7 @@ namespace Aliyun.SDK.CCP
                 }
                 else if (dicObj[key] is JObject)
                 {
-                    Dictionary<string, object> dicJObj = ((JObject) dicObj[key]).ToObject<Dictionary<string, object>>();
+                    Dictionary<string, object> dicJObj = ((JObject)dicObj[key]).ToObject<Dictionary<string, object>>();
                     dic.Add(key, dicJObj);
                 }
                 else
