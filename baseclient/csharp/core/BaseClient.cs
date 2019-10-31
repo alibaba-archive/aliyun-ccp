@@ -178,7 +178,6 @@ namespace Aliyun.SDK.CCP
         public String getCanonicalizedHeaders(Dictionary<String, String> headers)
         {
             String prefix = "x-acs-";
-            Dictionary<string, string>.KeyCollection keys = headers.Keys;
             List<string> canonicalizedKeys = new List<string>();
             canonicalizedKeys = headers.Where(p => p.Key.StartsWith(prefix))
                 .Select(p => p.Key).ToList();

@@ -5017,6 +5017,1229 @@ func (s *UserAuthentication) SetUserID(v string) *UserAuthentication {
 	return s
 }
 
+type AccessTokenResponse struct {
+	RequestId    *string `json:"requestId" xml:"requestId"`
+	AccessToken  *string `json:"access_token" xml:"access_token" require:"true"`
+	ExpiresTime  *string `json:"expires_time" xml:"expires_time"`
+	RefreshToken *string `json:"refresh_token" xml:"refresh_token"`
+	Role         *string `json:"role" xml:"role"`
+	TokenType    *string `json:"token_type" xml:"token_type"`
+	UserId       *string `json:"user_id" xml:"user_id"`
+}
+
+func (s AccessTokenResponse) String() string {
+	return utils.Prettify(s)
+}
+
+func (s AccessTokenResponse) GoString() string {
+	return s.String()
+}
+
+func (s *AccessTokenResponse) SetRequestId(v string) *AccessTokenResponse {
+	s.RequestId = &v
+	return s
+}
+
+func (s *AccessTokenResponse) SetAccessToken(v string) *AccessTokenResponse {
+	s.AccessToken = &v
+	return s
+}
+
+func (s *AccessTokenResponse) SetExpiresTime(v string) *AccessTokenResponse {
+	s.ExpiresTime = &v
+	return s
+}
+
+func (s *AccessTokenResponse) SetRefreshToken(v string) *AccessTokenResponse {
+	s.RefreshToken = &v
+	return s
+}
+
+func (s *AccessTokenResponse) SetRole(v string) *AccessTokenResponse {
+	s.Role = &v
+	return s
+}
+
+func (s *AccessTokenResponse) SetTokenType(v string) *AccessTokenResponse {
+	s.TokenType = &v
+	return s
+}
+
+func (s *AccessTokenResponse) SetUserId(v string) *AccessTokenResponse {
+	s.UserId = &v
+	return s
+}
+
+type AddStoreResponse struct {
+	RequestId          *string `json:"requestId" xml:"requestId"`
+	AccelerateEndpoint *string `json:"accelerate_endpoint" xml:"accelerate_endpoint"`
+	BasePath           *string `json:"base_path" xml:"base_path"`
+	Bucket             *string `json:"bucket" xml:"bucket" require:"true"`
+	CustomizedEndpoint *string `json:"customized_endpoint" xml:"customized_endpoint"`
+	DomainId           *string `json:"domain_id" xml:"domain_id" require:"true"`
+	Endpoint           *string `json:"endpoint" xml:"endpoint" require:"true"`
+	InternalEndpoint   *string `json:"internal_endpoint" xml:"internal_endpoint"`
+	Ownership          *string `json:"ownership" xml:"ownership" require:"true"`
+	Policy             *string `json:"policy" xml:"policy" require:"true"`
+	RoleArn            *string `json:"role_arn" xml:"role_arn"`
+	StoreId            *string `json:"store_id" xml:"store_id" require:"true"`
+	Type               *string `json:"type" xml:"type" require:"true"`
+}
+
+func (s AddStoreResponse) String() string {
+	return utils.Prettify(s)
+}
+
+func (s AddStoreResponse) GoString() string {
+	return s.String()
+}
+
+func (s *AddStoreResponse) SetRequestId(v string) *AddStoreResponse {
+	s.RequestId = &v
+	return s
+}
+
+func (s *AddStoreResponse) SetAccelerateEndpoint(v string) *AddStoreResponse {
+	s.AccelerateEndpoint = &v
+	return s
+}
+
+func (s *AddStoreResponse) SetBasePath(v string) *AddStoreResponse {
+	s.BasePath = &v
+	return s
+}
+
+func (s *AddStoreResponse) SetBucket(v string) *AddStoreResponse {
+	s.Bucket = &v
+	return s
+}
+
+func (s *AddStoreResponse) SetCustomizedEndpoint(v string) *AddStoreResponse {
+	s.CustomizedEndpoint = &v
+	return s
+}
+
+func (s *AddStoreResponse) SetDomainId(v string) *AddStoreResponse {
+	s.DomainId = &v
+	return s
+}
+
+func (s *AddStoreResponse) SetEndpoint(v string) *AddStoreResponse {
+	s.Endpoint = &v
+	return s
+}
+
+func (s *AddStoreResponse) SetInternalEndpoint(v string) *AddStoreResponse {
+	s.InternalEndpoint = &v
+	return s
+}
+
+func (s *AddStoreResponse) SetOwnership(v string) *AddStoreResponse {
+	s.Ownership = &v
+	return s
+}
+
+func (s *AddStoreResponse) SetPolicy(v string) *AddStoreResponse {
+	s.Policy = &v
+	return s
+}
+
+func (s *AddStoreResponse) SetRoleArn(v string) *AddStoreResponse {
+	s.RoleArn = &v
+	return s
+}
+
+func (s *AddStoreResponse) SetStoreId(v string) *AddStoreResponse {
+	s.StoreId = &v
+	return s
+}
+
+func (s *AddStoreResponse) SetType(v string) *AddStoreResponse {
+	s.Type = &v
+	return s
+}
+
+type AdminListStoresRequest struct {
+}
+
+func (s AdminListStoresRequest) String() string {
+	return utils.Prettify(s)
+}
+
+func (s AdminListStoresRequest) GoString() string {
+	return s.String()
+}
+
+type BaseDomainResponse struct {
+	RequestId                  *string                `json:"requestId" xml:"requestId"`
+	AuthAlipayAppId            *string                `json:"auth_alipay_app_id" xml:"auth_alipay_app_id"`
+	AuthAlipayEnable           *bool                  `json:"auth_alipay_enable" xml:"auth_alipay_enable"`
+	AuthAlipayPrivateKey       *string                `json:"auth_alipay_private_key" xml:"auth_alipay_private_key"`
+	AuthConfig                 map[string]interface{} `json:"auth_config" xml:"auth_config"`
+	AuthDingdingAppId          *string                `json:"auth_dingding_app_id" xml:"auth_dingding_app_id"`
+	AuthDingdingAppSecret      *string                `json:"auth_dingding_app_secret" xml:"auth_dingding_app_secret"`
+	AuthDingdingEnable         *bool                  `json:"auth_dingding_enable" xml:"auth_dingding_enable"`
+	AuthEndpointEnable         *bool                  `json:"auth_endpoint_enable" xml:"auth_endpoint_enable"`
+	AuthRamAppId               *string                `json:"auth_ram_app_id" xml:"auth_ram_app_id"`
+	AuthRamAppSecret           *string                `json:"auth_ram_app_secret" xml:"auth_ram_app_secret"`
+	AuthRamEnable              *bool                  `json:"auth_ram_enable" xml:"auth_ram_enable"`
+	CreatedAt                  *string                `json:"created_at" xml:"created_at"`
+	DataHashName               *string                `json:"data_hash_name" xml:"data_hash_name"`
+	Description                *string                `json:"description" xml:"description"`
+	DomainId                   *string                `json:"domain_id" xml:"domain_id"`
+	DomainName                 *string                `json:"domain_name" xml:"domain_name"`
+	EventFilenameMatches       *string                `json:"event_filename_matches" xml:"event_filename_matches"`
+	EventMnsEndpoint           *string                `json:"event_mns_endpoint" xml:"event_mns_endpoint"`
+	EventMnsTopic              *string                `json:"event_mns_topic" xml:"event_mns_topic"`
+	EventNames                 []*string              `json:"event_names" xml:"event_names" type:"Repeated"`
+	EventRoleArn               *string                `json:"event_role_arn" xml:"event_role_arn"`
+	InitDriveEnable            *bool                  `json:"init_drive_enable" xml:"init_drive_enable"`
+	InitDriveSize              *int64                 `json:"init_drive_size" xml:"init_drive_size"`
+	InitDriveStoreId           *string                `json:"init_drive_store_id" xml:"init_drive_store_id"`
+	PathType                   *string                `json:"path_type" xml:"path_type"`
+	PublishedAppAccessStrategy []*AppAccessStrategy   `json:"published_app_access_strategy" xml:"published_app_access_strategy" type:"Repeated"`
+	Sharable                   *bool                  `json:"sharable" xml:"sharable"`
+	StoreLevel                 *string                `json:"store_level" xml:"store_level"`
+	StoreRegionList            []*string              `json:"store_region_list" xml:"store_region_list" type:"Repeated"`
+	UpdatedAt                  *string                `json:"updated_at" xml:"updated_at"`
+}
+
+func (s BaseDomainResponse) String() string {
+	return utils.Prettify(s)
+}
+
+func (s BaseDomainResponse) GoString() string {
+	return s.String()
+}
+
+func (s *BaseDomainResponse) SetRequestId(v string) *BaseDomainResponse {
+	s.RequestId = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetAuthAlipayAppId(v string) *BaseDomainResponse {
+	s.AuthAlipayAppId = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetAuthAlipayEnable(v bool) *BaseDomainResponse {
+	s.AuthAlipayEnable = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetAuthAlipayPrivateKey(v string) *BaseDomainResponse {
+	s.AuthAlipayPrivateKey = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetAuthConfig(v map[string]interface{}) *BaseDomainResponse {
+	s.AuthConfig = v
+	return s
+}
+
+func (s *BaseDomainResponse) SetAuthDingdingAppId(v string) *BaseDomainResponse {
+	s.AuthDingdingAppId = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetAuthDingdingAppSecret(v string) *BaseDomainResponse {
+	s.AuthDingdingAppSecret = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetAuthDingdingEnable(v bool) *BaseDomainResponse {
+	s.AuthDingdingEnable = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetAuthEndpointEnable(v bool) *BaseDomainResponse {
+	s.AuthEndpointEnable = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetAuthRamAppId(v string) *BaseDomainResponse {
+	s.AuthRamAppId = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetAuthRamAppSecret(v string) *BaseDomainResponse {
+	s.AuthRamAppSecret = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetAuthRamEnable(v bool) *BaseDomainResponse {
+	s.AuthRamEnable = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetCreatedAt(v string) *BaseDomainResponse {
+	s.CreatedAt = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetDataHashName(v string) *BaseDomainResponse {
+	s.DataHashName = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetDescription(v string) *BaseDomainResponse {
+	s.Description = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetDomainId(v string) *BaseDomainResponse {
+	s.DomainId = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetDomainName(v string) *BaseDomainResponse {
+	s.DomainName = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetEventFilenameMatches(v string) *BaseDomainResponse {
+	s.EventFilenameMatches = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetEventMnsEndpoint(v string) *BaseDomainResponse {
+	s.EventMnsEndpoint = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetEventMnsTopic(v string) *BaseDomainResponse {
+	s.EventMnsTopic = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetEventNames(v []*string) *BaseDomainResponse {
+	s.EventNames = v
+	return s
+}
+
+func (s *BaseDomainResponse) SetEventRoleArn(v string) *BaseDomainResponse {
+	s.EventRoleArn = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetInitDriveEnable(v bool) *BaseDomainResponse {
+	s.InitDriveEnable = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetInitDriveSize(v int64) *BaseDomainResponse {
+	s.InitDriveSize = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetInitDriveStoreId(v string) *BaseDomainResponse {
+	s.InitDriveStoreId = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetPathType(v string) *BaseDomainResponse {
+	s.PathType = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetPublishedAppAccessStrategy(v []*AppAccessStrategy) *BaseDomainResponse {
+	s.PublishedAppAccessStrategy = v
+	return s
+}
+
+func (s *BaseDomainResponse) SetSharable(v bool) *BaseDomainResponse {
+	s.Sharable = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetStoreLevel(v string) *BaseDomainResponse {
+	s.StoreLevel = &v
+	return s
+}
+
+func (s *BaseDomainResponse) SetStoreRegionList(v []*string) *BaseDomainResponse {
+	s.StoreRegionList = v
+	return s
+}
+
+func (s *BaseDomainResponse) SetUpdatedAt(v string) *BaseDomainResponse {
+	s.UpdatedAt = &v
+	return s
+}
+
+type CreateDomainResponse struct {
+	RequestId                  *string                `json:"requestId" xml:"requestId"`
+	AuthAlipayAppId            *string                `json:"auth_alipay_app_id" xml:"auth_alipay_app_id"`
+	AuthAlipayEnable           *bool                  `json:"auth_alipay_enable" xml:"auth_alipay_enable"`
+	AuthAlipayPrivateKey       *string                `json:"auth_alipay_private_key" xml:"auth_alipay_private_key"`
+	AuthConfig                 map[string]interface{} `json:"auth_config" xml:"auth_config"`
+	AuthDingdingAppId          *string                `json:"auth_dingding_app_id" xml:"auth_dingding_app_id"`
+	AuthDingdingAppSecret      *string                `json:"auth_dingding_app_secret" xml:"auth_dingding_app_secret"`
+	AuthDingdingEnable         *bool                  `json:"auth_dingding_enable" xml:"auth_dingding_enable"`
+	AuthEndpointEnable         *bool                  `json:"auth_endpoint_enable" xml:"auth_endpoint_enable"`
+	AuthRamAppId               *string                `json:"auth_ram_app_id" xml:"auth_ram_app_id"`
+	AuthRamAppSecret           *string                `json:"auth_ram_app_secret" xml:"auth_ram_app_secret"`
+	AuthRamEnable              *bool                  `json:"auth_ram_enable" xml:"auth_ram_enable"`
+	CreatedAt                  *string                `json:"created_at" xml:"created_at"`
+	DataHashName               *string                `json:"data_hash_name" xml:"data_hash_name"`
+	Description                *string                `json:"description" xml:"description"`
+	DomainId                   *string                `json:"domain_id" xml:"domain_id"`
+	DomainName                 *string                `json:"domain_name" xml:"domain_name"`
+	EventFilenameMatches       *string                `json:"event_filename_matches" xml:"event_filename_matches"`
+	EventMnsEndpoint           *string                `json:"event_mns_endpoint" xml:"event_mns_endpoint"`
+	EventMnsTopic              *string                `json:"event_mns_topic" xml:"event_mns_topic"`
+	EventNames                 []*string              `json:"event_names" xml:"event_names" type:"Repeated"`
+	EventRoleArn               *string                `json:"event_role_arn" xml:"event_role_arn"`
+	InitDriveEnable            *bool                  `json:"init_drive_enable" xml:"init_drive_enable"`
+	InitDriveSize              *int64                 `json:"init_drive_size" xml:"init_drive_size"`
+	InitDriveStoreId           *string                `json:"init_drive_store_id" xml:"init_drive_store_id"`
+	PathType                   *string                `json:"path_type" xml:"path_type"`
+	PublishedAppAccessStrategy []*AppAccessStrategy   `json:"published_app_access_strategy" xml:"published_app_access_strategy" type:"Repeated"`
+	Sharable                   *bool                  `json:"sharable" xml:"sharable"`
+	StoreLevel                 *string                `json:"store_level" xml:"store_level"`
+	StoreRegionList            []*string              `json:"store_region_list" xml:"store_region_list" type:"Repeated"`
+	UpdatedAt                  *string                `json:"updated_at" xml:"updated_at"`
+}
+
+func (s CreateDomainResponse) String() string {
+	return utils.Prettify(s)
+}
+
+func (s CreateDomainResponse) GoString() string {
+	return s.String()
+}
+
+func (s *CreateDomainResponse) SetRequestId(v string) *CreateDomainResponse {
+	s.RequestId = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetAuthAlipayAppId(v string) *CreateDomainResponse {
+	s.AuthAlipayAppId = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetAuthAlipayEnable(v bool) *CreateDomainResponse {
+	s.AuthAlipayEnable = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetAuthAlipayPrivateKey(v string) *CreateDomainResponse {
+	s.AuthAlipayPrivateKey = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetAuthConfig(v map[string]interface{}) *CreateDomainResponse {
+	s.AuthConfig = v
+	return s
+}
+
+func (s *CreateDomainResponse) SetAuthDingdingAppId(v string) *CreateDomainResponse {
+	s.AuthDingdingAppId = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetAuthDingdingAppSecret(v string) *CreateDomainResponse {
+	s.AuthDingdingAppSecret = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetAuthDingdingEnable(v bool) *CreateDomainResponse {
+	s.AuthDingdingEnable = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetAuthEndpointEnable(v bool) *CreateDomainResponse {
+	s.AuthEndpointEnable = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetAuthRamAppId(v string) *CreateDomainResponse {
+	s.AuthRamAppId = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetAuthRamAppSecret(v string) *CreateDomainResponse {
+	s.AuthRamAppSecret = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetAuthRamEnable(v bool) *CreateDomainResponse {
+	s.AuthRamEnable = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetCreatedAt(v string) *CreateDomainResponse {
+	s.CreatedAt = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetDataHashName(v string) *CreateDomainResponse {
+	s.DataHashName = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetDescription(v string) *CreateDomainResponse {
+	s.Description = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetDomainId(v string) *CreateDomainResponse {
+	s.DomainId = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetDomainName(v string) *CreateDomainResponse {
+	s.DomainName = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetEventFilenameMatches(v string) *CreateDomainResponse {
+	s.EventFilenameMatches = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetEventMnsEndpoint(v string) *CreateDomainResponse {
+	s.EventMnsEndpoint = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetEventMnsTopic(v string) *CreateDomainResponse {
+	s.EventMnsTopic = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetEventNames(v []*string) *CreateDomainResponse {
+	s.EventNames = v
+	return s
+}
+
+func (s *CreateDomainResponse) SetEventRoleArn(v string) *CreateDomainResponse {
+	s.EventRoleArn = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetInitDriveEnable(v bool) *CreateDomainResponse {
+	s.InitDriveEnable = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetInitDriveSize(v int64) *CreateDomainResponse {
+	s.InitDriveSize = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetInitDriveStoreId(v string) *CreateDomainResponse {
+	s.InitDriveStoreId = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetPathType(v string) *CreateDomainResponse {
+	s.PathType = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetPublishedAppAccessStrategy(v []*AppAccessStrategy) *CreateDomainResponse {
+	s.PublishedAppAccessStrategy = v
+	return s
+}
+
+func (s *CreateDomainResponse) SetSharable(v bool) *CreateDomainResponse {
+	s.Sharable = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetStoreLevel(v string) *CreateDomainResponse {
+	s.StoreLevel = &v
+	return s
+}
+
+func (s *CreateDomainResponse) SetStoreRegionList(v []*string) *CreateDomainResponse {
+	s.StoreRegionList = v
+	return s
+}
+
+func (s *CreateDomainResponse) SetUpdatedAt(v string) *CreateDomainResponse {
+	s.UpdatedAt = &v
+	return s
+}
+
+type GetAppResponse struct {
+	RequestId   *string   `json:"requestId" xml:"requestId"`
+	AliOwnerId  *string   `json:"ali_owner_id" xml:"ali_owner_id" require:"true"`
+	AppId       *string   `json:"app_id" xml:"app_id" require:"true"`
+	AppName     *string   `json:"app_name" xml:"app_name" require:"true" maxLength:"128" pattern:"[0-9a-zA-Z]+"`
+	AppSecret   *string   `json:"app_secret" xml:"app_secret" require:"true"`
+	CreatedAt   *string   `json:"created_at" xml:"created_at" require:"true"`
+	Description *string   `json:"description" xml:"description" require:"true" maxLength:"128"`
+	Logo        *string   `json:"logo" xml:"logo" require:"true"`
+	Provider    *string   `json:"provider" xml:"provider" require:"true"`
+	RedirectUri *string   `json:"redirect_uri" xml:"redirect_uri" require:"true"`
+	Scope       []*string `json:"scope" xml:"scope" require:"true" type:"Repeated"`
+	Screenshots []*string `json:"screenshots" xml:"screenshots" require:"true" type:"Repeated"`
+	Stage       *string   `json:"stage" xml:"stage" require:"true"`
+	Type        *string   `json:"type" xml:"type" require:"true"`
+	UpdatedAt   *string   `json:"updated_at" xml:"updated_at" require:"true"`
+}
+
+func (s GetAppResponse) String() string {
+	return utils.Prettify(s)
+}
+
+func (s GetAppResponse) GoString() string {
+	return s.String()
+}
+
+func (s *GetAppResponse) SetRequestId(v string) *GetAppResponse {
+	s.RequestId = &v
+	return s
+}
+
+func (s *GetAppResponse) SetAliOwnerId(v string) *GetAppResponse {
+	s.AliOwnerId = &v
+	return s
+}
+
+func (s *GetAppResponse) SetAppId(v string) *GetAppResponse {
+	s.AppId = &v
+	return s
+}
+
+func (s *GetAppResponse) SetAppName(v string) *GetAppResponse {
+	s.AppName = &v
+	return s
+}
+
+func (s *GetAppResponse) SetAppSecret(v string) *GetAppResponse {
+	s.AppSecret = &v
+	return s
+}
+
+func (s *GetAppResponse) SetCreatedAt(v string) *GetAppResponse {
+	s.CreatedAt = &v
+	return s
+}
+
+func (s *GetAppResponse) SetDescription(v string) *GetAppResponse {
+	s.Description = &v
+	return s
+}
+
+func (s *GetAppResponse) SetLogo(v string) *GetAppResponse {
+	s.Logo = &v
+	return s
+}
+
+func (s *GetAppResponse) SetProvider(v string) *GetAppResponse {
+	s.Provider = &v
+	return s
+}
+
+func (s *GetAppResponse) SetRedirectUri(v string) *GetAppResponse {
+	s.RedirectUri = &v
+	return s
+}
+
+func (s *GetAppResponse) SetScope(v []*string) *GetAppResponse {
+	s.Scope = v
+	return s
+}
+
+func (s *GetAppResponse) SetScreenshots(v []*string) *GetAppResponse {
+	s.Screenshots = v
+	return s
+}
+
+func (s *GetAppResponse) SetStage(v string) *GetAppResponse {
+	s.Stage = &v
+	return s
+}
+
+func (s *GetAppResponse) SetType(v string) *GetAppResponse {
+	s.Type = &v
+	return s
+}
+
+func (s *GetAppResponse) SetUpdatedAt(v string) *GetAppResponse {
+	s.UpdatedAt = &v
+	return s
+}
+
+type GetDomainResponse struct {
+	RequestId                  *string                `json:"requestId" xml:"requestId"`
+	AuthAlipayAppId            *string                `json:"auth_alipay_app_id" xml:"auth_alipay_app_id"`
+	AuthAlipayEnable           *bool                  `json:"auth_alipay_enable" xml:"auth_alipay_enable"`
+	AuthAlipayPrivateKey       *string                `json:"auth_alipay_private_key" xml:"auth_alipay_private_key"`
+	AuthConfig                 map[string]interface{} `json:"auth_config" xml:"auth_config"`
+	AuthDingdingAppId          *string                `json:"auth_dingding_app_id" xml:"auth_dingding_app_id"`
+	AuthDingdingAppSecret      *string                `json:"auth_dingding_app_secret" xml:"auth_dingding_app_secret"`
+	AuthDingdingEnable         *bool                  `json:"auth_dingding_enable" xml:"auth_dingding_enable"`
+	AuthEndpointEnable         *bool                  `json:"auth_endpoint_enable" xml:"auth_endpoint_enable"`
+	AuthRamAppId               *string                `json:"auth_ram_app_id" xml:"auth_ram_app_id"`
+	AuthRamAppSecret           *string                `json:"auth_ram_app_secret" xml:"auth_ram_app_secret"`
+	AuthRamEnable              *bool                  `json:"auth_ram_enable" xml:"auth_ram_enable"`
+	CreatedAt                  *string                `json:"created_at" xml:"created_at"`
+	DataHashName               *string                `json:"data_hash_name" xml:"data_hash_name"`
+	Description                *string                `json:"description" xml:"description"`
+	DomainId                   *string                `json:"domain_id" xml:"domain_id"`
+	DomainName                 *string                `json:"domain_name" xml:"domain_name"`
+	EventFilenameMatches       *string                `json:"event_filename_matches" xml:"event_filename_matches"`
+	EventMnsEndpoint           *string                `json:"event_mns_endpoint" xml:"event_mns_endpoint"`
+	EventMnsTopic              *string                `json:"event_mns_topic" xml:"event_mns_topic"`
+	EventNames                 []*string              `json:"event_names" xml:"event_names" type:"Repeated"`
+	EventRoleArn               *string                `json:"event_role_arn" xml:"event_role_arn"`
+	InitDriveEnable            *bool                  `json:"init_drive_enable" xml:"init_drive_enable"`
+	InitDriveSize              *int64                 `json:"init_drive_size" xml:"init_drive_size"`
+	InitDriveStoreId           *string                `json:"init_drive_store_id" xml:"init_drive_store_id"`
+	PathType                   *string                `json:"path_type" xml:"path_type"`
+	PublishedAppAccessStrategy []*AppAccessStrategy   `json:"published_app_access_strategy" xml:"published_app_access_strategy" type:"Repeated"`
+	Sharable                   *bool                  `json:"sharable" xml:"sharable"`
+	StoreLevel                 *string                `json:"store_level" xml:"store_level"`
+	StoreRegionList            []*string              `json:"store_region_list" xml:"store_region_list" type:"Repeated"`
+	UpdatedAt                  *string                `json:"updated_at" xml:"updated_at"`
+}
+
+func (s GetDomainResponse) String() string {
+	return utils.Prettify(s)
+}
+
+func (s GetDomainResponse) GoString() string {
+	return s.String()
+}
+
+func (s *GetDomainResponse) SetRequestId(v string) *GetDomainResponse {
+	s.RequestId = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetAuthAlipayAppId(v string) *GetDomainResponse {
+	s.AuthAlipayAppId = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetAuthAlipayEnable(v bool) *GetDomainResponse {
+	s.AuthAlipayEnable = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetAuthAlipayPrivateKey(v string) *GetDomainResponse {
+	s.AuthAlipayPrivateKey = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetAuthConfig(v map[string]interface{}) *GetDomainResponse {
+	s.AuthConfig = v
+	return s
+}
+
+func (s *GetDomainResponse) SetAuthDingdingAppId(v string) *GetDomainResponse {
+	s.AuthDingdingAppId = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetAuthDingdingAppSecret(v string) *GetDomainResponse {
+	s.AuthDingdingAppSecret = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetAuthDingdingEnable(v bool) *GetDomainResponse {
+	s.AuthDingdingEnable = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetAuthEndpointEnable(v bool) *GetDomainResponse {
+	s.AuthEndpointEnable = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetAuthRamAppId(v string) *GetDomainResponse {
+	s.AuthRamAppId = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetAuthRamAppSecret(v string) *GetDomainResponse {
+	s.AuthRamAppSecret = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetAuthRamEnable(v bool) *GetDomainResponse {
+	s.AuthRamEnable = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetCreatedAt(v string) *GetDomainResponse {
+	s.CreatedAt = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetDataHashName(v string) *GetDomainResponse {
+	s.DataHashName = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetDescription(v string) *GetDomainResponse {
+	s.Description = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetDomainId(v string) *GetDomainResponse {
+	s.DomainId = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetDomainName(v string) *GetDomainResponse {
+	s.DomainName = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetEventFilenameMatches(v string) *GetDomainResponse {
+	s.EventFilenameMatches = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetEventMnsEndpoint(v string) *GetDomainResponse {
+	s.EventMnsEndpoint = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetEventMnsTopic(v string) *GetDomainResponse {
+	s.EventMnsTopic = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetEventNames(v []*string) *GetDomainResponse {
+	s.EventNames = v
+	return s
+}
+
+func (s *GetDomainResponse) SetEventRoleArn(v string) *GetDomainResponse {
+	s.EventRoleArn = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetInitDriveEnable(v bool) *GetDomainResponse {
+	s.InitDriveEnable = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetInitDriveSize(v int64) *GetDomainResponse {
+	s.InitDriveSize = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetInitDriveStoreId(v string) *GetDomainResponse {
+	s.InitDriveStoreId = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetPathType(v string) *GetDomainResponse {
+	s.PathType = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetPublishedAppAccessStrategy(v []*AppAccessStrategy) *GetDomainResponse {
+	s.PublishedAppAccessStrategy = v
+	return s
+}
+
+func (s *GetDomainResponse) SetSharable(v bool) *GetDomainResponse {
+	s.Sharable = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetStoreLevel(v string) *GetDomainResponse {
+	s.StoreLevel = &v
+	return s
+}
+
+func (s *GetDomainResponse) SetStoreRegionList(v []*string) *GetDomainResponse {
+	s.StoreRegionList = v
+	return s
+}
+
+func (s *GetDomainResponse) SetUpdatedAt(v string) *GetDomainResponse {
+	s.UpdatedAt = &v
+	return s
+}
+
+type GetUserAccessTokenRequest struct {
+	Role   *string `json:"role" xml:"role"`
+	UserId *string `json:"user_id" xml:"user_id" require:"true"`
+}
+
+func (s GetUserAccessTokenRequest) String() string {
+	return utils.Prettify(s)
+}
+
+func (s GetUserAccessTokenRequest) GoString() string {
+	return s.String()
+}
+
+func (s *GetUserAccessTokenRequest) SetRole(v string) *GetUserAccessTokenRequest {
+	s.Role = &v
+	return s
+}
+
+func (s *GetUserAccessTokenRequest) SetUserId(v string) *GetUserAccessTokenRequest {
+	s.UserId = &v
+	return s
+}
+
+type ListAppsResponse struct {
+	RequestId  *string           `json:"requestId" xml:"requestId"`
+	Items      []*GetAppResponse `json:"items" xml:"items" require:"true" type:"Repeated"`
+	NextMarker *string           `json:"next_marker" xml:"next_marker"`
+}
+
+func (s ListAppsResponse) String() string {
+	return utils.Prettify(s)
+}
+
+func (s ListAppsResponse) GoString() string {
+	return s.String()
+}
+
+func (s *ListAppsResponse) SetRequestId(v string) *ListAppsResponse {
+	s.RequestId = &v
+	return s
+}
+
+func (s *ListAppsResponse) SetItems(v []*GetAppResponse) *ListAppsResponse {
+	s.Items = v
+	return s
+}
+
+func (s *ListAppsResponse) SetNextMarker(v string) *ListAppsResponse {
+	s.NextMarker = &v
+	return s
+}
+
+type ListDomainsResponse struct {
+	RequestId  *string               `json:"requestId" xml:"requestId"`
+	Items      []*BaseDomainResponse `json:"items" xml:"items" type:"Repeated"`
+	NextMarker *string               `json:"next_marker" xml:"next_marker"`
+}
+
+func (s ListDomainsResponse) String() string {
+	return utils.Prettify(s)
+}
+
+func (s ListDomainsResponse) GoString() string {
+	return s.String()
+}
+
+func (s *ListDomainsResponse) SetRequestId(v string) *ListDomainsResponse {
+	s.RequestId = &v
+	return s
+}
+
+func (s *ListDomainsResponse) SetItems(v []*BaseDomainResponse) *ListDomainsResponse {
+	s.Items = v
+	return s
+}
+
+func (s *ListDomainsResponse) SetNextMarker(v string) *ListDomainsResponse {
+	s.NextMarker = &v
+	return s
+}
+
+type ListStoresResponse struct {
+	RequestId *string  `json:"requestId" xml:"requestId"`
+	Items     []*Store `json:"items" xml:"items" require:"true" type:"Repeated"`
+}
+
+func (s ListStoresResponse) String() string {
+	return utils.Prettify(s)
+}
+
+func (s ListStoresResponse) GoString() string {
+	return s.String()
+}
+
+func (s *ListStoresResponse) SetRequestId(v string) *ListStoresResponse {
+	s.RequestId = &v
+	return s
+}
+
+func (s *ListStoresResponse) SetItems(v []*Store) *ListStoresResponse {
+	s.Items = v
+	return s
+}
+
+type Store struct {
+	AccelerateEndpoint *string `json:"accelerate_endpoint" xml:"accelerate_endpoint"`
+	BasePath           *string `json:"base_path" xml:"base_path"`
+	Bucket             *string `json:"bucket" xml:"bucket" require:"true"`
+	CustomizedEndpoint *string `json:"customized_endpoint" xml:"customized_endpoint"`
+	Endpoint           *string `json:"endpoint" xml:"endpoint" require:"true"`
+	InternalEndpoint   *string `json:"internal_endpoint" xml:"internal_endpoint"`
+	Ownership          *string `json:"ownership" xml:"ownership" require:"true"`
+	Policy             *string `json:"policy" xml:"policy" require:"true"`
+	RoleArn            *string `json:"role_arn" xml:"role_arn"`
+	StoreId            *string `json:"store_id" xml:"store_id" require:"true"`
+	Type               *string `json:"type" xml:"type" require:"true"`
+}
+
+func (s Store) String() string {
+	return utils.Prettify(s)
+}
+
+func (s Store) GoString() string {
+	return s.String()
+}
+
+func (s *Store) SetAccelerateEndpoint(v string) *Store {
+	s.AccelerateEndpoint = &v
+	return s
+}
+
+func (s *Store) SetBasePath(v string) *Store {
+	s.BasePath = &v
+	return s
+}
+
+func (s *Store) SetBucket(v string) *Store {
+	s.Bucket = &v
+	return s
+}
+
+func (s *Store) SetCustomizedEndpoint(v string) *Store {
+	s.CustomizedEndpoint = &v
+	return s
+}
+
+func (s *Store) SetEndpoint(v string) *Store {
+	s.Endpoint = &v
+	return s
+}
+
+func (s *Store) SetInternalEndpoint(v string) *Store {
+	s.InternalEndpoint = &v
+	return s
+}
+
+func (s *Store) SetOwnership(v string) *Store {
+	s.Ownership = &v
+	return s
+}
+
+func (s *Store) SetPolicy(v string) *Store {
+	s.Policy = &v
+	return s
+}
+
+func (s *Store) SetRoleArn(v string) *Store {
+	s.RoleArn = &v
+	return s
+}
+
+func (s *Store) SetStoreId(v string) *Store {
+	s.StoreId = &v
+	return s
+}
+
+func (s *Store) SetType(v string) *Store {
+	s.Type = &v
+	return s
+}
+
+type UpdateDomainResponse struct {
+	RequestId                  *string                `json:"requestId" xml:"requestId"`
+	AuthAlipayAppId            *string                `json:"auth_alipay_app_id" xml:"auth_alipay_app_id"`
+	AuthAlipayEnable           *bool                  `json:"auth_alipay_enable" xml:"auth_alipay_enable"`
+	AuthAlipayPrivateKey       *string                `json:"auth_alipay_private_key" xml:"auth_alipay_private_key"`
+	AuthConfig                 map[string]interface{} `json:"auth_config" xml:"auth_config"`
+	AuthDingdingAppId          *string                `json:"auth_dingding_app_id" xml:"auth_dingding_app_id"`
+	AuthDingdingAppSecret      *string                `json:"auth_dingding_app_secret" xml:"auth_dingding_app_secret"`
+	AuthDingdingEnable         *bool                  `json:"auth_dingding_enable" xml:"auth_dingding_enable"`
+	AuthEndpointEnable         *bool                  `json:"auth_endpoint_enable" xml:"auth_endpoint_enable"`
+	AuthRamAppId               *string                `json:"auth_ram_app_id" xml:"auth_ram_app_id"`
+	AuthRamAppSecret           *string                `json:"auth_ram_app_secret" xml:"auth_ram_app_secret"`
+	AuthRamEnable              *bool                  `json:"auth_ram_enable" xml:"auth_ram_enable"`
+	CreatedAt                  *string                `json:"created_at" xml:"created_at"`
+	DataHashName               *string                `json:"data_hash_name" xml:"data_hash_name"`
+	Description                *string                `json:"description" xml:"description"`
+	DomainId                   *string                `json:"domain_id" xml:"domain_id"`
+	DomainName                 *string                `json:"domain_name" xml:"domain_name"`
+	EventFilenameMatches       *string                `json:"event_filename_matches" xml:"event_filename_matches"`
+	EventMnsEndpoint           *string                `json:"event_mns_endpoint" xml:"event_mns_endpoint"`
+	EventMnsTopic              *string                `json:"event_mns_topic" xml:"event_mns_topic"`
+	EventNames                 []*string              `json:"event_names" xml:"event_names" type:"Repeated"`
+	EventRoleArn               *string                `json:"event_role_arn" xml:"event_role_arn"`
+	InitDriveEnable            *bool                  `json:"init_drive_enable" xml:"init_drive_enable"`
+	InitDriveSize              *int64                 `json:"init_drive_size" xml:"init_drive_size"`
+	InitDriveStoreId           *string                `json:"init_drive_store_id" xml:"init_drive_store_id"`
+	PathType                   *string                `json:"path_type" xml:"path_type"`
+	PublishedAppAccessStrategy []*AppAccessStrategy   `json:"published_app_access_strategy" xml:"published_app_access_strategy" type:"Repeated"`
+	Sharable                   *bool                  `json:"sharable" xml:"sharable"`
+	StoreLevel                 *string                `json:"store_level" xml:"store_level"`
+	StoreRegionList            []*string              `json:"store_region_list" xml:"store_region_list" type:"Repeated"`
+	UpdatedAt                  *string                `json:"updated_at" xml:"updated_at"`
+}
+
+func (s UpdateDomainResponse) String() string {
+	return utils.Prettify(s)
+}
+
+func (s UpdateDomainResponse) GoString() string {
+	return s.String()
+}
+
+func (s *UpdateDomainResponse) SetRequestId(v string) *UpdateDomainResponse {
+	s.RequestId = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetAuthAlipayAppId(v string) *UpdateDomainResponse {
+	s.AuthAlipayAppId = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetAuthAlipayEnable(v bool) *UpdateDomainResponse {
+	s.AuthAlipayEnable = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetAuthAlipayPrivateKey(v string) *UpdateDomainResponse {
+	s.AuthAlipayPrivateKey = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetAuthConfig(v map[string]interface{}) *UpdateDomainResponse {
+	s.AuthConfig = v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetAuthDingdingAppId(v string) *UpdateDomainResponse {
+	s.AuthDingdingAppId = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetAuthDingdingAppSecret(v string) *UpdateDomainResponse {
+	s.AuthDingdingAppSecret = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetAuthDingdingEnable(v bool) *UpdateDomainResponse {
+	s.AuthDingdingEnable = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetAuthEndpointEnable(v bool) *UpdateDomainResponse {
+	s.AuthEndpointEnable = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetAuthRamAppId(v string) *UpdateDomainResponse {
+	s.AuthRamAppId = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetAuthRamAppSecret(v string) *UpdateDomainResponse {
+	s.AuthRamAppSecret = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetAuthRamEnable(v bool) *UpdateDomainResponse {
+	s.AuthRamEnable = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetCreatedAt(v string) *UpdateDomainResponse {
+	s.CreatedAt = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetDataHashName(v string) *UpdateDomainResponse {
+	s.DataHashName = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetDescription(v string) *UpdateDomainResponse {
+	s.Description = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetDomainId(v string) *UpdateDomainResponse {
+	s.DomainId = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetDomainName(v string) *UpdateDomainResponse {
+	s.DomainName = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetEventFilenameMatches(v string) *UpdateDomainResponse {
+	s.EventFilenameMatches = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetEventMnsEndpoint(v string) *UpdateDomainResponse {
+	s.EventMnsEndpoint = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetEventMnsTopic(v string) *UpdateDomainResponse {
+	s.EventMnsTopic = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetEventNames(v []*string) *UpdateDomainResponse {
+	s.EventNames = v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetEventRoleArn(v string) *UpdateDomainResponse {
+	s.EventRoleArn = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetInitDriveEnable(v bool) *UpdateDomainResponse {
+	s.InitDriveEnable = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetInitDriveSize(v int64) *UpdateDomainResponse {
+	s.InitDriveSize = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetInitDriveStoreId(v string) *UpdateDomainResponse {
+	s.InitDriveStoreId = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetPathType(v string) *UpdateDomainResponse {
+	s.PathType = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetPublishedAppAccessStrategy(v []*AppAccessStrategy) *UpdateDomainResponse {
+	s.PublishedAppAccessStrategy = v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetSharable(v bool) *UpdateDomainResponse {
+	s.Sharable = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetStoreLevel(v string) *UpdateDomainResponse {
+	s.StoreLevel = &v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetStoreRegionList(v []*string) *UpdateDomainResponse {
+	s.StoreRegionList = v
+	return s
+}
+
+func (s *UpdateDomainResponse) SetUpdatedAt(v string) *UpdateDomainResponse {
+	s.UpdatedAt = &v
+	return s
+}
+
 type BaseCompleteFileRequest struct {
 	DriveId      *string           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
@@ -9678,6 +10901,234 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (*Ac
 
 			if client.IsStatusCode(response_, 200) {
 				_result := &AccountAccessTokenResponse{}
+				err = tea.Convert(tea.ToMap(map[string]interface{}{
+					"requestId": response_.Headers["x-ca-request-id"],
+				}, client.ReadAsJSON(response_)), &_result)
+				return _result, err
+			}
+
+			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+				err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    response_.StatusCode,
+						"statusMessage": response_.StatusMessage,
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, err
+			}
+
+			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    response_.StatusCode,
+					"statusMessage": response_.StatusMessage,
+				},
+			}, client.ReadAsJSON(response_)))
+			return nil, err
+		}()
+		if !tea.Retryable(err) {
+			break
+		}
+	}
+
+	return _resp, err
+}
+
+func (client *Client) AdminListStores(request *AdminListStoresRequest, runtime *RuntimeOptions) (*ListStoresResponse, error) {
+	err := client.Validator(request)
+	if err != nil {
+		return nil, err
+	}
+	err = client.Validator(runtime)
+	if err != nil {
+		return nil, err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
+		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
+		"noProxy":        tea.GetStringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.GetBoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+		},
+		"backoff": map[string]interface{}{
+			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+		},
+		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &ListStoresResponse{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, err = func() (*ListStoresResponse, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, err := client.GetAccessKeyId()
+			if err != nil {
+				return nil, err
+			}
+			accessKeySecret, err := client.GetAccessKeySecret()
+			if err != nil {
+				return nil, err
+			}
+			accessToken, err := client.GetAccessToken()
+			if err != nil {
+				return nil, err
+			}
+			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Method = "POST"
+			request_.Pathname = "/v2/domain/list_stores"
+			request_.Headers = map[string]string{
+				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"content-type": "application/json; charset=utf-8",
+			}
+			if client.NotEmpty(accessToken) {
+				request_.Headers["authorization"] = "Bearer " + accessToken
+			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
+				request_.Headers["date"] = client.GetRFC2616Date()
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+			}
+
+			request_.Body = client.ToJSONString(request)
+			response_, err := tea.DoRequest(request_, _runtime)
+			if err != nil {
+				return nil, err
+			}
+
+			if client.IsStatusCode(response_, 200) {
+				_result := &ListStoresResponse{}
+				err = tea.Convert(tea.ToMap(map[string]interface{}{
+					"requestId": response_.Headers["x-ca-request-id"],
+				}, client.ReadAsJSON(response_)), &_result)
+				return _result, err
+			}
+
+			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+				err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    response_.StatusCode,
+						"statusMessage": response_.StatusMessage,
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, err
+			}
+
+			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    response_.StatusCode,
+					"statusMessage": response_.StatusMessage,
+				},
+			}, client.ReadAsJSON(response_)))
+			return nil, err
+		}()
+		if !tea.Retryable(err) {
+			break
+		}
+	}
+
+	return _resp, err
+}
+
+func (client *Client) GetAccessToken(request *GetUserAccessTokenRequest, runtime *RuntimeOptions) (*AccessTokenResponse, error) {
+	err := client.Validator(request)
+	if err != nil {
+		return nil, err
+	}
+	err = client.Validator(runtime)
+	if err != nil {
+		return nil, err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
+		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
+		"noProxy":        tea.GetStringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.GetBoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+		},
+		"backoff": map[string]interface{}{
+			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+		},
+		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &AccessTokenResponse{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, err = func() (*AccessTokenResponse, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, err := client.GetAccessKeyId()
+			if err != nil {
+				return nil, err
+			}
+			accessKeySecret, err := client.GetAccessKeySecret()
+			if err != nil {
+				return nil, err
+			}
+			accessToken, err := client.GetAccessToken()
+			if err != nil {
+				return nil, err
+			}
+			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Method = "POST"
+			request_.Pathname = "/v2/user/get_access_token"
+			request_.Headers = map[string]string{
+				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"content-type": "application/json; charset=utf-8",
+			}
+			if client.NotEmpty(accessToken) {
+				request_.Headers["authorization"] = "Bearer " + accessToken
+			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
+				request_.Headers["date"] = client.GetRFC2616Date()
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+			}
+
+			request_.Body = client.ToJSONString(request)
+			response_, err := tea.DoRequest(request_, _runtime)
+			if err != nil {
+				return nil, err
+			}
+
+			if client.IsStatusCode(response_, 200) {
+				_result := &AccessTokenResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, client.ReadAsJSON(response_)), &_result)

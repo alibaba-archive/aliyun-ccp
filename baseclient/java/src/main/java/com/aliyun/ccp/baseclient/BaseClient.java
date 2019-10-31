@@ -2,6 +2,7 @@ package com.aliyun.ccp.baseclient;
 
 import com.aliyun.ccp.baseclient.credentials.AccessTokenCredential;
 import com.aliyun.credentials.AccessKeyCredential;
+import com.aliyun.credentials.StsCredential;
 import com.aliyun.tea.TeaRequest;
 import com.aliyun.tea.TeaResponse;
 import com.aliyun.tea.utils.StringUtils;
@@ -24,10 +25,10 @@ public class BaseClient {
     protected String _domainId;
     protected String _protocol;
     protected Object _endpoint;
-    protected String _userId;
     protected Map<String, Object> _config;
     protected AccessKeyCredential _accessKeyCredential;
     protected AccessTokenCredential _accessTokenCredential;
+    protected StsCredential _stsCredential;
 
     public BaseClient(Map<String, Object> config) {
         this._domainId = (String) config.get("domainId");
@@ -41,8 +42,11 @@ public class BaseClient {
         if (!StringUtils.isEmpty(config.get("accessKeyId"))) {
             _accessKeyCredential = new AccessKeyCredential((String) config.get("accessKeyId"),
                     (String) config.get("accessKeySecret"));
-        } else if(!StringUtils.isEmpty(config.get("accessToken"))){
+        } else if (!StringUtils.isEmpty(config.get("accessToken"))) {
             _accessTokenCredential = new AccessTokenCredential(config);
+        } else if (!StringUtils.isEmpty(config.get("securityToken"))) {
+            _stsCredential = new StsCredential((String) config.get("accessKeyId"),
+                    (String) config.get("accessKeySecret"), (String) config.get("securityToken"));
         }
     }
 
@@ -97,6 +101,9 @@ public class BaseClient {
     public String _getSignature(TeaRequest request) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
         String method = request.method;
         String pathname = request.pathname;
+        if (null != this._getSecurityToken()) {
+            request.headers.put("x-acs-security-token", this._getSecurityToken());
+        }
         Map<String, String> headers = request.headers;
         Map<String, String> query = request.query;
         String accept = headers.get("accept") == null ? "" : headers.get("accept");
@@ -181,18 +188,47 @@ public class BaseClient {
         return defaultStr;
     }
 
-    public String _getAccessKeyId() throws Exception {
+    public String _getAccessKeyId() {
         if (null != this._accessKeyCredential) {
             return this._accessKeyCredential.getAccessKeyId();
+        } else if (null != this._stsCredential) {
+            return this._stsCredential.getAccessKeyId();
         }
         return null;
     }
 
-    public String _getAccessKeySecret() throws Exception {
+    public String _getAccessKeySecret() {
         if (null != this._accessKeyCredential) {
             return this._accessKeyCredential.getAccessKeySecret();
+        } else if (null != this._stsCredential) {
+            return this._stsCredential.getAccessKeySecret();
         }
         return null;
+    }
+
+    public void _setAccessKeyId(String accessKeyId) {
+        if (null != this._stsCredential) {
+            this._stsCredential.setAccessKeyId(accessKeyId);
+        }
+    }
+
+    public void _setAccessKeySecret(String accessKeySecret) {
+        if (null != this._stsCredential) {
+            this._stsCredential.setAccessKeySecret(accessKeySecret);
+        }
+    }
+
+    public String _getSecurityToken() {
+        if (null != this._stsCredential) {
+            return this._stsCredential.getSecurityToken();
+        }
+        return null;
+    }
+
+    public void _setSecurityToken(String securityToken) {
+        if (null != this._stsCredential) {
+            this._stsCredential.setSecurityToken(securityToken);
+        }
     }
 
     public String _getAccessToken() throws Exception {
