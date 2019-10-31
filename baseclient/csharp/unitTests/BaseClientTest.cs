@@ -50,6 +50,7 @@ namespace baseClientUnitTests
             Assert.Null(TestHelper.RunInstanceMethod(typeof(BaseClient), "_getAccessKeyId", baseClient, null));
             Assert.Null(TestHelper.RunInstanceMethod(typeof(BaseClient), "_getAccessKeySecret", baseClient, null));
             Assert.Null(TestHelper.RunInstanceMethod(typeof(BaseClient), "_getAccessToken", baseClient, null));
+            Assert.Null(TestHelper.RunInstanceMethod(typeof(BaseClient), "_getSecurityToken", baseClient, null));
         }
 
         [Fact]
@@ -101,6 +102,27 @@ namespace baseClientUnitTests
             filed.SetValue(baseClient, accessTokenCredential);
 
             Assert.Equal("accessToken", (string)TestHelper.RunInstanceMethod(typeof(BaseClient), "_getAccessToken", baseClient, null));
+        }
+
+        [Fact]
+        public void TestBaseClientStsToken()
+        {
+            Dictionary<string, object> config = new Dictionary<string, object>();
+            config.Add("DomainId", "domainId");
+            config.Add("Protocol", "protocol");
+            config.Add("Endpoint", "endpoint");
+            config.Add("UserId", "UserId");
+            config.Add("SecurityToken", "securityToken");
+            config.Add("AccessKeyId", "accessKeyId");
+            config.Add("AccessKeySecret", "accessKeySecret");
+            BaseClient baseClient = new BaseClient(config);
+
+            string accesskeyId = (string)TestHelper.RunInstanceMethod(typeof(BaseClient), "_getAccessKeyId", baseClient, null);
+            string accessKeySecret = (string)TestHelper.RunInstanceMethod(typeof(BaseClient), "_getAccessKeySecret", baseClient, null);
+            string securityToken = (string)TestHelper.RunInstanceMethod(typeof(BaseClient), "_getSecurityToken", baseClient, null);
+            Assert.Equal("accessKeyId", accesskeyId);
+            Assert.Equal("accessKeySecret", accessKeySecret);
+            Assert.Equal("securityToken", securityToken);
         }
 
         [Fact]
