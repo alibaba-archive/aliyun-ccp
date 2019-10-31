@@ -43,7 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\baseclient\csharp\baseClient.csproj" />
+    <ProjectReference Include="..\..\baseclient\csharp\core\baseClient.csproj" />
   </ItemGroup>
 
 </Project>
