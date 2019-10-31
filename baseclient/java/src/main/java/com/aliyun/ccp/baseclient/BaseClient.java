@@ -39,14 +39,14 @@ public class BaseClient {
     }
 
     private void setCredential(Map<String, Object> config) {
-        if (!StringUtils.isEmpty(config.get("accessKeyId"))) {
-            _accessKeyCredential = new AccessKeyCredential((String) config.get("accessKeyId"),
-                    (String) config.get("accessKeySecret"));
-        } else if (!StringUtils.isEmpty(config.get("accessToken"))) {
-            _accessTokenCredential = new AccessTokenCredential(config);
-        } else if (!StringUtils.isEmpty(config.get("securityToken"))) {
+        if (!StringUtils.isEmpty(config.get("securityToken"))) {
             _stsCredential = new StsCredential((String) config.get("accessKeyId"),
                     (String) config.get("accessKeySecret"), (String) config.get("securityToken"));
+        } else if (!StringUtils.isEmpty(config.get("accessToken"))) {
+            _accessTokenCredential = new AccessTokenCredential(config);
+        } else if (!StringUtils.isEmpty(config.get("accessKeyId"))) {
+            _accessKeyCredential = new AccessKeyCredential((String) config.get("accessKeyId"),
+                    (String) config.get("accessKeySecret"));
         }
     }
 
