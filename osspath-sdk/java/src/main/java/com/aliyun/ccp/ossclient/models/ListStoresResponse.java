@@ -5,9 +5,11 @@ import com.aliyun.tea.*;
 
 public class ListStoresResponse extends TeaModel {
     @NameInMap("requestId")
+    @Validation(pattern = "", maxLength = 0)
     public String requestId;
 
     @NameInMap("items")
+    @Validation(pattern = "", maxLength = 0)
     public Store[] items;
 
 }

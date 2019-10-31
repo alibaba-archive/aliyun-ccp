@@ -5,6 +5,7 @@ import com.aliyun.tea.*;
 
 public class ListStorageRequest extends TeaModel {
     @NameInMap("domain_id")
+    @Validation(pattern = "", maxLength = 0)
     public String domainId;
 
 }

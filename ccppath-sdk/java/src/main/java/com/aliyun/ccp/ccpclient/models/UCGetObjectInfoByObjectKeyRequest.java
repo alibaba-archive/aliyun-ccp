@@ -5,6 +5,7 @@ import com.aliyun.tea.*;
 
 public class UCGetObjectInfoByObjectKeyRequest extends TeaModel {
     @NameInMap("object_key")
+    @Validation(pattern = "", maxLength = 0)
     public String objectKey;
 
 }
