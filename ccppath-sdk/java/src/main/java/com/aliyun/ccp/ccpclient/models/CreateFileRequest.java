@@ -5,54 +5,71 @@ import com.aliyun.tea.*;
 
 public class CreateFileRequest extends TeaModel {
     @NameInMap("content_hash")
+    @Validation(pattern = "", maxLength = 0)
     public String contentHash;
 
     @NameInMap("content_hash_name")
+    @Validation(pattern = "", maxLength = 0)
     public String contentHashName;
 
     @NameInMap("content_md5")
+    @Validation(pattern = "", maxLength = 0)
     public String contentMd5;
 
     @NameInMap("content_type")
+    @Validation(pattern = "", maxLength = 0)
     public String contentType;
 
     @NameInMap("description")
+    @Validation(pattern = "", maxLength = 0)
     public String description;
 
     @NameInMap("drive_id")
+    @Validation(pattern = "[0-9]+", maxLength = 0)
     public String driveId;
 
     @NameInMap("hidden")
+    @Validation(pattern = "", maxLength = 0)
     public boolean hidden;
 
     @NameInMap("meta")
+    @Validation(pattern = "", maxLength = 0)
     public String meta;
 
     @NameInMap("name")
+    @Validation(pattern = "[a-zA-Z0-9.-]{1,1024}", maxLength = 0)
     public String name;
 
     @NameInMap("parent_file_id")
+    @Validation(pattern = "[a-z0-9]{1, 50}", maxLength = 0)
     public String parentFileId;
 
     @NameInMap("parent_file_path")
+    @Validation(pattern = "", maxLength = 0)
     public String parentFilePath;
 
     @NameInMap("part_info_list")
+    @Validation(pattern = "", maxLength = 0)
     public UploadPartInfo[] partInfoList;
 
     @NameInMap("pre_hash")
+    @Validation(pattern = "", maxLength = 0)
     public String preHash;
 
     @NameInMap("share_id")
+    @Validation(pattern = "", maxLength = 0)
     public String shareId;
 
     @NameInMap("size")
+    @Validation(pattern = "", maxLength = 0)
     public Long size;
 
     @NameInMap("tags")
+    @Validation(pattern = "", maxLength = 0)
     public java.util.Map<String, Object> tags;
 
     @NameInMap("type")
+    @Validation(pattern = "", maxLength = 0)
     public String type;
 
 }

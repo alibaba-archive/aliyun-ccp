@@ -5,6 +5,7 @@ import com.aliyun.tea.*;
 
 public class DeleteUserRequest extends TeaModel {
     @NameInMap("user_id")
+    @Validation(pattern = "", maxLength = 0)
     public String userId;
 
 }

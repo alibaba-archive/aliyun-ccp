@@ -70,7 +70,7 @@ public class AccessTokenCredential {
         return this.accessToken;
     }
 
-    private boolean shouldRefresh(long now) throws ParseException, CredentialException {
+    private boolean shouldRefresh(long now) throws ParseException {
         if (StringUtils.isEmpty(this.expireTime) || StringUtils.isEmpty(this.refreshToken)) {
             return false;
         }

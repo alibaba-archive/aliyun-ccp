@@ -19,18 +19,19 @@ public class BaseClientTest {
         Class clazz = baseClient.getClass();
         Method setCredential = clazz.getDeclaredMethod("setCredential", Map.class);
         setCredential.setAccessible(true);
-        map.put("securityToken", "testSecurityToken");
-        setCredential.invoke(baseClient, map);
-        Assert.assertEquals("testSecurityToken", baseClient._stsCredential.getSecurityToken());
-
-        map.put("accessToken", "testAccessToken");
-        setCredential.invoke(baseClient, map);
-        Assert.assertEquals("testAccessToken", baseClient._accessTokenCredential.getAccessToken());
 
         map.put("accessKeyId", "testAccessKeyId");
         map.put("accessKeySecret", "testAccessKeyId");
         setCredential.invoke(baseClient, map);
         Assert.assertEquals("testAccessKeyId", baseClient._accessKeyCredential.getAccessKeyId());
+
+        map.put("accessToken", "testAccessToken");
+        setCredential.invoke(baseClient, map);
+        Assert.assertEquals("testAccessToken", baseClient._accessTokenCredential.getAccessToken());
+
+        map.put("securityToken", "testSecurityToken");
+        setCredential.invoke(baseClient, map);
+        Assert.assertEquals("testSecurityToken", baseClient._stsCredential.getSecurityToken());
     }
 
 

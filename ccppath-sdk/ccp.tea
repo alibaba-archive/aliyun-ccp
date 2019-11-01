@@ -14,7 +14,7 @@ module Client {
   type @getSignature = ($Request): string
   type @default = (string, string): string
   type @defaultNumber = (number, number): number
-  type @getAccessToken = async (): string
+  type @getSysAccessToken = async (): string
   type @getAccessKeyId = async (): string
   type @getAccessKeySecret = async (): string
 
@@ -2078,7 +2078,7 @@ example', x-go-name='UserID'),
   api cancelLink(request: CancelLinkRequest, runtime: RuntimeOptions): AccountAccessTokenResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/cancel_link`;
@@ -2156,7 +2156,7 @@ example', x-go-name='UserID'),
   api confirmLink(request: ConfirmLinkRequest, runtime: RuntimeOptions): AccountAccessTokenResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/confirm_link`;
@@ -2233,7 +2233,7 @@ example', x-go-name='UserID'),
   api changePassword(request: DefaultChangePasswordRequest, runtime: RuntimeOptions): void  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/default/change_password`;
@@ -2307,7 +2307,7 @@ example', x-go-name='UserID'),
   api setPassword(request: DefaultSetPasswordRequest, runtime: RuntimeOptions): void  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/default/set_password`;
@@ -2382,7 +2382,7 @@ example', x-go-name='UserID'),
   api getAccessTokenByLinkInfo(request: GetAccessTokenByLinkInfoRequest, runtime: RuntimeOptions): AccountAccessTokenResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/get_access_token_by_link_info`;
@@ -2459,7 +2459,7 @@ example', x-go-name='UserID'),
   api getCaptcha(request: GetCaptchaRequest, runtime: RuntimeOptions): Captcha  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/get_captcha`;
@@ -2537,7 +2537,7 @@ example', x-go-name='UserID'),
   api getLinkInfo(request: GetByLinkInfoRequest, runtime: RuntimeOptions): LinkInfoResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/get_link_info`;
@@ -2614,7 +2614,7 @@ example', x-go-name='UserID'),
   api getLinkInfoByUserId(request: GetLinkInfoByUserIDRequest, runtime: RuntimeOptions): LinkInfoListResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/get_link_info_by_user_id`;
@@ -2693,7 +2693,7 @@ example', x-go-name='UserID'),
   api link(request: AccountLinkRequest, runtime: RuntimeOptions): AccountAccessTokenResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/link`;
@@ -2771,7 +2771,7 @@ example', x-go-name='UserID'),
   api checkExist(request: MobileCheckExistRequest, runtime: RuntimeOptions): MobileCheckExistResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/mobile/check_exist`;
@@ -2849,7 +2849,7 @@ example', x-go-name='UserID'),
   api login(request: MobileLoginRequest, runtime: RuntimeOptions): AccountAccessTokenResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/mobile/login`;
@@ -2927,7 +2927,7 @@ example', x-go-name='UserID'),
   api register(request: MobileRegisterRequest, runtime: RuntimeOptions): AccountAccessTokenResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/mobile/register`;
@@ -3004,7 +3004,7 @@ example', x-go-name='UserID'),
   api mobileSendSmsCode(request: MobileSendSmsCodeRequest, runtime: RuntimeOptions): MobileSendSmsCodeResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/mobile/send_sms_code`;
@@ -3081,7 +3081,7 @@ example', x-go-name='UserID'),
   api token(request: TokenRequest, runtime: RuntimeOptions): AccountAccessTokenResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/token`;
@@ -3160,7 +3160,7 @@ example', x-go-name='UserID'),
   api getAsyncTaskInfo(request: CCPGetAsyncTaskRequest, runtime: RuntimeOptions): CCPGetAsyncTaskResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/async_task/get`;
@@ -3239,7 +3239,7 @@ example', x-go-name='UserID'),
   api batchDeleteFiles(request: CCPDeleteFilesRequest, runtime: RuntimeOptions): CCPDeleteFilesResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/file/batch_delete`;
@@ -3318,7 +3318,7 @@ example', x-go-name='UserID'),
   api completeFile(request: CCPCompleteFileRequest, runtime: RuntimeOptions): CCPCompleteFileResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/file/complete`;
@@ -3397,7 +3397,7 @@ example', x-go-name='UserID'),
   api copyFile(request: CCPCopyFileRequest, runtime: RuntimeOptions): CCPCopyFileResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/file/copy`;
@@ -3484,7 +3484,7 @@ example', x-go-name='UserID'),
   api createFile(request: CCPCreateFileRequest, runtime: RuntimeOptions): CCPCreateFileResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/file/create`;
@@ -3563,7 +3563,7 @@ example', x-go-name='UserID'),
   api deleteFile(request: CCPDeleteFileRequest, runtime: RuntimeOptions): CCPDeleteFileResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/file/delete`;
@@ -3652,7 +3652,7 @@ example', x-go-name='UserID'),
   api downloadFile(request: DownloadFileRequest, runtime: RuntimeOptions): CCPGetDownloadUrlRequest  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'GET';
     pathname = `/v2/file/download`;
@@ -3723,7 +3723,7 @@ example', x-go-name='UserID'),
   api getFile(request: CCPGetFileRequest, runtime: RuntimeOptions): CCPGetFileResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/file/get`;
@@ -3802,7 +3802,7 @@ example', x-go-name='UserID'),
   api getDownloadUrl(request: CCPGetDownloadUrlRequest, runtime: RuntimeOptions): CCPGetDownloadUrlResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/file/get_download_url`;
@@ -3881,7 +3881,7 @@ example', x-go-name='UserID'),
   api getUploadUrl(request: CCPGetUploadUrlRequest, runtime: RuntimeOptions): CCPGetUploadUrlResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/file/get_upload_url`;
@@ -3960,7 +3960,7 @@ example', x-go-name='UserID'),
   api listFile(request: CCPListFileRequest, runtime: RuntimeOptions): CCPListFileResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/file/list`;
@@ -4039,7 +4039,7 @@ example', x-go-name='UserID'),
   api listUploadedParts(request: CCPListUploadedPartRequest, runtime: RuntimeOptions): CCPListUploadedPartResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/file/list_uploaded_parts`;
@@ -4118,7 +4118,7 @@ example', x-go-name='UserID'),
   api moveFile(request: CCPMoveFileRequest, runtime: RuntimeOptions): CCPMoveFileResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/file/move`;
@@ -4197,7 +4197,7 @@ example', x-go-name='UserID'),
   api searchFile(request: CCPSearchFileRequest, runtime: RuntimeOptions): CCPSearchFileResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/file/search`;
@@ -4276,7 +4276,7 @@ example', x-go-name='UserID'),
   api updateFile(request: CCPUpdateFileMetaRequest, runtime: RuntimeOptions): CCPUpdateFileMetaResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/file/update`;
@@ -4354,7 +4354,7 @@ example', x-go-name='UserID'),
   api createDrive(request: CreateDriveRequest, runtime: RuntimeOptions): CreateDriveResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/drive/create`;
@@ -4432,7 +4432,7 @@ example', x-go-name='UserID'),
   api deleteDrive(request: DeleteDriveRequest, runtime: RuntimeOptions): void  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/drive/delete`;
@@ -4508,7 +4508,7 @@ example', x-go-name='UserID'),
   api getDrive(request: GetDriveRequest, runtime: RuntimeOptions): GetDriveResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/drive/get`;
@@ -4587,7 +4587,7 @@ example', x-go-name='UserID'),
   api getDefaultDrive(request: GetDefaultDriveRequest, runtime: RuntimeOptions): GetDriveResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/drive/get_default_drive`;
@@ -4665,7 +4665,7 @@ example', x-go-name='UserID'),
   api listDrives(request: ListDriveRequest, runtime: RuntimeOptions): ListDriveResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/drive/list`;
@@ -4743,7 +4743,7 @@ example', x-go-name='UserID'),
   api listMyDrives(request: ListMyDriveRequest, runtime: RuntimeOptions): ListDriveResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/drive/list_my_drives`;
@@ -4822,7 +4822,7 @@ example', x-go-name='UserID'),
   api updateDrive(request: UpdateDriveRequest, runtime: RuntimeOptions): UpdateDriveResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/drive/update`;
@@ -4900,7 +4900,7 @@ example', x-go-name='UserID'),
   api createUser(request: CreateUserRequest, runtime: RuntimeOptions): CreateUserResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/user/create`;
@@ -4978,7 +4978,7 @@ example', x-go-name='UserID'),
   api deleteUser(request: DeleteUserRequest, runtime: RuntimeOptions): void  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/user/delete`;
@@ -5054,7 +5054,7 @@ example', x-go-name='UserID'),
   api getUser(request: GetUserRequest, runtime: RuntimeOptions): GetUserResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/user/get`;
@@ -5132,7 +5132,7 @@ example', x-go-name='UserID'),
   api listUsers(request: ListUserRequest, runtime: RuntimeOptions): ListUserResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/user/list`;
@@ -5210,7 +5210,7 @@ example', x-go-name='UserID'),
   api searchUser(request: SearchUserRequest, runtime: RuntimeOptions): ListUserResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/user/search`;
@@ -5289,7 +5289,7 @@ example', x-go-name='UserID'),
   api updateUser(request: UpdateUserRequest, runtime: RuntimeOptions): UpdateUserResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
+    var accessToken = @getSysAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/user/update`;
