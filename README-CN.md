@@ -14,6 +14,11 @@
 - [ccppath-sdk](./ccppath-sdk/go/README-CN.md)
 - [osspath-sdk](./osspath-sdk/go/README-CN.md)
 
+### Net
+- [baseclient](./baseclient/csharp/README-CN.md)
+- [ccppath-sdk](./ccppath-sdk/cs/README-CN.md)
+- [osspath-sdk](./osspath-sdk/cs/README-CN.md)
+
 ## 问题
 [Opening an Issue](https://github.com/aliyun/aliyun-ccp/issues/new)，不符合指南的问题可能会立即关闭。
 
