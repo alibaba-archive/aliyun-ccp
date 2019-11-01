@@ -181,7 +181,7 @@ func Test_GetAccessToken(t *testing.T) {
 		resp = tea.NewResponse(httpresponse)
 		return resp, nil
 	}
-	accesstoken, err := client.GetSysAccessToken()
+	accesstoken, err := client.GetAccessToken()
 	utils.AssertEqual(t, err.Error(), `parsing time "2006-01-T15:04:05Z" as "2006-01-02T15:04:05Z07:00": cannot parse "T15:04:05Z" as "02"`)
 	utils.AssertEqual(t, accesstoken, "")
 
@@ -194,22 +194,22 @@ func Test_GetAccessToken(t *testing.T) {
 		resp = tea.NewResponse(httpresponse)
 		return resp, nil
 	}
-	accesstoken, err = client.GetSysAccessToken()
+	accesstoken, err = client.GetAccessToken()
 	utils.AssertNil(t, err)
 	utils.AssertEqual(t, accesstoken, "access_token")
 
 	client.accessToken.ExpireTime = nil
-	accesstoken, err = client.GetSysAccessToken()
+	accesstoken, err = client.GetAccessToken()
 	utils.AssertNil(t, err)
 	utils.AssertEqual(t, accesstoken, "access_token")
 
 	client.accessToken.AccessToken = ""
-	accesstoken, err = client.GetSysAccessToken()
+	accesstoken, err = client.GetAccessToken()
 	utils.AssertNil(t, err)
 	utils.AssertEqual(t, accesstoken, "")
 
 	client.accessToken = nil
-	accesstoken, err = client.GetSysAccessToken()
+	accesstoken, err = client.GetAccessToken()
 	utils.AssertNil(t, err)
 	utils.AssertEqual(t, accesstoken, "")
 }
