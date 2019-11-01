@@ -6421,11 +6421,75 @@ func (s *BaseMoveFileRequest) SetOverwrite(v bool) *BaseMoveFileRequest {
 	return s
 }
 
+type BatchSubRequest struct {
+	Body    map[string]interface{} `json:"body" xml:"body"`
+	Headers map[string]interface{} `json:"headers" xml:"headers"`
+	Id      *string                `json:"id" xml:"id" require:"true"`
+	Method  *string                `json:"method" xml:"method" require:"true"`
+	Url     *string                `json:"url" xml:"url" require:"true"`
+}
+
+func (s BatchSubRequest) String() string {
+	return utils.Prettify(s)
+}
+
+func (s BatchSubRequest) GoString() string {
+	return s.String()
+}
+
+func (s *BatchSubRequest) SetBody(v map[string]interface{}) *BatchSubRequest {
+	s.Body = v
+	return s
+}
+
+func (s *BatchSubRequest) SetHeaders(v map[string]interface{}) *BatchSubRequest {
+	s.Headers = v
+	return s
+}
+
+func (s *BatchSubRequest) SetId(v string) *BatchSubRequest {
+	s.Id = &v
+	return s
+}
+
+func (s *BatchSubRequest) SetMethod(v string) *BatchSubRequest {
+	s.Method = &v
+	return s
+}
+
+func (s *BatchSubRequest) SetUrl(v string) *BatchSubRequest {
+	s.Url = &v
+	return s
+}
+
+type CCPBatchRequest struct {
+	Requests []*BatchSubRequest `json:"requests" xml:"requests" require:"true" type:"Repeated"`
+	Resource *string            `json:"resource" xml:"resource" require:"true"`
+}
+
+func (s CCPBatchRequest) String() string {
+	return utils.Prettify(s)
+}
+
+func (s CCPBatchRequest) GoString() string {
+	return s.String()
+}
+
+func (s *CCPBatchRequest) SetRequests(v []*BatchSubRequest) *CCPBatchRequest {
+	s.Requests = v
+	return s
+}
+
+func (s *CCPBatchRequest) SetResource(v string) *CCPBatchRequest {
+	s.Resource = &v
+	return s
+}
+
 type CCPCompleteFileRequest struct {
 	DriveId      *string           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	UploadId     *string           `json:"upload_id" xml:"upload_id"`
-	FileId       *string           `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
+	FileId       *string           `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
 }
 
 func (s CCPCompleteFileRequest) String() string {
@@ -6457,12 +6521,12 @@ func (s *CCPCompleteFileRequest) SetFileId(v string) *CCPCompleteFileRequest {
 }
 
 type CCPCopyFileRequest struct {
+	AutoRename     *bool   `json:"auto_rename" xml:"auto_rename"`
 	DriveId        *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId         *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1, 50}"`
+	FileId         *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	NewName        *string `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
-	Overwrite      *bool   `json:"overwrite" xml:"overwrite"`
 	ToDriveId      *string `json:"to_drive_id" xml:"to_drive_id" require:"true" pattern:"[0-9]+"`
-	ToParentFileId *string `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1, 50}"`
+	ToParentFileId *string `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 }
 
 func (s CCPCopyFileRequest) String() string {
@@ -6471,6 +6535,11 @@ func (s CCPCopyFileRequest) String() string {
 
 func (s CCPCopyFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CCPCopyFileRequest) SetAutoRename(v bool) *CCPCopyFileRequest {
+	s.AutoRename = &v
+	return s
 }
 
 func (s *CCPCopyFileRequest) SetDriveId(v string) *CCPCopyFileRequest {
@@ -6488,11 +6557,6 @@ func (s *CCPCopyFileRequest) SetNewName(v string) *CCPCopyFileRequest {
 	return s
 }
 
-func (s *CCPCopyFileRequest) SetOverwrite(v bool) *CCPCopyFileRequest {
-	s.Overwrite = &v
-	return s
-}
-
 func (s *CCPCopyFileRequest) SetToDriveId(v string) *CCPCopyFileRequest {
 	s.ToDriveId = &v
 	return s
@@ -6504,21 +6568,22 @@ func (s *CCPCopyFileRequest) SetToParentFileId(v string) *CCPCopyFileRequest {
 }
 
 type CCPCreateFileRequest struct {
-	ContentMd5      *string                `json:"content_md5" xml:"content_md5" require:"true"`
-	ContentType     *string                `json:"content_type" xml:"content_type" require:"true"`
-	Name            *string                `json:"name" xml:"name" require:"true" pattern:"[a-z0-9.-_]{1,1024}"`
-	PartInfoList    []*UploadPartInfo      `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	Size            *int64                 `json:"size" xml:"size" require:"true"`
-	Type            *string                `json:"type" xml:"type" require:"true"`
-	ContentHash     *string                `json:"content_hash" xml:"content_hash"`
-	ContentHashName *string                `json:"content_hash_name" xml:"content_hash_name"`
-	Description     *string                `json:"description" xml:"description" maxLength:"0"`
-	DriveId         *string                `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	Hidden          *bool                  `json:"hidden" xml:"hidden"`
-	Meta            *string                `json:"meta" xml:"meta"`
-	ParentFileId    *string                `json:"parent_file_id" xml:"parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
-	PreHash         *string                `json:"pre_hash" xml:"pre_hash"`
-	Tags            map[string]interface{} `json:"tags" xml:"tags"`
+	ContentMd5      *string           `json:"content_md5" xml:"content_md5" require:"true"`
+	ContentType     *string           `json:"content_type" xml:"content_type" require:"true"`
+	Name            *string           `json:"name" xml:"name" require:"true" pattern:"[a-z0-9.-_]{1,1024}"`
+	PartInfoList    []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
+	Size            *int64            `json:"size" xml:"size" require:"true"`
+	Type            *string           `json:"type" xml:"type" require:"true"`
+	AutoRename      *bool             `json:"auto_rename" xml:"auto_rename"`
+	ContentHash     *string           `json:"content_hash" xml:"content_hash"`
+	ContentHashName *string           `json:"content_hash_name" xml:"content_hash_name"`
+	Description     *string           `json:"description" xml:"description" maxLength:"0"`
+	DriveId         *string           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	Hidden          *bool             `json:"hidden" xml:"hidden"`
+	Labels          []*string         `json:"labels" xml:"labels" type:"Repeated"`
+	Meta            *string           `json:"meta" xml:"meta"`
+	ParentFileId    *string           `json:"parent_file_id" xml:"parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	PreHash         *string           `json:"pre_hash" xml:"pre_hash"`
 }
 
 func (s CCPCreateFileRequest) String() string {
@@ -6559,6 +6624,11 @@ func (s *CCPCreateFileRequest) SetType(v string) *CCPCreateFileRequest {
 	return s
 }
 
+func (s *CCPCreateFileRequest) SetAutoRename(v bool) *CCPCreateFileRequest {
+	s.AutoRename = &v
+	return s
+}
+
 func (s *CCPCreateFileRequest) SetContentHash(v string) *CCPCreateFileRequest {
 	s.ContentHash = &v
 	return s
@@ -6584,6 +6654,11 @@ func (s *CCPCreateFileRequest) SetHidden(v bool) *CCPCreateFileRequest {
 	return s
 }
 
+func (s *CCPCreateFileRequest) SetLabels(v []*string) *CCPCreateFileRequest {
+	s.Labels = v
+	return s
+}
+
 func (s *CCPCreateFileRequest) SetMeta(v string) *CCPCreateFileRequest {
 	s.Meta = &v
 	return s
@@ -6599,14 +6674,9 @@ func (s *CCPCreateFileRequest) SetPreHash(v string) *CCPCreateFileRequest {
 	return s
 }
 
-func (s *CCPCreateFileRequest) SetTags(v map[string]interface{}) *CCPCreateFileRequest {
-	s.Tags = v
-	return s
-}
-
 type CCPDeleteFileRequest struct {
 	DriveId     *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId      *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1, 50}"`
+	FileId      *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	Permanently *bool   `json:"permanently" xml:"permanently"`
 }
 
@@ -6676,7 +6746,7 @@ func (s *CCPGetAsyncTaskRequest) SetAsyncTaskId(v string) *CCPGetAsyncTaskReques
 type CCPGetDownloadUrlRequest struct {
 	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
-	FileId    *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1, 50}"`
+	FileId    *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	FileName  *string `json:"file_name" xml:"file_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
 }
 
@@ -6710,7 +6780,7 @@ func (s *CCPGetDownloadUrlRequest) SetFileName(v string) *CCPGetDownloadUrlReque
 
 type CCPGetFileRequest struct {
 	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId                *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1, 50}"`
+	FileId                *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
 }
@@ -6748,7 +6818,7 @@ type CCPGetUploadUrlRequest struct {
 	DriveId      *string           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	UploadId     *string           `json:"upload_id" xml:"upload_id" require:"true"`
-	FileId       *string           `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
+	FileId       *string           `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
 }
 
 func (s CCPGetUploadUrlRequest) String() string {
@@ -6784,86 +6854,9 @@ func (s *CCPGetUploadUrlRequest) SetFileId(v string) *CCPGetUploadUrlRequest {
 	return s
 }
 
-type CCPListFileRequest struct {
-	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
-	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
-	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1, 3}"`
-	Marker                *string `json:"marker" xml:"marker"`
-	Category              *string `json:"category" xml:"category"`
-	OrderBy               *string `json:"order_by" xml:"order_by"`
-	OrderDirection        *string `json:"order_direction" xml:"order_direction"`
-	ParentFileId          *string `json:"parent_file_id" xml:"parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1, 50}"`
-	Status                *string `json:"status" xml:"status"`
-	Type                  *string `json:"type" xml:"type"`
-}
-
-func (s CCPListFileRequest) String() string {
-	return utils.Prettify(s)
-}
-
-func (s CCPListFileRequest) GoString() string {
-	return s.String()
-}
-
-func (s *CCPListFileRequest) SetDriveId(v string) *CCPListFileRequest {
-	s.DriveId = &v
-	return s
-}
-
-func (s *CCPListFileRequest) SetImageThumbnailProcess(v string) *CCPListFileRequest {
-	s.ImageThumbnailProcess = &v
-	return s
-}
-
-func (s *CCPListFileRequest) SetImageUrlProcess(v string) *CCPListFileRequest {
-	s.ImageUrlProcess = &v
-	return s
-}
-
-func (s *CCPListFileRequest) SetLimit(v int64) *CCPListFileRequest {
-	s.Limit = &v
-	return s
-}
-
-func (s *CCPListFileRequest) SetMarker(v string) *CCPListFileRequest {
-	s.Marker = &v
-	return s
-}
-
-func (s *CCPListFileRequest) SetCategory(v string) *CCPListFileRequest {
-	s.Category = &v
-	return s
-}
-
-func (s *CCPListFileRequest) SetOrderBy(v string) *CCPListFileRequest {
-	s.OrderBy = &v
-	return s
-}
-
-func (s *CCPListFileRequest) SetOrderDirection(v string) *CCPListFileRequest {
-	s.OrderDirection = &v
-	return s
-}
-
-func (s *CCPListFileRequest) SetParentFileId(v string) *CCPListFileRequest {
-	s.ParentFileId = &v
-	return s
-}
-
-func (s *CCPListFileRequest) SetStatus(v string) *CCPListFileRequest {
-	s.Status = &v
-	return s
-}
-
-func (s *CCPListFileRequest) SetType(v string) *CCPListFileRequest {
-	s.Type = &v
-	return s
-}
-
 type CCPListUploadedPartRequest struct {
 	DriveId          *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId           *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1, 50}"`
+	FileId           *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	Limit            *int64  `json:"limit" xml:"limit" require:"true" pattern:"[0-9]+"`
 	PartNumberMarker *int64  `json:"part_number_marker" xml:"part_number_marker" pattern:"[0-9]+"`
 	UploadId         *string `json:"upload_id" xml:"upload_id"`
@@ -6906,7 +6899,7 @@ type CCPMoveFileRequest struct {
 	DriveId        *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	NewName        *string `json:"new_name" xml:"new_name" pattern:"[a-zA-Z0-9.-]{1,1024}"`
 	Overwrite      *bool   `json:"overwrite" xml:"overwrite"`
-	FileId         *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1, 50}"`
+	FileId         *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	ToParentFileId *string `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50"`
 }
 
@@ -6997,14 +6990,15 @@ func (s *CCPSearchFileRequest) SetQuery(v string) *CCPSearchFileRequest {
 }
 
 type CCPUpdateFileMetaRequest struct {
-	Description *string                `json:"description" xml:"description" maxLength:"1024"`
-	DriveId     *string                `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId      *string                `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1, 50}"`
-	Hidden      *bool                  `json:"hidden" xml:"hidden"`
-	Meta        *string                `json:"meta" xml:"meta"`
-	Name        *string                `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
-	Starred     *bool                  `json:"starred" xml:"starred"`
-	Tags        map[string]interface{} `json:"tags" xml:"tags"`
+	CustomIndexKey *string   `json:"custom_index_key" xml:"custom_index_key"`
+	Description    *string   `json:"description" xml:"description" maxLength:"1024"`
+	DriveId        *string   `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	FileId         *string   `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	Hidden         *bool     `json:"hidden" xml:"hidden"`
+	Labels         []*string `json:"labels" xml:"labels" type:"Repeated"`
+	Meta           *string   `json:"meta" xml:"meta"`
+	Name           *string   `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	Starred        *bool     `json:"starred" xml:"starred"`
 }
 
 func (s CCPUpdateFileMetaRequest) String() string {
@@ -7013,6 +7007,11 @@ func (s CCPUpdateFileMetaRequest) String() string {
 
 func (s CCPUpdateFileMetaRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CCPUpdateFileMetaRequest) SetCustomIndexKey(v string) *CCPUpdateFileMetaRequest {
+	s.CustomIndexKey = &v
+	return s
 }
 
 func (s *CCPUpdateFileMetaRequest) SetDescription(v string) *CCPUpdateFileMetaRequest {
@@ -7035,6 +7034,11 @@ func (s *CCPUpdateFileMetaRequest) SetHidden(v bool) *CCPUpdateFileMetaRequest {
 	return s
 }
 
+func (s *CCPUpdateFileMetaRequest) SetLabels(v []*string) *CCPUpdateFileMetaRequest {
+	s.Labels = v
+	return s
+}
+
 func (s *CCPUpdateFileMetaRequest) SetMeta(v string) *CCPUpdateFileMetaRequest {
 	s.Meta = &v
 	return s
@@ -7050,14 +7054,9 @@ func (s *CCPUpdateFileMetaRequest) SetStarred(v bool) *CCPUpdateFileMetaRequest 
 	return s
 }
 
-func (s *CCPUpdateFileMetaRequest) SetTags(v map[string]interface{}) *CCPUpdateFileMetaRequest {
-	s.Tags = v
-	return s
-}
-
 type CompleteFileRequest struct {
 	DriveId      *string           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId       *string           `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
+	FileId       *string           `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
 	FilePath     *string           `json:"file_path" xml:"file_path"`
 	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	ShareId      *string           `json:"share_id" xml:"share_id"`
@@ -7104,15 +7103,13 @@ func (s *CompleteFileRequest) SetUploadId(v string) *CompleteFileRequest {
 
 type CopyFileRequest struct {
 	DriveId          *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId           *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1, 50}"`
+	FileId           *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	FilePath         *string `json:"file_path" xml:"file_path"`
 	NewName          *string `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
 	Overwrite        *bool   `json:"overwrite" xml:"overwrite"`
 	ShareId          *string `json:"share_id" xml:"share_id"`
-	ToDriveId        *string `json:"to_drive_id" xml:"to_drive_id" require:"true" pattern:"[0-9]+"`
-	ToParentFileId   *string `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1, 50}"`
+	ToParentFileId   *string `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	ToParentFilePath *string `json:"to_parent_file_path" xml:"to_parent_file_path"`
-	ToShareId        *string `json:"to_share_id" xml:"to_share_id"`
 }
 
 func (s CopyFileRequest) String() string {
@@ -7153,11 +7150,6 @@ func (s *CopyFileRequest) SetShareId(v string) *CopyFileRequest {
 	return s
 }
 
-func (s *CopyFileRequest) SetToDriveId(v string) *CopyFileRequest {
-	s.ToDriveId = &v
-	return s
-}
-
 func (s *CopyFileRequest) SetToParentFileId(v string) *CopyFileRequest {
 	s.ToParentFileId = &v
 	return s
@@ -7165,11 +7157,6 @@ func (s *CopyFileRequest) SetToParentFileId(v string) *CopyFileRequest {
 
 func (s *CopyFileRequest) SetToParentFilePath(v string) *CopyFileRequest {
 	s.ToParentFilePath = &v
-	return s
-}
-
-func (s *CopyFileRequest) SetToShareId(v string) *CopyFileRequest {
-	s.ToShareId = &v
 	return s
 }
 
@@ -7248,7 +7235,7 @@ type CreateFileRequest struct {
 	Hidden          *bool                  `json:"hidden" xml:"hidden"`
 	Meta            *string                `json:"meta" xml:"meta"`
 	Name            *string                `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
-	ParentFileId    *string                `json:"parent_file_id" xml:"parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
+	ParentFileId    *string                `json:"parent_file_id" xml:"parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
 	ParentFilePath  *string                `json:"parent_file_path" xml:"parent_file_path"`
 	PartInfoList    []*UploadPartInfo      `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	PreHash         *string                `json:"pre_hash" xml:"pre_hash"`
@@ -7429,7 +7416,7 @@ func (s *DeleteDriveRequest) SetDriveId(v string) *DeleteDriveRequest {
 
 type DeleteFileRequest struct {
 	DriveId     *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId      *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1, 50}"`
+	FileId      *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	FilePath    *string `json:"file_path" xml:"file_path"`
 	Permanently *bool   `json:"permanently" xml:"permanently"`
 	ShareId     *string `json:"share_id" xml:"share_id"`
@@ -7487,7 +7474,7 @@ func (s *DeleteShareRequest) SetShareId(v string) *DeleteShareRequest {
 
 type DownloadRequest struct {
 	DriveID      *string `json:"DriveID" xml:"DriveID" require:"true" pattern:"[0-9]+"`
-	FileID       *string `json:"FileID" xml:"FileID" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1, 50}"`
+	FileID       *string `json:"FileID" xml:"FileID" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	ImageProcess *string `json:"ImageProcess" xml:"ImageProcess"`
 	ShareID      *string `json:"ShareID" xml:"ShareID"`
 }
@@ -7557,7 +7544,7 @@ func (s *GetDefaultDriveRequest) SetUserId(v string) *GetDefaultDriveRequest {
 type GetDownloadUrlRequest struct {
 	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
-	FileId    *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1, 50}"`
+	FileId    *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	FileName  *string `json:"file_name" xml:"file_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
 	FilePath  *string `json:"file_path" xml:"file_path"`
 	ShareId   *string `json:"share_id" xml:"share_id"`
@@ -7620,7 +7607,7 @@ func (s *GetDriveRequest) SetDriveId(v string) *GetDriveRequest {
 
 type GetFileRequest struct {
 	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId                *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1, 50}"`
+	FileId                *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	FilePath              *string `json:"file_path" xml:"file_path"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
@@ -7685,7 +7672,7 @@ func (s *GetShareRequest) SetShareId(v string) *GetShareRequest {
 type GetUploadUrlRequest struct {
 	ContentMd5   *string           `json:"content_md5" xml:"content_md5" maxLength:"32"`
 	DriveId      *string           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId       *string           `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
+	FileId       *string           `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
 	FilePath     *string           `json:"file_path" xml:"file_path"`
 	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	ShareId      *string           `json:"share_id" xml:"share_id"`
@@ -7771,7 +7758,7 @@ type ListFileRequest struct {
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
 	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1, 3}"`
 	Marker                *string `json:"marker" xml:"marker"`
-	ParentFileId          *string `json:"parent_file_id" xml:"parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1, 50}"`
+	ParentFileId          *string `json:"parent_file_id" xml:"parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	ParentFilePath        *string `json:"parent_file_path" xml:"parent_file_path"`
 	ShareId               *string `json:"share_id" xml:"share_id"`
 	Status                *string `json:"status" xml:"status"`
@@ -7893,7 +7880,7 @@ func (s *ListShareRequest) SetOwner(v string) *ListShareRequest {
 	return s
 }
 
-type ListStorageFileRequest struct {
+type ListStoreFileRequest struct {
 	Limit          *int64  `json:"limit" xml:"limit"`
 	Marker         *string `json:"marker" xml:"marker"`
 	ParentFilePath *string `json:"parent_file_path" xml:"parent_file_path"`
@@ -7901,105 +7888,53 @@ type ListStorageFileRequest struct {
 	Type           *string `json:"type" xml:"type"`
 }
 
-func (s ListStorageFileRequest) String() string {
+func (s ListStoreFileRequest) String() string {
 	return utils.Prettify(s)
 }
 
-func (s ListStorageFileRequest) GoString() string {
+func (s ListStoreFileRequest) GoString() string {
 	return s.String()
 }
 
-func (s *ListStorageFileRequest) SetLimit(v int64) *ListStorageFileRequest {
+func (s *ListStoreFileRequest) SetLimit(v int64) *ListStoreFileRequest {
 	s.Limit = &v
 	return s
 }
 
-func (s *ListStorageFileRequest) SetMarker(v string) *ListStorageFileRequest {
+func (s *ListStoreFileRequest) SetMarker(v string) *ListStoreFileRequest {
 	s.Marker = &v
 	return s
 }
 
-func (s *ListStorageFileRequest) SetParentFilePath(v string) *ListStorageFileRequest {
+func (s *ListStoreFileRequest) SetParentFilePath(v string) *ListStoreFileRequest {
 	s.ParentFilePath = &v
 	return s
 }
 
-func (s *ListStorageFileRequest) SetStoreId(v string) *ListStorageFileRequest {
+func (s *ListStoreFileRequest) SetStoreId(v string) *ListStoreFileRequest {
 	s.StoreId = &v
 	return s
 }
 
-func (s *ListStorageFileRequest) SetType(v string) *ListStorageFileRequest {
+func (s *ListStoreFileRequest) SetType(v string) *ListStoreFileRequest {
 	s.Type = &v
 	return s
 }
 
-type ListStorageFileResponse struct {
-	RequestId  *string      `json:"requestId" xml:"requestId"`
-	Items      []*StoreFile `json:"items" xml:"items" type:"Repeated"`
-	NextMarker *string      `json:"next_marker" xml:"next_marker"`
-}
-
-func (s ListStorageFileResponse) String() string {
-	return utils.Prettify(s)
-}
-
-func (s ListStorageFileResponse) GoString() string {
-	return s.String()
-}
-
-func (s *ListStorageFileResponse) SetRequestId(v string) *ListStorageFileResponse {
-	s.RequestId = &v
-	return s
-}
-
-func (s *ListStorageFileResponse) SetItems(v []*StoreFile) *ListStorageFileResponse {
-	s.Items = v
-	return s
-}
-
-func (s *ListStorageFileResponse) SetNextMarker(v string) *ListStorageFileResponse {
-	s.NextMarker = &v
-	return s
-}
-
-type ListStorageRequest struct {
+type ListStoreRequest struct {
 	DomainId *string `json:"domain_id" xml:"domain_id"`
 }
 
-func (s ListStorageRequest) String() string {
+func (s ListStoreRequest) String() string {
 	return utils.Prettify(s)
 }
 
-func (s ListStorageRequest) GoString() string {
+func (s ListStoreRequest) GoString() string {
 	return s.String()
 }
 
-func (s *ListStorageRequest) SetDomainId(v string) *ListStorageRequest {
+func (s *ListStoreRequest) SetDomainId(v string) *ListStoreRequest {
 	s.DomainId = &v
-	return s
-}
-
-type ListStorageResponse struct {
-	RequestId *string              `json:"requestId" xml:"requestId"`
-	Items     []*StoreItemResponse `json:"items" xml:"items" type:"Repeated"`
-}
-
-func (s ListStorageResponse) String() string {
-	return utils.Prettify(s)
-}
-
-func (s ListStorageResponse) GoString() string {
-	return s.String()
-}
-
-func (s *ListStorageResponse) SetRequestId(v string) *ListStorageResponse {
-	s.RequestId = &v
-	return s
-}
-
-func (s *ListStorageResponse) SetItems(v []*StoreItemResponse) *ListStorageResponse {
-	s.Items = v
 	return s
 }
 
@@ -8170,7 +8105,7 @@ func (s *OSSCreateFileRequest) SetShareId(v string) *OSSCreateFileRequest {
 
 type OSSDeleteFileRequest struct {
 	DriveId     *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FilePath    *string `json:"file_path" xml:"file_path" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1, 50}"`
+	FilePath    *string `json:"file_path" xml:"file_path" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	Permanently *bool   `json:"permanently" xml:"permanently"`
 	ShareId     *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
 }
@@ -8207,7 +8142,7 @@ type OSSGetDownloadUrlRequest struct {
 	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
 	FileName  *string `json:"file_name" xml:"file_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
-	FilePath  *string `json:"file_path" xml:"file_path" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1, 50}"`
+	FilePath  *string `json:"file_path" xml:"file_path" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	ShareId   *string `json:"share_id" xml:"share_id" require:"true" pattern:"[0-9a-z-]+"`
 }
 
@@ -8246,7 +8181,7 @@ func (s *OSSGetDownloadUrlRequest) SetShareId(v string) *OSSGetDownloadUrlReques
 
 type OSSGetFileRequest struct {
 	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FilePath              *string `json:"file_path" xml:"file_path" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1, 50}"`
+	FilePath              *string `json:"file_path" xml:"file_path" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
 	ShareId               *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
@@ -8557,7 +8492,7 @@ func (s *UpdateDriveRequest) SetTotalSize(v int64) *UpdateDriveRequest {
 type UpdateFileMetaRequest struct {
 	Description *string                `json:"description" xml:"description" maxLength:"1000"`
 	DriveId     *string                `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId      *string                `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1, 50}"`
+	FileId      *string                `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	Hidden      *bool                  `json:"hidden" xml:"hidden"`
 	Meta        *string                `json:"meta" xml:"meta"`
 	Name        *string                `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
@@ -9400,7 +9335,7 @@ func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOpt
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -9514,7 +9449,7 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeO
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -9627,7 +9562,7 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runt
 			if err != nil {
 				return err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return err
 			}
@@ -9736,7 +9671,7 @@ func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *R
 			if err != nil {
 				return err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return err
 			}
@@ -9846,7 +9781,7 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -9960,7 +9895,7 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOpt
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -10074,7 +10009,7 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *Runtim
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -10188,7 +10123,7 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, r
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -10302,7 +10237,7 @@ func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions)
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -10416,7 +10351,7 @@ func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *Runt
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -10530,7 +10465,7 @@ func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -10644,7 +10579,7 @@ func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeO
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -10758,7 +10693,7 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runti
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -10872,7 +10807,7 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (*Ac
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -10901,6 +10836,234 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (*Ac
 
 			if client.IsStatusCode(response_, 200) {
 				_result := &AccountAccessTokenResponse{}
+				err = tea.Convert(tea.ToMap(map[string]interface{}{
+					"requestId": response_.Headers["x-ca-request-id"],
+				}, client.ReadAsJSON(response_)), &_result)
+				return _result, err
+			}
+
+			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+				err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    response_.StatusCode,
+						"statusMessage": response_.StatusMessage,
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, err
+			}
+
+			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    response_.StatusCode,
+					"statusMessage": response_.StatusMessage,
+				},
+			}, client.ReadAsJSON(response_)))
+			return nil, err
+		}()
+		if !tea.Retryable(err) {
+			break
+		}
+	}
+
+	return _resp, err
+}
+
+func (client *Client) AdminListStores(request *AdminListStoresRequest, runtime *RuntimeOptions) (*ListStoresResponse, error) {
+	err := client.Validator(request)
+	if err != nil {
+		return nil, err
+	}
+	err = client.Validator(runtime)
+	if err != nil {
+		return nil, err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
+		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
+		"noProxy":        tea.GetStringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.GetBoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+		},
+		"backoff": map[string]interface{}{
+			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+		},
+		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &ListStoresResponse{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, err = func() (*ListStoresResponse, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, err := client.GetAccessKeyId()
+			if err != nil {
+				return nil, err
+			}
+			accessKeySecret, err := client.GetAccessKeySecret()
+			if err != nil {
+				return nil, err
+			}
+			accessToken, err := client.GetSysAccessToken()
+			if err != nil {
+				return nil, err
+			}
+			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Method = "POST"
+			request_.Pathname = "/v2/domain/list_stores"
+			request_.Headers = map[string]string{
+				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"content-type": "application/json; charset=utf-8",
+			}
+			if client.NotEmpty(accessToken) {
+				request_.Headers["authorization"] = "Bearer " + accessToken
+			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
+				request_.Headers["date"] = client.GetRFC2616Date()
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+			}
+
+			request_.Body = client.ToJSONString(request)
+			response_, err := tea.DoRequest(request_, _runtime)
+			if err != nil {
+				return nil, err
+			}
+
+			if client.IsStatusCode(response_, 200) {
+				_result := &ListStoresResponse{}
+				err = tea.Convert(tea.ToMap(map[string]interface{}{
+					"requestId": response_.Headers["x-ca-request-id"],
+				}, client.ReadAsJSON(response_)), &_result)
+				return _result, err
+			}
+
+			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+				err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    response_.StatusCode,
+						"statusMessage": response_.StatusMessage,
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, err
+			}
+
+			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    response_.StatusCode,
+					"statusMessage": response_.StatusMessage,
+				},
+			}, client.ReadAsJSON(response_)))
+			return nil, err
+		}()
+		if !tea.Retryable(err) {
+			break
+		}
+	}
+
+	return _resp, err
+}
+
+func (client *Client) GetAccessToken(request *GetUserAccessTokenRequest, runtime *RuntimeOptions) (*AccessTokenResponse, error) {
+	err := client.Validator(request)
+	if err != nil {
+		return nil, err
+	}
+	err = client.Validator(runtime)
+	if err != nil {
+		return nil, err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
+		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
+		"noProxy":        tea.GetStringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.GetBoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+		},
+		"backoff": map[string]interface{}{
+			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+		},
+		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &AccessTokenResponse{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, err = func() (*AccessTokenResponse, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, err := client.GetAccessKeyId()
+			if err != nil {
+				return nil, err
+			}
+			accessKeySecret, err := client.GetAccessKeySecret()
+			if err != nil {
+				return nil, err
+			}
+			accessToken, err := client.GetSysAccessToken()
+			if err != nil {
+				return nil, err
+			}
+			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Method = "POST"
+			request_.Pathname = "/v2/user/get_access_token"
+			request_.Headers = map[string]string{
+				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"content-type": "application/json; charset=utf-8",
+			}
+			if client.NotEmpty(accessToken) {
+				request_.Headers["authorization"] = "Bearer " + accessToken
+			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
+				request_.Headers["date"] = client.GetRFC2616Date()
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+			}
+
+			request_.Body = client.ToJSONString(request)
+			response_, err := tea.DoRequest(request_, _runtime)
+			if err != nil {
+				return nil, err
+			}
+
+			if client.IsStatusCode(response_, 200) {
+				_result := &AccessTokenResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, client.ReadAsJSON(response_)), &_result)
@@ -11214,7 +11377,7 @@ func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeO
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -11327,7 +11490,7 @@ func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeO
 			if err != nil {
 				return err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return err
 			}
@@ -11437,7 +11600,7 @@ func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -11551,7 +11714,7 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -11665,7 +11828,7 @@ func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOpti
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -11779,7 +11942,7 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *Runtime
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -11893,7 +12056,7 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeO
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -12007,7 +12170,7 @@ func (client *Client) CompleteFile(request *OSSCompleteFileRequest, runtime *Run
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -12121,7 +12284,7 @@ func (client *Client) CopyFile(request *OSSCopyFileRequest, runtime *RuntimeOpti
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -12235,7 +12398,7 @@ func (client *Client) CreateFile(request *OSSCreateFileRequest, runtime *Runtime
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -12348,7 +12511,7 @@ func (client *Client) DeleteFile(request *OSSDeleteFileRequest, runtime *Runtime
 			if err != nil {
 				return err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return err
 			}
@@ -12458,7 +12621,7 @@ func (client *Client) GetFile(request *OSSGetFileRequest, runtime *RuntimeOption
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -12572,7 +12735,7 @@ func (client *Client) GetDownloadUrl(request *OSSGetDownloadUrlRequest, runtime 
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -12686,7 +12849,7 @@ func (client *Client) GetUploadUrl(request *OSSGetUploadUrlRequest, runtime *Run
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -12800,7 +12963,7 @@ func (client *Client) ListFile(request *OSSListFileRequest, runtime *RuntimeOpti
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -12914,7 +13077,7 @@ func (client *Client) ListUploadedParts(request *OSSListUploadedPartRequest, run
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -13028,7 +13191,7 @@ func (client *Client) MoveFile(request *OSSMoveFileRequest, runtime *RuntimeOpti
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -13142,7 +13305,7 @@ func (client *Client) CreateShare(request *CreateShareRequest, runtime *RuntimeO
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -13255,7 +13418,7 @@ func (client *Client) DeleteShare(request *DeleteShareRequest, runtime *RuntimeO
 			if err != nil {
 				return err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return err
 			}
@@ -13365,7 +13528,7 @@ func (client *Client) GetShare(request *GetShareRequest, runtime *RuntimeOptions
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -13390,6 +13553,14 @@ func (client *Client) GetShare(request *GetShareRequest, runtime *RuntimeOptions
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
+			}
+
+			if client.IsStatusCode(response_, 200) {
+				_result := &GetShareResponse{}
+				err = tea.Convert(tea.ToMap(map[string]interface{}{
+					"requestId": response_.Headers["x-ca-request-id"],
+				}, client.ReadAsJSON(response_)), &_result)
+				return _result, err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
@@ -13471,7 +13642,7 @@ func (client *Client) ListShare(request *ListShareRequest, runtime *RuntimeOptio
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -13585,7 +13756,7 @@ func (client *Client) UpdateShare(request *UpdateShareRequest, runtime *RuntimeO
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -13649,7 +13820,7 @@ func (client *Client) UpdateShare(request *UpdateShareRequest, runtime *RuntimeO
 	return _resp, err
 }
 
-func (client *Client) ListStorage(request *ListStorageRequest, runtime *RuntimeOptions) (*ListStorageResponse, error) {
+func (client *Client) ListStorefile(request *ListStoreFileRequest, runtime *RuntimeOptions) (*ListStoreFileResponse, error) {
 	err := client.Validator(request)
 	if err != nil {
 		return nil, err
@@ -13680,7 +13851,7 @@ func (client *Client) ListStorage(request *ListStorageRequest, runtime *RuntimeO
 		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
 	}
 
-	_resp := &ListStorageResponse{}
+	_resp := &ListStoreFileResponse{}
 	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
 		if _retryTimes > 0 {
 			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
@@ -13689,7 +13860,7 @@ func (client *Client) ListStorage(request *ListStorageRequest, runtime *RuntimeO
 			}
 		}
 
-		_resp, err = func() (*ListStorageResponse, error) {
+		_resp, err = func() (*ListStoreFileResponse, error) {
 			request_ := tea.NewRequest()
 			accesskeyId, err := client.GetAccessKeyId()
 			if err != nil {
@@ -13699,13 +13870,13 @@ func (client *Client) ListStorage(request *ListStorageRequest, runtime *RuntimeO
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/osspath/storage/list"
+			request_.Pathname = "/v2/osspath/store_file/list"
 			request_.Headers = map[string]string{
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
@@ -13727,121 +13898,7 @@ func (client *Client) ListStorage(request *ListStorageRequest, runtime *RuntimeO
 			}
 
 			if client.IsStatusCode(response_, 200) {
-				_result := &ListStorageResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
-					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
-				return _result, err
-			}
-
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
-					"data": map[string]interface{}{
-						"requestId":     response_.Headers["x-ca-request-id"],
-						"statusCode":    response_.StatusCode,
-						"statusMessage": response_.StatusMessage,
-					},
-					"message": response_.Headers["x-ca-error-message"],
-				})
-				return nil, err
-			}
-
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
-				"data": map[string]interface{}{
-					"requestId":     response_.Headers["x-ca-request-id"],
-					"statusCode":    response_.StatusCode,
-					"statusMessage": response_.StatusMessage,
-				},
-			}, client.ReadAsJSON(response_)))
-			return nil, err
-		}()
-		if !tea.Retryable(err) {
-			break
-		}
-	}
-
-	return _resp, err
-}
-
-func (client *Client) ListStoragefile(request *ListStorageFileRequest, runtime *RuntimeOptions) (*ListStorageFileResponse, error) {
-	err := client.Validator(request)
-	if err != nil {
-		return nil, err
-	}
-	err = client.Validator(runtime)
-	if err != nil {
-		return nil, err
-	}
-	_runtime := map[string]interface{}{
-		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
-		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
-		},
-		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
-		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
-	}
-
-	_resp := &ListStorageFileResponse{}
-	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
-		if _retryTimes > 0 {
-			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
-			if _backoffTime > 0 {
-				tea.Sleep(_backoffTime)
-			}
-		}
-
-		_resp, err = func() (*ListStorageFileResponse, error) {
-			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
-			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
-			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
-			}
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
-			request_.Method = "POST"
-			request_.Pathname = "/v2/osspath/storage_file/list"
-			request_.Headers = map[string]string{
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
-				"content-type": "application/json; charset=utf-8",
-			}
-			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
-				request_.Headers["accept"] = "application/json"
-				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
-				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
-			}
-
-			request_.Body = client.ToJSONString(request)
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
-			}
-
-			if client.IsStatusCode(response_, 200) {
-				_result := &ListStorageFileResponse{}
+				_result := &ListStoreFileResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, client.ReadAsJSON(response_)), &_result)
@@ -13927,7 +13984,7 @@ func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOpt
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -14040,7 +14097,7 @@ func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOpt
 			if err != nil {
 				return err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return err
 			}
@@ -14150,7 +14207,7 @@ func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) 
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -14264,7 +14321,7 @@ func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOption
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -14378,7 +14435,7 @@ func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOpt
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -14492,7 +14549,7 @@ func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOpt
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetAccessToken()
+			accessToken, err := client.GetSysAccessToken()
 			if err != nil {
 				return nil, err
 			}
