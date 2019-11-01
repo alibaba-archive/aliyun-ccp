@@ -3553,7 +3553,9 @@ example', x-go-name='UserID'),
   }
 
   /**
-   * 可以指定 Drive 类型来创建 Drive
+   * 支持normal和large两种drive，
+large类型的drive用于文件数多的场景，不支持list操作，
+当drive的文件数量大于1亿时，建议使用large类型。
    * @tags drive
    * @error InvalidParameter The input parameter {parameter_name} is not valid.
    * @error AccessTokenInvalid AccessToken is invalid. {message}
