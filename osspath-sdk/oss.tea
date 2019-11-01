@@ -14,7 +14,7 @@ module Client {
   type @getSignature = ($Request): string
   type @default = (string, string): string
   type @defaultNumber = (number, number): number
-  type @getSysAccessToken = async (): string
+  type @getAccessToken = async (): string
   type @getAccessKeyId = async (): string
   type @getAccessKeySecret = async (): string
 
@@ -2326,7 +2326,7 @@ example', x-go-name='UserID'),
   api cancelLink(request: CancelLinkRequest, runtime: RuntimeOptions): AccountAccessTokenResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/cancel_link`;
@@ -2404,7 +2404,7 @@ example', x-go-name='UserID'),
   api confirmLink(request: ConfirmLinkRequest, runtime: RuntimeOptions): AccountAccessTokenResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/confirm_link`;
@@ -2481,7 +2481,7 @@ example', x-go-name='UserID'),
   api changePassword(request: DefaultChangePasswordRequest, runtime: RuntimeOptions): void  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/default/change_password`;
@@ -2555,7 +2555,7 @@ example', x-go-name='UserID'),
   api setPassword(request: DefaultSetPasswordRequest, runtime: RuntimeOptions): void  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/default/set_password`;
@@ -2630,7 +2630,7 @@ example', x-go-name='UserID'),
   api getAccessTokenByLinkInfo(request: GetAccessTokenByLinkInfoRequest, runtime: RuntimeOptions): AccountAccessTokenResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/get_access_token_by_link_info`;
@@ -2707,7 +2707,7 @@ example', x-go-name='UserID'),
   api getCaptcha(request: GetCaptchaRequest, runtime: RuntimeOptions): Captcha  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/get_captcha`;
@@ -2785,7 +2785,7 @@ example', x-go-name='UserID'),
   api getLinkInfo(request: GetByLinkInfoRequest, runtime: RuntimeOptions): LinkInfoResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/get_link_info`;
@@ -2862,7 +2862,7 @@ example', x-go-name='UserID'),
   api getLinkInfoByUserId(request: GetLinkInfoByUserIDRequest, runtime: RuntimeOptions): LinkInfoListResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/get_link_info_by_user_id`;
@@ -2941,7 +2941,7 @@ example', x-go-name='UserID'),
   api link(request: AccountLinkRequest, runtime: RuntimeOptions): AccountAccessTokenResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/link`;
@@ -3019,7 +3019,7 @@ example', x-go-name='UserID'),
   api checkExist(request: MobileCheckExistRequest, runtime: RuntimeOptions): MobileCheckExistResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/mobile/check_exist`;
@@ -3097,7 +3097,7 @@ example', x-go-name='UserID'),
   api login(request: MobileLoginRequest, runtime: RuntimeOptions): AccountAccessTokenResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/mobile/login`;
@@ -3175,7 +3175,7 @@ example', x-go-name='UserID'),
   api register(request: MobileRegisterRequest, runtime: RuntimeOptions): AccountAccessTokenResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/mobile/register`;
@@ -3252,7 +3252,7 @@ example', x-go-name='UserID'),
   api mobileSendSmsCode(request: MobileSendSmsCodeRequest, runtime: RuntimeOptions): MobileSendSmsCodeResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/mobile/send_sms_code`;
@@ -3329,7 +3329,7 @@ example', x-go-name='UserID'),
   api token(request: TokenRequest, runtime: RuntimeOptions): AccountAccessTokenResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/account/token`;
@@ -3406,7 +3406,7 @@ example', x-go-name='UserID'),
   api adminListStores(request: AdminListStoresRequest, runtime: RuntimeOptions): ListStoresResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/domain/list_stores`;
@@ -3474,7 +3474,7 @@ example', x-go-name='UserID'),
   }
 
   /**
-   * This will get a user info
+   * 获取用户的accessToken
    * @tags admin
    * @error undefined undefined
    * @error undefined undefined
@@ -3482,10 +3482,10 @@ example', x-go-name='UserID'),
    * @error undefined undefined
    * @error undefined undefined
    */
-  api getAccessToken(request: GetUserAccessTokenRequest, runtime: RuntimeOptions): AccessTokenResponse  {
+  api getUserAccessToken(request: GetUserAccessTokenRequest, runtime: RuntimeOptions): AccessTokenResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/user/get_access_token`;
@@ -3566,7 +3566,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api createDrive(request: CreateDriveRequest, runtime: RuntimeOptions): CreateDriveResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/drive/create`;
@@ -3645,7 +3645,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api deleteDrive(request: DeleteDriveRequest, runtime: RuntimeOptions): void  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/drive/delete`;
@@ -3722,7 +3722,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api getDrive(request: GetDriveRequest, runtime: RuntimeOptions): GetDriveResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/drive/get`;
@@ -3803,7 +3803,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api getDefaultDrive(request: GetDefaultDriveRequest, runtime: RuntimeOptions): GetDriveResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/drive/get_default_drive`;
@@ -3882,7 +3882,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api listDrives(request: ListDriveRequest, runtime: RuntimeOptions): ListDriveResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/drive/list`;
@@ -3961,7 +3961,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api listMyDrives(request: ListMyDriveRequest, runtime: RuntimeOptions): ListDriveResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/drive/list_my_drives`;
@@ -4041,7 +4041,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api updateDrive(request: UpdateDriveRequest, runtime: RuntimeOptions): UpdateDriveResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/drive/update`;
@@ -4121,7 +4121,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api completeFile(request: OSSCompleteFileRequest, runtime: RuntimeOptions): OSSCompleteFileResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/osspath/file/complete`;
@@ -4201,7 +4201,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api copyFile(request: OSSCopyFileRequest, runtime: RuntimeOptions): OSSCopyFileResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/osspath/file/copy`;
@@ -4282,7 +4282,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api createFile(request: OSSCreateFileRequest, runtime: RuntimeOptions): OSSCreateFileResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/osspath/file/create`;
@@ -4362,7 +4362,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api deleteFile(request: OSSDeleteFileRequest, runtime: RuntimeOptions): void  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/osspath/file/delete`;
@@ -4439,7 +4439,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api getFile(request: OSSGetFileRequest, runtime: RuntimeOptions): OSSGetFileResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/osspath/file/get`;
@@ -4519,7 +4519,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api getDownloadUrl(request: OSSGetDownloadUrlRequest, runtime: RuntimeOptions): OSSGetDownloadUrlResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/osspath/file/get_download_url`;
@@ -4599,7 +4599,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api getUploadUrl(request: OSSGetUploadUrlRequest, runtime: RuntimeOptions): OSSGetUploadUrlResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/osspath/file/get_upload_url`;
@@ -4679,7 +4679,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api listFile(request: OSSListFileRequest, runtime: RuntimeOptions): OSSListFileResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/osspath/file/list`;
@@ -4759,7 +4759,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api listUploadedParts(request: OSSListUploadedPartRequest, runtime: RuntimeOptions): OSSListUploadedPartResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/osspath/file/list_uploaded_parts`;
@@ -4839,7 +4839,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api moveFile(request: OSSMoveFileRequest, runtime: RuntimeOptions): OSSMoveFileResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/osspath/file/move`;
@@ -4919,7 +4919,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api createShare(request: CreateShareRequest, runtime: RuntimeOptions): CreateShareResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/osspath/share/create`;
@@ -4998,7 +4998,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api deleteShare(request: DeleteShareRequest, runtime: RuntimeOptions): void  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/osspath/share/delete`;
@@ -5075,7 +5075,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api getShare(request: GetShareRequest, runtime: RuntimeOptions): GetShareResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/osspath/share/get`;
@@ -5154,7 +5154,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api listShare(request: ListShareRequest, runtime: RuntimeOptions): ListShareResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/osspath/share/list`;
@@ -5234,7 +5234,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api updateShare(request: UpdateShareRequest, runtime: RuntimeOptions): UpdateShareResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/osspath/share/update`;
@@ -5314,7 +5314,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api listStorefile(request: ListStoreFileRequest, runtime: RuntimeOptions): ListStoreFileResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/osspath/store_file/list`;
@@ -5392,7 +5392,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api createUser(request: CreateUserRequest, runtime: RuntimeOptions): CreateUserResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/user/create`;
@@ -5470,7 +5470,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api deleteUser(request: DeleteUserRequest, runtime: RuntimeOptions): void  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/user/delete`;
@@ -5546,7 +5546,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api getUser(request: GetUserRequest, runtime: RuntimeOptions): GetUserResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/user/get`;
@@ -5624,7 +5624,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api listUsers(request: ListUserRequest, runtime: RuntimeOptions): ListUserResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/user/list`;
@@ -5702,7 +5702,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api searchUser(request: SearchUserRequest, runtime: RuntimeOptions): ListUserResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/user/search`;
@@ -5781,7 +5781,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
   api updateUser(request: UpdateUserRequest, runtime: RuntimeOptions): UpdateUserResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getSysAccessToken();
+    var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/user/update`;

@@ -9335,7 +9335,7 @@ func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOpt
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -9449,7 +9449,7 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeO
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -9562,7 +9562,7 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runt
 			if err != nil {
 				return err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return err
 			}
@@ -9671,7 +9671,7 @@ func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *R
 			if err != nil {
 				return err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return err
 			}
@@ -9781,7 +9781,7 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -9895,7 +9895,7 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOpt
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -10009,7 +10009,7 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *Runtim
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -10123,7 +10123,7 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, r
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -10237,7 +10237,7 @@ func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions)
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -10351,7 +10351,7 @@ func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *Runt
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -10465,7 +10465,7 @@ func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -10579,7 +10579,7 @@ func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeO
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -10693,7 +10693,7 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runti
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -10807,7 +10807,7 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (*Ac
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -10921,7 +10921,7 @@ func (client *Client) AdminListStores(request *AdminListStoresRequest, runtime *
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -10985,7 +10985,7 @@ func (client *Client) AdminListStores(request *AdminListStoresRequest, runtime *
 	return _resp, err
 }
 
-func (client *Client) GetAccessToken(request *GetUserAccessTokenRequest, runtime *RuntimeOptions) (*AccessTokenResponse, error) {
+func (client *Client) GetUserAccessToken(request *GetUserAccessTokenRequest, runtime *RuntimeOptions) (*AccessTokenResponse, error) {
 	err := client.Validator(request)
 	if err != nil {
 		return nil, err
@@ -11035,7 +11035,7 @@ func (client *Client) GetAccessToken(request *GetUserAccessTokenRequest, runtime
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -11149,7 +11149,7 @@ func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeO
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -11262,7 +11262,7 @@ func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeO
 			if err != nil {
 				return err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return err
 			}
@@ -11372,7 +11372,7 @@ func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -11486,7 +11486,7 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -11600,7 +11600,7 @@ func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOpti
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -11714,7 +11714,7 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *Runtime
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -11828,7 +11828,7 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeO
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -11942,7 +11942,7 @@ func (client *Client) CompleteFile(request *OSSCompleteFileRequest, runtime *Run
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -12056,7 +12056,7 @@ func (client *Client) CopyFile(request *OSSCopyFileRequest, runtime *RuntimeOpti
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -12170,7 +12170,7 @@ func (client *Client) CreateFile(request *OSSCreateFileRequest, runtime *Runtime
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -12283,7 +12283,7 @@ func (client *Client) DeleteFile(request *OSSDeleteFileRequest, runtime *Runtime
 			if err != nil {
 				return err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return err
 			}
@@ -12393,7 +12393,7 @@ func (client *Client) GetFile(request *OSSGetFileRequest, runtime *RuntimeOption
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -12507,7 +12507,7 @@ func (client *Client) GetDownloadUrl(request *OSSGetDownloadUrlRequest, runtime 
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -12621,7 +12621,7 @@ func (client *Client) GetUploadUrl(request *OSSGetUploadUrlRequest, runtime *Run
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -12735,7 +12735,7 @@ func (client *Client) ListFile(request *OSSListFileRequest, runtime *RuntimeOpti
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -12849,7 +12849,7 @@ func (client *Client) ListUploadedParts(request *OSSListUploadedPartRequest, run
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -12963,7 +12963,7 @@ func (client *Client) MoveFile(request *OSSMoveFileRequest, runtime *RuntimeOpti
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -13077,7 +13077,7 @@ func (client *Client) CreateShare(request *CreateShareRequest, runtime *RuntimeO
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -13190,7 +13190,7 @@ func (client *Client) DeleteShare(request *DeleteShareRequest, runtime *RuntimeO
 			if err != nil {
 				return err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return err
 			}
@@ -13300,7 +13300,7 @@ func (client *Client) GetShare(request *GetShareRequest, runtime *RuntimeOptions
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -13414,7 +13414,7 @@ func (client *Client) ListShare(request *ListShareRequest, runtime *RuntimeOptio
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -13528,7 +13528,7 @@ func (client *Client) UpdateShare(request *UpdateShareRequest, runtime *RuntimeO
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -13642,7 +13642,7 @@ func (client *Client) ListStorefile(request *ListStoreFileRequest, runtime *Runt
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -13756,7 +13756,7 @@ func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOpt
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -13869,7 +13869,7 @@ func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOpt
 			if err != nil {
 				return err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return err
 			}
@@ -13979,7 +13979,7 @@ func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) 
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -14093,7 +14093,7 @@ func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOption
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -14207,7 +14207,7 @@ func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOpt
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
@@ -14321,7 +14321,7 @@ func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOpt
 			if err != nil {
 				return nil, err
 			}
-			accessToken, err := client.GetSysAccessToken()
+			accessToken, err := client.GetAccessToken()
 			if err != nil {
 				return nil, err
 			}
