@@ -167,7 +167,7 @@ func (client *BaseClient) GetAccessKeyId() (string, error) {
 	return accesskey, nil
 }
 
-func (client *BaseClient) GetAccessToken() (string, error) {
+func (client *BaseClient) GetSysAccessToken() (string, error) {
 	if client.accessToken == nil {
 		return "", nil
 	}
