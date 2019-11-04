@@ -123,13 +123,15 @@ func Test_IsStatusCode(t *testing.T) {
 }
 
 func Test_ToQuery(t *testing.T) {
-	input := map[string]string{
-		"key":   "ccp",
-		"value": "ok",
+	input := map[string]interface{}{
+		"key":    "ccp",
+		"value":  "ok",
+		"number": 1,
 	}
 	out := client.ToQuery(input)
 	utils.AssertEqual(t, "ccp", out["key"])
 	utils.AssertEqual(t, "ok", out["value"])
+	utils.AssertEqual(t, 1, out["number"])
 }
 
 func Test_ReadAsJSON(t *testing.T) {
