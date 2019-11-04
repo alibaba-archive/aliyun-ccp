@@ -33,7 +33,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         public string Marker { get; set; }
 
         [NameInMap("parent_file_id")]
-        [Validation(Required=true, MaxLength=50, Pattern="[a-z0-9.-_]{1, 50}")]
+        [Validation(Required=true, MaxLength=50, Pattern="[a-z0-9.-_]{1,50}")]
         public string ParentFileId { get; set; }
 
         [NameInMap("parent_file_path")]

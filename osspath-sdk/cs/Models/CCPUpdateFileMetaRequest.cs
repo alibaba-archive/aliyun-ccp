@@ -8,6 +8,10 @@ using Tea;
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
     public class CCPUpdateFileMetaRequest : TeaModel {
+        [NameInMap("custom_index_key")]
+        [Validation(Required=false)]
+        public string CustomIndexKey { get; set; }
+
         [NameInMap("description")]
         [Validation(Required=false, MaxLength=1024)]
         public string Description { get; set; }
@@ -17,12 +21,16 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         public string DriveId { get; set; }
 
         [NameInMap("file_id")]
-        [Validation(Required=true, MaxLength=50, Pattern="[a-z0-9.-_]{1, 50}")]
+        [Validation(Required=true, MaxLength=50, Pattern="[a-z0-9.-_]{1,50}")]
         public string FileId { get; set; }
 
         [NameInMap("hidden")]
         [Validation(Required=false)]
         public bool Hidden { get; set; }
+
+        [NameInMap("labels")]
+        [Validation(Required=false)]
+        public List<string> Labels { get; set; }
 
         [NameInMap("meta")]
         [Validation(Required=false)]
@@ -35,10 +43,6 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         [NameInMap("starred")]
         [Validation(Required=false)]
         public bool Starred { get; set; }
-
-        [NameInMap("tags")]
-        [Validation(Required=false)]
-        public object Tags { get; set; }
 
     }
 

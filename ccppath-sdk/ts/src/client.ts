@@ -3,20 +3,20 @@ import * as $tea from '@alicloud/tea-typescript';
 import BaseClient from '@alicloud/ccp-baseclient';
 
 export class RuntimeOptions extends $tea.Model {
-  autoretry: boolean
-  ignoreSSL: boolean
-  maxAttempts: number
-  backoffPolicy: string
-  backoffPeriod: number
-  readTimeout: number
-  connectTimeout: number
-  httpProxy: string
-  httpsProxy: string
-  noProxy: string
-  maxIdleConns: number
-  localAddr: string
-  socks5Proxy: string
-  socks5NetWork: string
+  autoretry?: boolean
+  ignoreSSL?: boolean
+  maxAttempts?: number
+  backoffPolicy?: string
+  backoffPeriod?: number
+  readTimeout?: number
+  connectTimeout?: number
+  httpProxy?: string
+  httpsProxy?: string
+  noProxy?: string
+  maxIdleConns?: number
+  localAddr?: string
+  socks5Proxy?: string
+  socks5NetWork?: string
   static names(): { [key: string]: string } {
     return {
       autoretry: 'autoretry',
@@ -62,7 +62,7 @@ export class RuntimeOptions extends $tea.Model {
 
 export class Config extends $tea.Model {
   endpoint?: string
-  domainId?: string
+  domainId: string
   protocol?: string
   credentialType?: string
   securityToken?: string
