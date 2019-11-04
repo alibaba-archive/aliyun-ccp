@@ -9,20 +9,20 @@ import (
 )
 
 type RuntimeOptions struct {
-	Autoretry      *bool   `json:"autoretry" xml:"autoretry" require:"true"`
-	IgnoreSSL      *bool   `json:"ignoreSSL" xml:"ignoreSSL" require:"true"`
-	MaxAttempts    *int    `json:"maxAttempts" xml:"maxAttempts" require:"true"`
-	BackoffPolicy  *string `json:"backoffPolicy" xml:"backoffPolicy" require:"true"`
-	BackoffPeriod  *int    `json:"backoffPeriod" xml:"backoffPeriod" require:"true"`
-	ReadTimeout    *int    `json:"readTimeout" xml:"readTimeout" require:"true"`
-	ConnectTimeout *int    `json:"connectTimeout" xml:"connectTimeout" require:"true"`
-	HttpProxy      *string `json:"httpProxy" xml:"httpProxy" require:"true"`
-	HttpsProxy     *string `json:"httpsProxy" xml:"httpsProxy" require:"true"`
-	NoProxy        *string `json:"noProxy" xml:"noProxy" require:"true"`
-	MaxIdleConns   *int    `json:"maxIdleConns" xml:"maxIdleConns" require:"true"`
-	LocalAddr      *string `json:"localAddr" xml:"localAddr" require:"true"`
-	Socks5Proxy    *string `json:"socks5Proxy" xml:"socks5Proxy" require:"true"`
-	Socks5NetWork  *string `json:"socks5NetWork" xml:"socks5NetWork" require:"true"`
+	Autoretry      *bool   `json:"autoretry" xml:"autoretry"`
+	IgnoreSSL      *bool   `json:"ignoreSSL" xml:"ignoreSSL"`
+	MaxAttempts    *int    `json:"maxAttempts" xml:"maxAttempts"`
+	BackoffPolicy  *string `json:"backoffPolicy" xml:"backoffPolicy"`
+	BackoffPeriod  *int    `json:"backoffPeriod" xml:"backoffPeriod"`
+	ReadTimeout    *int    `json:"readTimeout" xml:"readTimeout"`
+	ConnectTimeout *int    `json:"connectTimeout" xml:"connectTimeout"`
+	HttpProxy      *string `json:"httpProxy" xml:"httpProxy"`
+	HttpsProxy     *string `json:"httpsProxy" xml:"httpsProxy"`
+	NoProxy        *string `json:"noProxy" xml:"noProxy"`
+	MaxIdleConns   *int    `json:"maxIdleConns" xml:"maxIdleConns"`
+	LocalAddr      *string `json:"localAddr" xml:"localAddr"`
+	Socks5Proxy    *string `json:"socks5Proxy" xml:"socks5Proxy"`
+	Socks5NetWork  *string `json:"socks5NetWork" xml:"socks5NetWork"`
 }
 
 func (s RuntimeOptions) String() string {
@@ -105,7 +105,7 @@ func (s *RuntimeOptions) SetSocks5NetWork(v string) *RuntimeOptions {
 
 type Config struct {
 	Endpoint        *string `json:"endpoint" xml:"endpoint"`
-	DomainId        *string `json:"domainId" xml:"domainId"`
+	DomainId        *string `json:"domainId" xml:"domainId" require:"true"`
 	Protocol        *string `json:"protocol" xml:"protocol"`
 	CredentialType  *string `json:"credentialType" xml:"credentialType"`
 	SecurityToken   *string `json:"securityToken" xml:"securityToken"`

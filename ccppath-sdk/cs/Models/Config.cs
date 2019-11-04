@@ -13,7 +13,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         public string Endpoint { get; set; }
 
         [NameInMap("domainId")]
-        [Validation(Required=false)]
+        [Validation(Required=true)]
         public string DomainId { get; set; }
 
         [NameInMap("protocol")]

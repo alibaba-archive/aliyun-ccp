@@ -21,7 +21,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         public string FileName { get; set; }
 
         [NameInMap("file_path")]
-        [Validation(Required=true, MaxLength=50, Pattern="[a-z0-9.-_]{1, 50}")]
+        [Validation(Required=true, MaxLength=50, Pattern="[a-z0-9.-_]{1,50}")]
         public string FilePath { get; set; }
 
         [NameInMap("share_id")]

@@ -3,20 +3,20 @@ import * as $tea from '@alicloud/tea-typescript';
 import BaseClient from '@alicloud/ccp-baseclient';
 
 export class RuntimeOptions extends $tea.Model {
-  autoretry: boolean
-  ignoreSSL: boolean
-  maxAttempts: number
-  backoffPolicy: string
-  backoffPeriod: number
-  readTimeout: number
-  connectTimeout: number
-  httpProxy: string
-  httpsProxy: string
-  noProxy: string
-  maxIdleConns: number
-  localAddr: string
-  socks5Proxy: string
-  socks5NetWork: string
+  autoretry?: boolean
+  ignoreSSL?: boolean
+  maxAttempts?: number
+  backoffPolicy?: string
+  backoffPeriod?: number
+  readTimeout?: number
+  connectTimeout?: number
+  httpProxy?: string
+  httpsProxy?: string
+  noProxy?: string
+  maxIdleConns?: number
+  localAddr?: string
+  socks5Proxy?: string
+  socks5NetWork?: string
   static names(): { [key: string]: string } {
     return {
       autoretry: 'autoretry',
@@ -62,7 +62,7 @@ export class RuntimeOptions extends $tea.Model {
 
 export class Config extends $tea.Model {
   endpoint?: string
-  domainId?: string
+  domainId: string
   protocol?: string
   credentialType?: string
   securityToken?: string
@@ -4353,6 +4353,59 @@ export class BaseMoveFileRequest extends $tea.Model {
   }
 }
 
+export class BatchSubRequest extends $tea.Model {
+  body?: object
+  headers?: object
+  id: string
+  method: string
+  url: string
+  static names(): { [key: string]: string } {
+    return {
+      body: 'body',
+      headers: 'headers',
+      id: 'id',
+      method: 'method',
+      url: 'url',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      body: 'object',
+      headers: 'object',
+      id: 'string',
+      method: 'string',
+      url: 'string',
+    };
+  }
+
+  constructor(map: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class CCPBatchRequest extends $tea.Model {
+  requests: BatchSubRequest[]
+  resource: string
+  static names(): { [key: string]: string } {
+    return {
+      requests: 'requests',
+      resource: 'resource',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      requests: { 'type': 'array', 'itemType': BatchSubRequest },
+      resource: 'string',
+    };
+  }
+
+  constructor(map: { [key: string]: any }) {
+    super(map);
+  }
+}
+
 export class CCPCompleteFileRequest extends $tea.Model {
   driveId: string
   partInfoList?: UploadPartInfo[]
@@ -4382,18 +4435,18 @@ export class CCPCompleteFileRequest extends $tea.Model {
 }
 
 export class CCPCopyFileRequest extends $tea.Model {
+  autoRename?: boolean
   driveId: string
   fileId: string
   newName: string
-  overwrite?: boolean
   toDriveId: string
   toParentFileId: string
   static names(): { [key: string]: string } {
     return {
+      autoRename: 'auto_rename',
       driveId: 'drive_id',
       fileId: 'file_id',
       newName: 'new_name',
-      overwrite: 'overwrite',
       toDriveId: 'to_drive_id',
       toParentFileId: 'to_parent_file_id',
     };
@@ -4401,10 +4454,10 @@ export class CCPCopyFileRequest extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
+      autoRename: 'boolean',
       driveId: 'string',
       fileId: 'string',
       newName: 'string',
-      overwrite: 'boolean',
       toDriveId: 'string',
       toParentFileId: 'string',
     };
@@ -4422,15 +4475,16 @@ export class CCPCreateFileRequest extends $tea.Model {
   partInfoList?: UploadPartInfo[]
   size: number
   type: string
+  autoRename?: boolean
   contentHash?: string
   contentHashName?: string
   description?: string
   driveId: string
   hidden?: boolean
+  labels?: string[]
   meta?: string
   parentFileId: string
   preHash?: string
-  tags?: object
   static names(): { [key: string]: string } {
     return {
       contentMd5: 'content_md5',
@@ -4439,15 +4493,16 @@ export class CCPCreateFileRequest extends $tea.Model {
       partInfoList: 'part_info_list',
       size: 'size',
       type: 'type',
+      autoRename: 'auto_rename',
       contentHash: 'content_hash',
       contentHashName: 'content_hash_name',
       description: 'description',
       driveId: 'drive_id',
       hidden: 'hidden',
+      labels: 'labels',
       meta: 'meta',
       parentFileId: 'parent_file_id',
       preHash: 'pre_hash',
-      tags: 'tags',
     };
   }
 
@@ -4459,15 +4514,16 @@ export class CCPCreateFileRequest extends $tea.Model {
       partInfoList: { 'type': 'array', 'itemType': UploadPartInfo },
       size: 'number',
       type: 'string',
+      autoRename: 'boolean',
       contentHash: 'string',
       contentHashName: 'string',
       description: 'string',
       driveId: 'string',
       hidden: 'boolean',
+      labels: { 'type': 'array', 'itemType': 'string' },
       meta: 'string',
       parentFileId: 'string',
       preHash: 'string',
-      tags: 'object',
     };
   }
 
@@ -4629,55 +4685,6 @@ export class CCPGetUploadUrlRequest extends $tea.Model {
   }
 }
 
-export class CCPListFileRequest extends $tea.Model {
-  driveId: string
-  imageThumbnailProcess?: string
-  imageUrlProcess?: string
-  limit?: number
-  marker?: string
-  category?: string
-  orderBy?: string
-  orderDirection?: string
-  parentFileId: string
-  status?: string
-  type?: string
-  static names(): { [key: string]: string } {
-    return {
-      driveId: 'drive_id',
-      imageThumbnailProcess: 'image_thumbnail_process',
-      imageUrlProcess: 'image_url_process',
-      limit: 'limit',
-      marker: 'marker',
-      category: 'category',
-      orderBy: 'order_by',
-      orderDirection: 'order_direction',
-      parentFileId: 'parent_file_id',
-      status: 'status',
-      type: 'type',
-    };
-  }
-
-  static types(): { [key: string]: any } {
-    return {
-      driveId: 'string',
-      imageThumbnailProcess: 'string',
-      imageUrlProcess: 'string',
-      limit: 'number',
-      marker: 'string',
-      category: 'string',
-      orderBy: 'string',
-      orderDirection: 'string',
-      parentFileId: 'string',
-      status: 'string',
-      type: 'string',
-    };
-  }
-
-  constructor(map: { [key: string]: any }) {
-    super(map);
-  }
-}
-
 export class CCPListUploadedPartRequest extends $tea.Model {
   driveId: string
   fileId: string
@@ -4778,37 +4785,40 @@ export class CCPSearchFileRequest extends $tea.Model {
 }
 
 export class CCPUpdateFileMetaRequest extends $tea.Model {
+  customIndexKey?: string
   description?: string
   driveId: string
   fileId: string
   hidden?: boolean
+  labels?: string[]
   meta?: string
   name: string
   starred?: boolean
-  tags?: object
   static names(): { [key: string]: string } {
     return {
+      customIndexKey: 'custom_index_key',
       description: 'description',
       driveId: 'drive_id',
       fileId: 'file_id',
       hidden: 'hidden',
+      labels: 'labels',
       meta: 'meta',
       name: 'name',
       starred: 'starred',
-      tags: 'tags',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
+      customIndexKey: 'string',
       description: 'string',
       driveId: 'string',
       fileId: 'string',
       hidden: 'boolean',
+      labels: { 'type': 'array', 'itemType': 'string' },
       meta: 'string',
       name: 'string',
       starred: 'boolean',
-      tags: 'object',
     };
   }
 
@@ -4858,10 +4868,8 @@ export class CopyFileRequest extends $tea.Model {
   newName: string
   overwrite?: boolean
   shareId?: string
-  toDriveId: string
   toParentFileId: string
   toParentFilePath?: string
-  toShareId?: string
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -4870,10 +4878,8 @@ export class CopyFileRequest extends $tea.Model {
       newName: 'new_name',
       overwrite: 'overwrite',
       shareId: 'share_id',
-      toDriveId: 'to_drive_id',
       toParentFileId: 'to_parent_file_id',
       toParentFilePath: 'to_parent_file_path',
-      toShareId: 'to_share_id',
     };
   }
 
@@ -4885,10 +4891,8 @@ export class CopyFileRequest extends $tea.Model {
       newName: 'string',
       overwrite: 'boolean',
       shareId: 'string',
-      toDriveId: 'string',
       toParentFileId: 'string',
       toParentFilePath: 'string',
-      toShareId: 'string',
     };
   }
 
@@ -5446,7 +5450,7 @@ export class ListShareRequest extends $tea.Model {
   }
 }
 
-export class ListStorageFileRequest extends $tea.Model {
+export class ListStoreFileRequest extends $tea.Model {
   limit?: number
   marker?: string
   parentFilePath?: string
@@ -5477,32 +5481,7 @@ export class ListStorageFileRequest extends $tea.Model {
   }
 }
 
-export class ListStorageFileResponse extends $tea.Model {
-  requestId?: string
-  items?: StoreFile[]
-  nextMarker?: string
-  static names(): { [key: string]: string } {
-    return {
-      requestId: 'requestId',
-      items: 'items',
-      nextMarker: 'next_marker',
-    };
-  }
-
-  static types(): { [key: string]: any } {
-    return {
-      requestId: 'string',
-      items: { 'type': 'array', 'itemType': StoreFile },
-      nextMarker: 'string',
-    };
-  }
-
-  constructor(map: { [key: string]: any }) {
-    super(map);
-  }
-}
-
-export class ListStorageRequest extends $tea.Model {
+export class ListStoreRequest extends $tea.Model {
   domainId?: string
   static names(): { [key: string]: string } {
     return {
@@ -5513,28 +5492,6 @@ export class ListStorageRequest extends $tea.Model {
   static types(): { [key: string]: any } {
     return {
       domainId: 'string',
-    };
-  }
-
-  constructor(map: { [key: string]: any }) {
-    super(map);
-  }
-}
-
-export class ListStorageResponse extends $tea.Model {
-  requestId?: string
-  items?: StoreItemResponse[]
-  static names(): { [key: string]: string } {
-    return {
-      requestId: 'requestId',
-      items: 'items',
-    };
-  }
-
-  static types(): { [key: string]: any } {
-    return {
-      requestId: 'string',
-      items: { 'type': 'array', 'itemType': StoreItemResponse },
     };
   }
 
@@ -7947,7 +7904,7 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getAccessToken(request: GetUserAccessTokenRequest, runtime: RuntimeOptions): Promise<AccessTokenResponse>  {
+  async getUserAccessToken(request: GetUserAccessTokenRequest, runtime: RuntimeOptions): Promise<AccessTokenResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
       readTimeout: runtime["readTimeout"],
@@ -9938,6 +9895,13 @@ export default class Client extends BaseClient {
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        if (this._isStatusCode(response_, 200)) {
+          return $tea.cast<GetShareResponse>({
+            requestId: response_.headers["x-ca-request-id"],
+            ...await this._readAsJSON(response_),
+          }, new GetShareResponse({}));
+        }
+
         if (this._notEmpty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
@@ -10162,7 +10126,7 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async listStorage(request: ListStorageRequest, runtime: RuntimeOptions): Promise<ListStorageResponse>  {
+  async listStorefile(request: ListStoreFileRequest, runtime: RuntimeOptions): Promise<ListStoreFileResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
       readTimeout: runtime["readTimeout"],
@@ -10204,7 +10168,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/osspath/storage/list`;
+        request_.pathname = `/v2/osspath/store_file/list`;
         request_.headers = {
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
@@ -10223,107 +10187,10 @@ export default class Client extends BaseClient {
         let response_ = await $tea.doAction(request_, _runtime);
 
         if (this._isStatusCode(response_, 200)) {
-          return $tea.cast<ListStorageResponse>({
+          return $tea.cast<ListStoreFileResponse>({
             requestId: response_.headers["x-ca-request-id"],
             ...await this._readAsJSON(response_),
-          }, new ListStorageResponse({}));
-        }
-
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
-          throw $tea.newError({
-            data: {
-              requestId: response_.headers["x-ca-request-id"],
-              statusCode: response_.statusCode,
-              statusMessage: response_.statusMessage,
-            },
-            message: response_.headers["x-ca-error-message"],
-          });
-        }
-
-        throw $tea.newError({
-          data: {
-            requestId: response_.headers["x-ca-request-id"],
-            statusCode: response_.statusCode,
-            statusMessage: response_.statusMessage,
-          },
-          ...await this._readAsJSON(response_),
-        });
-      } catch (ex) {
-        if ($tea.isRetryable(ex)) {
-          continue;
-        }
-        throw ex;
-      }
-    }
-
-    throw $tea.newUnretryableError(_lastRequest);
-  }
-
-  async listStoragefile(request: ListStorageFileRequest, runtime: RuntimeOptions): Promise<ListStorageFileResponse>  {
-    let _runtime : {[key: string]: any} = {
-      timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
-      retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
-      },
-      backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
-      },
-      ignoreSSL: runtime["ignoreSSL"],
-    }
-
-    let _lastRequest = null;
-    let _now = Date.now();
-    let _retryTimes = 0;
-    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
-      if (_retryTimes > 0) {
-        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
-        if (_backoffTime > 0) {
-          await $tea.sleep(_backoffTime);
-        }
-      }
-
-      _retryTimes = _retryTimes + 1;
-      try {
-        let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
-        request_.method = "POST";
-        request_.pathname = `/v2/osspath/storage_file/list`;
-        request_.headers = {
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
-          'content-type': "application/json; charset=utf-8",
-        };
-        if (this._notEmpty(accessToken)) {
-          request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
-          request_.headers["accept"] = "application/json";
-          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
-          request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
-        }
-        request_.body = this._toJSONString(request.toMap());
-        _lastRequest = request_;
-        let response_ = await $tea.doAction(request_, _runtime);
-
-        if (this._isStatusCode(response_, 200)) {
-          return $tea.cast<ListStorageFileResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
-          }, new ListStorageFileResponse({}));
+          }, new ListStoreFileResponse({}));
         }
 
         if (this._notEmpty(response_.headers["x-ca-error-message"])) {

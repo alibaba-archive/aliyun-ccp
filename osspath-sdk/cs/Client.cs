@@ -1502,7 +1502,7 @@ namespace Aliyun.SDK.CCP.OSSClient
             throw new TeaUnretryableException(_lastRequest, _lastException);
         }
 
-        public AccessTokenResponse getAccessToken(GetUserAccessTokenRequest request, RuntimeOptions runtime) {
+        public AccessTokenResponse getUserAccessToken(GetUserAccessTokenRequest request, RuntimeOptions runtime) {
             request.Validate();
             runtime.Validate();
             Dictionary<string, object> runtime_ = new Dictionary<string, object>(){
@@ -3541,6 +3541,14 @@ namespace Aliyun.SDK.CCP.OSSClient
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    if (this._isStatusCode(response_, 200)) {
+                        return TeaModel.ToObject<GetShareResponse>(TeaConverter.merge(
+                            new Dictionary<string, object>(){
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                            },
+                            this._readAsJSON(response_)
+                        ));
+                    }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
                         return TeaModel.ToObject<GetShareResponse>(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
@@ -3777,7 +3785,7 @@ namespace Aliyun.SDK.CCP.OSSClient
             throw new TeaUnretryableException(_lastRequest, _lastException);
         }
 
-        public ListStorageResponse listStorage(ListStorageRequest request, RuntimeOptions runtime) {
+        public ListStoreFileResponse listStorefile(ListStoreFileRequest request, RuntimeOptions runtime) {
             request.Validate();
             runtime.Validate();
             Dictionary<string, object> runtime_ = new Dictionary<string, object>(){
@@ -3821,7 +3829,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/osspath/storage/list";
+                    request_.Pathname = "/v2/osspath/store_file/list";
                     request_.Headers = new Dictionary<string, string>(){
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
@@ -3840,7 +3848,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<ListStorageResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<ListStoreFileResponse>(TeaConverter.merge(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -3848,7 +3856,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<ListStorageResponse>(new Dictionary<string, object>(){
+                        return TeaModel.ToObject<ListStoreFileResponse>(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3857,109 +3865,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<ListStorageResponse>(TeaConverter.merge(
-                        new Dictionary<string, object>(){
-                            {"data", new Dictionary<string, object>(){
-                                {"requestId", response_.Headers["x-ca-request-id"]},
-                                {"statusCode", response_.StatusCode},
-                                {"statusMessage", response_.StatusMessage},
-                            }},
-                        },
-                        this._readAsJSON(response_)
-                    ));
-                } catch (Exception e) {
-                    if (TeaCore.IsRetryable(e)) {
-                        _lastException = e;
-                        continue;
-                    }
-                    throw e;
-                }
-            }
-
-            throw new TeaUnretryableException(_lastRequest, _lastException);
-        }
-
-        public ListStorageFileResponse listStoragefile(ListStorageFileRequest request, RuntimeOptions runtime) {
-            request.Validate();
-            runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>(){
-                {"timeouted", "retry"},
-                {"readTimeout", runtime.ReadTimeout},
-                {"connectTimeout", runtime.ConnectTimeout},
-                {"localAddr", runtime.LocalAddr},
-                {"httpProxy", runtime.HttpProxy},
-                {"httpsProxy", runtime.HttpsProxy},
-                {"noProxy", runtime.NoProxy},
-                {"maxIdleConns", runtime.MaxIdleConns},
-                {"socks5Proxy", runtime.Socks5Proxy},
-                {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>(){
-                    {"retryable", runtime.Autoretry},
-                    {"maxAttempts", this._defaultNumber(runtime.MaxAttempts, 3)},
-                }},
-                {"backoff", new Dictionary<string, object>(){
-                    {"policy", this._default(runtime.BackoffPolicy, "no")},
-                    {"period", this._defaultNumber(runtime.BackoffPeriod, 1)},
-                }},
-                {"ignoreSSL", runtime.IgnoreSSL},
-            };
-
-            TeaRequest _lastRequest = null;
-            Exception _lastException = null;
-            long _now = System.DateTime.Now.Millisecond;
-            int _retryTimes = 0;
-            while (TeaCore.AllowRetry((Dictionary<string, object>) runtime_["retry"], _retryTimes, _now)) {
-                if (_retryTimes > 0) {
-                    int backoffTime = TeaCore.GetBackoffTime((Dictionary<string, object>)runtime_["backoff"], _retryTimes);
-                    if (backoffTime > 0) {
-                        TeaCore.Sleep(backoffTime);
-                    }
-                }
-                _retryTimes = _retryTimes + 1;
-                try {
-                    TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = this._getAccessKeyId();
-                    string accessKeySecret = this._getAccessKeySecret();
-                    string accessToken = this._getAccessToken();
-                    request_.Protocol = this._getProtocol(_protocol, "https");
-                    request_.Method = "POST";
-                    request_.Pathname = "/v2/osspath/storage_file/list";
-                    request_.Headers = new Dictionary<string, string>(){
-                        {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
-                    if (this._notEmpty(accessToken)) {
-                        request_.Headers["authorization"] = "Bearer " + accessToken;
-                    } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-                        request_.Headers["date"] = this._getRFC2616Date();
-                        request_.Headers["accept"] = "application/json";
-                        request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
-                        request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
-                    }
-                    request_.Body = this._toJSONString(request);
-                    _lastRequest = request_;
-                    TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
-
-                    if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<ListStorageFileResponse>(TeaConverter.merge(
-                            new Dictionary<string, object>(){
-                                {"requestId", response_.Headers["x-ca-request-id"]},
-                            },
-                            this._readAsJSON(response_)
-                        ));
-                    }
-                    if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<ListStorageFileResponse>(new Dictionary<string, object>(){
-                            {"data", new Dictionary<string, object>(){
-                                {"requestId", response_.Headers["x-ca-request-id"]},
-                                {"statusCode", response_.StatusCode},
-                                {"statusMessage", response_.StatusMessage},
-                            }},
-                            {"message", response_.Headers["x-ca-error-message"]},
-                        });
-                    }
-                    return TeaModel.ToObject<ListStorageFileResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<ListStoreFileResponse>(TeaConverter.merge(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},

@@ -32,6 +32,10 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         [Validation(Required=true)]
         public string Type { get; set; }
 
+        [NameInMap("auto_rename")]
+        [Validation(Required=false)]
+        public bool AutoRename { get; set; }
+
         [NameInMap("content_hash")]
         [Validation(Required=false)]
         public string ContentHash { get; set; }
@@ -52,21 +56,21 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         [Validation(Required=false)]
         public bool Hidden { get; set; }
 
+        [NameInMap("labels")]
+        [Validation(Required=false)]
+        public List<string> Labels { get; set; }
+
         [NameInMap("meta")]
         [Validation(Required=false)]
         public string Meta { get; set; }
 
         [NameInMap("parent_file_id")]
-        [Validation(Required=true, MaxLength=50, Pattern="[a-z0-9]{1, 50}")]
+        [Validation(Required=true, MaxLength=50, Pattern="[a-z0-9]{1,50}")]
         public string ParentFileId { get; set; }
 
         [NameInMap("pre_hash")]
         [Validation(Required=false)]
         public string PreHash { get; set; }
-
-        [NameInMap("tags")]
-        [Validation(Required=false)]
-        public object Tags { get; set; }
 
     }
 
