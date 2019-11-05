@@ -29,3 +29,7 @@ hs_err_pid*
 .vscode
 .settings
 doc/
+
+.nyc_output/
+node_modules/
+coverage/
