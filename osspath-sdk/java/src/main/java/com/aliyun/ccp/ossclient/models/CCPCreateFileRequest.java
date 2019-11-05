@@ -28,6 +28,10 @@ public class CCPCreateFileRequest extends TeaModel {
     @Validation(pattern = "", maxLength = 0)
     public String type;
 
+    @NameInMap("auto_rename")
+    @Validation(pattern = "", maxLength = 0)
+    public boolean autoRename;
+
     @NameInMap("content_hash")
     @Validation(pattern = "", maxLength = 0)
     public String contentHash;
@@ -48,21 +52,21 @@ public class CCPCreateFileRequest extends TeaModel {
     @Validation(pattern = "", maxLength = 0)
     public boolean hidden;
 
+    @NameInMap("labels")
+    @Validation(pattern = "", maxLength = 0)
+    public String[] labels;
+
     @NameInMap("meta")
     @Validation(pattern = "", maxLength = 0)
     public String meta;
 
     @NameInMap("parent_file_id")
-    @Validation(pattern = "[a-z0-9]{1, 50}", maxLength = 0)
+    @Validation(pattern = "[a-z0-9]{1,50}", maxLength = 0)
     public String parentFileId;
 
     @NameInMap("pre_hash")
     @Validation(pattern = "", maxLength = 0)
     public String preHash;
-
-    @NameInMap("tags")
-    @Validation(pattern = "", maxLength = 0)
-    public java.util.Map<String, Object> tags;
 
 }
 

@@ -13,7 +13,7 @@ public class GetUploadUrlRequest extends TeaModel {
     public String driveId;
 
     @NameInMap("file_id")
-    @Validation(pattern = "[a-z0-9]{1, 50}", maxLength = 0)
+    @Validation(pattern = "[a-z0-9]{1,50}", maxLength = 0)
     public String fileId;
 
     @NameInMap("file_path")

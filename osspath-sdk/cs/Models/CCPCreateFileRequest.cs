@@ -9,15 +9,15 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 {
     public class CCPCreateFileRequest : TeaModel {
         [NameInMap("content_md5")]
-        [Validation(Required=true)]
+        [Validation(Required=false)]
         public string ContentMd5 { get; set; }
 
         [NameInMap("content_type")]
-        [Validation(Required=true)]
+        [Validation(Required=false)]
         public string ContentType { get; set; }
 
         [NameInMap("name")]
-        [Validation(Required=true, Pattern="[a-z0-9.-_]{1,1024}")]
+        [Validation(Required=false, Pattern="[a-z0-9.-_]{1,1024}")]
         public string Name { get; set; }
 
         [NameInMap("part_info_list")]
@@ -25,11 +25,11 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         public List<UploadPartInfo> PartInfoList { get; set; }
 
         [NameInMap("size")]
-        [Validation(Required=true)]
+        [Validation(Required=false)]
         public long Size { get; set; }
 
         [NameInMap("type")]
-        [Validation(Required=true)]
+        [Validation(Required=false)]
         public string Type { get; set; }
 
         [NameInMap("auto_rename")]
@@ -49,7 +49,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         public string Description { get; set; }
 
         [NameInMap("drive_id")]
-        [Validation(Required=true, Pattern="[0-9]+")]
+        [Validation(Required=false, Pattern="[0-9]+")]
         public string DriveId { get; set; }
 
         [NameInMap("hidden")]
@@ -65,7 +65,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         public string Meta { get; set; }
 
         [NameInMap("parent_file_id")]
-        [Validation(Required=true, MaxLength=50, Pattern="[a-z0-9]{1,50}")]
+        [Validation(Required=false, MaxLength=50, Pattern="[a-z0-9]{1,50}")]
         public string ParentFileId { get; set; }
 
         [NameInMap("pre_hash")]
