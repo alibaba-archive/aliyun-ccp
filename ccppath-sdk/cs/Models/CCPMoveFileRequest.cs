@@ -9,7 +9,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
 {
     public class CCPMoveFileRequest : TeaModel {
         [NameInMap("drive_id")]
-        [Validation(Required=true, Pattern="[0-9]+")]
+        [Validation(Required=false, Pattern="[0-9]+")]
         public string DriveId { get; set; }
 
         [NameInMap("new_name")]
@@ -21,11 +21,11 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         public bool Overwrite { get; set; }
 
         [NameInMap("file_id")]
-        [Validation(Required=true, MaxLength=50, Pattern="[a-z0-9.-_]{1, 50}")]
+        [Validation(Required=false, MaxLength=50, Pattern="[a-z0-9.-_]{1,50}")]
         public string FileId { get; set; }
 
         [NameInMap("to_parent_file_id")]
-        [Validation(Required=true, MaxLength=50)]
+        [Validation(Required=false, MaxLength=50)]
         public string ToParentFileId { get; set; }
 
     }

@@ -4,6 +4,10 @@ package com.aliyun.ccp.ccpclient.models;
 import com.aliyun.tea.*;
 
 public class CCPUpdateFileMetaRequest extends TeaModel {
+    @NameInMap("custom_index_key")
+    @Validation(pattern = "", maxLength = 0)
+    public String customIndexKey;
+
     @NameInMap("description")
     @Validation(pattern = "", maxLength = 0)
     public String description;
@@ -13,12 +17,16 @@ public class CCPUpdateFileMetaRequest extends TeaModel {
     public String driveId;
 
     @NameInMap("file_id")
-    @Validation(pattern = "[a-z0-9.-_]{1, 50}", maxLength = 0)
+    @Validation(pattern = "[a-z0-9.-_]{1,50}", maxLength = 0)
     public String fileId;
 
     @NameInMap("hidden")
     @Validation(pattern = "", maxLength = 0)
     public boolean hidden;
+
+    @NameInMap("labels")
+    @Validation(pattern = "", maxLength = 0)
+    public String[] labels;
 
     @NameInMap("meta")
     @Validation(pattern = "", maxLength = 0)
@@ -31,10 +39,6 @@ public class CCPUpdateFileMetaRequest extends TeaModel {
     @NameInMap("starred")
     @Validation(pattern = "", maxLength = 0)
     public boolean starred;
-
-    @NameInMap("tags")
-    @Validation(pattern = "", maxLength = 0)
-    public java.util.Map<String, Object> tags;
 
 }
 

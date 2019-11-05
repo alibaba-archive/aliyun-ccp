@@ -17,7 +17,7 @@ public class OSSGetDownloadUrlRequest extends TeaModel {
     public String fileName;
 
     @NameInMap("file_path")
-    @Validation(pattern = "[a-z0-9.-_]{1, 50}", maxLength = 0)
+    @Validation(pattern = "[a-z0-9.-_]{1,50}", maxLength = 0)
     public String filePath;
 
     @NameInMap("share_id")

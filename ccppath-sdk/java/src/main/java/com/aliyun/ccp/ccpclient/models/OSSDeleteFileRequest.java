@@ -9,7 +9,7 @@ public class OSSDeleteFileRequest extends TeaModel {
     public String driveId;
 
     @NameInMap("file_path")
-    @Validation(pattern = "[a-z0-9.-_]{1, 50}", maxLength = 0)
+    @Validation(pattern = "[a-z0-9.-_]{1,50}", maxLength = 0)
     public String filePath;
 
     @NameInMap("permanently")

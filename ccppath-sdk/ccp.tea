@@ -265,7 +265,7 @@ type: boolean', enum='false, true', example=false, x-go-name='Hidden'),
     imageMediaMetadata?: [ ImageMediaResponse ](name='image_media_metadata', $ref='#/definitions/ImageMediaResponse'),
     labels?: [ string ](name='labels', description='labels', example='label1:1, label2:2', items='{"type":"string"}', x-go-name='Labels'),
     meta?: string(name='meta', description='meta', example='file meta', x-go-name='Meta'),
-    name: string(name='name', description='name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}', x-go-name='Name'),
+    name?: string(name='name', description='name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}', x-go-name='Name'),
     parentFileId?: string(name='parent_file_id', description='parent_file_id', example='root', maxLength=50, minLength=40, pattern='[a-z0-9]{1, 50}', x-go-name='ParentFileID'),
     size?: long(name='size', description='Size', example=1024, format='int64', maximum=53687091200, minimum=0, x-go-name='Size'),
     starred?: boolean(name='starred', description='starred
@@ -371,7 +371,7 @@ type: boolean', enum='false, true', example=false, x-go-name='Hidden'),
     imageMediaMetadata?: [ ImageMediaResponse ](name='image_media_metadata', $ref='#/definitions/ImageMediaResponse'),
     labels?: [ string ](name='labels', description='labels', example='label1:1, label2:2', items='{"type":"string"}', x-go-name='Labels'),
     meta?: string(name='meta', description='meta', example='file meta', x-go-name='Meta'),
-    name: string(name='name', description='name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}', x-go-name='Name'),
+    name?: string(name='name', description='name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}', x-go-name='Name'),
     parentFileId?: string(name='parent_file_id', description='parent_file_id', example='root', maxLength=50, minLength=40, pattern='[a-z0-9]{1, 50}', x-go-name='ParentFileID'),
     size?: long(name='size', description='Size', example=1024, format='int64', maximum=53687091200, minimum=0, x-go-name='Size'),
     starred?: boolean(name='starred', description='starred
@@ -460,7 +460,7 @@ type: boolean', enum='false, true', example=false, x-go-name='Hidden'),
     imageMediaMetadata?: [ ImageMediaResponse ](name='image_media_metadata', $ref='#/definitions/ImageMediaResponse'),
     labels?: [ string ](name='labels', description='labels', example='label1:1, label2:2', items='{"type":"string"}', x-go-name='Labels'),
     meta?: string(name='meta', description='meta', example='file meta', x-go-name='Meta'),
-    name: string(name='name', description='name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}', x-go-name='Name'),
+    name?: string(name='name', description='name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}', x-go-name='Name'),
     parentFileId?: string(name='parent_file_id', description='parent_file_id', example='root', maxLength=50, minLength=40, pattern='[a-z0-9]{1, 50}', x-go-name='ParentFileID'),
     size?: long(name='size', description='Size', example=1024, format='int64', maximum=53687091200, minimum=0, x-go-name='Size'),
     starred?: boolean(name='starred', description='starred
@@ -881,7 +881,7 @@ file list', example='', items='{"$ref":"#/definitions/StoreFile"}', x-go-name='F
     driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
     fileExtension?: string(name='file_extension', description='file_extension', example='jpg', x-go-name='FileExtension'),
     filePath?: string(name='file_path', description='file_path', example='/a.jpg', x-go-name='FilePath'),
-    name: string(name='name', description='name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}', x-go-name='Name'),
+    name?: string(name='name', description='name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}', x-go-name='Name'),
     parentFilePath?: string(name='parent_file_path', description='parent_file_id', example='/', maxLength=50, minLength=40, pattern='[a-z0-9]{1, 50}', x-go-name='ParentFilePath'),
     shareId?: string(name='share_id', description='share_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', pattern='[0-9]+', x-go-name='ShareID'),
     size?: long(name='size', description='Size', example=1024, format='int64', maximum=53687091200, minimum=0, x-go-name='Size'),
@@ -970,7 +970,7 @@ file list', example='', items='{"$ref":"#/definitions/StoreFile"}', x-go-name='F
     driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
     fileExtension?: string(name='file_extension', description='file_extension', example='jpg', x-go-name='FileExtension'),
     filePath?: string(name='file_path', description='file_path', example='/a.jpg', x-go-name='FilePath'),
-    name: string(name='name', description='name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}', x-go-name='Name'),
+    name?: string(name='name', description='name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}', x-go-name='Name'),
     parentFilePath?: string(name='parent_file_path', description='parent_file_id', example='/', maxLength=50, minLength=40, pattern='[a-z0-9]{1, 50}', x-go-name='ParentFilePath'),
     shareId?: string(name='share_id', description='share_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', pattern='[0-9]+', x-go-name='ShareID'),
     size?: long(name='size', description='Size', example=1024, format='int64', maximum=53687091200, minimum=0, x-go-name='Size'),
@@ -1053,7 +1053,7 @@ file list', example='', items='{"$ref":"#/definitions/StoreFile"}', x-go-name='F
     driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
     fileExtension?: string(name='file_extension', description='file_extension', example='jpg', x-go-name='FileExtension'),
     filePath?: string(name='file_path', description='file_path', example='/a.jpg', x-go-name='FilePath'),
-    name: string(name='name', description='name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}', x-go-name='Name'),
+    name?: string(name='name', description='name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}', x-go-name='Name'),
     parentFilePath?: string(name='parent_file_path', description='parent_file_id', example='/', maxLength=50, minLength=40, pattern='[a-z0-9]{1, 50}', x-go-name='ParentFilePath'),
     shareId?: string(name='share_id', description='share_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', pattern='[0-9]+', x-go-name='ShareID'),
     size?: long(name='size', description='Size', example=1024, format='int64', maximum=53687091200, minimum=0, x-go-name='Size'),
@@ -1296,47 +1296,68 @@ type: boolean', example=false, x-go-name='Overwrite'),
   }
 
   /**
+   * 
+   */
+  model BatchSubRequest {
+    body?: object(name='body', additionalProperties='{"type":"object"}', description='body 子请求的请求参数 json 字符串，可参考对于子请求文档, 当指定了body 必须传headers ： "Content-Type" 对应的类型，目前子请求入参是"application/json"', example='{"drive_id":"101","file_id":"xxxxxx"}', x-go-name='Body'),
+    headers?: object(name='headers', additionalProperties='{"type":"string"}', description='headers 请求头，表示body传入数据的类型', example='{"Content-Type":"application/json"}', x-go-name='Headers'),
+    id: string(name='id', description='id 用于request 和 response关联， 不允许重复', example='"1"', x-go-name='ID'),
+    method: string(name='method', description='method', enum='POST, GET, PUT, DELETE, HEAD', example='"POST"', x-go-name='Method'),
+    url: string(name='url', description='url 子请求的api path路径， 可参考对于子请求文档', example='/file/get', x-go-name='URL'),
+  }
+
+  /**
+   * 批处理
+   */
+  model CCPBatchRequest {
+    requests: [ BatchSubRequest ](name='requests', description='Requests 请求合集', items='{"$ref":"#/definitions/BatchSubRequest"}', x-go-name='Requests'),
+    resource: string(name='resource', description='支持的资源类型', example='"file"', x-go-name='Resource'),
+  }
+
+  /**
    * 合并文件上传任务
    */
   model CCPCompleteFileRequest {
-    driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
+    driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
     partInfoList?: [ UploadPartInfo ](name='part_info_list', description='part_info_list', items='{"$ref":"#/definitions/UploadPartInfo"}', x-go-name='PartList'),
     uploadId?: string(name='upload_id', description='upload_id', x-go-name='UploadID'),
-    fileId: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9]{1, 50}', x-go-name='FileID'),
+    fileId?: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9]{1,50}', x-go-name='FileID'),
   }
 
   /**
    * 文件拷贝
    */
   model CCPCopyFileRequest {
+    autoRename?: boolean(name='auto_rename', default=false, description='auto_rename
+type: boolean', example=false, x-go-name='AutoRename'),
     driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
-    fileId: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1, 50}', x-go-name='FileID'),
+    fileId: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}', x-go-name='FileID'),
     newName: string(name='new_name', description='new_name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}', x-go-name='NewName'),
-    overwrite?: boolean(name='overwrite', default=false, description='overwrite
-type: boolean', example=false, x-go-name='Overwrite'),
     toDriveId: string(name='to_drive_id', description='to_drive_id', example='1', pattern='[0-9]+', x-go-name='ToDriveID'),
-    toParentFileId: string(name='to_parent_file_id', description='to_parent_file_id', example='root', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1, 50}', x-go-name='ToParentFileId'),
+    toParentFileId: string(name='to_parent_file_id', description='to_parent_file_id', example='root', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}', x-go-name='ToParentFileId'),
   }
 
   /**
    * 创建文件
    */
   model CCPCreateFileRequest {
-    contentMd5: string(name='content_md5', description='ContentMd5', example='E10ADC3949BA59ABBE56E057F20F883E', x-go-name='ContentMd5'),
-    contentType: string(name='content_type', description='ContentType', example='application/json', x-go-name='ContentType'),
-    name: string(name='name', description='Name', example='ccp.jpg', maximum=1024, minimum=1, pattern='[a-z0-9.-_]{1,1024}', x-go-name='Name'),
+    contentMd5?: string(name='content_md5', description='ContentMd5', example='E10ADC3949BA59ABBE56E057F20F883E', x-go-name='ContentMd5'),
+    contentType?: string(name='content_type', description='ContentType', example='application/json', x-go-name='ContentType'),
+    name?: string(name='name', description='Name', example='ccp.jpg', maximum=1024, minimum=1, pattern='[a-z0-9.-_]{1,1024}', x-go-name='Name'),
     partInfoList?: [ UploadPartInfo ](name='part_info_list', description='part_info_list', items='{"$ref":"#/definitions/UploadPartInfo"}', x-go-name='PartInfoList'),
-    size: long(name='size', description='Size', format='int64', maximum=53687091200, minimum=0, x-go-name='Size'),
-    type: string(name='type', description='Type', enum='file, folder', example='file', x-go-name='Type'),
+    size?: long(name='size', description='Size', format='int64', maximum=53687091200, minimum=0, x-go-name='Size'),
+    type?: string(name='type', description='Type', enum='file, folder', example='file', x-go-name='Type'),
+    autoRename?: boolean(name='auto_rename', default=false, description='auto_rename', enum='false, true', x-go-name='AutoRename'),
     contentHash?: string(name='content_hash', description='content_hash', example='7C4A8D09CA3762AF61E59520943DC26494F8941B', x-go-name='ContentHash'),
     contentHashName?: string(name='content_hash_name', description='content_hash_name', enum='sha1', example='sha1', x-go-name='ContentHashName'),
     description?: string(name='description', description='description', example='file description', maxLength=0, minLength=1024, x-go-name='Description'),
-    driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
+    driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
+    fileId?: string(name='file_id', description='file_id', x-go-name='FileID'),
     hidden?: boolean(name='hidden', description='hidden', enum='true, false', example=false, x-go-name='Hidden'),
+    labels?: [ string ](name='labels', description='labels', example='label1, label2', items='{"type":"string"}', x-go-name='Labels'),
     meta?: string(name='meta', description='meta', example='meta test', x-go-name='Meta'),
-    parentFileId: string(name='parent_file_id', description='parent_file_id', example='root', maxLength=50, minLength=40, pattern='[a-z0-9]{1, 50}', x-go-name='ParentFileID'),
+    parentFileId?: string(name='parent_file_id', description='parent_file_id', example='root', maxLength=50, minLength=40, pattern='[a-z0-9]{1,50}', x-go-name='ParentFileID'),
     preHash?: string(name='pre_hash', description='pre_hash', example='E10ADC3949BA59ABBE56E057F20F883E', x-go-name='PreHash'),
-    tags?: object(name='tags', additionalProperties='{"type":"object"}', description='tags', example='{"tag1":1,"tag2":2}', x-go-name='Tags'),
   }
 
   /**
@@ -1344,7 +1365,7 @@ type: boolean', example=false, x-go-name='Overwrite'),
    */
   model CCPDeleteFileRequest {
     driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
-    fileId: string(name='file_id', description='file_id', example='5d792010669a1dd91087479e8071c9ae212065cc', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1, 50}', x-go-name='FileID'),
+    fileId: string(name='file_id', description='file_id', example='5d792010669a1dd91087479e8071c9ae212065cc', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}', x-go-name='FileID'),
     permanently?: boolean(name='permanently', default=false, description='permanently
 type: false', example=false, x-go-name='Permanently'),
   }
@@ -1371,7 +1392,7 @@ type:string', example='000e89fb-cf8f-11e9-8ab4-b6e980803a3b', x-go-name='AsyncTa
   model CCPGetDownloadUrlRequest {
     driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
     expireSec?: long(name='expire_sec', default=900, description='expire_sec', example=15, format='int64', maximum=14400, minimum=0, x-go-name='ExpireSec'),
-    fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1, 50}', x-go-name='FileID'),
+    fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}', x-go-name='FileID'),
     fileName: string(name='file_name', description='file_name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}', x-go-name='FileName'),
   }
 
@@ -1380,7 +1401,7 @@ type:string', example='000e89fb-cf8f-11e9-8ab4-b6e980803a3b', x-go-name='AsyncTa
    */
   model CCPGetFileRequest {
     driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
-    fileId: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1, 50}', x-go-name='FileID'),
+    fileId: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}', x-go-name='FileID'),
     imageThumbnailProcess?: string(name='image_thumbnail_process', description='image_thumbnail_process
 type:string', example='image/resize,w_200', x-go-name='ImageThumbnailProcess'),
     imageUrlProcess?: string(name='image_url_process', description='image_thumbnail_process
@@ -1392,24 +1413,30 @@ type:string', example='image/crop,w_100,h_100/rounded-corners,r_10/format,png', 
    */
   model CCPGetUploadUrlRequest {
     contentMd5?: string(name='content_md5', description='content_md5', example='E10ADC3949BA59ABBE56E057F20F883E', maxLength=32, x-go-name='ContentMd5'),
-    driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
+    driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
     partInfoList?: [ UploadPartInfo ](name='part_info_list', description='upload_part_list', example='', items='{"$ref":"#/definitions/UploadPartInfo"}', x-go-name='PartInfoList'),
-    uploadId: string(name='upload_id', description='upload_id', example='3920F2BE4D9446D6967E2ED505A97EFD', x-go-name='UploadID'),
-    fileId: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9]{1, 50}', x-go-name='FileID'),
+    uploadId?: string(name='upload_id', description='upload_id', example='3920F2BE4D9446D6967E2ED505A97EFD', x-go-name='UploadID'),
+    fileId?: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9]{1,50}', x-go-name='FileID'),
   }
 
   /**
    * 列举文件
    */
   model CCPListFileRequest {
-    driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
+    driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
     imageThumbnailProcess?: string(name='image_thumbnail_process', description='image_thumbnail_process', example='image/resize,w_200', x-go-name='ImageThumbnailProcess'),
     imageUrlProcess?: string(name='image_url_process', description='image_url_process', example='image/resize,w_200', x-go-name='ImageUrlProcess'),
     limit?: long(name='limit', default=50, description='limit', example=10, format='int64', maximum=100, minimum=0, pattern='[0-9]{1, 3}', x-go-name='Limit'),
     marker?: string(name='marker', description='marker', example='NWQ1Yjk4YmI1ZDRlYmU1Y2E0YWE0NmJhYWJmODBhNDQ2NzhlMTRhMg', x-go-name='Marker'),
-    all?: boolean(name='all', default=false, description='all', enum='false, true', example=false, x-go-name='All'),
-    parentFileId: string(name='parent_file_id', description='ParentFileID', example='root', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1, 50}', x-go-name='ParentFileID'),
+    Starred?: boolean(name='Starred', description='starred', enum='false, true', example=false),
+    category?: string(name='category', description='category', enum='image, video, music, doc, other', example='image', x-go-name='Category'),
+    customIndexKey?: string(name='custom_index_key', description='custom_index_key', x-go-name='CustomIndexKey'),
+    orderDirection?: string(name='order_direction', description='order_direction', enum='ASC, DESC', example='ASC', x-go-name='OrderDirection'),
     status?: string(name='status', default='available', description='status', enum='uploading, available', example='available', x-go-name='Status'),
+    type?: string(name='type', description='type', enum='file, folder', example='file', x-go-name='Type'),
+    all?: boolean(name='all', default=true, description='all', enum='false, true', example=false, x-go-name='All'),
+    orderBy?: string(name='order_by', description='order_by', enum='update_time, name', example='name', x-go-name='OrderBy'),
+    parentFileId?: string(name='parent_file_id', description='ParentFileID', example='root', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}', x-go-name='ParentFileID'),
   }
 
   /**
@@ -1417,7 +1444,7 @@ type:string', example='image/crop,w_100,h_100/rounded-corners,r_10/format,png', 
    */
   model CCPListUploadedPartRequest {
     driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
-    fileId: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1, 50}', x-go-name='FileID'),
+    fileId: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}', x-go-name='FileID'),
     limit: long(name='limit', default=1000, description='limit', example=1, format='int64', maximum=1000, minimum=1, pattern='[0-9]+', x-go-name='Limit'),
     partNumberMarker?: long(name='part_number_marker', description='part_number_marker', example=1, format='int64', minimum=1, pattern='[0-9]+', x-go-name='PartNumberMarker'),
     uploadId?: string(name='upload_id', description='upload_id', example='00668396C0814D818D90F0A92B04B355', x-go-name='UploadID'),
@@ -1427,12 +1454,12 @@ type:string', example='image/crop,w_100,h_100/rounded-corners,r_10/format,png', 
    * 文件移动请求
    */
   model CCPMoveFileRequest {
-    driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
+    driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
     newName?: string(name='new_name', description='new_name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}', x-go-name='NewName'),
     overwrite?: boolean(name='overwrite', default=false, description='overwrite
 type: boolean', example=false, x-go-name='Overwrite'),
-    fileId: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1, 50}', x-go-name='FileID'),
-    toParentFileId: string(name='to_parent_file_id', description='to_parent_file_id', example='root', maxLength=50, minLength=40, x-go-name='ToParentFileId'),
+    fileId?: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}', x-go-name='FileID'),
+    toParentFileId?: string(name='to_parent_file_id', description='to_parent_file_id', example='root', maxLength=50, minLength=40, x-go-name='ToParentFileId'),
   }
 
   /**
@@ -1452,17 +1479,18 @@ type: boolean', example=false, x-go-name='Overwrite'),
    * 更新文件元数据
    */
   model CCPUpdateFileMetaRequest {
+    customIndexKey?: string(name='custom_index_key', x-go-name='CustomIndexKey'),
     description?: string(name='description', description='description
 type: string', example='description', maxLength=1024, x-go-name='Description'),
     driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
-    fileId: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1, 50}', x-go-name='FileID'),
+    fileId: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}', x-go-name='FileID'),
     hidden?: boolean(name='hidden', default=false, description='hidden
 type: boolean', example=false, x-go-name='Hidden'),
+    labels?: [ string ](name='labels', description='labels', example='label1, label2', items='{"type":"string"}', x-go-name='Labels'),
     meta?: string(name='meta', description='meta', example='meta test', x-go-name='Meta'),
     name: string(name='name', description='name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}', x-go-name='Name'),
     starred?: boolean(name='starred', default=false, description='starred
 type: boolean', example=false, x-go-name='Starred'),
-    tags?: object(name='tags', additionalProperties='{"type":"object"}', description='tags', example='{"tag1":1,"tag2":2}', x-go-name='Tags'),
   }
 
   /**
@@ -1470,7 +1498,7 @@ type: boolean', example=false, x-go-name='Starred'),
    */
   model CompleteFileRequest {
     driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
-    fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9]{1, 50}', x-go-name='FileID'),
+    fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9]{1,50}', x-go-name='FileID'),
     filePath?: string(name='file_path', x-go-name='FilePath'),
     partInfoList?: [ UploadPartInfo ](name='part_info_list', description='part_info_list', items='{"$ref":"#/definitions/UploadPartInfo"}', x-go-name='PartList'),
     shareId?: string(name='share_id', x-go-name='ShareID'),
@@ -1482,13 +1510,13 @@ type: boolean', example=false, x-go-name='Starred'),
    */
   model CopyFileRequest {
     driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
-    fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1, 50}', x-go-name='FileID'),
+    fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}', x-go-name='FileID'),
     filePath?: string(name='file_path', x-go-name='FilePath'),
     newName: string(name='new_name', description='new_name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}', x-go-name='NewName'),
     overwrite?: boolean(name='overwrite', default=false, description='overwrite
 type: boolean', x-go-name='Overwrite'),
     shareId?: string(name='share_id', x-go-name='ShareID'),
-    toParentFileId: string(name='to_parent_file_id', description='to_parent_file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1, 50}', x-go-name='ToParentFileId'),
+    toParentFileId: string(name='to_parent_file_id', description='to_parent_file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}', x-go-name='ToParentFileId'),
     toParentFilePath?: string(name='to_parent_file_path', x-go-name='ToParentFilePath'),
   }
 
@@ -1504,7 +1532,7 @@ type: boolean', x-go-name='Overwrite'),
     relativePath?: string(name='relative_path', description='domain的PathType为OSSPath时必选。 Drive存储基于store的相对路径', example='/d/e/f/', x-go-name='RelativePath'),
     status?: string(name='status', default='enabled', description='状态', enum='disabled, enabled', example='enabled', x-go-name='Status'),
     storeId?: string(name='store_id', description='StoreID , domain的PathType为OSSPath时必选', example='store_id', x-go-name='StoreID'),
-    totalSize?: long(name='total_size', default=0, description='总大小,单位Byte [如果设置 0 代表不限制]', example=1024, format='int64', x-go-name='TotalSize'),
+    totalSize?: long(name='total_size', default=-1, description='总大小,单位Byte [如果设置 -1 代表不限制]', example=1024, format='int64', x-go-name='TotalSize'),
   }
 
   /**
@@ -1520,7 +1548,7 @@ type: boolean', x-go-name='Overwrite'),
     hidden?: boolean(name='hidden', description='Hidden', enum='true, false', x-go-name='Hidden'),
     meta?: string(name='meta', description='Meta', x-go-name='Meta'),
     name: string(name='name', description='name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}', x-go-name='Name'),
-    parentFileId: string(name='parent_file_id', description='parent_file_id', maxLength=50, minLength=40, pattern='[a-z0-9]{1, 50}', x-go-name='ParentFileID'),
+    parentFileId: string(name='parent_file_id', description='parent_file_id', maxLength=50, minLength=40, pattern='[a-z0-9]{1,50}', x-go-name='ParentFileID'),
     parentFilePath?: string(name='parent_file_path', description='ParentFilePath', x-go-name='ParentFilePath'),
     partInfoList?: [ UploadPartInfo ](name='part_info_list', description='part_info_list', items='{"$ref":"#/definitions/UploadPartInfo"}', x-go-name='PartInfoList'),
     preHash?: string(name='pre_hash', description='pre_hash', x-go-name='PreHash'),
@@ -1556,7 +1584,7 @@ type: boolean', x-go-name='Overwrite'),
    */
   model DeleteFileRequest {
     driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
-    fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1, 50}', x-go-name='FileID'),
+    fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}', x-go-name='FileID'),
     filePath?: string(name='file_path', x-go-name='FilePath'),
     permanently?: boolean(name='permanently', x-go-name='Permanently'),
     shareId?: string(name='share_id', x-go-name='ShareID'),
@@ -1574,7 +1602,7 @@ type: boolean', x-go-name='Overwrite'),
    */
   model DownloadRequest {
     DriveID: string(name='DriveID', description='drive_id', example='1', pattern='[0-9]+'),
-    FileID: string(name='FileID', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1, 50}'),
+    FileID: string(name='FileID', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
     ImageProcess?: string(name='ImageProcess', description='image_process', example='image/resize,w_200'),
     ShareID?: string(name='ShareID'),
   }
@@ -1600,7 +1628,7 @@ type:string', example='000e89fb-cf8f-11e9-8ab4-b6e980803a3b', x-go-name='AsyncTa
   model GetDownloadUrlRequest {
     driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
     expireSec?: long(name='expire_sec', default=900, description='expire_sec', example=15, format='int64', maximum=14400, minimum=0, x-go-name='ExpireSec'),
-    fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1, 50}', x-go-name='FileID'),
+    fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}', x-go-name='FileID'),
     fileName: string(name='file_name', description='file_name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}', x-go-name='FileName'),
     filePath?: string(name='file_path', x-go-name='FilePath'),
     shareId?: string(name='share_id', x-go-name='ShareID'),
@@ -1618,7 +1646,7 @@ type:string', example='000e89fb-cf8f-11e9-8ab4-b6e980803a3b', x-go-name='AsyncTa
    */
   model GetFileRequest {
     driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
-    fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1, 50}', x-go-name='FileID'),
+    fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}', x-go-name='FileID'),
     filePath?: string(name='file_path', x-go-name='FilePath'),
     imageThumbnailProcess?: string(name='image_thumbnail_process', description='image_thumbnail_process
 type:string', example='image/resize,w_200', x-go-name='ImageThumbnailProcess'),
@@ -1640,7 +1668,7 @@ type:string', example='image/resize,w_200', x-go-name='ImageUrlProcess'),
   model GetUploadUrlRequest {
     contentMd5?: string(name='content_md5', description='content_md5', maxLength=32, x-go-name='ContentMd5'),
     driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
-    fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9]{1, 50}', x-go-name='FileID'),
+    fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9]{1,50}', x-go-name='FileID'),
     filePath?: string(name='file_path', x-go-name='FilePath'),
     partInfoList?: [ UploadPartInfo ](name='part_info_list', description='upload_part_list', items='{"$ref":"#/definitions/UploadPartInfo"}', x-go-name='PartInfoList'),
     shareId?: string(name='share_id', x-go-name='ShareID'),
@@ -1666,7 +1694,7 @@ type:string', example='image/resize,w_200', x-go-name='ImageUrlProcess'),
     imageUrlProcess?: string(name='image_url_process', description='image_url_process', x-go-name='ImageUrlProcess'),
     limit?: long(name='limit', default=50, description='limit', format='int64', maximum=100, minimum=0, pattern='[0-9]{1, 3}', x-go-name='Limit'),
     marker?: string(name='marker', description='marker', x-go-name='Marker'),
-    parentFileId: string(name='parent_file_id', description='ParentFileID', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1, 50}', x-go-name='ParentFileID'),
+    parentFileId: string(name='parent_file_id', description='ParentFileID', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}', x-go-name='ParentFileID'),
     parentFilePath?: string(name='parent_file_path', x-go-name='ParentFilePath'),
     shareId?: string(name='share_id', x-go-name='ShareID'),
     status?: string(name='status', description='status', enum='uploading,  available', x-go-name='Status'),
@@ -1691,9 +1719,9 @@ type:string', example='image/resize,w_200', x-go-name='ImageUrlProcess'),
   }
 
   /**
-   * list storage file
+   * list store file
    */
-  model ListStorageFileRequest {
+  model ListStoreFileRequest {
     limit?: long(name='limit', default=100, description='limit', example=50, format='int64', maximum=1000, minimum=1, x-go-name='Limit'),
     marker?: string(name='marker', description='marker', x-go-name='Marker'),
     parentFilePath?: string(name='parent_file_path', description='parent_file_path', x-go-name='ParentFilePath'),
@@ -1702,35 +1730,17 @@ type:string', example='image/resize,w_200', x-go-name='ImageUrlProcess'),
   }
 
   /**
-   * List storage file
-   */
-  model ListStorageFileResponse {
-    requestId?: string(name='requestId', description='request Id', example='0BA8CF68-9769E-4469-A14B-8772004287E2', x-go-name='requestId'),
-    items?: [ StoreFile ](name='items', description='items
-file list', example='', items='{"$ref":"#/definitions/StoreFile"}', x-go-name='FileList'),
-    nextMarker?: string(name='next_marker', x-go-name='NextMarker'),
-  }
-
-  /**
    * list storage file
    */
-  model ListStorageRequest {
+  model ListStoreRequest {
     domainId?: string(name='domain_id', description='domain_id', example='10', x-go-name='DomainID'),
-  }
-
-  /**
-   * List storage
-   */
-  model ListStorageResponse {
-    requestId?: string(name='requestId', description='request Id', example='0BA8CF68-9769E-4469-A14B-8772004287E2', x-go-name='requestId'),
-    items?: [ StoreItemResponse ](name='items', description='items', example='', items='{"$ref":"#/definitions/StoreItemResponse"}', x-go-name='StoreList'),
   }
 
   /**
    * complete file request
    */
   model OSSCompleteFileRequest {
-    driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
+    driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
     partInfoList?: [ UploadPartInfo ](name='part_info_list', description='part_info_list', items='{"$ref":"#/definitions/UploadPartInfo"}', x-go-name='PartList'),
     uploadId?: string(name='upload_id', description='upload_id', x-go-name='UploadID'),
     filePath?: string(name='file_path', x-go-name='FilePath'),
@@ -1756,14 +1766,14 @@ type: boolean', x-go-name='Overwrite'),
    * create file request
    */
   model OSSCreateFileRequest {
-    contentMd5: string(name='content_md5', description='ContentMd5', example='E10ADC3949BA59ABBE56E057F20F883E', x-go-name='ContentMd5'),
-    contentType: string(name='content_type', description='ContentType', example='application/json', x-go-name='ContentType'),
-    name: string(name='name', description='Name', example='ccp.jpg', maximum=1024, minimum=1, pattern='[a-z0-9.-_]{1,1024}', x-go-name='Name'),
+    contentMd5?: string(name='content_md5', description='ContentMd5', example='E10ADC3949BA59ABBE56E057F20F883E', x-go-name='ContentMd5'),
+    contentType?: string(name='content_type', description='ContentType', example='application/json', x-go-name='ContentType'),
+    name?: string(name='name', description='Name', example='ccp.jpg', maximum=1024, minimum=1, pattern='[a-z0-9.-_]{1,1024}', x-go-name='Name'),
     partInfoList?: [ UploadPartInfo ](name='part_info_list', description='part_info_list', items='{"$ref":"#/definitions/UploadPartInfo"}', x-go-name='PartInfoList'),
-    size: long(name='size', description='Size', format='int64', maximum=53687091200, minimum=0, x-go-name='Size'),
-    type: string(name='type', description='Type', enum='file, folder', example='file', x-go-name='Type'),
-    driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
-    parentFilePath: string(name='parent_file_path', description='parent_file_path', x-go-name='ParentFilePath'),
+    size?: long(name='size', description='Size', format='int64', maximum=53687091200, minimum=0, x-go-name='Size'),
+    type?: string(name='type', description='Type', enum='file, folder', example='file', x-go-name='Type'),
+    driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
+    parentFilePath?: string(name='parent_file_path', description='parent_file_path', x-go-name='ParentFilePath'),
     shareId?: string(name='share_id', description='share_id', maxLength=40, minLength=50, x-go-name='ShareID'),
   }
 
@@ -1772,7 +1782,7 @@ type: boolean', x-go-name='Overwrite'),
    */
   model OSSDeleteFileRequest {
     driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
-    filePath: string(name='file_path', description='file_path', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1, 50}', x-go-name='FilePath'),
+    filePath: string(name='file_path', description='file_path', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}', x-go-name='FilePath'),
     permanently?: boolean(name='permanently', description='permanently
 type: false', example=false, x-go-name='Permanently'),
     shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-z-]+', x-go-name='ShareID'),
@@ -1785,7 +1795,7 @@ type: false', example=false, x-go-name='Permanently'),
     driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
     expireSec?: long(name='expire_sec', default=900, description='expire_sec', example=15, format='int64', maximum=14400, minimum=0, x-go-name='ExpireSec'),
     fileName: string(name='file_name', description='file_name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}', x-go-name='FileName'),
-    filePath: string(name='file_path', description='file_path', example='/a/b/c.jpg', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1, 50}', x-go-name='FilePath'),
+    filePath: string(name='file_path', description='file_path', example='/a/b/c.jpg', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}', x-go-name='FilePath'),
     shareId: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-z-]+', x-go-name='ShareID'),
   }
 
@@ -1794,7 +1804,7 @@ type: false', example=false, x-go-name='Permanently'),
    */
   model OSSGetFileRequest {
     driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
-    filePath: string(name='file_path', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1, 50}', x-go-name='FilePath'),
+    filePath: string(name='file_path', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}', x-go-name='FilePath'),
     imageThumbnailProcess?: string(name='image_thumbnail_process', description='image_thumbnail_process
 type:string', example='image/resize,w_200', x-go-name='ImageThumbnailProcess'),
     imageUrlProcess?: string(name='image_url_process', description='image_thumbnail_process
@@ -1807,11 +1817,11 @@ type:string', example='image/resize,w_200', x-go-name='ImageUrlProcess'),
    */
   model OSSGetUploadUrlRequest {
     contentMd5?: string(name='content_md5', description='content_md5', example='E10ADC3949BA59ABBE56E057F20F883E', maxLength=32, x-go-name='ContentMd5'),
-    driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
+    driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
     partInfoList?: [ UploadPartInfo ](name='part_info_list', description='upload_part_list', example='', items='{"$ref":"#/definitions/UploadPartInfo"}', x-go-name='PartInfoList'),
-    uploadId: string(name='upload_id', description='upload_id', example='3920F2BE4D9446D6967E2ED505A97EFD', x-go-name='UploadID'),
-    filePath: string(name='file_path', description='file_path', example='/a/b/c.jpg', x-go-name='FilePath'),
-    shareId: string(name='share_id', description='share_id', example='1', pattern='[0-9]+', x-go-name='ShareID'),
+    uploadId?: string(name='upload_id', description='upload_id', example='3920F2BE4D9446D6967E2ED505A97EFD', x-go-name='UploadID'),
+    filePath?: string(name='file_path', description='file_path', example='/a/b/c.jpg', x-go-name='FilePath'),
+    shareId?: string(name='share_id', description='share_id', example='1', pattern='[0-9]+', x-go-name='ShareID'),
   }
 
   /**
@@ -1874,7 +1884,7 @@ type: boolean', x-go-name='Overwrite'),
     driveId: string(name='drive_id', description='Drive ID', example='123', x-go-name='DriveID'),
     driveName: string(name='drive_name', description='Drive 名称', example='ccpdrive', maximum=1024, x-go-name='DriveName'),
     status?: string(name='status', default='enabled', description='状态', enum='disabled, enabled', example='enabled', x-go-name='Status'),
-    totalSize?: long(name='total_size', default=0, description='总大小,单位Byte [如果设置 0 代表不限制]', example=1024, format='int64', x-go-name='TotalSize'),
+    totalSize?: long(name='total_size', default=0, description='总大小,单位Byte [如果设置 -1 代表不限制]', example=1024, format='int64', x-go-name='TotalSize'),
   }
 
   /**
@@ -1884,8 +1894,9 @@ type: boolean', x-go-name='Overwrite'),
     description?: string(name='description', description='description
 type: string', maxLength=1000, x-go-name='Description'),
     driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+', x-go-name='DriveID'),
-    fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1, 50}', x-go-name='FileID'),
-    hidden?: boolean(name='hidden', default=false, description='hidden', x-go-name='Hidden'),
+    fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}', x-go-name='FileID'),
+    hidden?: boolean(name='hidden', default=false, description='hidden
+type: boolean', x-go-name='Hidden'),
     meta?: string(name='meta', description='meta', x-go-name='Meta'),
     name: string(name='name', description='name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}', x-go-name='Name'),
     shareId?: string(name='share_id', x-go-name='ShareID'),
@@ -3149,9 +3160,11 @@ example', x-go-name='UserID'),
   }
 
   /**
-   * This will get async task info
+   * 如果目录拷贝、目录删除不能在限定时间内完成，将访问一个异步任务id，
+通过此接口获取异步任务的信息，以确定任务是否执行成功。
    * @tags async_task
    * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
    * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
    * @error NotFound The resource {resource_name} cannot be found. Please check.
    * @error InternalError The request has been failed due to some unknown error.
@@ -3228,21 +3241,22 @@ example', x-go-name='UserID'),
   }
 
   /**
-   * 批量删除文件
-   * @tags file
+   * 对多个原子操作封装成一个批处理请求，服务端并行处理并打包返回每个操作的执行结果。
+支持对文件和文件夹的移动、删除、修改，每个批处理请求最多包含100个原则操作。
+   * @tags batch
    * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
    * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
-   * @error NotFound The resource {resource_name} cannot be found. Please check.
    * @error InternalError The request has been failed due to some unknown error.
    * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
    */
-  api batchDeleteFiles(request: CCPDeleteFilesRequest, runtime: RuntimeOptions): CCPDeleteFilesResponse  {
+  api operation(request: CCPBatchRequest, runtime: RuntimeOptions): CCPBatchResponse  {
     var accesskeyId = @getAccessKeyId();
     var accessKeySecret = @getAccessKeySecret();
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/file/batch_delete`;
+    pathname = `/v2/batch`;
     headers = {
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
@@ -3307,9 +3321,566 @@ example', x-go-name='UserID'),
   }
 
   /**
-   * 完成文件上传任务
+   * 支持normal和large两种drive，
+large类型的drive用于文件数多的场景，不支持list操作，
+当drive的文件数量大于1亿时，建议使用large类型。
+   * @tags drive
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  api createDrive(request: CreateDriveRequest, runtime: RuntimeOptions): CreateDriveResponse  {
+    var accesskeyId = @getAccessKeyId();
+    var accessKeySecret = @getAccessKeySecret();
+    var accessToken = @getAccessToken();
+    protocol = @getProtocol(@protocol, 'https');
+    method = 'POST';
+    pathname = `/v2/drive/create`;
+    headers = {
+      host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
+      content-type = 'application/json; charset=utf-8',
+    };
+
+    if (@notEmpty(accessToken)) {
+      headers.authorization = `Bearer ${accessToken}`;
+    } else if (@notEmpty(accesskeyId) && @notEmpty(accessKeySecret)) {
+      headers.date = @getRFC2616Date();
+      headers.accept = 'application/json';
+      headers.x-acs-signature-method = 'HMAC-SHA1';
+      headers.x-acs-signature-version = '1.0';
+      headers.authorization = `acs ${accesskeyId}:${@getSignature(__request)}`;
+    }
+    body = @toJSONString(request);
+  } returns {
+    if (@isStatusCode(__response, 201)) {
+      return {
+        requestId = __response.headers.x-ca-request-id,
+        ...@readAsJSON(__response),
+      };
+    }
+
+    if (@notEmpty(__response.headers.x-ca-error-message)) {
+      throw {
+        data = {
+          requestId = __response.headers.x-ca-request-id,
+          statusCode = __response.statusCode,
+          statusMessage = __response.statusMessage,
+        },
+        message = __response.headers.x-ca-error-message,
+      };
+    }
+    throw {
+      data = {
+        requestId = __response.headers.x-ca-request-id,
+        statusCode = __response.statusCode,
+        statusMessage = __response.statusMessage,
+      },
+      ...@readAsJSON(__response),
+    };
+  } runtime {
+    timeouted = 'retry',
+    readTimeout = runtime.readTimeout,
+    connectTimeout = runtime.connectTimeout,
+    localAddr = runtime.localAddr,
+    httpProxy = runtime.httpProxy,
+    httpsProxy = runtime.httpsProxy,
+    noProxy = runtime.noProxy,
+    maxIdleConns = runtime.maxIdleConns,
+    socks5Proxy = runtime.socks5Proxy,
+    socks5NetWork = runtime.socks5NetWork,
+    retry = {
+      retryable = runtime.autoretry,
+      maxAttempts = @defaultNumber(runtime.maxAttempts, 3),
+    },
+    backoff = {
+      policy = @default(runtime.backoffPolicy, 'no'),
+      period = @defaultNumber(runtime.backoffPeriod, 1),
+    },
+    ignoreSSL = runtime.ignoreSSL
+  }
+
+  /**
+   * 删除指定drive_id对应的Drive
+   * @tags drive
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  api deleteDrive(request: DeleteDriveRequest, runtime: RuntimeOptions): void  {
+    var accesskeyId = @getAccessKeyId();
+    var accessKeySecret = @getAccessKeySecret();
+    var accessToken = @getAccessToken();
+    protocol = @getProtocol(@protocol, 'https');
+    method = 'POST';
+    pathname = `/v2/drive/delete`;
+    headers = {
+      host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
+      content-type = 'application/json; charset=utf-8',
+    };
+
+    if (@notEmpty(accessToken)) {
+      headers.authorization = `Bearer ${accessToken}`;
+    } else if (@notEmpty(accesskeyId) && @notEmpty(accessKeySecret)) {
+      headers.date = @getRFC2616Date();
+      headers.accept = 'application/json';
+      headers.x-acs-signature-method = 'HMAC-SHA1';
+      headers.x-acs-signature-version = '1.0';
+      headers.authorization = `acs ${accesskeyId}:${@getSignature(__request)}`;
+    }
+    body = @toJSONString(request);
+  } returns {
+    if (@isStatusCode(__response, 204)) {
+      return;
+    }
+
+    if (@notEmpty(__response.headers.x-ca-error-message)) {
+      throw {
+        data = {
+          requestId = __response.headers.x-ca-request-id,
+          statusCode = __response.statusCode,
+          statusMessage = __response.statusMessage,
+        },
+        message = __response.headers.x-ca-error-message,
+      };
+    }
+    throw {
+      data = {
+        requestId = __response.headers.x-ca-request-id,
+        statusCode = __response.statusCode,
+        statusMessage = __response.statusMessage,
+      },
+      ...@readAsJSON(__response),
+    };
+  } runtime {
+    timeouted = 'retry',
+    readTimeout = runtime.readTimeout,
+    connectTimeout = runtime.connectTimeout,
+    localAddr = runtime.localAddr,
+    httpProxy = runtime.httpProxy,
+    httpsProxy = runtime.httpsProxy,
+    noProxy = runtime.noProxy,
+    maxIdleConns = runtime.maxIdleConns,
+    socks5Proxy = runtime.socks5Proxy,
+    socks5NetWork = runtime.socks5NetWork,
+    retry = {
+      retryable = runtime.autoretry,
+      maxAttempts = @defaultNumber(runtime.maxAttempts, 3),
+    },
+    backoff = {
+      policy = @default(runtime.backoffPolicy, 'no'),
+      period = @defaultNumber(runtime.backoffPeriod, 1),
+    },
+    ignoreSSL = runtime.ignoreSSL
+  }
+
+  /**
+   * 获取指定drive_id对应的Drive详细信息。
+   * @tags drive
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  api getDrive(request: GetDriveRequest, runtime: RuntimeOptions): GetDriveResponse  {
+    var accesskeyId = @getAccessKeyId();
+    var accessKeySecret = @getAccessKeySecret();
+    var accessToken = @getAccessToken();
+    protocol = @getProtocol(@protocol, 'https');
+    method = 'POST';
+    pathname = `/v2/drive/get`;
+    headers = {
+      host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
+      content-type = 'application/json; charset=utf-8',
+    };
+
+    if (@notEmpty(accessToken)) {
+      headers.authorization = `Bearer ${accessToken}`;
+    } else if (@notEmpty(accesskeyId) && @notEmpty(accessKeySecret)) {
+      headers.date = @getRFC2616Date();
+      headers.accept = 'application/json';
+      headers.x-acs-signature-method = 'HMAC-SHA1';
+      headers.x-acs-signature-version = '1.0';
+      headers.authorization = `acs ${accesskeyId}:${@getSignature(__request)}`;
+    }
+    body = @toJSONString(request);
+  } returns {
+    if (@isStatusCode(__response, 200)) {
+      return {
+        requestId = __response.headers.x-ca-request-id,
+        ...@readAsJSON(__response),
+      };
+    }
+
+    if (@notEmpty(__response.headers.x-ca-error-message)) {
+      throw {
+        data = {
+          requestId = __response.headers.x-ca-request-id,
+          statusCode = __response.statusCode,
+          statusMessage = __response.statusMessage,
+        },
+        message = __response.headers.x-ca-error-message,
+      };
+    }
+    throw {
+      data = {
+        requestId = __response.headers.x-ca-request-id,
+        statusCode = __response.statusCode,
+        statusMessage = __response.statusMessage,
+      },
+      ...@readAsJSON(__response),
+    };
+  } runtime {
+    timeouted = 'retry',
+    readTimeout = runtime.readTimeout,
+    connectTimeout = runtime.connectTimeout,
+    localAddr = runtime.localAddr,
+    httpProxy = runtime.httpProxy,
+    httpsProxy = runtime.httpsProxy,
+    noProxy = runtime.noProxy,
+    maxIdleConns = runtime.maxIdleConns,
+    socks5Proxy = runtime.socks5Proxy,
+    socks5NetWork = runtime.socks5NetWork,
+    retry = {
+      retryable = runtime.autoretry,
+      maxAttempts = @defaultNumber(runtime.maxAttempts, 3),
+    },
+    backoff = {
+      policy = @default(runtime.backoffPolicy, 'no'),
+      period = @defaultNumber(runtime.backoffPeriod, 1),
+    },
+    ignoreSSL = runtime.ignoreSSL
+  }
+
+  /**
+   * 一个用户可拥有多个drive，在创建drive时通过参数指定是否为这个用户的默认drive，
+每个用户只能设置一个默认drive。
+   * @tags drive
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  api getDefaultDrive(request: GetDefaultDriveRequest, runtime: RuntimeOptions): GetDriveResponse  {
+    var accesskeyId = @getAccessKeyId();
+    var accessKeySecret = @getAccessKeySecret();
+    var accessToken = @getAccessToken();
+    protocol = @getProtocol(@protocol, 'https');
+    method = 'POST';
+    pathname = `/v2/drive/get_default_drive`;
+    headers = {
+      host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
+      content-type = 'application/json; charset=utf-8',
+    };
+
+    if (@notEmpty(accessToken)) {
+      headers.authorization = `Bearer ${accessToken}`;
+    } else if (@notEmpty(accesskeyId) && @notEmpty(accessKeySecret)) {
+      headers.date = @getRFC2616Date();
+      headers.accept = 'application/json';
+      headers.x-acs-signature-method = 'HMAC-SHA1';
+      headers.x-acs-signature-version = '1.0';
+      headers.authorization = `acs ${accesskeyId}:${@getSignature(__request)}`;
+    }
+    body = @toJSONString(request);
+  } returns {
+    if (@isStatusCode(__response, 200)) {
+      return {
+        requestId = __response.headers.x-ca-request-id,
+        ...@readAsJSON(__response),
+      };
+    }
+
+    if (@notEmpty(__response.headers.x-ca-error-message)) {
+      throw {
+        data = {
+          requestId = __response.headers.x-ca-request-id,
+          statusCode = __response.statusCode,
+          statusMessage = __response.statusMessage,
+        },
+        message = __response.headers.x-ca-error-message,
+      };
+    }
+    throw {
+      data = {
+        requestId = __response.headers.x-ca-request-id,
+        statusCode = __response.statusCode,
+        statusMessage = __response.statusMessage,
+      },
+      ...@readAsJSON(__response),
+    };
+  } runtime {
+    timeouted = 'retry',
+    readTimeout = runtime.readTimeout,
+    connectTimeout = runtime.connectTimeout,
+    localAddr = runtime.localAddr,
+    httpProxy = runtime.httpProxy,
+    httpsProxy = runtime.httpsProxy,
+    noProxy = runtime.noProxy,
+    maxIdleConns = runtime.maxIdleConns,
+    socks5Proxy = runtime.socks5Proxy,
+    socks5NetWork = runtime.socks5NetWork,
+    retry = {
+      retryable = runtime.autoretry,
+      maxAttempts = @defaultNumber(runtime.maxAttempts, 3),
+    },
+    backoff = {
+      policy = @default(runtime.backoffPolicy, 'no'),
+      period = @defaultNumber(runtime.backoffPeriod, 1),
+    },
+    ignoreSSL = runtime.ignoreSSL
+  }
+
+  /**
+   * 管理员列举指定用户的Drive
+   * @tags drive
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  api listDrives(request: ListDriveRequest, runtime: RuntimeOptions): ListDriveResponse  {
+    var accesskeyId = @getAccessKeyId();
+    var accessKeySecret = @getAccessKeySecret();
+    var accessToken = @getAccessToken();
+    protocol = @getProtocol(@protocol, 'https');
+    method = 'POST';
+    pathname = `/v2/drive/list`;
+    headers = {
+      host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
+      content-type = 'application/json; charset=utf-8',
+    };
+
+    if (@notEmpty(accessToken)) {
+      headers.authorization = `Bearer ${accessToken}`;
+    } else if (@notEmpty(accesskeyId) && @notEmpty(accessKeySecret)) {
+      headers.date = @getRFC2616Date();
+      headers.accept = 'application/json';
+      headers.x-acs-signature-method = 'HMAC-SHA1';
+      headers.x-acs-signature-version = '1.0';
+      headers.authorization = `acs ${accesskeyId}:${@getSignature(__request)}`;
+    }
+    body = @toJSONString(request);
+  } returns {
+    if (@isStatusCode(__response, 200)) {
+      return {
+        requestId = __response.headers.x-ca-request-id,
+        ...@readAsJSON(__response),
+      };
+    }
+
+    if (@notEmpty(__response.headers.x-ca-error-message)) {
+      throw {
+        data = {
+          requestId = __response.headers.x-ca-request-id,
+          statusCode = __response.statusCode,
+          statusMessage = __response.statusMessage,
+        },
+        message = __response.headers.x-ca-error-message,
+      };
+    }
+    throw {
+      data = {
+        requestId = __response.headers.x-ca-request-id,
+        statusCode = __response.statusCode,
+        statusMessage = __response.statusMessage,
+      },
+      ...@readAsJSON(__response),
+    };
+  } runtime {
+    timeouted = 'retry',
+    readTimeout = runtime.readTimeout,
+    connectTimeout = runtime.connectTimeout,
+    localAddr = runtime.localAddr,
+    httpProxy = runtime.httpProxy,
+    httpsProxy = runtime.httpsProxy,
+    noProxy = runtime.noProxy,
+    maxIdleConns = runtime.maxIdleConns,
+    socks5Proxy = runtime.socks5Proxy,
+    socks5NetWork = runtime.socks5NetWork,
+    retry = {
+      retryable = runtime.autoretry,
+      maxAttempts = @defaultNumber(runtime.maxAttempts, 3),
+    },
+    backoff = {
+      policy = @default(runtime.backoffPolicy, 'no'),
+      period = @defaultNumber(runtime.backoffPeriod, 1),
+    },
+    ignoreSSL = runtime.ignoreSSL
+  }
+
+  /**
+   * 列举当前用户（访问令牌）的Drive
+   * @tags drive
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  api listMyDrives(request: ListMyDriveRequest, runtime: RuntimeOptions): ListDriveResponse  {
+    var accesskeyId = @getAccessKeyId();
+    var accessKeySecret = @getAccessKeySecret();
+    var accessToken = @getAccessToken();
+    protocol = @getProtocol(@protocol, 'https');
+    method = 'POST';
+    pathname = `/v2/drive/list_my_drives`;
+    headers = {
+      host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
+      content-type = 'application/json; charset=utf-8',
+    };
+
+    if (@notEmpty(accessToken)) {
+      headers.authorization = `Bearer ${accessToken}`;
+    } else if (@notEmpty(accesskeyId) && @notEmpty(accessKeySecret)) {
+      headers.date = @getRFC2616Date();
+      headers.accept = 'application/json';
+      headers.x-acs-signature-method = 'HMAC-SHA1';
+      headers.x-acs-signature-version = '1.0';
+      headers.authorization = `acs ${accesskeyId}:${@getSignature(__request)}`;
+    }
+    body = @toJSONString(request);
+  } returns {
+    if (@isStatusCode(__response, 200)) {
+      return {
+        requestId = __response.headers.x-ca-request-id,
+        ...@readAsJSON(__response),
+      };
+    }
+
+    if (@notEmpty(__response.headers.x-ca-error-message)) {
+      throw {
+        data = {
+          requestId = __response.headers.x-ca-request-id,
+          statusCode = __response.statusCode,
+          statusMessage = __response.statusMessage,
+        },
+        message = __response.headers.x-ca-error-message,
+      };
+    }
+    throw {
+      data = {
+        requestId = __response.headers.x-ca-request-id,
+        statusCode = __response.statusCode,
+        statusMessage = __response.statusMessage,
+      },
+      ...@readAsJSON(__response),
+    };
+  } runtime {
+    timeouted = 'retry',
+    readTimeout = runtime.readTimeout,
+    connectTimeout = runtime.connectTimeout,
+    localAddr = runtime.localAddr,
+    httpProxy = runtime.httpProxy,
+    httpsProxy = runtime.httpsProxy,
+    noProxy = runtime.noProxy,
+    maxIdleConns = runtime.maxIdleConns,
+    socks5Proxy = runtime.socks5Proxy,
+    socks5NetWork = runtime.socks5NetWork,
+    retry = {
+      retryable = runtime.autoretry,
+      maxAttempts = @defaultNumber(runtime.maxAttempts, 3),
+    },
+    backoff = {
+      policy = @default(runtime.backoffPolicy, 'no'),
+      period = @defaultNumber(runtime.backoffPeriod, 1),
+    },
+    ignoreSSL = runtime.ignoreSSL
+  }
+
+  /**
+   * 更新指定drive_id的Drive信息
+   * @tags drive
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  api updateDrive(request: UpdateDriveRequest, runtime: RuntimeOptions): UpdateDriveResponse  {
+    var accesskeyId = @getAccessKeyId();
+    var accessKeySecret = @getAccessKeySecret();
+    var accessToken = @getAccessToken();
+    protocol = @getProtocol(@protocol, 'https');
+    method = 'POST';
+    pathname = `/v2/drive/update`;
+    headers = {
+      host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
+      content-type = 'application/json; charset=utf-8',
+    };
+
+    if (@notEmpty(accessToken)) {
+      headers.authorization = `Bearer ${accessToken}`;
+    } else if (@notEmpty(accesskeyId) && @notEmpty(accessKeySecret)) {
+      headers.date = @getRFC2616Date();
+      headers.accept = 'application/json';
+      headers.x-acs-signature-method = 'HMAC-SHA1';
+      headers.x-acs-signature-version = '1.0';
+      headers.authorization = `acs ${accesskeyId}:${@getSignature(__request)}`;
+    }
+    body = @toJSONString(request);
+  } returns {
+    if (@isStatusCode(__response, 200)) {
+      return {
+        requestId = __response.headers.x-ca-request-id,
+        ...@readAsJSON(__response),
+      };
+    }
+
+    if (@notEmpty(__response.headers.x-ca-error-message)) {
+      throw {
+        data = {
+          requestId = __response.headers.x-ca-request-id,
+          statusCode = __response.statusCode,
+          statusMessage = __response.statusMessage,
+        },
+        message = __response.headers.x-ca-error-message,
+      };
+    }
+    throw {
+      data = {
+        requestId = __response.headers.x-ca-request-id,
+        statusCode = __response.statusCode,
+        statusMessage = __response.statusMessage,
+      },
+      ...@readAsJSON(__response),
+    };
+  } runtime {
+    timeouted = 'retry',
+    readTimeout = runtime.readTimeout,
+    connectTimeout = runtime.connectTimeout,
+    localAddr = runtime.localAddr,
+    httpProxy = runtime.httpProxy,
+    httpsProxy = runtime.httpsProxy,
+    noProxy = runtime.noProxy,
+    maxIdleConns = runtime.maxIdleConns,
+    socks5Proxy = runtime.socks5Proxy,
+    socks5NetWork = runtime.socks5NetWork,
+    retry = {
+      retryable = runtime.autoretry,
+      maxAttempts = @defaultNumber(runtime.maxAttempts, 3),
+    },
+    backoff = {
+      policy = @default(runtime.backoffPolicy, 'no'),
+      period = @defaultNumber(runtime.backoffPeriod, 1),
+    },
+    ignoreSSL = runtime.ignoreSSL
+  }
+
+  /**
+   * 完成文件上传。
    * @tags file
    * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
    * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
    * @error NotFound The resource {resource_name} cannot be found. Please check.
    * @error InternalError The request has been failed due to some unknown error.
@@ -3386,9 +3957,10 @@ example', x-go-name='UserID'),
   }
 
   /**
-   * 拷贝文件或者文件夹
+   * 指定源文件或文件夹，拷贝到指定的文件夹。
    * @tags file
    * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
    * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
    * @error NotFound The resource {resource_name} cannot be found. Please check.
    * @error InternalError The request has been failed due to some unknown error.
@@ -3472,9 +4044,11 @@ example', x-go-name='UserID'),
   }
 
   /**
-   * 创建文件或者文件夹
+   * 在指定文件夹下创建文件或者文件夹，
+根文件夹用root表示，其他文件夹使用创建文件夹时返回的file_id。
    * @tags file
    * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
    * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
    * @error NotFound The resource {resource_name} cannot be found. Please check.
    * @error AlreadyExist {resource} has already exists. {extra_msg}
@@ -3552,9 +4126,10 @@ example', x-go-name='UserID'),
   }
 
   /**
-   * 删除文件或者文件夹
+   * 指定文件或文件夹ID，删除文件或者文件夹。
    * @tags file
    * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
    * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
    * @error NotFound The resource {resource_name} cannot be found. Please check.
    * @error InternalError The request has been failed due to some unknown error.
@@ -3641,9 +4216,10 @@ example', x-go-name='UserID'),
   }
 
   /**
-   * 或下载文件下载重定向URL
+   * 指定文件ID，下载文件。
    * @tags file
    * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
    * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
    * @error NotFound The resource {resource_name} cannot be found. Please check.
    * @error InternalError The request has been failed due to some unknown error.
@@ -3712,9 +4288,10 @@ example', x-go-name='UserID'),
   }
 
   /**
-   * 获取文件meta信息
+   * 获取指定文件或文件夹ID的信息。
    * @tags file
    * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
    * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
    * @error NotFound The resource {resource_name} cannot be found. Please check.
    * @error InternalError The request has been failed due to some unknown error.
@@ -3791,9 +4368,10 @@ example', x-go-name='UserID'),
   }
 
   /**
-   * 获取文件 download url
+   * 获取文件的下载地址，调用者可自己设置range头并发下载。
    * @tags file
    * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
    * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
    * @error NotFound The resource {resource_name} cannot be found. Please check.
    * @error InternalError The request has been failed due to some unknown error.
@@ -3870,9 +4448,10 @@ example', x-go-name='UserID'),
   }
 
   /**
-   * 获取file Upload url
+   * 可指定分片信息，一次获取多个分片的上传地址。
    * @tags file
    * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
    * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
    * @error NotFound The resource {resource_name} cannot be found. Please check.
    * @error InternalError The request has been failed due to some unknown error.
@@ -3949,9 +4528,10 @@ example', x-go-name='UserID'),
   }
 
   /**
-   * 列举文件或者文件夹
+   * 列举指定目录下的文件或文件夹。
    * @tags file
    * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
    * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
    * @error NotFound The resource {resource_name} cannot be found. Please check.
    * @error InternalError The request has been failed due to some unknown error.
@@ -4028,9 +4608,10 @@ example', x-go-name='UserID'),
   }
 
   /**
-   * 列举uploadID对应的已上传分片
+   * 列举upload_id对应的已上传分片。
    * @tags file
    * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
    * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
    * @error NotFound The resource {resource_name} cannot be found. Please check.
    * @error InternalError The request has been failed due to some unknown error.
@@ -4107,9 +4688,10 @@ example', x-go-name='UserID'),
   }
 
   /**
-   * 移动文件到相同drive的其他路径。
+   * 指定源文件或文件夹，移动到指定的文件夹。
    * @tags file
    * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
    * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
    * @error NotFound The resource {resource_name} cannot be found. Please check.
    * @error InternalError The request has been failed due to some unknown error.
@@ -4186,9 +4768,10 @@ example', x-go-name='UserID'),
   }
 
   /**
-   * This will search files of the drive
+   * 根据筛选条件，在指定drive下搜索文件。
    * @tags file
    * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
    * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
    * @error NotFound The resource {resource_name} cannot be found. Please check.
    * @error InternalError The request has been failed due to some unknown error.
@@ -4265,9 +4848,10 @@ example', x-go-name='UserID'),
   }
 
   /**
-   * 更新file
+   * 对指定的文件或文件夹更新信息。
    * @tags file
    * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
    * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
    * @error NotFound The resource {resource_name} cannot be found. Please check.
    * @error InternalError The request has been failed due to some unknown error.
@@ -4280,552 +4864,6 @@ example', x-go-name='UserID'),
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
     pathname = `/v2/file/update`;
-    headers = {
-      host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
-      content-type = 'application/json; charset=utf-8',
-    };
-
-    if (@notEmpty(accessToken)) {
-      headers.authorization = `Bearer ${accessToken}`;
-    } else if (@notEmpty(accesskeyId) && @notEmpty(accessKeySecret)) {
-      headers.date = @getRFC2616Date();
-      headers.accept = 'application/json';
-      headers.x-acs-signature-method = 'HMAC-SHA1';
-      headers.x-acs-signature-version = '1.0';
-      headers.authorization = `acs ${accesskeyId}:${@getSignature(__request)}`;
-    }
-    body = @toJSONString(request);
-  } returns {
-    if (@isStatusCode(__response, 200)) {
-      return {
-        requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
-      };
-    }
-
-    if (@notEmpty(__response.headers.x-ca-error-message)) {
-      throw {
-        data = {
-          requestId = __response.headers.x-ca-request-id,
-          statusCode = __response.statusCode,
-          statusMessage = __response.statusMessage,
-        },
-        message = __response.headers.x-ca-error-message,
-      };
-    }
-    throw {
-      data = {
-        requestId = __response.headers.x-ca-request-id,
-        statusCode = __response.statusCode,
-        statusMessage = __response.statusMessage,
-      },
-      ...@readAsJSON(__response),
-    };
-  } runtime {
-    timeouted = 'retry',
-    readTimeout = runtime.readTimeout,
-    connectTimeout = runtime.connectTimeout,
-    localAddr = runtime.localAddr,
-    httpProxy = runtime.httpProxy,
-    httpsProxy = runtime.httpsProxy,
-    noProxy = runtime.noProxy,
-    maxIdleConns = runtime.maxIdleConns,
-    socks5Proxy = runtime.socks5Proxy,
-    socks5NetWork = runtime.socks5NetWork,
-    retry = {
-      retryable = runtime.autoretry,
-      maxAttempts = @defaultNumber(runtime.maxAttempts, 3),
-    },
-    backoff = {
-      policy = @default(runtime.backoffPolicy, 'no'),
-      period = @defaultNumber(runtime.backoffPeriod, 1),
-    },
-    ignoreSSL = runtime.ignoreSSL
-  }
-
-  /**
-   * 可以指定 Drive 类型来创建 Drive
-   * @tags drive
-   * @error InvalidParameter The input parameter {parameter_name} is not valid.
-   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
-   * @error InternalError The request has been failed due to some unknown error.
-   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-   */
-  api createDrive(request: CreateDriveRequest, runtime: RuntimeOptions): CreateDriveResponse  {
-    var accesskeyId = @getAccessKeyId();
-    var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
-    protocol = @getProtocol(@protocol, 'https');
-    method = 'POST';
-    pathname = `/v2/drive/create`;
-    headers = {
-      host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
-      content-type = 'application/json; charset=utf-8',
-    };
-
-    if (@notEmpty(accessToken)) {
-      headers.authorization = `Bearer ${accessToken}`;
-    } else if (@notEmpty(accesskeyId) && @notEmpty(accessKeySecret)) {
-      headers.date = @getRFC2616Date();
-      headers.accept = 'application/json';
-      headers.x-acs-signature-method = 'HMAC-SHA1';
-      headers.x-acs-signature-version = '1.0';
-      headers.authorization = `acs ${accesskeyId}:${@getSignature(__request)}`;
-    }
-    body = @toJSONString(request);
-  } returns {
-    if (@isStatusCode(__response, 201)) {
-      return {
-        requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
-      };
-    }
-
-    if (@notEmpty(__response.headers.x-ca-error-message)) {
-      throw {
-        data = {
-          requestId = __response.headers.x-ca-request-id,
-          statusCode = __response.statusCode,
-          statusMessage = __response.statusMessage,
-        },
-        message = __response.headers.x-ca-error-message,
-      };
-    }
-    throw {
-      data = {
-        requestId = __response.headers.x-ca-request-id,
-        statusCode = __response.statusCode,
-        statusMessage = __response.statusMessage,
-      },
-      ...@readAsJSON(__response),
-    };
-  } runtime {
-    timeouted = 'retry',
-    readTimeout = runtime.readTimeout,
-    connectTimeout = runtime.connectTimeout,
-    localAddr = runtime.localAddr,
-    httpProxy = runtime.httpProxy,
-    httpsProxy = runtime.httpsProxy,
-    noProxy = runtime.noProxy,
-    maxIdleConns = runtime.maxIdleConns,
-    socks5Proxy = runtime.socks5Proxy,
-    socks5NetWork = runtime.socks5NetWork,
-    retry = {
-      retryable = runtime.autoretry,
-      maxAttempts = @defaultNumber(runtime.maxAttempts, 3),
-    },
-    backoff = {
-      policy = @default(runtime.backoffPolicy, 'no'),
-      period = @defaultNumber(runtime.backoffPeriod, 1),
-    },
-    ignoreSSL = runtime.ignoreSSL
-  }
-
-  /**
-   * 该接口将会删除 Drive
-   * @tags drive
-   * @error InvalidParameter The input parameter {parameter_name} is not valid.
-   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
-   * @error InternalError The request has been failed due to some unknown error.
-   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-   */
-  api deleteDrive(request: DeleteDriveRequest, runtime: RuntimeOptions): void  {
-    var accesskeyId = @getAccessKeyId();
-    var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
-    protocol = @getProtocol(@protocol, 'https');
-    method = 'POST';
-    pathname = `/v2/drive/delete`;
-    headers = {
-      host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
-      content-type = 'application/json; charset=utf-8',
-    };
-
-    if (@notEmpty(accessToken)) {
-      headers.authorization = `Bearer ${accessToken}`;
-    } else if (@notEmpty(accesskeyId) && @notEmpty(accessKeySecret)) {
-      headers.date = @getRFC2616Date();
-      headers.accept = 'application/json';
-      headers.x-acs-signature-method = 'HMAC-SHA1';
-      headers.x-acs-signature-version = '1.0';
-      headers.authorization = `acs ${accesskeyId}:${@getSignature(__request)}`;
-    }
-    body = @toJSONString(request);
-  } returns {
-    if (@isStatusCode(__response, 204)) {
-      return;
-    }
-
-    if (@notEmpty(__response.headers.x-ca-error-message)) {
-      throw {
-        data = {
-          requestId = __response.headers.x-ca-request-id,
-          statusCode = __response.statusCode,
-          statusMessage = __response.statusMessage,
-        },
-        message = __response.headers.x-ca-error-message,
-      };
-    }
-    throw {
-      data = {
-        requestId = __response.headers.x-ca-request-id,
-        statusCode = __response.statusCode,
-        statusMessage = __response.statusMessage,
-      },
-      ...@readAsJSON(__response),
-    };
-  } runtime {
-    timeouted = 'retry',
-    readTimeout = runtime.readTimeout,
-    connectTimeout = runtime.connectTimeout,
-    localAddr = runtime.localAddr,
-    httpProxy = runtime.httpProxy,
-    httpsProxy = runtime.httpsProxy,
-    noProxy = runtime.noProxy,
-    maxIdleConns = runtime.maxIdleConns,
-    socks5Proxy = runtime.socks5Proxy,
-    socks5NetWork = runtime.socks5NetWork,
-    retry = {
-      retryable = runtime.autoretry,
-      maxAttempts = @defaultNumber(runtime.maxAttempts, 3),
-    },
-    backoff = {
-      policy = @default(runtime.backoffPolicy, 'no'),
-      period = @defaultNumber(runtime.backoffPeriod, 1),
-    },
-    ignoreSSL = runtime.ignoreSSL
-  }
-
-  /**
-   * 通过该接口可以获取 Drive 详细信息
-   * @tags drive
-   * @error InvalidParameter The input parameter {parameter_name} is not valid.
-   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
-   * @error NotFound The resource {resource_name} cannot be found. Please check.
-   * @error InternalError The request has been failed due to some unknown error.
-   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-   */
-  api getDrive(request: GetDriveRequest, runtime: RuntimeOptions): GetDriveResponse  {
-    var accesskeyId = @getAccessKeyId();
-    var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
-    protocol = @getProtocol(@protocol, 'https');
-    method = 'POST';
-    pathname = `/v2/drive/get`;
-    headers = {
-      host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
-      content-type = 'application/json; charset=utf-8',
-    };
-
-    if (@notEmpty(accessToken)) {
-      headers.authorization = `Bearer ${accessToken}`;
-    } else if (@notEmpty(accesskeyId) && @notEmpty(accessKeySecret)) {
-      headers.date = @getRFC2616Date();
-      headers.accept = 'application/json';
-      headers.x-acs-signature-method = 'HMAC-SHA1';
-      headers.x-acs-signature-version = '1.0';
-      headers.authorization = `acs ${accesskeyId}:${@getSignature(__request)}`;
-    }
-    body = @toJSONString(request);
-  } returns {
-    if (@isStatusCode(__response, 200)) {
-      return {
-        requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
-      };
-    }
-
-    if (@notEmpty(__response.headers.x-ca-error-message)) {
-      throw {
-        data = {
-          requestId = __response.headers.x-ca-request-id,
-          statusCode = __response.statusCode,
-          statusMessage = __response.statusMessage,
-        },
-        message = __response.headers.x-ca-error-message,
-      };
-    }
-    throw {
-      data = {
-        requestId = __response.headers.x-ca-request-id,
-        statusCode = __response.statusCode,
-        statusMessage = __response.statusMessage,
-      },
-      ...@readAsJSON(__response),
-    };
-  } runtime {
-    timeouted = 'retry',
-    readTimeout = runtime.readTimeout,
-    connectTimeout = runtime.connectTimeout,
-    localAddr = runtime.localAddr,
-    httpProxy = runtime.httpProxy,
-    httpsProxy = runtime.httpsProxy,
-    noProxy = runtime.noProxy,
-    maxIdleConns = runtime.maxIdleConns,
-    socks5Proxy = runtime.socks5Proxy,
-    socks5NetWork = runtime.socks5NetWork,
-    retry = {
-      retryable = runtime.autoretry,
-      maxAttempts = @defaultNumber(runtime.maxAttempts, 3),
-    },
-    backoff = {
-      policy = @default(runtime.backoffPolicy, 'no'),
-      period = @defaultNumber(runtime.backoffPeriod, 1),
-    },
-    ignoreSSL = runtime.ignoreSSL
-  }
-
-  /**
-   * 该接口可以获取默认 Drive 的详细信息
-   * @tags drive
-   * @error InvalidParameter The input parameter {parameter_name} is not valid.
-   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
-   * @error NotFound The resource {resource_name} cannot be found. Please check.
-   * @error InternalError The request has been failed due to some unknown error.
-   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-   */
-  api getDefaultDrive(request: GetDefaultDriveRequest, runtime: RuntimeOptions): GetDriveResponse  {
-    var accesskeyId = @getAccessKeyId();
-    var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
-    protocol = @getProtocol(@protocol, 'https');
-    method = 'POST';
-    pathname = `/v2/drive/get_default_drive`;
-    headers = {
-      host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
-      content-type = 'application/json; charset=utf-8',
-    };
-
-    if (@notEmpty(accessToken)) {
-      headers.authorization = `Bearer ${accessToken}`;
-    } else if (@notEmpty(accesskeyId) && @notEmpty(accessKeySecret)) {
-      headers.date = @getRFC2616Date();
-      headers.accept = 'application/json';
-      headers.x-acs-signature-method = 'HMAC-SHA1';
-      headers.x-acs-signature-version = '1.0';
-      headers.authorization = `acs ${accesskeyId}:${@getSignature(__request)}`;
-    }
-    body = @toJSONString(request);
-  } returns {
-    if (@isStatusCode(__response, 200)) {
-      return {
-        requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
-      };
-    }
-
-    if (@notEmpty(__response.headers.x-ca-error-message)) {
-      throw {
-        data = {
-          requestId = __response.headers.x-ca-request-id,
-          statusCode = __response.statusCode,
-          statusMessage = __response.statusMessage,
-        },
-        message = __response.headers.x-ca-error-message,
-      };
-    }
-    throw {
-      data = {
-        requestId = __response.headers.x-ca-request-id,
-        statusCode = __response.statusCode,
-        statusMessage = __response.statusMessage,
-      },
-      ...@readAsJSON(__response),
-    };
-  } runtime {
-    timeouted = 'retry',
-    readTimeout = runtime.readTimeout,
-    connectTimeout = runtime.connectTimeout,
-    localAddr = runtime.localAddr,
-    httpProxy = runtime.httpProxy,
-    httpsProxy = runtime.httpsProxy,
-    noProxy = runtime.noProxy,
-    maxIdleConns = runtime.maxIdleConns,
-    socks5Proxy = runtime.socks5Proxy,
-    socks5NetWork = runtime.socks5NetWork,
-    retry = {
-      retryable = runtime.autoretry,
-      maxAttempts = @defaultNumber(runtime.maxAttempts, 3),
-    },
-    backoff = {
-      policy = @default(runtime.backoffPolicy, 'no'),
-      period = @defaultNumber(runtime.backoffPeriod, 1),
-    },
-    ignoreSSL = runtime.ignoreSSL
-  }
-
-  /**
-   * 该接口将会列举用户的 Drive
-   * @tags drive
-   * @error InvalidParameter The input parameter {parameter_name} is not valid.
-   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
-   * @error InternalError The request has been failed due to some unknown error.
-   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-   */
-  api listDrives(request: ListDriveRequest, runtime: RuntimeOptions): ListDriveResponse  {
-    var accesskeyId = @getAccessKeyId();
-    var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
-    protocol = @getProtocol(@protocol, 'https');
-    method = 'POST';
-    pathname = `/v2/drive/list`;
-    headers = {
-      host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
-      content-type = 'application/json; charset=utf-8',
-    };
-
-    if (@notEmpty(accessToken)) {
-      headers.authorization = `Bearer ${accessToken}`;
-    } else if (@notEmpty(accesskeyId) && @notEmpty(accessKeySecret)) {
-      headers.date = @getRFC2616Date();
-      headers.accept = 'application/json';
-      headers.x-acs-signature-method = 'HMAC-SHA1';
-      headers.x-acs-signature-version = '1.0';
-      headers.authorization = `acs ${accesskeyId}:${@getSignature(__request)}`;
-    }
-    body = @toJSONString(request);
-  } returns {
-    if (@isStatusCode(__response, 200)) {
-      return {
-        requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
-      };
-    }
-
-    if (@notEmpty(__response.headers.x-ca-error-message)) {
-      throw {
-        data = {
-          requestId = __response.headers.x-ca-request-id,
-          statusCode = __response.statusCode,
-          statusMessage = __response.statusMessage,
-        },
-        message = __response.headers.x-ca-error-message,
-      };
-    }
-    throw {
-      data = {
-        requestId = __response.headers.x-ca-request-id,
-        statusCode = __response.statusCode,
-        statusMessage = __response.statusMessage,
-      },
-      ...@readAsJSON(__response),
-    };
-  } runtime {
-    timeouted = 'retry',
-    readTimeout = runtime.readTimeout,
-    connectTimeout = runtime.connectTimeout,
-    localAddr = runtime.localAddr,
-    httpProxy = runtime.httpProxy,
-    httpsProxy = runtime.httpsProxy,
-    noProxy = runtime.noProxy,
-    maxIdleConns = runtime.maxIdleConns,
-    socks5Proxy = runtime.socks5Proxy,
-    socks5NetWork = runtime.socks5NetWork,
-    retry = {
-      retryable = runtime.autoretry,
-      maxAttempts = @defaultNumber(runtime.maxAttempts, 3),
-    },
-    backoff = {
-      policy = @default(runtime.backoffPolicy, 'no'),
-      period = @defaultNumber(runtime.backoffPeriod, 1),
-    },
-    ignoreSSL = runtime.ignoreSSL
-  }
-
-  /**
-   * 该接口将会列举当前用户的 Drive
-   * @tags drive
-   * @error InvalidParameter The input parameter {parameter_name} is not valid.
-   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
-   * @error InternalError The request has been failed due to some unknown error.
-   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-   */
-  api listMyDrives(request: ListMyDriveRequest, runtime: RuntimeOptions): ListDriveResponse  {
-    var accesskeyId = @getAccessKeyId();
-    var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
-    protocol = @getProtocol(@protocol, 'https');
-    method = 'POST';
-    pathname = `/v2/drive/list_my_drives`;
-    headers = {
-      host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
-      content-type = 'application/json; charset=utf-8',
-    };
-
-    if (@notEmpty(accessToken)) {
-      headers.authorization = `Bearer ${accessToken}`;
-    } else if (@notEmpty(accesskeyId) && @notEmpty(accessKeySecret)) {
-      headers.date = @getRFC2616Date();
-      headers.accept = 'application/json';
-      headers.x-acs-signature-method = 'HMAC-SHA1';
-      headers.x-acs-signature-version = '1.0';
-      headers.authorization = `acs ${accesskeyId}:${@getSignature(__request)}`;
-    }
-    body = @toJSONString(request);
-  } returns {
-    if (@isStatusCode(__response, 200)) {
-      return {
-        requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
-      };
-    }
-
-    if (@notEmpty(__response.headers.x-ca-error-message)) {
-      throw {
-        data = {
-          requestId = __response.headers.x-ca-request-id,
-          statusCode = __response.statusCode,
-          statusMessage = __response.statusMessage,
-        },
-        message = __response.headers.x-ca-error-message,
-      };
-    }
-    throw {
-      data = {
-        requestId = __response.headers.x-ca-request-id,
-        statusCode = __response.statusCode,
-        statusMessage = __response.statusMessage,
-      },
-      ...@readAsJSON(__response),
-    };
-  } runtime {
-    timeouted = 'retry',
-    readTimeout = runtime.readTimeout,
-    connectTimeout = runtime.connectTimeout,
-    localAddr = runtime.localAddr,
-    httpProxy = runtime.httpProxy,
-    httpsProxy = runtime.httpsProxy,
-    noProxy = runtime.noProxy,
-    maxIdleConns = runtime.maxIdleConns,
-    socks5Proxy = runtime.socks5Proxy,
-    socks5NetWork = runtime.socks5NetWork,
-    retry = {
-      retryable = runtime.autoretry,
-      maxAttempts = @defaultNumber(runtime.maxAttempts, 3),
-    },
-    backoff = {
-      policy = @default(runtime.backoffPolicy, 'no'),
-      period = @defaultNumber(runtime.backoffPeriod, 1),
-    },
-    ignoreSSL = runtime.ignoreSSL
-  }
-
-  /**
-   * 该接口将会 更新 Drive 信息
-   * @tags drive
-   * @error InvalidParameter The input parameter {parameter_name} is not valid.
-   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
-   * @error NotFound The resource {resource_name} cannot be found. Please check.
-   * @error InternalError The request has been failed due to some unknown error.
-   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-   */
-  api updateDrive(request: UpdateDriveRequest, runtime: RuntimeOptions): UpdateDriveResponse  {
-    var accesskeyId = @getAccessKeyId();
-    var accessKeySecret = @getAccessKeySecret();
-    var accessToken = @getAccessToken();
-    protocol = @getProtocol(@protocol, 'https');
-    method = 'POST';
-    pathname = `/v2/drive/update`;
     headers = {
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
