@@ -5,15 +5,14 @@ import com.aliyun.tea.*;
 
 public class MobileCheckExistResponse extends TeaModel {
     @NameInMap("requestId")
-    @Validation(pattern = "", maxLength = 0)
     public String requestId;
 
     @NameInMap("is_exist")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public boolean isExist;
 
     @NameInMap("phone_number")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String phoneNumber;
 
 }

@@ -5,11 +5,11 @@ import com.aliyun.tea.*;
 
 public class GetByLinkInfoRequest extends TeaModel {
     @NameInMap("identity")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String identity;
 
     @NameInMap("type")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String type;
 
 }

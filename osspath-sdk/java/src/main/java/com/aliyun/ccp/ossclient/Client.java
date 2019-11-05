@@ -77,7 +77,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new AccountAccessTokenResponse());
                 }
 
@@ -99,7 +99,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -178,7 +178,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new AccountAccessTokenResponse());
                 }
 
@@ -200,7 +200,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -297,7 +297,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -394,7 +394,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -473,7 +473,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new AccountAccessTokenResponse());
                 }
 
@@ -495,7 +495,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -574,7 +574,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new Captcha());
                 }
 
@@ -596,7 +596,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -675,7 +675,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new LinkInfoResponse());
                 }
 
@@ -697,7 +697,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -776,7 +776,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new LinkInfoListResponse());
                 }
 
@@ -798,7 +798,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -877,7 +877,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new AccountAccessTokenResponse());
                 }
 
@@ -899,7 +899,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -978,7 +978,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new MobileCheckExistResponse());
                 }
 
@@ -1000,7 +1000,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -1079,7 +1079,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new AccountAccessTokenResponse());
                 }
 
@@ -1101,7 +1101,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -1180,7 +1180,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new AccountAccessTokenResponse());
                 }
 
@@ -1202,7 +1202,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -1281,7 +1281,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new MobileSendSmsCodeResponse());
                 }
 
@@ -1303,7 +1303,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -1382,7 +1382,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new AccountAccessTokenResponse());
                 }
 
@@ -1404,7 +1404,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -1483,7 +1483,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new ListStoresResponse());
                 }
 
@@ -1505,7 +1505,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -1584,7 +1584,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new AccessTokenResponse());
                 }
 
@@ -1606,7 +1606,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -1685,7 +1685,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new CreateDriveResponse());
                 }
 
@@ -1707,7 +1707,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -1804,7 +1804,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -1883,7 +1883,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new GetDriveResponse());
                 }
 
@@ -1905,7 +1905,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -1984,7 +1984,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new GetDriveResponse());
                 }
 
@@ -2006,7 +2006,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -2085,7 +2085,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new ListDriveResponse());
                 }
 
@@ -2107,7 +2107,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -2186,7 +2186,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new ListDriveResponse());
                 }
 
@@ -2208,7 +2208,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -2287,7 +2287,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new UpdateDriveResponse());
                 }
 
@@ -2309,7 +2309,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -2388,7 +2388,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new OSSCompleteFileResponse());
                 }
 
@@ -2410,7 +2410,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -2489,7 +2489,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new OSSCopyFileResponse());
                 }
 
@@ -2511,7 +2511,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -2590,7 +2590,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new OSSCreateFileResponse());
                 }
 
@@ -2612,7 +2612,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -2709,7 +2709,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -2788,7 +2788,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new OSSGetFileResponse());
                 }
 
@@ -2810,7 +2810,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -2889,7 +2889,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new OSSGetDownloadUrlResponse());
                 }
 
@@ -2911,7 +2911,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -2990,7 +2990,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new OSSGetUploadUrlResponse());
                 }
 
@@ -3012,7 +3012,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -3091,7 +3091,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new OSSListFileResponse());
                 }
 
@@ -3113,7 +3113,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -3192,7 +3192,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new OSSListUploadedPartResponse());
                 }
 
@@ -3214,7 +3214,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -3293,7 +3293,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new OSSMoveFileResponse());
                 }
 
@@ -3315,7 +3315,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -3394,7 +3394,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new CreateShareResponse());
                 }
 
@@ -3416,7 +3416,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -3513,7 +3513,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -3592,7 +3592,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new GetShareResponse());
                 }
 
@@ -3614,7 +3614,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -3693,7 +3693,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new ListShareResponse());
                 }
 
@@ -3715,7 +3715,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -3794,7 +3794,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new UpdateShareResponse());
                 }
 
@@ -3816,7 +3816,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -3895,7 +3895,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new ListStoreFileResponse());
                 }
 
@@ -3917,7 +3917,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -3996,7 +3996,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new CreateUserResponse());
                 }
 
@@ -4018,7 +4018,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -4115,7 +4115,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -4194,7 +4194,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new GetUserResponse());
                 }
 
@@ -4216,7 +4216,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -4295,7 +4295,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new ListUserResponse());
                 }
 
@@ -4317,7 +4317,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -4396,7 +4396,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new ListUserResponse());
                 }
 
@@ -4418,7 +4418,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -4497,7 +4497,7 @@ public class Client extends BaseClient {
                     return TeaModel.toModel(TeaConverter.merge(
                         TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                        this._readAsJSON(response_)
+                            this._readAsJSON(response_)
                     ), new UpdateUserResponse());
                 }
 
@@ -4519,7 +4519,7 @@ public class Client extends BaseClient {
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
                         ))),
-                    this._readAsJSON(response_)
+                        this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {

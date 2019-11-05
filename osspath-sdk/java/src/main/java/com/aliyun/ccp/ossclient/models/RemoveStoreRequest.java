@@ -5,11 +5,11 @@ import com.aliyun.tea.*;
 
 public class RemoveStoreRequest extends TeaModel {
     @NameInMap("domain_id")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String domainId;
 
     @NameInMap("store_id")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String storeId;
 
 }

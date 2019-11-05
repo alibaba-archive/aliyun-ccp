@@ -5,7 +5,7 @@ import com.aliyun.tea.*;
 
 public class GetCaptchaRequest extends TeaModel {
     @NameInMap("app_id")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String appId;
 
 }

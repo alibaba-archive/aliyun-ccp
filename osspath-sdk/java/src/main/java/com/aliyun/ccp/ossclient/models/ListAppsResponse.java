@@ -5,15 +5,13 @@ import com.aliyun.tea.*;
 
 public class ListAppsResponse extends TeaModel {
     @NameInMap("requestId")
-    @Validation(pattern = "", maxLength = 0)
     public String requestId;
 
     @NameInMap("items")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public GetAppResponse[] items;
 
     @NameInMap("next_marker")
-    @Validation(pattern = "", maxLength = 0)
     public String nextMarker;
 
 }

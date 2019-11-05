@@ -5,7 +5,6 @@ import com.aliyun.tea.*;
 
 public class UCGetObjectInfoBySha1Request extends TeaModel {
     @NameInMap("sha1")
-    @Validation(pattern = "", maxLength = 0)
     public String sha1;
 
 }

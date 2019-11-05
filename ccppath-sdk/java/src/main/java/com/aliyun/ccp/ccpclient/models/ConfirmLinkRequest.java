@@ -5,7 +5,7 @@ import com.aliyun.tea.*;
 
 public class ConfirmLinkRequest extends TeaModel {
     @NameInMap("temporary_token")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String temporaryToken;
 
 }

@@ -5,7 +5,6 @@ import com.aliyun.tea.*;
 
 public class GetAsyncTaskRequest extends TeaModel {
     @NameInMap("async_task_id")
-    @Validation(pattern = "", maxLength = 0)
     public String asyncTaskId;
 
 }

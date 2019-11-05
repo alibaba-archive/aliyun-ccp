@@ -5,27 +5,26 @@ import com.aliyun.tea.*;
 
 public class BaseCreateFileRequest extends TeaModel {
     @NameInMap("content_md5")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String contentMd5;
 
     @NameInMap("content_type")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String contentType;
 
     @NameInMap("name")
-    @Validation(pattern = "[a-z0-9.-_]{1,1024}", maxLength = 0)
+    @Validation(required = true, pattern = "[a-z0-9.-_]{1,1024}")
     public String name;
 
     @NameInMap("part_info_list")
-    @Validation(pattern = "", maxLength = 0)
     public UploadPartInfo[] partInfoList;
 
     @NameInMap("size")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public Long size;
 
     @NameInMap("type")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String type;
 
 }
