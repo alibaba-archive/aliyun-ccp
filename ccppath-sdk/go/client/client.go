@@ -7329,7 +7329,7 @@ func (s *UCGetObjectInfoBySha1Request) SetSha1(v string) *UCGetObjectInfoBySha1R
 type UpdateDriveRequest struct {
 	Description *string `json:"description" xml:"description"`
 	DriveId     *string `json:"drive_id" xml:"drive_id" require:"true"`
-	DriveName   *string `json:"drive_name" xml:"drive_name" require:"true"`
+	DriveName   *string `json:"drive_name" xml:"drive_name"`
 	Status      *string `json:"status" xml:"status"`
 	TotalSize   *int64  `json:"total_size" xml:"total_size"`
 }
