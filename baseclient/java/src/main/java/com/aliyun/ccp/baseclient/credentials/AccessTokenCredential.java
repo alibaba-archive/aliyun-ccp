@@ -21,14 +21,24 @@ public class AccessTokenCredential {
     private String domainId;
     private String clientId;
     private String clientSecret;
+    private String endpoint;
 
     public AccessTokenCredential(Map<String, Object> config) {
         this.refreshToken = (String) config.get("refreshToken");
         this.domainId = (String) config.get("domainId");
+        this.endpoint = (String) config.get("endpoint");
         this.clientId = (String) config.get("clientId");
         this.clientSecret = (String) config.get("clientSecret");
         this.accessToken = (String) config.get("accessToken");
         this.expireTime = (String) config.get("expireTime");
+    }
+
+    public String getHost(String endpoint, String domain) {
+        if (null != endpoint && endpoint.trim().length() > 0) {
+            return endpoint;
+        } else {
+            return domain;
+        }
     }
 
     public void refreshAccessToken() throws NoSuchAlgorithmException, IOException, KeyManagementException,
@@ -38,7 +48,7 @@ public class AccessTokenCredential {
         request_.method = "POST";
         request_.pathname = "/v2/oauth/token";
         request_.headers = TeaConverter.buildMap(
-                new TeaPair("host", this.domainId + ".api.alicloudccp.com"),
+                new TeaPair("host", getHost(this.endpoint, this.domainId + ".api.alicloudccp.com")),
                 new TeaPair("content-type", "application/x-www-form-urlencoded; charset=utf-8"),
                 new TeaPair("date", TimeUtils._getGMTDate()),
                 new TeaPair("accept", "application/json"),
