@@ -29,7 +29,7 @@ public class ListFileRequest extends TeaModel {
     public String marker;
 
     @NameInMap("parent_file_id")
-    @Validation(pattern = "[a-z0-9.-_]{1, 50}", maxLength = 0)
+    @Validation(pattern = "[a-z0-9.-_]{1,50}", maxLength = 0)
     public String parentFileId;
 
     @NameInMap("parent_file_path")

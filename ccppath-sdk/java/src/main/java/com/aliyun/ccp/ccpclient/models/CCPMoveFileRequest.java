@@ -17,7 +17,7 @@ public class CCPMoveFileRequest extends TeaModel {
     public boolean overwrite;
 
     @NameInMap("file_id")
-    @Validation(pattern = "[a-z0-9.-_]{1, 50}", maxLength = 0)
+    @Validation(pattern = "[a-z0-9.-_]{1,50}", maxLength = 0)
     public String fileId;
 
     @NameInMap("to_parent_file_id")

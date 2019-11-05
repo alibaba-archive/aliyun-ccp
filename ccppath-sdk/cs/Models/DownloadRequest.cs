@@ -13,7 +13,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         public string DriveID { get; set; }
 
         [NameInMap("FileID")]
-        [Validation(Required=true, MaxLength=50, Pattern="[a-z0-9.-_]{1, 50}")]
+        [Validation(Required=true, MaxLength=50, Pattern="[a-z0-9.-_]{1,50}")]
         public string FileID { get; set; }
 
         [NameInMap("ImageProcess")]

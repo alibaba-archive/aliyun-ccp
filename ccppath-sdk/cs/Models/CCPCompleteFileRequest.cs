@@ -9,7 +9,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
 {
     public class CCPCompleteFileRequest : TeaModel {
         [NameInMap("drive_id")]
-        [Validation(Required=true, Pattern="[0-9]+")]
+        [Validation(Required=false, Pattern="[0-9]+")]
         public string DriveId { get; set; }
 
         [NameInMap("part_info_list")]
@@ -21,7 +21,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         public string UploadId { get; set; }
 
         [NameInMap("file_id")]
-        [Validation(Required=true, MaxLength=50, Pattern="[a-z0-9]{1, 50}")]
+        [Validation(Required=false, MaxLength=50, Pattern="[a-z0-9]{1,50}")]
         public string FileId { get; set; }
 
     }

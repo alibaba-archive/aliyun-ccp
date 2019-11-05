@@ -663,7 +663,7 @@ export class CCPCompleteFileResponse extends $tea.Model {
   imageMediaMetadata?: ImageMediaResponse[]
   labels?: string[]
   meta?: string
-  name: string
+  name?: string
   parentFileId?: string
   size?: number
   starred?: boolean
@@ -955,7 +955,7 @@ export class CCPGetFileResponse extends $tea.Model {
   imageMediaMetadata?: ImageMediaResponse[]
   labels?: string[]
   meta?: string
-  name: string
+  name?: string
   parentFileId?: string
   size?: number
   starred?: boolean
@@ -1204,7 +1204,7 @@ export class CCPUpdateFileMetaResponse extends $tea.Model {
   imageMediaMetadata?: ImageMediaResponse[]
   labels?: string[]
   meta?: string
-  name: string
+  name?: string
   parentFileId?: string
   size?: number
   starred?: boolean
@@ -2391,7 +2391,7 @@ export class OSSCompleteFileResponse extends $tea.Model {
   driveId?: string
   fileExtension?: string
   filePath?: string
-  name: string
+  name?: string
   parentFilePath?: string
   shareId?: string
   size?: number
@@ -2646,7 +2646,7 @@ export class OSSGetFileResponse extends $tea.Model {
   driveId?: string
   fileExtension?: string
   filePath?: string
-  name: string
+  name?: string
   parentFilePath?: string
   shareId?: string
   size?: number
@@ -2883,7 +2883,7 @@ export class OSSUpdateFileMetaResponse extends $tea.Model {
   driveId?: string
   fileExtension?: string
   filePath?: string
-  name: string
+  name?: string
   parentFilePath?: string
   shareId?: string
   size?: number
@@ -3605,11 +3605,64 @@ export class BaseMoveFileRequest extends $tea.Model {
   }
 }
 
+export class BatchSubRequest extends $tea.Model {
+  body?: object
+  headers?: object
+  id: string
+  method: string
+  url: string
+  static names(): { [key: string]: string } {
+    return {
+      body: 'body',
+      headers: 'headers',
+      id: 'id',
+      method: 'method',
+      url: 'url',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      body: 'object',
+      headers: 'object',
+      id: 'string',
+      method: 'string',
+      url: 'string',
+    };
+  }
+
+  constructor(map: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class CCPBatchRequest extends $tea.Model {
+  requests: BatchSubRequest[]
+  resource: string
+  static names(): { [key: string]: string } {
+    return {
+      requests: 'requests',
+      resource: 'resource',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      requests: { 'type': 'array', 'itemType': BatchSubRequest },
+      resource: 'string',
+    };
+  }
+
+  constructor(map: { [key: string]: any }) {
+    super(map);
+  }
+}
+
 export class CCPCompleteFileRequest extends $tea.Model {
-  driveId: string
+  driveId?: string
   partInfoList?: UploadPartInfo[]
   uploadId?: string
-  fileId: string
+  fileId?: string
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -3634,18 +3687,18 @@ export class CCPCompleteFileRequest extends $tea.Model {
 }
 
 export class CCPCopyFileRequest extends $tea.Model {
+  autoRename?: boolean
   driveId: string
   fileId: string
   newName: string
-  overwrite?: boolean
   toDriveId: string
   toParentFileId: string
   static names(): { [key: string]: string } {
     return {
+      autoRename: 'auto_rename',
       driveId: 'drive_id',
       fileId: 'file_id',
       newName: 'new_name',
-      overwrite: 'overwrite',
       toDriveId: 'to_drive_id',
       toParentFileId: 'to_parent_file_id',
     };
@@ -3653,10 +3706,10 @@ export class CCPCopyFileRequest extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
+      autoRename: 'boolean',
       driveId: 'string',
       fileId: 'string',
       newName: 'string',
-      overwrite: 'boolean',
       toDriveId: 'string',
       toParentFileId: 'string',
     };
@@ -3668,21 +3721,23 @@ export class CCPCopyFileRequest extends $tea.Model {
 }
 
 export class CCPCreateFileRequest extends $tea.Model {
-  contentMd5: string
-  contentType: string
-  name: string
+  contentMd5?: string
+  contentType?: string
+  name?: string
   partInfoList?: UploadPartInfo[]
-  size: number
-  type: string
+  size?: number
+  type?: string
+  autoRename?: boolean
   contentHash?: string
   contentHashName?: string
   description?: string
-  driveId: string
+  driveId?: string
+  fileId?: string
   hidden?: boolean
+  labels?: string[]
   meta?: string
-  parentFileId: string
+  parentFileId?: string
   preHash?: string
-  tags?: object
   static names(): { [key: string]: string } {
     return {
       contentMd5: 'content_md5',
@@ -3691,15 +3746,17 @@ export class CCPCreateFileRequest extends $tea.Model {
       partInfoList: 'part_info_list',
       size: 'size',
       type: 'type',
+      autoRename: 'auto_rename',
       contentHash: 'content_hash',
       contentHashName: 'content_hash_name',
       description: 'description',
       driveId: 'drive_id',
+      fileId: 'file_id',
       hidden: 'hidden',
+      labels: 'labels',
       meta: 'meta',
       parentFileId: 'parent_file_id',
       preHash: 'pre_hash',
-      tags: 'tags',
     };
   }
 
@@ -3711,15 +3768,17 @@ export class CCPCreateFileRequest extends $tea.Model {
       partInfoList: { 'type': 'array', 'itemType': UploadPartInfo },
       size: 'number',
       type: 'string',
+      autoRename: 'boolean',
       contentHash: 'string',
       contentHashName: 'string',
       description: 'string',
       driveId: 'string',
+      fileId: 'string',
       hidden: 'boolean',
+      labels: { 'type': 'array', 'itemType': 'string' },
       meta: 'string',
       parentFileId: 'string',
       preHash: 'string',
-      tags: 'object',
     };
   }
 
@@ -3852,10 +3911,10 @@ export class CCPGetFileRequest extends $tea.Model {
 
 export class CCPGetUploadUrlRequest extends $tea.Model {
   contentMd5?: string
-  driveId: string
+  driveId?: string
   partInfoList?: UploadPartInfo[]
-  uploadId: string
-  fileId: string
+  uploadId?: string
+  fileId?: string
   static names(): { [key: string]: string } {
     return {
       contentMd5: 'content_md5',
@@ -3882,14 +3941,20 @@ export class CCPGetUploadUrlRequest extends $tea.Model {
 }
 
 export class CCPListFileRequest extends $tea.Model {
-  driveId: string
+  driveId?: string
   imageThumbnailProcess?: string
   imageUrlProcess?: string
   limit?: number
   marker?: string
-  all?: boolean
-  parentFileId: string
+  Starred?: boolean
+  category?: string
+  customIndexKey?: string
+  orderDirection?: string
   status?: string
+  type?: string
+  all?: boolean
+  orderBy?: string
+  parentFileId?: string
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -3897,9 +3962,15 @@ export class CCPListFileRequest extends $tea.Model {
       imageUrlProcess: 'image_url_process',
       limit: 'limit',
       marker: 'marker',
-      all: 'all',
-      parentFileId: 'parent_file_id',
+      Starred: 'Starred',
+      category: 'category',
+      customIndexKey: 'custom_index_key',
+      orderDirection: 'order_direction',
       status: 'status',
+      type: 'type',
+      all: 'all',
+      orderBy: 'order_by',
+      parentFileId: 'parent_file_id',
     };
   }
 
@@ -3910,9 +3981,15 @@ export class CCPListFileRequest extends $tea.Model {
       imageUrlProcess: 'string',
       limit: 'number',
       marker: 'string',
-      all: 'boolean',
-      parentFileId: 'string',
+      Starred: 'boolean',
+      category: 'string',
+      customIndexKey: 'string',
+      orderDirection: 'string',
       status: 'string',
+      type: 'string',
+      all: 'boolean',
+      orderBy: 'string',
+      parentFileId: 'string',
     };
   }
 
@@ -3953,11 +4030,11 @@ export class CCPListUploadedPartRequest extends $tea.Model {
 }
 
 export class CCPMoveFileRequest extends $tea.Model {
-  driveId: string
+  driveId?: string
   newName?: string
   overwrite?: boolean
-  fileId: string
-  toParentFileId: string
+  fileId?: string
+  toParentFileId?: string
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -4021,37 +4098,40 @@ export class CCPSearchFileRequest extends $tea.Model {
 }
 
 export class CCPUpdateFileMetaRequest extends $tea.Model {
+  customIndexKey?: string
   description?: string
   driveId: string
   fileId: string
   hidden?: boolean
+  labels?: string[]
   meta?: string
   name: string
   starred?: boolean
-  tags?: object
   static names(): { [key: string]: string } {
     return {
+      customIndexKey: 'custom_index_key',
       description: 'description',
       driveId: 'drive_id',
       fileId: 'file_id',
       hidden: 'hidden',
+      labels: 'labels',
       meta: 'meta',
       name: 'name',
       starred: 'starred',
-      tags: 'tags',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
+      customIndexKey: 'string',
       description: 'string',
       driveId: 'string',
       fileId: 'string',
       hidden: 'boolean',
+      labels: { 'type': 'array', 'itemType': 'string' },
       meta: 'string',
       name: 'string',
       starred: 'boolean',
-      tags: 'object',
     };
   }
 
@@ -4683,7 +4763,7 @@ export class ListShareRequest extends $tea.Model {
   }
 }
 
-export class ListStorageFileRequest extends $tea.Model {
+export class ListStoreFileRequest extends $tea.Model {
   limit?: number
   marker?: string
   parentFilePath?: string
@@ -4714,32 +4794,7 @@ export class ListStorageFileRequest extends $tea.Model {
   }
 }
 
-export class ListStorageFileResponse extends $tea.Model {
-  requestId?: string
-  items?: StoreFile[]
-  nextMarker?: string
-  static names(): { [key: string]: string } {
-    return {
-      requestId: 'requestId',
-      items: 'items',
-      nextMarker: 'next_marker',
-    };
-  }
-
-  static types(): { [key: string]: any } {
-    return {
-      requestId: 'string',
-      items: { 'type': 'array', 'itemType': StoreFile },
-      nextMarker: 'string',
-    };
-  }
-
-  constructor(map: { [key: string]: any }) {
-    super(map);
-  }
-}
-
-export class ListStorageRequest extends $tea.Model {
+export class ListStoreRequest extends $tea.Model {
   domainId?: string
   static names(): { [key: string]: string } {
     return {
@@ -4758,30 +4813,8 @@ export class ListStorageRequest extends $tea.Model {
   }
 }
 
-export class ListStorageResponse extends $tea.Model {
-  requestId?: string
-  items?: StoreItemResponse[]
-  static names(): { [key: string]: string } {
-    return {
-      requestId: 'requestId',
-      items: 'items',
-    };
-  }
-
-  static types(): { [key: string]: any } {
-    return {
-      requestId: 'string',
-      items: { 'type': 'array', 'itemType': StoreItemResponse },
-    };
-  }
-
-  constructor(map: { [key: string]: any }) {
-    super(map);
-  }
-}
-
 export class OSSCompleteFileRequest extends $tea.Model {
-  driveId: string
+  driveId?: string
   partInfoList?: UploadPartInfo[]
   uploadId?: string
   filePath?: string
@@ -4852,14 +4885,14 @@ export class OSSCopyFileRequest extends $tea.Model {
 }
 
 export class OSSCreateFileRequest extends $tea.Model {
-  contentMd5: string
-  contentType: string
-  name: string
+  contentMd5?: string
+  contentType?: string
+  name?: string
   partInfoList?: UploadPartInfo[]
-  size: number
-  type: string
-  driveId: string
-  parentFilePath: string
+  size?: number
+  type?: string
+  driveId?: string
+  parentFilePath?: string
   shareId?: string
   static names(): { [key: string]: string } {
     return {
@@ -4986,11 +5019,11 @@ export class OSSGetFileRequest extends $tea.Model {
 
 export class OSSGetUploadUrlRequest extends $tea.Model {
   contentMd5?: string
-  driveId: string
+  driveId?: string
   partInfoList?: UploadPartInfo[]
-  uploadId: string
-  filePath: string
-  shareId: string
+  uploadId?: string
+  filePath?: string
+  shareId?: string
   static names(): { [key: string]: string } {
     return {
       contentMd5: 'content_md5',
@@ -7209,7 +7242,7 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async batchDeleteFiles(request: CCPDeleteFilesRequest, runtime: RuntimeOptions): Promise<CCPDeleteFilesResponse>  {
+  async operation(request: CCPBatchRequest, runtime: RuntimeOptions): Promise<CCPBatchResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
       readTimeout: runtime["readTimeout"],
@@ -7251,7 +7284,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/file/batch_delete`;
+        request_.pathname = `/v2/batch`;
         request_.headers = {
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
@@ -7270,10 +7303,686 @@ export default class Client extends BaseClient {
         let response_ = await $tea.doAction(request_, _runtime);
 
         if (this._isStatusCode(response_, 200)) {
-          return $tea.cast<CCPDeleteFilesResponse>({
+          return $tea.cast<CCPBatchResponse>({
             requestId: response_.headers["x-ca-request-id"],
             ...await this._readAsJSON(response_),
-          }, new CCPDeleteFilesResponse({}));
+          }, new CCPBatchResponse({}));
+        }
+
+        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...await this._readAsJSON(response_),
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  async createDrive(request: CreateDriveRequest, runtime: RuntimeOptions): Promise<CreateDriveResponse>  {
+    let _runtime : {[key: string]: any} = {
+      timeouted: "retry",
+      readTimeout: runtime["readTimeout"],
+      connectTimeout: runtime["connectTimeout"],
+      localAddr: runtime["localAddr"],
+      httpProxy: runtime["httpProxy"],
+      httpsProxy: runtime["httpsProxy"],
+      noProxy: runtime["noProxy"],
+      maxIdleConns: runtime["maxIdleConns"],
+      socks5Proxy: runtime["socks5Proxy"],
+      socks5NetWork: runtime["socks5NetWork"],
+      retry: {
+        retryable: runtime["autoretry"],
+        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+      },
+      backoff: {
+        policy: this._default(runtime["backoffPolicy"], "no"),
+        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+      },
+      ignoreSSL: runtime["ignoreSSL"],
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this._getAccessKeyId();
+        let accessKeySecret = await this._getAccessKeySecret();
+        let accessToken = await this._getAccessToken();
+        request_.protocol = this._getProtocol(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = `/v2/drive/create`;
+        request_.headers = {
+          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+        };
+        if (this._notEmpty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
+          request_.headers["date"] = this._getRFC2616Date();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+        }
+        request_.body = this._toJSONString(request.toMap());
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        if (this._isStatusCode(response_, 201)) {
+          return $tea.cast<CreateDriveResponse>({
+            requestId: response_.headers["x-ca-request-id"],
+            ...await this._readAsJSON(response_),
+          }, new CreateDriveResponse({}));
+        }
+
+        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...await this._readAsJSON(response_),
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  async deleteDrive(request: DeleteDriveRequest, runtime: RuntimeOptions): Promise<void>  {
+    let _runtime : {[key: string]: any} = {
+      timeouted: "retry",
+      readTimeout: runtime["readTimeout"],
+      connectTimeout: runtime["connectTimeout"],
+      localAddr: runtime["localAddr"],
+      httpProxy: runtime["httpProxy"],
+      httpsProxy: runtime["httpsProxy"],
+      noProxy: runtime["noProxy"],
+      maxIdleConns: runtime["maxIdleConns"],
+      socks5Proxy: runtime["socks5Proxy"],
+      socks5NetWork: runtime["socks5NetWork"],
+      retry: {
+        retryable: runtime["autoretry"],
+        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+      },
+      backoff: {
+        policy: this._default(runtime["backoffPolicy"], "no"),
+        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+      },
+      ignoreSSL: runtime["ignoreSSL"],
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this._getAccessKeyId();
+        let accessKeySecret = await this._getAccessKeySecret();
+        let accessToken = await this._getAccessToken();
+        request_.protocol = this._getProtocol(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = `/v2/drive/delete`;
+        request_.headers = {
+          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+        };
+        if (this._notEmpty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
+          request_.headers["date"] = this._getRFC2616Date();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+        }
+        request_.body = this._toJSONString(request.toMap());
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        if (this._isStatusCode(response_, 204)) {
+          return ;
+        }
+
+        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...await this._readAsJSON(response_),
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  async getDrive(request: GetDriveRequest, runtime: RuntimeOptions): Promise<GetDriveResponse>  {
+    let _runtime : {[key: string]: any} = {
+      timeouted: "retry",
+      readTimeout: runtime["readTimeout"],
+      connectTimeout: runtime["connectTimeout"],
+      localAddr: runtime["localAddr"],
+      httpProxy: runtime["httpProxy"],
+      httpsProxy: runtime["httpsProxy"],
+      noProxy: runtime["noProxy"],
+      maxIdleConns: runtime["maxIdleConns"],
+      socks5Proxy: runtime["socks5Proxy"],
+      socks5NetWork: runtime["socks5NetWork"],
+      retry: {
+        retryable: runtime["autoretry"],
+        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+      },
+      backoff: {
+        policy: this._default(runtime["backoffPolicy"], "no"),
+        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+      },
+      ignoreSSL: runtime["ignoreSSL"],
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this._getAccessKeyId();
+        let accessKeySecret = await this._getAccessKeySecret();
+        let accessToken = await this._getAccessToken();
+        request_.protocol = this._getProtocol(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = `/v2/drive/get`;
+        request_.headers = {
+          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+        };
+        if (this._notEmpty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
+          request_.headers["date"] = this._getRFC2616Date();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+        }
+        request_.body = this._toJSONString(request.toMap());
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        if (this._isStatusCode(response_, 200)) {
+          return $tea.cast<GetDriveResponse>({
+            requestId: response_.headers["x-ca-request-id"],
+            ...await this._readAsJSON(response_),
+          }, new GetDriveResponse({}));
+        }
+
+        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...await this._readAsJSON(response_),
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  async getDefaultDrive(request: GetDefaultDriveRequest, runtime: RuntimeOptions): Promise<GetDriveResponse>  {
+    let _runtime : {[key: string]: any} = {
+      timeouted: "retry",
+      readTimeout: runtime["readTimeout"],
+      connectTimeout: runtime["connectTimeout"],
+      localAddr: runtime["localAddr"],
+      httpProxy: runtime["httpProxy"],
+      httpsProxy: runtime["httpsProxy"],
+      noProxy: runtime["noProxy"],
+      maxIdleConns: runtime["maxIdleConns"],
+      socks5Proxy: runtime["socks5Proxy"],
+      socks5NetWork: runtime["socks5NetWork"],
+      retry: {
+        retryable: runtime["autoretry"],
+        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+      },
+      backoff: {
+        policy: this._default(runtime["backoffPolicy"], "no"),
+        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+      },
+      ignoreSSL: runtime["ignoreSSL"],
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this._getAccessKeyId();
+        let accessKeySecret = await this._getAccessKeySecret();
+        let accessToken = await this._getAccessToken();
+        request_.protocol = this._getProtocol(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = `/v2/drive/get_default_drive`;
+        request_.headers = {
+          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+        };
+        if (this._notEmpty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
+          request_.headers["date"] = this._getRFC2616Date();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+        }
+        request_.body = this._toJSONString(request.toMap());
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        if (this._isStatusCode(response_, 200)) {
+          return $tea.cast<GetDriveResponse>({
+            requestId: response_.headers["x-ca-request-id"],
+            ...await this._readAsJSON(response_),
+          }, new GetDriveResponse({}));
+        }
+
+        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...await this._readAsJSON(response_),
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  async listDrives(request: ListDriveRequest, runtime: RuntimeOptions): Promise<ListDriveResponse>  {
+    let _runtime : {[key: string]: any} = {
+      timeouted: "retry",
+      readTimeout: runtime["readTimeout"],
+      connectTimeout: runtime["connectTimeout"],
+      localAddr: runtime["localAddr"],
+      httpProxy: runtime["httpProxy"],
+      httpsProxy: runtime["httpsProxy"],
+      noProxy: runtime["noProxy"],
+      maxIdleConns: runtime["maxIdleConns"],
+      socks5Proxy: runtime["socks5Proxy"],
+      socks5NetWork: runtime["socks5NetWork"],
+      retry: {
+        retryable: runtime["autoretry"],
+        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+      },
+      backoff: {
+        policy: this._default(runtime["backoffPolicy"], "no"),
+        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+      },
+      ignoreSSL: runtime["ignoreSSL"],
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this._getAccessKeyId();
+        let accessKeySecret = await this._getAccessKeySecret();
+        let accessToken = await this._getAccessToken();
+        request_.protocol = this._getProtocol(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = `/v2/drive/list`;
+        request_.headers = {
+          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+        };
+        if (this._notEmpty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
+          request_.headers["date"] = this._getRFC2616Date();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+        }
+        request_.body = this._toJSONString(request.toMap());
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        if (this._isStatusCode(response_, 200)) {
+          return $tea.cast<ListDriveResponse>({
+            requestId: response_.headers["x-ca-request-id"],
+            ...await this._readAsJSON(response_),
+          }, new ListDriveResponse({}));
+        }
+
+        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...await this._readAsJSON(response_),
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  async listMyDrives(request: ListMyDriveRequest, runtime: RuntimeOptions): Promise<ListDriveResponse>  {
+    let _runtime : {[key: string]: any} = {
+      timeouted: "retry",
+      readTimeout: runtime["readTimeout"],
+      connectTimeout: runtime["connectTimeout"],
+      localAddr: runtime["localAddr"],
+      httpProxy: runtime["httpProxy"],
+      httpsProxy: runtime["httpsProxy"],
+      noProxy: runtime["noProxy"],
+      maxIdleConns: runtime["maxIdleConns"],
+      socks5Proxy: runtime["socks5Proxy"],
+      socks5NetWork: runtime["socks5NetWork"],
+      retry: {
+        retryable: runtime["autoretry"],
+        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+      },
+      backoff: {
+        policy: this._default(runtime["backoffPolicy"], "no"),
+        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+      },
+      ignoreSSL: runtime["ignoreSSL"],
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this._getAccessKeyId();
+        let accessKeySecret = await this._getAccessKeySecret();
+        let accessToken = await this._getAccessToken();
+        request_.protocol = this._getProtocol(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = `/v2/drive/list_my_drives`;
+        request_.headers = {
+          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+        };
+        if (this._notEmpty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
+          request_.headers["date"] = this._getRFC2616Date();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+        }
+        request_.body = this._toJSONString(request.toMap());
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        if (this._isStatusCode(response_, 200)) {
+          return $tea.cast<ListDriveResponse>({
+            requestId: response_.headers["x-ca-request-id"],
+            ...await this._readAsJSON(response_),
+          }, new ListDriveResponse({}));
+        }
+
+        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...await this._readAsJSON(response_),
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  async updateDrive(request: UpdateDriveRequest, runtime: RuntimeOptions): Promise<UpdateDriveResponse>  {
+    let _runtime : {[key: string]: any} = {
+      timeouted: "retry",
+      readTimeout: runtime["readTimeout"],
+      connectTimeout: runtime["connectTimeout"],
+      localAddr: runtime["localAddr"],
+      httpProxy: runtime["httpProxy"],
+      httpsProxy: runtime["httpsProxy"],
+      noProxy: runtime["noProxy"],
+      maxIdleConns: runtime["maxIdleConns"],
+      socks5Proxy: runtime["socks5Proxy"],
+      socks5NetWork: runtime["socks5NetWork"],
+      retry: {
+        retryable: runtime["autoretry"],
+        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+      },
+      backoff: {
+        policy: this._default(runtime["backoffPolicy"], "no"),
+        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+      },
+      ignoreSSL: runtime["ignoreSSL"],
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this._getAccessKeyId();
+        let accessKeySecret = await this._getAccessKeySecret();
+        let accessToken = await this._getAccessToken();
+        request_.protocol = this._getProtocol(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = `/v2/drive/update`;
+        request_.headers = {
+          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+        };
+        if (this._notEmpty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
+          request_.headers["date"] = this._getRFC2616Date();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+        }
+        request_.body = this._toJSONString(request.toMap());
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        if (this._isStatusCode(response_, 200)) {
+          return $tea.cast<UpdateDriveResponse>({
+            requestId: response_.headers["x-ca-request-id"],
+            ...await this._readAsJSON(response_),
+          }, new UpdateDriveResponse({}));
         }
 
         if (this._notEmpty(response_.headers["x-ca-error-message"])) {
@@ -8538,682 +9247,6 @@ export default class Client extends BaseClient {
             requestId: response_.headers["x-ca-request-id"],
             ...await this._readAsJSON(response_),
           }, new CCPUpdateFileMetaResponse({}));
-        }
-
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
-          throw $tea.newError({
-            data: {
-              requestId: response_.headers["x-ca-request-id"],
-              statusCode: response_.statusCode,
-              statusMessage: response_.statusMessage,
-            },
-            message: response_.headers["x-ca-error-message"],
-          });
-        }
-
-        throw $tea.newError({
-          data: {
-            requestId: response_.headers["x-ca-request-id"],
-            statusCode: response_.statusCode,
-            statusMessage: response_.statusMessage,
-          },
-          ...await this._readAsJSON(response_),
-        });
-      } catch (ex) {
-        if ($tea.isRetryable(ex)) {
-          continue;
-        }
-        throw ex;
-      }
-    }
-
-    throw $tea.newUnretryableError(_lastRequest);
-  }
-
-  async createDrive(request: CreateDriveRequest, runtime: RuntimeOptions): Promise<CreateDriveResponse>  {
-    let _runtime : {[key: string]: any} = {
-      timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
-      retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
-      },
-      backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
-      },
-      ignoreSSL: runtime["ignoreSSL"],
-    }
-
-    let _lastRequest = null;
-    let _now = Date.now();
-    let _retryTimes = 0;
-    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
-      if (_retryTimes > 0) {
-        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
-        if (_backoffTime > 0) {
-          await $tea.sleep(_backoffTime);
-        }
-      }
-
-      _retryTimes = _retryTimes + 1;
-      try {
-        let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
-        request_.method = "POST";
-        request_.pathname = `/v2/drive/create`;
-        request_.headers = {
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
-          'content-type': "application/json; charset=utf-8",
-        };
-        if (this._notEmpty(accessToken)) {
-          request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
-          request_.headers["accept"] = "application/json";
-          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
-          request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
-        }
-        request_.body = this._toJSONString(request.toMap());
-        _lastRequest = request_;
-        let response_ = await $tea.doAction(request_, _runtime);
-
-        if (this._isStatusCode(response_, 201)) {
-          return $tea.cast<CreateDriveResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
-          }, new CreateDriveResponse({}));
-        }
-
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
-          throw $tea.newError({
-            data: {
-              requestId: response_.headers["x-ca-request-id"],
-              statusCode: response_.statusCode,
-              statusMessage: response_.statusMessage,
-            },
-            message: response_.headers["x-ca-error-message"],
-          });
-        }
-
-        throw $tea.newError({
-          data: {
-            requestId: response_.headers["x-ca-request-id"],
-            statusCode: response_.statusCode,
-            statusMessage: response_.statusMessage,
-          },
-          ...await this._readAsJSON(response_),
-        });
-      } catch (ex) {
-        if ($tea.isRetryable(ex)) {
-          continue;
-        }
-        throw ex;
-      }
-    }
-
-    throw $tea.newUnretryableError(_lastRequest);
-  }
-
-  async deleteDrive(request: DeleteDriveRequest, runtime: RuntimeOptions): Promise<void>  {
-    let _runtime : {[key: string]: any} = {
-      timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
-      retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
-      },
-      backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
-      },
-      ignoreSSL: runtime["ignoreSSL"],
-    }
-
-    let _lastRequest = null;
-    let _now = Date.now();
-    let _retryTimes = 0;
-    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
-      if (_retryTimes > 0) {
-        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
-        if (_backoffTime > 0) {
-          await $tea.sleep(_backoffTime);
-        }
-      }
-
-      _retryTimes = _retryTimes + 1;
-      try {
-        let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
-        request_.method = "POST";
-        request_.pathname = `/v2/drive/delete`;
-        request_.headers = {
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
-          'content-type': "application/json; charset=utf-8",
-        };
-        if (this._notEmpty(accessToken)) {
-          request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
-          request_.headers["accept"] = "application/json";
-          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
-          request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
-        }
-        request_.body = this._toJSONString(request.toMap());
-        _lastRequest = request_;
-        let response_ = await $tea.doAction(request_, _runtime);
-
-        if (this._isStatusCode(response_, 204)) {
-          return ;
-        }
-
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
-          throw $tea.newError({
-            data: {
-              requestId: response_.headers["x-ca-request-id"],
-              statusCode: response_.statusCode,
-              statusMessage: response_.statusMessage,
-            },
-            message: response_.headers["x-ca-error-message"],
-          });
-        }
-
-        throw $tea.newError({
-          data: {
-            requestId: response_.headers["x-ca-request-id"],
-            statusCode: response_.statusCode,
-            statusMessage: response_.statusMessage,
-          },
-          ...await this._readAsJSON(response_),
-        });
-      } catch (ex) {
-        if ($tea.isRetryable(ex)) {
-          continue;
-        }
-        throw ex;
-      }
-    }
-
-    throw $tea.newUnretryableError(_lastRequest);
-  }
-
-  async getDrive(request: GetDriveRequest, runtime: RuntimeOptions): Promise<GetDriveResponse>  {
-    let _runtime : {[key: string]: any} = {
-      timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
-      retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
-      },
-      backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
-      },
-      ignoreSSL: runtime["ignoreSSL"],
-    }
-
-    let _lastRequest = null;
-    let _now = Date.now();
-    let _retryTimes = 0;
-    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
-      if (_retryTimes > 0) {
-        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
-        if (_backoffTime > 0) {
-          await $tea.sleep(_backoffTime);
-        }
-      }
-
-      _retryTimes = _retryTimes + 1;
-      try {
-        let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
-        request_.method = "POST";
-        request_.pathname = `/v2/drive/get`;
-        request_.headers = {
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
-          'content-type': "application/json; charset=utf-8",
-        };
-        if (this._notEmpty(accessToken)) {
-          request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
-          request_.headers["accept"] = "application/json";
-          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
-          request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
-        }
-        request_.body = this._toJSONString(request.toMap());
-        _lastRequest = request_;
-        let response_ = await $tea.doAction(request_, _runtime);
-
-        if (this._isStatusCode(response_, 200)) {
-          return $tea.cast<GetDriveResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
-          }, new GetDriveResponse({}));
-        }
-
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
-          throw $tea.newError({
-            data: {
-              requestId: response_.headers["x-ca-request-id"],
-              statusCode: response_.statusCode,
-              statusMessage: response_.statusMessage,
-            },
-            message: response_.headers["x-ca-error-message"],
-          });
-        }
-
-        throw $tea.newError({
-          data: {
-            requestId: response_.headers["x-ca-request-id"],
-            statusCode: response_.statusCode,
-            statusMessage: response_.statusMessage,
-          },
-          ...await this._readAsJSON(response_),
-        });
-      } catch (ex) {
-        if ($tea.isRetryable(ex)) {
-          continue;
-        }
-        throw ex;
-      }
-    }
-
-    throw $tea.newUnretryableError(_lastRequest);
-  }
-
-  async getDefaultDrive(request: GetDefaultDriveRequest, runtime: RuntimeOptions): Promise<GetDriveResponse>  {
-    let _runtime : {[key: string]: any} = {
-      timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
-      retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
-      },
-      backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
-      },
-      ignoreSSL: runtime["ignoreSSL"],
-    }
-
-    let _lastRequest = null;
-    let _now = Date.now();
-    let _retryTimes = 0;
-    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
-      if (_retryTimes > 0) {
-        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
-        if (_backoffTime > 0) {
-          await $tea.sleep(_backoffTime);
-        }
-      }
-
-      _retryTimes = _retryTimes + 1;
-      try {
-        let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
-        request_.method = "POST";
-        request_.pathname = `/v2/drive/get_default_drive`;
-        request_.headers = {
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
-          'content-type': "application/json; charset=utf-8",
-        };
-        if (this._notEmpty(accessToken)) {
-          request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
-          request_.headers["accept"] = "application/json";
-          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
-          request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
-        }
-        request_.body = this._toJSONString(request.toMap());
-        _lastRequest = request_;
-        let response_ = await $tea.doAction(request_, _runtime);
-
-        if (this._isStatusCode(response_, 200)) {
-          return $tea.cast<GetDriveResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
-          }, new GetDriveResponse({}));
-        }
-
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
-          throw $tea.newError({
-            data: {
-              requestId: response_.headers["x-ca-request-id"],
-              statusCode: response_.statusCode,
-              statusMessage: response_.statusMessage,
-            },
-            message: response_.headers["x-ca-error-message"],
-          });
-        }
-
-        throw $tea.newError({
-          data: {
-            requestId: response_.headers["x-ca-request-id"],
-            statusCode: response_.statusCode,
-            statusMessage: response_.statusMessage,
-          },
-          ...await this._readAsJSON(response_),
-        });
-      } catch (ex) {
-        if ($tea.isRetryable(ex)) {
-          continue;
-        }
-        throw ex;
-      }
-    }
-
-    throw $tea.newUnretryableError(_lastRequest);
-  }
-
-  async listDrives(request: ListDriveRequest, runtime: RuntimeOptions): Promise<ListDriveResponse>  {
-    let _runtime : {[key: string]: any} = {
-      timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
-      retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
-      },
-      backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
-      },
-      ignoreSSL: runtime["ignoreSSL"],
-    }
-
-    let _lastRequest = null;
-    let _now = Date.now();
-    let _retryTimes = 0;
-    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
-      if (_retryTimes > 0) {
-        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
-        if (_backoffTime > 0) {
-          await $tea.sleep(_backoffTime);
-        }
-      }
-
-      _retryTimes = _retryTimes + 1;
-      try {
-        let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
-        request_.method = "POST";
-        request_.pathname = `/v2/drive/list`;
-        request_.headers = {
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
-          'content-type': "application/json; charset=utf-8",
-        };
-        if (this._notEmpty(accessToken)) {
-          request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
-          request_.headers["accept"] = "application/json";
-          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
-          request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
-        }
-        request_.body = this._toJSONString(request.toMap());
-        _lastRequest = request_;
-        let response_ = await $tea.doAction(request_, _runtime);
-
-        if (this._isStatusCode(response_, 200)) {
-          return $tea.cast<ListDriveResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
-          }, new ListDriveResponse({}));
-        }
-
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
-          throw $tea.newError({
-            data: {
-              requestId: response_.headers["x-ca-request-id"],
-              statusCode: response_.statusCode,
-              statusMessage: response_.statusMessage,
-            },
-            message: response_.headers["x-ca-error-message"],
-          });
-        }
-
-        throw $tea.newError({
-          data: {
-            requestId: response_.headers["x-ca-request-id"],
-            statusCode: response_.statusCode,
-            statusMessage: response_.statusMessage,
-          },
-          ...await this._readAsJSON(response_),
-        });
-      } catch (ex) {
-        if ($tea.isRetryable(ex)) {
-          continue;
-        }
-        throw ex;
-      }
-    }
-
-    throw $tea.newUnretryableError(_lastRequest);
-  }
-
-  async listMyDrives(request: ListMyDriveRequest, runtime: RuntimeOptions): Promise<ListDriveResponse>  {
-    let _runtime : {[key: string]: any} = {
-      timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
-      retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
-      },
-      backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
-      },
-      ignoreSSL: runtime["ignoreSSL"],
-    }
-
-    let _lastRequest = null;
-    let _now = Date.now();
-    let _retryTimes = 0;
-    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
-      if (_retryTimes > 0) {
-        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
-        if (_backoffTime > 0) {
-          await $tea.sleep(_backoffTime);
-        }
-      }
-
-      _retryTimes = _retryTimes + 1;
-      try {
-        let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
-        request_.method = "POST";
-        request_.pathname = `/v2/drive/list_my_drives`;
-        request_.headers = {
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
-          'content-type': "application/json; charset=utf-8",
-        };
-        if (this._notEmpty(accessToken)) {
-          request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
-          request_.headers["accept"] = "application/json";
-          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
-          request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
-        }
-        request_.body = this._toJSONString(request.toMap());
-        _lastRequest = request_;
-        let response_ = await $tea.doAction(request_, _runtime);
-
-        if (this._isStatusCode(response_, 200)) {
-          return $tea.cast<ListDriveResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
-          }, new ListDriveResponse({}));
-        }
-
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
-          throw $tea.newError({
-            data: {
-              requestId: response_.headers["x-ca-request-id"],
-              statusCode: response_.statusCode,
-              statusMessage: response_.statusMessage,
-            },
-            message: response_.headers["x-ca-error-message"],
-          });
-        }
-
-        throw $tea.newError({
-          data: {
-            requestId: response_.headers["x-ca-request-id"],
-            statusCode: response_.statusCode,
-            statusMessage: response_.statusMessage,
-          },
-          ...await this._readAsJSON(response_),
-        });
-      } catch (ex) {
-        if ($tea.isRetryable(ex)) {
-          continue;
-        }
-        throw ex;
-      }
-    }
-
-    throw $tea.newUnretryableError(_lastRequest);
-  }
-
-  async updateDrive(request: UpdateDriveRequest, runtime: RuntimeOptions): Promise<UpdateDriveResponse>  {
-    let _runtime : {[key: string]: any} = {
-      timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
-      retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
-      },
-      backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
-      },
-      ignoreSSL: runtime["ignoreSSL"],
-    }
-
-    let _lastRequest = null;
-    let _now = Date.now();
-    let _retryTimes = 0;
-    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
-      if (_retryTimes > 0) {
-        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
-        if (_backoffTime > 0) {
-          await $tea.sleep(_backoffTime);
-        }
-      }
-
-      _retryTimes = _retryTimes + 1;
-      try {
-        let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
-        request_.method = "POST";
-        request_.pathname = `/v2/drive/update`;
-        request_.headers = {
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
-          'content-type': "application/json; charset=utf-8",
-        };
-        if (this._notEmpty(accessToken)) {
-          request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
-          request_.headers["accept"] = "application/json";
-          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
-          request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
-        }
-        request_.body = this._toJSONString(request.toMap());
-        _lastRequest = request_;
-        let response_ = await $tea.doAction(request_, _runtime);
-
-        if (this._isStatusCode(response_, 200)) {
-          return $tea.cast<UpdateDriveResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
-          }, new UpdateDriveResponse({}));
         }
 
         if (this._notEmpty(response_.headers["x-ca-error-message"])) {

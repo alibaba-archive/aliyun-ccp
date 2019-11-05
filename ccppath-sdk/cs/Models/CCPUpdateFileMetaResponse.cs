@@ -77,7 +77,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         public string Meta { get; set; }
 
         [NameInMap("name")]
-        [Validation(Required=true, Pattern="[a-zA-Z0-9.-]{1,1024}")]
+        [Validation(Required=false, Pattern="[a-zA-Z0-9.-]{1,1024}")]
         public string Name { get; set; }
 
         [NameInMap("parent_file_id")]
