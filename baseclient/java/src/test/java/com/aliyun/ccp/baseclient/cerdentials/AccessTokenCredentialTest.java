@@ -21,6 +21,14 @@ import static org.mockito.Matchers.any;
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({Tea.class})
 public class AccessTokenCredentialTest {
+    @Test
+    public void getHostTest() {
+        Map<String, Object> map = new HashMap<>();
+        AccessTokenCredential credential = new AccessTokenCredential(map);
+        Assert.assertEquals("domain", credential.getHost(null, "domain"));
+        Assert.assertEquals("endpoint", credential.getHost("endpoint", null));
+        Assert.assertEquals("domain", credential.getHost("", "domain"));
+    }
 
     @Test
     public void constructorTest() throws Exception {
