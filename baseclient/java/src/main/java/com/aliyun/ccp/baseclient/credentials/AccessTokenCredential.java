@@ -23,7 +23,7 @@ public class AccessTokenCredential {
     private String clientSecret;
 
     public AccessTokenCredential(Map<String, Object> config) {
-        this.refreshToken = (String) config.get("refresh_token");
+        this.refreshToken = (String) config.get("refreshToken");
         this.domainId = (String) config.get("domainId");
         this.clientId = (String) config.get("clientId");
         this.clientSecret = (String) config.get("clientSecret");
