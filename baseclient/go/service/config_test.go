@@ -131,7 +131,7 @@ func Test_refreshAccessToken(t *testing.T) {
 	hookdo = func(response *tea.Response, err error) (*tea.Response, error) {
 		return nil, errors.New("refresh_token error")
 	}
-	at, rt, up, err := refreshAccessToken("ccp", "refresh_token", "client_id", "client_secret")
+	at, rt, up, err := refreshAccessToken("", "ccp", "refresh_token", "client_id", "client_secret")
 	utils.AssertEqual(t, "", at)
 	utils.AssertEqual(t, "", rt)
 	utils.AssertNil(t, up)
@@ -146,7 +146,7 @@ func Test_refreshAccessToken(t *testing.T) {
 		resp = tea.NewResponse(httpresponse)
 		return resp, nil
 	}
-	at, rt, up, err = refreshAccessToken("ccp", "refresh_token", "client_id", "client_secret")
+	at, rt, up, err = refreshAccessToken("endpoint", "ccp", "refresh_token", "client_id", "client_secret")
 	utils.AssertEqual(t, "", at)
 	utils.AssertEqual(t, "", rt)
 	utils.AssertNil(t, up)
@@ -161,7 +161,7 @@ func Test_refreshAccessToken(t *testing.T) {
 		resp = tea.NewResponse(httpresponse)
 		return resp, nil
 	}
-	at, rt, up, err = refreshAccessToken("ccp", "refresh_token", "client_id", "client_secret")
+	at, rt, up, err = refreshAccessToken("endpoint", "ccp", "refresh_token", "client_id", "client_secret")
 	utils.AssertEqual(t, "access_token", at)
 	utils.AssertEqual(t, "refresh_token", rt)
 	utils.AssertNil(t, err)

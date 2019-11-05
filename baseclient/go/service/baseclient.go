@@ -176,7 +176,7 @@ func (client *BaseClient) GetAccessToken() (string, error) {
 	}
 
 	if client.accessToken.needUpdateCredential() && client.accessToken.RefreshToken != "" {
-		accessToken, refreshToken, update, err := refreshAccessToken(client.DomainId, client.accessToken.RefreshToken, client.ClientId, client.ClientSecret)
+		accessToken, refreshToken, update, err := refreshAccessToken(client.Endpoint, client.DomainId, client.accessToken.RefreshToken, client.ClientId, client.ClientSecret)
 		if accessToken != "" && refreshToken != "" && update != nil {
 			client.accessToken.AccessToken = accessToken
 			client.accessToken.RefreshToken = refreshToken

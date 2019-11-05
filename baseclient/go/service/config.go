@@ -321,18 +321,21 @@ func handleMap(valueField reflect.Value, result map[string]string, prefix string
 	}
 }
 
-func refreshAccessToken(domainId, refreshToken, clientId, clientSecret string) (string, string, *credentialUpdater, error) {
+func refreshAccessToken(endpoint, domainId, refreshToken, clientId, clientSecret string) (string, string, *credentialUpdater, error) {
 	request := tea.NewRequest()
 	request.Protocol = "http"
 	request.Method = "POST"
 	request.Pathname = "/v2/oauth/token"
 	request.Headers = map[string]string{
-		"host":                    domainId + ".api.alicloudccp.com",
 		"date":                    utils.GetRFC2616Date(),
 		"content-type":            "application/x-www-form-urlencoded",
 		"accept":                  "application/json",
 		"x-acs-signature-method":  "HMAC-SHA1",
 		"x-acs-signature-version": "1.0",
+	}
+	request.Headers["host"] = domainId + ".api.alicloudccp.com"
+	if endpoint != "" {
+		request.Headers["host"] = endpoint
 	}
 	bodyStr := "grant_type=refresh_token&refresh_token=" + refreshToken + "&client_id=" + clientId + "&client_secret=" + clientSecret
 	request.Body = strings.NewReader(bodyStr)
