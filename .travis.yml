@@ -1,7 +1,7 @@
 
 jobs:
   include:
-    - node_js
+    - language: node_js
       node_js: 12
       script:
         - cd baseclient/ts
