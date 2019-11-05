@@ -1,0 +1,9 @@
+
+jobs:
+  include:
+    - language: node_js
+      node_js: 12
+      script:
+        - cd baseclient/ts
+        - npm install
+        - npm run ci

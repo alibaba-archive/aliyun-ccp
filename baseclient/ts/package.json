@@ -6,6 +6,7 @@
   "scripts": {
     "test": "mocha -r ts-node/register test/**/*.spec.ts",
     "cov": "nyc npm run test",
+    "ci": "npm run cov && codecov",
     "build": "tsc"
   },
   "author": "Jackson Tian",
