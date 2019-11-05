@@ -91,10 +91,17 @@ describe('base client', function () {
 
     it('_toQuery should ok', async function () {
         const client = new BaseClient({});
-        assert.ok(typeof client._toQuery({ test: true }) === 'object');
-        assert.ok(typeof client._toQuery(undefined) === 'object');
-        assert.ok(typeof client._toQuery('string') === 'object');
-        assert.ok(typeof client._toQuery(1) === 'object');
+        assert.deepStrictEqual(
+            client._toQuery({
+                number: 1,
+                boolean: true,
+                string: '1234'
+            }), {
+            number: '1',
+            boolean: 'true',
+            string: '1234'
+        });
+        assert.equal(client._toQuery(undefined), undefined);
     });
 
     it('_notEmpty should ok', async function () {
