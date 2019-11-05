@@ -9,7 +9,7 @@ public class DownloadRequest extends TeaModel {
     public String DriveID;
 
     @NameInMap("FileID")
-    @Validation(pattern = "[a-z0-9.-_]{1, 50}", maxLength = 0)
+    @Validation(pattern = "[a-z0-9.-_]{1,50}", maxLength = 0)
     public String FileID;
 
     @NameInMap("ImageProcess")

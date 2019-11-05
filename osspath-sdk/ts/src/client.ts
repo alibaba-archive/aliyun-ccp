@@ -663,7 +663,7 @@ export class CCPCompleteFileResponse extends $tea.Model {
   imageMediaMetadata?: ImageMediaResponse[]
   labels?: string[]
   meta?: string
-  name: string
+  name?: string
   parentFileId?: string
   size?: number
   starred?: boolean
@@ -955,7 +955,7 @@ export class CCPGetFileResponse extends $tea.Model {
   imageMediaMetadata?: ImageMediaResponse[]
   labels?: string[]
   meta?: string
-  name: string
+  name?: string
   parentFileId?: string
   size?: number
   starred?: boolean
@@ -1204,7 +1204,7 @@ export class CCPUpdateFileMetaResponse extends $tea.Model {
   imageMediaMetadata?: ImageMediaResponse[]
   labels?: string[]
   meta?: string
-  name: string
+  name?: string
   parentFileId?: string
   size?: number
   starred?: boolean
@@ -2391,7 +2391,7 @@ export class OSSCompleteFileResponse extends $tea.Model {
   driveId?: string
   fileExtension?: string
   filePath?: string
-  name: string
+  name?: string
   parentFilePath?: string
   shareId?: string
   size?: number
@@ -2646,7 +2646,7 @@ export class OSSGetFileResponse extends $tea.Model {
   driveId?: string
   fileExtension?: string
   filePath?: string
-  name: string
+  name?: string
   parentFilePath?: string
   shareId?: string
   size?: number
@@ -2883,7 +2883,7 @@ export class OSSUpdateFileMetaResponse extends $tea.Model {
   driveId?: string
   fileExtension?: string
   filePath?: string
-  name: string
+  name?: string
   parentFilePath?: string
   shareId?: string
   size?: number
@@ -4407,10 +4407,10 @@ export class CCPBatchRequest extends $tea.Model {
 }
 
 export class CCPCompleteFileRequest extends $tea.Model {
-  driveId: string
+  driveId?: string
   partInfoList?: UploadPartInfo[]
   uploadId?: string
-  fileId: string
+  fileId?: string
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -4469,21 +4469,21 @@ export class CCPCopyFileRequest extends $tea.Model {
 }
 
 export class CCPCreateFileRequest extends $tea.Model {
-  contentMd5: string
-  contentType: string
-  name: string
+  contentMd5?: string
+  contentType?: string
+  name?: string
   partInfoList?: UploadPartInfo[]
-  size: number
-  type: string
+  size?: number
+  type?: string
   autoRename?: boolean
   contentHash?: string
   contentHashName?: string
   description?: string
-  driveId: string
+  driveId?: string
   hidden?: boolean
   labels?: string[]
   meta?: string
-  parentFileId: string
+  parentFileId?: string
   preHash?: string
   static names(): { [key: string]: string } {
     return {
@@ -4656,10 +4656,10 @@ export class CCPGetFileRequest extends $tea.Model {
 
 export class CCPGetUploadUrlRequest extends $tea.Model {
   contentMd5?: string
-  driveId: string
+  driveId?: string
   partInfoList?: UploadPartInfo[]
-  uploadId: string
-  fileId: string
+  uploadId?: string
+  fileId?: string
   static names(): { [key: string]: string } {
     return {
       contentMd5: 'content_md5',
@@ -4717,11 +4717,11 @@ export class CCPListUploadedPartRequest extends $tea.Model {
 }
 
 export class CCPMoveFileRequest extends $tea.Model {
-  driveId: string
+  driveId?: string
   newName?: string
   overwrite?: boolean
-  fileId: string
-  toParentFileId: string
+  fileId?: string
+  toParentFileId?: string
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -5501,7 +5501,7 @@ export class ListStoreRequest extends $tea.Model {
 }
 
 export class OSSCompleteFileRequest extends $tea.Model {
-  driveId: string
+  driveId?: string
   partInfoList?: UploadPartInfo[]
   uploadId?: string
   filePath?: string
@@ -5572,14 +5572,14 @@ export class OSSCopyFileRequest extends $tea.Model {
 }
 
 export class OSSCreateFileRequest extends $tea.Model {
-  contentMd5: string
-  contentType: string
-  name: string
+  contentMd5?: string
+  contentType?: string
+  name?: string
   partInfoList?: UploadPartInfo[]
-  size: number
-  type: string
-  driveId: string
-  parentFilePath: string
+  size?: number
+  type?: string
+  driveId?: string
+  parentFilePath?: string
   shareId?: string
   static names(): { [key: string]: string } {
     return {
@@ -5706,11 +5706,11 @@ export class OSSGetFileRequest extends $tea.Model {
 
 export class OSSGetUploadUrlRequest extends $tea.Model {
   contentMd5?: string
-  driveId: string
+  driveId?: string
   partInfoList?: UploadPartInfo[]
-  uploadId: string
-  filePath: string
-  shareId: string
+  uploadId?: string
+  filePath?: string
+  shareId?: string
   static names(): { [key: string]: string } {
     return {
       contentMd5: 'content_md5',

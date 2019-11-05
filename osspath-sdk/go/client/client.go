@@ -1039,7 +1039,7 @@ type CCPCompleteFileResponse struct {
 	ImageMediaMetadata []*ImageMediaResponse `json:"image_media_metadata" xml:"image_media_metadata" type:"Repeated"`
 	Labels             []*string             `json:"labels" xml:"labels" type:"Repeated"`
 	Meta               *string               `json:"meta" xml:"meta"`
-	Name               *string               `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	Name               *string               `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1024}"`
 	ParentFileId       *string               `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
 	Size               *int64                `json:"size" xml:"size"`
 	Starred            *bool                 `json:"starred" xml:"starred"`
@@ -1476,7 +1476,7 @@ type CCPGetFileResponse struct {
 	ImageMediaMetadata []*ImageMediaResponse `json:"image_media_metadata" xml:"image_media_metadata" type:"Repeated"`
 	Labels             []*string             `json:"labels" xml:"labels" type:"Repeated"`
 	Meta               *string               `json:"meta" xml:"meta"`
-	Name               *string               `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	Name               *string               `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1024}"`
 	ParentFileId       *string               `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
 	Size               *int64                `json:"size" xml:"size"`
 	Starred            *bool                 `json:"starred" xml:"starred"`
@@ -1848,7 +1848,7 @@ type CCPUpdateFileMetaResponse struct {
 	ImageMediaMetadata []*ImageMediaResponse `json:"image_media_metadata" xml:"image_media_metadata" type:"Repeated"`
 	Labels             []*string             `json:"labels" xml:"labels" type:"Repeated"`
 	Meta               *string               `json:"meta" xml:"meta"`
-	Name               *string               `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	Name               *string               `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1024}"`
 	ParentFileId       *string               `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
 	Size               *int64                `json:"size" xml:"size"`
 	Starred            *bool                 `json:"starred" xml:"starred"`
@@ -3387,7 +3387,7 @@ type OSSCompleteFileResponse struct {
 	DriveId         *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	FileExtension   *string `json:"file_extension" xml:"file_extension"`
 	FilePath        *string `json:"file_path" xml:"file_path"`
-	Name            *string `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	Name            *string `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1024}"`
 	ParentFilePath  *string `json:"parent_file_path" xml:"parent_file_path" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
 	ShareId         *string `json:"share_id" xml:"share_id" pattern:"[0-9]+"`
 	Size            *int64  `json:"size" xml:"size"`
@@ -3771,7 +3771,7 @@ type OSSGetFileResponse struct {
 	DriveId         *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	FileExtension   *string `json:"file_extension" xml:"file_extension"`
 	FilePath        *string `json:"file_path" xml:"file_path"`
-	Name            *string `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	Name            *string `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1024}"`
 	ParentFilePath  *string `json:"parent_file_path" xml:"parent_file_path" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
 	ShareId         *string `json:"share_id" xml:"share_id" pattern:"[0-9]+"`
 	Size            *int64  `json:"size" xml:"size"`
@@ -4119,7 +4119,7 @@ type OSSUpdateFileMetaResponse struct {
 	DriveId         *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	FileExtension   *string `json:"file_extension" xml:"file_extension"`
 	FilePath        *string `json:"file_path" xml:"file_path"`
-	Name            *string `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	Name            *string `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1024}"`
 	ParentFilePath  *string `json:"parent_file_path" xml:"parent_file_path" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
 	ShareId         *string `json:"share_id" xml:"share_id" pattern:"[0-9]+"`
 	Size            *int64  `json:"size" xml:"size"`
@@ -6486,10 +6486,10 @@ func (s *CCPBatchRequest) SetResource(v string) *CCPBatchRequest {
 }
 
 type CCPCompleteFileRequest struct {
-	DriveId      *string           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	DriveId      *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	UploadId     *string           `json:"upload_id" xml:"upload_id"`
-	FileId       *string           `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	FileId       *string           `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
 }
 
 func (s CCPCompleteFileRequest) String() string {
@@ -6568,21 +6568,21 @@ func (s *CCPCopyFileRequest) SetToParentFileId(v string) *CCPCopyFileRequest {
 }
 
 type CCPCreateFileRequest struct {
-	ContentMd5      *string           `json:"content_md5" xml:"content_md5" require:"true"`
-	ContentType     *string           `json:"content_type" xml:"content_type" require:"true"`
-	Name            *string           `json:"name" xml:"name" require:"true" pattern:"[a-z0-9.-_]{1,1024}"`
+	ContentMd5      *string           `json:"content_md5" xml:"content_md5"`
+	ContentType     *string           `json:"content_type" xml:"content_type"`
+	Name            *string           `json:"name" xml:"name" pattern:"[a-z0-9.-_]{1,1024}"`
 	PartInfoList    []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	Size            *int64            `json:"size" xml:"size" require:"true"`
-	Type            *string           `json:"type" xml:"type" require:"true"`
+	Size            *int64            `json:"size" xml:"size"`
+	Type            *string           `json:"type" xml:"type"`
 	AutoRename      *bool             `json:"auto_rename" xml:"auto_rename"`
 	ContentHash     *string           `json:"content_hash" xml:"content_hash"`
 	ContentHashName *string           `json:"content_hash_name" xml:"content_hash_name"`
 	Description     *string           `json:"description" xml:"description" maxLength:"0"`
-	DriveId         *string           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	DriveId         *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	Hidden          *bool             `json:"hidden" xml:"hidden"`
 	Labels          []*string         `json:"labels" xml:"labels" type:"Repeated"`
 	Meta            *string           `json:"meta" xml:"meta"`
-	ParentFileId    *string           `json:"parent_file_id" xml:"parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	ParentFileId    *string           `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
 	PreHash         *string           `json:"pre_hash" xml:"pre_hash"`
 }
 
@@ -6815,10 +6815,10 @@ func (s *CCPGetFileRequest) SetImageUrlProcess(v string) *CCPGetFileRequest {
 
 type CCPGetUploadUrlRequest struct {
 	ContentMd5   *string           `json:"content_md5" xml:"content_md5" maxLength:"32"`
-	DriveId      *string           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	DriveId      *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	UploadId     *string           `json:"upload_id" xml:"upload_id" require:"true"`
-	FileId       *string           `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	UploadId     *string           `json:"upload_id" xml:"upload_id"`
+	FileId       *string           `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
 }
 
 func (s CCPGetUploadUrlRequest) String() string {
@@ -6896,11 +6896,11 @@ func (s *CCPListUploadedPartRequest) SetUploadId(v string) *CCPListUploadedPartR
 }
 
 type CCPMoveFileRequest struct {
-	DriveId        *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	DriveId        *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	NewName        *string `json:"new_name" xml:"new_name" pattern:"[a-zA-Z0-9.-]{1,1024}"`
 	Overwrite      *bool   `json:"overwrite" xml:"overwrite"`
-	FileId         *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	ToParentFileId *string `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50"`
+	FileId         *string `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	ToParentFileId *string `json:"to_parent_file_id" xml:"to_parent_file_id" maxLength:"50"`
 }
 
 func (s CCPMoveFileRequest) String() string {
@@ -7939,7 +7939,7 @@ func (s *ListStoreRequest) SetDomainId(v string) *ListStoreRequest {
 }
 
 type OSSCompleteFileRequest struct {
-	DriveId      *string           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	DriveId      *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	UploadId     *string           `json:"upload_id" xml:"upload_id"`
 	FilePath     *string           `json:"file_path" xml:"file_path"`
@@ -8039,14 +8039,14 @@ func (s *OSSCopyFileRequest) SetToShareId(v string) *OSSCopyFileRequest {
 }
 
 type OSSCreateFileRequest struct {
-	ContentMd5     *string           `json:"content_md5" xml:"content_md5" require:"true"`
-	ContentType    *string           `json:"content_type" xml:"content_type" require:"true"`
-	Name           *string           `json:"name" xml:"name" require:"true" pattern:"[a-z0-9.-_]{1,1024}"`
+	ContentMd5     *string           `json:"content_md5" xml:"content_md5"`
+	ContentType    *string           `json:"content_type" xml:"content_type"`
+	Name           *string           `json:"name" xml:"name" pattern:"[a-z0-9.-_]{1,1024}"`
 	PartInfoList   []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	Size           *int64            `json:"size" xml:"size" require:"true"`
-	Type           *string           `json:"type" xml:"type" require:"true"`
-	DriveId        *string           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	ParentFilePath *string           `json:"parent_file_path" xml:"parent_file_path" require:"true"`
+	Size           *int64            `json:"size" xml:"size"`
+	Type           *string           `json:"type" xml:"type"`
+	DriveId        *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	ParentFilePath *string           `json:"parent_file_path" xml:"parent_file_path"`
 	ShareId        *string           `json:"share_id" xml:"share_id" maxLength:"40"`
 }
 
@@ -8222,11 +8222,11 @@ func (s *OSSGetFileRequest) SetShareId(v string) *OSSGetFileRequest {
 
 type OSSGetUploadUrlRequest struct {
 	ContentMd5   *string           `json:"content_md5" xml:"content_md5" maxLength:"32"`
-	DriveId      *string           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	DriveId      *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	UploadId     *string           `json:"upload_id" xml:"upload_id" require:"true"`
-	FilePath     *string           `json:"file_path" xml:"file_path" require:"true"`
-	ShareId      *string           `json:"share_id" xml:"share_id" require:"true" pattern:"[0-9]+"`
+	UploadId     *string           `json:"upload_id" xml:"upload_id"`
+	FilePath     *string           `json:"file_path" xml:"file_path"`
+	ShareId      *string           `json:"share_id" xml:"share_id" pattern:"[0-9]+"`
 }
 
 func (s OSSGetUploadUrlRequest) String() string {

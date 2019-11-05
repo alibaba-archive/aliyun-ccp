@@ -17,7 +17,7 @@ public class CCPCompleteFileRequest extends TeaModel {
     public String uploadId;
 
     @NameInMap("file_id")
-    @Validation(pattern = "[a-z0-9]{1, 50}", maxLength = 0)
+    @Validation(pattern = "[a-z0-9]{1,50}", maxLength = 0)
     public String fileId;
 
 }

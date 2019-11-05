@@ -57,7 +57,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         public string FilePath { get; set; }
 
         [NameInMap("name")]
-        [Validation(Required=true, Pattern="[a-zA-Z0-9.-]{1,1024}")]
+        [Validation(Required=false, Pattern="[a-zA-Z0-9.-]{1,1024}")]
         public string Name { get; set; }
 
         [NameInMap("parent_file_path")]
