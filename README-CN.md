@@ -2,7 +2,7 @@
 ![](https://aliyunsdk-pages.alicdn.com/icons/AlibabaCloud.svg)
 
 ## Alibaba Cloud CCP SDK
-
+[![Travis Build Status](https://travis-ci.org/aliyun/aliyun-ccp.svg?branch=master)](https://travis-ci.org/aliyun/aliyun-ccp)
 ## 安装
 ### Java
 - [baseclient](./baseclient/java/README-CN.md)
