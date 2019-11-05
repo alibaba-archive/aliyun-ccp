@@ -25,12 +25,12 @@ public class AccessTokenCredentialTest {
     @Test
     public void constructorTest() throws Exception {
         Map<String, Object> map = new HashMap<>();
-        map.put("refresh_token", "refresh_token");
+        map.put("refreshToken", "refreshToken");
         map.put("accessToken", "accessToken");
         map.put("expireTime", "4000-01-01T12:12:12Z");
         AccessTokenCredential credential = new AccessTokenCredential(map);
         Assert.assertEquals("4000-01-01T12:12:12Z", credential.getExpireTime());
-        Assert.assertEquals("refresh_token", credential.getRefreshToken());
+        Assert.assertEquals("refreshToken", credential.getRefreshToken());
         Assert.assertEquals("accessToken", credential.getAccessToken());
     }
 
