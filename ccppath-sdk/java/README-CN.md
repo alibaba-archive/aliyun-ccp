@@ -3,7 +3,7 @@
 ![](https://aliyunsdk-pages.alicdn.com/icons/AlibabaCloud.svg)
 
 ## Alibaba Cloud ccp-client for Java
-
+[![Travis Build Status](https://travis-ci.org/aliyun/aliyun-ccp.svg?branch=master)](https://travis-ci.org/aliyun/aliyun-ccp)
 
 ## 安装
 
