@@ -5,15 +5,15 @@ import com.aliyun.tea.*;
 
 public class SetStoreCorsRequest extends TeaModel {
     @NameInMap("cors_rule")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public CorsRule[] corsRule;
 
     @NameInMap("domain_id")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String domainId;
 
     @NameInMap("store_id")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String storeId;
 
 }

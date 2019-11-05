@@ -5,7 +5,7 @@ import com.aliyun.tea.*;
 
 public class GetDomainRequest extends TeaModel {
     @NameInMap("domain_id")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String domainId;
 
 }

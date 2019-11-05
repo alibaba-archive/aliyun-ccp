@@ -5,11 +5,11 @@ import com.aliyun.tea.*;
 
 public class CCPBatchRequest extends TeaModel {
     @NameInMap("requests")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public BatchSubRequest[] requests;
 
     @NameInMap("resource")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String resource;
 
 }

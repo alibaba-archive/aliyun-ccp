@@ -5,23 +5,21 @@ import com.aliyun.tea.*;
 
 public class MobileSendSmsCodeRequest extends TeaModel {
     @NameInMap("app_id")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String appId;
 
     @NameInMap("captcha_id")
-    @Validation(pattern = "", maxLength = 0)
     public String captchaId;
 
     @NameInMap("captcha_text")
-    @Validation(pattern = "", maxLength = 0)
     public String captchaText;
 
     @NameInMap("phone_number")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String phoneNumber;
 
     @NameInMap("type")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String type;
 
 }

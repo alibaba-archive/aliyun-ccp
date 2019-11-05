@@ -5,35 +5,35 @@ import com.aliyun.tea.*;
 
 public class UserAuthentication extends TeaModel {
     @NameInMap("AuthenticationType")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String AuthenticationType;
 
     @NameInMap("CreatedAt")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public Long CreatedAt;
 
     @NameInMap("Detail")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String Detail;
 
     @NameInMap("DomainID")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String DomainID;
 
     @NameInMap("Identity")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String Identity;
 
     @NameInMap("LastLoginTime")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public Long LastLoginTime;
 
     @NameInMap("Status")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String Status;
 
     @NameInMap("UserID")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String UserID;
 
 }

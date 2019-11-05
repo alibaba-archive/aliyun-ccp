@@ -5,19 +5,18 @@ import com.aliyun.tea.*;
 
 public class ListShareRequest extends TeaModel {
     @NameInMap("creator")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String creator;
 
     @NameInMap("limit")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public Integer limit;
 
     @NameInMap("marker")
-    @Validation(pattern = "", maxLength = 0)
     public String marker;
 
     @NameInMap("owner")
-    @Validation(pattern = "", maxLength = 0)
+    @Validation(required = true)
     public String owner;
 
 }
