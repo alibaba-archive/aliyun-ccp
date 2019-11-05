@@ -28,7 +28,7 @@ function getCanonicalizedHeaders(headers: { [key: string]: string }) {
     return result;
 }
 
-function getCanonicalizedResource(pathname: string, query: {[key: string]: string}) {
+function getCanonicalizedResource(pathname: string, query: { [key: string]: string }) {
     const keys = Object.keys(query).sort();
 
     if (keys.length === 0) {
@@ -95,8 +95,15 @@ export default class BaseClient {
         return JSON.stringify(body);
     }
 
-    _toQuery(query: any): { [key: string]: string } {
-        return {};
+    _toQuery(query: { [key: string]: any }): { [key: string]: string } {
+        if (!query) {
+            return;
+        }
+        let ret: { [key: string]: string } = {};
+        for (let [key, value] of Object.entries(query)) {
+            ret[key] = value.toString();
+        }
+        return ret;
     }
 
     _notEmpty(input: string): boolean {
