@@ -131,7 +131,7 @@ func Test_ToQuery(t *testing.T) {
 	out := client.ToQuery(input)
 	utils.AssertEqual(t, "ccp", out["key"])
 	utils.AssertEqual(t, "ok", out["value"])
-	utils.AssertEqual(t, 1, out["number"])
+	utils.AssertEqual(t, "1", out["number"])
 }
 
 func Test_ReadAsJSON(t *testing.T) {
@@ -228,7 +228,7 @@ func Test_Expiretimme(t *testing.T) {
 	utils.AssertNil(t, err)
 
 	expiretime = client.GetExpireTime()
-	utils.AssertEqual(t, expiretime, "2006-01-02T23:04:05+08:00")
+	utils.AssertContains(t, expiretime, "2006-01-02T")
 
 	client.accessToken = nil
 	refreshtoken := client.GetRefreshToken()
