@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 using Aliyun.Credentials;
 using Aliyun.SDK.CCP.Credentials;
@@ -19,6 +22,8 @@ namespace Aliyun.SDK.CCP
     {
         public static string URL_ENCODING = "UTF-8";
         private static string ALGORITHM_NAME = "HmacSHA1";
+        protected readonly string _defaultUserAgent;
+        protected string _userAgent;
         protected string _domainId;
         protected string _protocol;
         protected string _endpoint;
@@ -36,6 +41,9 @@ namespace Aliyun.SDK.CCP
             _userId = DictUtils.GetDicValue(config, "UserId").ToSafeString();
             SetCredential(config);
             this._config = config;
+
+            _defaultUserAgent = GetDefaultUserAgent();
+
         }
 
         private void SetCredential(Dictionary<string, object> config)
@@ -281,6 +289,68 @@ namespace Aliyun.SDK.CCP
                 return numValue;
             }
             return numDefault;
+        }
+
+        public void _appendUserAgent(string userAgent)
+        {
+            if (!string.IsNullOrWhiteSpace(userAgent))
+            {
+                this._userAgent += " " + userAgent;
+            }
+        }
+
+        public void _setUserAgent(string userAgent)
+        {
+            this._userAgent = userAgent;
+        }
+
+        public string _getUserAgent()
+        {
+            if (!string.IsNullOrWhiteSpace(this._userAgent))
+            {
+                return _defaultUserAgent + " " + this._userAgent;
+            }
+            return _defaultUserAgent;
+        }
+
+        private string GetDefaultUserAgent()
+        {
+            string defaultUserAgent = string.Empty;
+            string OSVersion = Environment.OSVersion.ToString();
+            string ClientVersion = GetRuntimeRegexValue(RuntimeEnvironment.GetRuntimeDirectory());
+            string CoreVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            defaultUserAgent = "Alibaba Cloud (" + OSVersion + ") ";
+            defaultUserAgent += ClientVersion;
+            defaultUserAgent += " Core/" + CoreVersion;
+            return defaultUserAgent;
+        }
+
+        private string GetRuntimeRegexValue(string value)
+        {
+            var rx = new Regex(@"(\.NET).*(\\|\/).*(\d)", RegexOptions.Compiled | RegexOptions.IgnoreCase);
+            var matches = rx.Match(value);
+            char[] separator = { '\\', '/' };
+
+            if (matches.Success)
+            {
+                var clientValueArray = matches.Value.Split(separator);
+                return BuildClientVersion(clientValueArray);
+            }
+
+            return "RuntimeNotFound";
+        }
+
+        private string BuildClientVersion(string[] value)
+        {
+            var finalValue = "";
+            for (var i = 0; i < value.Length - 1; ++i)
+            {
+                finalValue += value[i].Replace(".", "").ToLower();
+            }
+
+            finalValue += "/" + value[value.Length - 1];
+
+            return finalValue;
         }
     }
 }
