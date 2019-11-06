@@ -216,6 +216,13 @@ func Test_GetAccessToken(t *testing.T) {
 	utils.AssertEqual(t, accesstoken, "")
 }
 
+func Test_UserAgent(t *testing.T) {
+	utils.AssertContains(t, client.GetUserAgent(), "AlibabaCloud")
+
+	client.SetUserAgent("test")
+	utils.AssertContains(t, client.GetUserAgent(), "test")
+}
+
 func Test_Expiretimme(t *testing.T) {
 	client.accessToken = nil
 	err := client.SetExpireTime("2006-01-T15:04:05Z")

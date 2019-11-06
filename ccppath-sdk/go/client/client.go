@@ -8250,6 +8250,7 @@ func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOpt
 			request_.Method = "POST"
 			request_.Pathname = "/v2/account/cancel_link"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -8364,6 +8365,7 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeO
 			request_.Method = "POST"
 			request_.Pathname = "/v2/account/confirm_link"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -8477,6 +8479,7 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runt
 			request_.Method = "POST"
 			request_.Pathname = "/v2/account/default/change_password"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -8586,6 +8589,7 @@ func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *R
 			request_.Method = "POST"
 			request_.Pathname = "/v2/account/default/set_password"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -8696,6 +8700,7 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 			request_.Method = "POST"
 			request_.Pathname = "/v2/account/get_access_token_by_link_info"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -8810,6 +8815,7 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOpt
 			request_.Method = "POST"
 			request_.Pathname = "/v2/account/get_captcha"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -8924,6 +8930,7 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *Runtim
 			request_.Method = "POST"
 			request_.Pathname = "/v2/account/get_link_info"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -9038,6 +9045,7 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, r
 			request_.Method = "POST"
 			request_.Pathname = "/v2/account/get_link_info_by_user_id"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -9152,6 +9160,7 @@ func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions)
 			request_.Method = "POST"
 			request_.Pathname = "/v2/account/link"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -9266,6 +9275,7 @@ func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *Runt
 			request_.Method = "POST"
 			request_.Pathname = "/v2/account/mobile/check_exist"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -9380,6 +9390,7 @@ func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions
 			request_.Method = "POST"
 			request_.Pathname = "/v2/account/mobile/login"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -9494,6 +9505,7 @@ func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeO
 			request_.Method = "POST"
 			request_.Pathname = "/v2/account/mobile/register"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -9608,6 +9620,7 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runti
 			request_.Method = "POST"
 			request_.Pathname = "/v2/account/mobile/send_sms_code"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -9722,6 +9735,7 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (*Ac
 			request_.Method = "POST"
 			request_.Pathname = "/v2/account/token"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -9836,6 +9850,7 @@ func (client *Client) GetAsyncTaskInfo(request *CCPGetAsyncTaskRequest, runtime 
 			request_.Method = "POST"
 			request_.Pathname = "/v2/async_task/get"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -9950,6 +9965,7 @@ func (client *Client) Operation(request *CCPBatchRequest, runtime *RuntimeOption
 			request_.Method = "POST"
 			request_.Pathname = "/v2/batch"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -10064,6 +10080,7 @@ func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeO
 			request_.Method = "POST"
 			request_.Pathname = "/v2/drive/create"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -10177,6 +10194,7 @@ func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeO
 			request_.Method = "POST"
 			request_.Pathname = "/v2/drive/delete"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -10287,6 +10305,7 @@ func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions
 			request_.Method = "POST"
 			request_.Pathname = "/v2/drive/get"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -10401,6 +10420,7 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *
 			request_.Method = "POST"
 			request_.Pathname = "/v2/drive/get_default_drive"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -10515,6 +10535,7 @@ func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOpti
 			request_.Method = "POST"
 			request_.Pathname = "/v2/drive/list"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -10629,6 +10650,7 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *Runtime
 			request_.Method = "POST"
 			request_.Pathname = "/v2/drive/list_my_drives"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -10743,6 +10765,7 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeO
 			request_.Method = "POST"
 			request_.Pathname = "/v2/drive/update"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -10857,6 +10880,7 @@ func (client *Client) CompleteFile(request *CCPCompleteFileRequest, runtime *Run
 			request_.Method = "POST"
 			request_.Pathname = "/v2/file/complete"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -10971,6 +10995,7 @@ func (client *Client) CopyFile(request *CCPCopyFileRequest, runtime *RuntimeOpti
 			request_.Method = "POST"
 			request_.Pathname = "/v2/file/copy"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -11093,6 +11118,7 @@ func (client *Client) CreateFile(request *CCPCreateFileRequest, runtime *Runtime
 			request_.Method = "POST"
 			request_.Pathname = "/v2/file/create"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -11207,6 +11233,7 @@ func (client *Client) DeleteFile(request *CCPDeleteFileRequest, runtime *Runtime
 			request_.Method = "POST"
 			request_.Pathname = "/v2/file/delete"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -11326,7 +11353,8 @@ func (client *Client) DownloadFile(request *DownloadFileRequest, runtime *Runtim
 			request_.Pathname = "/v2/file/download"
 			request_.Query = client.ToQuery(request)
 			request_.Headers = map[string]string{
-				"host": client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"user-agent": client.GetUserAgent(),
+				"host":       client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 			}
 			if client.NotEmpty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + accessToken
@@ -11430,6 +11458,7 @@ func (client *Client) GetFile(request *CCPGetFileRequest, runtime *RuntimeOption
 			request_.Method = "POST"
 			request_.Pathname = "/v2/file/get"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -11544,6 +11573,7 @@ func (client *Client) GetDownloadUrl(request *CCPGetDownloadUrlRequest, runtime 
 			request_.Method = "POST"
 			request_.Pathname = "/v2/file/get_download_url"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -11658,6 +11688,7 @@ func (client *Client) GetUploadUrl(request *CCPGetUploadUrlRequest, runtime *Run
 			request_.Method = "POST"
 			request_.Pathname = "/v2/file/get_upload_url"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -11772,6 +11803,7 @@ func (client *Client) ListFile(request *CCPListFileRequest, runtime *RuntimeOpti
 			request_.Method = "POST"
 			request_.Pathname = "/v2/file/list"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -11886,6 +11918,7 @@ func (client *Client) ListUploadedParts(request *CCPListUploadedPartRequest, run
 			request_.Method = "POST"
 			request_.Pathname = "/v2/file/list_uploaded_parts"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -12000,6 +12033,7 @@ func (client *Client) MoveFile(request *CCPMoveFileRequest, runtime *RuntimeOpti
 			request_.Method = "POST"
 			request_.Pathname = "/v2/file/move"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -12114,6 +12148,7 @@ func (client *Client) SearchFile(request *CCPSearchFileRequest, runtime *Runtime
 			request_.Method = "POST"
 			request_.Pathname = "/v2/file/search"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -12228,6 +12263,7 @@ func (client *Client) UpdateFile(request *CCPUpdateFileMetaRequest, runtime *Run
 			request_.Method = "POST"
 			request_.Pathname = "/v2/file/update"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -12342,6 +12378,7 @@ func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOpt
 			request_.Method = "POST"
 			request_.Pathname = "/v2/user/create"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -12455,6 +12492,7 @@ func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOpt
 			request_.Method = "POST"
 			request_.Pathname = "/v2/user/delete"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -12565,6 +12603,7 @@ func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) 
 			request_.Method = "POST"
 			request_.Pathname = "/v2/user/get"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -12679,6 +12718,7 @@ func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOption
 			request_.Method = "POST"
 			request_.Pathname = "/v2/user/list"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -12793,6 +12833,7 @@ func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOpt
 			request_.Method = "POST"
 			request_.Pathname = "/v2/user/search"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
@@ -12907,6 +12948,7 @@ func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOpt
 			request_.Method = "POST"
 			request_.Pathname = "/v2/user/update"
 			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
