@@ -1,3 +1,6 @@
+### 2019-11-06 Version 0.0.3
+* Supported UserAgent
+
 ### 2019-11-06 Version 0.0.2
 * Improve `ToQuery`.
 * Improve `ToJsonString`.
