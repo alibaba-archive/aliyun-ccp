@@ -5197,7 +5197,7 @@ export class UCGetObjectInfoBySha1Request extends $tea.Model {
 export class UpdateDriveRequest extends $tea.Model {
   description?: string
   driveId: string
-  driveName: string
+  driveName?: string
   status?: string
   totalSize?: number
   static names(): { [key: string]: string } {
