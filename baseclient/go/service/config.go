@@ -365,3 +365,8 @@ func refreshAccessToken(endpoint, domainId, refreshToken, clientId, clientSecret
 	}
 	return accessToken.AccessToken, accessToken.RefreshToken, update, nil
 }
+
+func Prettify(i interface{}) string {
+	resp, _ := json.MarshalIndent(i, "", "   ")
+	return string(resp)
+}
