@@ -60,6 +60,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/account/cancel_link";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -72,7 +73,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -162,6 +163,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/account/confirm_link";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -174,7 +176,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -264,6 +266,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/account/default/change_password";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -276,7 +279,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -345,6 +348,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/account/default/set_password";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -357,7 +361,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -426,6 +430,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/account/get_access_token_by_link_info";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -438,7 +443,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -528,6 +533,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/account/get_captcha";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -540,7 +546,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -630,6 +636,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/account/get_link_info";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -642,7 +649,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -732,6 +739,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/account/get_link_info_by_user_id";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -744,7 +752,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -834,6 +842,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/account/link";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -846,7 +855,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -936,6 +945,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/account/mobile/check_exist";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -948,7 +958,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1038,6 +1048,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/account/mobile/login";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -1050,7 +1061,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1140,6 +1151,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/account/mobile/register";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -1152,7 +1164,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1242,6 +1254,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/account/mobile/send_sms_code";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -1254,7 +1267,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1344,6 +1357,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/account/token";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -1356,7 +1370,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1446,6 +1460,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/async_task/get";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -1458,7 +1473,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1548,6 +1563,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/batch";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -1560,7 +1576,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1650,6 +1666,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/drive/create";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -1662,7 +1679,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1752,6 +1769,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/drive/delete";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -1764,7 +1782,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1833,6 +1851,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/drive/get";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -1845,7 +1864,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1935,6 +1954,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/drive/get_default_drive";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -1947,7 +1967,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2037,6 +2057,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/drive/list";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -2049,7 +2070,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2139,6 +2160,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/drive/list_my_drives";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -2151,7 +2173,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2241,6 +2263,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/drive/update";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -2253,7 +2276,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2343,6 +2366,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/file/complete";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -2355,7 +2379,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2445,6 +2469,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/file/copy";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -2457,7 +2482,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2555,6 +2580,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/file/create";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -2567,7 +2593,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2657,6 +2683,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/file/delete";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -2669,7 +2696,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2761,8 +2788,9 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "GET";
                     request_.Pathname = "/v2/file/download";
-                    request_.Query = this._toQuery(request);
+                    request_.Query = this._toQuery(request.ToMap());
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                     };
                     if (this._notEmpty(accessToken)) {
@@ -2855,6 +2883,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/file/get";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -2867,7 +2896,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2957,6 +2986,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/file/get_download_url";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -2969,7 +2999,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3059,6 +3089,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/file/get_upload_url";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -3071,7 +3102,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3161,6 +3192,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/file/list";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -3173,7 +3205,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3263,6 +3295,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/file/list_uploaded_parts";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -3275,7 +3308,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3365,6 +3398,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/file/move";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -3377,7 +3411,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3467,6 +3501,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/file/search";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -3479,7 +3514,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3569,6 +3604,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/file/update";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -3581,7 +3617,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3671,6 +3707,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/user/create";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -3683,7 +3720,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3773,6 +3810,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/user/delete";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -3785,7 +3823,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3854,6 +3892,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/user/get";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -3866,7 +3905,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3956,6 +3995,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/user/list";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -3968,7 +4008,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -4058,6 +4098,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/user/search";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -4070,7 +4111,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -4160,6 +4201,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Method = "POST";
                     request_.Pathname = "/v2/user/update";
                     request_.Headers = new Dictionary<string, string>(){
+                        {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
@@ -4172,7 +4214,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request);
+                    request_.Body = this._toJSONString(request.ToMap());
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 

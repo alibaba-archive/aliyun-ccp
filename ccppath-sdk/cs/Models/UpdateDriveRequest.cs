@@ -17,7 +17,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         public string DriveId { get; set; }
 
         [NameInMap("drive_name")]
-        [Validation(Required=true)]
+        [Validation(Required=false)]
         public string DriveName { get; set; }
 
         [NameInMap("status")]

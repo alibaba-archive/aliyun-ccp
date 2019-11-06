@@ -13,7 +13,7 @@ public class BaseCreateFileRequest extends TeaModel {
     public String contentType;
 
     @NameInMap("name")
-    @Validation(required = true, pattern = "[a-z0-9.-_]{1,1024}")
+    @Validation(required = true, pattern = "[a-z0-9.-_]{1,1000}")
     public String name;
 
     @NameInMap("part_info_list")

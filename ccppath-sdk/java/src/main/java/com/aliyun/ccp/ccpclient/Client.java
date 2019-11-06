@@ -56,6 +56,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/account/cancel_link";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -157,6 +158,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/account/confirm_link";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -258,6 +260,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/account/default/change_password";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -355,6 +358,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/account/default/set_password";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -452,6 +456,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/account/get_access_token_by_link_info";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -553,6 +558,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/account/get_captcha";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -654,6 +660,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/account/get_link_info";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -755,6 +762,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/account/get_link_info_by_user_id";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -856,6 +864,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/account/link";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -957,6 +966,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/account/mobile/check_exist";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -1058,6 +1068,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/account/mobile/login";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -1159,6 +1170,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/account/mobile/register";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -1260,6 +1272,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/account/mobile/send_sms_code";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -1361,6 +1374,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/account/token";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -1462,6 +1476,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/async_task/get";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -1563,6 +1578,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/batch";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -1664,6 +1680,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/drive/create";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -1765,6 +1782,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/drive/delete";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -1862,6 +1880,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/drive/get";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -1963,6 +1982,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/drive/get_default_drive";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -2064,6 +2084,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/drive/list";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -2165,6 +2186,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/drive/list_my_drives";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -2266,6 +2288,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/drive/update";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -2367,6 +2390,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/file/complete";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -2468,6 +2492,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/file/copy";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -2577,6 +2602,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/file/create";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -2678,6 +2704,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/file/delete";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -2784,6 +2811,7 @@ public class Client extends BaseClient {
                 request_.pathname = "/v2/file/download";
                 request_.query = this._toQuery(request.toMap());
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com"))
                 );
                 if (this._notEmpty(accessToken)) {
@@ -2875,6 +2903,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/file/get";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -2976,6 +3005,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/file/get_download_url";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -3077,6 +3107,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/file/get_upload_url";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -3178,6 +3209,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/file/list";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -3279,6 +3311,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/file/list_uploaded_parts";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -3380,6 +3413,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/file/move";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -3481,6 +3515,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/file/search";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -3582,6 +3617,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/file/update";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -3683,6 +3719,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/user/create";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -3784,6 +3821,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/user/delete";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -3881,6 +3919,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/user/get";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -3982,6 +4021,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/user/list";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -4083,6 +4123,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/user/search";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
@@ -4184,6 +4225,7 @@ public class Client extends BaseClient {
                 request_.method = "POST";
                 request_.pathname = "/v2/user/update";
                 request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
                     new TeaPair("content-type", "application/json; charset=utf-8")
                 );
