@@ -247,5 +247,29 @@ namespace baseClientUnitTests
             Assert.Equal(1, (int) TestHelper.RunInstanceMethod(typeof(BaseClient), "_defaultNumber", baseClient, new object[] { 1, 0 }));
         }
 
+        [Fact]
+        public void TestGetUserAgent()
+        {
+            Assert.NotNull(baseClient._getUserAgent());
+
+            baseClient._appendUserAgent("");
+            baseClient._appendUserAgent("appendUserAgent");
+            Assert.Contains("appendUserAgent", baseClient._getUserAgent());
+
+            baseClient._setUserAgent("setUserAgent");
+            Assert.DoesNotContain("appendUserAgent", baseClient._getUserAgent());
+            Assert.Contains("setUserAgent", baseClient._getUserAgent());
+
+            baseClient._appendUserAgent("append");
+            Assert.Contains("setUserAgent", baseClient._getUserAgent());
+            Assert.Contains("append", baseClient._getUserAgent());
+        }
+
+        [Fact]
+        public void TestGetRuntimeRegexValue()
+        {
+            Assert.Equal("RuntimeNotFound", (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "GetRuntimeRegexValue", baseClient, new object[] { "1" }));
+        }
+
     }
 }
