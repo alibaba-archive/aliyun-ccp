@@ -56,6 +56,10 @@ public class BaseClient {
         return df.format(new Date());
     }
 
+    public String _getUserAgent() {
+        return "";
+    }
+
     public String getCanonicalizedHeaders(Map<String, String> headers) {
         String prefix = "x-acs-";
         Set<String> keys = headers.keySet();

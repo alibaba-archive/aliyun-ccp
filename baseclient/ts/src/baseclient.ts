@@ -78,6 +78,10 @@ export default class BaseClient {
         return input || default_;
     }
 
+    _getUserAgent(): string {
+        return "";
+    }
+
     _getProtocol(input: string, default_: string): string {
         return input || default_;
     }
