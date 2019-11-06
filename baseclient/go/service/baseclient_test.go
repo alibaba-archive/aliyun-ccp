@@ -221,6 +221,9 @@ func Test_UserAgent(t *testing.T) {
 
 	client.SetUserAgent("test")
 	utils.AssertContains(t, client.GetUserAgent(), "test")
+
+	client.AppendUserAgent("ccp")
+	utils.AssertContains(t, client.GetUserAgent(), "test ccp")
 }
 
 func Test_Expiretimme(t *testing.T) {

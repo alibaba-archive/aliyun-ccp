@@ -95,6 +95,10 @@ func (client *BaseClient) SetUserAgent(useragent string) {
 	client.UserAgent = useragent
 }
 
+func (client *BaseClient) AppendUserAgent(useragent string) {
+	client.UserAgent = client.UserAgent + " " + useragent
+}
+
 func (client *BaseClient) GetUserAgent() string {
 	if client.UserAgent != "" {
 		return defaultUserAgent + " " + client.UserAgent
