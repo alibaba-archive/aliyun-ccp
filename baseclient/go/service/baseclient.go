@@ -2,8 +2,10 @@ package service
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"reflect"
+	"runtime"
 	"strings"
 	"time"
 
@@ -12,12 +14,15 @@ import (
 	"github.com/aliyun/credentials-go/credentials"
 )
 
+var defaultUserAgent = fmt.Sprintf("AlibabaCloud (%s; %s) Golang/%s Core/%s", runtime.GOOS, runtime.GOARCH, strings.Trim(runtime.Version(), "go"), "0.01")
+
 type BaseClient struct {
 	RegionId     string `json:"regionId" xml:"regionId"`
 	Protocol     string `json:"protocol" xml:"protocol"`
 	Endpoint     string `json:"endpoint" xml:"endpoint"`
 	DomainId     string `json:"domainId" xml:"domainId"`
 	ClientId     string `json:"clientId" xml:"clientId"`
+	UserAgent    string `json:"useragent" xml:"useragent"`
 	ClientSecret string `json:"clientSecret" xml:"clientSecret"`
 	credential   credentials.Credential
 	accessToken  *AccessTokenCredential
@@ -84,6 +89,17 @@ func (client *BaseClient) SetExpireTime(expireTime string) error {
 	unix := expiretime.Unix()
 	client.accessToken.credentialUpdater.ExpireTime = &unix
 	return nil
+}
+
+func (client *BaseClient) SetUserAgent(useragent string) {
+	client.UserAgent = useragent
+}
+
+func (client *BaseClient) GetUserAgent() string {
+	if client.UserAgent != "" {
+		return defaultUserAgent + " " + client.UserAgent
+	}
+	return defaultUserAgent
 }
 
 func (client *BaseClient) GetExpireTime() string {

@@ -17,6 +17,7 @@ module Client {
   type @getAccessToken = async (): string
   type @getAccessKeyId = async (): string
   type @getAccessKeySecret = async (): string
+  type @getUserAgent = (): string
 
   type @domainId = string
   type @endpoint = string
@@ -2094,6 +2095,7 @@ example'),
     method = 'POST';
     pathname = `/v2/account/cancel_link`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -2172,6 +2174,7 @@ example'),
     method = 'POST';
     pathname = `/v2/account/confirm_link`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -2249,6 +2252,7 @@ example'),
     method = 'POST';
     pathname = `/v2/account/default/change_password`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -2323,6 +2327,7 @@ example'),
     method = 'POST';
     pathname = `/v2/account/default/set_password`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -2398,6 +2403,7 @@ example'),
     method = 'POST';
     pathname = `/v2/account/get_access_token_by_link_info`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -2475,6 +2481,7 @@ example'),
     method = 'POST';
     pathname = `/v2/account/get_captcha`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -2553,6 +2560,7 @@ example'),
     method = 'POST';
     pathname = `/v2/account/get_link_info`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -2630,6 +2638,7 @@ example'),
     method = 'POST';
     pathname = `/v2/account/get_link_info_by_user_id`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -2709,6 +2718,7 @@ example'),
     method = 'POST';
     pathname = `/v2/account/link`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -2787,6 +2797,7 @@ example'),
     method = 'POST';
     pathname = `/v2/account/mobile/check_exist`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -2865,6 +2876,7 @@ example'),
     method = 'POST';
     pathname = `/v2/account/mobile/login`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -2943,6 +2955,7 @@ example'),
     method = 'POST';
     pathname = `/v2/account/mobile/register`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -3020,6 +3033,7 @@ example'),
     method = 'POST';
     pathname = `/v2/account/mobile/send_sms_code`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -3097,6 +3111,7 @@ example'),
     method = 'POST';
     pathname = `/v2/account/token`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -3178,6 +3193,7 @@ example'),
     method = 'POST';
     pathname = `/v2/async_task/get`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -3258,6 +3274,7 @@ example'),
     method = 'POST';
     pathname = `/v2/batch`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -3339,6 +3356,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/drive/create`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -3418,6 +3436,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/drive/delete`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -3495,6 +3514,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/drive/get`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -3576,6 +3596,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/drive/get_default_drive`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -3655,6 +3676,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/drive/list`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -3734,6 +3756,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/drive/list_my_drives`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -3814,6 +3837,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/drive/update`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -3894,6 +3918,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/file/complete`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -3974,6 +3999,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/file/copy`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -4063,6 +4089,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/file/create`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -4143,6 +4170,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/file/delete`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -4234,6 +4262,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     pathname = `/v2/file/download`;
     query = @toQuery(request);
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
     };
 
@@ -4305,6 +4334,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/file/get`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -4385,6 +4415,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/file/get_download_url`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -4465,6 +4496,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/file/get_upload_url`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -4545,6 +4577,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/file/list`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -4625,6 +4658,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/file/list_uploaded_parts`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -4705,6 +4739,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/file/move`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -4785,6 +4820,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/file/search`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -4865,6 +4901,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/file/update`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -4943,6 +4980,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/user/create`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -5021,6 +5059,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/user/delete`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -5097,6 +5136,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/user/get`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -5175,6 +5215,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/user/list`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -5253,6 +5294,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/user/search`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
@@ -5332,6 +5374,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     method = 'POST';
     pathname = `/v2/user/update`;
     headers = {
+      user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
       content-type = 'application/json; charset=utf-8',
     };
