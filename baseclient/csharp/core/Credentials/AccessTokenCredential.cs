@@ -17,11 +17,13 @@ namespace Aliyun.SDK.CCP.Credentials
         private string domainId;
         private string clientId;
         private string clientSecret;
+        private string endpoint;
 
         public AccessTokenCredential(Dictionary<string, object> config)
         {
             this.refreshToken = DictUtils.GetDicValue(config, "RefreshToken").ToSafeString();
             this.domainId = DictUtils.GetDicValue(config, "DomainId").ToSafeString();
+            this.endpoint = DictUtils.GetDicValue(config, "Endpoint").ToSafeString();
             this.clientId = DictUtils.GetDicValue(config, "ClientId").ToSafeString();
             this.clientSecret = DictUtils.GetDicValue(config, "ClientSecret").ToSafeString();
             this.accessToken = DictUtils.GetDicValue(config, "AccessToken").ToSafeString();
@@ -35,7 +37,7 @@ namespace Aliyun.SDK.CCP.Credentials
             request.Method = "POST";
             request.Pathname = "/v2/oauth/token";
             request.Headers = new Dictionary<string, string>();
-            request.Headers.Add("host", this.domainId + ".api.alicloudccp.com");
+            request.Headers.Add("host", GetHost(this.endpoint, this.domainId + ".api.alicloudccp.com"));
             request.Headers.Add("content-type", "application/x-www-form-urlencoded; charset=utf-8");
             request.Headers.Add("date", TimeUtils.GetGMTDate());
             request.Headers.Add("accept", "application/json");
@@ -91,6 +93,18 @@ namespace Aliyun.SDK.CCP.Credentials
             set
             {
                 this.expireTime = value;
+            }
+        }
+
+        public string GetHost(string endpoint, string domain)
+        {
+            if (!string.IsNullOrWhiteSpace(endpoint))
+            {
+                return endpoint;
+            }
+            else
+            {
+                return domain;
             }
         }
     }

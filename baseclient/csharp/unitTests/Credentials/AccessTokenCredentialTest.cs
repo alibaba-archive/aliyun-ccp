@@ -53,5 +53,19 @@ namespace baseClientUnitTests.Credentials
             AccessTokenCredential accessTokenCredentialExpireTimeNull = new AccessTokenCredential(configExpireTimeNull);
             Assert.False(accessTokenCredentialExpireTimeNull.WithShouldRefresh());
         }
+
+        [Fact]
+        public void TestGetHost()
+        {
+            Dictionary<string, object> config = new Dictionary<string, object>();
+            config.Add("RefreshToken", "refreshToken");
+            config.Add("DomainId", "domainId");
+            config.Add("ClientId", "clientId");
+            config.Add("ClientSecret", "clientSecret");
+            config.Add("ExpireTime", "2019-10-01T00:00:00");
+            AccessTokenCredential accessTokenCredential = new AccessTokenCredential(config);
+            Assert.Equal("domainId", accessTokenCredential.GetHost(null, "domainId"));
+            Assert.Equal("endpoint", accessTokenCredential.GetHost("endpoint", "domainId"));
+        }
     }
 }
