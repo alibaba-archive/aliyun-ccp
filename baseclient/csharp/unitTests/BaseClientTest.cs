@@ -56,27 +56,27 @@ namespace baseClientUnitTests
         [Fact]
         public void TestBaseClientAK()
         {
-            string accesskeyId = (string)TestHelper.RunInstanceMethod(typeof(BaseClient), "_getAccessKeyId", baseClient, null);
-            string accessKeySecret = (string)TestHelper.RunInstanceMethod(typeof(BaseClient), "_getAccessKeySecret", baseClient, null);
+            string accesskeyId = (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_getAccessKeyId", baseClient, null);
+            string accessKeySecret = (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_getAccessKeySecret", baseClient, null);
             Assert.Equal("accessKeyId", accesskeyId);
             Assert.Equal("accessKeySecret", accessKeySecret);
 
-            string protocol = (string)TestHelper.RunInstanceMethod(typeof(BaseClient), "_getProtocol", baseClient, new object[] { "_protocol", "protocol" });
+            string protocol = (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_getProtocol", baseClient, new object[] { "_protocol", "protocol" });
             Assert.Equal("_protocol", protocol);
 
-            string protocolEmpty = (string)TestHelper.RunInstanceMethod(typeof(BaseClient), "_getProtocol", baseClient, new object[] { "", "protocol" });
+            string protocolEmpty = (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_getProtocol", baseClient, new object[] { "", "protocol" });
             Assert.Equal("protocol", protocolEmpty);
 
-            string host = (string)TestHelper.RunInstanceMethod(typeof(BaseClient), "_getHost", baseClient, new object[] { "_endpoint", "endpoint" });
+            string host = (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_getHost", baseClient, new object[] { "_endpoint", "endpoint" });
             Assert.Equal("_endpoint", host);
 
-            string hostEmpty = (string)TestHelper.RunInstanceMethod(typeof(BaseClient), "_getHost", baseClient, new object[] { "", "endpoint" });
+            string hostEmpty = (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_getHost", baseClient, new object[] { "", "endpoint" });
             Assert.Equal("endpoint", hostEmpty);
 
-            Assert.True((bool)TestHelper.RunInstanceMethod(typeof(BaseClient), "_notEmpty", baseClient, new object[] { "endpoint" }));
-            Assert.False((bool)TestHelper.RunInstanceMethod(typeof(BaseClient), "_notEmpty", baseClient, new object[] { "" }));
+            Assert.True((bool) TestHelper.RunInstanceMethod(typeof(BaseClient), "_notEmpty", baseClient, new object[] { "endpoint" }));
+            Assert.False((bool) TestHelper.RunInstanceMethod(typeof(BaseClient), "_notEmpty", baseClient, new object[] { "" }));
 
-            string RFC2616Date = (string)TestHelper.RunInstanceMethod(typeof(BaseClient), "_getRFC2616Date", baseClient, null);
+            string RFC2616Date = (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_getRFC2616Date", baseClient, null);
             Assert.NotNull(RFC2616Date);
         }
 
@@ -101,7 +101,7 @@ namespace baseClientUnitTests
             var filed = type.GetFields(flag).Where(p => p.Name == "_accessTokenCredential").ToList().FirstOrDefault();
             filed.SetValue(baseClient, accessTokenCredential);
 
-            Assert.Equal("accessToken", (string)TestHelper.RunInstanceMethod(typeof(BaseClient), "_getAccessToken", baseClient, null));
+            Assert.Equal("accessToken", (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_getAccessToken", baseClient, null));
         }
 
         [Fact]
@@ -117,9 +117,9 @@ namespace baseClientUnitTests
             config.Add("AccessKeySecret", "accessKeySecret");
             BaseClient baseClient = new BaseClient(config);
 
-            string accesskeyId = (string)TestHelper.RunInstanceMethod(typeof(BaseClient), "_getAccessKeyId", baseClient, null);
-            string accessKeySecret = (string)TestHelper.RunInstanceMethod(typeof(BaseClient), "_getAccessKeySecret", baseClient, null);
-            string securityToken = (string)TestHelper.RunInstanceMethod(typeof(BaseClient), "_getSecurityToken", baseClient, null);
+            string accesskeyId = (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_getAccessKeyId", baseClient, null);
+            string accessKeySecret = (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_getAccessKeySecret", baseClient, null);
+            string securityToken = (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_getSecurityToken", baseClient, null);
             Assert.Equal("accessKeyId", accesskeyId);
             Assert.Equal("accessKeySecret", accessKeySecret);
             Assert.Equal("securityToken", securityToken);
@@ -161,14 +161,19 @@ namespace baseClientUnitTests
             mockHttpWebResponse.Setup(p => p.StatusDescription).Returns("StatusDescription");
             mockHttpWebResponse.Setup(p => p.Headers).Returns(new WebHeaderCollection());
             TeaResponse teaResponse = new TeaResponse(mockHttpWebResponse.Object);
-            Assert.True((bool)TestHelper.RunInstanceMethod(typeof(BaseClient), "_isStatusCode", baseClient, new object[] { teaResponse, 200 }));
+            Assert.True((bool) TestHelper.RunInstanceMethod(typeof(BaseClient), "_isStatusCode", baseClient, new object[] { teaResponse, 200 }));
         }
 
         [Fact]
         public void TestToJSONString()
         {
-            TeaModel model = new TeaModel();
-            Assert.NotNull(TestHelper.RunInstanceMethod(typeof(BaseClient), "_toJSONString", baseClient, new object[] { model }));
+            TestRegModel testRegModel = new TestRegModel();
+            testRegModel.RequestId = "requestId";
+            testRegModel.subModel = new TestRegSubModel();
+            string a = (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_toJSONString", baseClient, new object[] { testRegModel.ToMap() });
+            Assert.NotNull(TestHelper.RunInstanceMethod(typeof(BaseClient), "_toJSONString", baseClient, new object[] { testRegModel.ToMap() }));
+            Assert.Equal("{\"RequestId\":\"requestId\",\"NextMarker\":null,\"testNoAttr\":null,\"subModel\":{\"RequestId\":null,\"testInt\":0}}",
+                (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_toJSONString", baseClient, new object[] { testRegModel.ToMap() }));
         }
 
         [Fact]
@@ -184,10 +189,10 @@ namespace baseClientUnitTests
             mockHttpWebResponse.Setup(p => p.GetResponseStream()).Returns(stream);
             TeaResponse teaResponse = new TeaResponse(mockHttpWebResponse.Object);
 
-            Dictionary<string, object> dict = (Dictionary<string, object>)TestHelper.RunInstanceMethod(typeof(BaseClient), "_readAsJSON", baseClient, new object[] { teaResponse });
+            Dictionary<string, object> dict = (Dictionary<string, object>) TestHelper.RunInstanceMethod(typeof(BaseClient), "_readAsJSON", baseClient, new object[] { teaResponse });
             Assert.Empty(dict["next_marker"].ToString());
-            Assert.Equal(2, ((List<Dictionary<string, object>>)dict["items"]).Count);
-            Assert.Equal(19L, ((Dictionary<string, object>)dict["test"])["total_size"]);
+            Assert.Equal(2, ((List<Dictionary<string, object>>) dict["items"]).Count);
+            Assert.Equal(19L, ((Dictionary<string, object>) dict["test"]) ["total_size"]);
         }
 
         [Fact]
@@ -196,7 +201,7 @@ namespace baseClientUnitTests
             TestRegModel testRegModel = new TestRegModel();
             testRegModel.RequestId = "requestId";
             testRegModel.subModel = new TestRegSubModel();
-            Dictionary<string, string> dict = (Dictionary<string, string>)TestHelper.RunInstanceMethod(typeof(BaseClient), "_toQuery", baseClient, new object[] { testRegModel });
+            Dictionary<string, string> dict = (Dictionary<string, string>) TestHelper.RunInstanceMethod(typeof(BaseClient), "_toQuery", baseClient, new object[] { testRegModel.ToMap() });
             Assert.Equal("requestId", dict["RequestId"]);
             Assert.Null(dict["NextMarker"]);
         }
@@ -207,7 +212,7 @@ namespace baseClientUnitTests
             Dictionary<String, String> headers = new Dictionary<string, string>();
             headers.Add("x-acs-test", "test");
             headers.Add("testKey", "testValue");
-            string connonicalized = (string)TestHelper.RunInstanceMethod(typeof(BaseClient), "getCanonicalizedHeaders", baseClient, new object[] { headers });
+            string connonicalized = (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "getCanonicalizedHeaders", baseClient, new object[] { headers });
             Assert.NotNull(connonicalized);
             Assert.Equal("x-acs-test:test", connonicalized);
         }
@@ -216,30 +221,30 @@ namespace baseClientUnitTests
         public void TestGetCanonicalizedResource()
         {
             string pathName = "pathName";
-            Assert.Equal("pathName", (string)TestHelper.RunInstanceMethod(typeof(BaseClient), "getCanonicalizedResource", baseClient, new object[] { pathName, null }));
+            Assert.Equal("pathName", (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "getCanonicalizedResource", baseClient, new object[] { pathName, null }));
 
             Dictionary<String, String> query = new Dictionary<string, string>();
-            Assert.Equal("pathName", (string)TestHelper.RunInstanceMethod(typeof(BaseClient), "getCanonicalizedResource", baseClient, new object[] { pathName, query }));
+            Assert.Equal("pathName", (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "getCanonicalizedResource", baseClient, new object[] { pathName, query }));
 
             query.Add("key", "value");
-            string resultPath = (string)TestHelper.RunInstanceMethod(typeof(BaseClient), "getCanonicalizedResource", baseClient, new object[] { pathName, query });
+            string resultPath = (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "getCanonicalizedResource", baseClient, new object[] { pathName, query });
             Assert.Equal("pathName?key=value", resultPath);
         }
 
         [Fact]
         public void TestDefault()
         {
-            Assert.Equal("default", (string)TestHelper.RunInstanceMethod(typeof(BaseClient), "_default", baseClient, new object[] { string.Empty, "default" }));
+            Assert.Equal("default", (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_default", baseClient, new object[] { string.Empty, "default" }));
 
-            Assert.Equal("inputStr", (string)TestHelper.RunInstanceMethod(typeof(BaseClient), "_default", baseClient, new object[] { "inputStr", "default" }));
+            Assert.Equal("inputStr", (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_default", baseClient, new object[] { "inputStr", "default" }));
         }
 
         [Fact]
         public void TestDefaultNumber()
         {
-            Assert.Equal(0, (int)TestHelper.RunInstanceMethod(typeof(BaseClient), "_defaultNumber", baseClient, new object[] { -1, 0 }));
+            Assert.Equal(0, (int) TestHelper.RunInstanceMethod(typeof(BaseClient), "_defaultNumber", baseClient, new object[] {-1, 0 }));
 
-            Assert.Equal(1, (int)TestHelper.RunInstanceMethod(typeof(BaseClient), "_defaultNumber", baseClient, new object[] { 1, 0 }));
+            Assert.Equal(1, (int) TestHelper.RunInstanceMethod(typeof(BaseClient), "_defaultNumber", baseClient, new object[] { 1, 0 }));
         }
 
     }
