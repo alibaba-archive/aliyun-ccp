@@ -134,7 +134,7 @@ namespace Aliyun.SDK.CCP
 
         protected string _getRFC2616Date()
         {
-            return DateTime.Now.ToUniversalTime().GetDateTimeFormats('r')[0];
+            return DateTime.Now.ToUniversalTime().GetDateTimeFormats('r') [0];
         }
 
         protected string _getSignature(TeaRequest request)
@@ -152,7 +152,7 @@ namespace Aliyun.SDK.CCP
             string canonicalizedResource = getCanonicalizedResource(pathname, query);
             string stringToSign = header + "\n" + canonicalizedHeaders + "\n" + canonicalizedResource;
             byte[] signData;
-            using (KeyedHashAlgorithm algorithm = CryptoConfig.CreateFromName("HMACSHA1") as KeyedHashAlgorithm)
+            using(KeyedHashAlgorithm algorithm = CryptoConfig.CreateFromName("HMACSHA1") as KeyedHashAlgorithm)
             {
                 algorithm.Key = Encoding.UTF8.GetBytes(_getAccessKeySecret());
                 signData = algorithm.ComputeHash(Encoding.UTF8.GetBytes(stringToSign.ToCharArray()));
@@ -165,7 +165,7 @@ namespace Aliyun.SDK.CCP
             return response.StatusCode == code;
         }
 
-        protected string _toJSONString(TeaModel request)
+        protected string _toJSONString(Dictionary<string, object> request)
         {
             return JsonConvert.SerializeObject(request);
         }
@@ -179,9 +179,8 @@ namespace Aliyun.SDK.CCP
             return dic;
         }
 
-        protected Dictionary<string, string> _toQuery(TeaModel request)
+        protected Dictionary<string, string> _toQuery(Dictionary<string, object> dicRequest)
         {
-            Dictionary<string, object> dicRequest = request.ToMap();
             Dictionary<string, string> dicQuery = new Dictionary<string, string>();
             foreach (KeyValuePair<string, object> item in dicRequest)
             {
@@ -245,7 +244,7 @@ namespace Aliyun.SDK.CCP
             {
                 if (dicObj[key] is JArray)
                 {
-                    List<Dictionary<string, object>> dicObjList = ((JArray)dicObj[key]).ToObject<List<Dictionary<string, object>>>();
+                    List<Dictionary<string, object>> dicObjList = ((JArray) dicObj[key]).ToObject<List<Dictionary<string, object>>>();
                     List<Dictionary<string, object>> dicList = new List<Dictionary<string, object>>();
                     foreach (Dictionary<string, object> objItem in dicObjList)
                     {
@@ -255,7 +254,7 @@ namespace Aliyun.SDK.CCP
                 }
                 else if (dicObj[key] is JObject)
                 {
-                    Dictionary<string, object> dicJObj = ((JObject)dicObj[key]).ToObject<Dictionary<string, object>>();
+                    Dictionary<string, object> dicJObj = ((JObject) dicObj[key]).ToObject<Dictionary<string, object>>();
                     dic.Add(key, dicJObj);
                 }
                 else
