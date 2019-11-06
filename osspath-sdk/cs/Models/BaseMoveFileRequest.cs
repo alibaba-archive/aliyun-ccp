@@ -13,7 +13,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         public string DriveId { get; set; }
 
         [NameInMap("new_name")]
-        [Validation(Required=false, Pattern="[a-zA-Z0-9.-]{1,1024}")]
+        [Validation(Required=false, Pattern="[a-zA-Z0-9.-]{1,1000}")]
         public string NewName { get; set; }
 
         [NameInMap("overwrite")]

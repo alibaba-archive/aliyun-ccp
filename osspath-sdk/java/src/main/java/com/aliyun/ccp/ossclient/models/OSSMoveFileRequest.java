@@ -12,7 +12,7 @@ public class OSSMoveFileRequest extends TeaModel {
     public String filePath;
 
     @NameInMap("new_name")
-    @Validation(required = true, pattern = "[a-zA-Z0-9.-]{1,1024}")
+    @Validation(required = true, pattern = "[a-zA-Z0-9.-]{1,1000}")
     public String newName;
 
     @NameInMap("overwrite")
