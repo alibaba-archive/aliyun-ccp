@@ -9,7 +9,7 @@ public class CCPMoveFileRequest extends TeaModel {
     public String driveId;
 
     @NameInMap("new_name")
-    @Validation(pattern = "[a-zA-Z0-9.-]{1,1024}")
+    @Validation(pattern = "[a-zA-Z0-9.-]{1,1000}")
     public String newName;
 
     @NameInMap("overwrite")

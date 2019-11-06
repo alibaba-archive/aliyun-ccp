@@ -32,17 +32,25 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         [Validation(Required=false)]
         public bool Starred { get; set; }
 
+        [NameInMap("all")]
+        [Validation(Required=false)]
+        public bool All { get; set; }
+
         [NameInMap("category")]
         [Validation(Required=false)]
         public string Category { get; set; }
 
-        [NameInMap("custom_index_key")]
+        [NameInMap("order_by")]
         [Validation(Required=false)]
-        public string CustomIndexKey { get; set; }
+        public string OrderBy { get; set; }
 
         [NameInMap("order_direction")]
         [Validation(Required=false)]
         public string OrderDirection { get; set; }
+
+        [NameInMap("parent_file_id")]
+        [Validation(Required=false, MaxLength=50, Pattern="[a-z0-9.-_]{1,50}")]
+        public string ParentFileId { get; set; }
 
         [NameInMap("status")]
         [Validation(Required=false)]
@@ -52,17 +60,9 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         [Validation(Required=false)]
         public string Type { get; set; }
 
-        [NameInMap("all")]
+        [NameInMap("custom_index_key")]
         [Validation(Required=false)]
-        public bool All { get; set; }
-
-        [NameInMap("order_by")]
-        [Validation(Required=false)]
-        public string OrderBy { get; set; }
-
-        [NameInMap("parent_file_id")]
-        [Validation(Required=false, MaxLength=50, Pattern="[a-z0-9.-_]{1,50}")]
-        public string ParentFileId { get; set; }
+        public string CustomIndexKey { get; set; }
 
     }
 

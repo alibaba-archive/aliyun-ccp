@@ -5048,7 +5048,7 @@ func (s *BaseCompleteFileRequest) SetUploadId(v string) *BaseCompleteFileRequest
 type BaseCreateFileRequest struct {
 	ContentMd5   *string           `json:"content_md5" xml:"content_md5" require:"true"`
 	ContentType  *string           `json:"content_type" xml:"content_type" require:"true"`
-	Name         *string           `json:"name" xml:"name" require:"true" pattern:"[a-z0-9.-_]{1,1024}"`
+	Name         *string           `json:"name" xml:"name" require:"true" pattern:"[a-z0-9.-_]{1,1000}"`
 	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	Size         *int64            `json:"size" xml:"size" require:"true"`
 	Type         *string           `json:"type" xml:"type" require:"true"`
@@ -5170,7 +5170,7 @@ func (s *BaseListFileRequest) SetMarker(v string) *BaseListFileRequest {
 
 type BaseMoveFileRequest struct {
 	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	NewName   *string `json:"new_name" xml:"new_name" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	NewName   *string `json:"new_name" xml:"new_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	Overwrite *bool   `json:"overwrite" xml:"overwrite"`
 }
 
@@ -5300,7 +5300,7 @@ type CCPCopyFileRequest struct {
 	AutoRename     *bool   `json:"auto_rename" xml:"auto_rename"`
 	DriveId        *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	FileId         *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	NewName        *string `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	NewName        *string `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	ToDriveId      *string `json:"to_drive_id" xml:"to_drive_id" require:"true" pattern:"[0-9]+"`
 	ToParentFileId *string `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 }
@@ -5346,7 +5346,7 @@ func (s *CCPCopyFileRequest) SetToParentFileId(v string) *CCPCopyFileRequest {
 type CCPCreateFileRequest struct {
 	ContentMd5      *string           `json:"content_md5" xml:"content_md5"`
 	ContentType     *string           `json:"content_type" xml:"content_type"`
-	Name            *string           `json:"name" xml:"name" pattern:"[a-z0-9.-_]{1,1024}"`
+	Name            *string           `json:"name" xml:"name" pattern:"[a-z0-9.-_]{1,1000}"`
 	PartInfoList    []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	Size            *int64            `json:"size" xml:"size"`
 	Type            *string           `json:"type" xml:"type"`
@@ -5529,7 +5529,7 @@ type CCPGetDownloadUrlRequest struct {
 	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
 	FileId    *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	FileName  *string `json:"file_name" xml:"file_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	FileName  *string `json:"file_name" xml:"file_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 }
 
 func (s CCPGetDownloadUrlRequest) String() string {
@@ -5643,14 +5643,14 @@ type CCPListFileRequest struct {
 	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1, 3}"`
 	Marker                *string `json:"marker" xml:"marker"`
 	Starred               *bool   `json:"Starred" xml:"Starred"`
+	All                   *bool   `json:"all" xml:"all"`
 	Category              *string `json:"category" xml:"category"`
-	CustomIndexKey        *string `json:"custom_index_key" xml:"custom_index_key"`
+	OrderBy               *string `json:"order_by" xml:"order_by"`
 	OrderDirection        *string `json:"order_direction" xml:"order_direction"`
+	ParentFileId          *string `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	Status                *string `json:"status" xml:"status"`
 	Type                  *string `json:"type" xml:"type"`
-	All                   *bool   `json:"all" xml:"all"`
-	OrderBy               *string `json:"order_by" xml:"order_by"`
-	ParentFileId          *string `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	CustomIndexKey        *string `json:"custom_index_key" xml:"custom_index_key"`
 }
 
 func (s CCPListFileRequest) String() string {
@@ -5691,18 +5691,28 @@ func (s *CCPListFileRequest) SetStarred(v bool) *CCPListFileRequest {
 	return s
 }
 
+func (s *CCPListFileRequest) SetAll(v bool) *CCPListFileRequest {
+	s.All = &v
+	return s
+}
+
 func (s *CCPListFileRequest) SetCategory(v string) *CCPListFileRequest {
 	s.Category = &v
 	return s
 }
 
-func (s *CCPListFileRequest) SetCustomIndexKey(v string) *CCPListFileRequest {
-	s.CustomIndexKey = &v
+func (s *CCPListFileRequest) SetOrderBy(v string) *CCPListFileRequest {
+	s.OrderBy = &v
 	return s
 }
 
 func (s *CCPListFileRequest) SetOrderDirection(v string) *CCPListFileRequest {
 	s.OrderDirection = &v
+	return s
+}
+
+func (s *CCPListFileRequest) SetParentFileId(v string) *CCPListFileRequest {
+	s.ParentFileId = &v
 	return s
 }
 
@@ -5716,18 +5726,8 @@ func (s *CCPListFileRequest) SetType(v string) *CCPListFileRequest {
 	return s
 }
 
-func (s *CCPListFileRequest) SetAll(v bool) *CCPListFileRequest {
-	s.All = &v
-	return s
-}
-
-func (s *CCPListFileRequest) SetOrderBy(v string) *CCPListFileRequest {
-	s.OrderBy = &v
-	return s
-}
-
-func (s *CCPListFileRequest) SetParentFileId(v string) *CCPListFileRequest {
-	s.ParentFileId = &v
+func (s *CCPListFileRequest) SetCustomIndexKey(v string) *CCPListFileRequest {
+	s.CustomIndexKey = &v
 	return s
 }
 
@@ -5774,7 +5774,7 @@ func (s *CCPListUploadedPartRequest) SetUploadId(v string) *CCPListUploadedPartR
 
 type CCPMoveFileRequest struct {
 	DriveId        *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	NewName        *string `json:"new_name" xml:"new_name" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	NewName        *string `json:"new_name" xml:"new_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	Overwrite      *bool   `json:"overwrite" xml:"overwrite"`
 	FileId         *string `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	ToParentFileId *string `json:"to_parent_file_id" xml:"to_parent_file_id" maxLength:"50"`
@@ -5874,7 +5874,7 @@ type CCPUpdateFileMetaRequest struct {
 	Hidden         *bool     `json:"hidden" xml:"hidden"`
 	Labels         []*string `json:"labels" xml:"labels" type:"Repeated"`
 	Meta           *string   `json:"meta" xml:"meta"`
-	Name           *string   `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	Name           *string   `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	Starred        *bool     `json:"starred" xml:"starred"`
 }
 
@@ -5982,7 +5982,7 @@ type CopyFileRequest struct {
 	DriveId          *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	FileId           *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	FilePath         *string `json:"file_path" xml:"file_path"`
-	NewName          *string `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	NewName          *string `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	Overwrite        *bool   `json:"overwrite" xml:"overwrite"`
 	ShareId          *string `json:"share_id" xml:"share_id"`
 	ToParentFileId   *string `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
@@ -6111,7 +6111,7 @@ type CreateFileRequest struct {
 	DriveId         *string                `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	Hidden          *bool                  `json:"hidden" xml:"hidden"`
 	Meta            *string                `json:"meta" xml:"meta"`
-	Name            *string                `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	Name            *string                `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	ParentFileId    *string                `json:"parent_file_id" xml:"parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
 	ParentFilePath  *string                `json:"parent_file_path" xml:"parent_file_path"`
 	PartInfoList    []*UploadPartInfo      `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
@@ -6422,7 +6422,7 @@ type GetDownloadUrlRequest struct {
 	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
 	FileId    *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	FileName  *string `json:"file_name" xml:"file_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	FileName  *string `json:"file_name" xml:"file_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	FilePath  *string `json:"file_path" xml:"file_path"`
 	ShareId   *string `json:"share_id" xml:"share_id"`
 }
@@ -6859,7 +6859,7 @@ func (s *OSSCompleteFileRequest) SetShareId(v string) *OSSCompleteFileRequest {
 type OSSCopyFileRequest struct {
 	DriveId          *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	FilePath         *string `json:"file_path" xml:"file_path"`
-	NewName          *string `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	NewName          *string `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	Overwrite        *bool   `json:"overwrite" xml:"overwrite"`
 	ShareId          *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
 	ToDriveId        *string `json:"to_drive_id" xml:"to_drive_id" require:"true" pattern:"[0-9]+"`
@@ -6918,7 +6918,7 @@ func (s *OSSCopyFileRequest) SetToShareId(v string) *OSSCopyFileRequest {
 type OSSCreateFileRequest struct {
 	ContentMd5     *string           `json:"content_md5" xml:"content_md5"`
 	ContentType    *string           `json:"content_type" xml:"content_type"`
-	Name           *string           `json:"name" xml:"name" pattern:"[a-z0-9.-_]{1,1024}"`
+	Name           *string           `json:"name" xml:"name" pattern:"[a-z0-9.-_]{1,1000}"`
 	PartInfoList   []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	Size           *int64            `json:"size" xml:"size"`
 	Type           *string           `json:"type" xml:"type"`
@@ -7018,7 +7018,7 @@ func (s *OSSDeleteFileRequest) SetShareId(v string) *OSSDeleteFileRequest {
 type OSSGetDownloadUrlRequest struct {
 	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
-	FileName  *string `json:"file_name" xml:"file_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	FileName  *string `json:"file_name" xml:"file_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	FilePath  *string `json:"file_path" xml:"file_path" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	ShareId   *string `json:"share_id" xml:"share_id" require:"true" pattern:"[0-9a-z-]+"`
 }
@@ -7247,7 +7247,7 @@ func (s *OSSListUploadedPartRequest) SetUploadId(v string) *OSSListUploadedPartR
 type OSSMoveFileRequest struct {
 	DriveId          *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	FilePath         *string `json:"file_path" xml:"file_path"`
-	NewName          *string `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	NewName          *string `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	Overwrite        *bool   `json:"overwrite" xml:"overwrite"`
 	ShareId          *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
 	ToParentFilePath *string `json:"to_parent_file_path" xml:"to_parent_file_path"`
@@ -7372,7 +7372,7 @@ type UpdateFileMetaRequest struct {
 	FileId      *string                `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	Hidden      *bool                  `json:"hidden" xml:"hidden"`
 	Meta        *string                `json:"meta" xml:"meta"`
-	Name        *string                `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	Name        *string                `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	ShareId     *string                `json:"share_id" xml:"share_id"`
 	Starred     *bool                  `json:"starred" xml:"starred"`
 	Tags        map[string]interface{} `json:"tags" xml:"tags"`

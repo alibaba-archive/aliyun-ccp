@@ -28,7 +28,7 @@ public class CCPUpdateFileMetaRequest extends TeaModel {
     public String meta;
 
     @NameInMap("name")
-    @Validation(required = true, pattern = "[a-zA-Z0-9.-]{1,1024}")
+    @Validation(required = true, pattern = "[a-zA-Z0-9.-]{1,1000}")
     public String name;
 
     @NameInMap("starred")
