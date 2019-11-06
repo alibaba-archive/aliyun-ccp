@@ -4480,6 +4480,7 @@ export class CCPCreateFileRequest extends $tea.Model {
   contentHashName?: string
   description?: string
   driveId?: string
+  fileId?: string
   hidden?: boolean
   labels?: string[]
   meta?: string
@@ -4498,6 +4499,7 @@ export class CCPCreateFileRequest extends $tea.Model {
       contentHashName: 'content_hash_name',
       description: 'description',
       driveId: 'drive_id',
+      fileId: 'file_id',
       hidden: 'hidden',
       labels: 'labels',
       meta: 'meta',
@@ -4519,6 +4521,7 @@ export class CCPCreateFileRequest extends $tea.Model {
       contentHashName: 'string',
       description: 'string',
       driveId: 'string',
+      fileId: 'string',
       hidden: 'boolean',
       labels: { 'type': 'array', 'itemType': 'string' },
       meta: 'string',
@@ -4677,6 +4680,64 @@ export class CCPGetUploadUrlRequest extends $tea.Model {
       partInfoList: { 'type': 'array', 'itemType': UploadPartInfo },
       uploadId: 'string',
       fileId: 'string',
+    };
+  }
+
+  constructor(map: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class CCPListFileRequest extends $tea.Model {
+  driveId?: string
+  imageThumbnailProcess?: string
+  imageUrlProcess?: string
+  limit?: number
+  marker?: string
+  Starred?: boolean
+  category?: string
+  customIndexKey?: string
+  orderDirection?: string
+  status?: string
+  type?: string
+  all?: boolean
+  orderBy?: string
+  parentFileId?: string
+  static names(): { [key: string]: string } {
+    return {
+      driveId: 'drive_id',
+      imageThumbnailProcess: 'image_thumbnail_process',
+      imageUrlProcess: 'image_url_process',
+      limit: 'limit',
+      marker: 'marker',
+      Starred: 'Starred',
+      category: 'category',
+      customIndexKey: 'custom_index_key',
+      orderDirection: 'order_direction',
+      status: 'status',
+      type: 'type',
+      all: 'all',
+      orderBy: 'order_by',
+      parentFileId: 'parent_file_id',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      driveId: 'string',
+      imageThumbnailProcess: 'string',
+      imageUrlProcess: 'string',
+      limit: 'number',
+      marker: 'string',
+      Starred: 'boolean',
+      category: 'string',
+      customIndexKey: 'string',
+      orderDirection: 'string',
+      status: 'string',
+      type: 'string',
+      all: 'boolean',
+      orderBy: 'string',
+      parentFileId: 'string',
     };
   }
 
@@ -5884,7 +5945,7 @@ export class UCGetObjectInfoBySha1Request extends $tea.Model {
 export class UpdateDriveRequest extends $tea.Model {
   description?: string
   driveId: string
-  driveName: string
+  driveName?: string
   status?: string
   totalSize?: number
   static names(): { [key: string]: string } {
@@ -6499,6 +6560,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/account/cancel_link`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -6596,6 +6658,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/account/confirm_link`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -6693,6 +6756,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/account/default/change_password`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -6787,6 +6851,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/account/default/set_password`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -6881,6 +6946,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/account/get_access_token_by_link_info`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -6978,6 +7044,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/account/get_captcha`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -7075,6 +7142,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/account/get_link_info`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -7172,6 +7240,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/account/get_link_info_by_user_id`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -7269,6 +7338,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/account/link`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -7366,6 +7436,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/account/mobile/check_exist`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -7463,6 +7534,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/account/mobile/login`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -7560,6 +7632,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/account/mobile/register`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -7657,6 +7730,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/account/mobile/send_sms_code`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -7754,6 +7828,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/account/token`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -7851,6 +7926,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/domain/list_stores`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -7948,6 +8024,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/user/get_access_token`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -8045,6 +8122,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/drive/create`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -8142,6 +8220,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/drive/delete`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -8236,6 +8315,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/drive/get`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -8333,6 +8413,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/drive/get_default_drive`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -8430,6 +8511,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/drive/list`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -8527,6 +8609,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/drive/list_my_drives`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -8624,6 +8707,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/drive/update`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -8721,6 +8805,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/osspath/file/complete`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -8818,6 +8903,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/osspath/file/copy`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -8915,6 +9001,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/osspath/file/create`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -9012,6 +9099,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/osspath/file/delete`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -9106,6 +9194,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/osspath/file/get`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -9203,6 +9292,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/osspath/file/get_download_url`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -9300,6 +9390,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/osspath/file/get_upload_url`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -9397,6 +9488,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/osspath/file/list`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -9494,6 +9586,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/osspath/file/list_uploaded_parts`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -9591,6 +9684,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/osspath/file/move`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -9688,6 +9782,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/osspath/share/create`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -9785,6 +9880,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/osspath/share/delete`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -9879,6 +9975,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/osspath/share/get`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -9976,6 +10073,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/osspath/share/list`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -10073,6 +10171,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/osspath/share/update`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -10170,6 +10269,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/osspath/store_file/list`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -10267,6 +10367,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/user/create`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -10364,6 +10465,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/user/delete`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -10458,6 +10560,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/user/get`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -10555,6 +10658,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/user/list`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -10652,6 +10756,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/user/search`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };
@@ -10749,6 +10854,7 @@ export default class Client extends BaseClient {
         request_.method = "POST";
         request_.pathname = `/v2/user/update`;
         request_.headers = {
+          'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
         };

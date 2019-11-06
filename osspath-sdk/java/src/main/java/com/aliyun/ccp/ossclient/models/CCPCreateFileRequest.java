@@ -11,7 +11,7 @@ public class CCPCreateFileRequest extends TeaModel {
     public String contentType;
 
     @NameInMap("name")
-    @Validation(pattern = "[a-z0-9.-_]{1,1024}")
+    @Validation(pattern = "[a-z0-9.-_]{1,1000}")
     public String name;
 
     @NameInMap("part_info_list")
@@ -38,6 +38,9 @@ public class CCPCreateFileRequest extends TeaModel {
     @NameInMap("drive_id")
     @Validation(pattern = "[0-9]+")
     public String driveId;
+
+    @NameInMap("file_id")
+    public String fileId;
 
     @NameInMap("hidden")
     public boolean hidden;

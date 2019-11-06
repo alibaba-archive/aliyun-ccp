@@ -12,7 +12,6 @@ public class UpdateDriveRequest extends TeaModel {
     public String driveId;
 
     @NameInMap("drive_name")
-    @Validation(required = true)
     public String driveName;
 
     @NameInMap("status")

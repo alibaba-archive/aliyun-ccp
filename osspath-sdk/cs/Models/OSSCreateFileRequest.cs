@@ -17,7 +17,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         public string ContentType { get; set; }
 
         [NameInMap("name")]
-        [Validation(Required=false, Pattern="[a-z0-9.-_]{1,1024}")]
+        [Validation(Required=false, Pattern="[a-z0-9.-_]{1,1000}")]
         public string Name { get; set; }
 
         [NameInMap("part_info_list")]

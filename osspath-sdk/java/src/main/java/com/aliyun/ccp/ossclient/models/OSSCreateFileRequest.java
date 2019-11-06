@@ -11,7 +11,7 @@ public class OSSCreateFileRequest extends TeaModel {
     public String contentType;
 
     @NameInMap("name")
-    @Validation(pattern = "[a-z0-9.-_]{1,1024}")
+    @Validation(pattern = "[a-z0-9.-_]{1,1000}")
     public String name;
 
     @NameInMap("part_info_list")
