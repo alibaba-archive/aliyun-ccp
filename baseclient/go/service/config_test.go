@@ -2,11 +2,13 @@ package service
 
 import (
 	"errors"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"reflect"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/alibabacloud-go/tea/tea"
 	"github.com/aliyun/aliyun-ccp/baseclient/go/utils"
@@ -21,6 +23,36 @@ type validatorTest struct {
 
 type errLength struct {
 	Num *int `json:"num" maxLength:"a"`
+}
+
+type PrettifyTest struct {
+	name     string
+	Strs     []string
+	Value    string
+	Time     time.Time
+	Body     io.Reader
+	Mapvalue map[string]string
+	Prettify *PrettifyTest
+}
+
+func Test_Prettify(t *testing.T) {
+	prettifyTest := PrettifyTest{
+		name:     "prettify",
+		Value:    "ok",
+		Time:     time.Now(),
+		Body:     interface{}(strings.NewReader("ccp")).(io.Reader),
+		Mapvalue: map[string]string{"key": "ccp", "value": "ok"},
+		Prettify: &PrettifyTest{
+			Time:     time.Now(),
+			Body:     interface{}(strings.NewReader("ccp")).(io.Reader),
+			Mapvalue: map[string]string{"key": "ccp", "value": "ok"},
+		},
+	}
+	str := Prettify(prettifyTest)
+	utils.AssertContains(t, str, "Prettify")
+
+	str = Prettify(nil)
+	utils.AssertEqual(t, "null", str)
 }
 
 func Test_Sorter(t *testing.T) {

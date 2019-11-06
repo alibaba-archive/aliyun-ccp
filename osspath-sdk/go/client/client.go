@@ -5,7 +5,6 @@ import (
 
 	"github.com/alibabacloud-go/tea/tea"
 	"github.com/aliyun/aliyun-ccp/baseclient/go/service"
-	"github.com/aliyun/aliyun-ccp/baseclient/go/utils"
 )
 
 type RuntimeOptions struct {
@@ -26,7 +25,7 @@ type RuntimeOptions struct {
 }
 
 func (s RuntimeOptions) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s RuntimeOptions) GoString() string {
@@ -119,7 +118,7 @@ type Config struct {
 }
 
 func (s Config) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s Config) GoString() string {
@@ -205,7 +204,7 @@ type AccountAccessTokenResponse struct {
 }
 
 func (s AccountAccessTokenResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s AccountAccessTokenResponse) GoString() string {
@@ -296,7 +295,7 @@ type AccountLinkRequest struct {
 }
 
 func (s AccountLinkRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s AccountLinkRequest) GoString() string {
@@ -339,7 +338,7 @@ type AddStoreRequest struct {
 }
 
 func (s AddStoreRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s AddStoreRequest) GoString() string {
@@ -387,7 +386,7 @@ type AppAccessStrategy struct {
 }
 
 func (s AppAccessStrategy) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s AppAccessStrategy) GoString() string {
@@ -413,7 +412,7 @@ type AuthConfig struct {
 }
 
 func (s AuthConfig) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s AuthConfig) GoString() string {
@@ -477,7 +476,7 @@ type BaseCCPFileResponse struct {
 }
 
 func (s BaseCCPFileResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s BaseCCPFileResponse) GoString() string {
@@ -641,7 +640,7 @@ type BaseDriveResponse struct {
 }
 
 func (s BaseDriveResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s BaseDriveResponse) GoString() string {
@@ -740,7 +739,7 @@ type BaseOSSFileResponse struct {
 }
 
 func (s BaseOSSFileResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s BaseOSSFileResponse) GoString() string {
@@ -881,7 +880,7 @@ type BaseShareResponse struct {
 }
 
 func (s BaseShareResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s BaseShareResponse) GoString() string {
@@ -971,7 +970,7 @@ type BatchSubResponse struct {
 }
 
 func (s BatchSubResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s BatchSubResponse) GoString() string {
@@ -1004,7 +1003,7 @@ type CCPBatchResponse struct {
 }
 
 func (s CCPBatchResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPBatchResponse) GoString() string {
@@ -1054,7 +1053,7 @@ type CCPCompleteFileResponse struct {
 }
 
 func (s CCPCompleteFileResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPCompleteFileResponse) GoString() string {
@@ -1215,7 +1214,7 @@ type CCPCopyFileResponse struct {
 }
 
 func (s CCPCopyFileResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPCopyFileResponse) GoString() string {
@@ -1260,7 +1259,7 @@ type CCPCreateFileResponse struct {
 }
 
 func (s CCPCreateFileResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPCreateFileResponse) GoString() string {
@@ -1321,7 +1320,7 @@ type CCPDeleteFileResponse struct {
 }
 
 func (s CCPDeleteFileResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPDeleteFileResponse) GoString() string {
@@ -1361,7 +1360,7 @@ type CCPDeleteFilesResponse struct {
 }
 
 func (s CCPDeleteFilesResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPDeleteFilesResponse) GoString() string {
@@ -1396,7 +1395,7 @@ type CCPGetAsyncTaskResponse struct {
 }
 
 func (s CCPGetAsyncTaskResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPGetAsyncTaskResponse) GoString() string {
@@ -1431,7 +1430,7 @@ type CCPGetDownloadUrlResponse struct {
 }
 
 func (s CCPGetDownloadUrlResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPGetDownloadUrlResponse) GoString() string {
@@ -1490,7 +1489,7 @@ type CCPGetFileResponse struct {
 }
 
 func (s CCPGetFileResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPGetFileResponse) GoString() string {
@@ -1648,7 +1647,7 @@ type CCPGetUploadUrlResponse struct {
 }
 
 func (s CCPGetUploadUrlResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPGetUploadUrlResponse) GoString() string {
@@ -1697,7 +1696,7 @@ type CCPListFileResponse struct {
 }
 
 func (s CCPListFileResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPListFileResponse) GoString() string {
@@ -1728,7 +1727,7 @@ type CCPListUploadedPartResponse struct {
 }
 
 func (s CCPListUploadedPartResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPListUploadedPartResponse) GoString() string {
@@ -1769,7 +1768,7 @@ type CCPMoveFileResponse struct {
 }
 
 func (s CCPMoveFileResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPMoveFileResponse) GoString() string {
@@ -1808,7 +1807,7 @@ type CCPSearchFileResponse struct {
 }
 
 func (s CCPSearchFileResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPSearchFileResponse) GoString() string {
@@ -1862,7 +1861,7 @@ type CCPUpdateFileMetaResponse struct {
 }
 
 func (s CCPUpdateFileMetaResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPUpdateFileMetaResponse) GoString() string {
@@ -2014,7 +2013,7 @@ type CancelLinkRequest struct {
 }
 
 func (s CancelLinkRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CancelLinkRequest) GoString() string {
@@ -2033,7 +2032,7 @@ type Captcha struct {
 }
 
 func (s Captcha) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s Captcha) GoString() string {
@@ -2060,7 +2059,7 @@ type ConfirmLinkRequest struct {
 }
 
 func (s ConfirmLinkRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s ConfirmLinkRequest) GoString() string {
@@ -2081,7 +2080,7 @@ type CorsRule struct {
 }
 
 func (s CorsRule) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CorsRule) GoString() string {
@@ -2124,7 +2123,7 @@ type CreateAppRequest struct {
 }
 
 func (s CreateAppRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CreateAppRequest) GoString() string {
@@ -2196,7 +2195,7 @@ type CreateDomainRequest struct {
 }
 
 func (s CreateDomainRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CreateDomainRequest) GoString() string {
@@ -2340,7 +2339,7 @@ type CreateDriveResponse struct {
 }
 
 func (s CreateDriveResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CreateDriveResponse) GoString() string {
@@ -2369,7 +2368,7 @@ type CreateShareResponse struct {
 }
 
 func (s CreateShareResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CreateShareResponse) GoString() string {
@@ -2400,7 +2399,7 @@ type DefaultChangePasswordRequest struct {
 }
 
 func (s DefaultChangePasswordRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s DefaultChangePasswordRequest) GoString() string {
@@ -2439,7 +2438,7 @@ type DefaultSetPasswordRequest struct {
 }
 
 func (s DefaultSetPasswordRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s DefaultSetPasswordRequest) GoString() string {
@@ -2466,7 +2465,7 @@ type DeleteAppRequest struct {
 }
 
 func (s DeleteAppRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s DeleteAppRequest) GoString() string {
@@ -2483,7 +2482,7 @@ type DeleteDomainRequest struct {
 }
 
 func (s DeleteDomainRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s DeleteDomainRequest) GoString() string {
@@ -2500,7 +2499,7 @@ type DeleteDriveResponse struct {
 }
 
 func (s DeleteDriveResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s DeleteDriveResponse) GoString() string {
@@ -2518,7 +2517,7 @@ type GetAccessTokenByLinkInfoRequest struct {
 }
 
 func (s GetAccessTokenByLinkInfoRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s GetAccessTokenByLinkInfoRequest) GoString() string {
@@ -2540,7 +2539,7 @@ type GetAppRequest struct {
 }
 
 func (s GetAppRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s GetAppRequest) GoString() string {
@@ -2558,7 +2557,7 @@ type GetByLinkInfoRequest struct {
 }
 
 func (s GetByLinkInfoRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s GetByLinkInfoRequest) GoString() string {
@@ -2580,7 +2579,7 @@ type GetCaptchaRequest struct {
 }
 
 func (s GetCaptchaRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s GetCaptchaRequest) GoString() string {
@@ -2597,7 +2596,7 @@ type GetDomainRequest struct {
 }
 
 func (s GetDomainRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s GetDomainRequest) GoString() string {
@@ -2626,7 +2625,7 @@ type GetDriveResponse struct {
 }
 
 func (s GetDriveResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s GetDriveResponse) GoString() string {
@@ -2703,7 +2702,7 @@ type GetLinkInfoByUserIDRequest struct {
 }
 
 func (s GetLinkInfoByUserIDRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s GetLinkInfoByUserIDRequest) GoString() string {
@@ -2734,7 +2733,7 @@ type GetShareResponse struct {
 }
 
 func (s GetShareResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s GetShareResponse) GoString() string {
@@ -2824,7 +2823,7 @@ type ImageMediaResponse struct {
 }
 
 func (s ImageMediaResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s ImageMediaResponse) GoString() string {
@@ -2857,7 +2856,7 @@ type LinkInfo struct {
 }
 
 func (s LinkInfo) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s LinkInfo) GoString() string {
@@ -2880,7 +2879,7 @@ type LinkInfoListResponse struct {
 }
 
 func (s LinkInfoListResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s LinkInfoListResponse) GoString() string {
@@ -2909,7 +2908,7 @@ type LinkInfoResponse struct {
 }
 
 func (s LinkInfoResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s LinkInfoResponse) GoString() string {
@@ -2962,7 +2961,7 @@ type ListAppsRequest struct {
 }
 
 func (s ListAppsRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s ListAppsRequest) GoString() string {
@@ -2985,7 +2984,7 @@ type ListDomainsRequest struct {
 }
 
 func (s ListDomainsRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s ListDomainsRequest) GoString() string {
@@ -3009,7 +3008,7 @@ type ListDriveResponse struct {
 }
 
 func (s ListDriveResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s ListDriveResponse) GoString() string {
@@ -3038,7 +3037,7 @@ type ListShareResponse struct {
 }
 
 func (s ListShareResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s ListShareResponse) GoString() string {
@@ -3067,7 +3066,7 @@ type ListStoreFileResponse struct {
 }
 
 func (s ListStoreFileResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s ListStoreFileResponse) GoString() string {
@@ -3095,7 +3094,7 @@ type ListStoreResponse struct {
 }
 
 func (s ListStoreResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s ListStoreResponse) GoString() string {
@@ -3117,7 +3116,7 @@ type ListStoresRequest struct {
 }
 
 func (s ListStoresRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s ListStoresRequest) GoString() string {
@@ -3137,7 +3136,7 @@ type LoginByCodeRequest struct {
 }
 
 func (s LoginByCodeRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s LoginByCodeRequest) GoString() string {
@@ -3170,7 +3169,7 @@ type MobileCheckExistRequest struct {
 }
 
 func (s MobileCheckExistRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s MobileCheckExistRequest) GoString() string {
@@ -3194,7 +3193,7 @@ type MobileCheckExistResponse struct {
 }
 
 func (s MobileCheckExistResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s MobileCheckExistResponse) GoString() string {
@@ -3228,7 +3227,7 @@ type MobileLoginRequest struct {
 }
 
 func (s MobileLoginRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s MobileLoginRequest) GoString() string {
@@ -3283,7 +3282,7 @@ type MobileRegisterRequest struct {
 }
 
 func (s MobileRegisterRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s MobileRegisterRequest) GoString() string {
@@ -3319,7 +3318,7 @@ type MobileSendSmsCodeRequest struct {
 }
 
 func (s MobileSendSmsCodeRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s MobileSendSmsCodeRequest) GoString() string {
@@ -3357,7 +3356,7 @@ type MobileSendSmsCodeResponse struct {
 }
 
 func (s MobileSendSmsCodeResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s MobileSendSmsCodeResponse) GoString() string {
@@ -3402,7 +3401,7 @@ type OSSCompleteFileResponse struct {
 }
 
 func (s OSSCompleteFileResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSCompleteFileResponse) GoString() string {
@@ -3539,7 +3538,7 @@ type OSSCopyFileResponse struct {
 }
 
 func (s OSSCopyFileResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSCopyFileResponse) GoString() string {
@@ -3588,7 +3587,7 @@ type OSSCreateFileResponse struct {
 }
 
 func (s OSSCreateFileResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSCreateFileResponse) GoString() string {
@@ -3645,7 +3644,7 @@ type OSSDeleteFileResponse struct {
 }
 
 func (s OSSDeleteFileResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSDeleteFileResponse) GoString() string {
@@ -3691,7 +3690,7 @@ type OSSDeleteFilesResponse struct {
 }
 
 func (s OSSDeleteFilesResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSDeleteFilesResponse) GoString() string {
@@ -3731,7 +3730,7 @@ type OSSGetDownloadUrlResponse struct {
 }
 
 func (s OSSGetDownloadUrlResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSGetDownloadUrlResponse) GoString() string {
@@ -3785,7 +3784,7 @@ type OSSGetFileResponse struct {
 }
 
 func (s OSSGetFileResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSGetFileResponse) GoString() string {
@@ -3918,7 +3917,7 @@ type OSSGetUploadUrlResponse struct {
 }
 
 func (s OSSGetUploadUrlResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSGetUploadUrlResponse) GoString() string {
@@ -3967,7 +3966,7 @@ type OSSListFileResponse struct {
 }
 
 func (s OSSListFileResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSListFileResponse) GoString() string {
@@ -3998,7 +3997,7 @@ type OSSListUploadedPartResponse struct {
 }
 
 func (s OSSListUploadedPartResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSListUploadedPartResponse) GoString() string {
@@ -4040,7 +4039,7 @@ type OSSMoveFileResponse struct {
 }
 
 func (s OSSMoveFileResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSMoveFileResponse) GoString() string {
@@ -4084,7 +4083,7 @@ type OSSSearchFileResponse struct {
 }
 
 func (s OSSSearchFileResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSSearchFileResponse) GoString() string {
@@ -4133,7 +4132,7 @@ type OSSUpdateFileMetaResponse struct {
 }
 
 func (s OSSUpdateFileMetaResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSUpdateFileMetaResponse) GoString() string {
@@ -4265,7 +4264,7 @@ type PreHashCheckSuccessResponse struct {
 }
 
 func (s PreHashCheckSuccessResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s PreHashCheckSuccessResponse) GoString() string {
@@ -4308,7 +4307,7 @@ type RemoveStoreRequest struct {
 }
 
 func (s RemoveStoreRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s RemoveStoreRequest) GoString() string {
@@ -4332,7 +4331,7 @@ type SetStoreCorsRequest struct {
 }
 
 func (s SetStoreCorsRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s SetStoreCorsRequest) GoString() string {
@@ -4363,7 +4362,7 @@ type StoreFile struct {
 }
 
 func (s StoreFile) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s StoreFile) GoString() string {
@@ -4412,7 +4411,7 @@ type StoreItemResponse struct {
 }
 
 func (s StoreItemResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s StoreItemResponse) GoString() string {
@@ -4491,7 +4490,7 @@ type TokenRequest struct {
 }
 
 func (s TokenRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s TokenRequest) GoString() string {
@@ -4525,7 +4524,7 @@ type UpdateAppRequest struct {
 }
 
 func (s UpdateAppRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s UpdateAppRequest) GoString() string {
@@ -4601,7 +4600,7 @@ type UpdateDomainRequest struct {
 }
 
 func (s UpdateDomainRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s UpdateDomainRequest) GoString() string {
@@ -4750,7 +4749,7 @@ type UpdateDriveResponse struct {
 }
 
 func (s UpdateDriveResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s UpdateDriveResponse) GoString() string {
@@ -4841,7 +4840,7 @@ type UpdateShareResponse struct {
 }
 
 func (s UpdateShareResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s UpdateShareResponse) GoString() string {
@@ -4931,7 +4930,7 @@ type UploadPartInfo struct {
 }
 
 func (s UploadPartInfo) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s UploadPartInfo) GoString() string {
@@ -4970,7 +4969,7 @@ type UserAuthentication struct {
 }
 
 func (s UserAuthentication) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s UserAuthentication) GoString() string {
@@ -5028,7 +5027,7 @@ type AccessTokenResponse struct {
 }
 
 func (s AccessTokenResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s AccessTokenResponse) GoString() string {
@@ -5087,7 +5086,7 @@ type AddStoreResponse struct {
 }
 
 func (s AddStoreResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s AddStoreResponse) GoString() string {
@@ -5163,7 +5162,7 @@ type AdminListStoresRequest struct {
 }
 
 func (s AdminListStoresRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s AdminListStoresRequest) GoString() string {
@@ -5205,7 +5204,7 @@ type BaseDomainResponse struct {
 }
 
 func (s BaseDomainResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s BaseDomainResponse) GoString() string {
@@ -5402,7 +5401,7 @@ type CreateDomainResponse struct {
 }
 
 func (s CreateDomainResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CreateDomainResponse) GoString() string {
@@ -5583,7 +5582,7 @@ type GetAppResponse struct {
 }
 
 func (s GetAppResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s GetAppResponse) GoString() string {
@@ -5700,7 +5699,7 @@ type GetDomainResponse struct {
 }
 
 func (s GetDomainResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s GetDomainResponse) GoString() string {
@@ -5868,7 +5867,7 @@ type GetUserAccessTokenRequest struct {
 }
 
 func (s GetUserAccessTokenRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s GetUserAccessTokenRequest) GoString() string {
@@ -5892,7 +5891,7 @@ type ListAppsResponse struct {
 }
 
 func (s ListAppsResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s ListAppsResponse) GoString() string {
@@ -5921,7 +5920,7 @@ type ListDomainsResponse struct {
 }
 
 func (s ListDomainsResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s ListDomainsResponse) GoString() string {
@@ -5949,7 +5948,7 @@ type ListStoresResponse struct {
 }
 
 func (s ListStoresResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s ListStoresResponse) GoString() string {
@@ -5981,7 +5980,7 @@ type Store struct {
 }
 
 func (s Store) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s Store) GoString() string {
@@ -6078,7 +6077,7 @@ type UpdateDomainResponse struct {
 }
 
 func (s UpdateDomainResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s UpdateDomainResponse) GoString() string {
@@ -6247,7 +6246,7 @@ type BaseCompleteFileRequest struct {
 }
 
 func (s BaseCompleteFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s BaseCompleteFileRequest) GoString() string {
@@ -6279,7 +6278,7 @@ type BaseCreateFileRequest struct {
 }
 
 func (s BaseCreateFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s BaseCreateFileRequest) GoString() string {
@@ -6324,7 +6323,7 @@ type BaseGetUploadUrlRequest struct {
 }
 
 func (s BaseGetUploadUrlRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s BaseGetUploadUrlRequest) GoString() string {
@@ -6360,7 +6359,7 @@ type BaseListFileRequest struct {
 }
 
 func (s BaseListFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s BaseListFileRequest) GoString() string {
@@ -6399,7 +6398,7 @@ type BaseMoveFileRequest struct {
 }
 
 func (s BaseMoveFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s BaseMoveFileRequest) GoString() string {
@@ -6430,7 +6429,7 @@ type BatchSubRequest struct {
 }
 
 func (s BatchSubRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s BatchSubRequest) GoString() string {
@@ -6468,7 +6467,7 @@ type CCPBatchRequest struct {
 }
 
 func (s CCPBatchRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPBatchRequest) GoString() string {
@@ -6493,7 +6492,7 @@ type CCPCompleteFileRequest struct {
 }
 
 func (s CCPCompleteFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPCompleteFileRequest) GoString() string {
@@ -6530,7 +6529,7 @@ type CCPCopyFileRequest struct {
 }
 
 func (s CCPCopyFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPCopyFileRequest) GoString() string {
@@ -6587,7 +6586,7 @@ type CCPCreateFileRequest struct {
 }
 
 func (s CCPCreateFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPCreateFileRequest) GoString() string {
@@ -6681,7 +6680,7 @@ type CCPDeleteFileRequest struct {
 }
 
 func (s CCPDeleteFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPDeleteFileRequest) GoString() string {
@@ -6709,7 +6708,7 @@ type CCPDeleteFilesRequest struct {
 }
 
 func (s CCPDeleteFilesRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPDeleteFilesRequest) GoString() string {
@@ -6731,7 +6730,7 @@ type CCPGetAsyncTaskRequest struct {
 }
 
 func (s CCPGetAsyncTaskRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPGetAsyncTaskRequest) GoString() string {
@@ -6751,7 +6750,7 @@ type CCPGetDownloadUrlRequest struct {
 }
 
 func (s CCPGetDownloadUrlRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPGetDownloadUrlRequest) GoString() string {
@@ -6786,7 +6785,7 @@ type CCPGetFileRequest struct {
 }
 
 func (s CCPGetFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPGetFileRequest) GoString() string {
@@ -6822,7 +6821,7 @@ type CCPGetUploadUrlRequest struct {
 }
 
 func (s CCPGetUploadUrlRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPGetUploadUrlRequest) GoString() string {
@@ -6863,7 +6862,7 @@ type CCPListUploadedPartRequest struct {
 }
 
 func (s CCPListUploadedPartRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPListUploadedPartRequest) GoString() string {
@@ -6904,7 +6903,7 @@ type CCPMoveFileRequest struct {
 }
 
 func (s CCPMoveFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPMoveFileRequest) GoString() string {
@@ -6947,7 +6946,7 @@ type CCPSearchFileRequest struct {
 }
 
 func (s CCPSearchFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPSearchFileRequest) GoString() string {
@@ -7002,7 +7001,7 @@ type CCPUpdateFileMetaRequest struct {
 }
 
 func (s CCPUpdateFileMetaRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CCPUpdateFileMetaRequest) GoString() string {
@@ -7064,7 +7063,7 @@ type CompleteFileRequest struct {
 }
 
 func (s CompleteFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CompleteFileRequest) GoString() string {
@@ -7113,7 +7112,7 @@ type CopyFileRequest struct {
 }
 
 func (s CopyFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CopyFileRequest) GoString() string {
@@ -7173,7 +7172,7 @@ type CreateDriveRequest struct {
 }
 
 func (s CreateDriveRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CreateDriveRequest) GoString() string {
@@ -7246,7 +7245,7 @@ type CreateFileRequest struct {
 }
 
 func (s CreateFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CreateFileRequest) GoString() string {
@@ -7350,7 +7349,7 @@ type CreateShareRequest struct {
 }
 
 func (s CreateShareRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CreateShareRequest) GoString() string {
@@ -7402,7 +7401,7 @@ type DeleteDriveRequest struct {
 }
 
 func (s DeleteDriveRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s DeleteDriveRequest) GoString() string {
@@ -7423,7 +7422,7 @@ type DeleteFileRequest struct {
 }
 
 func (s DeleteFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s DeleteFileRequest) GoString() string {
@@ -7460,7 +7459,7 @@ type DeleteShareRequest struct {
 }
 
 func (s DeleteShareRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s DeleteShareRequest) GoString() string {
@@ -7480,7 +7479,7 @@ type DownloadRequest struct {
 }
 
 func (s DownloadRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s DownloadRequest) GoString() string {
@@ -7512,7 +7511,7 @@ type GetAsyncTaskRequest struct {
 }
 
 func (s GetAsyncTaskRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s GetAsyncTaskRequest) GoString() string {
@@ -7529,7 +7528,7 @@ type GetDefaultDriveRequest struct {
 }
 
 func (s GetDefaultDriveRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s GetDefaultDriveRequest) GoString() string {
@@ -7551,7 +7550,7 @@ type GetDownloadUrlRequest struct {
 }
 
 func (s GetDownloadUrlRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s GetDownloadUrlRequest) GoString() string {
@@ -7593,7 +7592,7 @@ type GetDriveRequest struct {
 }
 
 func (s GetDriveRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s GetDriveRequest) GoString() string {
@@ -7615,7 +7614,7 @@ type GetFileRequest struct {
 }
 
 func (s GetFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s GetFileRequest) GoString() string {
@@ -7657,7 +7656,7 @@ type GetShareRequest struct {
 }
 
 func (s GetShareRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s GetShareRequest) GoString() string {
@@ -7680,7 +7679,7 @@ type GetUploadUrlRequest struct {
 }
 
 func (s GetUploadUrlRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s GetUploadUrlRequest) GoString() string {
@@ -7729,7 +7728,7 @@ type ListDriveRequest struct {
 }
 
 func (s ListDriveRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s ListDriveRequest) GoString() string {
@@ -7765,7 +7764,7 @@ type ListFileRequest struct {
 }
 
 func (s ListFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s ListFileRequest) GoString() string {
@@ -7828,7 +7827,7 @@ type ListMyDriveRequest struct {
 }
 
 func (s ListMyDriveRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s ListMyDriveRequest) GoString() string {
@@ -7853,7 +7852,7 @@ type ListShareRequest struct {
 }
 
 func (s ListShareRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s ListShareRequest) GoString() string {
@@ -7889,7 +7888,7 @@ type ListStoreFileRequest struct {
 }
 
 func (s ListStoreFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s ListStoreFileRequest) GoString() string {
@@ -7926,7 +7925,7 @@ type ListStoreRequest struct {
 }
 
 func (s ListStoreRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s ListStoreRequest) GoString() string {
@@ -7947,7 +7946,7 @@ type OSSCompleteFileRequest struct {
 }
 
 func (s OSSCompleteFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSCompleteFileRequest) GoString() string {
@@ -7991,7 +7990,7 @@ type OSSCopyFileRequest struct {
 }
 
 func (s OSSCopyFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSCopyFileRequest) GoString() string {
@@ -8051,7 +8050,7 @@ type OSSCreateFileRequest struct {
 }
 
 func (s OSSCreateFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSCreateFileRequest) GoString() string {
@@ -8111,7 +8110,7 @@ type OSSDeleteFileRequest struct {
 }
 
 func (s OSSDeleteFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSDeleteFileRequest) GoString() string {
@@ -8147,7 +8146,7 @@ type OSSGetDownloadUrlRequest struct {
 }
 
 func (s OSSGetDownloadUrlRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSGetDownloadUrlRequest) GoString() string {
@@ -8188,7 +8187,7 @@ type OSSGetFileRequest struct {
 }
 
 func (s OSSGetFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSGetFileRequest) GoString() string {
@@ -8230,7 +8229,7 @@ type OSSGetUploadUrlRequest struct {
 }
 
 func (s OSSGetUploadUrlRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSGetUploadUrlRequest) GoString() string {
@@ -8278,7 +8277,7 @@ type OSSListFileRequest struct {
 }
 
 func (s OSSListFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSListFileRequest) GoString() string {
@@ -8330,7 +8329,7 @@ type OSSListUploadedPartRequest struct {
 }
 
 func (s OSSListUploadedPartRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSListUploadedPartRequest) GoString() string {
@@ -8377,7 +8376,7 @@ type OSSMoveFileRequest struct {
 }
 
 func (s OSSMoveFileRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s OSSMoveFileRequest) GoString() string {
@@ -8419,7 +8418,7 @@ type UCGetObjectInfoByObjectKeyRequest struct {
 }
 
 func (s UCGetObjectInfoByObjectKeyRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s UCGetObjectInfoByObjectKeyRequest) GoString() string {
@@ -8436,7 +8435,7 @@ type UCGetObjectInfoBySha1Request struct {
 }
 
 func (s UCGetObjectInfoBySha1Request) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s UCGetObjectInfoBySha1Request) GoString() string {
@@ -8457,7 +8456,7 @@ type UpdateDriveRequest struct {
 }
 
 func (s UpdateDriveRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s UpdateDriveRequest) GoString() string {
@@ -8502,7 +8501,7 @@ type UpdateFileMetaRequest struct {
 }
 
 func (s UpdateFileMetaRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s UpdateFileMetaRequest) GoString() string {
@@ -8564,7 +8563,7 @@ type UpdateShareRequest struct {
 }
 
 func (s UpdateShareRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s UpdateShareRequest) GoString() string {
@@ -8619,7 +8618,7 @@ type BaseUserResponse struct {
 }
 
 func (s BaseUserResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s BaseUserResponse) GoString() string {
@@ -8709,7 +8708,7 @@ type CreateUserRequest struct {
 }
 
 func (s CreateUserRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CreateUserRequest) GoString() string {
@@ -8779,7 +8778,7 @@ type CreateUserResponse struct {
 }
 
 func (s CreateUserResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s CreateUserResponse) GoString() string {
@@ -8861,7 +8860,7 @@ type DeleteUserRequest struct {
 }
 
 func (s DeleteUserRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s DeleteUserRequest) GoString() string {
@@ -8878,7 +8877,7 @@ type DeleteUserResponse struct {
 }
 
 func (s DeleteUserResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s DeleteUserResponse) GoString() string {
@@ -8895,7 +8894,7 @@ type GetUserRequest struct {
 }
 
 func (s GetUserRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s GetUserRequest) GoString() string {
@@ -8925,7 +8924,7 @@ type GetUserResponse struct {
 }
 
 func (s GetUserResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s GetUserResponse) GoString() string {
@@ -9008,7 +9007,7 @@ type ListUserRequest struct {
 }
 
 func (s ListUserRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s ListUserRequest) GoString() string {
@@ -9032,7 +9031,7 @@ type ListUserResponse struct {
 }
 
 func (s ListUserResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s ListUserResponse) GoString() string {
@@ -9066,7 +9065,7 @@ type SearchUserRequest struct {
 }
 
 func (s SearchUserRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s SearchUserRequest) GoString() string {
@@ -9125,7 +9124,7 @@ type UpdateUserRequest struct {
 }
 
 func (s UpdateUserRequest) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s UpdateUserRequest) GoString() string {
@@ -9190,7 +9189,7 @@ type UpdateUserResponse struct {
 }
 
 func (s UpdateUserResponse) String() string {
-	return utils.Prettify(s)
+	return service.Prettify(s)
 }
 
 func (s UpdateUserResponse) GoString() string {

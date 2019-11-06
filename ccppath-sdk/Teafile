@@ -12,7 +12,7 @@
     "baseClient": ""
   },
   "go": {
-    "baseClient": "github.com/aliyun/aliyun-ccp/baseclient/"
+    "baseClient": "github.com/aliyun/aliyun-ccp/baseclient"
   },
   "typescript": {
     "baseClient": "@alicloud/ccp-baseclient"
