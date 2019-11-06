@@ -1882,7 +1882,7 @@ type: boolean'),
   model UpdateDriveRequest {
     description?: string(name='description', description='描述信息', example='ccp team drive', maximum=1024),
     driveId: string(name='drive_id', description='Drive ID', example='123'),
-    driveName: string(name='drive_name', description='Drive 名称', example='ccpdrive', maximum=1024),
+    driveName?: string(name='drive_name', description='Drive 名称', example='ccpdrive', maximum=1024),
     status?: string(name='status', default='enabled', description='状态', enum='disabled, enabled', example='enabled'),
     totalSize?: long(name='total_size', default=0, description='总大小,单位Byte [如果设置 -1 代表不限制]', example=1024, format='int64'),
   }
