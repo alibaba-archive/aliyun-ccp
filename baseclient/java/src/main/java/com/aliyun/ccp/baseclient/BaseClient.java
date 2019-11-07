@@ -20,8 +20,25 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class BaseClient {
+
+    static {
+        Properties sysProps = System.getProperties();
+        String coreVersion = "";
+        Properties props = new Properties();
+        try {
+            props.load(BaseClient.class.getClassLoader().getResourceAsStream("project.properties"));
+            coreVersion = props.getProperty("sdk.project.version");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        _defaultUserAgent = String.format("AlibabaCloud (%s; %s) Java/%s %s/%s", sysProps.getProperty("os.name"), sysProps
+                .getProperty("os.arch"), sysProps.getProperty("java.runtime.version"), "ccp-baseClient", coreVersion);
+    }
+
     public final static String URL_ENCODING = "UTF-8";
     private static final String ALGORITHM_NAME = "HmacSHA1";
+    protected static final String _defaultUserAgent;
+    protected String _userAgent;
     protected String _domainId;
     protected String _protocol;
     protected Object _endpoint;
@@ -54,10 +71,6 @@ public class BaseClient {
         SimpleDateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.US);
         df.setTimeZone(TimeZone.getTimeZone("GMT"));
         return df.format(new Date());
-    }
-
-    public String _getUserAgent() {
-        return "";
     }
 
     public String getCanonicalizedHeaders(Map<String, String> headers) {
@@ -273,4 +286,20 @@ public class BaseClient {
         }
         return null;
     }
+
+    public String _getUserAgent() {
+        if (null == _userAgent) {
+            return _defaultUserAgent;
+        }
+        return _defaultUserAgent + " " + _userAgent;
+    }
+
+    public void _setUserAgent(String _userAgent) {
+        this._userAgent = _userAgent;
+    }
+
+    public void _appendUserAgent(String _userAgent) {
+        this._userAgent += " " + _userAgent;
+    }
+
 }

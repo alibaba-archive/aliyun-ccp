@@ -105,6 +105,20 @@ public class BaseClientTest {
     }
 
     @Test
+    public void userAgentTest() {
+        Map<String, Object> map = new HashMap<>();
+        BaseClient baseClient = new BaseClient(map);
+        Assert.assertTrue(BaseClient._defaultUserAgent.contains("AlibabaCloud"));
+        Assert.assertTrue(baseClient._getUserAgent().contains("Java"));
+
+        baseClient._setUserAgent("test/test");
+        Assert.assertTrue(baseClient._getUserAgent().endsWith("test/test"));
+
+        baseClient._appendUserAgent("test1/test1");
+        Assert.assertTrue(baseClient._getUserAgent().endsWith("test/test test1/test1"));
+    }
+
+    @Test
     public void _toQueryTest() {
         Map<String, Object> map = new HashMap<>();
         map.put("test", 1);
