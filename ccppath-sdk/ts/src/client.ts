@@ -309,7 +309,7 @@ export class BaseCCPFileResponse extends $tea.Model {
   fileExtension?: string
   fileId?: string
   hidden?: boolean
-  imageMediaMetadata?: ImageMediaResponse[]
+  imageMediaMetadata?: ImageMediaResponse
   labels?: string[]
   meta?: string
   name: string
@@ -372,7 +372,7 @@ export class BaseCCPFileResponse extends $tea.Model {
       fileExtension: 'string',
       fileId: 'string',
       hidden: 'boolean',
-      imageMediaMetadata: { 'type': 'array', 'itemType': ImageMediaResponse },
+      imageMediaMetadata: ImageMediaResponse,
       labels: { 'type': 'array', 'itemType': 'string' },
       meta: 'string',
       name: 'string',
@@ -660,7 +660,7 @@ export class CCPCompleteFileResponse extends $tea.Model {
   fileExtension?: string
   fileId?: string
   hidden?: boolean
-  imageMediaMetadata?: ImageMediaResponse[]
+  imageMediaMetadata?: ImageMediaResponse
   labels?: string[]
   meta?: string
   name?: string
@@ -725,7 +725,7 @@ export class CCPCompleteFileResponse extends $tea.Model {
       fileExtension: 'string',
       fileId: 'string',
       hidden: 'boolean',
-      imageMediaMetadata: { 'type': 'array', 'itemType': ImageMediaResponse },
+      imageMediaMetadata: ImageMediaResponse,
       labels: { 'type': 'array', 'itemType': 'string' },
       meta: 'string',
       name: 'string',
@@ -952,7 +952,7 @@ export class CCPGetFileResponse extends $tea.Model {
   fileExtension?: string
   fileId?: string
   hidden?: boolean
-  imageMediaMetadata?: ImageMediaResponse[]
+  imageMediaMetadata?: ImageMediaResponse
   labels?: string[]
   meta?: string
   name?: string
@@ -1015,7 +1015,7 @@ export class CCPGetFileResponse extends $tea.Model {
       fileExtension: 'string',
       fileId: 'string',
       hidden: 'boolean',
-      imageMediaMetadata: { 'type': 'array', 'itemType': ImageMediaResponse },
+      imageMediaMetadata: ImageMediaResponse,
       labels: { 'type': 'array', 'itemType': 'string' },
       meta: 'string',
       name: 'string',
@@ -1201,7 +1201,7 @@ export class CCPUpdateFileMetaResponse extends $tea.Model {
   fileExtension?: string
   fileId?: string
   hidden?: boolean
-  imageMediaMetadata?: ImageMediaResponse[]
+  imageMediaMetadata?: ImageMediaResponse
   labels?: string[]
   meta?: string
   name?: string
@@ -1264,7 +1264,7 @@ export class CCPUpdateFileMetaResponse extends $tea.Model {
       fileExtension: 'string',
       fileId: 'string',
       hidden: 'boolean',
-      imageMediaMetadata: { 'type': 'array', 'itemType': ImageMediaResponse },
+      imageMediaMetadata: ImageMediaResponse,
       labels: { 'type': 'array', 'itemType': 'string' },
       meta: 'string',
       name: 'string',
@@ -1440,7 +1440,7 @@ export class CreateDomainRequest extends $tea.Model {
   initDriveEnable?: boolean
   initDriveSize?: number
   pathType: string
-  publishedAppAccessStrategy?: AppAccessStrategy[]
+  publishedAppAccessStrategy?: AppAccessStrategy
   sharable?: boolean
   storeLevel?: string
   storeRegionList: string[]
@@ -1499,7 +1499,7 @@ export class CreateDomainRequest extends $tea.Model {
       initDriveEnable: 'boolean',
       initDriveSize: 'number',
       pathType: 'string',
-      publishedAppAccessStrategy: { 'type': 'array', 'itemType': AppAccessStrategy },
+      publishedAppAccessStrategy: AppAccessStrategy,
       sharable: 'boolean',
       storeLevel: 'string',
       storeRegionList: { 'type': 'array', 'itemType': 'string' },
@@ -3012,7 +3012,7 @@ export class RemoveStoreRequest extends $tea.Model {
 }
 
 export class SetStoreCorsRequest extends $tea.Model {
-  corsRule: CorsRule[]
+  corsRule: CorsRule
   domainId: string
   storeId: string
   static names(): { [key: string]: string } {
@@ -3025,7 +3025,7 @@ export class SetStoreCorsRequest extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      corsRule: { 'type': 'array', 'itemType': CorsRule },
+      corsRule: CorsRule,
       domainId: 'string',
       storeId: 'string',
     };
@@ -3211,7 +3211,7 @@ export class UpdateDomainRequest extends $tea.Model {
   initDriveEnable?: boolean
   initDriveSize?: number
   initDriveStoreId?: string
-  publishedAppAccessStrategy?: AppAccessStrategy[]
+  publishedAppAccessStrategy?: AppAccessStrategy
   sharable?: boolean
   static names(): { [key: string]: string } {
     return {
@@ -3268,7 +3268,7 @@ export class UpdateDomainRequest extends $tea.Model {
       initDriveEnable: 'boolean',
       initDriveSize: 'number',
       initDriveStoreId: 'string',
-      publishedAppAccessStrategy: { 'type': 'array', 'itemType': AppAccessStrategy },
+      publishedAppAccessStrategy: AppAccessStrategy,
       sharable: 'boolean',
     };
   }
@@ -3690,8 +3690,8 @@ export class CCPCopyFileRequest extends $tea.Model {
   autoRename?: boolean
   driveId: string
   fileId: string
-  newName: string
-  toDriveId: string
+  newName?: string
+  toDriveId?: string
   toParentFileId: string
   static names(): { [key: string]: string } {
     return {
@@ -4105,7 +4105,7 @@ export class CCPUpdateFileMetaRequest extends $tea.Model {
   hidden?: boolean
   labels?: string[]
   meta?: string
-  name: string
+  name?: string
   starred?: boolean
   static names(): { [key: string]: string } {
     return {
@@ -4181,8 +4181,10 @@ export class CopyFileRequest extends $tea.Model {
   newName: string
   overwrite?: boolean
   shareId?: string
+  toDriveId: string
   toParentFileId: string
   toParentFilePath?: string
+  toShareId?: string
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -4191,8 +4193,10 @@ export class CopyFileRequest extends $tea.Model {
       newName: 'new_name',
       overwrite: 'overwrite',
       shareId: 'share_id',
+      toDriveId: 'to_drive_id',
       toParentFileId: 'to_parent_file_id',
       toParentFilePath: 'to_parent_file_path',
+      toShareId: 'to_share_id',
     };
   }
 
@@ -4204,8 +4208,10 @@ export class CopyFileRequest extends $tea.Model {
       newName: 'string',
       overwrite: 'boolean',
       shareId: 'string',
+      toDriveId: 'string',
       toParentFileId: 'string',
       toParentFilePath: 'string',
+      toShareId: 'string',
     };
   }
 
@@ -4503,7 +4509,7 @@ export class GetDownloadUrlRequest extends $tea.Model {
   driveId: string
   expireSec?: number
   fileId: string
-  fileName: string
+  fileName?: string
   filePath?: string
   shareId?: string
   static names(): { [key: string]: string } {
@@ -4847,7 +4853,7 @@ export class OSSCompleteFileRequest extends $tea.Model {
 export class OSSCopyFileRequest extends $tea.Model {
   driveId?: string
   filePath?: string
-  newName: string
+  newName?: string
   overwrite?: boolean
   shareId?: string
   toDriveId: string
@@ -4958,7 +4964,7 @@ export class OSSDeleteFileRequest extends $tea.Model {
 export class OSSGetDownloadUrlRequest extends $tea.Model {
   driveId: string
   expireSec?: number
-  fileName: string
+  fileName?: string
   filePath: string
   shareId: string
   static names(): { [key: string]: string } {
@@ -5148,6 +5154,55 @@ export class OSSMoveFileRequest extends $tea.Model {
       overwrite: 'boolean',
       shareId: 'string',
       toParentFilePath: 'string',
+    };
+  }
+
+  constructor(map: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class Store extends $tea.Model {
+  accelerateEndpoint?: string
+  basePath?: string
+  bucket: string
+  customizedEndpoint?: string
+  endpoint: string
+  internalEndpoint?: string
+  ownership: string
+  policy: string
+  roleArn?: string
+  storeId: string
+  type: string
+  static names(): { [key: string]: string } {
+    return {
+      accelerateEndpoint: 'accelerate_endpoint',
+      basePath: 'base_path',
+      bucket: 'bucket',
+      customizedEndpoint: 'customized_endpoint',
+      endpoint: 'endpoint',
+      internalEndpoint: 'internal_endpoint',
+      ownership: 'ownership',
+      policy: 'policy',
+      roleArn: 'role_arn',
+      storeId: 'store_id',
+      type: 'type',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      accelerateEndpoint: 'string',
+      basePath: 'string',
+      bucket: 'string',
+      customizedEndpoint: 'string',
+      endpoint: 'string',
+      internalEndpoint: 'string',
+      ownership: 'string',
+      policy: 'string',
+      roleArn: 'string',
+      storeId: 'string',
+      type: 'string',
     };
   }
 

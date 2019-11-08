@@ -50,7 +50,7 @@ public class CCPUpdateFileMetaResponse extends TeaModel {
     public boolean hidden;
 
     @NameInMap("image_media_metadata")
-    public ImageMediaResponse[] imageMediaMetadata;
+    public ImageMediaResponse imageMediaMetadata;
 
     @NameInMap("labels")
     public String[] labels;

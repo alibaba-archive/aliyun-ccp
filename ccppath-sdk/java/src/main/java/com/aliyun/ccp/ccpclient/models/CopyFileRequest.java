@@ -25,12 +25,19 @@ public class CopyFileRequest extends TeaModel {
     @NameInMap("share_id")
     public String shareId;
 
+    @NameInMap("to_drive_id")
+    @Validation(required = true, pattern = "[0-9]+")
+    public String toDriveId;
+
     @NameInMap("to_parent_file_id")
     @Validation(required = true, pattern = "[a-z0-9.-_]{1,50}")
     public String toParentFileId;
 
     @NameInMap("to_parent_file_path")
     public String toParentFilePath;
+
+    @NameInMap("to_share_id")
+    public String toShareId;
 
 }
 
