@@ -18,7 +18,7 @@ public class ListFileRequest extends TeaModel {
     public String imageUrlProcess;
 
     @NameInMap("limit")
-    @Validation(pattern = "[0-9]{1, 3}")
+    @Validation(pattern = "[0-9]{1,3}")
     public Long limit;
 
     @NameInMap("marker")

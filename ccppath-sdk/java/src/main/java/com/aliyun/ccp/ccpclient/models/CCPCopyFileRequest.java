@@ -16,11 +16,11 @@ public class CCPCopyFileRequest extends TeaModel {
     public String fileId;
 
     @NameInMap("new_name")
-    @Validation(required = true, pattern = "[a-zA-Z0-9.-]{1,1000}")
+    @Validation(pattern = "[a-zA-Z0-9.-]{1,1000}")
     public String newName;
 
     @NameInMap("to_drive_id")
-    @Validation(required = true, pattern = "[0-9]+")
+    @Validation(pattern = "[0-9]+")
     public String toDriveId;
 
     @NameInMap("to_parent_file_id")

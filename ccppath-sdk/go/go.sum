@@ -1,9 +1,10 @@
 github.com/alibabacloud-go/debug v0.0.0-20190504072949-9472017b5c68 h1:NqugFkGxx1TXSh/pBcU00Y6bljgDPaFdh5MUSeJ7e50=
 github.com/alibabacloud-go/debug v0.0.0-20190504072949-9472017b5c68/go.mod h1:6pb/Qy8c+lqua8cFpEy7g39NRRqOWc3rOwAy8m5Y2BY=
-github.com/alibabacloud-go/tea v0.0.0-20191011054747-c132d91088dc h1:uIpggXB1Za9l3c3Orkr2jULvmmEhgL2n5hxCuc5Nkno=
 github.com/alibabacloud-go/tea v0.0.0-20191011054747-c132d91088dc/go.mod h1:r5AZdLL+m9H2frPZaXy5TGycjXQu/wqgSgLaVsN7870=
-github.com/aliyun/aliyun-ccp/baseclient/go v0.0.0-20191030022849-b142dba36ea7 h1:FBIu1Wx3fP6BSwLwcV4Sedsn8pP99uCKxAqvYRWLiWc=
-github.com/aliyun/aliyun-ccp/baseclient/go v0.0.0-20191030022849-b142dba36ea7/go.mod h1:x1vmWI0vlRsfSbR2+MeTGcowWN/VLbLwWJdBOcT6o18=
+github.com/alibabacloud-go/tea v0.0.0-20191104093916-c8bed262c823 h1:/DZEBzETGdYIakS0TzhPV0av+URAfHZYv8EdfVWLME0=
+github.com/alibabacloud-go/tea v0.0.0-20191104093916-c8bed262c823/go.mod h1:r5AZdLL+m9H2frPZaXy5TGycjXQu/wqgSgLaVsN7870=
+github.com/aliyun/aliyun-ccp/baseclient/go v0.0.0-20191106102852-26e0867afbe8 h1:rvCcOQpG5xxCDJiRwZyK/hFDr9Oa9iXYh4u/kBWdld4=
+github.com/aliyun/aliyun-ccp/baseclient/go v0.0.0-20191106102852-26e0867afbe8/go.mod h1:as2jAKUjYkETdAAPNAhOUGOhJxnktPf8lR6eKE2elX0=
 github.com/aliyun/credentials-go v0.0.0-20190906110604-c03d72db9395 h1:ey3Xbk1uAgNOlWZAH7KDBxmoa0IcOt+snhA0vN8EA7s=
 github.com/aliyun/credentials-go v0.0.0-20190906110604-c03d72db9395/go.mod h1:AJeNV4JgJLF+XrTuSe0EPfSs702qFXKNJVOqloWotqs=
 github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=

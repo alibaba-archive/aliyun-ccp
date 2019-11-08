@@ -32,6 +32,10 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         [Validation(Required=false)]
         public string ShareId { get; set; }
 
+        [NameInMap("to_drive_id")]
+        [Validation(Required=true, Pattern="[0-9]+")]
+        public string ToDriveId { get; set; }
+
         [NameInMap("to_parent_file_id")]
         [Validation(Required=true, MaxLength=50, Pattern="[a-z0-9.-_]{1,50}")]
         public string ToParentFileId { get; set; }
@@ -39,6 +43,10 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         [NameInMap("to_parent_file_path")]
         [Validation(Required=false)]
         public string ToParentFilePath { get; set; }
+
+        [NameInMap("to_share_id")]
+        [Validation(Required=false)]
+        public string ToShareId { get; set; }
 
     }
 
