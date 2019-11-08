@@ -21,7 +21,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         public string ImageUrlProcess { get; set; }
 
         [NameInMap("limit")]
-        [Validation(Required=false, Pattern="[0-9]{1, 3}")]
+        [Validation(Required=false, Pattern="[0-9]{1,3}")]
         public long Limit { get; set; }
 
         [NameInMap("marker")]

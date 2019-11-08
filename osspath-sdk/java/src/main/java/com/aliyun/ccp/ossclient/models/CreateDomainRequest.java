@@ -73,7 +73,7 @@ public class CreateDomainRequest extends TeaModel {
     public String pathType;
 
     @NameInMap("published_app_access_strategy")
-    public AppAccessStrategy[] publishedAppAccessStrategy;
+    public AppAccessStrategy publishedAppAccessStrategy;
 
     @NameInMap("sharable")
     public boolean sharable;

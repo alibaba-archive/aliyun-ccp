@@ -6,7 +6,7 @@ import com.aliyun.tea.*;
 public class SetStoreCorsRequest extends TeaModel {
     @NameInMap("cors_rule")
     @Validation(required = true)
-    public CorsRule[] corsRule;
+    public CorsRule corsRule;
 
     @NameInMap("domain_id")
     @Validation(required = true)

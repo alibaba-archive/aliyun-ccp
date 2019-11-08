@@ -445,34 +445,34 @@ func (s *AuthConfig) SetEnterpriseId(v string) *AuthConfig {
 }
 
 type BaseCCPFileResponse struct {
-	RequestId          *string               `json:"requestId" xml:"requestId"`
-	Category           *string               `json:"category" xml:"category"`
-	ContentHash        *string               `json:"content_hash" xml:"content_hash"`
-	ContentHashName    *string               `json:"content_hash_name" xml:"content_hash_name"`
-	ContentType        *string               `json:"content_type" xml:"content_type"`
-	Crc64Hash          *string               `json:"crc64_hash" xml:"crc64_hash"`
-	CreatedAt          *string               `json:"created_at" xml:"created_at"`
-	Description        *string               `json:"description" xml:"description"`
-	DomainId           *string               `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
-	DownloadUrl        *string               `json:"download_url" xml:"download_url"`
-	DriveId            *string               `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	FileExtension      *string               `json:"file_extension" xml:"file_extension"`
-	FileId             *string               `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
-	Hidden             *bool                 `json:"hidden" xml:"hidden"`
-	ImageMediaMetadata []*ImageMediaResponse `json:"image_media_metadata" xml:"image_media_metadata" type:"Repeated"`
-	Labels             []*string             `json:"labels" xml:"labels" type:"Repeated"`
-	Meta               *string               `json:"meta" xml:"meta"`
-	Name               *string               `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
-	ParentFileId       *string               `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
-	Size               *int64                `json:"size" xml:"size"`
-	Starred            *bool                 `json:"starred" xml:"starred"`
-	Status             *string               `json:"status" xml:"status"`
-	Thumbnail          *string               `json:"thumbnail" xml:"thumbnail"`
-	TrashedAt          *string               `json:"trashed_at" xml:"trashed_at"`
-	Type               *string               `json:"type" xml:"type"`
-	UpdatedAt          *string               `json:"updated_at" xml:"updated_at"`
-	UploadId           *string               `json:"upload_id" xml:"upload_id"`
-	Url                *string               `json:"url" xml:"url"`
+	RequestId          *string             `json:"requestId" xml:"requestId"`
+	Category           *string             `json:"category" xml:"category"`
+	ContentHash        *string             `json:"content_hash" xml:"content_hash"`
+	ContentHashName    *string             `json:"content_hash_name" xml:"content_hash_name"`
+	ContentType        *string             `json:"content_type" xml:"content_type"`
+	Crc64Hash          *string             `json:"crc64_hash" xml:"crc64_hash"`
+	CreatedAt          *string             `json:"created_at" xml:"created_at"`
+	Description        *string             `json:"description" xml:"description"`
+	DomainId           *string             `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
+	DownloadUrl        *string             `json:"download_url" xml:"download_url"`
+	DriveId            *string             `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	FileExtension      *string             `json:"file_extension" xml:"file_extension"`
+	FileId             *string             `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
+	Hidden             *bool               `json:"hidden" xml:"hidden"`
+	ImageMediaMetadata *ImageMediaResponse `json:"image_media_metadata" xml:"image_media_metadata"`
+	Labels             []*string           `json:"labels" xml:"labels" type:"Repeated"`
+	Meta               *string             `json:"meta" xml:"meta"`
+	Name               *string             `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	ParentFileId       *string             `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
+	Size               *int64              `json:"size" xml:"size"`
+	Starred            *bool               `json:"starred" xml:"starred"`
+	Status             *string             `json:"status" xml:"status"`
+	Thumbnail          *string             `json:"thumbnail" xml:"thumbnail"`
+	TrashedAt          *string             `json:"trashed_at" xml:"trashed_at"`
+	Type               *string             `json:"type" xml:"type"`
+	UpdatedAt          *string             `json:"updated_at" xml:"updated_at"`
+	UploadId           *string             `json:"upload_id" xml:"upload_id"`
+	Url                *string             `json:"url" xml:"url"`
 }
 
 func (s BaseCCPFileResponse) String() string {
@@ -553,7 +553,7 @@ func (s *BaseCCPFileResponse) SetHidden(v bool) *BaseCCPFileResponse {
 	return s
 }
 
-func (s *BaseCCPFileResponse) SetImageMediaMetadata(v []*ImageMediaResponse) *BaseCCPFileResponse {
+func (s *BaseCCPFileResponse) SetImageMediaMetadata(v *ImageMediaResponse) *BaseCCPFileResponse {
 	s.ImageMediaMetadata = v
 	return s
 }
@@ -1021,35 +1021,35 @@ func (s *CCPBatchResponse) SetResponses(v []*BatchSubResponse) *CCPBatchResponse
 }
 
 type CCPCompleteFileResponse struct {
-	RequestId          *string               `json:"requestId" xml:"requestId"`
-	Category           *string               `json:"category" xml:"category"`
-	ContentHash        *string               `json:"content_hash" xml:"content_hash"`
-	ContentHashName    *string               `json:"content_hash_name" xml:"content_hash_name"`
-	ContentType        *string               `json:"content_type" xml:"content_type"`
-	Crc64Hash          *string               `json:"crc64_hash" xml:"crc64_hash"`
-	CreatedAt          *string               `json:"created_at" xml:"created_at"`
-	Description        *string               `json:"description" xml:"description"`
-	DomainId           *string               `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
-	DownloadUrl        *string               `json:"download_url" xml:"download_url"`
-	DriveId            *string               `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	FileExtension      *string               `json:"file_extension" xml:"file_extension"`
-	FileId             *string               `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
-	Hidden             *bool                 `json:"hidden" xml:"hidden"`
-	ImageMediaMetadata []*ImageMediaResponse `json:"image_media_metadata" xml:"image_media_metadata" type:"Repeated"`
-	Labels             []*string             `json:"labels" xml:"labels" type:"Repeated"`
-	Meta               *string               `json:"meta" xml:"meta"`
-	Name               *string               `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1024}"`
-	ParentFileId       *string               `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
-	Size               *int64                `json:"size" xml:"size"`
-	Starred            *bool                 `json:"starred" xml:"starred"`
-	Status             *string               `json:"status" xml:"status"`
-	Thumbnail          *string               `json:"thumbnail" xml:"thumbnail"`
-	TrashedAt          *string               `json:"trashed_at" xml:"trashed_at"`
-	Type               *string               `json:"type" xml:"type"`
-	UpdatedAt          *string               `json:"updated_at" xml:"updated_at"`
-	UploadId           *string               `json:"upload_id" xml:"upload_id"`
-	Url                *string               `json:"url" xml:"url"`
-	Crc                *string               `json:"crc" xml:"crc"`
+	RequestId          *string             `json:"requestId" xml:"requestId"`
+	Category           *string             `json:"category" xml:"category"`
+	ContentHash        *string             `json:"content_hash" xml:"content_hash"`
+	ContentHashName    *string             `json:"content_hash_name" xml:"content_hash_name"`
+	ContentType        *string             `json:"content_type" xml:"content_type"`
+	Crc64Hash          *string             `json:"crc64_hash" xml:"crc64_hash"`
+	CreatedAt          *string             `json:"created_at" xml:"created_at"`
+	Description        *string             `json:"description" xml:"description"`
+	DomainId           *string             `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
+	DownloadUrl        *string             `json:"download_url" xml:"download_url"`
+	DriveId            *string             `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	FileExtension      *string             `json:"file_extension" xml:"file_extension"`
+	FileId             *string             `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
+	Hidden             *bool               `json:"hidden" xml:"hidden"`
+	ImageMediaMetadata *ImageMediaResponse `json:"image_media_metadata" xml:"image_media_metadata"`
+	Labels             []*string           `json:"labels" xml:"labels" type:"Repeated"`
+	Meta               *string             `json:"meta" xml:"meta"`
+	Name               *string             `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	ParentFileId       *string             `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
+	Size               *int64              `json:"size" xml:"size"`
+	Starred            *bool               `json:"starred" xml:"starred"`
+	Status             *string             `json:"status" xml:"status"`
+	Thumbnail          *string             `json:"thumbnail" xml:"thumbnail"`
+	TrashedAt          *string             `json:"trashed_at" xml:"trashed_at"`
+	Type               *string             `json:"type" xml:"type"`
+	UpdatedAt          *string             `json:"updated_at" xml:"updated_at"`
+	UploadId           *string             `json:"upload_id" xml:"upload_id"`
+	Url                *string             `json:"url" xml:"url"`
+	Crc                *string             `json:"crc" xml:"crc"`
 }
 
 func (s CCPCompleteFileResponse) String() string {
@@ -1130,7 +1130,7 @@ func (s *CCPCompleteFileResponse) SetHidden(v bool) *CCPCompleteFileResponse {
 	return s
 }
 
-func (s *CCPCompleteFileResponse) SetImageMediaMetadata(v []*ImageMediaResponse) *CCPCompleteFileResponse {
+func (s *CCPCompleteFileResponse) SetImageMediaMetadata(v *ImageMediaResponse) *CCPCompleteFileResponse {
 	s.ImageMediaMetadata = v
 	return s
 }
@@ -1458,34 +1458,34 @@ func (s *CCPGetDownloadUrlResponse) SetUrl(v string) *CCPGetDownloadUrlResponse 
 }
 
 type CCPGetFileResponse struct {
-	RequestId          *string               `json:"requestId" xml:"requestId"`
-	Category           *string               `json:"category" xml:"category"`
-	ContentHash        *string               `json:"content_hash" xml:"content_hash"`
-	ContentHashName    *string               `json:"content_hash_name" xml:"content_hash_name"`
-	ContentType        *string               `json:"content_type" xml:"content_type"`
-	Crc64Hash          *string               `json:"crc64_hash" xml:"crc64_hash"`
-	CreatedAt          *string               `json:"created_at" xml:"created_at"`
-	Description        *string               `json:"description" xml:"description"`
-	DomainId           *string               `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
-	DownloadUrl        *string               `json:"download_url" xml:"download_url"`
-	DriveId            *string               `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	FileExtension      *string               `json:"file_extension" xml:"file_extension"`
-	FileId             *string               `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
-	Hidden             *bool                 `json:"hidden" xml:"hidden"`
-	ImageMediaMetadata []*ImageMediaResponse `json:"image_media_metadata" xml:"image_media_metadata" type:"Repeated"`
-	Labels             []*string             `json:"labels" xml:"labels" type:"Repeated"`
-	Meta               *string               `json:"meta" xml:"meta"`
-	Name               *string               `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1024}"`
-	ParentFileId       *string               `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
-	Size               *int64                `json:"size" xml:"size"`
-	Starred            *bool                 `json:"starred" xml:"starred"`
-	Status             *string               `json:"status" xml:"status"`
-	Thumbnail          *string               `json:"thumbnail" xml:"thumbnail"`
-	TrashedAt          *string               `json:"trashed_at" xml:"trashed_at"`
-	Type               *string               `json:"type" xml:"type"`
-	UpdatedAt          *string               `json:"updated_at" xml:"updated_at"`
-	UploadId           *string               `json:"upload_id" xml:"upload_id"`
-	Url                *string               `json:"url" xml:"url"`
+	RequestId          *string             `json:"requestId" xml:"requestId"`
+	Category           *string             `json:"category" xml:"category"`
+	ContentHash        *string             `json:"content_hash" xml:"content_hash"`
+	ContentHashName    *string             `json:"content_hash_name" xml:"content_hash_name"`
+	ContentType        *string             `json:"content_type" xml:"content_type"`
+	Crc64Hash          *string             `json:"crc64_hash" xml:"crc64_hash"`
+	CreatedAt          *string             `json:"created_at" xml:"created_at"`
+	Description        *string             `json:"description" xml:"description"`
+	DomainId           *string             `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
+	DownloadUrl        *string             `json:"download_url" xml:"download_url"`
+	DriveId            *string             `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	FileExtension      *string             `json:"file_extension" xml:"file_extension"`
+	FileId             *string             `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
+	Hidden             *bool               `json:"hidden" xml:"hidden"`
+	ImageMediaMetadata *ImageMediaResponse `json:"image_media_metadata" xml:"image_media_metadata"`
+	Labels             []*string           `json:"labels" xml:"labels" type:"Repeated"`
+	Meta               *string             `json:"meta" xml:"meta"`
+	Name               *string             `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	ParentFileId       *string             `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
+	Size               *int64              `json:"size" xml:"size"`
+	Starred            *bool               `json:"starred" xml:"starred"`
+	Status             *string             `json:"status" xml:"status"`
+	Thumbnail          *string             `json:"thumbnail" xml:"thumbnail"`
+	TrashedAt          *string             `json:"trashed_at" xml:"trashed_at"`
+	Type               *string             `json:"type" xml:"type"`
+	UpdatedAt          *string             `json:"updated_at" xml:"updated_at"`
+	UploadId           *string             `json:"upload_id" xml:"upload_id"`
+	Url                *string             `json:"url" xml:"url"`
 }
 
 func (s CCPGetFileResponse) String() string {
@@ -1566,7 +1566,7 @@ func (s *CCPGetFileResponse) SetHidden(v bool) *CCPGetFileResponse {
 	return s
 }
 
-func (s *CCPGetFileResponse) SetImageMediaMetadata(v []*ImageMediaResponse) *CCPGetFileResponse {
+func (s *CCPGetFileResponse) SetImageMediaMetadata(v *ImageMediaResponse) *CCPGetFileResponse {
 	s.ImageMediaMetadata = v
 	return s
 }
@@ -1830,34 +1830,34 @@ func (s *CCPSearchFileResponse) SetNextMarker(v string) *CCPSearchFileResponse {
 }
 
 type CCPUpdateFileMetaResponse struct {
-	RequestId          *string               `json:"requestId" xml:"requestId"`
-	Category           *string               `json:"category" xml:"category"`
-	ContentHash        *string               `json:"content_hash" xml:"content_hash"`
-	ContentHashName    *string               `json:"content_hash_name" xml:"content_hash_name"`
-	ContentType        *string               `json:"content_type" xml:"content_type"`
-	Crc64Hash          *string               `json:"crc64_hash" xml:"crc64_hash"`
-	CreatedAt          *string               `json:"created_at" xml:"created_at"`
-	Description        *string               `json:"description" xml:"description"`
-	DomainId           *string               `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
-	DownloadUrl        *string               `json:"download_url" xml:"download_url"`
-	DriveId            *string               `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	FileExtension      *string               `json:"file_extension" xml:"file_extension"`
-	FileId             *string               `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
-	Hidden             *bool                 `json:"hidden" xml:"hidden"`
-	ImageMediaMetadata []*ImageMediaResponse `json:"image_media_metadata" xml:"image_media_metadata" type:"Repeated"`
-	Labels             []*string             `json:"labels" xml:"labels" type:"Repeated"`
-	Meta               *string               `json:"meta" xml:"meta"`
-	Name               *string               `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1024}"`
-	ParentFileId       *string               `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
-	Size               *int64                `json:"size" xml:"size"`
-	Starred            *bool                 `json:"starred" xml:"starred"`
-	Status             *string               `json:"status" xml:"status"`
-	Thumbnail          *string               `json:"thumbnail" xml:"thumbnail"`
-	TrashedAt          *string               `json:"trashed_at" xml:"trashed_at"`
-	Type               *string               `json:"type" xml:"type"`
-	UpdatedAt          *string               `json:"updated_at" xml:"updated_at"`
-	UploadId           *string               `json:"upload_id" xml:"upload_id"`
-	Url                *string               `json:"url" xml:"url"`
+	RequestId          *string             `json:"requestId" xml:"requestId"`
+	Category           *string             `json:"category" xml:"category"`
+	ContentHash        *string             `json:"content_hash" xml:"content_hash"`
+	ContentHashName    *string             `json:"content_hash_name" xml:"content_hash_name"`
+	ContentType        *string             `json:"content_type" xml:"content_type"`
+	Crc64Hash          *string             `json:"crc64_hash" xml:"crc64_hash"`
+	CreatedAt          *string             `json:"created_at" xml:"created_at"`
+	Description        *string             `json:"description" xml:"description"`
+	DomainId           *string             `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
+	DownloadUrl        *string             `json:"download_url" xml:"download_url"`
+	DriveId            *string             `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	FileExtension      *string             `json:"file_extension" xml:"file_extension"`
+	FileId             *string             `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
+	Hidden             *bool               `json:"hidden" xml:"hidden"`
+	ImageMediaMetadata *ImageMediaResponse `json:"image_media_metadata" xml:"image_media_metadata"`
+	Labels             []*string           `json:"labels" xml:"labels" type:"Repeated"`
+	Meta               *string             `json:"meta" xml:"meta"`
+	Name               *string             `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1024}"`
+	ParentFileId       *string             `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1, 50}"`
+	Size               *int64              `json:"size" xml:"size"`
+	Starred            *bool               `json:"starred" xml:"starred"`
+	Status             *string             `json:"status" xml:"status"`
+	Thumbnail          *string             `json:"thumbnail" xml:"thumbnail"`
+	TrashedAt          *string             `json:"trashed_at" xml:"trashed_at"`
+	Type               *string             `json:"type" xml:"type"`
+	UpdatedAt          *string             `json:"updated_at" xml:"updated_at"`
+	UploadId           *string             `json:"upload_id" xml:"upload_id"`
+	Url                *string             `json:"url" xml:"url"`
 }
 
 func (s CCPUpdateFileMetaResponse) String() string {
@@ -1938,7 +1938,7 @@ func (s *CCPUpdateFileMetaResponse) SetHidden(v bool) *CCPUpdateFileMetaResponse
 	return s
 }
 
-func (s *CCPUpdateFileMetaResponse) SetImageMediaMetadata(v []*ImageMediaResponse) *CCPUpdateFileMetaResponse {
+func (s *CCPUpdateFileMetaResponse) SetImageMediaMetadata(v *ImageMediaResponse) *CCPUpdateFileMetaResponse {
 	s.ImageMediaMetadata = v
 	return s
 }
@@ -2188,7 +2188,7 @@ type CreateDomainRequest struct {
 	InitDriveEnable            *bool                  `json:"init_drive_enable" xml:"init_drive_enable"`
 	InitDriveSize              *int64                 `json:"init_drive_size" xml:"init_drive_size"`
 	PathType                   *string                `json:"path_type" xml:"path_type" require:"true"`
-	PublishedAppAccessStrategy []*AppAccessStrategy   `json:"published_app_access_strategy" xml:"published_app_access_strategy" type:"Repeated"`
+	PublishedAppAccessStrategy *AppAccessStrategy     `json:"published_app_access_strategy" xml:"published_app_access_strategy"`
 	Sharable                   *bool                  `json:"sharable" xml:"sharable"`
 	StoreLevel                 *string                `json:"store_level" xml:"store_level"`
 	StoreRegionList            []*string              `json:"store_region_list" xml:"store_region_list" require:"true" type:"Repeated"`
@@ -2312,7 +2312,7 @@ func (s *CreateDomainRequest) SetPathType(v string) *CreateDomainRequest {
 	return s
 }
 
-func (s *CreateDomainRequest) SetPublishedAppAccessStrategy(v []*AppAccessStrategy) *CreateDomainRequest {
+func (s *CreateDomainRequest) SetPublishedAppAccessStrategy(v *AppAccessStrategy) *CreateDomainRequest {
 	s.PublishedAppAccessStrategy = v
 	return s
 }
@@ -4325,9 +4325,9 @@ func (s *RemoveStoreRequest) SetStoreId(v string) *RemoveStoreRequest {
 }
 
 type SetStoreCorsRequest struct {
-	CorsRule []*CorsRule `json:"cors_rule" xml:"cors_rule" require:"true" type:"Repeated"`
-	DomainId *string     `json:"domain_id" xml:"domain_id" require:"true"`
-	StoreId  *string     `json:"store_id" xml:"store_id" require:"true"`
+	CorsRule *CorsRule `json:"cors_rule" xml:"cors_rule" require:"true"`
+	DomainId *string   `json:"domain_id" xml:"domain_id" require:"true"`
+	StoreId  *string   `json:"store_id" xml:"store_id" require:"true"`
 }
 
 func (s SetStoreCorsRequest) String() string {
@@ -4338,7 +4338,7 @@ func (s SetStoreCorsRequest) GoString() string {
 	return s.String()
 }
 
-func (s *SetStoreCorsRequest) SetCorsRule(v []*CorsRule) *SetStoreCorsRequest {
+func (s *SetStoreCorsRequest) SetCorsRule(v *CorsRule) *SetStoreCorsRequest {
 	s.CorsRule = v
 	return s
 }
@@ -4595,7 +4595,7 @@ type UpdateDomainRequest struct {
 	InitDriveEnable            *bool                  `json:"init_drive_enable" xml:"init_drive_enable"`
 	InitDriveSize              *int64                 `json:"init_drive_size" xml:"init_drive_size"`
 	InitDriveStoreId           *string                `json:"init_drive_store_id" xml:"init_drive_store_id"`
-	PublishedAppAccessStrategy []*AppAccessStrategy   `json:"published_app_access_strategy" xml:"published_app_access_strategy" type:"Repeated"`
+	PublishedAppAccessStrategy *AppAccessStrategy     `json:"published_app_access_strategy" xml:"published_app_access_strategy"`
 	Sharable                   *bool                  `json:"sharable" xml:"sharable"`
 }
 
@@ -4722,7 +4722,7 @@ func (s *UpdateDomainRequest) SetInitDriveStoreId(v string) *UpdateDomainRequest
 	return s
 }
 
-func (s *UpdateDomainRequest) SetPublishedAppAccessStrategy(v []*AppAccessStrategy) *UpdateDomainRequest {
+func (s *UpdateDomainRequest) SetPublishedAppAccessStrategy(v *AppAccessStrategy) *UpdateDomainRequest {
 	s.PublishedAppAccessStrategy = v
 	return s
 }
@@ -5196,7 +5196,7 @@ type BaseDomainResponse struct {
 	InitDriveSize              *int64                 `json:"init_drive_size" xml:"init_drive_size"`
 	InitDriveStoreId           *string                `json:"init_drive_store_id" xml:"init_drive_store_id"`
 	PathType                   *string                `json:"path_type" xml:"path_type"`
-	PublishedAppAccessStrategy []*AppAccessStrategy   `json:"published_app_access_strategy" xml:"published_app_access_strategy" type:"Repeated"`
+	PublishedAppAccessStrategy *AppAccessStrategy     `json:"published_app_access_strategy" xml:"published_app_access_strategy"`
 	Sharable                   *bool                  `json:"sharable" xml:"sharable"`
 	StoreLevel                 *string                `json:"store_level" xml:"store_level"`
 	StoreRegionList            []*string              `json:"store_region_list" xml:"store_region_list" type:"Repeated"`
@@ -5341,7 +5341,7 @@ func (s *BaseDomainResponse) SetPathType(v string) *BaseDomainResponse {
 	return s
 }
 
-func (s *BaseDomainResponse) SetPublishedAppAccessStrategy(v []*AppAccessStrategy) *BaseDomainResponse {
+func (s *BaseDomainResponse) SetPublishedAppAccessStrategy(v *AppAccessStrategy) *BaseDomainResponse {
 	s.PublishedAppAccessStrategy = v
 	return s
 }
@@ -5393,7 +5393,7 @@ type CreateDomainResponse struct {
 	InitDriveSize              *int64                 `json:"init_drive_size" xml:"init_drive_size"`
 	InitDriveStoreId           *string                `json:"init_drive_store_id" xml:"init_drive_store_id"`
 	PathType                   *string                `json:"path_type" xml:"path_type"`
-	PublishedAppAccessStrategy []*AppAccessStrategy   `json:"published_app_access_strategy" xml:"published_app_access_strategy" type:"Repeated"`
+	PublishedAppAccessStrategy *AppAccessStrategy     `json:"published_app_access_strategy" xml:"published_app_access_strategy"`
 	Sharable                   *bool                  `json:"sharable" xml:"sharable"`
 	StoreLevel                 *string                `json:"store_level" xml:"store_level"`
 	StoreRegionList            []*string              `json:"store_region_list" xml:"store_region_list" type:"Repeated"`
@@ -5538,7 +5538,7 @@ func (s *CreateDomainResponse) SetPathType(v string) *CreateDomainResponse {
 	return s
 }
 
-func (s *CreateDomainResponse) SetPublishedAppAccessStrategy(v []*AppAccessStrategy) *CreateDomainResponse {
+func (s *CreateDomainResponse) SetPublishedAppAccessStrategy(v *AppAccessStrategy) *CreateDomainResponse {
 	s.PublishedAppAccessStrategy = v
 	return s
 }
@@ -5691,7 +5691,7 @@ type GetDomainResponse struct {
 	InitDriveSize              *int64                 `json:"init_drive_size" xml:"init_drive_size"`
 	InitDriveStoreId           *string                `json:"init_drive_store_id" xml:"init_drive_store_id"`
 	PathType                   *string                `json:"path_type" xml:"path_type"`
-	PublishedAppAccessStrategy []*AppAccessStrategy   `json:"published_app_access_strategy" xml:"published_app_access_strategy" type:"Repeated"`
+	PublishedAppAccessStrategy *AppAccessStrategy     `json:"published_app_access_strategy" xml:"published_app_access_strategy"`
 	Sharable                   *bool                  `json:"sharable" xml:"sharable"`
 	StoreLevel                 *string                `json:"store_level" xml:"store_level"`
 	StoreRegionList            []*string              `json:"store_region_list" xml:"store_region_list" type:"Repeated"`
@@ -5836,7 +5836,7 @@ func (s *GetDomainResponse) SetPathType(v string) *GetDomainResponse {
 	return s
 }
 
-func (s *GetDomainResponse) SetPublishedAppAccessStrategy(v []*AppAccessStrategy) *GetDomainResponse {
+func (s *GetDomainResponse) SetPublishedAppAccessStrategy(v *AppAccessStrategy) *GetDomainResponse {
 	s.PublishedAppAccessStrategy = v
 	return s
 }
@@ -6069,7 +6069,7 @@ type UpdateDomainResponse struct {
 	InitDriveSize              *int64                 `json:"init_drive_size" xml:"init_drive_size"`
 	InitDriveStoreId           *string                `json:"init_drive_store_id" xml:"init_drive_store_id"`
 	PathType                   *string                `json:"path_type" xml:"path_type"`
-	PublishedAppAccessStrategy []*AppAccessStrategy   `json:"published_app_access_strategy" xml:"published_app_access_strategy" type:"Repeated"`
+	PublishedAppAccessStrategy *AppAccessStrategy     `json:"published_app_access_strategy" xml:"published_app_access_strategy"`
 	Sharable                   *bool                  `json:"sharable" xml:"sharable"`
 	StoreLevel                 *string                `json:"store_level" xml:"store_level"`
 	StoreRegionList            []*string              `json:"store_region_list" xml:"store_region_list" type:"Repeated"`
@@ -6214,7 +6214,7 @@ func (s *UpdateDomainResponse) SetPathType(v string) *UpdateDomainResponse {
 	return s
 }
 
-func (s *UpdateDomainResponse) SetPublishedAppAccessStrategy(v []*AppAccessStrategy) *UpdateDomainResponse {
+func (s *UpdateDomainResponse) SetPublishedAppAccessStrategy(v *AppAccessStrategy) *UpdateDomainResponse {
 	s.PublishedAppAccessStrategy = v
 	return s
 }
@@ -6354,7 +6354,7 @@ type BaseListFileRequest struct {
 	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
-	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1, 3}"`
+	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1,3}"`
 	Marker                *string `json:"marker" xml:"marker"`
 }
 
@@ -6523,8 +6523,8 @@ type CCPCopyFileRequest struct {
 	AutoRename     *bool   `json:"auto_rename" xml:"auto_rename"`
 	DriveId        *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	FileId         *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	NewName        *string `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	ToDriveId      *string `json:"to_drive_id" xml:"to_drive_id" require:"true" pattern:"[0-9]+"`
+	NewName        *string `json:"new_name" xml:"new_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	ToDriveId      *string `json:"to_drive_id" xml:"to_drive_id" pattern:"[0-9]+"`
 	ToParentFileId *string `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 }
 
@@ -6863,7 +6863,7 @@ type CCPListFileRequest struct {
 	DriveId               *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
-	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1, 3}"`
+	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1,3}"`
 	Marker                *string `json:"marker" xml:"marker"`
 	Starred               *bool   `json:"Starred" xml:"Starred"`
 	Category              *string `json:"category" xml:"category"`
@@ -7097,7 +7097,7 @@ type CCPUpdateFileMetaRequest struct {
 	Hidden         *bool     `json:"hidden" xml:"hidden"`
 	Labels         []*string `json:"labels" xml:"labels" type:"Repeated"`
 	Meta           *string   `json:"meta" xml:"meta"`
-	Name           *string   `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	Name           *string   `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	Starred        *bool     `json:"starred" xml:"starred"`
 }
 
@@ -7645,7 +7645,7 @@ type GetDownloadUrlRequest struct {
 	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
 	FileId    *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	FileName  *string `json:"file_name" xml:"file_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	FileName  *string `json:"file_name" xml:"file_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	FilePath  *string `json:"file_path" xml:"file_path"`
 	ShareId   *string `json:"share_id" xml:"share_id"`
 }
@@ -7856,7 +7856,7 @@ type ListFileRequest struct {
 	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
-	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1, 3}"`
+	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1,3}"`
 	Marker                *string `json:"marker" xml:"marker"`
 	ParentFileId          *string `json:"parent_file_id" xml:"parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	ParentFilePath        *string `json:"parent_file_path" xml:"parent_file_path"`
@@ -8082,7 +8082,7 @@ func (s *OSSCompleteFileRequest) SetShareId(v string) *OSSCompleteFileRequest {
 type OSSCopyFileRequest struct {
 	DriveId          *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	FilePath         *string `json:"file_path" xml:"file_path"`
-	NewName          *string `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	NewName          *string `json:"new_name" xml:"new_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	Overwrite        *bool   `json:"overwrite" xml:"overwrite"`
 	ShareId          *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
 	ToDriveId        *string `json:"to_drive_id" xml:"to_drive_id" require:"true" pattern:"[0-9]+"`
@@ -8241,7 +8241,7 @@ func (s *OSSDeleteFileRequest) SetShareId(v string) *OSSDeleteFileRequest {
 type OSSGetDownloadUrlRequest struct {
 	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
-	FileName  *string `json:"file_name" xml:"file_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	FileName  *string `json:"file_name" xml:"file_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	FilePath  *string `json:"file_path" xml:"file_path" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	ShareId   *string `json:"share_id" xml:"share_id" require:"true" pattern:"[0-9a-z-]+"`
 }
@@ -8371,7 +8371,7 @@ type OSSListFileRequest struct {
 	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
-	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1, 3}"`
+	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1,3}"`
 	Marker                *string `json:"marker" xml:"marker"`
 	ParentFilePath        *string `json:"parent_file_path" xml:"parent_file_path" require:"true"`
 	ShareId               *string `json:"share_id" xml:"share_id" require:"true" pattern:"[0-9]+"`

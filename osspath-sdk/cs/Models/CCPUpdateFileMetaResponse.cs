@@ -66,7 +66,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("image_media_metadata")]
         [Validation(Required=false)]
-        public List<ImageMediaResponse> ImageMediaMetadata { get; set; }
+        public ImageMediaResponse ImageMediaMetadata { get; set; }
 
         [NameInMap("labels")]
         [Validation(Required=false)]

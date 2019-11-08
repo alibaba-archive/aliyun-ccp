@@ -309,7 +309,7 @@ export class BaseCCPFileResponse extends $tea.Model {
   fileExtension?: string
   fileId?: string
   hidden?: boolean
-  imageMediaMetadata?: ImageMediaResponse[]
+  imageMediaMetadata?: ImageMediaResponse
   labels?: string[]
   meta?: string
   name: string
@@ -372,7 +372,7 @@ export class BaseCCPFileResponse extends $tea.Model {
       fileExtension: 'string',
       fileId: 'string',
       hidden: 'boolean',
-      imageMediaMetadata: { 'type': 'array', 'itemType': ImageMediaResponse },
+      imageMediaMetadata: ImageMediaResponse,
       labels: { 'type': 'array', 'itemType': 'string' },
       meta: 'string',
       name: 'string',
@@ -660,7 +660,7 @@ export class CCPCompleteFileResponse extends $tea.Model {
   fileExtension?: string
   fileId?: string
   hidden?: boolean
-  imageMediaMetadata?: ImageMediaResponse[]
+  imageMediaMetadata?: ImageMediaResponse
   labels?: string[]
   meta?: string
   name?: string
@@ -725,7 +725,7 @@ export class CCPCompleteFileResponse extends $tea.Model {
       fileExtension: 'string',
       fileId: 'string',
       hidden: 'boolean',
-      imageMediaMetadata: { 'type': 'array', 'itemType': ImageMediaResponse },
+      imageMediaMetadata: ImageMediaResponse,
       labels: { 'type': 'array', 'itemType': 'string' },
       meta: 'string',
       name: 'string',
@@ -952,7 +952,7 @@ export class CCPGetFileResponse extends $tea.Model {
   fileExtension?: string
   fileId?: string
   hidden?: boolean
-  imageMediaMetadata?: ImageMediaResponse[]
+  imageMediaMetadata?: ImageMediaResponse
   labels?: string[]
   meta?: string
   name?: string
@@ -1015,7 +1015,7 @@ export class CCPGetFileResponse extends $tea.Model {
       fileExtension: 'string',
       fileId: 'string',
       hidden: 'boolean',
-      imageMediaMetadata: { 'type': 'array', 'itemType': ImageMediaResponse },
+      imageMediaMetadata: ImageMediaResponse,
       labels: { 'type': 'array', 'itemType': 'string' },
       meta: 'string',
       name: 'string',
@@ -1201,7 +1201,7 @@ export class CCPUpdateFileMetaResponse extends $tea.Model {
   fileExtension?: string
   fileId?: string
   hidden?: boolean
-  imageMediaMetadata?: ImageMediaResponse[]
+  imageMediaMetadata?: ImageMediaResponse
   labels?: string[]
   meta?: string
   name?: string
@@ -1264,7 +1264,7 @@ export class CCPUpdateFileMetaResponse extends $tea.Model {
       fileExtension: 'string',
       fileId: 'string',
       hidden: 'boolean',
-      imageMediaMetadata: { 'type': 'array', 'itemType': ImageMediaResponse },
+      imageMediaMetadata: ImageMediaResponse,
       labels: { 'type': 'array', 'itemType': 'string' },
       meta: 'string',
       name: 'string',
@@ -1440,7 +1440,7 @@ export class CreateDomainRequest extends $tea.Model {
   initDriveEnable?: boolean
   initDriveSize?: number
   pathType: string
-  publishedAppAccessStrategy?: AppAccessStrategy[]
+  publishedAppAccessStrategy?: AppAccessStrategy
   sharable?: boolean
   storeLevel?: string
   storeRegionList: string[]
@@ -1499,7 +1499,7 @@ export class CreateDomainRequest extends $tea.Model {
       initDriveEnable: 'boolean',
       initDriveSize: 'number',
       pathType: 'string',
-      publishedAppAccessStrategy: { 'type': 'array', 'itemType': AppAccessStrategy },
+      publishedAppAccessStrategy: AppAccessStrategy,
       sharable: 'boolean',
       storeLevel: 'string',
       storeRegionList: { 'type': 'array', 'itemType': 'string' },
@@ -3012,7 +3012,7 @@ export class RemoveStoreRequest extends $tea.Model {
 }
 
 export class SetStoreCorsRequest extends $tea.Model {
-  corsRule: CorsRule[]
+  corsRule: CorsRule
   domainId: string
   storeId: string
   static names(): { [key: string]: string } {
@@ -3025,7 +3025,7 @@ export class SetStoreCorsRequest extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      corsRule: { 'type': 'array', 'itemType': CorsRule },
+      corsRule: CorsRule,
       domainId: 'string',
       storeId: 'string',
     };
@@ -3211,7 +3211,7 @@ export class UpdateDomainRequest extends $tea.Model {
   initDriveEnable?: boolean
   initDriveSize?: number
   initDriveStoreId?: string
-  publishedAppAccessStrategy?: AppAccessStrategy[]
+  publishedAppAccessStrategy?: AppAccessStrategy
   sharable?: boolean
   static names(): { [key: string]: string } {
     return {
@@ -3268,7 +3268,7 @@ export class UpdateDomainRequest extends $tea.Model {
       initDriveEnable: 'boolean',
       initDriveSize: 'number',
       initDriveStoreId: 'string',
-      publishedAppAccessStrategy: { 'type': 'array', 'itemType': AppAccessStrategy },
+      publishedAppAccessStrategy: AppAccessStrategy,
       sharable: 'boolean',
     };
   }
@@ -3597,7 +3597,7 @@ export class BaseDomainResponse extends $tea.Model {
   initDriveSize?: number
   initDriveStoreId?: string
   pathType?: string
-  publishedAppAccessStrategy?: AppAccessStrategy[]
+  publishedAppAccessStrategy?: AppAccessStrategy
   sharable?: boolean
   storeLevel?: string
   storeRegionList?: string[]
@@ -3666,7 +3666,7 @@ export class BaseDomainResponse extends $tea.Model {
       initDriveSize: 'number',
       initDriveStoreId: 'string',
       pathType: 'string',
-      publishedAppAccessStrategy: { 'type': 'array', 'itemType': AppAccessStrategy },
+      publishedAppAccessStrategy: AppAccessStrategy,
       sharable: 'boolean',
       storeLevel: 'string',
       storeRegionList: { 'type': 'array', 'itemType': 'string' },
@@ -3706,7 +3706,7 @@ export class CreateDomainResponse extends $tea.Model {
   initDriveSize?: number
   initDriveStoreId?: string
   pathType?: string
-  publishedAppAccessStrategy?: AppAccessStrategy[]
+  publishedAppAccessStrategy?: AppAccessStrategy
   sharable?: boolean
   storeLevel?: string
   storeRegionList?: string[]
@@ -3775,7 +3775,7 @@ export class CreateDomainResponse extends $tea.Model {
       initDriveSize: 'number',
       initDriveStoreId: 'string',
       pathType: 'string',
-      publishedAppAccessStrategy: { 'type': 'array', 'itemType': AppAccessStrategy },
+      publishedAppAccessStrategy: AppAccessStrategy,
       sharable: 'boolean',
       storeLevel: 'string',
       storeRegionList: { 'type': 'array', 'itemType': 'string' },
@@ -3876,7 +3876,7 @@ export class GetDomainResponse extends $tea.Model {
   initDriveSize?: number
   initDriveStoreId?: string
   pathType?: string
-  publishedAppAccessStrategy?: AppAccessStrategy[]
+  publishedAppAccessStrategy?: AppAccessStrategy
   sharable?: boolean
   storeLevel?: string
   storeRegionList?: string[]
@@ -3945,7 +3945,7 @@ export class GetDomainResponse extends $tea.Model {
       initDriveSize: 'number',
       initDriveStoreId: 'string',
       pathType: 'string',
-      publishedAppAccessStrategy: { 'type': 'array', 'itemType': AppAccessStrategy },
+      publishedAppAccessStrategy: AppAccessStrategy,
       sharable: 'boolean',
       storeLevel: 'string',
       storeRegionList: { 'type': 'array', 'itemType': 'string' },
@@ -4128,7 +4128,7 @@ export class UpdateDomainResponse extends $tea.Model {
   initDriveSize?: number
   initDriveStoreId?: string
   pathType?: string
-  publishedAppAccessStrategy?: AppAccessStrategy[]
+  publishedAppAccessStrategy?: AppAccessStrategy
   sharable?: boolean
   storeLevel?: string
   storeRegionList?: string[]
@@ -4197,7 +4197,7 @@ export class UpdateDomainResponse extends $tea.Model {
       initDriveSize: 'number',
       initDriveStoreId: 'string',
       pathType: 'string',
-      publishedAppAccessStrategy: { 'type': 'array', 'itemType': AppAccessStrategy },
+      publishedAppAccessStrategy: AppAccessStrategy,
       sharable: 'boolean',
       storeLevel: 'string',
       storeRegionList: { 'type': 'array', 'itemType': 'string' },
@@ -4438,8 +4438,8 @@ export class CCPCopyFileRequest extends $tea.Model {
   autoRename?: boolean
   driveId: string
   fileId: string
-  newName: string
-  toDriveId: string
+  newName?: string
+  toDriveId?: string
   toParentFileId: string
   static names(): { [key: string]: string } {
     return {
@@ -4853,7 +4853,7 @@ export class CCPUpdateFileMetaRequest extends $tea.Model {
   hidden?: boolean
   labels?: string[]
   meta?: string
-  name: string
+  name?: string
   starred?: boolean
   static names(): { [key: string]: string } {
     return {
@@ -5251,7 +5251,7 @@ export class GetDownloadUrlRequest extends $tea.Model {
   driveId: string
   expireSec?: number
   fileId: string
-  fileName: string
+  fileName?: string
   filePath?: string
   shareId?: string
   static names(): { [key: string]: string } {
@@ -5595,7 +5595,7 @@ export class OSSCompleteFileRequest extends $tea.Model {
 export class OSSCopyFileRequest extends $tea.Model {
   driveId?: string
   filePath?: string
-  newName: string
+  newName?: string
   overwrite?: boolean
   shareId?: string
   toDriveId: string
@@ -5706,7 +5706,7 @@ export class OSSDeleteFileRequest extends $tea.Model {
 export class OSSGetDownloadUrlRequest extends $tea.Model {
   driveId: string
   expireSec?: number
-  fileName: string
+  fileName?: string
   filePath: string
   shareId: string
   static names(): { [key: string]: string } {

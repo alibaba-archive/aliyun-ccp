@@ -21,11 +21,11 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         public string FileId { get; set; }
 
         [NameInMap("new_name")]
-        [Validation(Required=true, Pattern="[a-zA-Z0-9.-]{1,1000}")]
+        [Validation(Required=false, Pattern="[a-zA-Z0-9.-]{1,1000}")]
         public string NewName { get; set; }
 
         [NameInMap("to_drive_id")]
-        [Validation(Required=true, Pattern="[0-9]+")]
+        [Validation(Required=false, Pattern="[0-9]+")]
         public string ToDriveId { get; set; }
 
         [NameInMap("to_parent_file_id")]
