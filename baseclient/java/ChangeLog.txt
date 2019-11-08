@@ -1,9 +1,12 @@
+2019-11-08 Version: 1.3-SNAPSHOT
+1. Add userAgent
+
 2019-10-31 Version: 1.2-SNAPSHOT
-1.improve sts credential
-2.add test
+1. Improve sts credential
+2. Add test
 
 2019-10-29 Version: 1.1-SNAPSHOT
-1.support sts credential
+1. Support sts credential
 
 2019-10-29 Version: 1.0-SNAPSHOT
-1.release version 1.0-SNAPSHOT
+1. Release version 1.0-SNAPSHOT
