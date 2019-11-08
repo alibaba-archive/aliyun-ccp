@@ -98,7 +98,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("published_app_access_strategy")]
         [Validation(Required=false)]
-        public List<AppAccessStrategy> PublishedAppAccessStrategy { get; set; }
+        public AppAccessStrategy PublishedAppAccessStrategy { get; set; }
 
         [NameInMap("sharable")]
         [Validation(Required=false)]

@@ -10,7 +10,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
     public class SetStoreCorsRequest : TeaModel {
         [NameInMap("cors_rule")]
         [Validation(Required=true)]
-        public List<CorsRule> CorsRule { get; set; }
+        public CorsRule CorsRule { get; set; }
 
         [NameInMap("domain_id")]
         [Validation(Required=true)]

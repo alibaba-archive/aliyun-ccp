@@ -12,7 +12,7 @@ public class OSSGetDownloadUrlRequest extends TeaModel {
     public Long expireSec;
 
     @NameInMap("file_name")
-    @Validation(required = true, pattern = "[a-zA-Z0-9.-]{1,1000}")
+    @Validation(pattern = "[a-zA-Z0-9.-]{1,1000}")
     public String fileName;
 
     @NameInMap("file_path")

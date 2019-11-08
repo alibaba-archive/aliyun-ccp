@@ -75,7 +75,7 @@ public class UpdateDomainRequest extends TeaModel {
     public String initDriveStoreId;
 
     @NameInMap("published_app_access_strategy")
-    public AppAccessStrategy[] publishedAppAccessStrategy;
+    public AppAccessStrategy publishedAppAccessStrategy;
 
     @NameInMap("sharable")
     public boolean sharable;
