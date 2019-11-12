@@ -170,10 +170,9 @@ namespace baseClientUnitTests
             TestRegModel testRegModel = new TestRegModel();
             testRegModel.RequestId = "requestId";
             testRegModel.subModel = new TestRegSubModel();
-            string a = (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_toJSONString", baseClient, new object[] { testRegModel.ToMap() });
-            Assert.NotNull(TestHelper.RunInstanceMethod(typeof(BaseClient), "_toJSONString", baseClient, new object[] { testRegModel.ToMap() }));
-            Assert.Equal("{\"RequestId\":\"requestId\",\"NextMarker\":null,\"testNoAttr\":null,\"subModel\":{\"RequestId\":null,\"testInt\":0}}",
-                (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_toJSONString", baseClient, new object[] { testRegModel.ToMap() }));
+            Stream stream = (Stream) TestHelper.RunInstanceMethod(typeof(BaseClient), "_toJSONString", baseClient, new object[] { testRegModel.ToMap() });
+            Assert.NotNull(stream);
+            Assert.InRange(stream.Length,1,long.MaxValue);
         }
 
         [Fact]
