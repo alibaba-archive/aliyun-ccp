@@ -5845,7 +5845,6 @@ export class DownloadFileRequest extends $tea.Model {
 export default class Client extends BaseClient {
   constructor(config: Config) {
     super(config.toMap());
-    super(config.toMap());
   }
 
   async cancelLink(request: CancelLinkRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse>  {
@@ -5905,7 +5904,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -6003,7 +6002,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -6101,7 +6100,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -6196,7 +6195,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -6291,7 +6290,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -6389,7 +6388,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -6487,7 +6486,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -6585,7 +6584,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -6683,7 +6682,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -6781,7 +6780,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -6879,7 +6878,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -6977,7 +6976,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -7075,7 +7074,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -7173,7 +7172,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -7271,7 +7270,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -7369,7 +7368,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -7467,7 +7466,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -7565,7 +7564,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -7660,7 +7659,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -7758,7 +7757,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -7856,7 +7855,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -7954,7 +7953,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -8052,7 +8051,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -8150,7 +8149,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -8248,7 +8247,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -8353,7 +8352,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -8451,7 +8450,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -8643,7 +8642,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -8741,7 +8740,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -8839,7 +8838,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -8937,7 +8936,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -9035,7 +9034,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -9133,7 +9132,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -9231,7 +9230,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -9329,7 +9328,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -9427,7 +9426,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -9525,7 +9524,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -9620,7 +9619,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -9718,7 +9717,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -9816,7 +9815,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
@@ -9914,7 +9913,7 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = this._toJSONString(request.toMap());
+        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
