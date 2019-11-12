@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 using Aliyun.SDK.CCP.Utils;
 
@@ -43,8 +45,12 @@ namespace Aliyun.SDK.CCP.Credentials
             request.Headers.Add("accept", "application/json");
             request.Headers.Add("x-acs-signature-method", "HMAC-SHA1");
             request.Headers.Add("x-acs-signature-version", "1.0");
-            request.Body = string.Format("grant_type=refresh_token&refresh_token={0}&client_id={1}&client_secret={2}",
+            string bodyStr = string.Format("grant_type=refresh_token&refresh_token={0}&client_id={1}&client_secret={2}",
                 this.refreshToken, this.clientId, this.clientSecret);
+            MemoryStream stream = new MemoryStream();
+            byte[] bytes = Encoding.UTF8.GetBytes(bodyStr);
+            stream.Write(bytes, 0, bytes.Length);
+            request.Body = stream;
             TeaResponse response = TeaCore.DoAction(request, new Dictionary<string, object>());
             string body = TeaCore.GetResponseBody(response);
             Dictionary<string, object> bodyDict = JsonConvert.DeserializeObject<Dictionary<string, object>>(body);

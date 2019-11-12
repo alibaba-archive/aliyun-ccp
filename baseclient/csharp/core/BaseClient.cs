@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -173,9 +174,13 @@ namespace Aliyun.SDK.CCP
             return response.StatusCode == code;
         }
 
-        protected string _toJSONString(Dictionary<string, object> request)
+        protected Stream _toJSONString(Dictionary<string, object> request)
         {
-            return JsonConvert.SerializeObject(request);
+            string jsonStr = JsonConvert.SerializeObject(request);
+            MemoryStream stream = new MemoryStream();
+            byte[] bytes = Encoding.UTF8.GetBytes(jsonStr);
+            stream.Write(bytes, 0, bytes.Length);
+            return stream;
         }
 
         protected Dictionary<string, object> _readAsJSON(TeaResponse response)

@@ -46,7 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Tea" Version="0.0.2" />
+    <PackageReference Include="Tea" Version="0.0.4" />
   </ItemGroup>
   
   <ItemGroup>
