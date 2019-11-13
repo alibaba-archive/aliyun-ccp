@@ -8,6 +8,7 @@
 - [baseclient](./baseclient/java/README-CN.md)
 - [ccppath-sdk](./ccppath-sdk/java/README-CN.md)
 - [osspath-sdk](./osspath-sdk/java/README-CN.md)
+- [more demo](docs/java-sdk-demo.md)
 
 ### Go
 - [baseclient](./baseclient/go/README-CN.md)
