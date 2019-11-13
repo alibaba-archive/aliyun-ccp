@@ -1,3 +1,7 @@
+### 2019-11-06 Version 0.0.4
+* Improve `_toJsonString()` 
+* Improve `AccessTokenCredential.RefreshAccessToken()`
+
 ### 2019-11-06 Version 0.0.3
 * Supported UserAgent
 
