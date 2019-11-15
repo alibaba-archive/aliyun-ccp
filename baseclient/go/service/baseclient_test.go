@@ -17,7 +17,7 @@ type configTest struct {
 }
 
 func Test_InitClient(t *testing.T) {
-	config := map[string]string{
+	config := map[string]interface{}{
 		"accessKeyId":     "AccessKeyId",
 		"accessKeySecret": "AccessKeySecret",
 		"credentialType":  "no",
@@ -34,7 +34,7 @@ func Test_InitClient(t *testing.T) {
 	utils.AssertNil(t, err)
 	utils.AssertEqual(t, "", accessKeySecret)
 
-	config = map[string]string{
+	config = map[string]interface{}{
 		"accessKeyId":     "AccessKeyId",
 		"accessKeySecret": "AccessKeySecret",
 		"refreshToken":    "refreshToken",
@@ -43,7 +43,7 @@ func Test_InitClient(t *testing.T) {
 	err = client.InitClient(config)
 	utils.AssertEqual(t, `parsing time "2006-01-T15:04:05Z" as "2006-01-02T15:04:05Z07:00": cannot parse "T15:04:05Z" as "02"`, err.Error())
 
-	config = map[string]string{
+	config = map[string]interface{}{
 		"accessKeyId":     "AccessKeyId",
 		"accessKeySecret": "AccessKeySecret",
 		"refreshToken":    "refreshToken",

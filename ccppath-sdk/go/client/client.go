@@ -5529,7 +5529,7 @@ type CCPGetDownloadUrlRequest struct {
 	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
 	FileId    *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	FileName  *string `json:"file_name" xml:"file_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	FileName  *string `json:"file_name" xml:"file_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 }
 
 func (s CCPGetDownloadUrlRequest) String() string {
@@ -8268,7 +8268,7 @@ type Client struct {
 
 func NewClient(config *Config) (*Client, error) {
 	client := &Client{}
-	input := make(map[string]string)
+	input := make(map[string]interface{})
 	byt, _ := json.Marshal(config)
 	err := json.Unmarshal(byt, &input)
 	if err != nil {
@@ -8352,7 +8352,7 @@ func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOpt
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -8467,7 +8467,7 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeO
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -8581,7 +8581,7 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runt
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return err
@@ -8691,7 +8691,7 @@ func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *R
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return err
@@ -8802,7 +8802,7 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -8917,7 +8917,7 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOpt
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -9032,7 +9032,7 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *Runtim
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -9147,7 +9147,7 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, r
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -9262,7 +9262,7 @@ func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions)
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -9377,7 +9377,7 @@ func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *Runt
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -9492,7 +9492,7 @@ func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -9607,7 +9607,7 @@ func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeO
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -9722,7 +9722,7 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runti
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -9837,7 +9837,7 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (*Ac
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -9952,7 +9952,7 @@ func (client *Client) GetAsyncTaskInfo(request *CCPGetAsyncTaskRequest, runtime 
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -10067,7 +10067,7 @@ func (client *Client) Operation(request *CCPBatchRequest, runtime *RuntimeOption
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -10182,7 +10182,7 @@ func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeO
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -10296,7 +10296,7 @@ func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeO
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return err
@@ -10407,7 +10407,7 @@ func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -10522,7 +10522,7 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -10637,7 +10637,7 @@ func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOpti
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -10752,7 +10752,7 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *Runtime
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -10867,7 +10867,7 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeO
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -10982,7 +10982,7 @@ func (client *Client) CompleteFile(request *CCPCompleteFileRequest, runtime *Run
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -11097,7 +11097,7 @@ func (client *Client) CopyFile(request *CCPCopyFileRequest, runtime *RuntimeOpti
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -11220,7 +11220,7 @@ func (client *Client) CreateFile(request *CCPCreateFileRequest, runtime *Runtime
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -11335,7 +11335,7 @@ func (client *Client) DeleteFile(request *CCPDeleteFileRequest, runtime *Runtime
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -11560,7 +11560,7 @@ func (client *Client) GetFile(request *CCPGetFileRequest, runtime *RuntimeOption
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -11675,7 +11675,7 @@ func (client *Client) GetDownloadUrl(request *CCPGetDownloadUrlRequest, runtime 
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -11790,7 +11790,7 @@ func (client *Client) GetUploadUrl(request *CCPGetUploadUrlRequest, runtime *Run
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -11905,7 +11905,7 @@ func (client *Client) ListFile(request *CCPListFileRequest, runtime *RuntimeOpti
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -12020,7 +12020,7 @@ func (client *Client) ListUploadedParts(request *CCPListUploadedPartRequest, run
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -12135,7 +12135,7 @@ func (client *Client) MoveFile(request *CCPMoveFileRequest, runtime *RuntimeOpti
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -12250,7 +12250,7 @@ func (client *Client) SearchFile(request *CCPSearchFileRequest, runtime *Runtime
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -12365,7 +12365,7 @@ func (client *Client) UpdateFile(request *CCPUpdateFileMetaRequest, runtime *Run
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -12480,7 +12480,7 @@ func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOpt
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -12594,7 +12594,7 @@ func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOpt
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return err
@@ -12705,7 +12705,7 @@ func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) 
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -12820,7 +12820,7 @@ func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOption
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -12935,7 +12935,7 @@ func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOpt
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
@@ -13050,7 +13050,7 @@ func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOpt
 				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
 			}
 
-			request_.Body = client.ToJSONString(request)
+			request_.Body = tea.ToReader(client.ToJSONString(request))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err

@@ -16,7 +16,7 @@ public class CCPGetDownloadUrlRequest extends TeaModel {
     public String fileId;
 
     @NameInMap("file_name")
-    @Validation(required = true, pattern = "[a-zA-Z0-9.-]{1,1000}")
+    @Validation(pattern = "[a-zA-Z0-9.-]{1,1000}")
     public String fileName;
 
 }

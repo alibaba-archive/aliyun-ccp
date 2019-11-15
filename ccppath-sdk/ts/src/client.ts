@@ -3857,7 +3857,7 @@ export class CCPGetDownloadUrlRequest extends $tea.Model {
   driveId: string
   expireSec?: number
   fileId: string
-  fileName: string
+  fileName?: string
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
