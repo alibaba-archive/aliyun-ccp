@@ -202,3 +202,19 @@ func Test_refreshAccessToken(t *testing.T) {
 	ifUpdate := up.needUpdateCredential()
 	utils.AssertEqual(t, true, ifUpdate)
 }
+
+func Test_getFunc(t *testing.T) {
+	num := 10
+	intval := getIntValue(num)
+	utils.AssertEqual(t, 10, intval)
+
+	intval = getIntValue(nil)
+	utils.AssertEqual(t, 0, intval)
+
+	boolval := true
+	boolval = getBoolValue(boolval)
+	utils.AssertEqual(t, true, boolval)
+
+	boolval = getBoolValue(nil)
+	utils.AssertEqual(t, false, boolval)
+}

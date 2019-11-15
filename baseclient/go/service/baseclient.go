@@ -34,18 +34,19 @@ type AccessTokenCredential struct {
 	RefreshToken string
 }
 
-func (client *BaseClient) InitClient(config map[string]string) error {
-	byt, _ := json.Marshal(config)
-	err := json.Unmarshal(byt, &client)
-	if err != nil {
-		return err
-	}
-
+func (client *BaseClient) InitClient(config map[string]interface{}) error {
+	client.Protocol = getStringValue(config["protocol"])
+	client.RegionId = getStringValue(config["regionId"])
+	client.Endpoint = getStringValue(config["endpoint"])
+	client.DomainId = getStringValue(config["domainId"])
+	client.UserAgent = getStringValue(config["useragent"])
+	client.ClientId = getStringValue(config["clientId"])
+	client.ClientSecret = getStringValue(config["clientSecret"])
 	configuration := &credentials.Configuration{
-		Type:            config["credentialType"],
-		AccessKeyID:     config["accessKeyId"],
-		AccessKeySecret: config["accessKeySecret"],
-		SecurityToken:   config["securityToken"],
+		AccessKeyID:     getStringValue(config["accessKeyId"]),
+		AccessKeySecret: getStringValue(config["accessKeySecret"]),
+		SecurityToken:   getStringValue(config["securityToken"]),
+		Type:            getStringValue(config["credentialType"]),
 	}
 	if configuration.Type == "" {
 		configuration.Type = "access_key"
@@ -58,14 +59,14 @@ func (client *BaseClient) InitClient(config map[string]string) error {
 		client.credential = credential
 	}
 
-	if config["refreshToken"] != "" || config["accessToken"] != "" {
+	if getStringValue(config["refreshToken"]) != "" || getStringValue(config["accessToken"]) != "" {
 		client.accessToken = &AccessTokenCredential{
-			RefreshToken:      config["refreshToken"],
-			AccessToken:       config["accessToken"],
+			RefreshToken:      getStringValue(config["refreshToken"]),
+			AccessToken:       getStringValue(config["accessToken"]),
 			credentialUpdater: new(credentialUpdater),
 		}
-		if config["expireTime"] != "" {
-			expiretime, err := time.Parse(time.RFC3339, config["expireTime"])
+		if getStringValue(config["expireTime"]) != "" {
+			expiretime, err := time.Parse(time.RFC3339, getStringValue(config["expireTime"]))
 			if err != nil {
 				return err
 			}

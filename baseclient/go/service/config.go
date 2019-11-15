@@ -370,3 +370,24 @@ func Prettify(i interface{}) string {
 	resp, _ := json.MarshalIndent(i, "", "   ")
 	return string(resp)
 }
+
+func getStringValue(obj interface{}) string {
+	if obj == nil {
+		return ""
+	}
+	return obj.(string)
+}
+
+func getIntValue(obj interface{}) int {
+	if obj == nil {
+		return 0
+	}
+	return obj.(int)
+}
+
+func getBoolValue(obj interface{}) bool {
+	if obj == nil {
+		return false
+	}
+	return obj.(bool)
+}

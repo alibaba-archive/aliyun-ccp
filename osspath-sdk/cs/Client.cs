@@ -73,7 +73,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -176,7 +176,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -279,7 +279,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -361,7 +361,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -443,7 +443,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -546,7 +546,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -649,7 +649,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -752,7 +752,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -855,7 +855,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -958,7 +958,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1061,7 +1061,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1164,7 +1164,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1267,7 +1267,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1370,7 +1370,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1473,7 +1473,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1576,7 +1576,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1679,7 +1679,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1782,7 +1782,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1864,7 +1864,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1967,7 +1967,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2070,7 +2070,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2173,7 +2173,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2276,7 +2276,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2379,7 +2379,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2482,7 +2482,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2585,7 +2585,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2688,7 +2688,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2770,7 +2770,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2873,7 +2873,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2976,7 +2976,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3079,7 +3079,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3182,7 +3182,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3285,7 +3285,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3388,7 +3388,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3491,7 +3491,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3573,7 +3573,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3676,7 +3676,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3779,7 +3779,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3882,7 +3882,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3985,7 +3985,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -4088,7 +4088,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -4170,7 +4170,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -4273,7 +4273,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -4376,7 +4376,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -4479,7 +4479,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = this._toJSONString(request.ToMap());
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
