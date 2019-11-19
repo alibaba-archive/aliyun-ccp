@@ -174,13 +174,9 @@ namespace Aliyun.SDK.CCP
             return response.StatusCode == code;
         }
 
-        protected Stream _toJSONString(Dictionary<string, object> request)
+        protected string _toJSONString(Dictionary<string, object> request)
         {
-            string jsonStr = JsonConvert.SerializeObject(request);
-            MemoryStream stream = new MemoryStream();
-            byte[] bytes = Encoding.UTF8.GetBytes(jsonStr);
-            stream.Write(bytes, 0, bytes.Length);
-            return stream;
+            return JsonConvert.SerializeObject(request);
         }
 
         protected Dictionary<string, object> _readAsJSON(TeaResponse response)
