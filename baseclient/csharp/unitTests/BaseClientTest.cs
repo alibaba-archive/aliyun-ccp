@@ -201,8 +201,8 @@ namespace baseClientUnitTests
             testRegModel.RequestId = "requestId";
             testRegModel.subModel = new TestRegSubModel();
             Dictionary<string, string> dict = (Dictionary<string, string>) TestHelper.RunInstanceMethod(typeof(BaseClient), "_toQuery", baseClient, new object[] { testRegModel.ToMap() });
-            Assert.Equal("requestId", dict["RequestId"]);
-            Assert.Null(dict["NextMarker"]);
+            Assert.Equal("requestId", dict["requestId"]);
+            Assert.Null(dict["next_marker"]);
         }
 
         [Fact]
