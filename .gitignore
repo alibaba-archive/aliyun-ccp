@@ -33,3 +33,4 @@ doc/
 .nyc_output/
 node_modules/
 coverage/
+dist/

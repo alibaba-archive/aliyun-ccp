@@ -1,22 +1,23 @@
 // This file is auto-generated, don't edit it
+import { Readable } from 'stream';
 import * as $tea from '@alicloud/tea-typescript';
 import BaseClient from '@alicloud/ccp-baseclient';
 
 export class RuntimeOptions extends $tea.Model {
-  autoretry?: boolean
-  ignoreSSL?: boolean
-  maxAttempts?: number
-  backoffPolicy?: string
-  backoffPeriod?: number
-  readTimeout?: number
-  connectTimeout?: number
-  httpProxy?: string
-  httpsProxy?: string
-  noProxy?: string
-  maxIdleConns?: number
-  localAddr?: string
-  socks5Proxy?: string
-  socks5NetWork?: string
+  autoretry?: boolean;
+  ignoreSSL?: boolean;
+  maxAttempts?: number;
+  backoffPolicy?: string;
+  backoffPeriod?: number;
+  readTimeout?: number;
+  connectTimeout?: number;
+  httpProxy?: string;
+  httpsProxy?: string;
+  noProxy?: string;
+  maxIdleConns?: number;
+  localAddr?: string;
+  socks5Proxy?: string;
+  socks5NetWork?: string;
   static names(): { [key: string]: string } {
     return {
       autoretry: 'autoretry',
@@ -61,18 +62,18 @@ export class RuntimeOptions extends $tea.Model {
 }
 
 export class Config extends $tea.Model {
-  endpoint?: string
-  domainId: string
-  protocol?: string
-  credentialType?: string
-  securityToken?: string
-  accessKeyId?: string
-  accessKeySecret?: string
-  clientId?: string
-  refreshToken?: string
-  clientSecret?: string
-  accessToken?: string
-  expireTime?: string
+  endpoint?: string;
+  domainId: string;
+  protocol?: string;
+  credentialType?: string;
+  securityToken?: string;
+  accessKeyId?: string;
+  accessKeySecret?: string;
+  clientId?: string;
+  refreshToken?: string;
+  clientSecret?: string;
+  accessToken?: string;
+  expireTime?: string;
   static names(): { [key: string]: string } {
     return {
       endpoint: 'endpoint',
@@ -113,21 +114,21 @@ export class Config extends $tea.Model {
 }
 
 export class AccountAccessTokenResponse extends $tea.Model {
-  requestId?: string
-  accessToken: string
-  avatar?: string
-  defaultDriveId?: string
-  existLink?: LinkInfo[]
-  expireTime?: string
-  expiresIn?: number
-  needLink: boolean
-  nickName?: string
-  refreshToken?: string
-  role?: string
-  state?: string
-  tokenType?: string
-  userId?: string
-  userName?: string
+  requestId?: string;
+  accessToken: string;
+  avatar?: string;
+  defaultDriveId?: string;
+  existLink?: LinkInfo[];
+  expireTime?: string;
+  expiresIn?: number;
+  needLink: boolean;
+  nickName?: string;
+  refreshToken?: string;
+  role?: string;
+  state?: string;
+  tokenType?: string;
+  userId?: string;
+  userName?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -174,11 +175,11 @@ export class AccountAccessTokenResponse extends $tea.Model {
 }
 
 export class AccountLinkRequest extends $tea.Model {
-  detail?: string
-  identity: string
-  status?: string
-  type: string
-  userId: string
+  detail?: string;
+  identity: string;
+  status?: string;
+  type: string;
+  userId: string;
   static names(): { [key: string]: string } {
     return {
       detail: 'detail',
@@ -205,13 +206,13 @@ export class AccountLinkRequest extends $tea.Model {
 }
 
 export class AddStoreRequest extends $tea.Model {
-  basePath?: string
-  bucket?: string
-  domainId: string
-  endpoint: string
-  ownership?: string
-  roleArn?: string
-  type: string
+  basePath?: string;
+  bucket?: string;
+  domainId: string;
+  endpoint: string;
+  ownership?: string;
+  roleArn?: string;
+  type: string;
   static names(): { [key: string]: string } {
     return {
       basePath: 'base_path',
@@ -242,8 +243,8 @@ export class AddStoreRequest extends $tea.Model {
 }
 
 export class AppAccessStrategy extends $tea.Model {
-  effect?: string
-  exceptAppIdList?: string[]
+  effect?: string;
+  exceptAppIdList?: string[];
   static names(): { [key: string]: string } {
     return {
       effect: 'effect',
@@ -264,11 +265,11 @@ export class AppAccessStrategy extends $tea.Model {
 }
 
 export class AuthConfig extends $tea.Model {
-  appId?: string
-  appSecret?: string
-  enable?: boolean
-  endpoint?: string
-  enterpriseId?: string
+  appId?: string;
+  appSecret?: string;
+  enable?: boolean;
+  endpoint?: string;
+  enterpriseId?: string;
   static names(): { [key: string]: string } {
     return {
       appId: 'app_id',
@@ -295,34 +296,34 @@ export class AuthConfig extends $tea.Model {
 }
 
 export class BaseCCPFileResponse extends $tea.Model {
-  requestId?: string
-  category?: string
-  contentHash?: string
-  contentHashName?: string
-  contentType?: string
-  crc64Hash?: string
-  createdAt?: string
-  description?: string
-  domainId?: string
-  downloadUrl?: string
-  driveId?: string
-  fileExtension?: string
-  fileId?: string
-  hidden?: boolean
-  imageMediaMetadata?: ImageMediaResponse
-  labels?: string[]
-  meta?: string
-  name: string
-  parentFileId?: string
-  size?: number
-  starred?: boolean
-  status?: string
-  thumbnail?: string
-  trashedAt?: string
-  type?: string
-  updatedAt?: string
-  uploadId?: string
-  url?: string
+  requestId?: string;
+  category?: string;
+  contentHash?: string;
+  contentHashName?: string;
+  contentType?: string;
+  crc64Hash?: string;
+  createdAt?: string;
+  description?: string;
+  domainId?: string;
+  downloadUrl?: string;
+  driveId?: string;
+  fileExtension?: string;
+  fileId?: string;
+  hidden?: boolean;
+  imageMediaMetadata?: ImageMediaResponse;
+  labels?: string[];
+  meta?: string;
+  name: string;
+  parentFileId?: string;
+  size?: number;
+  starred?: boolean;
+  status?: string;
+  thumbnail?: string;
+  trashedAt?: string;
+  type?: string;
+  updatedAt?: string;
+  uploadId?: string;
+  url?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -395,19 +396,19 @@ export class BaseCCPFileResponse extends $tea.Model {
 }
 
 export class BaseDriveResponse extends $tea.Model {
-  requestId?: string
-  creator?: string
-  description?: string
-  domainId?: string
-  driveId?: string
-  driveName?: string
-  driveType?: string
-  owner?: string
-  relativePath?: string
-  status?: string
-  storeId?: string
-  totalSize?: number
-  usedSize?: number
+  requestId?: string;
+  creator?: string;
+  description?: string;
+  domainId?: string;
+  driveId?: string;
+  driveName?: string;
+  driveType?: string;
+  owner?: string;
+  relativePath?: string;
+  status?: string;
+  storeId?: string;
+  totalSize?: number;
+  usedSize?: number;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -450,29 +451,29 @@ export class BaseDriveResponse extends $tea.Model {
 }
 
 export class BaseOSSFileResponse extends $tea.Model {
-  requestId?: string
-  contentHash?: string
-  contentHashName?: string
-  contentType?: string
-  crc64Hash?: string
-  createdAt?: string
-  description?: string
-  domainId?: string
-  downloadUrl?: string
-  driveId?: string
-  fileExtension?: string
-  filePath?: string
-  name: string
-  parentFilePath?: string
-  shareId?: string
-  size?: number
-  status?: string
-  thumbnail?: string
-  trashedAt?: string
-  type?: string
-  updatedAt?: string
-  uploadId?: string
-  url?: string
+  requestId?: string;
+  contentHash?: string;
+  contentHashName?: string;
+  contentType?: string;
+  crc64Hash?: string;
+  createdAt?: string;
+  description?: string;
+  domainId?: string;
+  downloadUrl?: string;
+  driveId?: string;
+  fileExtension?: string;
+  filePath?: string;
+  name: string;
+  parentFilePath?: string;
+  shareId?: string;
+  size?: number;
+  status?: string;
+  thumbnail?: string;
+  trashedAt?: string;
+  type?: string;
+  updatedAt?: string;
+  uploadId?: string;
+  url?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -535,21 +536,21 @@ export class BaseOSSFileResponse extends $tea.Model {
 }
 
 export class BaseShareResponse extends $tea.Model {
-  requestId?: string
-  createdAt?: string
-  creator?: string
-  description?: string
-  domainId?: string
-  driveId?: string
-  expiration?: string
-  expired?: boolean
-  owner?: string
-  permissions?: string[]
-  shareFilePath?: string
-  shareId?: string
-  shareName?: string
-  status?: string
-  updatedAt?: string
+  requestId?: string;
+  createdAt?: string;
+  creator?: string;
+  description?: string;
+  domainId?: string;
+  driveId?: string;
+  expiration?: string;
+  expired?: boolean;
+  owner?: string;
+  permissions?: string[];
+  shareFilePath?: string;
+  shareId?: string;
+  shareName?: string;
+  status?: string;
+  updatedAt?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -596,10 +597,10 @@ export class BaseShareResponse extends $tea.Model {
 }
 
 export class BatchSubResponse extends $tea.Model {
-  requestId?: string
-  body?: object
-  id?: string
-  status?: number
+  requestId?: string;
+  body?: object;
+  id?: string;
+  status?: number;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -624,8 +625,8 @@ export class BatchSubResponse extends $tea.Model {
 }
 
 export class CCPBatchResponse extends $tea.Model {
-  requestId?: string
-  responses?: BatchSubResponse[]
+  requestId?: string;
+  responses?: BatchSubResponse[];
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -646,35 +647,35 @@ export class CCPBatchResponse extends $tea.Model {
 }
 
 export class CCPCompleteFileResponse extends $tea.Model {
-  requestId?: string
-  category?: string
-  contentHash?: string
-  contentHashName?: string
-  contentType?: string
-  crc64Hash?: string
-  createdAt?: string
-  description?: string
-  domainId?: string
-  downloadUrl?: string
-  driveId?: string
-  fileExtension?: string
-  fileId?: string
-  hidden?: boolean
-  imageMediaMetadata?: ImageMediaResponse
-  labels?: string[]
-  meta?: string
-  name?: string
-  parentFileId?: string
-  size?: number
-  starred?: boolean
-  status?: string
-  thumbnail?: string
-  trashedAt?: string
-  type?: string
-  updatedAt?: string
-  uploadId?: string
-  url?: string
-  crc?: string
+  requestId?: string;
+  category?: string;
+  contentHash?: string;
+  contentHashName?: string;
+  contentType?: string;
+  crc64Hash?: string;
+  createdAt?: string;
+  description?: string;
+  domainId?: string;
+  downloadUrl?: string;
+  driveId?: string;
+  fileExtension?: string;
+  fileId?: string;
+  hidden?: boolean;
+  imageMediaMetadata?: ImageMediaResponse;
+  labels?: string[];
+  meta?: string;
+  name?: string;
+  parentFileId?: string;
+  size?: number;
+  starred?: boolean;
+  status?: string;
+  thumbnail?: string;
+  trashedAt?: string;
+  type?: string;
+  updatedAt?: string;
+  uploadId?: string;
+  url?: string;
+  crc?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -749,11 +750,11 @@ export class CCPCompleteFileResponse extends $tea.Model {
 }
 
 export class CCPCopyFileResponse extends $tea.Model {
-  requestId?: string
-  asyncTaskId?: string
-  domainId?: string
-  driveId?: string
-  fileId?: string
+  requestId?: string;
+  asyncTaskId?: string;
+  domainId?: string;
+  driveId?: string;
+  fileId?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -780,15 +781,15 @@ export class CCPCopyFileResponse extends $tea.Model {
 }
 
 export class CCPCreateFileResponse extends $tea.Model {
-  requestId?: string
-  domainId?: string
-  driveId?: string
-  fileId?: string
-  parentFileId?: string
-  partInfoList?: UploadPartInfo[]
-  rapidUpload?: boolean
-  type?: string
-  uploadId?: string
+  requestId?: string;
+  domainId?: string;
+  driveId?: string;
+  fileId?: string;
+  parentFileId?: string;
+  partInfoList?: UploadPartInfo[];
+  rapidUpload?: boolean;
+  type?: string;
+  uploadId?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -823,11 +824,11 @@ export class CCPCreateFileResponse extends $tea.Model {
 }
 
 export class CCPDeleteFileResponse extends $tea.Model {
-  requestId?: string
-  asyncTaskId?: string
-  domainId?: string
-  driveId?: string
-  fileId?: string
+  requestId?: string;
+  asyncTaskId?: string;
+  domainId?: string;
+  driveId?: string;
+  fileId?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -854,10 +855,10 @@ export class CCPDeleteFileResponse extends $tea.Model {
 }
 
 export class CCPDeleteFilesResponse extends $tea.Model {
-  requestId?: string
-  deletedFileIdList?: string[]
-  domainId?: string
-  driveId?: string
+  requestId?: string;
+  deletedFileIdList?: string[];
+  domainId?: string;
+  driveId?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -882,10 +883,10 @@ export class CCPDeleteFilesResponse extends $tea.Model {
 }
 
 export class CCPGetAsyncTaskResponse extends $tea.Model {
-  requestId?: string
-  asyncTaskId?: string
-  message?: string
-  state?: string
+  requestId?: string;
+  asyncTaskId?: string;
+  message?: string;
+  state?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -910,10 +911,10 @@ export class CCPGetAsyncTaskResponse extends $tea.Model {
 }
 
 export class CCPGetDownloadUrlResponse extends $tea.Model {
-  requestId?: string
-  expiration?: string
-  method?: string
-  url?: string
+  requestId?: string;
+  expiration?: string;
+  method?: string;
+  url?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -938,34 +939,34 @@ export class CCPGetDownloadUrlResponse extends $tea.Model {
 }
 
 export class CCPGetFileResponse extends $tea.Model {
-  requestId?: string
-  category?: string
-  contentHash?: string
-  contentHashName?: string
-  contentType?: string
-  crc64Hash?: string
-  createdAt?: string
-  description?: string
-  domainId?: string
-  downloadUrl?: string
-  driveId?: string
-  fileExtension?: string
-  fileId?: string
-  hidden?: boolean
-  imageMediaMetadata?: ImageMediaResponse
-  labels?: string[]
-  meta?: string
-  name?: string
-  parentFileId?: string
-  size?: number
-  starred?: boolean
-  status?: string
-  thumbnail?: string
-  trashedAt?: string
-  type?: string
-  updatedAt?: string
-  uploadId?: string
-  url?: string
+  requestId?: string;
+  category?: string;
+  contentHash?: string;
+  contentHashName?: string;
+  contentType?: string;
+  crc64Hash?: string;
+  createdAt?: string;
+  description?: string;
+  domainId?: string;
+  downloadUrl?: string;
+  driveId?: string;
+  fileExtension?: string;
+  fileId?: string;
+  hidden?: boolean;
+  imageMediaMetadata?: ImageMediaResponse;
+  labels?: string[];
+  meta?: string;
+  name?: string;
+  parentFileId?: string;
+  size?: number;
+  starred?: boolean;
+  status?: string;
+  thumbnail?: string;
+  trashedAt?: string;
+  type?: string;
+  updatedAt?: string;
+  uploadId?: string;
+  url?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -1038,13 +1039,13 @@ export class CCPGetFileResponse extends $tea.Model {
 }
 
 export class CCPGetUploadUrlResponse extends $tea.Model {
-  requestId?: string
-  createAt?: string
-  domainId?: string
-  driveId?: string
-  fileId?: string
-  partInfoList?: UploadPartInfo[]
-  uploadId?: string
+  requestId?: string;
+  createAt?: string;
+  domainId?: string;
+  driveId?: string;
+  fileId?: string;
+  partInfoList?: UploadPartInfo[];
+  uploadId?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -1075,9 +1076,9 @@ export class CCPGetUploadUrlResponse extends $tea.Model {
 }
 
 export class CCPListFileResponse extends $tea.Model {
-  requestId?: string
-  items?: BaseCCPFileResponse[]
-  nextMarker?: string
+  requestId?: string;
+  items?: BaseCCPFileResponse[];
+  nextMarker?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -1100,11 +1101,11 @@ export class CCPListFileResponse extends $tea.Model {
 }
 
 export class CCPListUploadedPartResponse extends $tea.Model {
-  requestId?: string
-  fileId?: string
-  nextPartNumberMarker?: string
-  uploadId?: string
-  uploadedParts?: UploadPartInfo[]
+  requestId?: string;
+  fileId?: string;
+  nextPartNumberMarker?: string;
+  uploadId?: string;
+  uploadedParts?: UploadPartInfo[];
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -1131,11 +1132,11 @@ export class CCPListUploadedPartResponse extends $tea.Model {
 }
 
 export class CCPMoveFileResponse extends $tea.Model {
-  requestId?: string
-  asyncTaskId?: string
-  domainId?: string
-  driveId?: string
-  fileId?: string
+  requestId?: string;
+  asyncTaskId?: string;
+  domainId?: string;
+  driveId?: string;
+  fileId?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -1162,9 +1163,9 @@ export class CCPMoveFileResponse extends $tea.Model {
 }
 
 export class CCPSearchFileResponse extends $tea.Model {
-  requestId?: string
-  items?: BaseCCPFileResponse[]
-  nextMarker?: string
+  requestId?: string;
+  items?: BaseCCPFileResponse[];
+  nextMarker?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -1187,34 +1188,34 @@ export class CCPSearchFileResponse extends $tea.Model {
 }
 
 export class CCPUpdateFileMetaResponse extends $tea.Model {
-  requestId?: string
-  category?: string
-  contentHash?: string
-  contentHashName?: string
-  contentType?: string
-  crc64Hash?: string
-  createdAt?: string
-  description?: string
-  domainId?: string
-  downloadUrl?: string
-  driveId?: string
-  fileExtension?: string
-  fileId?: string
-  hidden?: boolean
-  imageMediaMetadata?: ImageMediaResponse
-  labels?: string[]
-  meta?: string
-  name?: string
-  parentFileId?: string
-  size?: number
-  starred?: boolean
-  status?: string
-  thumbnail?: string
-  trashedAt?: string
-  type?: string
-  updatedAt?: string
-  uploadId?: string
-  url?: string
+  requestId?: string;
+  category?: string;
+  contentHash?: string;
+  contentHashName?: string;
+  contentType?: string;
+  crc64Hash?: string;
+  createdAt?: string;
+  description?: string;
+  domainId?: string;
+  downloadUrl?: string;
+  driveId?: string;
+  fileExtension?: string;
+  fileId?: string;
+  hidden?: boolean;
+  imageMediaMetadata?: ImageMediaResponse;
+  labels?: string[];
+  meta?: string;
+  name?: string;
+  parentFileId?: string;
+  size?: number;
+  starred?: boolean;
+  status?: string;
+  thumbnail?: string;
+  trashedAt?: string;
+  type?: string;
+  updatedAt?: string;
+  uploadId?: string;
+  url?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -1287,7 +1288,7 @@ export class CCPUpdateFileMetaResponse extends $tea.Model {
 }
 
 export class CancelLinkRequest extends $tea.Model {
-  temporaryToken: string
+  temporaryToken: string;
   static names(): { [key: string]: string } {
     return {
       temporaryToken: 'temporary_token',
@@ -1306,9 +1307,9 @@ export class CancelLinkRequest extends $tea.Model {
 }
 
 export class Captcha extends $tea.Model {
-  captcha: string
-  captchaFormat: string
-  captchaId: string
+  captcha: string;
+  captchaFormat: string;
+  captchaId: string;
   static names(): { [key: string]: string } {
     return {
       captcha: 'captcha',
@@ -1331,7 +1332,7 @@ export class Captcha extends $tea.Model {
 }
 
 export class ConfirmLinkRequest extends $tea.Model {
-  temporaryToken: string
+  temporaryToken: string;
   static names(): { [key: string]: string } {
     return {
       temporaryToken: 'temporary_token',
@@ -1350,11 +1351,11 @@ export class ConfirmLinkRequest extends $tea.Model {
 }
 
 export class CorsRule extends $tea.Model {
-  allowedHeader?: string[]
-  allowedMethod?: string[]
-  allowedOrigin?: string[]
-  exposeHeader?: string[]
-  maxAgeSeconds?: number
+  allowedHeader?: string[];
+  allowedMethod?: string[];
+  allowedOrigin?: string[];
+  exposeHeader?: string[];
+  maxAgeSeconds?: number;
   static names(): { [key: string]: string } {
     return {
       allowedHeader: 'allowed_header',
@@ -1381,13 +1382,13 @@ export class CorsRule extends $tea.Model {
 }
 
 export class CreateAppRequest extends $tea.Model {
-  appName: string
-  description?: string
-  isThirdParty?: boolean
-  logo: string
-  redirectUri?: string
-  scope: string[]
-  type: string
+  appName: string;
+  description?: string;
+  isThirdParty?: boolean;
+  logo: string;
+  redirectUri?: string;
+  scope: string[];
+  type: string;
   static names(): { [key: string]: string } {
     return {
       appName: 'app_name',
@@ -1418,32 +1419,32 @@ export class CreateAppRequest extends $tea.Model {
 }
 
 export class CreateDomainRequest extends $tea.Model {
-  authAlipayAppId?: string
-  authAlipayEnbale?: boolean
-  authAlipayPrivateKey?: string
-  authConfig?: object
-  authDingdingAppId?: string
-  authDingdingAppSecret?: string
-  authDingdingEnable?: boolean
-  authEndpointEnable?: boolean
-  authRamAppId?: string
-  authRamAppSecret?: string
-  authRamEnable?: boolean
-  dataHashName?: string
-  description?: string
-  domainName: string
-  eventFilenameMatches?: string
-  eventMnsEndpoint?: string
-  eventMnsTopic?: string
-  eventNames?: string[]
-  eventRoleArn?: string
-  initDriveEnable?: boolean
-  initDriveSize?: number
-  pathType: string
-  publishedAppAccessStrategy?: AppAccessStrategy
-  sharable?: boolean
-  storeLevel?: string
-  storeRegionList: string[]
+  authAlipayAppId?: string;
+  authAlipayEnbale?: boolean;
+  authAlipayPrivateKey?: string;
+  authConfig?: object;
+  authDingdingAppId?: string;
+  authDingdingAppSecret?: string;
+  authDingdingEnable?: boolean;
+  authEndpointEnable?: boolean;
+  authRamAppId?: string;
+  authRamAppSecret?: string;
+  authRamEnable?: boolean;
+  dataHashName?: string;
+  description?: string;
+  domainName: string;
+  eventFilenameMatches?: string;
+  eventMnsEndpoint?: string;
+  eventMnsTopic?: string;
+  eventNames?: string[];
+  eventRoleArn?: string;
+  initDriveEnable?: boolean;
+  initDriveSize?: number;
+  pathType: string;
+  publishedAppAccessStrategy?: AppAccessStrategy;
+  sharable?: boolean;
+  storeLevel?: string;
+  storeRegionList: string[];
   static names(): { [key: string]: string } {
     return {
       authAlipayAppId: 'auth_alipay_app_id',
@@ -1512,9 +1513,9 @@ export class CreateDomainRequest extends $tea.Model {
 }
 
 export class CreateDriveResponse extends $tea.Model {
-  requestId?: string
-  domainId?: string
-  driveId?: string
+  requestId?: string;
+  domainId?: string;
+  driveId?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -1537,9 +1538,9 @@ export class CreateDriveResponse extends $tea.Model {
 }
 
 export class CreateShareResponse extends $tea.Model {
-  requestId?: string
-  domainId?: string
-  shareId?: string
+  requestId?: string;
+  domainId?: string;
+  shareId?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -1562,11 +1563,11 @@ export class CreateShareResponse extends $tea.Model {
 }
 
 export class DefaultChangePasswordRequest extends $tea.Model {
-  appId: string
-  newPassword: string
-  phoneNumber: string
-  smsCode: string
-  smsCodeId: string
+  appId: string;
+  newPassword: string;
+  phoneNumber: string;
+  smsCode: string;
+  smsCodeId: string;
   static names(): { [key: string]: string } {
     return {
       appId: 'app_id',
@@ -1593,9 +1594,9 @@ export class DefaultChangePasswordRequest extends $tea.Model {
 }
 
 export class DefaultSetPasswordRequest extends $tea.Model {
-  appId: string
-  newPassword: string
-  state: string
+  appId: string;
+  newPassword: string;
+  state: string;
   static names(): { [key: string]: string } {
     return {
       appId: 'app_id',
@@ -1618,7 +1619,7 @@ export class DefaultSetPasswordRequest extends $tea.Model {
 }
 
 export class DeleteAppRequest extends $tea.Model {
-  appId: string
+  appId: string;
   static names(): { [key: string]: string } {
     return {
       appId: 'app_id',
@@ -1637,7 +1638,7 @@ export class DeleteAppRequest extends $tea.Model {
 }
 
 export class DeleteDomainRequest extends $tea.Model {
-  domainId: string
+  domainId: string;
   static names(): { [key: string]: string } {
     return {
       domainId: 'domain_id',
@@ -1656,7 +1657,7 @@ export class DeleteDomainRequest extends $tea.Model {
 }
 
 export class DeleteDriveResponse extends $tea.Model {
-  requestId?: string
+  requestId?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -1675,8 +1676,8 @@ export class DeleteDriveResponse extends $tea.Model {
 }
 
 export class GetAccessTokenByLinkInfoRequest extends $tea.Model {
-  identity: string
-  type: string
+  identity: string;
+  type: string;
   static names(): { [key: string]: string } {
     return {
       identity: 'identity',
@@ -1697,7 +1698,7 @@ export class GetAccessTokenByLinkInfoRequest extends $tea.Model {
 }
 
 export class GetAppRequest extends $tea.Model {
-  appId: string
+  appId: string;
   static names(): { [key: string]: string } {
     return {
       appId: 'app_id',
@@ -1716,8 +1717,8 @@ export class GetAppRequest extends $tea.Model {
 }
 
 export class GetByLinkInfoRequest extends $tea.Model {
-  identity: string
-  type: string
+  identity: string;
+  type: string;
   static names(): { [key: string]: string } {
     return {
       identity: 'identity',
@@ -1738,7 +1739,7 @@ export class GetByLinkInfoRequest extends $tea.Model {
 }
 
 export class GetCaptchaRequest extends $tea.Model {
-  appId: string
+  appId: string;
   static names(): { [key: string]: string } {
     return {
       appId: 'app_id',
@@ -1757,7 +1758,7 @@ export class GetCaptchaRequest extends $tea.Model {
 }
 
 export class GetDomainRequest extends $tea.Model {
-  domainId: string
+  domainId: string;
   static names(): { [key: string]: string } {
     return {
       domainId: 'domain_id',
@@ -1776,19 +1777,19 @@ export class GetDomainRequest extends $tea.Model {
 }
 
 export class GetDriveResponse extends $tea.Model {
-  requestId?: string
-  creator?: string
-  description?: string
-  domainId?: string
-  driveId?: string
-  driveName?: string
-  driveType?: string
-  owner?: string
-  relativePath?: string
-  status?: string
-  storeId?: string
-  totalSize?: number
-  usedSize?: number
+  requestId?: string;
+  creator?: string;
+  description?: string;
+  domainId?: string;
+  driveId?: string;
+  driveName?: string;
+  driveType?: string;
+  owner?: string;
+  relativePath?: string;
+  status?: string;
+  storeId?: string;
+  totalSize?: number;
+  usedSize?: number;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -1831,7 +1832,7 @@ export class GetDriveResponse extends $tea.Model {
 }
 
 export class GetLinkInfoByUserIDRequest extends $tea.Model {
-  userId: string
+  userId: string;
   static names(): { [key: string]: string } {
     return {
       userId: 'user_id',
@@ -1850,21 +1851,21 @@ export class GetLinkInfoByUserIDRequest extends $tea.Model {
 }
 
 export class GetShareResponse extends $tea.Model {
-  requestId?: string
-  createdAt?: string
-  creator?: string
-  description?: string
-  domainId?: string
-  driveId?: string
-  expiration?: string
-  expired?: boolean
-  owner?: string
-  permissions?: string[]
-  shareFilePath?: string
-  shareId?: string
-  shareName?: string
-  status?: string
-  updatedAt?: string
+  requestId?: string;
+  createdAt?: string;
+  creator?: string;
+  description?: string;
+  domainId?: string;
+  driveId?: string;
+  expiration?: string;
+  expired?: boolean;
+  owner?: string;
+  permissions?: string[];
+  shareFilePath?: string;
+  shareId?: string;
+  shareName?: string;
+  status?: string;
+  updatedAt?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -1911,10 +1912,10 @@ export class GetShareResponse extends $tea.Model {
 }
 
 export class ImageMediaResponse extends $tea.Model {
-  requestId?: string
-  height?: number
-  time?: string
-  width?: number
+  requestId?: string;
+  height?: number;
+  time?: string;
+  width?: number;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -1939,8 +1940,8 @@ export class ImageMediaResponse extends $tea.Model {
 }
 
 export class LinkInfo extends $tea.Model {
-  identity?: string
-  type?: string
+  identity?: string;
+  type?: string;
   static names(): { [key: string]: string } {
     return {
       identity: 'identity',
@@ -1961,8 +1962,8 @@ export class LinkInfo extends $tea.Model {
 }
 
 export class LinkInfoListResponse extends $tea.Model {
-  requestId?: string
-  items: LinkInfoResponse[]
+  requestId?: string;
+  items: LinkInfoResponse[];
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -1983,14 +1984,14 @@ export class LinkInfoListResponse extends $tea.Model {
 }
 
 export class LinkInfoResponse extends $tea.Model {
-  requestId?: string
-  authenticationType: string
-  createdAt: number
-  domainId: string
-  identity: string
-  lastLoginTime: number
-  status: string
-  userId: string
+  requestId?: string;
+  authenticationType: string;
+  createdAt: number;
+  domainId: string;
+  identity: string;
+  lastLoginTime: number;
+  status: string;
+  userId: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -2023,8 +2024,8 @@ export class LinkInfoResponse extends $tea.Model {
 }
 
 export class ListAppsRequest extends $tea.Model {
-  limit?: number
-  marker?: string
+  limit?: number;
+  marker?: string;
   static names(): { [key: string]: string } {
     return {
       limit: 'limit',
@@ -2045,8 +2046,8 @@ export class ListAppsRequest extends $tea.Model {
 }
 
 export class ListDomainsRequest extends $tea.Model {
-  limit?: number
-  marker?: string
+  limit?: number;
+  marker?: string;
   static names(): { [key: string]: string } {
     return {
       limit: 'limit',
@@ -2067,9 +2068,9 @@ export class ListDomainsRequest extends $tea.Model {
 }
 
 export class ListDriveResponse extends $tea.Model {
-  requestId?: string
-  items?: BaseDriveResponse[]
-  nextMarker?: string
+  requestId?: string;
+  items?: BaseDriveResponse[];
+  nextMarker?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -2092,9 +2093,9 @@ export class ListDriveResponse extends $tea.Model {
 }
 
 export class ListShareResponse extends $tea.Model {
-  requestId?: string
-  items?: BaseShareResponse[]
-  nextMarker?: string
+  requestId?: string;
+  items?: BaseShareResponse[];
+  nextMarker?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -2117,9 +2118,9 @@ export class ListShareResponse extends $tea.Model {
 }
 
 export class ListStoreFileResponse extends $tea.Model {
-  requestId?: string
-  items?: StoreFile[]
-  nextMarker?: string
+  requestId?: string;
+  items?: StoreFile[];
+  nextMarker?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -2142,8 +2143,8 @@ export class ListStoreFileResponse extends $tea.Model {
 }
 
 export class ListStoreResponse extends $tea.Model {
-  requestId?: string
-  items?: StoreItemResponse[]
+  requestId?: string;
+  items?: StoreItemResponse[];
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -2164,7 +2165,7 @@ export class ListStoreResponse extends $tea.Model {
 }
 
 export class ListStoresRequest extends $tea.Model {
-  domainId: string
+  domainId: string;
   static names(): { [key: string]: string } {
     return {
       domainId: 'domain_id',
@@ -2183,10 +2184,10 @@ export class ListStoresRequest extends $tea.Model {
 }
 
 export class LoginByCodeRequest extends $tea.Model {
-  accessToken?: string
-  appId: string
-  authCode?: string
-  type: string
+  accessToken?: string;
+  appId: string;
+  authCode?: string;
+  type: string;
   static names(): { [key: string]: string } {
     return {
       accessToken: 'access_token',
@@ -2211,8 +2212,8 @@ export class LoginByCodeRequest extends $tea.Model {
 }
 
 export class MobileCheckExistRequest extends $tea.Model {
-  appId: string
-  phoneNumber: string
+  appId: string;
+  phoneNumber: string;
   static names(): { [key: string]: string } {
     return {
       appId: 'app_id',
@@ -2233,9 +2234,9 @@ export class MobileCheckExistRequest extends $tea.Model {
 }
 
 export class MobileCheckExistResponse extends $tea.Model {
-  requestId?: string
-  isExist: boolean
-  phoneNumber: string
+  requestId?: string;
+  isExist: boolean;
+  phoneNumber: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -2258,14 +2259,14 @@ export class MobileCheckExistResponse extends $tea.Model {
 }
 
 export class MobileLoginRequest extends $tea.Model {
-  appId: string
-  autoRegister?: boolean
-  captchaId?: string
-  captchaText?: string
-  password?: string
-  phoneNumber: string
-  smsCode?: string
-  smsCodeId?: string
+  appId: string;
+  autoRegister?: boolean;
+  captchaId?: string;
+  captchaText?: string;
+  password?: string;
+  phoneNumber: string;
+  smsCode?: string;
+  smsCodeId?: string;
   static names(): { [key: string]: string } {
     return {
       appId: 'app_id',
@@ -2298,10 +2299,10 @@ export class MobileLoginRequest extends $tea.Model {
 }
 
 export class MobileRegisterRequest extends $tea.Model {
-  appId: string
-  phoneNumber: string
-  smsCode: string
-  smsCodeId: string
+  appId: string;
+  phoneNumber: string;
+  smsCode: string;
+  smsCodeId: string;
   static names(): { [key: string]: string } {
     return {
       appId: 'app_id',
@@ -2326,11 +2327,11 @@ export class MobileRegisterRequest extends $tea.Model {
 }
 
 export class MobileSendSmsCodeRequest extends $tea.Model {
-  appId: string
-  captchaId?: string
-  captchaText?: string
-  phoneNumber: string
-  type: string
+  appId: string;
+  captchaId?: string;
+  captchaText?: string;
+  phoneNumber: string;
+  type: string;
   static names(): { [key: string]: string } {
     return {
       appId: 'app_id',
@@ -2357,8 +2358,8 @@ export class MobileSendSmsCodeRequest extends $tea.Model {
 }
 
 export class MobileSendSmsCodeResponse extends $tea.Model {
-  requestId?: string
-  smsCodeId: string
+  requestId?: string;
+  smsCodeId: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -2379,30 +2380,30 @@ export class MobileSendSmsCodeResponse extends $tea.Model {
 }
 
 export class OSSCompleteFileResponse extends $tea.Model {
-  requestId?: string
-  contentHash?: string
-  contentHashName?: string
-  contentType?: string
-  crc64Hash?: string
-  createdAt?: string
-  description?: string
-  domainId?: string
-  downloadUrl?: string
-  driveId?: string
-  fileExtension?: string
-  filePath?: string
-  name?: string
-  parentFilePath?: string
-  shareId?: string
-  size?: number
-  status?: string
-  thumbnail?: string
-  trashedAt?: string
-  type?: string
-  updatedAt?: string
-  uploadId?: string
-  url?: string
-  crc?: string
+  requestId?: string;
+  contentHash?: string;
+  contentHashName?: string;
+  contentType?: string;
+  crc64Hash?: string;
+  createdAt?: string;
+  description?: string;
+  domainId?: string;
+  downloadUrl?: string;
+  driveId?: string;
+  fileExtension?: string;
+  filePath?: string;
+  name?: string;
+  parentFilePath?: string;
+  shareId?: string;
+  size?: number;
+  status?: string;
+  thumbnail?: string;
+  trashedAt?: string;
+  type?: string;
+  updatedAt?: string;
+  uploadId?: string;
+  url?: string;
+  crc?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -2467,12 +2468,12 @@ export class OSSCompleteFileResponse extends $tea.Model {
 }
 
 export class OSSCopyFileResponse extends $tea.Model {
-  requestId?: string
-  asyncTaskId?: string
-  domainId?: string
-  driveId?: string
-  filePath?: string
-  shareId?: string
+  requestId?: string;
+  asyncTaskId?: string;
+  domainId?: string;
+  driveId?: string;
+  filePath?: string;
+  shareId?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -2501,14 +2502,14 @@ export class OSSCopyFileResponse extends $tea.Model {
 }
 
 export class OSSCreateFileResponse extends $tea.Model {
-  requestId?: string
-  domainId?: string
-  driveId?: string
-  filePath?: string
-  partInfoList?: UploadPartInfo[]
-  shareId?: string
-  type?: string
-  uploadId?: string
+  requestId?: string;
+  domainId?: string;
+  driveId?: string;
+  filePath?: string;
+  partInfoList?: UploadPartInfo[];
+  shareId?: string;
+  type?: string;
+  uploadId?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -2541,12 +2542,12 @@ export class OSSCreateFileResponse extends $tea.Model {
 }
 
 export class OSSDeleteFileResponse extends $tea.Model {
-  requestId?: string
-  asyncTaskId?: string
-  domainId?: string
-  driveId?: string
-  filePath?: string
-  shareId?: string
+  requestId?: string;
+  asyncTaskId?: string;
+  domainId?: string;
+  driveId?: string;
+  filePath?: string;
+  shareId?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -2575,11 +2576,11 @@ export class OSSDeleteFileResponse extends $tea.Model {
 }
 
 export class OSSDeleteFilesResponse extends $tea.Model {
-  requestId?: string
-  deletedFileIdList?: string[]
-  domainId?: string
-  driveId?: string
-  shareId?: string
+  requestId?: string;
+  deletedFileIdList?: string[];
+  domainId?: string;
+  driveId?: string;
+  shareId?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -2606,10 +2607,10 @@ export class OSSDeleteFilesResponse extends $tea.Model {
 }
 
 export class OSSGetDownloadUrlResponse extends $tea.Model {
-  requestId?: string
-  expiration?: string
-  method?: string
-  url?: string
+  requestId?: string;
+  expiration?: string;
+  method?: string;
+  url?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -2634,29 +2635,29 @@ export class OSSGetDownloadUrlResponse extends $tea.Model {
 }
 
 export class OSSGetFileResponse extends $tea.Model {
-  requestId?: string
-  contentHash?: string
-  contentHashName?: string
-  contentType?: string
-  crc64Hash?: string
-  createdAt?: string
-  description?: string
-  domainId?: string
-  downloadUrl?: string
-  driveId?: string
-  fileExtension?: string
-  filePath?: string
-  name?: string
-  parentFilePath?: string
-  shareId?: string
-  size?: number
-  status?: string
-  thumbnail?: string
-  trashedAt?: string
-  type?: string
-  updatedAt?: string
-  uploadId?: string
-  url?: string
+  requestId?: string;
+  contentHash?: string;
+  contentHashName?: string;
+  contentType?: string;
+  crc64Hash?: string;
+  createdAt?: string;
+  description?: string;
+  domainId?: string;
+  downloadUrl?: string;
+  driveId?: string;
+  fileExtension?: string;
+  filePath?: string;
+  name?: string;
+  parentFilePath?: string;
+  shareId?: string;
+  size?: number;
+  status?: string;
+  thumbnail?: string;
+  trashedAt?: string;
+  type?: string;
+  updatedAt?: string;
+  uploadId?: string;
+  url?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -2719,13 +2720,13 @@ export class OSSGetFileResponse extends $tea.Model {
 }
 
 export class OSSGetUploadUrlResponse extends $tea.Model {
-  requestId?: string
-  createAt?: string
-  domainId?: string
-  driveId?: string
-  filePath?: string
-  partInfoList?: UploadPartInfo[]
-  uploadId?: string
+  requestId?: string;
+  createAt?: string;
+  domainId?: string;
+  driveId?: string;
+  filePath?: string;
+  partInfoList?: UploadPartInfo[];
+  uploadId?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -2756,9 +2757,9 @@ export class OSSGetUploadUrlResponse extends $tea.Model {
 }
 
 export class OSSListFileResponse extends $tea.Model {
-  requestId?: string
-  items?: BaseOSSFileResponse[]
-  nextMarker?: string
+  requestId?: string;
+  items?: BaseOSSFileResponse[];
+  nextMarker?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -2781,11 +2782,11 @@ export class OSSListFileResponse extends $tea.Model {
 }
 
 export class OSSListUploadedPartResponse extends $tea.Model {
-  requestId?: string
-  filePath?: string
-  nextPartNumberMarker?: string
-  uploadId?: string
-  uploadedParts?: UploadPartInfo[]
+  requestId?: string;
+  filePath?: string;
+  nextPartNumberMarker?: string;
+  uploadId?: string;
+  uploadedParts?: UploadPartInfo[];
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -2812,12 +2813,12 @@ export class OSSListUploadedPartResponse extends $tea.Model {
 }
 
 export class OSSMoveFileResponse extends $tea.Model {
-  requestId?: string
-  asyncTaskId?: string
-  domainId?: string
-  driveId?: string
-  filePath?: string
-  shareId?: string
+  requestId?: string;
+  asyncTaskId?: string;
+  domainId?: string;
+  driveId?: string;
+  filePath?: string;
+  shareId?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -2846,9 +2847,9 @@ export class OSSMoveFileResponse extends $tea.Model {
 }
 
 export class OSSSearchFileResponse extends $tea.Model {
-  requestId?: string
-  items?: BaseOSSFileResponse[]
-  nextMarker?: string
+  requestId?: string;
+  items?: BaseOSSFileResponse[];
+  nextMarker?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -2871,29 +2872,29 @@ export class OSSSearchFileResponse extends $tea.Model {
 }
 
 export class OSSUpdateFileMetaResponse extends $tea.Model {
-  requestId?: string
-  contentHash?: string
-  contentHashName?: string
-  contentType?: string
-  crc64Hash?: string
-  createdAt?: string
-  description?: string
-  domainId?: string
-  downloadUrl?: string
-  driveId?: string
-  fileExtension?: string
-  filePath?: string
-  name?: string
-  parentFilePath?: string
-  shareId?: string
-  size?: number
-  status?: string
-  thumbnail?: string
-  trashedAt?: string
-  type?: string
-  updatedAt?: string
-  uploadId?: string
-  url?: string
+  requestId?: string;
+  contentHash?: string;
+  contentHashName?: string;
+  contentType?: string;
+  crc64Hash?: string;
+  createdAt?: string;
+  description?: string;
+  domainId?: string;
+  downloadUrl?: string;
+  driveId?: string;
+  fileExtension?: string;
+  filePath?: string;
+  name?: string;
+  parentFilePath?: string;
+  shareId?: string;
+  size?: number;
+  status?: string;
+  thumbnail?: string;
+  trashedAt?: string;
+  type?: string;
+  updatedAt?: string;
+  uploadId?: string;
+  url?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -2956,12 +2957,12 @@ export class OSSUpdateFileMetaResponse extends $tea.Model {
 }
 
 export class PreHashCheckSuccessResponse extends $tea.Model {
-  requestId?: string
-  code?: string
-  fileName?: string
-  message?: string
-  parentFileId: string
-  preHash?: string
+  requestId?: string;
+  code?: string;
+  fileName?: string;
+  message?: string;
+  parentFileId: string;
+  preHash?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -2990,8 +2991,8 @@ export class PreHashCheckSuccessResponse extends $tea.Model {
 }
 
 export class RemoveStoreRequest extends $tea.Model {
-  domainId: string
-  storeId: string
+  domainId: string;
+  storeId: string;
   static names(): { [key: string]: string } {
     return {
       domainId: 'domain_id',
@@ -3012,9 +3013,9 @@ export class RemoveStoreRequest extends $tea.Model {
 }
 
 export class SetStoreCorsRequest extends $tea.Model {
-  corsRule: CorsRule
-  domainId: string
-  storeId: string
+  corsRule: CorsRule;
+  domainId: string;
+  storeId: string;
   static names(): { [key: string]: string } {
     return {
       corsRule: 'cors_rule',
@@ -3037,11 +3038,11 @@ export class SetStoreCorsRequest extends $tea.Model {
 }
 
 export class StoreFile extends $tea.Model {
-  domainId?: string
-  name?: string
-  parentFilePath?: string
-  storeId?: string
-  type?: string
+  domainId?: string;
+  name?: string;
+  parentFilePath?: string;
+  storeId?: string;
+  type?: string;
   static names(): { [key: string]: string } {
     return {
       domainId: 'domain_id',
@@ -3068,19 +3069,19 @@ export class StoreFile extends $tea.Model {
 }
 
 export class StoreItemResponse extends $tea.Model {
-  requestId?: string
-  accelerateEndpoint?: string
-  basePath?: string
-  bucket: string
-  customizedEndpoint?: string
-  domainId?: string
-  endpoint: string
-  internalEndpoint?: string
-  ownership: string
-  policy: string
-  roleArn?: string
-  storeId: string
-  type: string
+  requestId?: string;
+  accelerateEndpoint?: string;
+  basePath?: string;
+  bucket: string;
+  customizedEndpoint?: string;
+  domainId?: string;
+  endpoint: string;
+  internalEndpoint?: string;
+  ownership: string;
+  policy: string;
+  roleArn?: string;
+  storeId: string;
+  type: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -3123,9 +3124,9 @@ export class StoreItemResponse extends $tea.Model {
 }
 
 export class TokenRequest extends $tea.Model {
-  appId: string
-  grantType: string
-  refreshToken: string
+  appId: string;
+  grantType: string;
+  refreshToken: string;
   static names(): { [key: string]: string } {
     return {
       appId: 'app_id',
@@ -3148,14 +3149,14 @@ export class TokenRequest extends $tea.Model {
 }
 
 export class UpdateAppRequest extends $tea.Model {
-  appId: string
-  appName: string
-  description?: string
-  isThirdParty: boolean
-  logo: string
-  redirectUri: string
-  scope: string[]
-  type: string
+  appId: string;
+  appName: string;
+  description?: string;
+  isThirdParty: boolean;
+  logo: string;
+  redirectUri: string;
+  scope: string[];
+  type: string;
   static names(): { [key: string]: string } {
     return {
       appId: 'app_id',
@@ -3188,31 +3189,31 @@ export class UpdateAppRequest extends $tea.Model {
 }
 
 export class UpdateDomainRequest extends $tea.Model {
-  authAlipayAppId?: string
-  authAlipayEnbale?: boolean
-  authAlipayPrivateKey?: string
-  authConfig?: object
-  authDingdingAppId?: string
-  authDingdingAppSecret?: string
-  authDingdingEnable?: boolean
-  authEndpointEnable?: boolean
-  authRamAppId?: string
-  authRamAppSecret?: string
-  authRamEnable?: boolean
-  dataHashName?: string
-  description?: string
-  domainId: string
-  domainName?: string
-  eventFilenameMatches?: string
-  eventMnsEndpoint?: string
-  eventMnsTopic?: string
-  eventNames?: string[]
-  eventRoleArn?: string
-  initDriveEnable?: boolean
-  initDriveSize?: number
-  initDriveStoreId?: string
-  publishedAppAccessStrategy?: AppAccessStrategy
-  sharable?: boolean
+  authAlipayAppId?: string;
+  authAlipayEnbale?: boolean;
+  authAlipayPrivateKey?: string;
+  authConfig?: object;
+  authDingdingAppId?: string;
+  authDingdingAppSecret?: string;
+  authDingdingEnable?: boolean;
+  authEndpointEnable?: boolean;
+  authRamAppId?: string;
+  authRamAppSecret?: string;
+  authRamEnable?: boolean;
+  dataHashName?: string;
+  description?: string;
+  domainId: string;
+  domainName?: string;
+  eventFilenameMatches?: string;
+  eventMnsEndpoint?: string;
+  eventMnsTopic?: string;
+  eventNames?: string[];
+  eventRoleArn?: string;
+  initDriveEnable?: boolean;
+  initDriveSize?: number;
+  initDriveStoreId?: string;
+  publishedAppAccessStrategy?: AppAccessStrategy;
+  sharable?: boolean;
   static names(): { [key: string]: string } {
     return {
       authAlipayAppId: 'auth_alipay_app_id',
@@ -3279,19 +3280,19 @@ export class UpdateDomainRequest extends $tea.Model {
 }
 
 export class UpdateDriveResponse extends $tea.Model {
-  requestId?: string
-  creator?: string
-  description?: string
-  domainId?: string
-  driveId?: string
-  driveName?: string
-  driveType?: string
-  owner?: string
-  relativePath?: string
-  status?: string
-  storeId?: string
-  totalSize?: number
-  usedSize?: number
+  requestId?: string;
+  creator?: string;
+  description?: string;
+  domainId?: string;
+  driveId?: string;
+  driveName?: string;
+  driveType?: string;
+  owner?: string;
+  relativePath?: string;
+  status?: string;
+  storeId?: string;
+  totalSize?: number;
+  usedSize?: number;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -3334,21 +3335,21 @@ export class UpdateDriveResponse extends $tea.Model {
 }
 
 export class UpdateShareResponse extends $tea.Model {
-  requestId?: string
-  createdAt?: string
-  creator?: string
-  description?: string
-  domainId?: string
-  driveId?: string
-  expiration?: string
-  expired?: boolean
-  owner?: string
-  permissions?: string[]
-  shareFilePath?: string
-  shareId?: string
-  shareName?: string
-  status?: string
-  updatedAt?: string
+  requestId?: string;
+  createdAt?: string;
+  creator?: string;
+  description?: string;
+  domainId?: string;
+  driveId?: string;
+  expiration?: string;
+  expired?: boolean;
+  owner?: string;
+  permissions?: string[];
+  shareFilePath?: string;
+  shareId?: string;
+  shareName?: string;
+  status?: string;
+  updatedAt?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -3395,10 +3396,10 @@ export class UpdateShareResponse extends $tea.Model {
 }
 
 export class UploadPartInfo extends $tea.Model {
-  etag?: string
-  partNumber?: number
-  partSize?: number
-  uploadUrl?: string
+  etag?: string;
+  partNumber?: number;
+  partSize?: number;
+  uploadUrl?: string;
   static names(): { [key: string]: string } {
     return {
       etag: 'etag',
@@ -3423,14 +3424,14 @@ export class UploadPartInfo extends $tea.Model {
 }
 
 export class UserAuthentication extends $tea.Model {
-  AuthenticationType: string
-  CreatedAt: number
-  Detail: string
-  DomainID: string
-  Identity: string
-  LastLoginTime: number
-  Status: string
-  UserID: string
+  AuthenticationType: string;
+  CreatedAt: number;
+  Detail: string;
+  DomainID: string;
+  Identity: string;
+  LastLoginTime: number;
+  Status: string;
+  UserID: string;
   static names(): { [key: string]: string } {
     return {
       AuthenticationType: 'AuthenticationType',
@@ -3463,13 +3464,13 @@ export class UserAuthentication extends $tea.Model {
 }
 
 export class AccessTokenResponse extends $tea.Model {
-  requestId?: string
-  accessToken: string
-  expiresTime?: string
-  refreshToken?: string
-  role?: string
-  tokenType?: string
-  userId?: string
+  requestId?: string;
+  accessToken: string;
+  expiresTime?: string;
+  refreshToken?: string;
+  role?: string;
+  tokenType?: string;
+  userId?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -3500,19 +3501,19 @@ export class AccessTokenResponse extends $tea.Model {
 }
 
 export class AddStoreResponse extends $tea.Model {
-  requestId?: string
-  accelerateEndpoint?: string
-  basePath?: string
-  bucket: string
-  customizedEndpoint?: string
-  domainId: string
-  endpoint: string
-  internalEndpoint?: string
-  ownership: string
-  policy: string
-  roleArn?: string
-  storeId: string
-  type: string
+  requestId?: string;
+  accelerateEndpoint?: string;
+  basePath?: string;
+  bucket: string;
+  customizedEndpoint?: string;
+  domainId: string;
+  endpoint: string;
+  internalEndpoint?: string;
+  ownership: string;
+  policy: string;
+  roleArn?: string;
+  storeId: string;
+  type: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -3571,37 +3572,37 @@ export class AdminListStoresRequest extends $tea.Model {
 }
 
 export class BaseDomainResponse extends $tea.Model {
-  requestId?: string
-  authAlipayAppId?: string
-  authAlipayEnable?: boolean
-  authAlipayPrivateKey?: string
-  authConfig?: object
-  authDingdingAppId?: string
-  authDingdingAppSecret?: string
-  authDingdingEnable?: boolean
-  authEndpointEnable?: boolean
-  authRamAppId?: string
-  authRamAppSecret?: string
-  authRamEnable?: boolean
-  createdAt?: string
-  dataHashName?: string
-  description?: string
-  domainId?: string
-  domainName?: string
-  eventFilenameMatches?: string
-  eventMnsEndpoint?: string
-  eventMnsTopic?: string
-  eventNames?: string[]
-  eventRoleArn?: string
-  initDriveEnable?: boolean
-  initDriveSize?: number
-  initDriveStoreId?: string
-  pathType?: string
-  publishedAppAccessStrategy?: AppAccessStrategy
-  sharable?: boolean
-  storeLevel?: string
-  storeRegionList?: string[]
-  updatedAt?: string
+  requestId?: string;
+  authAlipayAppId?: string;
+  authAlipayEnable?: boolean;
+  authAlipayPrivateKey?: string;
+  authConfig?: object;
+  authDingdingAppId?: string;
+  authDingdingAppSecret?: string;
+  authDingdingEnable?: boolean;
+  authEndpointEnable?: boolean;
+  authRamAppId?: string;
+  authRamAppSecret?: string;
+  authRamEnable?: boolean;
+  createdAt?: string;
+  dataHashName?: string;
+  description?: string;
+  domainId?: string;
+  domainName?: string;
+  eventFilenameMatches?: string;
+  eventMnsEndpoint?: string;
+  eventMnsTopic?: string;
+  eventNames?: string[];
+  eventRoleArn?: string;
+  initDriveEnable?: boolean;
+  initDriveSize?: number;
+  initDriveStoreId?: string;
+  pathType?: string;
+  publishedAppAccessStrategy?: AppAccessStrategy;
+  sharable?: boolean;
+  storeLevel?: string;
+  storeRegionList?: string[];
+  updatedAt?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -3680,37 +3681,37 @@ export class BaseDomainResponse extends $tea.Model {
 }
 
 export class CreateDomainResponse extends $tea.Model {
-  requestId?: string
-  authAlipayAppId?: string
-  authAlipayEnable?: boolean
-  authAlipayPrivateKey?: string
-  authConfig?: object
-  authDingdingAppId?: string
-  authDingdingAppSecret?: string
-  authDingdingEnable?: boolean
-  authEndpointEnable?: boolean
-  authRamAppId?: string
-  authRamAppSecret?: string
-  authRamEnable?: boolean
-  createdAt?: string
-  dataHashName?: string
-  description?: string
-  domainId?: string
-  domainName?: string
-  eventFilenameMatches?: string
-  eventMnsEndpoint?: string
-  eventMnsTopic?: string
-  eventNames?: string[]
-  eventRoleArn?: string
-  initDriveEnable?: boolean
-  initDriveSize?: number
-  initDriveStoreId?: string
-  pathType?: string
-  publishedAppAccessStrategy?: AppAccessStrategy
-  sharable?: boolean
-  storeLevel?: string
-  storeRegionList?: string[]
-  updatedAt?: string
+  requestId?: string;
+  authAlipayAppId?: string;
+  authAlipayEnable?: boolean;
+  authAlipayPrivateKey?: string;
+  authConfig?: object;
+  authDingdingAppId?: string;
+  authDingdingAppSecret?: string;
+  authDingdingEnable?: boolean;
+  authEndpointEnable?: boolean;
+  authRamAppId?: string;
+  authRamAppSecret?: string;
+  authRamEnable?: boolean;
+  createdAt?: string;
+  dataHashName?: string;
+  description?: string;
+  domainId?: string;
+  domainName?: string;
+  eventFilenameMatches?: string;
+  eventMnsEndpoint?: string;
+  eventMnsTopic?: string;
+  eventNames?: string[];
+  eventRoleArn?: string;
+  initDriveEnable?: boolean;
+  initDriveSize?: number;
+  initDriveStoreId?: string;
+  pathType?: string;
+  publishedAppAccessStrategy?: AppAccessStrategy;
+  sharable?: boolean;
+  storeLevel?: string;
+  storeRegionList?: string[];
+  updatedAt?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -3789,21 +3790,21 @@ export class CreateDomainResponse extends $tea.Model {
 }
 
 export class GetAppResponse extends $tea.Model {
-  requestId?: string
-  aliOwnerId: string
-  appId: string
-  appName: string
-  appSecret: string
-  createdAt: string
-  description: string
-  logo: string
-  provider: string
-  redirectUri: string
-  scope: string[]
-  screenshots: string[]
-  stage: string
-  type: string
-  updatedAt: string
+  requestId?: string;
+  aliOwnerId: string;
+  appId: string;
+  appName: string;
+  appSecret: string;
+  createdAt: string;
+  description: string;
+  logo: string;
+  provider: string;
+  redirectUri: string;
+  scope: string[];
+  screenshots: string[];
+  stage: string;
+  type: string;
+  updatedAt: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -3850,37 +3851,37 @@ export class GetAppResponse extends $tea.Model {
 }
 
 export class GetDomainResponse extends $tea.Model {
-  requestId?: string
-  authAlipayAppId?: string
-  authAlipayEnable?: boolean
-  authAlipayPrivateKey?: string
-  authConfig?: object
-  authDingdingAppId?: string
-  authDingdingAppSecret?: string
-  authDingdingEnable?: boolean
-  authEndpointEnable?: boolean
-  authRamAppId?: string
-  authRamAppSecret?: string
-  authRamEnable?: boolean
-  createdAt?: string
-  dataHashName?: string
-  description?: string
-  domainId?: string
-  domainName?: string
-  eventFilenameMatches?: string
-  eventMnsEndpoint?: string
-  eventMnsTopic?: string
-  eventNames?: string[]
-  eventRoleArn?: string
-  initDriveEnable?: boolean
-  initDriveSize?: number
-  initDriveStoreId?: string
-  pathType?: string
-  publishedAppAccessStrategy?: AppAccessStrategy
-  sharable?: boolean
-  storeLevel?: string
-  storeRegionList?: string[]
-  updatedAt?: string
+  requestId?: string;
+  authAlipayAppId?: string;
+  authAlipayEnable?: boolean;
+  authAlipayPrivateKey?: string;
+  authConfig?: object;
+  authDingdingAppId?: string;
+  authDingdingAppSecret?: string;
+  authDingdingEnable?: boolean;
+  authEndpointEnable?: boolean;
+  authRamAppId?: string;
+  authRamAppSecret?: string;
+  authRamEnable?: boolean;
+  createdAt?: string;
+  dataHashName?: string;
+  description?: string;
+  domainId?: string;
+  domainName?: string;
+  eventFilenameMatches?: string;
+  eventMnsEndpoint?: string;
+  eventMnsTopic?: string;
+  eventNames?: string[];
+  eventRoleArn?: string;
+  initDriveEnable?: boolean;
+  initDriveSize?: number;
+  initDriveStoreId?: string;
+  pathType?: string;
+  publishedAppAccessStrategy?: AppAccessStrategy;
+  sharable?: boolean;
+  storeLevel?: string;
+  storeRegionList?: string[];
+  updatedAt?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -3959,8 +3960,8 @@ export class GetDomainResponse extends $tea.Model {
 }
 
 export class GetUserAccessTokenRequest extends $tea.Model {
-  role?: string
-  userId: string
+  role?: string;
+  userId: string;
   static names(): { [key: string]: string } {
     return {
       role: 'role',
@@ -3981,9 +3982,9 @@ export class GetUserAccessTokenRequest extends $tea.Model {
 }
 
 export class ListAppsResponse extends $tea.Model {
-  requestId?: string
-  items: GetAppResponse[]
-  nextMarker?: string
+  requestId?: string;
+  items: GetAppResponse[];
+  nextMarker?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -4006,9 +4007,9 @@ export class ListAppsResponse extends $tea.Model {
 }
 
 export class ListDomainsResponse extends $tea.Model {
-  requestId?: string
-  items?: BaseDomainResponse[]
-  nextMarker?: string
+  requestId?: string;
+  items?: BaseDomainResponse[];
+  nextMarker?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -4031,8 +4032,8 @@ export class ListDomainsResponse extends $tea.Model {
 }
 
 export class ListStoresResponse extends $tea.Model {
-  requestId?: string
-  items: Store[]
+  requestId?: string;
+  items: Store[];
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -4053,17 +4054,17 @@ export class ListStoresResponse extends $tea.Model {
 }
 
 export class Store extends $tea.Model {
-  accelerateEndpoint?: string
-  basePath?: string
-  bucket: string
-  customizedEndpoint?: string
-  endpoint: string
-  internalEndpoint?: string
-  ownership: string
-  policy: string
-  roleArn?: string
-  storeId: string
-  type: string
+  accelerateEndpoint?: string;
+  basePath?: string;
+  bucket: string;
+  customizedEndpoint?: string;
+  endpoint: string;
+  internalEndpoint?: string;
+  ownership: string;
+  policy: string;
+  roleArn?: string;
+  storeId: string;
+  type: string;
   static names(): { [key: string]: string } {
     return {
       accelerateEndpoint: 'accelerate_endpoint',
@@ -4102,37 +4103,37 @@ export class Store extends $tea.Model {
 }
 
 export class UpdateDomainResponse extends $tea.Model {
-  requestId?: string
-  authAlipayAppId?: string
-  authAlipayEnable?: boolean
-  authAlipayPrivateKey?: string
-  authConfig?: object
-  authDingdingAppId?: string
-  authDingdingAppSecret?: string
-  authDingdingEnable?: boolean
-  authEndpointEnable?: boolean
-  authRamAppId?: string
-  authRamAppSecret?: string
-  authRamEnable?: boolean
-  createdAt?: string
-  dataHashName?: string
-  description?: string
-  domainId?: string
-  domainName?: string
-  eventFilenameMatches?: string
-  eventMnsEndpoint?: string
-  eventMnsTopic?: string
-  eventNames?: string[]
-  eventRoleArn?: string
-  initDriveEnable?: boolean
-  initDriveSize?: number
-  initDriveStoreId?: string
-  pathType?: string
-  publishedAppAccessStrategy?: AppAccessStrategy
-  sharable?: boolean
-  storeLevel?: string
-  storeRegionList?: string[]
-  updatedAt?: string
+  requestId?: string;
+  authAlipayAppId?: string;
+  authAlipayEnable?: boolean;
+  authAlipayPrivateKey?: string;
+  authConfig?: object;
+  authDingdingAppId?: string;
+  authDingdingAppSecret?: string;
+  authDingdingEnable?: boolean;
+  authEndpointEnable?: boolean;
+  authRamAppId?: string;
+  authRamAppSecret?: string;
+  authRamEnable?: boolean;
+  createdAt?: string;
+  dataHashName?: string;
+  description?: string;
+  domainId?: string;
+  domainName?: string;
+  eventFilenameMatches?: string;
+  eventMnsEndpoint?: string;
+  eventMnsTopic?: string;
+  eventNames?: string[];
+  eventRoleArn?: string;
+  initDriveEnable?: boolean;
+  initDriveSize?: number;
+  initDriveStoreId?: string;
+  pathType?: string;
+  publishedAppAccessStrategy?: AppAccessStrategy;
+  sharable?: boolean;
+  storeLevel?: string;
+  storeRegionList?: string[];
+  updatedAt?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -4211,9 +4212,9 @@ export class UpdateDomainResponse extends $tea.Model {
 }
 
 export class BaseCompleteFileRequest extends $tea.Model {
-  driveId: string
-  partInfoList?: UploadPartInfo[]
-  uploadId?: string
+  driveId: string;
+  partInfoList?: UploadPartInfo[];
+  uploadId?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -4236,12 +4237,12 @@ export class BaseCompleteFileRequest extends $tea.Model {
 }
 
 export class BaseCreateFileRequest extends $tea.Model {
-  contentMd5: string
-  contentType: string
-  name: string
-  partInfoList?: UploadPartInfo[]
-  size: number
-  type: string
+  contentMd5: string;
+  contentType: string;
+  name: string;
+  partInfoList?: UploadPartInfo[];
+  size: number;
+  type: string;
   static names(): { [key: string]: string } {
     return {
       contentMd5: 'content_md5',
@@ -4270,10 +4271,10 @@ export class BaseCreateFileRequest extends $tea.Model {
 }
 
 export class BaseGetUploadUrlRequest extends $tea.Model {
-  contentMd5?: string
-  driveId: string
-  partInfoList?: UploadPartInfo[]
-  uploadId: string
+  contentMd5?: string;
+  driveId: string;
+  partInfoList?: UploadPartInfo[];
+  uploadId: string;
   static names(): { [key: string]: string } {
     return {
       contentMd5: 'content_md5',
@@ -4298,11 +4299,11 @@ export class BaseGetUploadUrlRequest extends $tea.Model {
 }
 
 export class BaseListFileRequest extends $tea.Model {
-  driveId: string
-  imageThumbnailProcess?: string
-  imageUrlProcess?: string
-  limit?: number
-  marker?: string
+  driveId: string;
+  imageThumbnailProcess?: string;
+  imageUrlProcess?: string;
+  limit?: number;
+  marker?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -4329,9 +4330,9 @@ export class BaseListFileRequest extends $tea.Model {
 }
 
 export class BaseMoveFileRequest extends $tea.Model {
-  driveId: string
-  newName?: string
-  overwrite?: boolean
+  driveId: string;
+  newName?: string;
+  overwrite?: boolean;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -4354,11 +4355,11 @@ export class BaseMoveFileRequest extends $tea.Model {
 }
 
 export class BatchSubRequest extends $tea.Model {
-  body?: object
-  headers?: object
-  id: string
-  method: string
-  url: string
+  body?: object;
+  headers?: object;
+  id: string;
+  method: string;
+  url: string;
   static names(): { [key: string]: string } {
     return {
       body: 'body',
@@ -4385,8 +4386,8 @@ export class BatchSubRequest extends $tea.Model {
 }
 
 export class CCPBatchRequest extends $tea.Model {
-  requests: BatchSubRequest[]
-  resource: string
+  requests: BatchSubRequest[];
+  resource: string;
   static names(): { [key: string]: string } {
     return {
       requests: 'requests',
@@ -4407,10 +4408,10 @@ export class CCPBatchRequest extends $tea.Model {
 }
 
 export class CCPCompleteFileRequest extends $tea.Model {
-  driveId?: string
-  partInfoList?: UploadPartInfo[]
-  uploadId?: string
-  fileId?: string
+  driveId?: string;
+  partInfoList?: UploadPartInfo[];
+  uploadId?: string;
+  fileId?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -4435,12 +4436,12 @@ export class CCPCompleteFileRequest extends $tea.Model {
 }
 
 export class CCPCopyFileRequest extends $tea.Model {
-  autoRename?: boolean
-  driveId: string
-  fileId: string
-  newName?: string
-  toDriveId?: string
-  toParentFileId: string
+  autoRename?: boolean;
+  driveId: string;
+  fileId: string;
+  newName?: string;
+  toDriveId?: string;
+  toParentFileId: string;
   static names(): { [key: string]: string } {
     return {
       autoRename: 'auto_rename',
@@ -4469,23 +4470,23 @@ export class CCPCopyFileRequest extends $tea.Model {
 }
 
 export class CCPCreateFileRequest extends $tea.Model {
-  contentMd5?: string
-  contentType?: string
-  name?: string
-  partInfoList?: UploadPartInfo[]
-  size?: number
-  type?: string
-  autoRename?: boolean
-  contentHash?: string
-  contentHashName?: string
-  description?: string
-  driveId?: string
-  fileId?: string
-  hidden?: boolean
-  labels?: string[]
-  meta?: string
-  parentFileId?: string
-  preHash?: string
+  contentMd5?: string;
+  contentType?: string;
+  name?: string;
+  partInfoList?: UploadPartInfo[];
+  size?: number;
+  type?: string;
+  autoRename?: boolean;
+  contentHash?: string;
+  contentHashName?: string;
+  description?: string;
+  driveId?: string;
+  fileId?: string;
+  hidden?: boolean;
+  labels?: string[];
+  meta?: string;
+  parentFileId?: string;
+  preHash?: string;
   static names(): { [key: string]: string } {
     return {
       contentMd5: 'content_md5',
@@ -4536,9 +4537,9 @@ export class CCPCreateFileRequest extends $tea.Model {
 }
 
 export class CCPDeleteFileRequest extends $tea.Model {
-  driveId: string
-  fileId: string
-  permanently?: boolean
+  driveId: string;
+  fileId: string;
+  permanently?: boolean;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -4561,8 +4562,8 @@ export class CCPDeleteFileRequest extends $tea.Model {
 }
 
 export class CCPDeleteFilesRequest extends $tea.Model {
-  driveId: string
-  fileIdList: string[]
+  driveId: string;
+  fileIdList: string[];
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -4583,7 +4584,7 @@ export class CCPDeleteFilesRequest extends $tea.Model {
 }
 
 export class CCPGetAsyncTaskRequest extends $tea.Model {
-  asyncTaskId?: string
+  asyncTaskId?: string;
   static names(): { [key: string]: string } {
     return {
       asyncTaskId: 'async_task_id',
@@ -4602,10 +4603,10 @@ export class CCPGetAsyncTaskRequest extends $tea.Model {
 }
 
 export class CCPGetDownloadUrlRequest extends $tea.Model {
-  driveId: string
-  expireSec?: number
-  fileId: string
-  fileName: string
+  driveId: string;
+  expireSec?: number;
+  fileId: string;
+  fileName: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -4630,10 +4631,10 @@ export class CCPGetDownloadUrlRequest extends $tea.Model {
 }
 
 export class CCPGetFileRequest extends $tea.Model {
-  driveId: string
-  fileId: string
-  imageThumbnailProcess?: string
-  imageUrlProcess?: string
+  driveId: string;
+  fileId: string;
+  imageThumbnailProcess?: string;
+  imageUrlProcess?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -4658,11 +4659,11 @@ export class CCPGetFileRequest extends $tea.Model {
 }
 
 export class CCPGetUploadUrlRequest extends $tea.Model {
-  contentMd5?: string
-  driveId?: string
-  partInfoList?: UploadPartInfo[]
-  uploadId?: string
-  fileId?: string
+  contentMd5?: string;
+  driveId?: string;
+  partInfoList?: UploadPartInfo[];
+  uploadId?: string;
+  fileId?: string;
   static names(): { [key: string]: string } {
     return {
       contentMd5: 'content_md5',
@@ -4689,20 +4690,20 @@ export class CCPGetUploadUrlRequest extends $tea.Model {
 }
 
 export class CCPListFileRequest extends $tea.Model {
-  driveId?: string
-  imageThumbnailProcess?: string
-  imageUrlProcess?: string
-  limit?: number
-  marker?: string
-  Starred?: boolean
-  category?: string
-  customIndexKey?: string
-  orderDirection?: string
-  status?: string
-  type?: string
-  all?: boolean
-  orderBy?: string
-  parentFileId?: string
+  driveId?: string;
+  imageThumbnailProcess?: string;
+  imageUrlProcess?: string;
+  limit?: number;
+  marker?: string;
+  Starred?: boolean;
+  category?: string;
+  customIndexKey?: string;
+  orderDirection?: string;
+  status?: string;
+  type?: string;
+  all?: boolean;
+  orderBy?: string;
+  parentFileId?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -4747,11 +4748,11 @@ export class CCPListFileRequest extends $tea.Model {
 }
 
 export class CCPListUploadedPartRequest extends $tea.Model {
-  driveId: string
-  fileId: string
-  limit: number
-  partNumberMarker?: number
-  uploadId?: string
+  driveId: string;
+  fileId: string;
+  limit: number;
+  partNumberMarker?: number;
+  uploadId?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -4778,11 +4779,11 @@ export class CCPListUploadedPartRequest extends $tea.Model {
 }
 
 export class CCPMoveFileRequest extends $tea.Model {
-  driveId?: string
-  newName?: string
-  overwrite?: boolean
-  fileId?: string
-  toParentFileId?: string
+  driveId?: string;
+  newName?: string;
+  overwrite?: boolean;
+  fileId?: string;
+  toParentFileId?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -4809,13 +4810,13 @@ export class CCPMoveFileRequest extends $tea.Model {
 }
 
 export class CCPSearchFileRequest extends $tea.Model {
-  driveId: string
-  imageThumbnailProcess?: string
-  imageUrlProcess?: string
-  limit?: number
-  marker?: string
-  orderBy?: string
-  query?: string
+  driveId: string;
+  imageThumbnailProcess?: string;
+  imageUrlProcess?: string;
+  limit?: number;
+  marker?: string;
+  orderBy?: string;
+  query?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -4846,15 +4847,15 @@ export class CCPSearchFileRequest extends $tea.Model {
 }
 
 export class CCPUpdateFileMetaRequest extends $tea.Model {
-  customIndexKey?: string
-  description?: string
-  driveId: string
-  fileId: string
-  hidden?: boolean
-  labels?: string[]
-  meta?: string
-  name?: string
-  starred?: boolean
+  customIndexKey?: string;
+  description?: string;
+  driveId: string;
+  fileId: string;
+  hidden?: boolean;
+  labels?: string[];
+  meta?: string;
+  name?: string;
+  starred?: boolean;
   static names(): { [key: string]: string } {
     return {
       customIndexKey: 'custom_index_key',
@@ -4889,12 +4890,12 @@ export class CCPUpdateFileMetaRequest extends $tea.Model {
 }
 
 export class CompleteFileRequest extends $tea.Model {
-  driveId: string
-  fileId: string
-  filePath?: string
-  partInfoList?: UploadPartInfo[]
-  shareId?: string
-  uploadId: string
+  driveId: string;
+  fileId: string;
+  filePath?: string;
+  partInfoList?: UploadPartInfo[];
+  shareId?: string;
+  uploadId: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -4923,14 +4924,14 @@ export class CompleteFileRequest extends $tea.Model {
 }
 
 export class CopyFileRequest extends $tea.Model {
-  driveId: string
-  fileId: string
-  filePath?: string
-  newName: string
-  overwrite?: boolean
-  shareId?: string
-  toParentFileId: string
-  toParentFilePath?: string
+  driveId: string;
+  fileId: string;
+  filePath?: string;
+  newName: string;
+  overwrite?: boolean;
+  shareId?: string;
+  toParentFileId: string;
+  toParentFilePath?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -4963,15 +4964,15 @@ export class CopyFileRequest extends $tea.Model {
 }
 
 export class CreateDriveRequest extends $tea.Model {
-  default?: boolean
-  description?: string
-  driveName: string
-  driveType?: string
-  owner: string
-  relativePath?: string
-  status?: string
-  storeId?: string
-  totalSize?: number
+  default?: boolean;
+  description?: string;
+  driveName: string;
+  driveType?: string;
+  owner: string;
+  relativePath?: string;
+  status?: string;
+  storeId?: string;
+  totalSize?: number;
   static names(): { [key: string]: string } {
     return {
       default: 'default',
@@ -5006,23 +5007,23 @@ export class CreateDriveRequest extends $tea.Model {
 }
 
 export class CreateFileRequest extends $tea.Model {
-  contentHash?: string
-  contentHashName?: string
-  contentMd5?: string
-  contentType: string
-  description?: string
-  driveId: string
-  hidden?: boolean
-  meta?: string
-  name: string
-  parentFileId: string
-  parentFilePath?: string
-  partInfoList?: UploadPartInfo[]
-  preHash?: string
-  shareId?: string
-  size: number
-  tags?: object
-  type: string
+  contentHash?: string;
+  contentHashName?: string;
+  contentMd5?: string;
+  contentType: string;
+  description?: string;
+  driveId: string;
+  hidden?: boolean;
+  meta?: string;
+  name: string;
+  parentFileId: string;
+  parentFilePath?: string;
+  partInfoList?: UploadPartInfo[];
+  preHash?: string;
+  shareId?: string;
+  size: number;
+  tags?: object;
+  type: string;
   static names(): { [key: string]: string } {
     return {
       contentHash: 'content_hash',
@@ -5073,14 +5074,14 @@ export class CreateFileRequest extends $tea.Model {
 }
 
 export class CreateShareRequest extends $tea.Model {
-  description?: string
-  driveId: string
-  expiration?: string
-  owner: string
-  permissions?: string[]
-  shareFilePath: string
-  shareName?: string
-  status?: string
+  description?: string;
+  driveId: string;
+  expiration?: string;
+  owner: string;
+  permissions?: string[];
+  shareFilePath: string;
+  shareName?: string;
+  status?: string;
   static names(): { [key: string]: string } {
     return {
       description: 'description',
@@ -5113,7 +5114,7 @@ export class CreateShareRequest extends $tea.Model {
 }
 
 export class DeleteDriveRequest extends $tea.Model {
-  driveId: string
+  driveId: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -5132,11 +5133,11 @@ export class DeleteDriveRequest extends $tea.Model {
 }
 
 export class DeleteFileRequest extends $tea.Model {
-  driveId: string
-  fileId: string
-  filePath?: string
-  permanently?: boolean
-  shareId?: string
+  driveId: string;
+  fileId: string;
+  filePath?: string;
+  permanently?: boolean;
+  shareId?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -5163,7 +5164,7 @@ export class DeleteFileRequest extends $tea.Model {
 }
 
 export class DeleteShareRequest extends $tea.Model {
-  shareId: string
+  shareId: string;
   static names(): { [key: string]: string } {
     return {
       shareId: 'share_id',
@@ -5182,10 +5183,10 @@ export class DeleteShareRequest extends $tea.Model {
 }
 
 export class DownloadRequest extends $tea.Model {
-  DriveID: string
-  FileID: string
-  ImageProcess?: string
-  ShareID?: string
+  DriveID: string;
+  FileID: string;
+  ImageProcess?: string;
+  ShareID?: string;
   static names(): { [key: string]: string } {
     return {
       DriveID: 'DriveID',
@@ -5210,7 +5211,7 @@ export class DownloadRequest extends $tea.Model {
 }
 
 export class GetAsyncTaskRequest extends $tea.Model {
-  asyncTaskId?: string
+  asyncTaskId?: string;
   static names(): { [key: string]: string } {
     return {
       asyncTaskId: 'async_task_id',
@@ -5229,7 +5230,7 @@ export class GetAsyncTaskRequest extends $tea.Model {
 }
 
 export class GetDefaultDriveRequest extends $tea.Model {
-  userId?: string
+  userId?: string;
   static names(): { [key: string]: string } {
     return {
       userId: 'user_id',
@@ -5248,12 +5249,12 @@ export class GetDefaultDriveRequest extends $tea.Model {
 }
 
 export class GetDownloadUrlRequest extends $tea.Model {
-  driveId: string
-  expireSec?: number
-  fileId: string
-  fileName?: string
-  filePath?: string
-  shareId?: string
+  driveId: string;
+  expireSec?: number;
+  fileId: string;
+  fileName?: string;
+  filePath?: string;
+  shareId?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -5282,7 +5283,7 @@ export class GetDownloadUrlRequest extends $tea.Model {
 }
 
 export class GetDriveRequest extends $tea.Model {
-  driveId: string
+  driveId: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -5301,12 +5302,12 @@ export class GetDriveRequest extends $tea.Model {
 }
 
 export class GetFileRequest extends $tea.Model {
-  driveId: string
-  fileId: string
-  filePath?: string
-  imageThumbnailProcess?: string
-  imageUrlProcess?: string
-  shareId?: string
+  driveId: string;
+  fileId: string;
+  filePath?: string;
+  imageThumbnailProcess?: string;
+  imageUrlProcess?: string;
+  shareId?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -5335,7 +5336,7 @@ export class GetFileRequest extends $tea.Model {
 }
 
 export class GetShareRequest extends $tea.Model {
-  shareId?: string
+  shareId?: string;
   static names(): { [key: string]: string } {
     return {
       shareId: 'share_id',
@@ -5354,13 +5355,13 @@ export class GetShareRequest extends $tea.Model {
 }
 
 export class GetUploadUrlRequest extends $tea.Model {
-  contentMd5?: string
-  driveId: string
-  fileId: string
-  filePath?: string
-  partInfoList?: UploadPartInfo[]
-  shareId?: string
-  uploadId: string
+  contentMd5?: string;
+  driveId: string;
+  fileId: string;
+  filePath?: string;
+  partInfoList?: UploadPartInfo[];
+  shareId?: string;
+  uploadId: string;
   static names(): { [key: string]: string } {
     return {
       contentMd5: 'content_md5',
@@ -5391,9 +5392,9 @@ export class GetUploadUrlRequest extends $tea.Model {
 }
 
 export class ListDriveRequest extends $tea.Model {
-  limit?: number
-  marker?: string
-  owner?: string
+  limit?: number;
+  marker?: string;
+  owner?: string;
   static names(): { [key: string]: string } {
     return {
       limit: 'limit',
@@ -5416,16 +5417,16 @@ export class ListDriveRequest extends $tea.Model {
 }
 
 export class ListFileRequest extends $tea.Model {
-  all?: boolean
-  driveId: string
-  imageThumbnailProcess?: string
-  imageUrlProcess?: string
-  limit?: number
-  marker?: string
-  parentFileId: string
-  parentFilePath?: string
-  shareId?: string
-  status?: string
+  all?: boolean;
+  driveId: string;
+  imageThumbnailProcess?: string;
+  imageUrlProcess?: string;
+  limit?: number;
+  marker?: string;
+  parentFileId: string;
+  parentFilePath?: string;
+  shareId?: string;
+  status?: string;
   static names(): { [key: string]: string } {
     return {
       all: 'all',
@@ -5462,8 +5463,8 @@ export class ListFileRequest extends $tea.Model {
 }
 
 export class ListMyDriveRequest extends $tea.Model {
-  limit?: number
-  marker?: string
+  limit?: number;
+  marker?: string;
   static names(): { [key: string]: string } {
     return {
       limit: 'limit',
@@ -5484,10 +5485,10 @@ export class ListMyDriveRequest extends $tea.Model {
 }
 
 export class ListShareRequest extends $tea.Model {
-  creator: string
-  limit: number
-  marker?: string
-  owner: string
+  creator: string;
+  limit: number;
+  marker?: string;
+  owner: string;
   static names(): { [key: string]: string } {
     return {
       creator: 'creator',
@@ -5512,11 +5513,11 @@ export class ListShareRequest extends $tea.Model {
 }
 
 export class ListStoreFileRequest extends $tea.Model {
-  limit?: number
-  marker?: string
-  parentFilePath?: string
-  storeId?: string
-  type?: string
+  limit?: number;
+  marker?: string;
+  parentFilePath?: string;
+  storeId?: string;
+  type?: string;
   static names(): { [key: string]: string } {
     return {
       limit: 'limit',
@@ -5543,7 +5544,7 @@ export class ListStoreFileRequest extends $tea.Model {
 }
 
 export class ListStoreRequest extends $tea.Model {
-  domainId?: string
+  domainId?: string;
   static names(): { [key: string]: string } {
     return {
       domainId: 'domain_id',
@@ -5562,11 +5563,11 @@ export class ListStoreRequest extends $tea.Model {
 }
 
 export class OSSCompleteFileRequest extends $tea.Model {
-  driveId?: string
-  partInfoList?: UploadPartInfo[]
-  uploadId?: string
-  filePath?: string
-  shareId?: string
+  driveId?: string;
+  partInfoList?: UploadPartInfo[];
+  uploadId?: string;
+  filePath?: string;
+  shareId?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -5593,14 +5594,14 @@ export class OSSCompleteFileRequest extends $tea.Model {
 }
 
 export class OSSCopyFileRequest extends $tea.Model {
-  driveId?: string
-  filePath?: string
-  newName?: string
-  overwrite?: boolean
-  shareId?: string
-  toDriveId: string
-  toParentFilePath: string
-  toShareId?: string
+  driveId?: string;
+  filePath?: string;
+  newName?: string;
+  overwrite?: boolean;
+  shareId?: string;
+  toDriveId: string;
+  toParentFilePath: string;
+  toShareId?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -5633,15 +5634,15 @@ export class OSSCopyFileRequest extends $tea.Model {
 }
 
 export class OSSCreateFileRequest extends $tea.Model {
-  contentMd5?: string
-  contentType?: string
-  name?: string
-  partInfoList?: UploadPartInfo[]
-  size?: number
-  type?: string
-  driveId?: string
-  parentFilePath?: string
-  shareId?: string
+  contentMd5?: string;
+  contentType?: string;
+  name?: string;
+  partInfoList?: UploadPartInfo[];
+  size?: number;
+  type?: string;
+  driveId?: string;
+  parentFilePath?: string;
+  shareId?: string;
   static names(): { [key: string]: string } {
     return {
       contentMd5: 'content_md5',
@@ -5676,10 +5677,10 @@ export class OSSCreateFileRequest extends $tea.Model {
 }
 
 export class OSSDeleteFileRequest extends $tea.Model {
-  driveId: string
-  filePath: string
-  permanently?: boolean
-  shareId?: string
+  driveId: string;
+  filePath: string;
+  permanently?: boolean;
+  shareId?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -5704,11 +5705,11 @@ export class OSSDeleteFileRequest extends $tea.Model {
 }
 
 export class OSSGetDownloadUrlRequest extends $tea.Model {
-  driveId: string
-  expireSec?: number
-  fileName?: string
-  filePath: string
-  shareId: string
+  driveId: string;
+  expireSec?: number;
+  fileName?: string;
+  filePath: string;
+  shareId: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -5735,11 +5736,11 @@ export class OSSGetDownloadUrlRequest extends $tea.Model {
 }
 
 export class OSSGetFileRequest extends $tea.Model {
-  driveId: string
-  filePath: string
-  imageThumbnailProcess?: string
-  imageUrlProcess?: string
-  shareId?: string
+  driveId: string;
+  filePath: string;
+  imageThumbnailProcess?: string;
+  imageUrlProcess?: string;
+  shareId?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -5766,12 +5767,12 @@ export class OSSGetFileRequest extends $tea.Model {
 }
 
 export class OSSGetUploadUrlRequest extends $tea.Model {
-  contentMd5?: string
-  driveId?: string
-  partInfoList?: UploadPartInfo[]
-  uploadId?: string
-  filePath?: string
-  shareId?: string
+  contentMd5?: string;
+  driveId?: string;
+  partInfoList?: UploadPartInfo[];
+  uploadId?: string;
+  filePath?: string;
+  shareId?: string;
   static names(): { [key: string]: string } {
     return {
       contentMd5: 'content_md5',
@@ -5800,13 +5801,13 @@ export class OSSGetUploadUrlRequest extends $tea.Model {
 }
 
 export class OSSListFileRequest extends $tea.Model {
-  driveId: string
-  imageThumbnailProcess?: string
-  imageUrlProcess?: string
-  limit?: number
-  marker?: string
-  parentFilePath: string
-  shareId: string
+  driveId: string;
+  imageThumbnailProcess?: string;
+  imageUrlProcess?: string;
+  limit?: number;
+  marker?: string;
+  parentFilePath: string;
+  shareId: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -5837,12 +5838,12 @@ export class OSSListFileRequest extends $tea.Model {
 }
 
 export class OSSListUploadedPartRequest extends $tea.Model {
-  driveId: string
-  filePath: string
-  limit: number
-  partNumberMarker?: number
-  shareId?: string
-  uploadId?: string
+  driveId: string;
+  filePath: string;
+  limit: number;
+  partNumberMarker?: number;
+  shareId?: string;
+  uploadId?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -5871,12 +5872,12 @@ export class OSSListUploadedPartRequest extends $tea.Model {
 }
 
 export class OSSMoveFileRequest extends $tea.Model {
-  driveId: string
-  filePath?: string
-  newName: string
-  overwrite?: boolean
-  shareId?: string
-  toParentFilePath?: string
+  driveId: string;
+  filePath?: string;
+  newName: string;
+  overwrite?: boolean;
+  shareId?: string;
+  toParentFilePath?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -5905,7 +5906,7 @@ export class OSSMoveFileRequest extends $tea.Model {
 }
 
 export class UCGetObjectInfoByObjectKeyRequest extends $tea.Model {
-  objectKey?: string
+  objectKey?: string;
   static names(): { [key: string]: string } {
     return {
       objectKey: 'object_key',
@@ -5924,7 +5925,7 @@ export class UCGetObjectInfoByObjectKeyRequest extends $tea.Model {
 }
 
 export class UCGetObjectInfoBySha1Request extends $tea.Model {
-  sha1?: string
+  sha1?: string;
   static names(): { [key: string]: string } {
     return {
       sha1: 'sha1',
@@ -5943,11 +5944,11 @@ export class UCGetObjectInfoBySha1Request extends $tea.Model {
 }
 
 export class UpdateDriveRequest extends $tea.Model {
-  description?: string
-  driveId: string
-  driveName?: string
-  status?: string
-  totalSize?: number
+  description?: string;
+  driveId: string;
+  driveName?: string;
+  status?: string;
+  totalSize?: number;
   static names(): { [key: string]: string } {
     return {
       description: 'description',
@@ -5974,15 +5975,15 @@ export class UpdateDriveRequest extends $tea.Model {
 }
 
 export class UpdateFileMetaRequest extends $tea.Model {
-  description?: string
-  driveId: string
-  fileId: string
-  hidden?: boolean
-  meta?: string
-  name: string
-  shareId?: string
-  starred?: boolean
-  tags?: object
+  description?: string;
+  driveId: string;
+  fileId: string;
+  hidden?: boolean;
+  meta?: string;
+  name: string;
+  shareId?: string;
+  starred?: boolean;
+  tags?: object;
   static names(): { [key: string]: string } {
     return {
       description: 'description',
@@ -6017,12 +6018,12 @@ export class UpdateFileMetaRequest extends $tea.Model {
 }
 
 export class UpdateShareRequest extends $tea.Model {
-  description?: string
-  expiration?: string
-  permissions?: string[]
-  shareId: string
-  shareName?: string
-  status?: string
+  description?: string;
+  expiration?: string;
+  permissions?: string[];
+  shareId: string;
+  shareName?: string;
+  status?: string;
   static names(): { [key: string]: string } {
     return {
       description: 'description',
@@ -6051,20 +6052,20 @@ export class UpdateShareRequest extends $tea.Model {
 }
 
 export class BaseUserResponse extends $tea.Model {
-  requestId?: string
-  avatar?: string
-  createdAt?: number
-  defaultDriveId?: string
-  description?: string
-  domainId?: string
-  email?: string
-  nickName?: string
-  phone?: string
-  role?: string
-  status?: string
-  updatedAt?: number
-  userId?: string
-  userName?: string
+  requestId?: string;
+  avatar?: string;
+  createdAt?: number;
+  defaultDriveId?: string;
+  description?: string;
+  domainId?: string;
+  email?: string;
+  nickName?: string;
+  phone?: string;
+  role?: string;
+  status?: string;
+  updatedAt?: number;
+  userId?: string;
+  userName?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -6109,15 +6110,15 @@ export class BaseUserResponse extends $tea.Model {
 }
 
 export class CreateUserRequest extends $tea.Model {
-  avatar?: string
-  description?: string
-  email?: string
-  nickName?: string
-  phone?: string
-  role?: string
-  status?: string
-  userId: string
-  userName?: string
+  avatar?: string;
+  description?: string;
+  email?: string;
+  nickName?: string;
+  phone?: string;
+  role?: string;
+  status?: string;
+  userId: string;
+  userName?: string;
   static names(): { [key: string]: string } {
     return {
       avatar: 'avatar',
@@ -6152,20 +6153,20 @@ export class CreateUserRequest extends $tea.Model {
 }
 
 export class CreateUserResponse extends $tea.Model {
-  requestId?: string
-  avatar?: string
-  createdAt?: number
-  defaultDriveId?: string
-  description?: string
-  domainId?: string
-  email?: string
-  nickName?: string
-  phone?: string
-  role?: string
-  status?: string
-  updatedAt?: number
-  userId?: string
-  userName?: string
+  requestId?: string;
+  avatar?: string;
+  createdAt?: number;
+  defaultDriveId?: string;
+  description?: string;
+  domainId?: string;
+  email?: string;
+  nickName?: string;
+  phone?: string;
+  role?: string;
+  status?: string;
+  updatedAt?: number;
+  userId?: string;
+  userName?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -6210,7 +6211,7 @@ export class CreateUserResponse extends $tea.Model {
 }
 
 export class DeleteUserRequest extends $tea.Model {
-  userId: string
+  userId: string;
   static names(): { [key: string]: string } {
     return {
       userId: 'user_id',
@@ -6229,7 +6230,7 @@ export class DeleteUserRequest extends $tea.Model {
 }
 
 export class DeleteUserResponse extends $tea.Model {
-  requestId?: string
+  requestId?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -6248,7 +6249,7 @@ export class DeleteUserResponse extends $tea.Model {
 }
 
 export class GetUserRequest extends $tea.Model {
-  userId?: string
+  userId?: string;
   static names(): { [key: string]: string } {
     return {
       userId: 'user_id',
@@ -6267,20 +6268,20 @@ export class GetUserRequest extends $tea.Model {
 }
 
 export class GetUserResponse extends $tea.Model {
-  requestId?: string
-  avatar?: string
-  createdAt?: number
-  defaultDriveId?: string
-  description?: string
-  domainId?: string
-  email?: string
-  nickName?: string
-  phone?: string
-  role?: string
-  status?: string
-  updatedAt?: number
-  userId?: string
-  userName?: string
+  requestId?: string;
+  avatar?: string;
+  createdAt?: number;
+  defaultDriveId?: string;
+  description?: string;
+  domainId?: string;
+  email?: string;
+  nickName?: string;
+  phone?: string;
+  role?: string;
+  status?: string;
+  updatedAt?: number;
+  userId?: string;
+  userName?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -6325,8 +6326,8 @@ export class GetUserResponse extends $tea.Model {
 }
 
 export class ListUserRequest extends $tea.Model {
-  limit?: number
-  marker?: string
+  limit?: number;
+  marker?: string;
   static names(): { [key: string]: string } {
     return {
       limit: 'limit',
@@ -6347,9 +6348,9 @@ export class ListUserRequest extends $tea.Model {
 }
 
 export class ListUserResponse extends $tea.Model {
-  requestId?: string
-  items?: BaseUserResponse[]
-  nextMarker?: string
+  requestId?: string;
+  items?: BaseUserResponse[];
+  nextMarker?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -6372,14 +6373,14 @@ export class ListUserResponse extends $tea.Model {
 }
 
 export class SearchUserRequest extends $tea.Model {
-  email?: string
-  limit?: number
-  marker?: string
-  nickName?: string
-  phone?: string
-  role?: string
-  status?: string
-  userName?: string
+  email?: string;
+  limit?: number;
+  marker?: string;
+  nickName?: string;
+  phone?: string;
+  role?: string;
+  status?: string;
+  userName?: string;
   static names(): { [key: string]: string } {
     return {
       email: 'email',
@@ -6412,14 +6413,14 @@ export class SearchUserRequest extends $tea.Model {
 }
 
 export class UpdateUserRequest extends $tea.Model {
-  avatar?: string
-  description?: string
-  email?: string
-  nickName?: string
-  phone?: string
-  role?: string
-  status?: string
-  userId: string
+  avatar?: string;
+  description?: string;
+  email?: string;
+  nickName?: string;
+  phone?: string;
+  role?: string;
+  status?: string;
+  userId: string;
   static names(): { [key: string]: string } {
     return {
       avatar: 'avatar',
@@ -6452,20 +6453,20 @@ export class UpdateUserRequest extends $tea.Model {
 }
 
 export class UpdateUserResponse extends $tea.Model {
-  requestId?: string
-  avatar?: string
-  createdAt?: number
-  defaultDriveId?: string
-  description?: string
-  domainId?: string
-  email?: string
-  nickName?: string
-  phone?: string
-  role?: string
-  status?: string
-  updatedAt?: number
-  userId?: string
-  userName?: string
+  requestId?: string;
+  avatar?: string;
+  createdAt?: number;
+  defaultDriveId?: string;
+  description?: string;
+  domainId?: string;
+  email?: string;
+  nickName?: string;
+  phone?: string;
+  role?: string;
+  status?: string;
+  updatedAt?: number;
+  userId?: string;
+  userName?: string;
   static names(): { [key: string]: string } {
     return {
       requestId: 'requestId',
@@ -6518,24 +6519,24 @@ export default class Client extends BaseClient {
   async cancelLink(request: CancelLinkRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -6616,24 +6617,24 @@ export default class Client extends BaseClient {
   async confirmLink(request: ConfirmLinkRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -6714,24 +6715,24 @@ export default class Client extends BaseClient {
   async changePassword(request: DefaultChangePasswordRequest, runtime: RuntimeOptions): Promise<void>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -6809,24 +6810,24 @@ export default class Client extends BaseClient {
   async setPassword(request: DefaultSetPasswordRequest, runtime: RuntimeOptions): Promise<void>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -6904,24 +6905,24 @@ export default class Client extends BaseClient {
   async getAccessTokenByLinkInfo(request: GetAccessTokenByLinkInfoRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -7002,24 +7003,24 @@ export default class Client extends BaseClient {
   async getCaptcha(request: GetCaptchaRequest, runtime: RuntimeOptions): Promise<Captcha>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -7100,24 +7101,24 @@ export default class Client extends BaseClient {
   async getLinkInfo(request: GetByLinkInfoRequest, runtime: RuntimeOptions): Promise<LinkInfoResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -7198,24 +7199,24 @@ export default class Client extends BaseClient {
   async getLinkInfoByUserId(request: GetLinkInfoByUserIDRequest, runtime: RuntimeOptions): Promise<LinkInfoListResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -7296,24 +7297,24 @@ export default class Client extends BaseClient {
   async link(request: AccountLinkRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -7394,24 +7395,24 @@ export default class Client extends BaseClient {
   async checkExist(request: MobileCheckExistRequest, runtime: RuntimeOptions): Promise<MobileCheckExistResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -7492,24 +7493,24 @@ export default class Client extends BaseClient {
   async login(request: MobileLoginRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -7590,24 +7591,24 @@ export default class Client extends BaseClient {
   async register(request: MobileRegisterRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -7688,24 +7689,24 @@ export default class Client extends BaseClient {
   async mobileSendSmsCode(request: MobileSendSmsCodeRequest, runtime: RuntimeOptions): Promise<MobileSendSmsCodeResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -7786,24 +7787,24 @@ export default class Client extends BaseClient {
   async token(request: TokenRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -7884,24 +7885,24 @@ export default class Client extends BaseClient {
   async adminListStores(request: AdminListStoresRequest, runtime: RuntimeOptions): Promise<ListStoresResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -7982,24 +7983,24 @@ export default class Client extends BaseClient {
   async getUserAccessToken(request: GetUserAccessTokenRequest, runtime: RuntimeOptions): Promise<AccessTokenResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -8080,24 +8081,24 @@ export default class Client extends BaseClient {
   async createDrive(request: CreateDriveRequest, runtime: RuntimeOptions): Promise<CreateDriveResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -8178,24 +8179,24 @@ export default class Client extends BaseClient {
   async deleteDrive(request: DeleteDriveRequest, runtime: RuntimeOptions): Promise<void>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -8273,24 +8274,24 @@ export default class Client extends BaseClient {
   async getDrive(request: GetDriveRequest, runtime: RuntimeOptions): Promise<GetDriveResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -8371,24 +8372,24 @@ export default class Client extends BaseClient {
   async getDefaultDrive(request: GetDefaultDriveRequest, runtime: RuntimeOptions): Promise<GetDriveResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -8469,24 +8470,24 @@ export default class Client extends BaseClient {
   async listDrives(request: ListDriveRequest, runtime: RuntimeOptions): Promise<ListDriveResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -8567,24 +8568,24 @@ export default class Client extends BaseClient {
   async listMyDrives(request: ListMyDriveRequest, runtime: RuntimeOptions): Promise<ListDriveResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -8665,24 +8666,24 @@ export default class Client extends BaseClient {
   async updateDrive(request: UpdateDriveRequest, runtime: RuntimeOptions): Promise<UpdateDriveResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -8763,24 +8764,24 @@ export default class Client extends BaseClient {
   async completeFile(request: OSSCompleteFileRequest, runtime: RuntimeOptions): Promise<OSSCompleteFileResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -8861,24 +8862,24 @@ export default class Client extends BaseClient {
   async copyFile(request: OSSCopyFileRequest, runtime: RuntimeOptions): Promise<OSSCopyFileResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -8959,24 +8960,24 @@ export default class Client extends BaseClient {
   async createFile(request: OSSCreateFileRequest, runtime: RuntimeOptions): Promise<OSSCreateFileResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -9057,24 +9058,24 @@ export default class Client extends BaseClient {
   async deleteFile(request: OSSDeleteFileRequest, runtime: RuntimeOptions): Promise<void>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -9152,24 +9153,24 @@ export default class Client extends BaseClient {
   async getFile(request: OSSGetFileRequest, runtime: RuntimeOptions): Promise<OSSGetFileResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -9250,24 +9251,24 @@ export default class Client extends BaseClient {
   async getDownloadUrl(request: OSSGetDownloadUrlRequest, runtime: RuntimeOptions): Promise<OSSGetDownloadUrlResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -9348,24 +9349,24 @@ export default class Client extends BaseClient {
   async getUploadUrl(request: OSSGetUploadUrlRequest, runtime: RuntimeOptions): Promise<OSSGetUploadUrlResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -9446,24 +9447,24 @@ export default class Client extends BaseClient {
   async listFile(request: OSSListFileRequest, runtime: RuntimeOptions): Promise<OSSListFileResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -9544,24 +9545,24 @@ export default class Client extends BaseClient {
   async listUploadedParts(request: OSSListUploadedPartRequest, runtime: RuntimeOptions): Promise<OSSListUploadedPartResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -9642,24 +9643,24 @@ export default class Client extends BaseClient {
   async moveFile(request: OSSMoveFileRequest, runtime: RuntimeOptions): Promise<OSSMoveFileResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -9740,24 +9741,24 @@ export default class Client extends BaseClient {
   async createShare(request: CreateShareRequest, runtime: RuntimeOptions): Promise<CreateShareResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -9838,24 +9839,24 @@ export default class Client extends BaseClient {
   async deleteShare(request: DeleteShareRequest, runtime: RuntimeOptions): Promise<void>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -9933,24 +9934,24 @@ export default class Client extends BaseClient {
   async getShare(request: GetShareRequest, runtime: RuntimeOptions): Promise<GetShareResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -10031,24 +10032,24 @@ export default class Client extends BaseClient {
   async listShare(request: ListShareRequest, runtime: RuntimeOptions): Promise<ListShareResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -10129,24 +10130,24 @@ export default class Client extends BaseClient {
   async updateShare(request: UpdateShareRequest, runtime: RuntimeOptions): Promise<UpdateShareResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -10227,24 +10228,24 @@ export default class Client extends BaseClient {
   async listStorefile(request: ListStoreFileRequest, runtime: RuntimeOptions): Promise<ListStoreFileResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -10325,24 +10326,24 @@ export default class Client extends BaseClient {
   async createUser(request: CreateUserRequest, runtime: RuntimeOptions): Promise<CreateUserResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -10423,24 +10424,24 @@ export default class Client extends BaseClient {
   async deleteUser(request: DeleteUserRequest, runtime: RuntimeOptions): Promise<void>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -10518,24 +10519,24 @@ export default class Client extends BaseClient {
   async getUser(request: GetUserRequest, runtime: RuntimeOptions): Promise<GetUserResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -10616,24 +10617,24 @@ export default class Client extends BaseClient {
   async listUsers(request: ListUserRequest, runtime: RuntimeOptions): Promise<ListUserResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -10714,24 +10715,24 @@ export default class Client extends BaseClient {
   async searchUser(request: SearchUserRequest, runtime: RuntimeOptions): Promise<ListUserResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
@@ -10812,24 +10813,24 @@ export default class Client extends BaseClient {
   async updateUser(request: UpdateUserRequest, runtime: RuntimeOptions): Promise<UpdateUserResponse>  {
     let _runtime : {[key: string]: any} = {
       timeouted: "retry",
-      readTimeout: runtime["readTimeout"],
-      connectTimeout: runtime["connectTimeout"],
-      localAddr: runtime["localAddr"],
-      httpProxy: runtime["httpProxy"],
-      httpsProxy: runtime["httpsProxy"],
-      noProxy: runtime["noProxy"],
-      maxIdleConns: runtime["maxIdleConns"],
-      socks5Proxy: runtime["socks5Proxy"],
-      socks5NetWork: runtime["socks5NetWork"],
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
       retry: {
-        retryable: runtime["autoretry"],
-        maxAttempts: this._defaultNumber(runtime["maxAttempts"], 3),
+        retryable: runtime.autoretry,
+        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime["backoffPolicy"], "no"),
-        period: this._defaultNumber(runtime["backoffPeriod"], 1),
+        policy: this._default(runtime.backoffPolicy, "no"),
+        period: this._defaultNumber(runtime.backoffPeriod, 1),
       },
-      ignoreSSL: runtime["ignoreSSL"],
+      ignoreSSL: runtime.ignoreSSL,
     }
 
     let _lastRequest = null;
