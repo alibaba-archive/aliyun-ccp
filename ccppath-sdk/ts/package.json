@@ -1,5 +1,5 @@
 {
-  "name": "@alicloud/osspath-sdk",
+  "name": "@alicloud/ccppath-sdk",
   "version": "1.0.0",
   "description": "",
   "main": "dist/client.js",
