@@ -5,7 +5,7 @@ English | [简体中文](README-CN.md)
 
 ## Installation
 
-Use .NET CLI ( Recommand )
+Use .Net CLI ( Recommand )
 
     dotnet add package Aliyun.SDK.CCP.BaseClient
 

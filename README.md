@@ -15,7 +15,7 @@ English | [简体中文](README-CN.md)
 - [ccppath-sdk](./ccppath-sdk/go/README.md)
 - [osspath-sdk](./osspath-sdk/go/README.md)
 
-### Net
+### .Net
 - [baseclient](./baseclient/csharp/README.md)
 - [ccppath-sdk](./ccppath-sdk/cs/README.md)
 - [osspath-sdk](./osspath-sdk/cs/README.md)
