@@ -2,7 +2,7 @@
 
 ![](https://aliyunsdk-pages.alicdn.com/icons/AlibabaCloud.svg)
 
-## Alibaba Cloud ccp-baseclient for Java
+## Alibaba Cloud CCP BaseClient for Java
 
 
 ## 安装
