@@ -7,7 +7,7 @@
 
 ## 安装
 
-Use .NET CLI ( Recommand )
+Use .Net CLI ( Recommand )
 
     dotnet add package Aliyun.SDK.CCP.OSSClient
 
