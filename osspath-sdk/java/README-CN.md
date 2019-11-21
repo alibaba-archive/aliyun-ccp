@@ -2,7 +2,7 @@
 
 ![](https://aliyunsdk-pages.alicdn.com/icons/AlibabaCloud.svg)
 
-## Alibaba Cloud ccp-client for Java
+## Alibaba Cloud OSSPath SDK for Java
 
 
 ## 安装

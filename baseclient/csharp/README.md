@@ -1,7 +1,7 @@
 English | [简体中文](README-CN.md)
 ![](https://aliyunsdk-pages.alicdn.com/icons/AlibabaCloud.svg)
 
-## Alibaba Cloud ccp-baseclient for Net
+## Alibaba Cloud CCP BaseClient for .Net
 
 ## Installation
 

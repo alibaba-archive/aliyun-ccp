@@ -1,7 +1,7 @@
 English | [简体中文](README-CN.md)
 ![](https://aliyunsdk-pages.alicdn.com/icons/AlibabaCloud.svg)
 
-## Alibaba Cloud Ccp BaseClient for Go
+## Alibaba Cloud CCP BaseClient for Go
 
 ## Requirements
 - It's necessary for you to make sure your system have installed a Go environment which is new than 1.12.0.

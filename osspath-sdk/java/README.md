@@ -1,7 +1,7 @@
 English | [简体中文](README-CN.md)
 ![](https://aliyunsdk-pages.alicdn.com/icons/AlibabaCloud.svg)
 
-## Alibaba Cloud ccp-client for Java
+## Alibaba Cloud OSSPath SDK for Java
 
 ## Installation
 
