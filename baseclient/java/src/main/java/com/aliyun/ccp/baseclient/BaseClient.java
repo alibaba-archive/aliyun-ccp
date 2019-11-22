@@ -42,6 +42,7 @@ public class BaseClient {
     protected String _domainId;
     protected String _protocol;
     protected Object _endpoint;
+    protected String _nickname;
     protected Map<String, Object> _config;
     protected AccessKeyCredential _accessKeyCredential;
     protected AccessTokenCredential _accessTokenCredential;
@@ -51,6 +52,7 @@ public class BaseClient {
         this._domainId = (String) config.get("domainId");
         this._protocol = (String) config.get("protocol");
         this._endpoint = (String) config.get("endpoint");
+        this._nickname = (String) config.get("nickname");
         setCredential(config);
         this._config = config;
     }
@@ -246,6 +248,13 @@ public class BaseClient {
         if (null != this._stsCredential) {
             this._stsCredential.setSecurityToken(securityToken);
         }
+    }
+
+    public String _getPathname(String nickName, String path) {
+        if (StringUtils.isEmpty(nickName)) {
+            return path;
+        }
+        return "/" + nickName + path;
     }
 
     public String _getAccessToken() throws Exception {
