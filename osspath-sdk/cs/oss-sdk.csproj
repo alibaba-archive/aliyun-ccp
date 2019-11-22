@@ -6,7 +6,7 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PackageReleaseNotes></PackageReleaseNotes>
-    <AssemblyName>Aliyun.SDK.CCP.OSSClient</AssemblyName>
+    <AssemblyName>Aliyun.SDK.CCP.OSS.Client</AssemblyName>
     <Version>0.0.1</Version>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <LangVersion>4</LangVersion>
