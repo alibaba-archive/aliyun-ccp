@@ -28,12 +28,11 @@ namespace baseClientUnitTests
         public BaseClientTest()
         {
             config = new Dictionary<string, object>();
-            config.Add("DomainId", "domainId");
-            config.Add("Protocol", "protocol");
-            config.Add("Endpoint", "endpoint");
-            config.Add("UserId", "UserId");
-            config.Add("AccessKeyId", "accessKeyId");
-            config.Add("AccessKeySecret", "accessKeySecret");
+            config.Add("domainId", "domainId");
+            config.Add("protocol", "protocol");
+            config.Add("endpoint", "endpoint");
+            config.Add("accessKeyId", "accessKeyId");
+            config.Add("accessKeySecret", "accessKeySecret");
             baseClient = new BaseClient(config);
         }
 
@@ -41,10 +40,9 @@ namespace baseClientUnitTests
         public void TestBaseClientNull()
         {
             Dictionary<string, object> config = new Dictionary<string, object>();
-            config.Add("DomainId", "domainId");
-            config.Add("Protocol", "protocol");
-            config.Add("Endpoint", "endpoint");
-            config.Add("UserId", "UserId");
+            config.Add("domainId", "domainId");
+            config.Add("protocol", "protocol");
+            config.Add("endpoint", "endpoint");
             BaseClient baseClient = new BaseClient(config);
 
             Assert.Null(TestHelper.RunInstanceMethod(typeof(BaseClient), "_getAccessKeyId", baseClient, null));
@@ -84,11 +82,10 @@ namespace baseClientUnitTests
         public void TestBaseClientAccToken()
         {
             Dictionary<string, object> config = new Dictionary<string, object>();
-            config.Add("DomainId", "domainId");
-            config.Add("Protocol", "protocol");
-            config.Add("Endpoint", "endpoint");
-            config.Add("UserId", "UserId");
-            config.Add("RefreshToken", "refreshToken");
+            config.Add("domainId", "domainId");
+            config.Add("protocol", "protocol");
+            config.Add("endpoint", "endpoint");
+            config.Add("refreshToken", "refreshToken");
             BaseClient baseClient = new BaseClient(config);
 
             AccessTokenCredential accessTokenCredential = new AccessTokenCredential(config);
@@ -108,13 +105,12 @@ namespace baseClientUnitTests
         public void TestBaseClientStsToken()
         {
             Dictionary<string, object> config = new Dictionary<string, object>();
-            config.Add("DomainId", "domainId");
-            config.Add("Protocol", "protocol");
-            config.Add("Endpoint", "endpoint");
-            config.Add("UserId", "UserId");
-            config.Add("SecurityToken", "securityToken");
-            config.Add("AccessKeyId", "accessKeyId");
-            config.Add("AccessKeySecret", "accessKeySecret");
+            config.Add("domainId", "domainId");
+            config.Add("protocol", "protocol");
+            config.Add("endpoint", "endpoint");
+            config.Add("securityToken", "securityToken");
+            config.Add("accessKeyId", "accessKeyId");
+            config.Add("accessKeySecret", "accessKeySecret");
             BaseClient baseClient = new BaseClient(config);
 
             string accesskeyId = (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_getAccessKeyId", baseClient, null);

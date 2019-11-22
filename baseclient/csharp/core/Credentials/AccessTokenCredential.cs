@@ -23,13 +23,13 @@ namespace Aliyun.SDK.CCP.Credentials
 
         public AccessTokenCredential(Dictionary<string, object> config)
         {
-            this.refreshToken = DictUtils.GetDicValue(config, "RefreshToken").ToSafeString();
-            this.domainId = DictUtils.GetDicValue(config, "DomainId").ToSafeString();
-            this.endpoint = DictUtils.GetDicValue(config, "Endpoint").ToSafeString();
-            this.clientId = DictUtils.GetDicValue(config, "ClientId").ToSafeString();
-            this.clientSecret = DictUtils.GetDicValue(config, "ClientSecret").ToSafeString();
-            this.accessToken = DictUtils.GetDicValue(config, "AccessToken").ToSafeString();
-            this.expireTime = DictUtils.GetDicValue(config, "ExpireTime").ToSafeString();
+            this.refreshToken = DictUtils.GetDicValue(config, "refreshToken").ToSafeString();
+            this.domainId = DictUtils.GetDicValue(config, "domainId").ToSafeString();
+            this.endpoint = DictUtils.GetDicValue(config, "endpoint").ToSafeString();
+            this.clientId = DictUtils.GetDicValue(config, "clientId").ToSafeString();
+            this.clientSecret = DictUtils.GetDicValue(config, "clientSecret").ToSafeString();
+            this.accessToken = DictUtils.GetDicValue(config, "accessToken").ToSafeString();
+            this.expireTime = DictUtils.GetDicValue(config, "expireTime").ToSafeString();
         }
 
         public void RefreshAccessToken()
