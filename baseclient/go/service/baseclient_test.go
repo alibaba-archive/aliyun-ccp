@@ -63,6 +63,14 @@ func Test_InitClient(t *testing.T) {
 	utils.AssertEqual(t, "AccessKeySecret", accessKeySecret)
 }
 
+func Test_GetPathname(t *testing.T) {
+	pathName := client.GetPathname("", "/v2")
+	utils.AssertEqual(t, "/v2", pathName)
+
+	pathName = client.GetPathname("ccp", "/v2")
+	utils.AssertEqual(t, "/ccp/v2", pathName)
+}
+
 func Test_Validator(t *testing.T) {
 	str := "AccessKeyId"
 	config := &configTest{

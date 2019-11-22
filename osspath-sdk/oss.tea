@@ -4,6 +4,7 @@
 module Client {
 
   type @getHost = (string, string): string
+  type @getPathname = (string, string): string
   type @getProtocol = (string, string): string
   type @isStatusCode = ($Response, number): boolean
   type @readAsJSON = async ($Response): object
@@ -22,6 +23,7 @@ module Client {
   type @domainId = string
   type @endpoint = string
   type @protocol = string
+  type @nickname = string
 
   model RuntimeOptions {
     autoretry?: boolean(description='whether to try again', name='autoretry'),
@@ -53,6 +55,7 @@ module Client {
     clientSecret?: string,
     accessToken?: string,
     expireTime?: string,
+    nickname?: string,
   }
 
   init(config: Config);
@@ -2351,7 +2354,7 @@ example'),
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/account/cancel_link`;
+    pathname = @getPathname(@nickname, `/v2/account/cancel_link`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -2430,7 +2433,7 @@ example'),
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/account/confirm_link`;
+    pathname = @getPathname(@nickname, `/v2/account/confirm_link`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -2508,7 +2511,7 @@ example'),
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/account/default/change_password`;
+    pathname = @getPathname(@nickname, `/v2/account/default/change_password`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -2583,7 +2586,7 @@ example'),
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/account/default/set_password`;
+    pathname = @getPathname(@nickname, `/v2/account/default/set_password`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -2659,7 +2662,7 @@ example'),
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/account/get_access_token_by_link_info`;
+    pathname = @getPathname(@nickname, `/v2/account/get_access_token_by_link_info`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -2737,7 +2740,7 @@ example'),
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/account/get_captcha`;
+    pathname = @getPathname(@nickname, `/v2/account/get_captcha`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -2816,7 +2819,7 @@ example'),
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/account/get_link_info`;
+    pathname = @getPathname(@nickname, `/v2/account/get_link_info`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -2894,7 +2897,7 @@ example'),
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/account/get_link_info_by_user_id`;
+    pathname = @getPathname(@nickname, `/v2/account/get_link_info_by_user_id`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -2974,7 +2977,7 @@ example'),
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/account/link`;
+    pathname = @getPathname(@nickname, `/v2/account/link`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -3053,7 +3056,7 @@ example'),
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/account/mobile/check_exist`;
+    pathname = @getPathname(@nickname, `/v2/account/mobile/check_exist`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -3132,7 +3135,7 @@ example'),
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/account/mobile/login`;
+    pathname = @getPathname(@nickname, `/v2/account/mobile/login`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -3211,7 +3214,7 @@ example'),
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/account/mobile/register`;
+    pathname = @getPathname(@nickname, `/v2/account/mobile/register`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -3289,7 +3292,7 @@ example'),
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/account/mobile/send_sms_code`;
+    pathname = @getPathname(@nickname, `/v2/account/mobile/send_sms_code`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -3367,7 +3370,7 @@ example'),
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/account/token`;
+    pathname = @getPathname(@nickname, `/v2/account/token`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -3445,7 +3448,7 @@ example'),
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/domain/list_stores`;
+    pathname = @getPathname(@nickname, `/v2/domain/list_stores`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -3525,7 +3528,7 @@ example'),
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/user/get_access_token`;
+    pathname = @getPathname(@nickname, `/v2/user/get_access_token`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -3607,7 +3610,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/drive/create`;
+    pathname = @getPathname(@nickname, `/v2/drive/create`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -3687,7 +3690,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/drive/delete`;
+    pathname = @getPathname(@nickname, `/v2/drive/delete`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -3765,7 +3768,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/drive/get`;
+    pathname = @getPathname(@nickname, `/v2/drive/get`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -3847,7 +3850,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/drive/get_default_drive`;
+    pathname = @getPathname(@nickname, `/v2/drive/get_default_drive`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -3927,7 +3930,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/drive/list`;
+    pathname = @getPathname(@nickname, `/v2/drive/list`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4007,7 +4010,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/drive/list_my_drives`;
+    pathname = @getPathname(@nickname, `/v2/drive/list_my_drives`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4088,7 +4091,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/drive/update`;
+    pathname = @getPathname(@nickname, `/v2/drive/update`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4169,7 +4172,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/osspath/file/complete`;
+    pathname = @getPathname(@nickname, `/v2/osspath/file/complete`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4250,7 +4253,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/osspath/file/copy`;
+    pathname = @getPathname(@nickname, `/v2/osspath/file/copy`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4332,7 +4335,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/osspath/file/create`;
+    pathname = @getPathname(@nickname, `/v2/osspath/file/create`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4413,7 +4416,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/osspath/file/delete`;
+    pathname = @getPathname(@nickname, `/v2/osspath/file/delete`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4491,7 +4494,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/osspath/file/get`;
+    pathname = @getPathname(@nickname, `/v2/osspath/file/get`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4572,7 +4575,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/osspath/file/get_download_url`;
+    pathname = @getPathname(@nickname, `/v2/osspath/file/get_download_url`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4653,7 +4656,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/osspath/file/get_upload_url`;
+    pathname = @getPathname(@nickname, `/v2/osspath/file/get_upload_url`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4734,7 +4737,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/osspath/file/list`;
+    pathname = @getPathname(@nickname, `/v2/osspath/file/list`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4815,7 +4818,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/osspath/file/list_uploaded_parts`;
+    pathname = @getPathname(@nickname, `/v2/osspath/file/list_uploaded_parts`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4896,7 +4899,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/osspath/file/move`;
+    pathname = @getPathname(@nickname, `/v2/osspath/file/move`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4977,7 +4980,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/osspath/share/create`;
+    pathname = @getPathname(@nickname, `/v2/osspath/share/create`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -5057,7 +5060,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/osspath/share/delete`;
+    pathname = @getPathname(@nickname, `/v2/osspath/share/delete`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -5135,7 +5138,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/osspath/share/get`;
+    pathname = @getPathname(@nickname, `/v2/osspath/share/get`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -5215,7 +5218,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/osspath/share/list`;
+    pathname = @getPathname(@nickname, `/v2/osspath/share/list`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -5296,7 +5299,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/osspath/share/update`;
+    pathname = @getPathname(@nickname, `/v2/osspath/share/update`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -5377,7 +5380,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/osspath/store_file/list`;
+    pathname = @getPathname(@nickname, `/v2/osspath/store_file/list`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -5456,7 +5459,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/user/create`;
+    pathname = @getPathname(@nickname, `/v2/user/create`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -5535,7 +5538,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/user/delete`;
+    pathname = @getPathname(@nickname, `/v2/user/delete`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -5612,7 +5615,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/user/get`;
+    pathname = @getPathname(@nickname, `/v2/user/get`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -5691,7 +5694,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/user/list`;
+    pathname = @getPathname(@nickname, `/v2/user/list`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -5770,7 +5773,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/user/search`;
+    pathname = @getPathname(@nickname, `/v2/user/search`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -5850,7 +5853,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     var accessToken = @getAccessToken();
     protocol = @getProtocol(@protocol, 'https');
     method = 'POST';
-    pathname = `/v2/user/update`;
+    pathname = @getPathname(@nickname, `/v2/user/update`);
     headers = {
       user-agent = @getUserAgent(),
       host = @getHost(@endpoint, `${@domainId}.api.alicloudccp.com`),

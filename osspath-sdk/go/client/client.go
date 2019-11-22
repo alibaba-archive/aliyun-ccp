@@ -115,6 +115,7 @@ type Config struct {
 	ClientSecret    *string `json:"clientSecret" xml:"clientSecret"`
 	AccessToken     *string `json:"accessToken" xml:"accessToken"`
 	ExpireTime      *string `json:"expireTime" xml:"expireTime"`
+	Nickname        *string `json:"nickname" xml:"nickname"`
 }
 
 func (s Config) String() string {
@@ -182,6 +183,11 @@ func (s *Config) SetAccessToken(v string) *Config {
 
 func (s *Config) SetExpireTime(v string) *Config {
 	s.ExpireTime = &v
+	return s
+}
+
+func (s *Config) SetNickname(v string) *Config {
+	s.Nickname = &v
 	return s
 }
 
@@ -9441,7 +9447,7 @@ func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOpt
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/account/cancel_link"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/cancel_link")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
@@ -9556,7 +9562,7 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeO
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/account/confirm_link"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/confirm_link")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
@@ -9670,7 +9676,7 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runt
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/account/default/change_password"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/default/change_password")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
@@ -9780,7 +9786,7 @@ func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *R
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/account/default/set_password"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/default/set_password")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
@@ -9891,7 +9897,7 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/account/get_access_token_by_link_info"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_access_token_by_link_info")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
@@ -10006,7 +10012,7 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOpt
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/account/get_captcha"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_captcha")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
@@ -10121,7 +10127,7 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *Runtim
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/account/get_link_info"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_link_info")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
@@ -10236,7 +10242,7 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, r
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/account/get_link_info_by_user_id"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_link_info_by_user_id")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
@@ -10351,7 +10357,7 @@ func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions)
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/account/link"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/link")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
@@ -10466,7 +10472,7 @@ func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *Runt
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/account/mobile/check_exist"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/check_exist")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
@@ -10581,7 +10587,7 @@ func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/account/mobile/login"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/login")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
@@ -10696,7 +10702,7 @@ func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeO
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/account/mobile/register"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/register")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
@@ -10811,7 +10817,7 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runti
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/account/mobile/send_sms_code"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/send_sms_code")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
@@ -10926,7 +10932,7 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (*Ac
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/account/token"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/token")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
@@ -11041,7 +11047,7 @@ func (client *Client) AdminListStores(request *AdminListStoresRequest, runtime *
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/domain/list_stores"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/domain/list_stores")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -11156,7 +11162,7 @@ func (client *Client) GetUserAccessToken(request *GetUserAccessTokenRequest, run
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/user/get_access_token"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/get_access_token")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -11271,7 +11277,7 @@ func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeO
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/drive/create"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/create")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -11385,7 +11391,7 @@ func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeO
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/drive/delete"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/delete")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -11496,7 +11502,7 @@ func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/drive/get"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/get")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -11611,7 +11617,7 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/drive/get_default_drive"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/get_default_drive")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -11726,7 +11732,7 @@ func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOpti
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/drive/list"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/list")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -11841,7 +11847,7 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *Runtime
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/drive/list_my_drives"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/list_my_drives")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -11956,7 +11962,7 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeO
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/drive/update"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/update")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -12071,7 +12077,7 @@ func (client *Client) CompleteFile(request *OSSCompleteFileRequest, runtime *Run
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/osspath/file/complete"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/complete")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -12186,7 +12192,7 @@ func (client *Client) CopyFile(request *OSSCopyFileRequest, runtime *RuntimeOpti
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/osspath/file/copy"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/copy")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -12301,7 +12307,7 @@ func (client *Client) CreateFile(request *OSSCreateFileRequest, runtime *Runtime
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/osspath/file/create"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/create")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -12415,7 +12421,7 @@ func (client *Client) DeleteFile(request *OSSDeleteFileRequest, runtime *Runtime
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/osspath/file/delete"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/delete")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -12526,7 +12532,7 @@ func (client *Client) GetFile(request *OSSGetFileRequest, runtime *RuntimeOption
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/osspath/file/get"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/get")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -12641,7 +12647,7 @@ func (client *Client) GetDownloadUrl(request *OSSGetDownloadUrlRequest, runtime 
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/osspath/file/get_download_url"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/get_download_url")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -12756,7 +12762,7 @@ func (client *Client) GetUploadUrl(request *OSSGetUploadUrlRequest, runtime *Run
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/osspath/file/get_upload_url"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/get_upload_url")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -12871,7 +12877,7 @@ func (client *Client) ListFile(request *OSSListFileRequest, runtime *RuntimeOpti
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/osspath/file/list"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/list")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -12986,7 +12992,7 @@ func (client *Client) ListUploadedParts(request *OSSListUploadedPartRequest, run
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/osspath/file/list_uploaded_parts"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/list_uploaded_parts")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -13101,7 +13107,7 @@ func (client *Client) MoveFile(request *OSSMoveFileRequest, runtime *RuntimeOpti
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/osspath/file/move"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/move")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -13216,7 +13222,7 @@ func (client *Client) CreateShare(request *CreateShareRequest, runtime *RuntimeO
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/osspath/share/create"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/share/create")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -13330,7 +13336,7 @@ func (client *Client) DeleteShare(request *DeleteShareRequest, runtime *RuntimeO
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/osspath/share/delete"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/share/delete")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -13441,7 +13447,7 @@ func (client *Client) GetShare(request *GetShareRequest, runtime *RuntimeOptions
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/osspath/share/get"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/share/get")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -13556,7 +13562,7 @@ func (client *Client) ListShare(request *ListShareRequest, runtime *RuntimeOptio
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/osspath/share/list"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/share/list")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -13671,7 +13677,7 @@ func (client *Client) UpdateShare(request *UpdateShareRequest, runtime *RuntimeO
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/osspath/share/update"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/share/update")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -13786,7 +13792,7 @@ func (client *Client) ListStorefile(request *ListStoreFileRequest, runtime *Runt
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/osspath/store_file/list"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/store_file/list")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -13901,7 +13907,7 @@ func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOpt
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/user/create"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/create")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -14015,7 +14021,7 @@ func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOpt
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/user/delete"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/delete")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -14126,7 +14132,7 @@ func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) 
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/user/get"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/get")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -14241,7 +14247,7 @@ func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOption
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/user/list"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/list")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -14356,7 +14362,7 @@ func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOpt
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/user/search"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/search")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
@@ -14471,7 +14477,7 @@ func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOpt
 			}
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = "/v2/user/update"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/update")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
