@@ -1,3 +1,6 @@
+### 2019-11-22 Version 0.0.6
+* supported `nickname`
+
 ### 2019-11-19 Version 0.0.5
 * Fix `ToJsonString()` 
 
