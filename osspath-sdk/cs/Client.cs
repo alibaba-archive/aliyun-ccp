@@ -58,7 +58,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/account/cancel_link";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/account/cancel_link");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
@@ -161,7 +161,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/account/confirm_link";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/account/confirm_link");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
@@ -264,7 +264,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/account/default/change_password";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/account/default/change_password");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
@@ -346,7 +346,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/account/default/set_password";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/account/default/set_password");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
@@ -428,7 +428,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/account/get_access_token_by_link_info";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/account/get_access_token_by_link_info");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
@@ -531,7 +531,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/account/get_captcha";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/account/get_captcha");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
@@ -634,7 +634,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/account/get_link_info";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/account/get_link_info");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
@@ -737,7 +737,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/account/get_link_info_by_user_id";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/account/get_link_info_by_user_id");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
@@ -840,7 +840,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/account/link";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/account/link");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
@@ -943,7 +943,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/account/mobile/check_exist";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/account/mobile/check_exist");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
@@ -1046,7 +1046,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/account/mobile/login";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/account/mobile/login");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
@@ -1149,7 +1149,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/account/mobile/register";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/account/mobile/register");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
@@ -1252,7 +1252,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/account/mobile/send_sms_code";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/account/mobile/send_sms_code");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
@@ -1355,7 +1355,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/account/token";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/account/token");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
@@ -1458,7 +1458,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/domain/list_stores";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/domain/list_stores");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -1561,7 +1561,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/user/get_access_token";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/user/get_access_token");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -1664,7 +1664,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/drive/create";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/drive/create");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -1767,7 +1767,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/drive/delete";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/drive/delete");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -1849,7 +1849,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/drive/get";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/drive/get");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -1952,7 +1952,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/drive/get_default_drive";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/drive/get_default_drive");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -2055,7 +2055,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/drive/list";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/drive/list");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -2158,7 +2158,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/drive/list_my_drives";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/drive/list_my_drives");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -2261,7 +2261,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/drive/update";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/drive/update");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -2364,7 +2364,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/osspath/file/complete";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/osspath/file/complete");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -2467,7 +2467,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/osspath/file/copy";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/osspath/file/copy");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -2570,7 +2570,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/osspath/file/create";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/osspath/file/create");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -2673,7 +2673,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/osspath/file/delete";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/osspath/file/delete");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -2755,7 +2755,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/osspath/file/get";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/osspath/file/get");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -2858,7 +2858,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/osspath/file/get_download_url";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/osspath/file/get_download_url");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -2961,7 +2961,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/osspath/file/get_upload_url";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/osspath/file/get_upload_url");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -3064,7 +3064,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/osspath/file/list";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/osspath/file/list");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -3167,7 +3167,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/osspath/file/list_uploaded_parts";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/osspath/file/list_uploaded_parts");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -3270,7 +3270,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/osspath/file/move";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/osspath/file/move");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -3373,7 +3373,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/osspath/share/create";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/osspath/share/create");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -3476,7 +3476,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/osspath/share/delete";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/osspath/share/delete");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -3558,7 +3558,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/osspath/share/get";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/osspath/share/get");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -3661,7 +3661,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/osspath/share/list";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/osspath/share/list");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -3764,7 +3764,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/osspath/share/update";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/osspath/share/update");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -3867,7 +3867,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/osspath/store_file/list";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/osspath/store_file/list");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -3970,7 +3970,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/user/create";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/user/create");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -4073,7 +4073,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/user/delete";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/user/delete");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -4155,7 +4155,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/user/get";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/user/get");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -4258,7 +4258,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/user/list";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/user/list");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -4361,7 +4361,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/user/search";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/user/search");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -4464,7 +4464,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     string accessToken = this._getAccessToken();
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = "/v2/user/update";
+                    request_.Pathname = this._getPathname(_nickname, "/v2/user/update");
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
