@@ -64,6 +64,11 @@ describe('base client', function () {
         assert.strictEqual(client._getHost('not.default.com', 'default.com'), 'not.default.com');
     });
 
+    it('_getUserAgent should ok', async function () {
+        const client = new BaseClient({});
+        assert.strictEqual(client._getUserAgent(), '');
+    });
+
     it('_getProtocol should ok', async function () {
         const client = new BaseClient({});
         assert.strictEqual(client._getProtocol(undefined, 'http'), 'http');
@@ -127,6 +132,13 @@ describe('base client', function () {
         const client = new BaseClient({});
         assert.strictEqual(client._defaultNumber(undefined, 2019), 2019);
         assert.strictEqual(client._defaultNumber(2020, 2019), 2020);
+    });
+
+    it('_getPathname should ok', async function () {
+        const client = new BaseClient({});
+        assert.strictEqual(client._getPathname(undefined, '/pathname'), '/pathname');
+        assert.strictEqual(client._getPathname('', '/pathname'), '/pathname');
+        assert.strictEqual(client._getPathname('nickName', '/pathname'), '/nickName/pathname');
     });
 
     it('_getSignature should ok', async function () {

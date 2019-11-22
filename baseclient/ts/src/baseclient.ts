@@ -132,6 +132,13 @@ export default class BaseClient {
         }
         return input;
     }
+    
+    _getPathname(nickName: string, path: string): string {
+        if (!nickName) {
+            return path;
+        }
+        return `/${nickName}${path}`;
+    } 
 
     _getSignature(request: $tea.Request): string {
         const method = request.method;
