@@ -204,6 +204,16 @@ namespace Aliyun.SDK.CCP
             }
             return dicQuery;
         }
+
+        protected string _getPathname(string nickName, string path)
+        {
+            if (string.IsNullOrWhiteSpace(nickName))
+            {
+                return path;
+            }
+            return path + "/" + nickName;
+        }
+
         public String getCanonicalizedHeaders(Dictionary<String, String> headers)
         {
             String prefix = "x-acs-";
