@@ -41,5 +41,8 @@ public class Config extends TeaModel {
     @NameInMap("expireTime")
     public String expireTime;
 
+    @NameInMap("nickname")
+    public String nickname;
+
 }
 

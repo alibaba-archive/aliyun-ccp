@@ -1,5 +1,4 @@
 // This file is auto-generated, don't edit it
-import { Readable } from 'stream';
 import * as $tea from '@alicloud/tea-typescript';
 import BaseClient from '@alicloud/ccp-baseclient';
 
@@ -74,6 +73,7 @@ export class Config extends $tea.Model {
   clientSecret?: string;
   accessToken?: string;
   expireTime?: string;
+  nickname?: string;
   static names(): { [key: string]: string } {
     return {
       endpoint: 'endpoint',
@@ -88,6 +88,7 @@ export class Config extends $tea.Model {
       clientSecret: 'clientSecret',
       accessToken: 'accessToken',
       expireTime: 'expireTime',
+      nickname: 'nickname',
     };
   }
 
@@ -105,6 +106,7 @@ export class Config extends $tea.Model {
       clientSecret: 'string',
       accessToken: 'string',
       expireTime: 'string',
+      nickname: 'string',
     };
   }
 
@@ -6558,7 +6560,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/account/cancel_link`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/account/cancel_link`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
@@ -6656,7 +6658,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/account/confirm_link`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/account/confirm_link`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
@@ -6754,7 +6756,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/account/default/change_password`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/account/default/change_password`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
@@ -6849,7 +6851,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/account/default/set_password`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/account/default/set_password`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
@@ -6944,7 +6946,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/account/get_access_token_by_link_info`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/account/get_access_token_by_link_info`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
@@ -7042,7 +7044,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/account/get_captcha`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/account/get_captcha`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
@@ -7140,7 +7142,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/account/get_link_info`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/account/get_link_info`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
@@ -7238,7 +7240,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/account/get_link_info_by_user_id`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/account/get_link_info_by_user_id`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
@@ -7336,7 +7338,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/account/link`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/account/link`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
@@ -7434,7 +7436,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/account/mobile/check_exist`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/account/mobile/check_exist`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
@@ -7532,7 +7534,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/account/mobile/login`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/account/mobile/login`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
@@ -7630,7 +7632,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/account/mobile/register`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/account/mobile/register`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
@@ -7728,7 +7730,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/account/mobile/send_sms_code`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/account/mobile/send_sms_code`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
@@ -7826,7 +7828,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/account/token`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/account/token`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
@@ -7924,7 +7926,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/domain/list_stores`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/domain/list_stores`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -8022,7 +8024,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/user/get_access_token`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/user/get_access_token`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -8120,7 +8122,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/drive/create`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/drive/create`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -8218,7 +8220,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/drive/delete`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/drive/delete`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -8313,7 +8315,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/drive/get`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/drive/get`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -8411,7 +8413,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/drive/get_default_drive`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/drive/get_default_drive`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -8509,7 +8511,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/drive/list`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/drive/list`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -8607,7 +8609,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/drive/list_my_drives`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/drive/list_my_drives`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -8705,7 +8707,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/drive/update`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/drive/update`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -8803,7 +8805,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/osspath/file/complete`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/osspath/file/complete`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -8901,7 +8903,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/osspath/file/copy`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/osspath/file/copy`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -8999,7 +9001,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/osspath/file/create`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/osspath/file/create`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -9097,7 +9099,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/osspath/file/delete`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/osspath/file/delete`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -9192,7 +9194,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/osspath/file/get`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/osspath/file/get`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -9290,7 +9292,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/osspath/file/get_download_url`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/osspath/file/get_download_url`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -9388,7 +9390,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/osspath/file/get_upload_url`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/osspath/file/get_upload_url`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -9486,7 +9488,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/osspath/file/list`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/osspath/file/list`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -9584,7 +9586,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/osspath/file/list_uploaded_parts`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/osspath/file/list_uploaded_parts`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -9682,7 +9684,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/osspath/file/move`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/osspath/file/move`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -9780,7 +9782,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/osspath/share/create`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/osspath/share/create`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -9878,7 +9880,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/osspath/share/delete`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/osspath/share/delete`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -9973,7 +9975,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/osspath/share/get`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/osspath/share/get`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -10071,7 +10073,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/osspath/share/list`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/osspath/share/list`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -10169,7 +10171,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/osspath/share/update`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/osspath/share/update`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -10267,7 +10269,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/osspath/store_file/list`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/osspath/store_file/list`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -10365,7 +10367,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/user/create`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/user/create`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -10463,7 +10465,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/user/delete`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/user/delete`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -10558,7 +10560,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/user/get`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/user/get`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -10656,7 +10658,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/user/list`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/user/list`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -10754,7 +10756,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/user/search`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/user/search`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -10852,7 +10854,7 @@ export default class Client extends BaseClient {
         let accessToken = await this._getAccessToken();
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = `/v2/user/update`;
+        request_.pathname = this._getPathname(this._nickname, `/v2/user/update`);
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),

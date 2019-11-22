@@ -54,7 +54,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/account/cancel_link";
+                request_.pathname = this._getPathname(_nickname, "/v2/account/cancel_link");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
@@ -156,7 +156,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/account/confirm_link";
+                request_.pathname = this._getPathname(_nickname, "/v2/account/confirm_link");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
@@ -258,7 +258,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/account/default/change_password";
+                request_.pathname = this._getPathname(_nickname, "/v2/account/default/change_password");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
@@ -356,7 +356,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/account/default/set_password";
+                request_.pathname = this._getPathname(_nickname, "/v2/account/default/set_password");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
@@ -454,7 +454,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/account/get_access_token_by_link_info";
+                request_.pathname = this._getPathname(_nickname, "/v2/account/get_access_token_by_link_info");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
@@ -556,7 +556,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/account/get_captcha";
+                request_.pathname = this._getPathname(_nickname, "/v2/account/get_captcha");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
@@ -658,7 +658,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/account/get_link_info";
+                request_.pathname = this._getPathname(_nickname, "/v2/account/get_link_info");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
@@ -760,7 +760,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/account/get_link_info_by_user_id";
+                request_.pathname = this._getPathname(_nickname, "/v2/account/get_link_info_by_user_id");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
@@ -862,7 +862,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/account/link";
+                request_.pathname = this._getPathname(_nickname, "/v2/account/link");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
@@ -964,7 +964,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/account/mobile/check_exist";
+                request_.pathname = this._getPathname(_nickname, "/v2/account/mobile/check_exist");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
@@ -1066,7 +1066,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/account/mobile/login";
+                request_.pathname = this._getPathname(_nickname, "/v2/account/mobile/login");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
@@ -1168,7 +1168,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/account/mobile/register";
+                request_.pathname = this._getPathname(_nickname, "/v2/account/mobile/register");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
@@ -1270,7 +1270,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/account/mobile/send_sms_code";
+                request_.pathname = this._getPathname(_nickname, "/v2/account/mobile/send_sms_code");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
@@ -1372,7 +1372,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/account/token";
+                request_.pathname = this._getPathname(_nickname, "/v2/account/token");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
@@ -1474,7 +1474,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/async_task/get";
+                request_.pathname = this._getPathname(_nickname, "/v2/async_task/get");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -1576,7 +1576,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/batch";
+                request_.pathname = this._getPathname(_nickname, "/v2/batch");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -1678,7 +1678,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/drive/create";
+                request_.pathname = this._getPathname(_nickname, "/v2/drive/create");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -1780,7 +1780,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/drive/delete";
+                request_.pathname = this._getPathname(_nickname, "/v2/drive/delete");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -1878,7 +1878,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/drive/get";
+                request_.pathname = this._getPathname(_nickname, "/v2/drive/get");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -1980,7 +1980,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/drive/get_default_drive";
+                request_.pathname = this._getPathname(_nickname, "/v2/drive/get_default_drive");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -2082,7 +2082,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/drive/list";
+                request_.pathname = this._getPathname(_nickname, "/v2/drive/list");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -2184,7 +2184,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/drive/list_my_drives";
+                request_.pathname = this._getPathname(_nickname, "/v2/drive/list_my_drives");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -2286,7 +2286,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/drive/update";
+                request_.pathname = this._getPathname(_nickname, "/v2/drive/update");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -2388,7 +2388,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/file/complete";
+                request_.pathname = this._getPathname(_nickname, "/v2/file/complete");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -2490,7 +2490,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/file/copy";
+                request_.pathname = this._getPathname(_nickname, "/v2/file/copy");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -2600,7 +2600,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/file/create";
+                request_.pathname = this._getPathname(_nickname, "/v2/file/create");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -2702,7 +2702,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/file/delete";
+                request_.pathname = this._getPathname(_nickname, "/v2/file/delete");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -2808,7 +2808,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "GET";
-                request_.pathname = "/v2/file/download";
+                request_.pathname = this._getPathname(_nickname, "/v2/file/download");
                 request_.query = this._toQuery(request.toMap());
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
@@ -2901,7 +2901,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/file/get";
+                request_.pathname = this._getPathname(_nickname, "/v2/file/get");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -3003,7 +3003,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/file/get_download_url";
+                request_.pathname = this._getPathname(_nickname, "/v2/file/get_download_url");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -3105,7 +3105,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/file/get_upload_url";
+                request_.pathname = this._getPathname(_nickname, "/v2/file/get_upload_url");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -3207,7 +3207,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/file/list";
+                request_.pathname = this._getPathname(_nickname, "/v2/file/list");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -3309,7 +3309,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/file/list_uploaded_parts";
+                request_.pathname = this._getPathname(_nickname, "/v2/file/list_uploaded_parts");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -3411,7 +3411,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/file/move";
+                request_.pathname = this._getPathname(_nickname, "/v2/file/move");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -3513,7 +3513,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/file/search";
+                request_.pathname = this._getPathname(_nickname, "/v2/file/search");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -3615,7 +3615,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/file/update";
+                request_.pathname = this._getPathname(_nickname, "/v2/file/update");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -3717,7 +3717,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/user/create";
+                request_.pathname = this._getPathname(_nickname, "/v2/user/create");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -3819,7 +3819,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/user/delete";
+                request_.pathname = this._getPathname(_nickname, "/v2/user/delete");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -3917,7 +3917,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/user/get";
+                request_.pathname = this._getPathname(_nickname, "/v2/user/get");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -4019,7 +4019,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/user/list";
+                request_.pathname = this._getPathname(_nickname, "/v2/user/list");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -4121,7 +4121,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/user/search";
+                request_.pathname = this._getPathname(_nickname, "/v2/user/search");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
@@ -4223,7 +4223,7 @@ public class Client extends BaseClient {
                 String accessToken = this._getAccessToken();
                 request_.protocol = this._getProtocol(_protocol, "https");
                 request_.method = "POST";
-                request_.pathname = "/v2/user/update";
+                request_.pathname = this._getPathname(_nickname, "/v2/user/update");
                 request_.headers = TeaConverter.buildMap(
                     new TeaPair("user-agent", this._getUserAgent()),
                     new TeaPair("host", this._getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),

@@ -56,6 +56,10 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         [Validation(Required=false)]
         public string ExpireTime { get; set; }
 
+        [NameInMap("nickname")]
+        [Validation(Required=false)]
+        public string Nickname { get; set; }
+
     }
 
 }
