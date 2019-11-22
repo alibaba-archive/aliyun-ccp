@@ -24,6 +24,7 @@ type BaseClient struct {
 	ClientId     string `json:"clientId" xml:"clientId"`
 	UserAgent    string `json:"useragent" xml:"useragent"`
 	ClientSecret string `json:"clientSecret" xml:"clientSecret"`
+	Nickname     string `json:"nickname" xml:"nickname"`
 	credential   credentials.Credential
 	accessToken  *AccessTokenCredential
 }
@@ -42,6 +43,7 @@ func (client *BaseClient) InitClient(config map[string]interface{}) error {
 	client.UserAgent = getStringValue(config["useragent"])
 	client.ClientId = getStringValue(config["clientId"])
 	client.ClientSecret = getStringValue(config["clientSecret"])
+	client.Nickname = getStringValue(config["nickname"])
 	configuration := &credentials.Configuration{
 		AccessKeyID:     getStringValue(config["accessKeyId"]),
 		AccessKeySecret: getStringValue(config["accessKeySecret"]),
@@ -90,6 +92,13 @@ func (client *BaseClient) SetExpireTime(expireTime string) error {
 	unix := expiretime.Unix()
 	client.accessToken.credentialUpdater.ExpireTime = &unix
 	return nil
+}
+
+func (client *BaseClient) GetPathname(nickName string, path string) string {
+	if nickName == "" {
+		return path
+	}
+	return "/" + nickName + path
 }
 
 func (client *BaseClient) SetUserAgent(useragent string) {
