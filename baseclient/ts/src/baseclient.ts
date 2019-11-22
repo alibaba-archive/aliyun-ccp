@@ -52,6 +52,7 @@ export default class BaseClient {
     _accessKeyId: string
     _accessKeySecret: string
     _userId: string
+    _nickname: string
 
     constructor(config: { [key: string]: any }) {
         this._domainId = config['domainId'];
@@ -60,6 +61,7 @@ export default class BaseClient {
         this._accessKeyId = config['accessKeyId'];
         this._accessKeySecret = config['accessKeySecret'];
         this._userId = config['userId'];
+        this._nickname = config['nickname'];
     }
 
     async _getAccessKeyId(): Promise<string> {
@@ -133,11 +135,11 @@ export default class BaseClient {
         return input;
     }
     
-    _getPathname(nickName: string, path: string): string {
-        if (!nickName) {
+    _getPathname(nickname: string, path: string): string {
+        if (!nickname) {
             return path;
         }
-        return `/${nickName}${path}`;
+        return `/${nickname}${path}`;
     } 
 
     _getSignature(request: $tea.Request): string {
