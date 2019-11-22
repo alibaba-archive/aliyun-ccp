@@ -273,9 +273,9 @@ namespace baseClientUnitTests
         public void TestGetPathname()
         {
             string nickName = "nickName";
-            string path = "path";
-            Assert.Equal("path", (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_getPathname", baseClient, new object[] { string.Empty, path }));
-            Assert.Equal("path/nickName", (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_getPathname", baseClient, new object[] { nickName, path }));
+            string path = "/path";
+            Assert.Equal("/path", (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_getPathname", baseClient, new object[] { string.Empty, path }));
+            Assert.Equal("/nickName/path", (string) TestHelper.RunInstanceMethod(typeof(BaseClient), "_getPathname", baseClient, new object[] { nickName, path }));
         }
 
     }

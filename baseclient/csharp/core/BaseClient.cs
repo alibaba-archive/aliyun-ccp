@@ -211,7 +211,7 @@ namespace Aliyun.SDK.CCP
             {
                 return path;
             }
-            return path + "/" + nickName;
+            return "/" + nickName + path;
         }
 
         public String getCanonicalizedHeaders(Dictionary<String, String> headers)
