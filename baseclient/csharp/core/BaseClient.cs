@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -28,7 +27,7 @@ namespace Aliyun.SDK.CCP
         protected string _domainId;
         protected string _protocol;
         protected string _endpoint;
-        protected string _userId;
+        protected string _nickname;
         protected Dictionary<string, object> _config;
         protected AccessKeyCredential _accessKeyCredential;
         protected AccessTokenCredential _accessTokenCredential;
@@ -36,10 +35,10 @@ namespace Aliyun.SDK.CCP
 
         public BaseClient(Dictionary<string, object> config)
         {
-            _domainId = DictUtils.GetDicValue(config, "DomainId").ToSafeString();
-            _protocol = DictUtils.GetDicValue(config, "Protocol").ToSafeString();
-            _endpoint = DictUtils.GetDicValue(config, "Endpoint").ToSafeString();
-            _userId = DictUtils.GetDicValue(config, "UserId").ToSafeString();
+            _domainId = DictUtils.GetDicValue(config, "domainId").ToSafeString();
+            _protocol = DictUtils.GetDicValue(config, "protocol").ToSafeString();
+            _endpoint = DictUtils.GetDicValue(config, "endpoint").ToSafeString();
+            _nickname = DictUtils.GetDicValue(config, "nickname").ToSafeString();
             SetCredential(config);
             this._config = config;
 
@@ -49,10 +48,10 @@ namespace Aliyun.SDK.CCP
 
         private void SetCredential(Dictionary<string, object> config)
         {
-            string accessKeyId = DictUtils.GetDicValue(config, "AccessKeyId").ToSafeString();
-            string accessKeySecret = DictUtils.GetDicValue(config, "AccessKeySecret").ToSafeString();
-            string refreshToken = DictUtils.GetDicValue(config, "RefreshToken").ToSafeString();
-            string securityToken = DictUtils.GetDicValue(config, "SecurityToken").ToSafeString();
+            string accessKeyId = DictUtils.GetDicValue(config, "accessKeyId").ToSafeString();
+            string accessKeySecret = DictUtils.GetDicValue(config, "accessKeySecret").ToSafeString();
+            string refreshToken = DictUtils.GetDicValue(config, "refreshToken").ToSafeString();
+            string securityToken = DictUtils.GetDicValue(config, "securityToken").ToSafeString();
             if (!string.IsNullOrWhiteSpace(securityToken))
             {
                 _stsCredential = new StsCredential(accessKeyId, accessKeySecret, securityToken);
