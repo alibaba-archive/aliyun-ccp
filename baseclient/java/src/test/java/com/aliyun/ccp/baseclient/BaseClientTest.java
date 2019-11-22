@@ -38,6 +38,16 @@ public class BaseClientTest {
         Assert.assertEquals("testSecurityToken", baseClient._stsCredential.getSecurityToken());
     }
 
+    @Test
+    public void _getPathnameTest() {
+        Map<String, Object> map = new HashMap<>();
+        BaseClient baseClient = new BaseClient(map);
+        String path = baseClient._getPathname("", "/test");
+        Assert.assertEquals("/test", path);
+
+        path = baseClient._getPathname("nickname", "/test");
+        Assert.assertEquals("/nickname/test", path);
+    }
 
     @Test
     public void getSetTest() throws Exception {
