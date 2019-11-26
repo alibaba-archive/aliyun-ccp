@@ -7,7 +7,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PackageReleaseNotes></PackageReleaseNotes>
     <AssemblyName>Aliyun.SDK.CCP.Client</AssemblyName>
-    <Version>0.0.1</Version>
+    <Version>0.0.2</Version>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
