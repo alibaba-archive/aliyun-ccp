@@ -34,4 +34,3 @@ public class OSSCopyFileRequest extends TeaModel {
     public String toShareId;
 
 }
-

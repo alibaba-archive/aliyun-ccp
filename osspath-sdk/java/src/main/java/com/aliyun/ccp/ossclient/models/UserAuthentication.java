@@ -37,4 +37,3 @@ public class UserAuthentication extends TeaModel {
     public String UserID;
 
 }
-

@@ -26,4 +26,3 @@ public class OSSDeleteFileResponse extends TeaModel {
     public String shareId;
 
 }
-

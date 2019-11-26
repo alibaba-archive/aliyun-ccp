@@ -19,4 +19,3 @@ public class LoginByCodeRequest extends TeaModel {
     public String type;
 
 }
-

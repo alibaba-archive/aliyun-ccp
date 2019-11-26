@@ -19,4 +19,3 @@ public class CCPDeleteFilesResponse extends TeaModel {
     public String driveId;
 
 }
-

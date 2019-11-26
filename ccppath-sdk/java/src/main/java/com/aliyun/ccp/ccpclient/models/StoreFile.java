@@ -20,4 +20,3 @@ public class StoreFile extends TeaModel {
     public String type;
 
 }
-

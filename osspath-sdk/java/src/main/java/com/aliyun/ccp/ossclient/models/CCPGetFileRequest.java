@@ -19,4 +19,3 @@ public class CCPGetFileRequest extends TeaModel {
     public String imageUrlProcess;
 
 }
-

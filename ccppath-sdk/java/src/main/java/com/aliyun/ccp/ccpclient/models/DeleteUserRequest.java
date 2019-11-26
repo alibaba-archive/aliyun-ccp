@@ -9,4 +9,3 @@ public class DeleteUserRequest extends TeaModel {
     public String userId;
 
 }
-

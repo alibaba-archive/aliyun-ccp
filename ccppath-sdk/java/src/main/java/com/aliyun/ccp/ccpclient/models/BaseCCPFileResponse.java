@@ -94,4 +94,3 @@ public class BaseCCPFileResponse extends TeaModel {
     public String url;
 
 }
-

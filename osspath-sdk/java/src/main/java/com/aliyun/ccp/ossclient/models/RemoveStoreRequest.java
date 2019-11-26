@@ -13,4 +13,3 @@ public class RemoveStoreRequest extends TeaModel {
     public String storeId;
 
 }
-

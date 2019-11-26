@@ -8,4 +8,3 @@ public class DeleteUserResponse extends TeaModel {
     public String requestId;
 
 }
-

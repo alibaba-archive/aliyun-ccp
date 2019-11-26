@@ -23,4 +23,3 @@ public class AccountLinkRequest extends TeaModel {
     public String userId;
 
 }
-

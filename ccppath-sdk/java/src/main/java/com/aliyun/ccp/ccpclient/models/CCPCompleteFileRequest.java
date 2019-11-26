@@ -19,4 +19,3 @@ public class CCPCompleteFileRequest extends TeaModel {
     public String fileId;
 
 }
-

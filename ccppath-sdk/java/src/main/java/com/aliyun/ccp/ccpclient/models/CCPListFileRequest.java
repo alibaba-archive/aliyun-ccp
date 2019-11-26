@@ -50,4 +50,3 @@ public class CCPListFileRequest extends TeaModel {
     public String customIndexKey;
 
 }
-

@@ -23,4 +23,3 @@ public class CCPDeleteFileResponse extends TeaModel {
     public String fileId;
 
 }
-

@@ -9,4 +9,3 @@ public class DeleteDriveRequest extends TeaModel {
     public String driveId;
 
 }
-

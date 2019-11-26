@@ -11,4 +11,3 @@ public class ListUserRequest extends TeaModel {
     public String marker;
 
 }
-

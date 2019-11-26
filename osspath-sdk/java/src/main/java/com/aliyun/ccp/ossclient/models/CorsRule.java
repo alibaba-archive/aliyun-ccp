@@ -20,4 +20,3 @@ public class CorsRule extends TeaModel {
     public Long maxAgeSeconds;
 
 }
-

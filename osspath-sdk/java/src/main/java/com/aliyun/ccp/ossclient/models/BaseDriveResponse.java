@@ -44,4 +44,3 @@ public class BaseDriveResponse extends TeaModel {
     public Long usedSize;
 
 }
-

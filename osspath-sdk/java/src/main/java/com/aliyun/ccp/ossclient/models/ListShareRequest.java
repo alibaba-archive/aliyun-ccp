@@ -20,4 +20,3 @@ public class ListShareRequest extends TeaModel {
     public String owner;
 
 }
-

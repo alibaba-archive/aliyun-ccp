@@ -17,4 +17,3 @@ public class CCPGetDownloadUrlResponse extends TeaModel {
     public String url;
 
 }
-

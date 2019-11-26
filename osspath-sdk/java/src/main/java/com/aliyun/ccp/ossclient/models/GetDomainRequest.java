@@ -9,4 +9,3 @@ public class GetDomainRequest extends TeaModel {
     public String domainId;
 
 }
-

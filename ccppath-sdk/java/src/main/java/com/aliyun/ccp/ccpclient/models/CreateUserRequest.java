@@ -33,4 +33,3 @@ public class CreateUserRequest extends TeaModel {
     public String userName;
 
 }
-

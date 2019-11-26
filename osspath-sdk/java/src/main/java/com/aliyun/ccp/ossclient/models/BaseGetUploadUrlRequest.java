@@ -19,4 +19,3 @@ public class BaseGetUploadUrlRequest extends TeaModel {
     public String uploadId;
 
 }
-

@@ -47,4 +47,3 @@ public class UpdateUserResponse extends TeaModel {
     public String userName;
 
 }
-

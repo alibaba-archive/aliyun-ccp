@@ -59,4 +59,3 @@ public class CCPCreateFileRequest extends TeaModel {
     public String preHash;
 
 }
-

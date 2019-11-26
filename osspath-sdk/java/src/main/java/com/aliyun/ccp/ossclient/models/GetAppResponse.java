@@ -64,4 +64,3 @@ public class GetAppResponse extends TeaModel {
     public String updatedAt;
 
 }
-

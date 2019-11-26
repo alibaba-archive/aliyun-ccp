@@ -44,4 +44,3 @@ public class GetDriveResponse extends TeaModel {
     public Long usedSize;
 
 }
-

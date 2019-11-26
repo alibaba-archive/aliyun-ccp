@@ -28,4 +28,3 @@ public class OSSGetUploadUrlResponse extends TeaModel {
     public String uploadId;
 
 }
-

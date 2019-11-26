@@ -8,4 +8,3 @@ public class GetUserRequest extends TeaModel {
     public String userId;
 
 }
-

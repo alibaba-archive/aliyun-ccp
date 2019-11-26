@@ -86,4 +86,3 @@ public class CreateDomainRequest extends TeaModel {
     public String[] storeRegionList;
 
 }
-

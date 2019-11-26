@@ -94,4 +94,3 @@ public class CCPGetFileResponse extends TeaModel {
     public String url;
 
 }
-

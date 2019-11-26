@@ -14,4 +14,3 @@ public class CCPListFileResponse extends TeaModel {
     public String nextMarker;
 
 }
-

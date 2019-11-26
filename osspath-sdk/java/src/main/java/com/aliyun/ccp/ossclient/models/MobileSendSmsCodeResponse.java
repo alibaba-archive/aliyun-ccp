@@ -12,4 +12,3 @@ public class MobileSendSmsCodeResponse extends TeaModel {
     public String smsCodeId;
 
 }
-

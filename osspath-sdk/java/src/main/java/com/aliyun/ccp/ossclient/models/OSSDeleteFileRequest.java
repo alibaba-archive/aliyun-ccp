@@ -20,4 +20,3 @@ public class OSSDeleteFileRequest extends TeaModel {
     public String shareId;
 
 }
-

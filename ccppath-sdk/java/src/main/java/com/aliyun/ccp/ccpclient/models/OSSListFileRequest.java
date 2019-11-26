@@ -30,4 +30,3 @@ public class OSSListFileRequest extends TeaModel {
     public String shareId;
 
 }
-

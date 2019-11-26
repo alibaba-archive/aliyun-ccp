@@ -9,4 +9,3 @@ public class GetLinkInfoByUserIDRequest extends TeaModel {
     public String userId;
 
 }
-

@@ -12,4 +12,3 @@ public class LinkInfoListResponse extends TeaModel {
     public LinkInfoResponse[] items;
 
 }
-

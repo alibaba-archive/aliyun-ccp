@@ -13,4 +13,3 @@ public class GetByLinkInfoRequest extends TeaModel {
     public String type;
 
 }
-

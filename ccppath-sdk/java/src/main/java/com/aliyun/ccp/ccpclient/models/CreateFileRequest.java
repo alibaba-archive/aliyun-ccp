@@ -62,4 +62,3 @@ public class CreateFileRequest extends TeaModel {
     public String type;
 
 }
-

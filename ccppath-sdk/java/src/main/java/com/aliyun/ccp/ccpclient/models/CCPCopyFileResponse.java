@@ -23,4 +23,3 @@ public class CCPCopyFileResponse extends TeaModel {
     public String fileId;
 
 }
-

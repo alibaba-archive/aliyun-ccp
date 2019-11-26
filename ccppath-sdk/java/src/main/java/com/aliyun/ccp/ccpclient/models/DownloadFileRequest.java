@@ -16,4 +16,3 @@ public class DownloadFileRequest extends TeaModel {
     public String ImageProcess;
 
 }
-

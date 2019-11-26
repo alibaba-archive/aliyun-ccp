@@ -26,4 +26,3 @@ public class GetDownloadUrlRequest extends TeaModel {
     public String shareId;
 
 }
-

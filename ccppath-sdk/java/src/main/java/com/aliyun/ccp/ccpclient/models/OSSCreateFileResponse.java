@@ -32,4 +32,3 @@ public class OSSCreateFileResponse extends TeaModel {
     public String uploadId;
 
 }
-

@@ -17,4 +17,3 @@ public class CCPGetAsyncTaskResponse extends TeaModel {
     public String state;
 
 }
-

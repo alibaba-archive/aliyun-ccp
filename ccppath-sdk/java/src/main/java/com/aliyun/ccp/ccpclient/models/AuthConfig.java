@@ -20,4 +20,3 @@ public class AuthConfig extends TeaModel {
     public String enterpriseId;
 
 }
-

@@ -8,4 +8,3 @@ public class GetAsyncTaskRequest extends TeaModel {
     public String asyncTaskId;
 
 }
-

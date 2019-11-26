@@ -11,4 +11,3 @@ public class CCPBatchResponse extends TeaModel {
     public BatchSubResponse[] responses;
 
 }
-

@@ -26,4 +26,3 @@ public class OSSMoveFileResponse extends TeaModel {
     public String shareId;
 
 }
-

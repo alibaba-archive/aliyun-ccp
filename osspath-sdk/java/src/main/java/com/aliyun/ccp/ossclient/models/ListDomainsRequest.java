@@ -11,4 +11,3 @@ public class ListDomainsRequest extends TeaModel {
     public String marker;
 
 }
-

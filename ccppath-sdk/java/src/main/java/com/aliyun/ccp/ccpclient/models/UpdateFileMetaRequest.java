@@ -35,4 +35,3 @@ public class UpdateFileMetaRequest extends TeaModel {
     public java.util.Map<String, Object> tags;
 
 }
-

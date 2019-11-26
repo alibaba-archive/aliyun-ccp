@@ -17,4 +17,3 @@ public class OSSGetDownloadUrlResponse extends TeaModel {
     public String url;
 
 }
-

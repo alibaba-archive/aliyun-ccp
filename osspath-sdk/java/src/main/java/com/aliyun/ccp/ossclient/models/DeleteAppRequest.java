@@ -9,4 +9,3 @@ public class DeleteAppRequest extends TeaModel {
     public String appId;
 
 }
-

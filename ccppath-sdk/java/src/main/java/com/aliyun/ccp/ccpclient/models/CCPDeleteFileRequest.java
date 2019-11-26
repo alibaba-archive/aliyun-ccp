@@ -16,4 +16,3 @@ public class CCPDeleteFileRequest extends TeaModel {
     public boolean permanently;
 
 }
-

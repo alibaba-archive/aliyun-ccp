@@ -82,4 +82,3 @@ public class OSSCompleteFileResponse extends TeaModel {
     public String crc;
 
 }
-

@@ -35,4 +35,3 @@ public class CCPUpdateFileMetaRequest extends TeaModel {
     public boolean starred;
 
 }
-

@@ -9,4 +9,3 @@ public class DeleteShareRequest extends TeaModel {
     public String shareId;
 
 }
-

@@ -79,4 +79,3 @@ public class OSSUpdateFileMetaResponse extends TeaModel {
     public String url;
 
 }
-

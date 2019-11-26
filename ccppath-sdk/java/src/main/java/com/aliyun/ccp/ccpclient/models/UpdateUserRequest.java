@@ -30,4 +30,3 @@ public class UpdateUserRequest extends TeaModel {
     public String userId;
 
 }
-

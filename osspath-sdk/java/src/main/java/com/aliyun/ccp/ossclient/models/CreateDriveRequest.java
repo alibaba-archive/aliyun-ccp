@@ -34,4 +34,3 @@ public class CreateDriveRequest extends TeaModel {
     public Long totalSize;
 
 }
-

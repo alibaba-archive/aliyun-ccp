@@ -47,4 +47,3 @@ public class RuntimeOptions extends TeaModel {
     public String socks5NetWork;
 
 }
-

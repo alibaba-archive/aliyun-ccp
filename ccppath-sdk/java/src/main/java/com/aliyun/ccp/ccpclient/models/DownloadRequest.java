@@ -19,4 +19,3 @@ public class DownloadRequest extends TeaModel {
     public String ShareID;
 
 }
-

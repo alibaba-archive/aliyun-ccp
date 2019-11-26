@@ -45,4 +45,3 @@ public class Config extends TeaModel {
     public String nickname;
 
 }
-

@@ -21,4 +21,3 @@ public class UpdateDriveRequest extends TeaModel {
     public Long totalSize;
 
 }
-

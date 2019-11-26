@@ -11,4 +11,3 @@ public class LinkInfo extends TeaModel {
     public String type;
 
 }
-

@@ -94,4 +94,3 @@ public class CCPUpdateFileMetaResponse extends TeaModel {
     public String url;
 
 }
-

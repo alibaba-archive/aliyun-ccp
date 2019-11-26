@@ -6,6 +6,7 @@ import com.aliyun.tea.*;
 import com.aliyun.tea.utils.StringUtils;
 import com.google.gson.Gson;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.KeyManagementException;
@@ -55,8 +56,9 @@ public class AccessTokenCredential {
                 new TeaPair("x-acs-signature-method", "HMAC-SHA1"),
                 new TeaPair("x-acs-signature-version", "1.0")
         );
-        request_.body = String.format("grant_type=refresh_token&refresh_token=%s&client_id=%s&client_secret=%s",
+        String bodyString = String.format("grant_type=refresh_token&refresh_token=%s&client_id=%s&client_secret=%s",
                 this.refreshToken, this.clientId, this.clientSecret);
+        request_.body = new ByteArrayInputStream(bodyString.getBytes("UTF-8"));
         TeaResponse response_ = Tea.doAction(request_, new HashMap<>());
         String body = response_.getResponseBody();
         Gson gson = new Gson();

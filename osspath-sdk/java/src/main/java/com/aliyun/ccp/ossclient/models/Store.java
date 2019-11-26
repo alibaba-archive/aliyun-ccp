@@ -44,4 +44,3 @@ public class Store extends TeaModel {
     public String type;
 
 }
-

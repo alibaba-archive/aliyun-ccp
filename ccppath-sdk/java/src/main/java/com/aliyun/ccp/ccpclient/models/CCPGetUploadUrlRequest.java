@@ -22,4 +22,3 @@ public class CCPGetUploadUrlRequest extends TeaModel {
     public String fileId;
 
 }
-

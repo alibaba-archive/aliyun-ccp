@@ -22,4 +22,3 @@ public class DeleteFileRequest extends TeaModel {
     public String shareId;
 
 }
-

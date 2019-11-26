@@ -17,4 +17,3 @@ public class ImageMediaResponse extends TeaModel {
     public Long width;
 
 }
-

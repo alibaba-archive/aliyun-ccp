@@ -11,4 +11,3 @@ public class ListStoreResponse extends TeaModel {
     public StoreItemResponse[] items;
 
 }
-
