@@ -13,4 +13,3 @@ public class CCPBatchRequest extends TeaModel {
     public String resource;
 
 }
-

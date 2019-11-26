@@ -18,4 +18,3 @@ public class UploadPartInfo extends TeaModel {
     public String uploadUrl;
 
 }
-

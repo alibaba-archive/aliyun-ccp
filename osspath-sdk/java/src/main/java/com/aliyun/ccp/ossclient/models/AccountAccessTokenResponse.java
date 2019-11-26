@@ -52,4 +52,3 @@ public class AccountAccessTokenResponse extends TeaModel {
     public String userName;
 
 }
-

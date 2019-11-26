@@ -14,4 +14,3 @@ public class ListStoreFileResponse extends TeaModel {
     public String nextMarker;
 
 }
-

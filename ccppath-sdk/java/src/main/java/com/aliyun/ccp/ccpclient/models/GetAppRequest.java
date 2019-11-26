@@ -9,4 +9,3 @@ public class GetAppRequest extends TeaModel {
     public String appId;
 
 }
-

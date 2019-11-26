@@ -14,4 +14,3 @@ public class OSSSearchFileResponse extends TeaModel {
     public String nextMarker;
 
 }
-

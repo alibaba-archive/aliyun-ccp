@@ -8,4 +8,3 @@ public class GetDefaultDriveRequest extends TeaModel {
     public String userId;
 
 }
-

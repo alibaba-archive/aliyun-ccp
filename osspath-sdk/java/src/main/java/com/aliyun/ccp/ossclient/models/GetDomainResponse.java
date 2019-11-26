@@ -98,4 +98,3 @@ public class GetDomainResponse extends TeaModel {
     public String updatedAt;
 
 }
-

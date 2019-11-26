@@ -79,4 +79,3 @@ public class BaseOSSFileResponse extends TeaModel {
     public String url;
 
 }
-

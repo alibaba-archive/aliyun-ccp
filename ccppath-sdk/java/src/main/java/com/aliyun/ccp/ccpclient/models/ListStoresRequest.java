@@ -9,4 +9,3 @@ public class ListStoresRequest extends TeaModel {
     public String domainId;
 
 }
-

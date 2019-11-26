@@ -27,4 +27,3 @@ public class AccessTokenResponse extends TeaModel {
     public String userId;
 
 }
-

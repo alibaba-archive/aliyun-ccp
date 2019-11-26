@@ -14,4 +14,3 @@ public class CCPSearchFileResponse extends TeaModel {
     public String nextMarker;
 
 }
-

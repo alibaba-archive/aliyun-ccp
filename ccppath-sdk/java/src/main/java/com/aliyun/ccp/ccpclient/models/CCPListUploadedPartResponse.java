@@ -21,4 +21,3 @@ public class CCPListUploadedPartResponse extends TeaModel {
     public UploadPartInfo[] uploadedParts;
 
 }
-

@@ -26,4 +26,3 @@ public class OSSCopyFileResponse extends TeaModel {
     public String shareId;
 
 }
-

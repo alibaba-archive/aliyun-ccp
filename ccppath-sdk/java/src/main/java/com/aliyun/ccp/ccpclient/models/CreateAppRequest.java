@@ -30,4 +30,3 @@ public class CreateAppRequest extends TeaModel {
     public String type;
 
 }
-

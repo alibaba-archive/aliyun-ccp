@@ -23,4 +23,3 @@ public class MobileSendSmsCodeRequest extends TeaModel {
     public String type;
 
 }
-

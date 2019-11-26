@@ -22,4 +22,3 @@ public class BaseListFileRequest extends TeaModel {
     public String marker;
 
 }
-

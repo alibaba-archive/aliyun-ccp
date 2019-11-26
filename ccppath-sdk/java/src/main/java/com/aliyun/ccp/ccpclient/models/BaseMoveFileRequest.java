@@ -16,4 +16,3 @@ public class BaseMoveFileRequest extends TeaModel {
     public boolean overwrite;
 
 }
-

@@ -24,4 +24,3 @@ public class PreHashCheckSuccessResponse extends TeaModel {
     public String preHash;
 
 }
-

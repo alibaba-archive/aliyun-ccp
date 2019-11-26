@@ -24,4 +24,3 @@ public class UpdateShareRequest extends TeaModel {
     public String status;
 
 }
-

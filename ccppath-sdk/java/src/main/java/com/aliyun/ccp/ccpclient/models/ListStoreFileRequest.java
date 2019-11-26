@@ -20,4 +20,3 @@ public class ListStoreFileRequest extends TeaModel {
     public String type;
 
 }
-

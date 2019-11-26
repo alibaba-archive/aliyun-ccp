@@ -38,4 +38,3 @@ public class ListFileRequest extends TeaModel {
     public String status;
 
 }
-

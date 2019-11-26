@@ -8,4 +8,3 @@ public class GetShareRequest extends TeaModel {
     public String shareId;
 
 }
-

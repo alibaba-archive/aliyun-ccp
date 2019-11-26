@@ -36,4 +36,3 @@ public class UpdateAppRequest extends TeaModel {
     public String type;
 
 }
-

@@ -24,4 +24,3 @@ public class OSSGetDownloadUrlRequest extends TeaModel {
     public String shareId;
 
 }
-

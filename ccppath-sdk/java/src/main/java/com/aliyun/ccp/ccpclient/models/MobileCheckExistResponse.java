@@ -16,4 +16,3 @@ public class MobileCheckExistResponse extends TeaModel {
     public String phoneNumber;
 
 }
-

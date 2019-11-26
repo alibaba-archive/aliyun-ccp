@@ -7,7 +7,7 @@ import com.aliyun.ccp.baseclient.BaseClient;
 
 public class Client extends BaseClient {
 
-    public Client(Config config) throws IllegalArgumentException, IllegalAccessException {
+    public Client(Config config) throws Exception {
         super(config.toMap());
     }
 
@@ -70,15 +70,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new AccountAccessTokenResponse());
                 }
 
@@ -93,14 +94,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -172,15 +174,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new AccountAccessTokenResponse());
                 }
 
@@ -195,14 +198,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -274,7 +278,7 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -293,14 +297,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -372,7 +377,7 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -391,14 +396,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -470,15 +476,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new AccountAccessTokenResponse());
                 }
 
@@ -493,14 +500,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -572,15 +580,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new Captcha());
                 }
 
@@ -595,14 +604,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -674,15 +684,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new LinkInfoResponse());
                 }
 
@@ -697,14 +708,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -776,15 +788,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new LinkInfoListResponse());
                 }
 
@@ -799,14 +812,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -878,15 +892,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new AccountAccessTokenResponse());
                 }
 
@@ -901,14 +916,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -980,15 +996,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new MobileCheckExistResponse());
                 }
 
@@ -1003,14 +1020,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -1082,15 +1100,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new AccountAccessTokenResponse());
                 }
 
@@ -1105,14 +1124,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -1184,15 +1204,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new AccountAccessTokenResponse());
                 }
 
@@ -1207,14 +1228,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -1286,15 +1308,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new MobileSendSmsCodeResponse());
                 }
 
@@ -1309,14 +1332,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -1388,15 +1412,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new AccountAccessTokenResponse());
                 }
 
@@ -1411,14 +1436,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -1490,15 +1516,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new ListStoresResponse());
                 }
 
@@ -1513,14 +1540,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -1592,15 +1620,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new AccessTokenResponse());
                 }
 
@@ -1615,14 +1644,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -1694,15 +1724,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 201)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new CreateDriveResponse());
                 }
 
@@ -1717,14 +1748,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -1796,7 +1828,7 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -1815,14 +1847,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -1894,15 +1927,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new GetDriveResponse());
                 }
 
@@ -1917,14 +1951,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -1996,15 +2031,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new GetDriveResponse());
                 }
 
@@ -2019,14 +2055,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -2098,15 +2135,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new ListDriveResponse());
                 }
 
@@ -2121,14 +2159,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -2200,15 +2239,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new ListDriveResponse());
                 }
 
@@ -2223,14 +2263,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -2302,15 +2343,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new UpdateDriveResponse());
                 }
 
@@ -2325,14 +2367,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -2404,15 +2447,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new OSSCompleteFileResponse());
                 }
 
@@ -2427,14 +2471,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -2506,15 +2551,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 201)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new OSSCopyFileResponse());
                 }
 
@@ -2529,14 +2575,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -2608,15 +2655,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 201)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new OSSCreateFileResponse());
                 }
 
@@ -2631,14 +2679,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -2710,7 +2759,7 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -2729,14 +2778,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -2808,15 +2858,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new OSSGetFileResponse());
                 }
 
@@ -2831,14 +2882,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -2910,15 +2962,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new OSSGetDownloadUrlResponse());
                 }
 
@@ -2933,14 +2986,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -3012,15 +3066,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new OSSGetUploadUrlResponse());
                 }
 
@@ -3035,14 +3090,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -3114,15 +3170,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new OSSListFileResponse());
                 }
 
@@ -3137,14 +3194,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -3216,15 +3274,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new OSSListUploadedPartResponse());
                 }
 
@@ -3239,14 +3298,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -3318,15 +3378,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new OSSMoveFileResponse());
                 }
 
@@ -3341,14 +3402,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -3420,15 +3482,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 201)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new CreateShareResponse());
                 }
 
@@ -3443,14 +3506,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -3522,7 +3586,7 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -3541,14 +3605,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -3620,15 +3685,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new GetShareResponse());
                 }
 
@@ -3643,14 +3709,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -3722,15 +3789,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new ListShareResponse());
                 }
 
@@ -3745,14 +3813,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -3824,15 +3893,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new UpdateShareResponse());
                 }
 
@@ -3847,14 +3917,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -3926,15 +3997,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new ListStoreFileResponse());
                 }
 
@@ -3949,14 +4021,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -4028,15 +4101,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 201)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new CreateUserResponse());
                 }
 
@@ -4051,14 +4125,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -4130,7 +4205,7 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -4149,14 +4224,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -4228,15 +4304,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new GetUserResponse());
                 }
 
@@ -4251,14 +4328,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -4330,15 +4408,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new ListUserResponse());
                 }
 
@@ -4353,14 +4432,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -4432,15 +4512,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new ListUserResponse());
                 }
 
@@ -4455,14 +4536,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {
@@ -4534,15 +4616,16 @@ public class Client extends BaseClient {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + this._getSignature(request_) + "");
                 }
 
-                request_.body = this._toJSONString(request.toMap());
+                request_.body = Tea.toReadable(this._toJSONString(request.toMap()));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
                 if (this._isStatusCode(response_, 200)) {
-                    return TeaModel.toModel(TeaConverter.merge(
+                    return TeaModel.toModel(TeaConverter.merge(Object.class, 
                         TeaConverter.buildMap(
-                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))),
-                            this._readAsJSON(response_)
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        this._readAsJSON(response_)
                     ), new UpdateUserResponse());
                 }
 
@@ -4557,14 +4640,15 @@ public class Client extends BaseClient {
                     ));
                 }
 
-                throw new TeaException(TeaConverter.merge(
+                throw new TeaException(TeaConverter.merge(Object.class, 
                     TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(
                             new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
                             new TeaPair("statusCode", response_.statusCode),
                             new TeaPair("statusMessage", response_.statusMessage)
-                        ))),
-                        this._readAsJSON(response_)
+                        ))
+                    ),
+                    this._readAsJSON(response_)
                 ));
             } catch (Exception e) {
                 if (Tea.isRetryable(e)) {

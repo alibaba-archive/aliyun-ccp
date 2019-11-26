@@ -25,4 +25,3 @@ public class GetFileRequest extends TeaModel {
     public String shareId;
 
 }
-

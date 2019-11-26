@@ -28,4 +28,3 @@ public class CCPCopyFileRequest extends TeaModel {
     public String toParentFileId;
 
 }
-

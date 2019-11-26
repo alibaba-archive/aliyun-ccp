@@ -81,4 +81,3 @@ public class UpdateDomainRequest extends TeaModel {
     public boolean sharable;
 
 }
-

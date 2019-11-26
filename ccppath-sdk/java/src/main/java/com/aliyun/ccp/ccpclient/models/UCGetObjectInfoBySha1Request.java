@@ -8,4 +8,3 @@ public class UCGetObjectInfoBySha1Request extends TeaModel {
     public String sha1;
 
 }
-

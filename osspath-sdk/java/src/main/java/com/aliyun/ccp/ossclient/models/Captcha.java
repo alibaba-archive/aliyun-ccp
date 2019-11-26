@@ -17,4 +17,3 @@ public class Captcha extends TeaModel {
     public String captchaId;
 
 }
-

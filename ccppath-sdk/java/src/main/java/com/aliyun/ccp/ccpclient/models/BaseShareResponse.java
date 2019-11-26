@@ -50,4 +50,3 @@ public class BaseShareResponse extends TeaModel {
     public String updatedAt;
 
 }
-

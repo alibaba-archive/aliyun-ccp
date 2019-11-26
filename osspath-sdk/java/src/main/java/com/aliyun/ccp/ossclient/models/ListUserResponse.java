@@ -14,4 +14,3 @@ public class ListUserResponse extends TeaModel {
     public String nextMarker;
 
 }
-

@@ -25,4 +25,3 @@ public class DefaultChangePasswordRequest extends TeaModel {
     public String smsCodeId;
 
 }
-

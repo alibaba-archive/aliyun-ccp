@@ -26,4 +26,3 @@ public class OSSMoveFileRequest extends TeaModel {
     public String toParentFilePath;
 
 }
-

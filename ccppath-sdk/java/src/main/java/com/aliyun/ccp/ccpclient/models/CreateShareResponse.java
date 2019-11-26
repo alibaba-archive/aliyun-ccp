@@ -14,4 +14,3 @@ public class CreateShareResponse extends TeaModel {
     public String shareId;
 
 }
-

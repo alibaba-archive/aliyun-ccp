@@ -8,4 +8,3 @@ public class CCPGetAsyncTaskRequest extends TeaModel {
     public String asyncTaskId;
 
 }
-

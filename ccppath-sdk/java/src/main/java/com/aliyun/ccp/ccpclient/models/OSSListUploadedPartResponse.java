@@ -20,4 +20,3 @@ public class OSSListUploadedPartResponse extends TeaModel {
     public UploadPartInfo[] uploadedParts;
 
 }
-

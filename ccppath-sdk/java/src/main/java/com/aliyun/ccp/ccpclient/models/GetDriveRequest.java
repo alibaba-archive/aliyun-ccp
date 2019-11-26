@@ -9,4 +9,3 @@ public class GetDriveRequest extends TeaModel {
     public String driveId;
 
 }
-

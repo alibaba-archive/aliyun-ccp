@@ -8,4 +8,3 @@ public class UCGetObjectInfoByObjectKeyRequest extends TeaModel {
     public String objectKey;
 
 }
-

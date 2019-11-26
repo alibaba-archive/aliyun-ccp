@@ -11,4 +11,3 @@ public class AppAccessStrategy extends TeaModel {
     public String[] exceptAppIdList;
 
 }
-

@@ -5,4 +5,3 @@ import com.aliyun.tea.*;
 
 public class AdminListStoresRequest extends TeaModel {
 }
-

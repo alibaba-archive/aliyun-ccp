@@ -28,4 +28,3 @@ public class BaseCreateFileRequest extends TeaModel {
     public String type;
 
 }
-

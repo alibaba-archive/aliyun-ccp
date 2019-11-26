@@ -29,4 +29,3 @@ public class AddStoreRequest extends TeaModel {
     public String type;
 
 }
-

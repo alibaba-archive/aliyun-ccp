@@ -23,4 +23,3 @@ public class BatchSubRequest extends TeaModel {
     public String url;
 
 }
-

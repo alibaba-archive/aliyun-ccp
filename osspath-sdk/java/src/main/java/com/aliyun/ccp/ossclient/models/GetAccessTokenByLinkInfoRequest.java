@@ -13,4 +13,3 @@ public class GetAccessTokenByLinkInfoRequest extends TeaModel {
     public String type;
 
 }
-

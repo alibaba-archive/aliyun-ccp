@@ -32,4 +32,3 @@ public class CreateShareRequest extends TeaModel {
     public String status;
 
 }
-

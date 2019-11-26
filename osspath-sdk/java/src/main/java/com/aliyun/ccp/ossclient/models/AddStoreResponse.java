@@ -51,4 +51,3 @@ public class AddStoreResponse extends TeaModel {
     public String type;
 
 }
-

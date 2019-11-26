@@ -8,4 +8,3 @@ public class DeleteDriveResponse extends TeaModel {
     public String requestId;
 
 }
-

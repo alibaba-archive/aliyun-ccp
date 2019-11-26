@@ -14,4 +14,3 @@ public class OSSListFileResponse extends TeaModel {
     public String nextMarker;
 
 }
-

@@ -20,4 +20,3 @@ public class CCPGetDownloadUrlRequest extends TeaModel {
     public String fileName;
 
 }
-

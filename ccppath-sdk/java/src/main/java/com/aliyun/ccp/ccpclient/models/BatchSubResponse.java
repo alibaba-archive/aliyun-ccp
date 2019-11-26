@@ -17,4 +17,3 @@ public class BatchSubResponse extends TeaModel {
     public Long status;
 
 }
-

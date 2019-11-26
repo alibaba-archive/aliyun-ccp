@@ -50,4 +50,3 @@ public class StoreItemResponse extends TeaModel {
     public String type;
 
 }
-

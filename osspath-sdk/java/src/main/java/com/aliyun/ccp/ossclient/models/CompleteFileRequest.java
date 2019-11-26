@@ -26,4 +26,3 @@ public class CompleteFileRequest extends TeaModel {
     public String uploadId;
 
 }
-

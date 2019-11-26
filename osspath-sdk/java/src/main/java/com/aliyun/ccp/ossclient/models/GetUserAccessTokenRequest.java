@@ -12,4 +12,3 @@ public class GetUserAccessTokenRequest extends TeaModel {
     public String userId;
 
 }
-

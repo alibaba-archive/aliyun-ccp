@@ -29,4 +29,3 @@ public class SearchUserRequest extends TeaModel {
     public String userName;
 
 }
-

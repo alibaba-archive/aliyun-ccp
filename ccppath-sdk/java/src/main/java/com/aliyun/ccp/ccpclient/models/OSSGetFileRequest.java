@@ -23,4 +23,3 @@ public class OSSGetFileRequest extends TeaModel {
     public String shareId;
 
 }
-

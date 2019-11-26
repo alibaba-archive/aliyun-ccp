@@ -14,4 +14,3 @@ public class CreateDriveResponse extends TeaModel {
     public String driveId;
 
 }
-

@@ -97,4 +97,3 @@ public class CCPCompleteFileResponse extends TeaModel {
     public String crc;
 
 }
-

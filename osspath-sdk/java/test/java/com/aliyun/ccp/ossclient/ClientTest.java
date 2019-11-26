@@ -13,7 +13,7 @@ public class ClientTest {
     private static Client client;
 
     @Before
-    public void createClient() throws IllegalAccessException {
+    public void createClient() throws Exception {
         Config config = new Config();
         config.domainId = "sz16";
         config.protocol = "http";

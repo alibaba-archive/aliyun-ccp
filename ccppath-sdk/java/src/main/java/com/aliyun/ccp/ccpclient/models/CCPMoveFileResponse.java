@@ -23,4 +23,3 @@ public class CCPMoveFileResponse extends TeaModel {
     public String fileId;
 
 }
-

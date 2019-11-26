@@ -9,4 +9,3 @@ public class GetCaptchaRequest extends TeaModel {
     public String appId;
 
 }
-

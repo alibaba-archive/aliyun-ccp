@@ -36,4 +36,3 @@ public class LinkInfoResponse extends TeaModel {
     public String userId;
 
 }
-

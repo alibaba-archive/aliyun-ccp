@@ -17,4 +17,3 @@ public class SetStoreCorsRequest extends TeaModel {
     public String storeId;
 
 }
-

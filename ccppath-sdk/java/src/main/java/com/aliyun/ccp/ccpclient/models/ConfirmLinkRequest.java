@@ -9,4 +9,3 @@ public class ConfirmLinkRequest extends TeaModel {
     public String temporaryToken;
 
 }
-

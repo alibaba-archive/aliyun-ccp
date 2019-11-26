@@ -34,4 +34,3 @@ public class OSSCreateFileRequest extends TeaModel {
     public String shareId;
 
 }
-

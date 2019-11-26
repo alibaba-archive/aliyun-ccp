@@ -13,4 +13,3 @@ public class CCPDeleteFilesRequest extends TeaModel {
     public String[] fileIdList;
 
 }
-

@@ -9,4 +9,3 @@ public class CancelLinkRequest extends TeaModel {
     public String temporaryToken;
 
 }
-

@@ -21,4 +21,3 @@ public class OSSCompleteFileRequest extends TeaModel {
     public String shareId;
 
 }
-

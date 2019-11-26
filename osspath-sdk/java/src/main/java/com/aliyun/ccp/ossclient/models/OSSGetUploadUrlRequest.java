@@ -25,4 +25,3 @@ public class OSSGetUploadUrlRequest extends TeaModel {
     public String shareId;
 
 }
-

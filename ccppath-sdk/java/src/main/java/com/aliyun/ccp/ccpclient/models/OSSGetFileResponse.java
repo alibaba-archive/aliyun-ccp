@@ -79,4 +79,3 @@ public class OSSGetFileResponse extends TeaModel {
     public String url;
 
 }
-

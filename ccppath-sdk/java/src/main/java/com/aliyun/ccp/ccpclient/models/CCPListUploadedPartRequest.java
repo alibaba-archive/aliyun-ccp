@@ -24,4 +24,3 @@ public class CCPListUploadedPartRequest extends TeaModel {
     public String uploadId;
 
 }
-

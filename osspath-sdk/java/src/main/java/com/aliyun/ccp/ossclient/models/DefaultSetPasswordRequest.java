@@ -17,4 +17,3 @@ public class DefaultSetPasswordRequest extends TeaModel {
     public String state;
 
 }
-

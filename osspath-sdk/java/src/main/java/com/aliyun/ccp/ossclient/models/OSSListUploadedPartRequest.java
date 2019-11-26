@@ -28,4 +28,3 @@ public class OSSListUploadedPartRequest extends TeaModel {
     public String uploadId;
 
 }
-

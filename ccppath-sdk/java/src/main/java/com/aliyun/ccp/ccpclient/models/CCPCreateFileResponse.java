@@ -36,4 +36,3 @@ public class CCPCreateFileResponse extends TeaModel {
     public String uploadId;
 
 }
-

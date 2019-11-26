@@ -27,4 +27,3 @@ public class CCPSearchFileRequest extends TeaModel {
     public String query;
 
 }
-

@@ -15,4 +15,3 @@ public class BaseCompleteFileRequest extends TeaModel {
     public String uploadId;
 
 }
-
