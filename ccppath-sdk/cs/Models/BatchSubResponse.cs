@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 using Tea;
 
@@ -14,7 +15,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
 
         [NameInMap("body")]
         [Validation(Required=false)]
-        public object Body { get; set; }
+        public Dictionary<string, object> Body { get; set; }
 
         [NameInMap("id")]
         [Validation(Required=false)]

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 using Tea;
 
@@ -26,7 +27,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("auth_config")]
         [Validation(Required=false)]
-        public object AuthConfig { get; set; }
+        public Dictionary<string, object> AuthConfig { get; set; }
 
         [NameInMap("auth_dingding_app_id")]
         [Validation(Required=false)]

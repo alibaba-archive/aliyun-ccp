@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 using Tea;
 
@@ -42,7 +43,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
 
         [NameInMap("tags")]
         [Validation(Required=false)]
-        public object Tags { get; set; }
+        public Dictionary<string, object> Tags { get; set; }
 
     }
 
