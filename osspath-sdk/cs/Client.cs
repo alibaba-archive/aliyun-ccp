@@ -78,7 +78,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -95,7 +95,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -181,7 +181,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -198,7 +198,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -448,7 +448,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -465,7 +465,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -551,7 +551,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<Captcha>(TeaConverter.merge(
+                        return TeaModel.ToObject<Captcha>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -568,7 +568,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<Captcha>(TeaConverter.merge(
+                    return TeaModel.ToObject<Captcha>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -654,7 +654,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<LinkInfoResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<LinkInfoResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -671,7 +671,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<LinkInfoResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<LinkInfoResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -757,7 +757,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<LinkInfoListResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<LinkInfoListResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -774,7 +774,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<LinkInfoListResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<LinkInfoListResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -860,7 +860,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -877,7 +877,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -963,7 +963,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<MobileCheckExistResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<MobileCheckExistResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -980,7 +980,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<MobileCheckExistResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<MobileCheckExistResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -1066,7 +1066,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -1083,7 +1083,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -1169,7 +1169,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -1186,7 +1186,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -1272,7 +1272,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<MobileSendSmsCodeResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<MobileSendSmsCodeResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -1289,7 +1289,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<MobileSendSmsCodeResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<MobileSendSmsCodeResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -1375,7 +1375,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -1392,7 +1392,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -1478,7 +1478,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<ListStoresResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<ListStoresResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -1495,7 +1495,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<ListStoresResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<ListStoresResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -1581,7 +1581,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<AccessTokenResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<AccessTokenResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -1598,7 +1598,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<AccessTokenResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<AccessTokenResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -1684,7 +1684,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 201)) {
-                        return TeaModel.ToObject<CreateDriveResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<CreateDriveResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -1701,7 +1701,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<CreateDriveResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<CreateDriveResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -1869,7 +1869,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<GetDriveResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<GetDriveResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -1886,7 +1886,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<GetDriveResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<GetDriveResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -1972,7 +1972,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<GetDriveResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<GetDriveResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -1989,7 +1989,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<GetDriveResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<GetDriveResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -2075,7 +2075,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<ListDriveResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<ListDriveResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -2092,7 +2092,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<ListDriveResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<ListDriveResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -2178,7 +2178,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<ListDriveResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<ListDriveResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -2195,7 +2195,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<ListDriveResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<ListDriveResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -2281,7 +2281,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<UpdateDriveResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<UpdateDriveResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -2298,7 +2298,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<UpdateDriveResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<UpdateDriveResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -2384,7 +2384,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<OSSCompleteFileResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<OSSCompleteFileResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -2401,7 +2401,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<OSSCompleteFileResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<OSSCompleteFileResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -2487,7 +2487,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 201)) {
-                        return TeaModel.ToObject<OSSCopyFileResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<OSSCopyFileResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -2504,7 +2504,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<OSSCopyFileResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<OSSCopyFileResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -2590,7 +2590,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 201)) {
-                        return TeaModel.ToObject<OSSCreateFileResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<OSSCreateFileResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -2607,7 +2607,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<OSSCreateFileResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<OSSCreateFileResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -2775,7 +2775,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<OSSGetFileResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<OSSGetFileResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -2792,7 +2792,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<OSSGetFileResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<OSSGetFileResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -2878,7 +2878,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<OSSGetDownloadUrlResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<OSSGetDownloadUrlResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -2895,7 +2895,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<OSSGetDownloadUrlResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<OSSGetDownloadUrlResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -2981,7 +2981,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<OSSGetUploadUrlResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<OSSGetUploadUrlResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -2998,7 +2998,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<OSSGetUploadUrlResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<OSSGetUploadUrlResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -3084,7 +3084,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<OSSListFileResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<OSSListFileResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -3101,7 +3101,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<OSSListFileResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<OSSListFileResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -3187,7 +3187,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<OSSListUploadedPartResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<OSSListUploadedPartResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -3204,7 +3204,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<OSSListUploadedPartResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<OSSListUploadedPartResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -3290,7 +3290,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<OSSMoveFileResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<OSSMoveFileResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -3307,7 +3307,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<OSSMoveFileResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<OSSMoveFileResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -3393,7 +3393,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 201)) {
-                        return TeaModel.ToObject<CreateShareResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<CreateShareResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -3410,7 +3410,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<CreateShareResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<CreateShareResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -3578,7 +3578,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<GetShareResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<GetShareResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -3595,7 +3595,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<GetShareResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<GetShareResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -3681,7 +3681,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<ListShareResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<ListShareResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -3698,7 +3698,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<ListShareResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<ListShareResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -3784,7 +3784,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<UpdateShareResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<UpdateShareResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -3801,7 +3801,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<UpdateShareResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<UpdateShareResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -3887,7 +3887,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<ListStoreFileResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<ListStoreFileResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -3904,7 +3904,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<ListStoreFileResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<ListStoreFileResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -3990,7 +3990,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 201)) {
-                        return TeaModel.ToObject<CreateUserResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<CreateUserResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -4007,7 +4007,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<CreateUserResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<CreateUserResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -4175,7 +4175,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<GetUserResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<GetUserResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -4192,7 +4192,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<GetUserResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<GetUserResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -4278,7 +4278,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<ListUserResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<ListUserResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -4295,7 +4295,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<ListUserResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<ListUserResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -4381,7 +4381,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<ListUserResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<ListUserResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -4398,7 +4398,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<ListUserResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<ListUserResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -4484,7 +4484,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     if (this._isStatusCode(response_, 200)) {
-                        return TeaModel.ToObject<UpdateUserResponse>(TeaConverter.merge(
+                        return TeaModel.ToObject<UpdateUserResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
@@ -4501,7 +4501,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<UpdateUserResponse>(TeaConverter.merge(
+                    return TeaModel.ToObject<UpdateUserResponse>(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},

@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 using Tea;
 
@@ -10,11 +11,11 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
     public class BatchSubRequest : TeaModel {
         [NameInMap("body")]
         [Validation(Required=false)]
-        public object Body { get; set; }
+        public Dictionary<string, object> Body { get; set; }
 
         [NameInMap("headers")]
         [Validation(Required=false)]
-        public object Headers { get; set; }
+        public Dictionary<string, object> Headers { get; set; }
 
         [NameInMap("id")]
         [Validation(Required=true)]
