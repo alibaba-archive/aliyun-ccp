@@ -1,3 +1,6 @@
+### 2019-11-26 Version 0.0.7
+* Improved Tea Reference version 0.0.7
+
 ### 2019-11-22 Version 0.0.6
 * supported `nickname`
 
