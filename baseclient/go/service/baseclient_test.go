@@ -149,7 +149,8 @@ func Test_ReadAsJSON(t *testing.T) {
 		Body: readCloser,
 	}
 	response := tea.NewResponse(httpResponse)
-	result := client.ReadAsJSON(response)
+	result, err := client.ReadAsJSON(response)
+	utils.AssertNotNil(t, err)
 	utils.AssertEqual(t, 0, len(result))
 
 	body = client.ToJSONString(map[string]string{
@@ -158,7 +159,8 @@ func Test_ReadAsJSON(t *testing.T) {
 	readCloser = ioutil.NopCloser(body)
 	httpResponse.Body = readCloser
 	response = tea.NewResponse(httpResponse)
-	result = client.ReadAsJSON(response)
+	result, err = client.ReadAsJSON(response)
+	utils.AssertNil(t, err)
 	utils.AssertEqual(t, 1, len(result))
 }
 

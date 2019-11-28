@@ -2133,10 +2133,12 @@ example'),
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -2150,13 +2152,14 @@ example'),
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -2212,10 +2215,12 @@ example'),
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -2229,13 +2234,14 @@ example'),
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -2290,6 +2296,7 @@ example'),
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 204)) {
       return;
     }
@@ -2304,13 +2311,14 @@ example'),
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -2365,6 +2373,7 @@ example'),
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 204)) {
       return;
     }
@@ -2379,13 +2388,14 @@ example'),
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -2441,10 +2451,12 @@ example'),
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -2458,13 +2470,14 @@ example'),
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -2519,10 +2532,12 @@ example'),
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -2536,13 +2551,14 @@ example'),
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -2598,10 +2614,12 @@ example'),
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -2615,13 +2633,14 @@ example'),
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -2676,10 +2695,12 @@ example'),
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -2693,13 +2714,14 @@ example'),
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -2756,10 +2778,12 @@ example'),
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -2773,13 +2797,14 @@ example'),
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -2835,10 +2860,12 @@ example'),
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -2852,13 +2879,14 @@ example'),
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -2914,10 +2942,12 @@ example'),
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -2931,13 +2961,14 @@ example'),
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -2993,10 +3024,12 @@ example'),
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -3010,13 +3043,14 @@ example'),
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -3071,10 +3105,12 @@ example'),
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -3088,13 +3124,14 @@ example'),
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -3149,10 +3186,12 @@ example'),
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -3166,13 +3205,14 @@ example'),
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -3231,10 +3271,12 @@ example'),
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -3248,13 +3290,14 @@ example'),
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -3312,10 +3355,12 @@ example'),
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -3329,13 +3374,14 @@ example'),
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -3394,10 +3440,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 201)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -3411,13 +3459,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -3474,6 +3523,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 204)) {
       return;
     }
@@ -3488,13 +3538,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -3552,10 +3603,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -3569,13 +3622,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -3634,10 +3688,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -3651,13 +3707,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -3714,10 +3771,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -3731,13 +3790,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -3794,10 +3854,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -3811,13 +3873,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -3875,10 +3938,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -3892,13 +3957,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -3956,10 +4022,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -3973,13 +4041,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -4037,17 +4106,20 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 201)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
     if (@isStatusCode(__response, 202)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -4061,13 +4133,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -4127,10 +4200,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 201)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -4144,13 +4219,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -4208,10 +4284,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 202)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -4229,13 +4307,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -4298,6 +4377,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
       headers.authorization = `acs ${accesskeyId}:${@getSignature(__request)}`;
     }
   } returns {
+      var respMap : object = null;
     if (@notEmpty(__response.headers.x-ca-error-message)) {
       throw {
         data = {
@@ -4308,13 +4388,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -4372,10 +4453,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -4389,13 +4472,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -4453,10 +4537,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -4470,13 +4556,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -4534,10 +4621,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -4551,13 +4640,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -4615,10 +4705,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -4632,13 +4724,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -4696,10 +4789,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -4713,13 +4808,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -4777,10 +4873,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -4794,13 +4892,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -4858,10 +4957,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -4875,13 +4976,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -4939,10 +5041,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -4956,13 +5060,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -5018,10 +5123,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 201)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -5035,13 +5142,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -5097,6 +5205,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 204)) {
       return;
     }
@@ -5111,13 +5220,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -5174,10 +5284,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -5191,13 +5303,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -5253,10 +5366,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -5270,13 +5385,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -5332,10 +5448,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -5349,13 +5467,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
@@ -5412,10 +5531,12 @@ large类型的drive用于文件数多的场景，不支持list操作，
     }
     body = @toJSONString(request);
   } returns {
+      var respMap : object = null;
     if (@isStatusCode(__response, 200)) {
+      respMap = @readAsJSON(__response);
       return {
         requestId = __response.headers.x-ca-request-id,
-        ...@readAsJSON(__response),
+        ...respMap,
       };
     }
 
@@ -5429,13 +5550,14 @@ large类型的drive用于文件数多的场景，不支持list操作，
         message = __response.headers.x-ca-error-message,
       };
     }
+    respMap = @readAsJSON(__response);
     throw {
       data = {
         requestId = __response.headers.x-ca-request-id,
         statusCode = __response.statusCode,
         statusMessage = __response.statusMessage,
       },
-      ...@readAsJSON(__response),
+      ...respMap,
     };
   } runtime {
     timeouted = 'retry',
