@@ -9450,30 +9450,37 @@ func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOpt
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/cancel_link")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &AccountAccessTokenResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -9489,13 +9496,18 @@ func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOpt
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -9565,30 +9577,37 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeO
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/confirm_link")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &AccountAccessTokenResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -9604,13 +9623,18 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeO
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -9679,24 +9703,26 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runt
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/default/change_password")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return err
 			}
+
+			respMap := make(map[string]interface{})
 
 			if client.IsStatusCode(response_, 204) {
 				return nil
@@ -9714,13 +9740,18 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runt
 				return err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return err
 		}()
 		if !tea.Retryable(err) {
@@ -9789,24 +9820,26 @@ func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *R
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/default/set_password")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return err
 			}
+
+			respMap := make(map[string]interface{})
 
 			if client.IsStatusCode(response_, 204) {
 				return nil
@@ -9824,13 +9857,18 @@ func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *R
 				return err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return err
 		}()
 		if !tea.Retryable(err) {
@@ -9900,30 +9938,37 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_access_token_by_link_info")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &AccountAccessTokenResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -9939,13 +9984,18 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -10015,30 +10065,37 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOpt
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_captcha")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &Captcha{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -10054,13 +10111,18 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOpt
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -10130,30 +10192,37 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *Runtim
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_link_info")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &LinkInfoResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -10169,13 +10238,18 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *Runtim
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -10245,30 +10319,37 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, r
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_link_info_by_user_id")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &LinkInfoListResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -10284,13 +10365,18 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, r
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -10360,30 +10446,37 @@ func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions)
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/link")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &AccountAccessTokenResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -10399,13 +10492,18 @@ func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions)
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -10475,30 +10573,37 @@ func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *Runt
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/check_exist")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &MobileCheckExistResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -10514,13 +10619,18 @@ func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *Runt
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -10590,30 +10700,37 @@ func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/login")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &AccountAccessTokenResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -10629,13 +10746,18 @@ func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -10705,30 +10827,37 @@ func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeO
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/register")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &AccountAccessTokenResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -10744,13 +10873,18 @@ func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeO
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -10820,30 +10954,37 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runti
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/send_sms_code")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &MobileSendSmsCodeResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -10859,13 +11000,18 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runti
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -10935,30 +11081,37 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (*Ac
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/token")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".auth.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &AccountAccessTokenResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -10974,13 +11127,18 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (*Ac
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -11050,30 +11208,37 @@ func (client *Client) AdminListStores(request *AdminListStoresRequest, runtime *
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/domain/list_stores")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &ListStoresResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -11089,13 +11254,18 @@ func (client *Client) AdminListStores(request *AdminListStoresRequest, runtime *
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -11165,30 +11335,37 @@ func (client *Client) GetUserAccessToken(request *GetUserAccessTokenRequest, run
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/get_access_token")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &AccessTokenResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -11204,13 +11381,18 @@ func (client *Client) GetUserAccessToken(request *GetUserAccessTokenRequest, run
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -11280,30 +11462,37 @@ func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeO
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/create")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 201) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &CreateDriveResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -11319,13 +11508,18 @@ func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeO
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -11394,24 +11588,26 @@ func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeO
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/delete")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return err
 			}
+
+			respMap := make(map[string]interface{})
 
 			if client.IsStatusCode(response_, 204) {
 				return nil
@@ -11429,13 +11625,18 @@ func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeO
 				return err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return err
 		}()
 		if !tea.Retryable(err) {
@@ -11505,30 +11706,37 @@ func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/get")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &GetDriveResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -11544,13 +11752,18 @@ func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -11620,30 +11833,37 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/get_default_drive")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &GetDriveResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -11659,13 +11879,18 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -11735,30 +11960,37 @@ func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOpti
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/list")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &ListDriveResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -11774,13 +12006,18 @@ func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOpti
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -11850,30 +12087,37 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *Runtime
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/list_my_drives")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &ListDriveResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -11889,13 +12133,18 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *Runtime
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -11965,30 +12214,37 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeO
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/update")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &UpdateDriveResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -12004,13 +12260,18 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeO
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -12080,30 +12341,37 @@ func (client *Client) CompleteFile(request *OSSCompleteFileRequest, runtime *Run
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/complete")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &OSSCompleteFileResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -12119,13 +12387,18 @@ func (client *Client) CompleteFile(request *OSSCompleteFileRequest, runtime *Run
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -12195,30 +12468,37 @@ func (client *Client) CopyFile(request *OSSCopyFileRequest, runtime *RuntimeOpti
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/copy")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 201) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &OSSCopyFileResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -12234,13 +12514,18 @@ func (client *Client) CopyFile(request *OSSCopyFileRequest, runtime *RuntimeOpti
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -12310,30 +12595,37 @@ func (client *Client) CreateFile(request *OSSCreateFileRequest, runtime *Runtime
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/create")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 201) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &OSSCreateFileResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -12349,13 +12641,18 @@ func (client *Client) CreateFile(request *OSSCreateFileRequest, runtime *Runtime
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -12424,24 +12721,26 @@ func (client *Client) DeleteFile(request *OSSDeleteFileRequest, runtime *Runtime
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/delete")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return err
 			}
+
+			respMap := make(map[string]interface{})
 
 			if client.IsStatusCode(response_, 204) {
 				return nil
@@ -12459,13 +12758,18 @@ func (client *Client) DeleteFile(request *OSSDeleteFileRequest, runtime *Runtime
 				return err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return err
 		}()
 		if !tea.Retryable(err) {
@@ -12535,30 +12839,37 @@ func (client *Client) GetFile(request *OSSGetFileRequest, runtime *RuntimeOption
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/get")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &OSSGetFileResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -12574,13 +12885,18 @@ func (client *Client) GetFile(request *OSSGetFileRequest, runtime *RuntimeOption
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -12650,30 +12966,37 @@ func (client *Client) GetDownloadUrl(request *OSSGetDownloadUrlRequest, runtime 
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/get_download_url")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &OSSGetDownloadUrlResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -12689,13 +13012,18 @@ func (client *Client) GetDownloadUrl(request *OSSGetDownloadUrlRequest, runtime 
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -12765,30 +13093,37 @@ func (client *Client) GetUploadUrl(request *OSSGetUploadUrlRequest, runtime *Run
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/get_upload_url")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &OSSGetUploadUrlResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -12804,13 +13139,18 @@ func (client *Client) GetUploadUrl(request *OSSGetUploadUrlRequest, runtime *Run
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -12880,30 +13220,37 @@ func (client *Client) ListFile(request *OSSListFileRequest, runtime *RuntimeOpti
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/list")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &OSSListFileResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -12919,13 +13266,18 @@ func (client *Client) ListFile(request *OSSListFileRequest, runtime *RuntimeOpti
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -12995,30 +13347,37 @@ func (client *Client) ListUploadedParts(request *OSSListUploadedPartRequest, run
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/list_uploaded_parts")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &OSSListUploadedPartResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -13034,13 +13393,18 @@ func (client *Client) ListUploadedParts(request *OSSListUploadedPartRequest, run
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -13110,30 +13474,37 @@ func (client *Client) MoveFile(request *OSSMoveFileRequest, runtime *RuntimeOpti
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/move")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &OSSMoveFileResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -13149,13 +13520,18 @@ func (client *Client) MoveFile(request *OSSMoveFileRequest, runtime *RuntimeOpti
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -13225,30 +13601,37 @@ func (client *Client) CreateShare(request *CreateShareRequest, runtime *RuntimeO
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/share/create")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 201) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &CreateShareResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -13264,13 +13647,18 @@ func (client *Client) CreateShare(request *CreateShareRequest, runtime *RuntimeO
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -13339,24 +13727,26 @@ func (client *Client) DeleteShare(request *DeleteShareRequest, runtime *RuntimeO
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/share/delete")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return err
 			}
+
+			respMap := make(map[string]interface{})
 
 			if client.IsStatusCode(response_, 204) {
 				return nil
@@ -13374,13 +13764,18 @@ func (client *Client) DeleteShare(request *DeleteShareRequest, runtime *RuntimeO
 				return err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return err
 		}()
 		if !tea.Retryable(err) {
@@ -13450,30 +13845,37 @@ func (client *Client) GetShare(request *GetShareRequest, runtime *RuntimeOptions
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/share/get")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &GetShareResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -13489,13 +13891,18 @@ func (client *Client) GetShare(request *GetShareRequest, runtime *RuntimeOptions
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -13565,30 +13972,37 @@ func (client *Client) ListShare(request *ListShareRequest, runtime *RuntimeOptio
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/share/list")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &ListShareResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -13604,13 +14018,18 @@ func (client *Client) ListShare(request *ListShareRequest, runtime *RuntimeOptio
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -13680,30 +14099,37 @@ func (client *Client) UpdateShare(request *UpdateShareRequest, runtime *RuntimeO
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/share/update")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &UpdateShareResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -13719,13 +14145,18 @@ func (client *Client) UpdateShare(request *UpdateShareRequest, runtime *RuntimeO
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -13795,30 +14226,37 @@ func (client *Client) ListStorefile(request *ListStoreFileRequest, runtime *Runt
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/store_file/list")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &ListStoreFileResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -13834,13 +14272,18 @@ func (client *Client) ListStorefile(request *ListStoreFileRequest, runtime *Runt
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -13910,30 +14353,37 @@ func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOpt
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/create")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 201) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &CreateUserResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -13949,13 +14399,18 @@ func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOpt
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -14024,24 +14479,26 @@ func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOpt
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/delete")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return err
 			}
+
+			respMap := make(map[string]interface{})
 
 			if client.IsStatusCode(response_, 204) {
 				return nil
@@ -14059,13 +14516,18 @@ func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOpt
 				return err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return err
 		}()
 		if !tea.Retryable(err) {
@@ -14135,30 +14597,37 @@ func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) 
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/get")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &GetUserResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -14174,13 +14643,18 @@ func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) 
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -14250,30 +14724,37 @@ func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOption
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/list")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &ListUserResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -14289,13 +14770,18 @@ func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOption
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -14365,30 +14851,37 @@ func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOpt
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/search")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &ListUserResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -14404,13 +14897,18 @@ func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOpt
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {
@@ -14480,30 +14978,37 @@ func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOpt
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/update")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, client.DomainId+".api.alicloudccp.com"),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
 			if client.NotEmpty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + accessToken
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
 				request_.Headers["date"] = client.GetRFC2616Date()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + accesskeyId + ":" + client.GetSignature(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(request))
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
 			response_, err := tea.DoRequest(request_, _runtime)
 			if err != nil {
 				return nil, err
 			}
 
+			respMap := make(map[string]interface{})
+
 			if client.IsStatusCode(response_, 200) {
+				respMap, err = client.ReadAsJSON(response_)
+				if err != nil {
+					return nil, err
+				}
+
 				_result := &UpdateUserResponse{}
 				err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
-				}, client.ReadAsJSON(response_)), &_result)
+				}, respMap), &_result)
 				return _result, err
 			}
 
@@ -14519,13 +15024,18 @@ func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOpt
 				return nil, err
 			}
 
+			respMap, err = client.ReadAsJSON(response_)
+			if err != nil {
+				return nil, err
+			}
+
 			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
-			}, client.ReadAsJSON(response_)))
+			}, respMap))
 			return nil, err
 		}()
 		if !tea.Retryable(err) {

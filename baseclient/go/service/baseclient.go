@@ -251,18 +251,18 @@ func (client *BaseClient) ToQuery(request interface{}) map[string]string {
 	return result
 }
 
-func (client *BaseClient) ReadAsJSON(response *tea.Response) map[string]interface{} {
+func (client *BaseClient) ReadAsJSON(response *tea.Response) (map[string]interface{}, error) {
 	tmp := make(map[string]interface{})
 	body, err := response.ReadBody()
 	if err != nil {
-		return tmp
+		return tmp, err
 	}
 
 	err = json.Unmarshal(body, &tmp)
 	if err != nil {
-		return tmp
+		return tmp, err
 	}
-	return tmp
+	return tmp, nil
 }
 
 func (client *BaseClient) DefaultNumber(realNum, defaultNum int) int {
