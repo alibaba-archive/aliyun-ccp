@@ -168,7 +168,7 @@ namespace Aliyun.SDK.CCP
             return Convert.ToBase64String(signData);
         }
 
-        protected bool _isStatusCode(TeaResponse response, int code)
+        protected bool _isStatusCode(TeaResponse response, int? code)
         {
             return response.StatusCode == code;
         }
@@ -292,7 +292,7 @@ namespace Aliyun.SDK.CCP
             return strValue;
         }
 
-        public int _defaultNumber(int numValue, int numDefault)
+        public int? _defaultNumber(int? numValue, int numDefault)
         {
             if (numValue > 0)
             {

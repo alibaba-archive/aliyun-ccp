@@ -239,6 +239,8 @@ namespace baseClientUnitTests
             Assert.Equal(0, (int) TestHelper.RunInstanceMethod(typeof(BaseClient), "_defaultNumber", baseClient, new object[] {-1, 0 }));
 
             Assert.Equal(1, (int) TestHelper.RunInstanceMethod(typeof(BaseClient), "_defaultNumber", baseClient, new object[] { 1, 0 }));
+
+            Assert.Equal(1, (int) TestHelper.RunInstanceMethod(typeof(BaseClient), "_defaultNumber", baseClient, new object[] { null, 1 }));
         }
 
         [Fact]
