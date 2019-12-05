@@ -14,13 +14,6 @@ import (
 	"github.com/aliyun/aliyun-ccp/baseclient/go/utils"
 )
 
-type validatorTest struct {
-	Num  *int       `json:"num" require:"true"`
-	Str  *string    `json:"str" pattern:"^[a-d]*$" maxLength:"4"`
-	Test *errLength `json:"test"`
-	List []*string  `json:"list" pattern:"^[a-d]*$" maxLength:"4"`
-}
-
 type errLength struct {
 	Num *int `json:"num" maxLength:"a"`
 }
@@ -72,54 +65,6 @@ func Test_Sorter(t *testing.T) {
 	sort.Swap(0, 1)
 	isLess = sort.Less(0, 1)
 	utils.AssertEqual(t, isLess, false)
-}
-
-func Test_validator(t *testing.T) {
-	var test *validatorTest
-	err := validator(reflect.ValueOf(test))
-	utils.AssertNil(t, err)
-
-	num := 1
-	str0, str1 := "acc", "abcddd"
-	val := &validatorTest{
-		Num:  &num,
-		Str:  &str0,
-		List: []*string{&str0},
-	}
-
-	err = validator(reflect.ValueOf(val))
-	utils.AssertNil(t, err)
-
-	val.Str = &str1
-	err = validator(reflect.ValueOf(val))
-	utils.AssertEqual(t, "Length of abcddd is more than 4", err.Error())
-
-	val.Num = nil
-	err = validator(reflect.ValueOf(val))
-	utils.AssertEqual(t, "num should be setted", err.Error())
-
-	val.Num = &num
-	val.Str = &str0
-	val.List = []*string{&str1}
-	err = validator(reflect.ValueOf(val))
-	utils.AssertEqual(t, "Length of abcddd is more than 4", err.Error())
-
-	val.Str = nil
-	err = validator(reflect.ValueOf(val))
-	utils.AssertEqual(t, "Length of abcddd is more than 4", err.Error())
-
-	str2 := "test"
-	val.Str = &str2
-	err = validator(reflect.ValueOf(val))
-	utils.AssertEqual(t, "test is not matched ^[a-d]*$", err.Error())
-
-	val.Str = &str0
-	val.List = []*string{&str0}
-	val.Test = &errLength{
-		Num: &num,
-	}
-	err = validator(reflect.ValueOf(val))
-	utils.AssertEqual(t, `strconv.Atoi: parsing "a": invalid syntax`, err.Error())
 }
 
 func Test_getSignature(t *testing.T) {

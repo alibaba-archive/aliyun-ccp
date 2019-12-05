@@ -149,13 +149,6 @@ func (client *BaseClient) SetAccessToken(token string) {
 	client.accessToken.AccessToken = token
 }
 
-// Verify whether the parameters meet the requirements
-func (client *BaseClient) Validator(params interface{}) error {
-	requestValue := reflect.ValueOf(params).Elem()
-	err := validator(requestValue)
-	return err
-}
-
 func (client *BaseClient) GetProtocol(protocol, defaultValue string) string {
 	if protocol != "" {
 		return protocol

@@ -6,12 +6,10 @@ import (
 	"crypto/sha1"
 	"encoding/base64"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"hash"
 	"io"
 	"reflect"
-	"regexp"
 	"sort"
 	"strconv"
 	"strings"
@@ -20,11 +18,6 @@ import (
 	"github.com/alibabacloud-go/tea/tea"
 	"github.com/aliyun/aliyun-ccp/baseclient/go/utils"
 )
-
-// Common basic types
-var basicTypes = []string{
-	"int", "int64", "float32", "float64", "string", "bool", "uint64",
-}
 
 var hookdo = func(response *tea.Response, err error) (*tea.Response, error) {
 	return response, err
@@ -86,139 +79,6 @@ func (hs *Sorter) Less(i, j int) bool {
 func (hs *Sorter) Swap(i, j int) {
 	hs.Vals[i], hs.Vals[j] = hs.Vals[j], hs.Vals[i]
 	hs.Keys[i], hs.Keys[j] = hs.Keys[j], hs.Keys[i]
-}
-
-var validatorParams = []string{"require", "pattern", "maxLength"}
-
-// Verify whether the parameters meet the requirements
-func validator(dataValue reflect.Value) error {
-	if strings.HasPrefix(dataValue.Type().String(), "*") { // Determines whether the input is a structure object or a pointer object
-		if dataValue.IsNil() {
-			return nil
-		}
-		dataValue = dataValue.Elem()
-	}
-	dataType := dataValue.Type()
-	for i := 0; i < dataType.NumField(); i++ {
-		field := dataType.Field(i)
-		valueField := dataValue.Field(i)
-		for _, value := range validatorParams {
-			err := validatorParam(field, valueField, value)
-			if err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-
-func validatorParam(field reflect.StructField, valueField reflect.Value, tagName string) error {
-	tag, containsTag := field.Tag.Lookup(tagName) // Take out the checked regular expression
-	if containsTag && tagName == "require" {
-		err := checkRequire(field, valueField)
-		if err != nil {
-			return err
-		}
-	}
-	if strings.HasPrefix(field.Type.String(), "[]") { // Verify the parameters of the array type
-		err := validatorSlice(valueField, containsTag, tag, tagName)
-		if err != nil {
-			return err
-		}
-	} else if valueField.Kind() == reflect.Ptr { // Determines whether it is a pointer object
-		err := validatorPtr(valueField, containsTag, tag, tagName)
-		if err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-func validatorSlice(valueField reflect.Value, containsregexpTag bool, tag, tagName string) error {
-	if valueField.IsValid() && !valueField.IsNil() { // Determines whether the parameter has a value
-		for m := 0; m < valueField.Len(); m++ {
-			elementValue := valueField.Index(m)
-			if elementValue.Type().Kind() == reflect.Ptr { // Determines whether the child elements of an array are of a basic type
-				err := validatorPtr(elementValue, containsregexpTag, tag, tagName)
-				if err != nil {
-					return err
-				}
-			}
-		}
-	}
-	return nil
-}
-
-func validatorPtr(elementValue reflect.Value, containsregexpTag bool, tag, tagName string) error {
-	if elementValue.IsNil() {
-		return nil
-	}
-
-	if isFilterType(elementValue.Elem().Type().String(), basicTypes) {
-		if containsregexpTag {
-			if tagName == "pattern" {
-				err := checkPattern(elementValue.Elem(), tag)
-				if err != nil {
-					return err
-				}
-			}
-
-			if tagName == "maxLength" {
-				err := checkMaxLength(elementValue.Elem(), tag)
-				if err != nil {
-					return err
-				}
-			}
-		}
-	} else {
-		err := validator(elementValue)
-		if err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-func checkRequire(field reflect.StructField, valueField reflect.Value) error {
-	name, _ := field.Tag.Lookup("json")
-	if !valueField.IsNil() && valueField.IsValid() {
-		return nil
-	}
-	return errors.New(name + " should be setted")
-}
-
-func checkPattern(valueField reflect.Value, tag string) error {
-	if valueField.IsValid() && valueField.String() != "" {
-		value := valueField.String()
-		if match, _ := regexp.MatchString(tag, value); !match { // Determines whether the parameter value satisfies the regular expression or not, and throws an error
-			return errors.New(value + " is not matched " + tag)
-		}
-	}
-	return nil
-}
-
-func checkMaxLength(valueField reflect.Value, tag string) error {
-	if valueField.IsValid() && valueField.String() != "" {
-		maxLength, err := strconv.Atoi(tag)
-		if err != nil {
-			return err
-		}
-		if maxLength < valueField.Len() {
-			errMsg := fmt.Sprintf("Length of %s is more than %d", valueField.String(), maxLength)
-			return errors.New(errMsg)
-		}
-	}
-	return nil
-}
-
-// Determines whether realType is in filterTypes
-func isFilterType(realType string, filterTypes []string) bool {
-	for _, value := range filterTypes {
-		if value == realType {
-			return true
-		}
-	}
-	return false
 }
 
 func getSignature(request *tea.Request, accessKeySecret string) string {
