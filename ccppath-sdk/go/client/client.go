@@ -8287,11 +8287,11 @@ func NewClient(config *Config) (*Client, error) {
 	return client, nil
 }
 func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOptions) (*AccountAccessTokenResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -8414,11 +8414,11 @@ func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOpt
 }
 
 func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeOptions) (*AccountAccessTokenResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -8541,11 +8541,11 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeO
 }
 
 func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runtime *RuntimeOptions) error {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return err
 	}
@@ -8658,11 +8658,11 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runt
 }
 
 func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *RuntimeOptions) error {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return err
 	}
@@ -8775,11 +8775,11 @@ func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *R
 }
 
 func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfoRequest, runtime *RuntimeOptions) (*AccountAccessTokenResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -8902,11 +8902,11 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 }
 
 func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOptions) (*Captcha, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -9029,11 +9029,11 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOpt
 }
 
 func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *RuntimeOptions) (*LinkInfoResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -9156,11 +9156,11 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *Runtim
 }
 
 func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, runtime *RuntimeOptions) (*LinkInfoListResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -9283,11 +9283,11 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, r
 }
 
 func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions) (*AccountAccessTokenResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -9410,11 +9410,11 @@ func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions)
 }
 
 func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *RuntimeOptions) (*MobileCheckExistResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -9537,11 +9537,11 @@ func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *Runt
 }
 
 func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions) (*AccountAccessTokenResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -9664,11 +9664,11 @@ func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions
 }
 
 func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeOptions) (*AccountAccessTokenResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -9791,11 +9791,11 @@ func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeO
 }
 
 func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runtime *RuntimeOptions) (*MobileSendSmsCodeResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -9918,11 +9918,11 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runti
 }
 
 func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (*AccountAccessTokenResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -10045,11 +10045,11 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (*Ac
 }
 
 func (client *Client) GetAsyncTaskInfo(request *CCPGetAsyncTaskRequest, runtime *RuntimeOptions) (*CCPGetAsyncTaskResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -10172,11 +10172,11 @@ func (client *Client) GetAsyncTaskInfo(request *CCPGetAsyncTaskRequest, runtime 
 }
 
 func (client *Client) Operation(request *CCPBatchRequest, runtime *RuntimeOptions) (*CCPBatchResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -10299,11 +10299,11 @@ func (client *Client) Operation(request *CCPBatchRequest, runtime *RuntimeOption
 }
 
 func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeOptions) (*CreateDriveResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -10426,11 +10426,11 @@ func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeO
 }
 
 func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeOptions) error {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return err
 	}
@@ -10543,11 +10543,11 @@ func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeO
 }
 
 func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions) (*GetDriveResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -10670,11 +10670,11 @@ func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions
 }
 
 func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *RuntimeOptions) (*GetDriveResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -10797,11 +10797,11 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *
 }
 
 func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOptions) (*ListDriveResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -10924,11 +10924,11 @@ func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOpti
 }
 
 func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *RuntimeOptions) (*ListDriveResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -11051,11 +11051,11 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *Runtime
 }
 
 func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeOptions) (*UpdateDriveResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -11178,11 +11178,11 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeO
 }
 
 func (client *Client) CompleteFile(request *CCPCompleteFileRequest, runtime *RuntimeOptions) (*CCPCompleteFileResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -11305,11 +11305,11 @@ func (client *Client) CompleteFile(request *CCPCompleteFileRequest, runtime *Run
 }
 
 func (client *Client) CopyFile(request *CCPCopyFileRequest, runtime *RuntimeOptions) (*CCPCopyFileResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -11445,11 +11445,11 @@ func (client *Client) CopyFile(request *CCPCopyFileRequest, runtime *RuntimeOpti
 }
 
 func (client *Client) CreateFile(request *CCPCreateFileRequest, runtime *RuntimeOptions) (*CCPCreateFileResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -11572,11 +11572,11 @@ func (client *Client) CreateFile(request *CCPCreateFileRequest, runtime *Runtime
 }
 
 func (client *Client) DeleteFile(request *CCPDeleteFileRequest, runtime *RuntimeOptions) (*CCPDeleteFileResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -11703,11 +11703,11 @@ func (client *Client) DeleteFile(request *CCPDeleteFileRequest, runtime *Runtime
 }
 
 func (client *Client) DownloadFile(request *DownloadFileRequest, runtime *RuntimeOptions) (*CCPGetDownloadUrlRequest, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -11816,11 +11816,11 @@ func (client *Client) DownloadFile(request *DownloadFileRequest, runtime *Runtim
 }
 
 func (client *Client) GetFile(request *CCPGetFileRequest, runtime *RuntimeOptions) (*CCPGetFileResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -11943,11 +11943,11 @@ func (client *Client) GetFile(request *CCPGetFileRequest, runtime *RuntimeOption
 }
 
 func (client *Client) GetDownloadUrl(request *CCPGetDownloadUrlRequest, runtime *RuntimeOptions) (*CCPGetDownloadUrlResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -12070,11 +12070,11 @@ func (client *Client) GetDownloadUrl(request *CCPGetDownloadUrlRequest, runtime 
 }
 
 func (client *Client) GetUploadUrl(request *CCPGetUploadUrlRequest, runtime *RuntimeOptions) (*CCPGetUploadUrlResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -12197,11 +12197,11 @@ func (client *Client) GetUploadUrl(request *CCPGetUploadUrlRequest, runtime *Run
 }
 
 func (client *Client) ListFile(request *CCPListFileRequest, runtime *RuntimeOptions) (*CCPListFileResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -12324,11 +12324,11 @@ func (client *Client) ListFile(request *CCPListFileRequest, runtime *RuntimeOpti
 }
 
 func (client *Client) ListUploadedParts(request *CCPListUploadedPartRequest, runtime *RuntimeOptions) (*CCPListUploadedPartResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -12451,11 +12451,11 @@ func (client *Client) ListUploadedParts(request *CCPListUploadedPartRequest, run
 }
 
 func (client *Client) MoveFile(request *CCPMoveFileRequest, runtime *RuntimeOptions) (*CCPMoveFileResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -12578,11 +12578,11 @@ func (client *Client) MoveFile(request *CCPMoveFileRequest, runtime *RuntimeOpti
 }
 
 func (client *Client) SearchFile(request *CCPSearchFileRequest, runtime *RuntimeOptions) (*CCPSearchFileResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -12705,11 +12705,11 @@ func (client *Client) SearchFile(request *CCPSearchFileRequest, runtime *Runtime
 }
 
 func (client *Client) UpdateFile(request *CCPUpdateFileMetaRequest, runtime *RuntimeOptions) (*CCPUpdateFileMetaResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -12832,11 +12832,11 @@ func (client *Client) UpdateFile(request *CCPUpdateFileMetaRequest, runtime *Run
 }
 
 func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOptions) (*CreateUserResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -12959,11 +12959,11 @@ func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOpt
 }
 
 func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOptions) error {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return err
 	}
@@ -13076,11 +13076,11 @@ func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOpt
 }
 
 func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) (*GetUserResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -13203,11 +13203,11 @@ func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) 
 }
 
 func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOptions) (*ListUserResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -13330,11 +13330,11 @@ func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOption
 }
 
 func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOptions) (*ListUserResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}
@@ -13457,11 +13457,11 @@ func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOpt
 }
 
 func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOptions) (*UpdateUserResponse, error) {
-	err := client.Validator(request)
+	err := tea.Validate(request)
 	if err != nil {
 		return nil, err
 	}
-	err = client.Validator(runtime)
+	err = tea.Validate(runtime)
 	if err != nil {
 		return nil, err
 	}

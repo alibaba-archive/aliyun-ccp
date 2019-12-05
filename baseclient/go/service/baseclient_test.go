@@ -12,10 +12,6 @@ import (
 
 var client *BaseClient
 
-type configTest struct {
-	AccessKeyId *string `json:"accesskeyid"`
-}
-
 func Test_InitClient(t *testing.T) {
 	config := map[string]interface{}{
 		"accessKeyId":     "AccessKeyId",
@@ -69,15 +65,6 @@ func Test_GetPathname(t *testing.T) {
 
 	pathName = client.GetPathname("ccp", "/v2")
 	utils.AssertEqual(t, "/ccp/v2", pathName)
-}
-
-func Test_Validator(t *testing.T) {
-	str := "AccessKeyId"
-	config := &configTest{
-		AccessKeyId: &str,
-	}
-	err := client.Validator(config)
-	utils.AssertNil(t, err)
 }
 
 func Test_GetProtocol(t *testing.T) {
