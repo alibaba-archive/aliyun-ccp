@@ -1,3 +1,7 @@
+### 2019-12-09 Version 0.0.8
+* Improved Tea Reference version 0.0.9
+* Change inParam Type `int` to 'int?'
+
 ### 2019-11-26 Version 0.0.7
 * Improved Tea Reference version 0.0.7
 
