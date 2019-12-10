@@ -23,7 +23,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
 
         [NameInMap("hidden")]
         [Validation(Required=false)]
-        public bool Hidden { get; set; }
+        public bool? Hidden { get; set; }
 
         [NameInMap("meta")]
         [Validation(Required=false)]
@@ -39,7 +39,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
 
         [NameInMap("starred")]
         [Validation(Required=false)]
-        public bool Starred { get; set; }
+        public bool? Starred { get; set; }
 
         [NameInMap("tags")]
         [Validation(Required=false)]

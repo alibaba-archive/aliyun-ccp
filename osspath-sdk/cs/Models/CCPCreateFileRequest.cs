@@ -35,7 +35,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("auto_rename")]
         [Validation(Required=false)]
-        public bool AutoRename { get; set; }
+        public bool? AutoRename { get; set; }
 
         [NameInMap("content_hash")]
         [Validation(Required=false)]
@@ -59,7 +59,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("hidden")]
         [Validation(Required=false)]
-        public bool Hidden { get; set; }
+        public bool? Hidden { get; set; }
 
         [NameInMap("labels")]
         [Validation(Required=false)]

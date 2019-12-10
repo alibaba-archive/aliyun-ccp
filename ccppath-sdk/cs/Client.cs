@@ -73,20 +73,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<AccountAccessTokenResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -95,7 +97,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -103,7 +106,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -176,20 +179,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<AccountAccessTokenResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -198,7 +203,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -206,7 +212,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -279,16 +285,18 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 204)) {
                         return ;
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
                         return ;
                     }
+                    respMap = this._readAsJSON(response_);
                     return ;
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -361,16 +369,18 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 204)) {
                         return ;
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
                         return ;
                     }
+                    respMap = this._readAsJSON(response_);
                     return ;
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -443,20 +453,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<AccountAccessTokenResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -465,7 +477,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -473,7 +486,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -546,20 +559,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<Captcha>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<Captcha>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -568,7 +583,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<Captcha>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -576,7 +592,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -649,20 +665,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<LinkInfoResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<LinkInfoResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -671,7 +689,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<LinkInfoResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -679,7 +698,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -752,20 +771,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<LinkInfoListResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<LinkInfoListResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -774,7 +795,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<LinkInfoListResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -782,7 +804,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -855,20 +877,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<AccountAccessTokenResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -877,7 +901,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -885,7 +910,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -958,20 +983,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<MobileCheckExistResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<MobileCheckExistResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -980,7 +1007,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<MobileCheckExistResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -988,7 +1016,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -1061,20 +1089,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<AccountAccessTokenResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1083,7 +1113,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -1091,7 +1122,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -1164,20 +1195,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<AccountAccessTokenResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1186,7 +1219,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -1194,7 +1228,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -1267,20 +1301,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<MobileSendSmsCodeResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<MobileSendSmsCodeResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1289,7 +1325,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<MobileSendSmsCodeResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -1297,7 +1334,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -1370,20 +1407,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<AccountAccessTokenResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1392,7 +1431,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -1400,7 +1440,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -1473,20 +1513,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<CCPGetAsyncTaskResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<CCPGetAsyncTaskResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1495,7 +1537,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<CCPGetAsyncTaskResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -1503,7 +1546,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -1576,20 +1619,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<CCPBatchResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<CCPBatchResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1598,7 +1643,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<CCPBatchResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -1606,7 +1652,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -1679,20 +1725,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 201)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<CreateDriveResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<CreateDriveResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1701,7 +1749,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<CreateDriveResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -1709,7 +1758,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -1782,16 +1831,18 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 204)) {
                         return ;
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
                         return ;
                     }
+                    respMap = this._readAsJSON(response_);
                     return ;
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -1864,20 +1915,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<GetDriveResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<GetDriveResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1886,7 +1939,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<GetDriveResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -1894,7 +1948,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -1967,20 +2021,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<GetDriveResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<GetDriveResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1989,7 +2045,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<GetDriveResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -1997,7 +2054,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -2070,20 +2127,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<ListDriveResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<ListDriveResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2092,7 +2151,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<ListDriveResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -2100,7 +2160,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -2173,20 +2233,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<ListDriveResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<ListDriveResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2195,7 +2257,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<ListDriveResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -2203,7 +2266,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -2276,20 +2339,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<UpdateDriveResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<UpdateDriveResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2298,7 +2363,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<UpdateDriveResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -2306,7 +2372,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -2379,20 +2445,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<CCPCompleteFileResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<CCPCompleteFileResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2401,7 +2469,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<CCPCompleteFileResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -2409,7 +2478,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -2482,28 +2551,31 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 201)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<CCPCopyFileResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._isStatusCode(response_, 202)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<CCPCopyFileResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<CCPCopyFileResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2512,7 +2584,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<CCPCopyFileResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -2520,7 +2593,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -2593,20 +2666,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 201)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<CCPCreateFileResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<CCPCreateFileResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2615,7 +2690,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<CCPCreateFileResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -2623,7 +2699,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -2696,23 +2772,25 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 202)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<CCPDeleteFileResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._isStatusCode(response_, 204)) {
                         return null;
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<CCPDeleteFileResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2721,7 +2799,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<CCPDeleteFileResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -2729,7 +2808,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -2788,7 +2867,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = this._getProtocol(_protocol, "https");
                     request_.Method = "GET";
                     request_.Pathname = this._getPathname(_nickname, "/v2/file/download");
-                    request_.Query = this._toQuery(request.ToMap());
+                    request_.Query = this._toQuery(TeaModel.BuildMap(request));
                     request_.Headers = new Dictionary<string, string>(){
                         {"user-agent", this._getUserAgent()},
                         {"host", this._getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
@@ -2805,8 +2884,9 @@ namespace Aliyun.SDK.CCP.CCPClient
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<CCPGetDownloadUrlRequest>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2815,7 +2895,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<CCPGetDownloadUrlRequest>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -2823,7 +2904,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -2896,20 +2977,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<CCPGetFileResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<CCPGetFileResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2918,7 +3001,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<CCPGetFileResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -2926,7 +3010,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -2999,20 +3083,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<CCPGetDownloadUrlResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<CCPGetDownloadUrlResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3021,7 +3107,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<CCPGetDownloadUrlResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -3029,7 +3116,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -3102,20 +3189,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<CCPGetUploadUrlResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<CCPGetUploadUrlResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3124,7 +3213,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<CCPGetUploadUrlResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -3132,7 +3222,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -3205,20 +3295,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<CCPListFileResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<CCPListFileResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3227,7 +3319,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<CCPListFileResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -3235,7 +3328,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -3308,20 +3401,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<CCPListUploadedPartResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<CCPListUploadedPartResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3330,7 +3425,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<CCPListUploadedPartResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -3338,7 +3434,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -3411,20 +3507,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<CCPMoveFileResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<CCPMoveFileResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3433,7 +3531,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<CCPMoveFileResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -3441,7 +3540,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -3514,20 +3613,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<CCPSearchFileResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<CCPSearchFileResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3536,7 +3637,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<CCPSearchFileResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -3544,7 +3646,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -3617,20 +3719,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<CCPUpdateFileMetaResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<CCPUpdateFileMetaResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3639,7 +3743,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<CCPUpdateFileMetaResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -3647,7 +3752,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -3720,20 +3825,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 201)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<CreateUserResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<CreateUserResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3742,7 +3849,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<CreateUserResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -3750,7 +3858,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -3823,16 +3931,18 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 204)) {
                         return ;
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
                         return ;
                     }
+                    respMap = this._readAsJSON(response_);
                     return ;
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -3905,20 +4015,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<GetUserResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<GetUserResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3927,7 +4039,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<GetUserResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -3935,7 +4048,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -4008,20 +4121,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<ListUserResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<ListUserResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -4030,7 +4145,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<ListUserResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -4038,7 +4154,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -4111,20 +4227,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<ListUserResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<ListUserResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -4133,7 +4251,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<ListUserResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -4141,7 +4260,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {
@@ -4214,20 +4333,22 @@ namespace Aliyun.SDK.CCP.CCPClient
                         request_.Headers["x-acs-signature-version"] = "1.0";
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + this._getSignature(request_);
                     }
-                    request_.Body = TeaCore.BytesReadable(this._toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(this._toJSONString(TeaModel.BuildMap(request)));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
+                    Dictionary<string, object> respMap = null;
                     if (this._isStatusCode(response_, 200)) {
+                        respMap = this._readAsJSON(response_);
                         return TeaModel.ToObject<UpdateUserResponse>(TeaConverter.merge<object>(
                             new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                             },
-                            this._readAsJSON(response_)
+                            respMap
                         ));
                     }
                     if (this._notEmpty(response_.Headers["x-ca-error-message"])) {
-                        return TeaModel.ToObject<UpdateUserResponse>(new Dictionary<string, object>(){
+                        throw new TeaException(new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -4236,7 +4357,8 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    return TeaModel.ToObject<UpdateUserResponse>(TeaConverter.merge<object>(
+                    respMap = this._readAsJSON(response_);
+                    throw new TeaException(TeaConverter.merge<object>(
                         new Dictionary<string, object>(){
                             {"data", new Dictionary<string, object>(){
                                 {"requestId", response_.Headers["x-ca-request-id"]},
@@ -4244,7 +4366,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                                 {"statusMessage", response_.StatusMessage},
                             }},
                         },
-                        this._readAsJSON(response_)
+                        respMap
                     ));
                 } catch (Exception e) {
                     if (TeaCore.IsRetryable(e)) {

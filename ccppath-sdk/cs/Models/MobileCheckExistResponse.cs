@@ -15,7 +15,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
 
         [NameInMap("is_exist")]
         [Validation(Required=true)]
-        public bool IsExist { get; set; }
+        public bool? IsExist { get; set; }
 
         [NameInMap("phone_number")]
         [Validation(Required=true)]

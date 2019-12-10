@@ -27,7 +27,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
 
         [NameInMap("hidden")]
         [Validation(Required=false)]
-        public bool Hidden { get; set; }
+        public bool? Hidden { get; set; }
 
         [NameInMap("labels")]
         [Validation(Required=false)]
@@ -43,7 +43,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
 
         [NameInMap("starred")]
         [Validation(Required=false)]
-        public bool Starred { get; set; }
+        public bool? Starred { get; set; }
 
     }
 

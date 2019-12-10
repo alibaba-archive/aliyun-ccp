@@ -11,7 +11,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
     public class CCPCopyFileRequest : TeaModel {
         [NameInMap("auto_rename")]
         [Validation(Required=false)]
-        public bool AutoRename { get; set; }
+        public bool? AutoRename { get; set; }
 
         [NameInMap("drive_id")]
         [Validation(Required=true, Pattern="[0-9]+")]

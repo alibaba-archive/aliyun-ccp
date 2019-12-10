@@ -11,7 +11,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
     public class ListFileRequest : TeaModel {
         [NameInMap("all")]
         [Validation(Required=false)]
-        public bool All { get; set; }
+        public bool? All { get; set; }
 
         [NameInMap("drive_id")]
         [Validation(Required=true, Pattern="[0-9]+")]

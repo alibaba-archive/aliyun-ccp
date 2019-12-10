@@ -19,7 +19,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("enable")]
         [Validation(Required=false)]
-        public bool Enable { get; set; }
+        public bool? Enable { get; set; }
 
         [NameInMap("endpoint")]
         [Validation(Required=false)]

@@ -35,7 +35,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("rapid_upload")]
         [Validation(Required=false)]
-        public bool RapidUpload { get; set; }
+        public bool? RapidUpload { get; set; }
 
         [NameInMap("type")]
         [Validation(Required=false)]

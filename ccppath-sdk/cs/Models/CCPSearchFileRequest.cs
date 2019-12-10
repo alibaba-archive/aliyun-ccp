@@ -23,7 +23,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
 
         [NameInMap("limit")]
         [Validation(Required=false)]
-        public int Limit { get; set; }
+        public int? Limit { get; set; }
 
         [NameInMap("marker")]
         [Validation(Required=false)]

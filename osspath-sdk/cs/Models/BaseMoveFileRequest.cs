@@ -19,7 +19,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("overwrite")]
         [Validation(Required=false)]
-        public bool Overwrite { get; set; }
+        public bool? Overwrite { get; set; }
 
     }
 

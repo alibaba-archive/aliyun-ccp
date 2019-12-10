@@ -63,7 +63,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("hidden")]
         [Validation(Required=false)]
-        public bool Hidden { get; set; }
+        public bool? Hidden { get; set; }
 
         [NameInMap("image_media_metadata")]
         [Validation(Required=false)]
@@ -91,7 +91,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("starred")]
         [Validation(Required=false)]
-        public bool Starred { get; set; }
+        public bool? Starred { get; set; }
 
         [NameInMap("status")]
         [Validation(Required=false)]
