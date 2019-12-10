@@ -19,7 +19,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("permanently")]
         [Validation(Required=false)]
-        public bool Permanently { get; set; }
+        public bool? Permanently { get; set; }
 
     }
 

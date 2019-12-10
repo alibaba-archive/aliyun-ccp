@@ -15,7 +15,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("auth_alipay_enbale")]
         [Validation(Required=false)]
-        public bool AuthAlipayEnbale { get; set; }
+        public bool? AuthAlipayEnbale { get; set; }
 
         [NameInMap("auth_alipay_private_key")]
         [Validation(Required=false)]
@@ -35,11 +35,11 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("auth_dingding_enable")]
         [Validation(Required=false)]
-        public bool AuthDingdingEnable { get; set; }
+        public bool? AuthDingdingEnable { get; set; }
 
         [NameInMap("auth_endpoint_enable")]
         [Validation(Required=false)]
-        public bool AuthEndpointEnable { get; set; }
+        public bool? AuthEndpointEnable { get; set; }
 
         [NameInMap("auth_ram_app_id")]
         [Validation(Required=false)]
@@ -51,7 +51,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("auth_ram_enable")]
         [Validation(Required=false)]
-        public bool AuthRamEnable { get; set; }
+        public bool? AuthRamEnable { get; set; }
 
         [NameInMap("data_hash_name")]
         [Validation(Required=false)]
@@ -91,7 +91,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("init_drive_enable")]
         [Validation(Required=false)]
-        public bool InitDriveEnable { get; set; }
+        public bool? InitDriveEnable { get; set; }
 
         [NameInMap("init_drive_size")]
         [Validation(Required=false)]
@@ -107,7 +107,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("sharable")]
         [Validation(Required=false)]
-        public bool Sharable { get; set; }
+        public bool? Sharable { get; set; }
 
     }
 

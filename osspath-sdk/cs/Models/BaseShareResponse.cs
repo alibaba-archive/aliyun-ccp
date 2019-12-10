@@ -39,7 +39,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("expired")]
         [Validation(Required=false)]
-        public bool Expired { get; set; }
+        public bool? Expired { get; set; }
 
         [NameInMap("owner")]
         [Validation(Required=false)]

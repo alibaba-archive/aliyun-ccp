@@ -31,11 +31,11 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
 
         [NameInMap("Starred")]
         [Validation(Required=false)]
-        public bool Starred { get; set; }
+        public bool? Starred { get; set; }
 
         [NameInMap("all")]
         [Validation(Required=false)]
-        public bool All { get; set; }
+        public bool? All { get; set; }
 
         [NameInMap("category")]
         [Validation(Required=false)]

@@ -11,7 +11,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
     public class ListDriveRequest : TeaModel {
         [NameInMap("limit")]
         [Validation(Required=false)]
-        public int Limit { get; set; }
+        public int? Limit { get; set; }
 
         [NameInMap("marker")]
         [Validation(Required=false)]

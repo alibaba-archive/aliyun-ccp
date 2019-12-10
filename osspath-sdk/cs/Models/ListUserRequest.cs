@@ -11,7 +11,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
     public class ListUserRequest : TeaModel {
         [NameInMap("limit")]
         [Validation(Required=false)]
-        public int Limit { get; set; }
+        public int? Limit { get; set; }
 
         [NameInMap("marker")]
         [Validation(Required=false)]

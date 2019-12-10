@@ -23,7 +23,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("is_third_party")]
         [Validation(Required=true)]
-        public bool IsThirdParty { get; set; }
+        public bool? IsThirdParty { get; set; }
 
         [NameInMap("logo")]
         [Validation(Required=true)]

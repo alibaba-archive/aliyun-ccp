@@ -11,15 +11,15 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
     public class RuntimeOptions : TeaModel {
         [NameInMap("autoretry")]
         [Validation(Required=false)]
-        public bool Autoretry { get; set; }
+        public bool? Autoretry { get; set; }
 
         [NameInMap("ignoreSSL")]
         [Validation(Required=false)]
-        public bool IgnoreSSL { get; set; }
+        public bool? IgnoreSSL { get; set; }
 
         [NameInMap("maxAttempts")]
         [Validation(Required=false)]
-        public int MaxAttempts { get; set; }
+        public int? MaxAttempts { get; set; }
 
         [NameInMap("backoffPolicy")]
         [Validation(Required=false)]
@@ -27,15 +27,15 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
 
         [NameInMap("backoffPeriod")]
         [Validation(Required=false)]
-        public int BackoffPeriod { get; set; }
+        public int? BackoffPeriod { get; set; }
 
         [NameInMap("readTimeout")]
         [Validation(Required=false)]
-        public int ReadTimeout { get; set; }
+        public int? ReadTimeout { get; set; }
 
         [NameInMap("connectTimeout")]
         [Validation(Required=false)]
-        public int ConnectTimeout { get; set; }
+        public int? ConnectTimeout { get; set; }
 
         [NameInMap("httpProxy")]
         [Validation(Required=false)]
@@ -51,7 +51,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
 
         [NameInMap("maxIdleConns")]
         [Validation(Required=false)]
-        public int MaxIdleConns { get; set; }
+        public int? MaxIdleConns { get; set; }
 
         [NameInMap("localAddr")]
         [Validation(Required=false)]

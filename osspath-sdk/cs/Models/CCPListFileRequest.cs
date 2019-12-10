@@ -31,7 +31,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("Starred")]
         [Validation(Required=false)]
-        public bool Starred { get; set; }
+        public bool? Starred { get; set; }
 
         [NameInMap("category")]
         [Validation(Required=false)]
@@ -55,7 +55,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("all")]
         [Validation(Required=false)]
-        public bool All { get; set; }
+        public bool? All { get; set; }
 
         [NameInMap("order_by")]
         [Validation(Required=false)]

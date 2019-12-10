@@ -39,7 +39,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("need_link")]
         [Validation(Required=true)]
-        public bool NeedLink { get; set; }
+        public bool? NeedLink { get; set; }
 
         [NameInMap("nick_name")]
         [Validation(Required=false)]

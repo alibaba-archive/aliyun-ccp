@@ -35,7 +35,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
 
         [NameInMap("hidden")]
         [Validation(Required=false)]
-        public bool Hidden { get; set; }
+        public bool? Hidden { get; set; }
 
         [NameInMap("meta")]
         [Validation(Required=false)]

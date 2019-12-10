@@ -15,7 +15,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 
         [NameInMap("auto_register")]
         [Validation(Required=false)]
-        public bool AutoRegister { get; set; }
+        public bool? AutoRegister { get; set; }
 
         [NameInMap("captcha_id")]
         [Validation(Required=false)]

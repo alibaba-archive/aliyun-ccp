@@ -19,7 +19,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
 
         [NameInMap("permanently")]
         [Validation(Required=false)]
-        public bool Permanently { get; set; }
+        public bool? Permanently { get; set; }
 
         [NameInMap("share_id")]
         [Validation(Required=false, Pattern="[0-9a-zA-z-]+")]
