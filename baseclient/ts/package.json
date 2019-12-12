@@ -5,8 +5,7 @@
   "main": "dist/baseclient.js",
   "scripts": {
     "test": "mocha -r ts-node/register test/**/*.spec.ts",
-    "cov": "nyc -r text -r lcov -r html npm run test",
-    "ci": "npm run cov && codecov",
+    "test-cov": "nyc -e .ts -r=html -r=text -r=lcov npm run test",
     "build": "tsc",
     "prepublishOnly": "tsc"
   },
