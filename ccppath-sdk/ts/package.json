@@ -5,8 +5,7 @@
   "main": "dist/client.js",
   "scripts": {
     "test": "mocha -r ts-node/register test/**/*.spec.ts",
-    "cov": "nyc -r text -r lcov -r html npm run test",
-    "ci": "npm run cov && codecov",
+    "test-cov": "nyc -e .ts -r=html -r=text -r=lcov npm run test",
     "build": "tsc",
     "prepublishOnly": "tsc"
   },
@@ -20,7 +19,7 @@
     "typescript": "^3.7.2"
   },
   "dependencies": {
-    "@alicloud/ccp-baseclient": "^1.0.0",
+    "@alicloud/ccp-baseclient": "^1.1.0",
     "@alicloud/tea-typescript": "^1.2.0"
   }
 }

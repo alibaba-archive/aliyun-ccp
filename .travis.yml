@@ -2,10 +2,13 @@ jobs:
   include:
     - language: node_js
       node_js: 12
+      if: branch = master
       script:
         - cd baseclient/ts
         - npm install
-        - npm run ci
+        - npm run test-cov
+      after_success:
+        - bash <(curl -s https://codecov.io/bash) -cF node_js
     - language: java
       jdk: openjdk8
       if: branch = master
