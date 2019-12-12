@@ -19,11 +19,14 @@ jobs:
         - bash <(curl -s https://codecov.io/bash) -cF java
     - language: go
       go: 1.12.x
+      if: branch = master
       script:
         - cd baseclient/go
         - export GO111MODULE=on
         - go mod tidy
         - go test -race -coverprofile=coverage.txt -covermode=atomic ./service/... ./utils...
+      after_success:
+        - bash <(curl -s https://codecov.io/bash) -cF go
     - language: csharp
       sudo: true
       mono: none
