@@ -4,6 +4,8 @@ English | [简体中文](README-CN.md)
 
 ## Alibaba Cloud CCP SDK
 [![Travis Build Status](https://travis-ci.org/aliyun/aliyun-ccp.svg?branch=master)](https://travis-ci.org/aliyun/aliyun-ccp)
+[![codecov](https://codecov.io/gh/aliyun/aliyun-ccp/branch/master/graph/badge.svg)](https://codecov.io/gh/aliyun/aliyun-ccp)
+
 ## Installation
 ### Java
 - [baseclient](./baseclient/java/README.md)
