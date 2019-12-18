@@ -8,22 +8,18 @@ English | [简体中文](README-CN.md)
 
 ## Installation
 ### Java
-- [baseclient](./baseclient/java/README.md)
 - [ccppath-sdk](./ccppath-sdk/java/README.md)
 - [osspath-sdk](./osspath-sdk/java/README.md)
 
 ### Go
-- [baseclient](./baseclient/go/README.md)
 - [ccppath-sdk](./ccppath-sdk/go/README.md)
 - [osspath-sdk](./osspath-sdk/go/README.md)
 
 ### .Net
-- [baseclient](./baseclient/csharp/README.md)
 - [ccppath-sdk](./ccppath-sdk/cs/README.md)
 - [osspath-sdk](./osspath-sdk/cs/README.md)
 
 ### TypeScript/Node.js
-- [baseclient](./baseclient/ts/README.md)
 - [ccppath-sdk](./ccppath-sdk/ts/README.md)
 - [osspath-sdk](./osspath-sdk/ts/README.md)
 
