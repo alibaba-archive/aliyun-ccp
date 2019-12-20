@@ -9,7 +9,7 @@
   },
   "csharp": {
     "namespace": "Aliyun.SDK.CCP.OSSClient",
-    "baseClient": ""
+    "baseClient": "Aliyun.SDK.CCP.BaseClient"
   },
   "go": {
     "baseClient": "github.com/aliyun/aliyun-ccp/baseclient"
