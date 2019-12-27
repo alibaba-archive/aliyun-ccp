@@ -2044,7 +2044,7 @@ type: boolean'),
    */
   model OSSDeleteFileRequest {
     driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
-    filePath: string(name='file_path', description='file_path', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
+    filePath: string(name='file_path', description='file_path', maxLength=1000, minLength=1, pattern='[a-z0-9.-_]{1,1000}'),
     permanently?: boolean(name='permanently', description='permanently
 type: false', example=false),
     shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-z-]+'),
