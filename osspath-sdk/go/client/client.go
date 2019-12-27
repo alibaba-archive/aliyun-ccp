@@ -8211,7 +8211,7 @@ func (s *OSSCreateFileRequest) SetShareId(v string) *OSSCreateFileRequest {
 
 type OSSDeleteFileRequest struct {
 	DriveId     *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FilePath    *string `json:"file_path" xml:"file_path" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	FilePath    *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000" pattern:"[a-z0-9.-_]{1,1000}"`
 	Permanently *bool   `json:"permanently" xml:"permanently"`
 	ShareId     *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
 }
@@ -9391,6 +9391,7 @@ func NewClient(config *Config) (*Client, error) {
 	}
 	return client, nil
 }
+
 func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOptions) (*AccountAccessTokenResponse, error) {
 	err := tea.Validate(request)
 	if err != nil {
@@ -9470,7 +9471,6 @@ func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOpt
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -9597,7 +9597,6 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeO
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -9723,7 +9722,6 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runt
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 204) {
 				return nil
 			}
@@ -9840,7 +9838,6 @@ func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *R
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 204) {
 				return nil
 			}
@@ -9958,7 +9955,6 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -10085,7 +10081,6 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOpt
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -10212,7 +10207,6 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *Runtim
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -10339,7 +10333,6 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, r
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -10466,7 +10459,6 @@ func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions)
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -10593,7 +10585,6 @@ func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *Runt
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -10720,7 +10711,6 @@ func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -10847,7 +10837,6 @@ func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeO
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -10974,7 +10963,6 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runti
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -11101,7 +11089,6 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (*Ac
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -11228,7 +11215,6 @@ func (client *Client) AdminListStores(request *AdminListStoresRequest, runtime *
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -11355,7 +11341,6 @@ func (client *Client) GetUserAccessToken(request *GetUserAccessTokenRequest, run
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -11482,7 +11467,6 @@ func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeO
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 201) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -11608,7 +11592,6 @@ func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeO
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 204) {
 				return nil
 			}
@@ -11726,7 +11709,6 @@ func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -11853,7 +11835,6 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -11980,7 +11961,6 @@ func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOpti
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -12107,7 +12087,6 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *Runtime
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -12234,7 +12213,6 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeO
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -12361,7 +12339,6 @@ func (client *Client) CompleteFile(request *OSSCompleteFileRequest, runtime *Run
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -12488,7 +12465,6 @@ func (client *Client) CopyFile(request *OSSCopyFileRequest, runtime *RuntimeOpti
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 201) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -12615,7 +12591,6 @@ func (client *Client) CreateFile(request *OSSCreateFileRequest, runtime *Runtime
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 201) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -12741,7 +12716,6 @@ func (client *Client) DeleteFile(request *OSSDeleteFileRequest, runtime *Runtime
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 204) {
 				return nil
 			}
@@ -12859,7 +12833,6 @@ func (client *Client) GetFile(request *OSSGetFileRequest, runtime *RuntimeOption
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -12986,7 +12959,6 @@ func (client *Client) GetDownloadUrl(request *OSSGetDownloadUrlRequest, runtime 
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -13113,7 +13085,6 @@ func (client *Client) GetUploadUrl(request *OSSGetUploadUrlRequest, runtime *Run
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -13240,7 +13211,6 @@ func (client *Client) ListFile(request *OSSListFileRequest, runtime *RuntimeOpti
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -13367,7 +13337,6 @@ func (client *Client) ListUploadedParts(request *OSSListUploadedPartRequest, run
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -13494,7 +13463,6 @@ func (client *Client) MoveFile(request *OSSMoveFileRequest, runtime *RuntimeOpti
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -13621,7 +13589,6 @@ func (client *Client) CreateShare(request *CreateShareRequest, runtime *RuntimeO
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 201) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -13747,7 +13714,6 @@ func (client *Client) DeleteShare(request *DeleteShareRequest, runtime *RuntimeO
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 204) {
 				return nil
 			}
@@ -13865,7 +13831,6 @@ func (client *Client) GetShare(request *GetShareRequest, runtime *RuntimeOptions
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -13992,7 +13957,6 @@ func (client *Client) ListShare(request *ListShareRequest, runtime *RuntimeOptio
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -14119,7 +14083,6 @@ func (client *Client) UpdateShare(request *UpdateShareRequest, runtime *RuntimeO
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -14246,7 +14209,6 @@ func (client *Client) ListStorefile(request *ListStoreFileRequest, runtime *Runt
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -14373,7 +14335,6 @@ func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOpt
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 201) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -14499,7 +14460,6 @@ func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOpt
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 204) {
 				return nil
 			}
@@ -14617,7 +14577,6 @@ func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) 
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -14744,7 +14703,6 @@ func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOption
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -14871,7 +14829,6 @@ func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOpt
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
@@ -14998,7 +14955,6 @@ func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOpt
 			}
 
 			respMap := make(map[string]interface{})
-
 			if client.IsStatusCode(response_, 200) {
 				respMap, err = client.ReadAsJSON(response_)
 				if err != nil {
