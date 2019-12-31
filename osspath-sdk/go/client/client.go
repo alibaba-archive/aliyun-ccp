@@ -9392,35 +9392,35 @@ func NewClient(config *Config) (*Client, error) {
 	return client, nil
 }
 
-func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOptions) (*AccountAccessTokenResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOptions) (_result *AccountAccessTokenResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &AccountAccessTokenResponse{}
@@ -9432,20 +9432,23 @@ func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOpt
 			}
 		}
 
-		_resp, err = func() (*AccountAccessTokenResponse, error) {
+		_resp, _err = func() (*AccountAccessTokenResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/cancel_link")
@@ -9465,27 +9468,26 @@ func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOpt
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &AccountAccessTokenResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &AccountAccessTokenResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -9493,60 +9495,60 @@ func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOpt
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeOptions) (*AccountAccessTokenResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeOptions) (_result *AccountAccessTokenResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &AccountAccessTokenResponse{}
@@ -9558,20 +9560,23 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeO
 			}
 		}
 
-		_resp, err = func() (*AccountAccessTokenResponse, error) {
+		_resp, _err = func() (*AccountAccessTokenResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/confirm_link")
@@ -9591,27 +9596,26 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeO
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &AccountAccessTokenResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &AccountAccessTokenResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -9619,60 +9623,60 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeO
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runtime *RuntimeOptions) error {
-	err := tea.Validate(request)
-	if err != nil {
-		return err
+func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runtime *RuntimeOptions) (_err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
@@ -9683,20 +9687,23 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runt
 			}
 		}
 
-		err = func() error {
+		_err = func() error {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/default/change_password")
@@ -9716,18 +9723,17 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runt
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 204) {
-				return nil
+				return _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -9735,60 +9741,60 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runt
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return err
+				return _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return err
+			return _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return err
+	return _err
 }
 
-func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *RuntimeOptions) error {
-	err := tea.Validate(request)
-	if err != nil {
-		return err
+func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *RuntimeOptions) (_err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
@@ -9799,20 +9805,23 @@ func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *R
 			}
 		}
 
-		err = func() error {
+		_err = func() error {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/default/set_password")
@@ -9832,18 +9841,17 @@ func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *R
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 204) {
-				return nil
+				return _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -9851,60 +9859,60 @@ func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *R
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return err
+				return _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return err
+			return _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return err
+	return _err
 }
 
-func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfoRequest, runtime *RuntimeOptions) (*AccountAccessTokenResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfoRequest, runtime *RuntimeOptions) (_result *AccountAccessTokenResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &AccountAccessTokenResponse{}
@@ -9916,20 +9924,23 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 			}
 		}
 
-		_resp, err = func() (*AccountAccessTokenResponse, error) {
+		_resp, _err = func() (*AccountAccessTokenResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_access_token_by_link_info")
@@ -9949,27 +9960,26 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &AccountAccessTokenResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &AccountAccessTokenResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -9977,60 +9987,60 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOptions) (*Captcha, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOptions) (_result *Captcha, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &Captcha{}
@@ -10042,20 +10052,23 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOpt
 			}
 		}
 
-		_resp, err = func() (*Captcha, error) {
+		_resp, _err = func() (*Captcha, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_captcha")
@@ -10075,27 +10088,26 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOpt
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &Captcha{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &Captcha{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -10103,60 +10115,60 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOpt
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *RuntimeOptions) (*LinkInfoResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *RuntimeOptions) (_result *LinkInfoResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &LinkInfoResponse{}
@@ -10168,20 +10180,23 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *Runtim
 			}
 		}
 
-		_resp, err = func() (*LinkInfoResponse, error) {
+		_resp, _err = func() (*LinkInfoResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_link_info")
@@ -10201,27 +10216,26 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *Runtim
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &LinkInfoResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &LinkInfoResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -10229,60 +10243,60 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *Runtim
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, runtime *RuntimeOptions) (*LinkInfoListResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, runtime *RuntimeOptions) (_result *LinkInfoListResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &LinkInfoListResponse{}
@@ -10294,20 +10308,23 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, r
 			}
 		}
 
-		_resp, err = func() (*LinkInfoListResponse, error) {
+		_resp, _err = func() (*LinkInfoListResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_link_info_by_user_id")
@@ -10327,27 +10344,26 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, r
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &LinkInfoListResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &LinkInfoListResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -10355,60 +10371,60 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, r
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions) (*AccountAccessTokenResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions) (_result *AccountAccessTokenResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &AccountAccessTokenResponse{}
@@ -10420,20 +10436,23 @@ func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions)
 			}
 		}
 
-		_resp, err = func() (*AccountAccessTokenResponse, error) {
+		_resp, _err = func() (*AccountAccessTokenResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/link")
@@ -10453,27 +10472,26 @@ func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions)
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &AccountAccessTokenResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &AccountAccessTokenResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -10481,60 +10499,60 @@ func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions)
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *RuntimeOptions) (*MobileCheckExistResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *RuntimeOptions) (_result *MobileCheckExistResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &MobileCheckExistResponse{}
@@ -10546,20 +10564,23 @@ func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *Runt
 			}
 		}
 
-		_resp, err = func() (*MobileCheckExistResponse, error) {
+		_resp, _err = func() (*MobileCheckExistResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/check_exist")
@@ -10579,27 +10600,26 @@ func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *Runt
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &MobileCheckExistResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &MobileCheckExistResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -10607,60 +10627,60 @@ func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *Runt
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions) (*AccountAccessTokenResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions) (_result *AccountAccessTokenResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &AccountAccessTokenResponse{}
@@ -10672,20 +10692,23 @@ func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions
 			}
 		}
 
-		_resp, err = func() (*AccountAccessTokenResponse, error) {
+		_resp, _err = func() (*AccountAccessTokenResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/login")
@@ -10705,27 +10728,26 @@ func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &AccountAccessTokenResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &AccountAccessTokenResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -10733,60 +10755,60 @@ func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeOptions) (*AccountAccessTokenResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeOptions) (_result *AccountAccessTokenResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &AccountAccessTokenResponse{}
@@ -10798,20 +10820,23 @@ func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeO
 			}
 		}
 
-		_resp, err = func() (*AccountAccessTokenResponse, error) {
+		_resp, _err = func() (*AccountAccessTokenResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/register")
@@ -10831,27 +10856,26 @@ func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeO
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &AccountAccessTokenResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &AccountAccessTokenResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -10859,60 +10883,60 @@ func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeO
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runtime *RuntimeOptions) (*MobileSendSmsCodeResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runtime *RuntimeOptions) (_result *MobileSendSmsCodeResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &MobileSendSmsCodeResponse{}
@@ -10924,20 +10948,23 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runti
 			}
 		}
 
-		_resp, err = func() (*MobileSendSmsCodeResponse, error) {
+		_resp, _err = func() (*MobileSendSmsCodeResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/send_sms_code")
@@ -10957,27 +10984,26 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runti
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &MobileSendSmsCodeResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &MobileSendSmsCodeResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -10985,60 +11011,60 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runti
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (*AccountAccessTokenResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (_result *AccountAccessTokenResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &AccountAccessTokenResponse{}
@@ -11050,20 +11076,23 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (*Ac
 			}
 		}
 
-		_resp, err = func() (*AccountAccessTokenResponse, error) {
+		_resp, _err = func() (*AccountAccessTokenResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/token")
@@ -11083,27 +11112,26 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (*Ac
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &AccountAccessTokenResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &AccountAccessTokenResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -11111,60 +11139,60 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (*Ac
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) AdminListStores(request *AdminListStoresRequest, runtime *RuntimeOptions) (*ListStoresResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) AdminListStores(request *AdminListStoresRequest, runtime *RuntimeOptions) (_result *ListStoresResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &ListStoresResponse{}
@@ -11176,20 +11204,23 @@ func (client *Client) AdminListStores(request *AdminListStoresRequest, runtime *
 			}
 		}
 
-		_resp, err = func() (*ListStoresResponse, error) {
+		_resp, _err = func() (*ListStoresResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/domain/list_stores")
@@ -11209,27 +11240,26 @@ func (client *Client) AdminListStores(request *AdminListStoresRequest, runtime *
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &ListStoresResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &ListStoresResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -11237,60 +11267,60 @@ func (client *Client) AdminListStores(request *AdminListStoresRequest, runtime *
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) GetUserAccessToken(request *GetUserAccessTokenRequest, runtime *RuntimeOptions) (*AccessTokenResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) GetUserAccessToken(request *GetUserAccessTokenRequest, runtime *RuntimeOptions) (_result *AccessTokenResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &AccessTokenResponse{}
@@ -11302,20 +11332,23 @@ func (client *Client) GetUserAccessToken(request *GetUserAccessTokenRequest, run
 			}
 		}
 
-		_resp, err = func() (*AccessTokenResponse, error) {
+		_resp, _err = func() (*AccessTokenResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/get_access_token")
@@ -11335,27 +11368,26 @@ func (client *Client) GetUserAccessToken(request *GetUserAccessTokenRequest, run
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &AccessTokenResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &AccessTokenResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -11363,60 +11395,60 @@ func (client *Client) GetUserAccessToken(request *GetUserAccessTokenRequest, run
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeOptions) (*CreateDriveResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeOptions) (_result *CreateDriveResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &CreateDriveResponse{}
@@ -11428,20 +11460,23 @@ func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeO
 			}
 		}
 
-		_resp, err = func() (*CreateDriveResponse, error) {
+		_resp, _err = func() (*CreateDriveResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/create")
@@ -11461,27 +11496,26 @@ func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeO
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 201) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &CreateDriveResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &CreateDriveResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -11489,60 +11523,60 @@ func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeO
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeOptions) error {
-	err := tea.Validate(request)
-	if err != nil {
-		return err
+func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeOptions) (_err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
@@ -11553,20 +11587,23 @@ func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeO
 			}
 		}
 
-		err = func() error {
+		_err = func() error {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/delete")
@@ -11586,18 +11623,17 @@ func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeO
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 204) {
-				return nil
+				return _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -11605,60 +11641,60 @@ func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeO
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return err
+				return _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return err
+			return _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return err
+	return _err
 }
 
-func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions) (*GetDriveResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions) (_result *GetDriveResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &GetDriveResponse{}
@@ -11670,20 +11706,23 @@ func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions
 			}
 		}
 
-		_resp, err = func() (*GetDriveResponse, error) {
+		_resp, _err = func() (*GetDriveResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/get")
@@ -11703,27 +11742,26 @@ func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &GetDriveResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &GetDriveResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -11731,60 +11769,60 @@ func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *RuntimeOptions) (*GetDriveResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *RuntimeOptions) (_result *GetDriveResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &GetDriveResponse{}
@@ -11796,20 +11834,23 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *
 			}
 		}
 
-		_resp, err = func() (*GetDriveResponse, error) {
+		_resp, _err = func() (*GetDriveResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/get_default_drive")
@@ -11829,27 +11870,26 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &GetDriveResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &GetDriveResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -11857,60 +11897,60 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOptions) (*ListDriveResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOptions) (_result *ListDriveResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &ListDriveResponse{}
@@ -11922,20 +11962,23 @@ func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOpti
 			}
 		}
 
-		_resp, err = func() (*ListDriveResponse, error) {
+		_resp, _err = func() (*ListDriveResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/list")
@@ -11955,27 +11998,26 @@ func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOpti
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &ListDriveResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &ListDriveResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -11983,60 +12025,60 @@ func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOpti
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *RuntimeOptions) (*ListDriveResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *RuntimeOptions) (_result *ListDriveResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &ListDriveResponse{}
@@ -12048,20 +12090,23 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *Runtime
 			}
 		}
 
-		_resp, err = func() (*ListDriveResponse, error) {
+		_resp, _err = func() (*ListDriveResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/list_my_drives")
@@ -12081,27 +12126,26 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *Runtime
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &ListDriveResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &ListDriveResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -12109,60 +12153,60 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *Runtime
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeOptions) (*UpdateDriveResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeOptions) (_result *UpdateDriveResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &UpdateDriveResponse{}
@@ -12174,20 +12218,23 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeO
 			}
 		}
 
-		_resp, err = func() (*UpdateDriveResponse, error) {
+		_resp, _err = func() (*UpdateDriveResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/update")
@@ -12207,27 +12254,26 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeO
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &UpdateDriveResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &UpdateDriveResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -12235,60 +12281,60 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeO
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) CompleteFile(request *OSSCompleteFileRequest, runtime *RuntimeOptions) (*OSSCompleteFileResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) CompleteFile(request *OSSCompleteFileRequest, runtime *RuntimeOptions) (_result *OSSCompleteFileResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &OSSCompleteFileResponse{}
@@ -12300,20 +12346,23 @@ func (client *Client) CompleteFile(request *OSSCompleteFileRequest, runtime *Run
 			}
 		}
 
-		_resp, err = func() (*OSSCompleteFileResponse, error) {
+		_resp, _err = func() (*OSSCompleteFileResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/complete")
@@ -12333,27 +12382,26 @@ func (client *Client) CompleteFile(request *OSSCompleteFileRequest, runtime *Run
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &OSSCompleteFileResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &OSSCompleteFileResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -12361,60 +12409,60 @@ func (client *Client) CompleteFile(request *OSSCompleteFileRequest, runtime *Run
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) CopyFile(request *OSSCopyFileRequest, runtime *RuntimeOptions) (*OSSCopyFileResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) CopyFile(request *OSSCopyFileRequest, runtime *RuntimeOptions) (_result *OSSCopyFileResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &OSSCopyFileResponse{}
@@ -12426,20 +12474,23 @@ func (client *Client) CopyFile(request *OSSCopyFileRequest, runtime *RuntimeOpti
 			}
 		}
 
-		_resp, err = func() (*OSSCopyFileResponse, error) {
+		_resp, _err = func() (*OSSCopyFileResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/copy")
@@ -12459,27 +12510,26 @@ func (client *Client) CopyFile(request *OSSCopyFileRequest, runtime *RuntimeOpti
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 201) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &OSSCopyFileResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &OSSCopyFileResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -12487,60 +12537,60 @@ func (client *Client) CopyFile(request *OSSCopyFileRequest, runtime *RuntimeOpti
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) CreateFile(request *OSSCreateFileRequest, runtime *RuntimeOptions) (*OSSCreateFileResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) CreateFile(request *OSSCreateFileRequest, runtime *RuntimeOptions) (_result *OSSCreateFileResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &OSSCreateFileResponse{}
@@ -12552,20 +12602,23 @@ func (client *Client) CreateFile(request *OSSCreateFileRequest, runtime *Runtime
 			}
 		}
 
-		_resp, err = func() (*OSSCreateFileResponse, error) {
+		_resp, _err = func() (*OSSCreateFileResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/create")
@@ -12585,27 +12638,26 @@ func (client *Client) CreateFile(request *OSSCreateFileRequest, runtime *Runtime
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 201) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &OSSCreateFileResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &OSSCreateFileResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -12613,60 +12665,60 @@ func (client *Client) CreateFile(request *OSSCreateFileRequest, runtime *Runtime
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) DeleteFile(request *OSSDeleteFileRequest, runtime *RuntimeOptions) error {
-	err := tea.Validate(request)
-	if err != nil {
-		return err
+func (client *Client) DeleteFile(request *OSSDeleteFileRequest, runtime *RuntimeOptions) (_err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
@@ -12677,20 +12729,23 @@ func (client *Client) DeleteFile(request *OSSDeleteFileRequest, runtime *Runtime
 			}
 		}
 
-		err = func() error {
+		_err = func() error {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/delete")
@@ -12710,18 +12765,17 @@ func (client *Client) DeleteFile(request *OSSDeleteFileRequest, runtime *Runtime
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 204) {
-				return nil
+				return _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -12729,60 +12783,60 @@ func (client *Client) DeleteFile(request *OSSDeleteFileRequest, runtime *Runtime
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return err
+				return _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return err
+			return _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return err
+	return _err
 }
 
-func (client *Client) GetFile(request *OSSGetFileRequest, runtime *RuntimeOptions) (*OSSGetFileResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) GetFile(request *OSSGetFileRequest, runtime *RuntimeOptions) (_result *OSSGetFileResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &OSSGetFileResponse{}
@@ -12794,20 +12848,23 @@ func (client *Client) GetFile(request *OSSGetFileRequest, runtime *RuntimeOption
 			}
 		}
 
-		_resp, err = func() (*OSSGetFileResponse, error) {
+		_resp, _err = func() (*OSSGetFileResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/get")
@@ -12827,27 +12884,26 @@ func (client *Client) GetFile(request *OSSGetFileRequest, runtime *RuntimeOption
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &OSSGetFileResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &OSSGetFileResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -12855,60 +12911,60 @@ func (client *Client) GetFile(request *OSSGetFileRequest, runtime *RuntimeOption
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) GetDownloadUrl(request *OSSGetDownloadUrlRequest, runtime *RuntimeOptions) (*OSSGetDownloadUrlResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) GetDownloadUrl(request *OSSGetDownloadUrlRequest, runtime *RuntimeOptions) (_result *OSSGetDownloadUrlResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &OSSGetDownloadUrlResponse{}
@@ -12920,20 +12976,23 @@ func (client *Client) GetDownloadUrl(request *OSSGetDownloadUrlRequest, runtime 
 			}
 		}
 
-		_resp, err = func() (*OSSGetDownloadUrlResponse, error) {
+		_resp, _err = func() (*OSSGetDownloadUrlResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/get_download_url")
@@ -12953,27 +13012,26 @@ func (client *Client) GetDownloadUrl(request *OSSGetDownloadUrlRequest, runtime 
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &OSSGetDownloadUrlResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &OSSGetDownloadUrlResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -12981,60 +13039,60 @@ func (client *Client) GetDownloadUrl(request *OSSGetDownloadUrlRequest, runtime 
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) GetUploadUrl(request *OSSGetUploadUrlRequest, runtime *RuntimeOptions) (*OSSGetUploadUrlResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) GetUploadUrl(request *OSSGetUploadUrlRequest, runtime *RuntimeOptions) (_result *OSSGetUploadUrlResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &OSSGetUploadUrlResponse{}
@@ -13046,20 +13104,23 @@ func (client *Client) GetUploadUrl(request *OSSGetUploadUrlRequest, runtime *Run
 			}
 		}
 
-		_resp, err = func() (*OSSGetUploadUrlResponse, error) {
+		_resp, _err = func() (*OSSGetUploadUrlResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/get_upload_url")
@@ -13079,27 +13140,26 @@ func (client *Client) GetUploadUrl(request *OSSGetUploadUrlRequest, runtime *Run
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &OSSGetUploadUrlResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &OSSGetUploadUrlResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -13107,60 +13167,60 @@ func (client *Client) GetUploadUrl(request *OSSGetUploadUrlRequest, runtime *Run
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) ListFile(request *OSSListFileRequest, runtime *RuntimeOptions) (*OSSListFileResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) ListFile(request *OSSListFileRequest, runtime *RuntimeOptions) (_result *OSSListFileResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &OSSListFileResponse{}
@@ -13172,20 +13232,23 @@ func (client *Client) ListFile(request *OSSListFileRequest, runtime *RuntimeOpti
 			}
 		}
 
-		_resp, err = func() (*OSSListFileResponse, error) {
+		_resp, _err = func() (*OSSListFileResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/list")
@@ -13205,27 +13268,26 @@ func (client *Client) ListFile(request *OSSListFileRequest, runtime *RuntimeOpti
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &OSSListFileResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &OSSListFileResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -13233,60 +13295,60 @@ func (client *Client) ListFile(request *OSSListFileRequest, runtime *RuntimeOpti
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) ListUploadedParts(request *OSSListUploadedPartRequest, runtime *RuntimeOptions) (*OSSListUploadedPartResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) ListUploadedParts(request *OSSListUploadedPartRequest, runtime *RuntimeOptions) (_result *OSSListUploadedPartResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &OSSListUploadedPartResponse{}
@@ -13298,20 +13360,23 @@ func (client *Client) ListUploadedParts(request *OSSListUploadedPartRequest, run
 			}
 		}
 
-		_resp, err = func() (*OSSListUploadedPartResponse, error) {
+		_resp, _err = func() (*OSSListUploadedPartResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/list_uploaded_parts")
@@ -13331,27 +13396,26 @@ func (client *Client) ListUploadedParts(request *OSSListUploadedPartRequest, run
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &OSSListUploadedPartResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &OSSListUploadedPartResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -13359,60 +13423,60 @@ func (client *Client) ListUploadedParts(request *OSSListUploadedPartRequest, run
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) MoveFile(request *OSSMoveFileRequest, runtime *RuntimeOptions) (*OSSMoveFileResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) MoveFile(request *OSSMoveFileRequest, runtime *RuntimeOptions) (_result *OSSMoveFileResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &OSSMoveFileResponse{}
@@ -13424,20 +13488,23 @@ func (client *Client) MoveFile(request *OSSMoveFileRequest, runtime *RuntimeOpti
 			}
 		}
 
-		_resp, err = func() (*OSSMoveFileResponse, error) {
+		_resp, _err = func() (*OSSMoveFileResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/move")
@@ -13457,27 +13524,26 @@ func (client *Client) MoveFile(request *OSSMoveFileRequest, runtime *RuntimeOpti
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &OSSMoveFileResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &OSSMoveFileResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -13485,60 +13551,60 @@ func (client *Client) MoveFile(request *OSSMoveFileRequest, runtime *RuntimeOpti
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) CreateShare(request *CreateShareRequest, runtime *RuntimeOptions) (*CreateShareResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) CreateShare(request *CreateShareRequest, runtime *RuntimeOptions) (_result *CreateShareResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &CreateShareResponse{}
@@ -13550,20 +13616,23 @@ func (client *Client) CreateShare(request *CreateShareRequest, runtime *RuntimeO
 			}
 		}
 
-		_resp, err = func() (*CreateShareResponse, error) {
+		_resp, _err = func() (*CreateShareResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/share/create")
@@ -13583,27 +13652,26 @@ func (client *Client) CreateShare(request *CreateShareRequest, runtime *RuntimeO
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 201) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &CreateShareResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &CreateShareResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -13611,60 +13679,60 @@ func (client *Client) CreateShare(request *CreateShareRequest, runtime *RuntimeO
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) DeleteShare(request *DeleteShareRequest, runtime *RuntimeOptions) error {
-	err := tea.Validate(request)
-	if err != nil {
-		return err
+func (client *Client) DeleteShare(request *DeleteShareRequest, runtime *RuntimeOptions) (_err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
@@ -13675,20 +13743,23 @@ func (client *Client) DeleteShare(request *DeleteShareRequest, runtime *RuntimeO
 			}
 		}
 
-		err = func() error {
+		_err = func() error {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/share/delete")
@@ -13708,18 +13779,17 @@ func (client *Client) DeleteShare(request *DeleteShareRequest, runtime *RuntimeO
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 204) {
-				return nil
+				return _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -13727,60 +13797,60 @@ func (client *Client) DeleteShare(request *DeleteShareRequest, runtime *RuntimeO
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return err
+				return _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return err
+			return _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return err
+	return _err
 }
 
-func (client *Client) GetShare(request *GetShareRequest, runtime *RuntimeOptions) (*GetShareResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) GetShare(request *GetShareRequest, runtime *RuntimeOptions) (_result *GetShareResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &GetShareResponse{}
@@ -13792,20 +13862,23 @@ func (client *Client) GetShare(request *GetShareRequest, runtime *RuntimeOptions
 			}
 		}
 
-		_resp, err = func() (*GetShareResponse, error) {
+		_resp, _err = func() (*GetShareResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/share/get")
@@ -13825,27 +13898,26 @@ func (client *Client) GetShare(request *GetShareRequest, runtime *RuntimeOptions
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &GetShareResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &GetShareResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -13853,60 +13925,60 @@ func (client *Client) GetShare(request *GetShareRequest, runtime *RuntimeOptions
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) ListShare(request *ListShareRequest, runtime *RuntimeOptions) (*ListShareResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) ListShare(request *ListShareRequest, runtime *RuntimeOptions) (_result *ListShareResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &ListShareResponse{}
@@ -13918,20 +13990,23 @@ func (client *Client) ListShare(request *ListShareRequest, runtime *RuntimeOptio
 			}
 		}
 
-		_resp, err = func() (*ListShareResponse, error) {
+		_resp, _err = func() (*ListShareResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/share/list")
@@ -13951,27 +14026,26 @@ func (client *Client) ListShare(request *ListShareRequest, runtime *RuntimeOptio
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &ListShareResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &ListShareResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -13979,60 +14053,60 @@ func (client *Client) ListShare(request *ListShareRequest, runtime *RuntimeOptio
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) UpdateShare(request *UpdateShareRequest, runtime *RuntimeOptions) (*UpdateShareResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) UpdateShare(request *UpdateShareRequest, runtime *RuntimeOptions) (_result *UpdateShareResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &UpdateShareResponse{}
@@ -14044,20 +14118,23 @@ func (client *Client) UpdateShare(request *UpdateShareRequest, runtime *RuntimeO
 			}
 		}
 
-		_resp, err = func() (*UpdateShareResponse, error) {
+		_resp, _err = func() (*UpdateShareResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/share/update")
@@ -14077,27 +14154,26 @@ func (client *Client) UpdateShare(request *UpdateShareRequest, runtime *RuntimeO
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &UpdateShareResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &UpdateShareResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -14105,60 +14181,60 @@ func (client *Client) UpdateShare(request *UpdateShareRequest, runtime *RuntimeO
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) ListStorefile(request *ListStoreFileRequest, runtime *RuntimeOptions) (*ListStoreFileResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) ListStorefile(request *ListStoreFileRequest, runtime *RuntimeOptions) (_result *ListStoreFileResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &ListStoreFileResponse{}
@@ -14170,20 +14246,23 @@ func (client *Client) ListStorefile(request *ListStoreFileRequest, runtime *Runt
 			}
 		}
 
-		_resp, err = func() (*ListStoreFileResponse, error) {
+		_resp, _err = func() (*ListStoreFileResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/store_file/list")
@@ -14203,27 +14282,26 @@ func (client *Client) ListStorefile(request *ListStoreFileRequest, runtime *Runt
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &ListStoreFileResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &ListStoreFileResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -14231,60 +14309,60 @@ func (client *Client) ListStorefile(request *ListStoreFileRequest, runtime *Runt
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOptions) (*CreateUserResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOptions) (_result *CreateUserResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &CreateUserResponse{}
@@ -14296,20 +14374,23 @@ func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOpt
 			}
 		}
 
-		_resp, err = func() (*CreateUserResponse, error) {
+		_resp, _err = func() (*CreateUserResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/create")
@@ -14329,27 +14410,26 @@ func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOpt
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 201) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &CreateUserResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &CreateUserResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -14357,60 +14437,60 @@ func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOpt
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOptions) error {
-	err := tea.Validate(request)
-	if err != nil {
-		return err
+func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOptions) (_err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
@@ -14421,20 +14501,23 @@ func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOpt
 			}
 		}
 
-		err = func() error {
+		_err = func() error {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/delete")
@@ -14454,18 +14537,17 @@ func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOpt
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 204) {
-				return nil
+				return _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -14473,60 +14555,60 @@ func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOpt
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return err
+				return _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return err
+			return _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return err
+	return _err
 }
 
-func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) (*GetUserResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) (_result *GetUserResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &GetUserResponse{}
@@ -14538,20 +14620,23 @@ func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) 
 			}
 		}
 
-		_resp, err = func() (*GetUserResponse, error) {
+		_resp, _err = func() (*GetUserResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/get")
@@ -14571,27 +14656,26 @@ func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) 
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &GetUserResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &GetUserResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -14599,60 +14683,60 @@ func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) 
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOptions) (*ListUserResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOptions) (_result *ListUserResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &ListUserResponse{}
@@ -14664,20 +14748,23 @@ func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOption
 			}
 		}
 
-		_resp, err = func() (*ListUserResponse, error) {
+		_resp, _err = func() (*ListUserResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/list")
@@ -14697,27 +14784,26 @@ func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOption
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &ListUserResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &ListUserResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -14725,60 +14811,60 @@ func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOption
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOptions) (*ListUserResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOptions) (_result *ListUserResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &ListUserResponse{}
@@ -14790,20 +14876,23 @@ func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOpt
 			}
 		}
 
-		_resp, err = func() (*ListUserResponse, error) {
+		_resp, _err = func() (*ListUserResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/search")
@@ -14823,27 +14912,26 @@ func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOpt
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &ListUserResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &ListUserResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -14851,60 +14939,60 @@ func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOpt
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
 
-func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOptions) (*UpdateUserResponse, error) {
-	err := tea.Validate(request)
-	if err != nil {
-		return nil, err
+func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOptions) (_result *UpdateUserResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
 	}
-	err = tea.Validate(runtime)
-	if err != nil {
-		return nil, err
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
 	}
 	_runtime := map[string]interface{}{
 		"timeouted":      "retry",
-		"readTimeout":    tea.GetIntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.GetIntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.GetStringValue(runtime.LocalAddr),
-		"httpProxy":      tea.GetStringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.GetStringValue(runtime.HttpsProxy),
-		"noProxy":        tea.GetStringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.GetIntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.GetStringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.GetStringValue(runtime.Socks5NetWork),
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
-			"retryable":   tea.GetBoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.GetIntValue(runtime.MaxAttempts), 3),
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.GetStringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.GetIntValue(runtime.BackoffPeriod), 1),
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
-		"ignoreSSL": tea.GetBoolValue(runtime.IgnoreSSL),
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
 	_resp := &UpdateUserResponse{}
@@ -14916,20 +15004,23 @@ func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOpt
 			}
 		}
 
-		_resp, err = func() (*UpdateUserResponse, error) {
+		_resp, _err = func() (*UpdateUserResponse, error) {
 			request_ := tea.NewRequest()
-			accesskeyId, err := client.GetAccessKeyId()
-			if err != nil {
-				return nil, err
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
 			}
-			accessKeySecret, err := client.GetAccessKeySecret()
-			if err != nil {
-				return nil, err
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
 			}
-			accessToken, err := client.GetAccessToken()
-			if err != nil {
-				return nil, err
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
 			}
+
 			request_.Protocol = client.GetProtocol(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/update")
@@ -14949,27 +15040,26 @@ func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOpt
 			}
 
 			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
-			response_, err := tea.DoRequest(request_, _runtime)
-			if err != nil {
-				return nil, err
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
 			}
-
 			respMap := make(map[string]interface{})
 			if client.IsStatusCode(response_, 200) {
-				respMap, err = client.ReadAsJSON(response_)
-				if err != nil {
-					return nil, err
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
 				}
 
-				_result := &UpdateUserResponse{}
-				err = tea.Convert(tea.ToMap(map[string]interface{}{
+				_result = &UpdateUserResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
-				return _result, err
+				return _result, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
-				err = tea.NewSDKError(map[string]interface{}{
+				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
 						"statusCode":    response_.StatusCode,
@@ -14977,27 +15067,27 @@ func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOpt
 					},
 					"message": response_.Headers["x-ca-error-message"],
 				})
-				return nil, err
+				return nil, _err
 			}
 
-			respMap, err = client.ReadAsJSON(response_)
-			if err != nil {
-				return nil, err
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
 			}
 
-			err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
 					"statusCode":    response_.StatusCode,
 					"statusMessage": response_.StatusMessage,
 				},
 			}, respMap))
-			return nil, err
+			return nil, _err
 		}()
-		if !tea.Retryable(err) {
+		if !tea.Retryable(_err) {
 			break
 		}
 	}
 
-	return _resp, err
+	return _resp, _err
 }
