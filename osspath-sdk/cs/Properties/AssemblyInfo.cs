@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Alibaba Cloud, Inc")]
 [assembly: AssemblyProduct("aliyun ccp oss client")]
-[assembly: AssemblyCopyright("©2009-2019 Alibaba Cloud")]
+[assembly: AssemblyCopyright("©2009-present Alibaba Cloud")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

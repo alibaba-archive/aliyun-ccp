@@ -5,7 +5,7 @@
     <Version>0.0.8</Version>
     <Authors>Alibaba Cloud</Authors>
     <PackageTags>Alibaba Aliyun CCP BaseClient SDK</PackageTags>
-    <Copyright>©2009-2019 Alibaba Cloud</Copyright>
+    <Copyright>©2009-present Alibaba Cloud</Copyright>
     <PackageProjectUrl>https://github.com/aliyun/</PackageProjectUrl>
     <PackageIconUrl>https://www.alibabacloud.com/favicon.ico</PackageIconUrl>
     <Description>Alibaba Cloud CCP BaseClient SDK for .NET</Description>
