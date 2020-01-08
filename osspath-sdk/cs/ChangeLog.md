@@ -1,3 +1,6 @@
+### 2020-01-08 Version 0.0.4
+* ReGenerate CCP for CSharp
+
 ### 2019-12-10 Version 0.0.3
 * Supported `TeaException`
 * Supported `BuildMap()`
