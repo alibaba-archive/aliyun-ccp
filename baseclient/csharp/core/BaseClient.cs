@@ -21,7 +21,6 @@ namespace Aliyun.SDK.CCP
     public class BaseClient
     {
         public static string URL_ENCODING = "UTF-8";
-        private static string ALGORITHM_NAME = "HmacSHA1";
         protected readonly string _defaultUserAgent;
         protected string _userAgent;
         protected string _domainId;
