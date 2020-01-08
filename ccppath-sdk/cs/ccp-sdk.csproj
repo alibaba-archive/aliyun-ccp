@@ -9,7 +9,7 @@
     <AssemblyName>Aliyun.SDK.CCP.Client</AssemblyName>
     <Version>0.0.3</Version>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <LangVersion>4</LangVersion>
+    <LangVersion>5</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
@@ -43,7 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aliyun.SDK.CCP.BaseClient" Version="0.0.8" />
+    <PackageReference Include="Aliyun.SDK.CCP.BaseClient" Version="0.0.9" />
   </ItemGroup>
 
 </Project>
