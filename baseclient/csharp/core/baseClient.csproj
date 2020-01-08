@@ -12,7 +12,7 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <AssemblyName>Aliyun.SDK.CCP.BaseClient</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <LangVersion>4</LangVersion>
+    <LangVersion>5</LangVersion>
   </PropertyGroup>
 
    <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0'">
@@ -46,7 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Tea" Version="0.0.9" />
+    <PackageReference Include="Tea" Version="0.2.1" />
   </ItemGroup>
   
   <ItemGroup>
