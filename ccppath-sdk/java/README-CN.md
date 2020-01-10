@@ -3,6 +3,7 @@
 ![](https://aliyunsdk-pages.alicdn.com/icons/AlibabaCloud.svg)
 
 ## Alibaba Cloud CCPPath SDK for Java
+[![Latest Stable Version](https://img.shields.io/maven-central/v/com.aliyun/ccp-client.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.aliyun%22%20AND%20a:%22ccp-client%22)
 
 ## 安装
 
@@ -10,12 +11,12 @@
 <dependency>
     <groupId>com.aliyun</groupId>
     <artifactId>ccp-baseclient</artifactId>
-    <version>1.0.2</version>
+    <version>使用maven标签所示版本</version>
 </dependency>
 <dependency>
     <groupId>com.aliyun</groupId>
     <artifactId>ccp-client</artifactId>
-    <version>1.1.1</version>
+    <version>使用maven标签所示版本</version>
 </dependency>
 ```
 
