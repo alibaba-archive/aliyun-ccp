@@ -10,12 +10,12 @@
 <dependency>
     <groupId>com.aliyun</groupId>
     <artifactId>ccp-baseclient</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.2</version>
 </dependency>
 <dependency>
     <groupId>com.aliyun</groupId>
     <artifactId>ccp-client</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1.1</version>
 </dependency>
 ```
 
