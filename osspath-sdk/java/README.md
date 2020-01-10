@@ -2,6 +2,7 @@ English | [简体中文](README-CN.md)
 ![](https://aliyunsdk-pages.alicdn.com/icons/AlibabaCloud.svg)
 
 ## Alibaba Cloud OSSPath SDK for Java
+[![Latest Stable Version](https://img.shields.io/maven-central/v/com.aliyun/ccp-oss-client.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.aliyun%22%20AND%20a:%22ccp-oss-client%22)
 
 ## Installation
 
@@ -9,12 +10,12 @@ English | [简体中文](README-CN.md)
 <dependency>
     <groupId>com.aliyun</groupId>
     <artifactId>ccp-baseclient</artifactId>
-    <version>1.0.2</version>
+    <version>Use the version shown in the maven badge</version>
 </dependency>
 <dependency>
     <groupId>com.aliyun</groupId>
     <artifactId>ccp-oss-client</artifactId>
-    <version>1.1.1</version>
+    <version>Use the version shown in the maven badge</version>
 </dependency>
 ```
 
