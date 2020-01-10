@@ -11,7 +11,7 @@
 <dependency>
     <groupId>com.aliyun</groupId>
     <artifactId>ccp-baseclient</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
