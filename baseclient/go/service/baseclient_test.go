@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strings"
+	"sync"
 	"testing"
 
 	"github.com/alibabacloud-go/tea/tea"
@@ -163,6 +164,43 @@ func Test_Default(t *testing.T) {
 
 	str = client.Default("", "2")
 	utils.AssertEqual(t, "2", str)
+}
+
+func Test_RefreshTokenWithConcurrent(t *testing.T) {
+	originTestHookDo := hookdo
+	defer func() { hookdo = originTestHookDo }()
+	hookdo = func(resp *tea.Response, err error) (*tea.Response, error) {
+		tmp := `{"expires_time": "2006-01-02T15:04:05Z","access_token":"access_token","refresh_token":"refresh_token"}`
+		httpresponse := &http.Response{
+			StatusCode: 200,
+			Body:       ioutil.NopCloser(strings.NewReader(tmp)),
+		}
+		resp = tea.NewResponse(httpresponse)
+		return resp, nil
+	}
+	originTest := RefreshCallbackFn
+	var refre, access, expire string
+	defer func() { RefreshCallbackFn = originTest }()
+	RefreshCallbackFn = func(refreshToken, accessToken, expireTime string) {
+		refre = refreshToken
+		access = accessToken
+		expire = expireTime
+		return
+	}
+	var wg sync.WaitGroup
+	for i := 0; i < 50; i++ {
+		wg.Add(1)
+		go func() {
+			accesstoken, err := client.GetAccessToken()
+			utils.AssertNil(t, err)
+			utils.AssertEqual(t, "access_token", accesstoken)
+			wg.Done()
+		}()
+	}
+	wg.Wait()
+	utils.AssertEqual(t, "refresh_token", refre)
+	utils.AssertEqual(t, "access_token", access)
+	utils.AssertEqual(t, "2006-01-02T15:04:05Z", expire)
 }
 
 func Test_GetAccessToken(t *testing.T) {

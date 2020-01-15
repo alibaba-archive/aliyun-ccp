@@ -7,6 +7,7 @@ import (
 	"reflect"
 	"runtime"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/alibabacloud-go/tea/tea"
@@ -15,6 +16,7 @@ import (
 )
 
 var defaultUserAgent = fmt.Sprintf("AlibabaCloud (%s; %s) Golang/%s Core/%s", runtime.GOOS, runtime.GOARCH, strings.Trim(runtime.Version(), "go"), "0.01")
+var mutex sync.Mutex
 
 type BaseClient struct {
 	RegionId     string `json:"regionId" xml:"regionId"`
@@ -194,22 +196,24 @@ func (client *BaseClient) GetAccessToken() (string, error) {
 	if client.accessToken == nil {
 		return "", nil
 	}
-	if client.accessToken.AccessToken != "" && !client.accessToken.needUpdateCredential() {
-		return client.accessToken.AccessToken, nil
-	}
 
+	mutex.Lock()
 	if client.accessToken.needUpdateCredential() && client.accessToken.RefreshToken != "" {
 		accessToken, refreshToken, update, err := refreshAccessToken(client.Endpoint, client.DomainId, client.accessToken.RefreshToken, client.ClientId, client.ClientSecret)
 		if accessToken != "" && refreshToken != "" && update != nil {
 			client.accessToken.AccessToken = accessToken
 			client.accessToken.RefreshToken = refreshToken
 			client.accessToken.credentialUpdater = update
+			mutex.Unlock()
 			return accessToken, nil
 		}
+		mutex.Unlock()
 		return "", err
+	} else {
+		mutex.Unlock()
+		return client.accessToken.AccessToken, nil
 	}
 
-	return "", nil
 }
 
 func (client *BaseClient) GetAccessKeySecret() (string, error) {

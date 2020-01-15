@@ -23,6 +23,9 @@ var hookdo = func(response *tea.Response, err error) (*tea.Response, error) {
 	return response, err
 }
 
+var RefreshCallbackFn = func(refreshToken string, accessToken string, expireTime string) {
+}
+
 // Sorter defines the key-value structure for storing the sorted data in signHeader.
 type Sorter struct {
 	Keys []string
@@ -223,6 +226,7 @@ func refreshAccessToken(endpoint, domainId, refreshToken, clientId, clientSecret
 	update := &credentialUpdater{
 		ExpireTime: &expireTime,
 	}
+	RefreshCallbackFn(accessToken.RefreshToken, accessToken.AccessToken, accessToken.ExpireTime)
 	return accessToken.AccessToken, accessToken.RefreshToken, update, nil
 }
 
