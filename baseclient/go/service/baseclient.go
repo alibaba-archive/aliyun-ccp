@@ -188,7 +188,7 @@ func (client *BaseClient) GetAccessKeyId() (string, error) {
 	if client.credential == nil {
 		return "", nil
 	}
-	accesskey, _ := client.credential.GetAccessKeyID()
+	accesskey, _ := client.credential.GetAccessKeyId()
 	return accesskey, nil
 }
 
@@ -220,7 +220,7 @@ func (client *BaseClient) GetAccessKeySecret() (string, error) {
 	if client.credential == nil {
 		return "", nil
 	}
-	secret, _ := client.credential.GetAccessSecret()
+	secret, _ := client.credential.GetAccessKeySecret()
 	return secret, nil
 }
 
