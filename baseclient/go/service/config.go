@@ -6,6 +6,7 @@ import (
 	"crypto/sha1"
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"hash"
 	"io"
@@ -24,6 +25,9 @@ var hookdo = func(response *tea.Response, err error) (*tea.Response, error) {
 }
 
 var RefreshCallbackFn = func(refreshToken string, accessToken string, expireTime string) {
+}
+
+var RefreshFailCallbackFn = func(err error) {
 }
 
 // Sorter defines the key-value structure for storing the sorted data in signHeader.
@@ -203,23 +207,33 @@ func refreshAccessToken(endpoint, domainId, refreshToken, clientId, clientSecret
 	bodyStr := "grant_type=refresh_token&refresh_token=" + refreshToken + "&client_id=" + clientId + "&client_secret=" + clientSecret
 	request.Body = strings.NewReader(bodyStr)
 	response, err := hookdo(tea.DoRequest(request, nil))
-	if err != nil || response.StatusCode != 200 {
+	if err != nil {
+		RefreshFailCallbackFn(err)
 		return "", "", nil, err
 	}
 
 	body, err := response.ReadBody()
 	if err != nil {
+		RefreshFailCallbackFn(err)
+		return "", "", nil, err
+	}
+
+	if response.StatusCode != 200 {
+		err = errors.New(string(body))
+		RefreshFailCallbackFn(err)
 		return "", "", nil, err
 	}
 
 	accessToken := new(AccessTokenResponse)
 	err = json.Unmarshal(body, &accessToken)
 	if err != nil {
+		RefreshFailCallbackFn(err)
 		return "", "", nil, err
 	}
 
 	expiretime, err := time.Parse(time.RFC3339, accessToken.ExpireTime)
 	if err != nil {
+		RefreshFailCallbackFn(err)
 		return "", "", nil, err
 	}
 	expireTime := expiretime.Unix()

@@ -209,6 +209,14 @@ func Test_GetAccessToken(t *testing.T) {
 		hookdo = originhook
 	}()
 
+	originTest := RefreshFailCallbackFn
+	var err1 error
+	defer func() { RefreshFailCallbackFn = originTest }()
+	RefreshFailCallbackFn = func(err error) {
+		err1 = err
+		return
+	}
+
 	hookdo = func(resp *tea.Response, err error) (*tea.Response, error) {
 		tmp := `{"expires_time": "2006-01-T15:04:05Z"}`
 		httpresponse := &http.Response{
@@ -221,6 +229,7 @@ func Test_GetAccessToken(t *testing.T) {
 	accesstoken, err := client.GetAccessToken()
 	utils.AssertEqual(t, err.Error(), `parsing time "2006-01-T15:04:05Z" as "2006-01-02T15:04:05Z07:00": cannot parse "T15:04:05Z" as "02"`)
 	utils.AssertEqual(t, accesstoken, "")
+	utils.AssertEqual(t, err1.Error(), `parsing time "2006-01-T15:04:05Z" as "2006-01-02T15:04:05Z07:00": cannot parse "T15:04:05Z" as "02"`)
 
 	hookdo = func(resp *tea.Response, err error) (*tea.Response, error) {
 		tmp := `{"expires_time": "2006-01-02T15:04:05Z","access_token":"access_token","refresh_token":"refresh_token"}`
