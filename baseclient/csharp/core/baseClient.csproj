@@ -46,12 +46,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Tea" Version="0.2.1" />
+    <PackageReference Include="Tea" Version="0.2.2" />
   </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-    <PackageReference Include="Aliyun.Credentials" Version="0.0.1" />
+    <PackageReference Include="Aliyun.Credentials" Version="0.0.3" />
   </ItemGroup>
 
 </Project>

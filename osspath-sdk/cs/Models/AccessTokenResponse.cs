@@ -17,9 +17,9 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         [Validation(Required=true)]
         public string AccessToken { get; set; }
 
-        [NameInMap("expires_time")]
+        [NameInMap("expire_time")]
         [Validation(Required=false)]
-        public string ExpiresTime { get; set; }
+        public string ExpireTime { get; set; }
 
         [NameInMap("refresh_token")]
         [Validation(Required=false)]
