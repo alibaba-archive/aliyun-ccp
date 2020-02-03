@@ -11,7 +11,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
     public class CreateDriveRequest : TeaModel {
         [NameInMap("default")]
         [Validation(Required=false)]
-        public bool? _default { get; set; }
+        public bool? Default { get; set; }
 
         [NameInMap("description")]
         [Validation(Required=false)]
