@@ -16,4 +16,9 @@ public class CCPGetAsyncTaskResponse extends TeaModel {
     @NameInMap("state")
     public String state;
 
+    public static CCPGetAsyncTaskResponse build(java.util.Map<String, ?> map) throws Exception {
+        CCPGetAsyncTaskResponse self = new CCPGetAsyncTaskResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

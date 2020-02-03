@@ -13,4 +13,9 @@ public class OSSSearchFileResponse extends TeaModel {
     @NameInMap("next_marker")
     public String nextMarker;
 
+    public static OSSSearchFileResponse build(java.util.Map<String, ?> map) throws Exception {
+        OSSSearchFileResponse self = new OSSSearchFileResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

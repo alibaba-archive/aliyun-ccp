@@ -11,4 +11,9 @@ public class ListStoresResponse extends TeaModel {
     @Validation(required = true)
     public Store[] items;
 
+    public static ListStoresResponse build(java.util.Map<String, ?> map) throws Exception {
+        ListStoresResponse self = new ListStoresResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

@@ -61,4 +61,9 @@ public class CreateFileRequest extends TeaModel {
     @Validation(required = true)
     public String type;
 
+    public static CreateFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        CreateFileRequest self = new CreateFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

@@ -14,4 +14,9 @@ public class ListAppsResponse extends TeaModel {
     @NameInMap("next_marker")
     public String nextMarker;
 
+    public static ListAppsResponse build(java.util.Map<String, ?> map) throws Exception {
+        ListAppsResponse self = new ListAppsResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

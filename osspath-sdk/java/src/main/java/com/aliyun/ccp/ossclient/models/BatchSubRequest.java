@@ -22,4 +22,9 @@ public class BatchSubRequest extends TeaModel {
     @Validation(required = true)
     public String url;
 
+    public static BatchSubRequest build(java.util.Map<String, ?> map) throws Exception {
+        BatchSubRequest self = new BatchSubRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

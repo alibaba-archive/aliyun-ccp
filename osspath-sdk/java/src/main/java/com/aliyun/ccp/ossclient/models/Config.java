@@ -44,4 +44,9 @@ public class Config extends TeaModel {
     @NameInMap("nickname")
     public String nickname;
 
+    public static Config build(java.util.Map<String, ?> map) throws Exception {
+        Config self = new Config();
+        return TeaModel.build(map, self);
+    }
+
 }

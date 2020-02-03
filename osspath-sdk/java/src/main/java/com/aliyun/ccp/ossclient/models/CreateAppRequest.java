@@ -29,4 +29,9 @@ public class CreateAppRequest extends TeaModel {
     @Validation(required = true)
     public String type;
 
+    public static CreateAppRequest build(java.util.Map<String, ?> map) throws Exception {
+        CreateAppRequest self = new CreateAppRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

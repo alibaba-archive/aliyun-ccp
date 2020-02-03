@@ -19,4 +19,9 @@ public class ListShareRequest extends TeaModel {
     @Validation(required = true)
     public String owner;
 
+    public static ListShareRequest build(java.util.Map<String, ?> map) throws Exception {
+        ListShareRequest self = new ListShareRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

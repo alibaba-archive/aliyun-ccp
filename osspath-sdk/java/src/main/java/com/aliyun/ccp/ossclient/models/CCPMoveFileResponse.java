@@ -22,4 +22,9 @@ public class CCPMoveFileResponse extends TeaModel {
     @Validation(pattern = "[a-z0-9]{1, 50}")
     public String fileId;
 
+    public static CCPMoveFileResponse build(java.util.Map<String, ?> map) throws Exception {
+        CCPMoveFileResponse self = new CCPMoveFileResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

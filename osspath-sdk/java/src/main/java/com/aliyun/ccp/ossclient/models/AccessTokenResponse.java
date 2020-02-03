@@ -11,8 +11,8 @@ public class AccessTokenResponse extends TeaModel {
     @Validation(required = true)
     public String accessToken;
 
-    @NameInMap("expires_time")
-    public String expiresTime;
+    @NameInMap("expire_time")
+    public String expireTime;
 
     @NameInMap("refresh_token")
     public String refreshToken;
@@ -25,5 +25,10 @@ public class AccessTokenResponse extends TeaModel {
 
     @NameInMap("user_id")
     public String userId;
+
+    public static AccessTokenResponse build(java.util.Map<String, ?> map) throws Exception {
+        AccessTokenResponse self = new AccessTokenResponse();
+        return TeaModel.build(map, self);
+    }
 
 }

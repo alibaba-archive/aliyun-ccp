@@ -23,4 +23,9 @@ public class OSSGetDownloadUrlRequest extends TeaModel {
     @Validation(required = true, pattern = "[0-9a-z-]+")
     public String shareId;
 
+    public static OSSGetDownloadUrlRequest build(java.util.Map<String, ?> map) throws Exception {
+        OSSGetDownloadUrlRequest self = new OSSGetDownloadUrlRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

@@ -16,4 +16,9 @@ public class BatchSubResponse extends TeaModel {
     @NameInMap("status")
     public Long status;
 
+    public static BatchSubResponse build(java.util.Map<String, ?> map) throws Exception {
+        BatchSubResponse self = new BatchSubResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

@@ -80,4 +80,9 @@ public class UpdateDomainRequest extends TeaModel {
     @NameInMap("sharable")
     public boolean sharable;
 
+    public static UpdateDomainRequest build(java.util.Map<String, ?> map) throws Exception {
+        UpdateDomainRequest self = new UpdateDomainRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

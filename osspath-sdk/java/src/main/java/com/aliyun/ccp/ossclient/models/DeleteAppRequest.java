@@ -8,4 +8,9 @@ public class DeleteAppRequest extends TeaModel {
     @Validation(required = true)
     public String appId;
 
+    public static DeleteAppRequest build(java.util.Map<String, ?> map) throws Exception {
+        DeleteAppRequest self = new DeleteAppRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

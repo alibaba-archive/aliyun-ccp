@@ -21,4 +21,9 @@ public class BaseListFileRequest extends TeaModel {
     @NameInMap("marker")
     public String marker;
 
+    public static BaseListFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        BaseListFileRequest self = new BaseListFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

@@ -12,4 +12,9 @@ public class RemoveStoreRequest extends TeaModel {
     @Validation(required = true)
     public String storeId;
 
+    public static RemoveStoreRequest build(java.util.Map<String, ?> map) throws Exception {
+        RemoveStoreRequest self = new RemoveStoreRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

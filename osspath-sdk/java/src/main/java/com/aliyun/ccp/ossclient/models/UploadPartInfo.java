@@ -17,4 +17,9 @@ public class UploadPartInfo extends TeaModel {
     @NameInMap("upload_url")
     public String uploadUrl;
 
+    public static UploadPartInfo build(java.util.Map<String, ?> map) throws Exception {
+        UploadPartInfo self = new UploadPartInfo();
+        return TeaModel.build(map, self);
+    }
+
 }

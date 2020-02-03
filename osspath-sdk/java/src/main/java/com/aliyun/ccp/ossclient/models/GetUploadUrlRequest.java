@@ -28,4 +28,9 @@ public class GetUploadUrlRequest extends TeaModel {
     @Validation(required = true)
     public String uploadId;
 
+    public static GetUploadUrlRequest build(java.util.Map<String, ?> map) throws Exception {
+        GetUploadUrlRequest self = new GetUploadUrlRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

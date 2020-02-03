@@ -16,4 +16,9 @@ public class TokenRequest extends TeaModel {
     @Validation(required = true)
     public String refreshToken;
 
+    public static TokenRequest build(java.util.Map<String, ?> map) throws Exception {
+        TokenRequest self = new TokenRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

@@ -20,4 +20,9 @@ public class MobileRegisterRequest extends TeaModel {
     @Validation(required = true)
     public String smsCodeId;
 
+    public static MobileRegisterRequest build(java.util.Map<String, ?> map) throws Exception {
+        MobileRegisterRequest self = new MobileRegisterRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

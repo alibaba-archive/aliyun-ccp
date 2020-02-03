@@ -15,4 +15,9 @@ public class MobileCheckExistResponse extends TeaModel {
     @Validation(required = true)
     public String phoneNumber;
 
+    public static MobileCheckExistResponse build(java.util.Map<String, ?> map) throws Exception {
+        MobileCheckExistResponse self = new MobileCheckExistResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

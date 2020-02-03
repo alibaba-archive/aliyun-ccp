@@ -63,4 +63,9 @@ public class GetAppResponse extends TeaModel {
     @Validation(required = true)
     public String updatedAt;
 
+    public static GetAppResponse build(java.util.Map<String, ?> map) throws Exception {
+        GetAppResponse self = new GetAppResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

@@ -26,4 +26,9 @@ public class CCPSearchFileRequest extends TeaModel {
     @NameInMap("query")
     public String query;
 
+    public static CCPSearchFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        CCPSearchFileRequest self = new CCPSearchFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

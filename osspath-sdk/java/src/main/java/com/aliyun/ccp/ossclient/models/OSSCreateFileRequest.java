@@ -33,4 +33,9 @@ public class OSSCreateFileRequest extends TeaModel {
     @NameInMap("share_id")
     public String shareId;
 
+    public static OSSCreateFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        OSSCreateFileRequest self = new OSSCreateFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

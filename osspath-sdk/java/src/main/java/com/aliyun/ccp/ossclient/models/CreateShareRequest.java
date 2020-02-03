@@ -31,4 +31,9 @@ public class CreateShareRequest extends TeaModel {
     @NameInMap("status")
     public String status;
 
+    public static CreateShareRequest build(java.util.Map<String, ?> map) throws Exception {
+        CreateShareRequest self = new CreateShareRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

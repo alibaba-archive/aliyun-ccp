@@ -10,4 +10,9 @@ public class ListUserRequest extends TeaModel {
     @NameInMap("marker")
     public String marker;
 
+    public static ListUserRequest build(java.util.Map<String, ?> map) throws Exception {
+        ListUserRequest self = new ListUserRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

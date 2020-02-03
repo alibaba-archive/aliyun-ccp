@@ -16,4 +16,9 @@ public class SetStoreCorsRequest extends TeaModel {
     @Validation(required = true)
     public String storeId;
 
+    public static SetStoreCorsRequest build(java.util.Map<String, ?> map) throws Exception {
+        SetStoreCorsRequest self = new SetStoreCorsRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

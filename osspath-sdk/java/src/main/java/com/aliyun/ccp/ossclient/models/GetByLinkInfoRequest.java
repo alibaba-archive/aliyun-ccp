@@ -12,4 +12,9 @@ public class GetByLinkInfoRequest extends TeaModel {
     @Validation(required = true)
     public String type;
 
+    public static GetByLinkInfoRequest build(java.util.Map<String, ?> map) throws Exception {
+        GetByLinkInfoRequest self = new GetByLinkInfoRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

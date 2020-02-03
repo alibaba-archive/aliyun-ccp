@@ -10,4 +10,9 @@ public class ListStoreResponse extends TeaModel {
     @NameInMap("items")
     public StoreItemResponse[] items;
 
+    public static ListStoreResponse build(java.util.Map<String, ?> map) throws Exception {
+        ListStoreResponse self = new ListStoreResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

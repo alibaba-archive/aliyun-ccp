@@ -8,4 +8,9 @@ public class DeleteShareRequest extends TeaModel {
     @Validation(required = true)
     public String shareId;
 
+    public static DeleteShareRequest build(java.util.Map<String, ?> map) throws Exception {
+        DeleteShareRequest self = new DeleteShareRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

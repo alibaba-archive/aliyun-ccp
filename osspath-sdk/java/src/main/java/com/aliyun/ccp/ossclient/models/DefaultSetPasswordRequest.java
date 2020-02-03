@@ -16,4 +16,9 @@ public class DefaultSetPasswordRequest extends TeaModel {
     @Validation(required = true)
     public String state;
 
+    public static DefaultSetPasswordRequest build(java.util.Map<String, ?> map) throws Exception {
+        DefaultSetPasswordRequest self = new DefaultSetPasswordRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

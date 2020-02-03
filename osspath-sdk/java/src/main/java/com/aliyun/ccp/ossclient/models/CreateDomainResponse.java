@@ -97,4 +97,9 @@ public class CreateDomainResponse extends TeaModel {
     @NameInMap("updated_at")
     public String updatedAt;
 
+    public static CreateDomainResponse build(java.util.Map<String, ?> map) throws Exception {
+        CreateDomainResponse self = new CreateDomainResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

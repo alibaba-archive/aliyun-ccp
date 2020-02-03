@@ -22,4 +22,9 @@ public class AccountLinkRequest extends TeaModel {
     @Validation(required = true)
     public String userId;
 
+    public static AccountLinkRequest build(java.util.Map<String, ?> map) throws Exception {
+        AccountLinkRequest self = new AccountLinkRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

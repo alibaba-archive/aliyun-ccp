@@ -10,4 +10,9 @@ public class CCPBatchResponse extends TeaModel {
     @NameInMap("responses")
     public BatchSubResponse[] responses;
 
+    public static CCPBatchResponse build(java.util.Map<String, ?> map) throws Exception {
+        CCPBatchResponse self = new CCPBatchResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

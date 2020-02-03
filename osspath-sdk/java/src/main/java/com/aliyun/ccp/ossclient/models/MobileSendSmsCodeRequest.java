@@ -22,4 +22,9 @@ public class MobileSendSmsCodeRequest extends TeaModel {
     @Validation(required = true)
     public String type;
 
+    public static MobileSendSmsCodeRequest build(java.util.Map<String, ?> map) throws Exception {
+        MobileSendSmsCodeRequest self = new MobileSendSmsCodeRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

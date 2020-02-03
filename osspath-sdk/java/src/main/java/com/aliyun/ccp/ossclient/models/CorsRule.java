@@ -19,4 +19,9 @@ public class CorsRule extends TeaModel {
     @NameInMap("max_age_seconds")
     public Long maxAgeSeconds;
 
+    public static CorsRule build(java.util.Map<String, ?> map) throws Exception {
+        CorsRule self = new CorsRule();
+        return TeaModel.build(map, self);
+    }
+
 }

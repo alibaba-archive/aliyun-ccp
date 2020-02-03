@@ -23,4 +23,9 @@ public class UpdateShareRequest extends TeaModel {
     @NameInMap("status")
     public String status;
 
+    public static UpdateShareRequest build(java.util.Map<String, ?> map) throws Exception {
+        UpdateShareRequest self = new UpdateShareRequest();
+        return TeaModel.build(map, self);
+    }
+
 }
