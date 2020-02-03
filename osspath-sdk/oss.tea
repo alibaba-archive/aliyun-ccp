@@ -1253,7 +1253,7 @@ file list', example='', items='{"$ref":"#/definitions/StoreFile"}'),
   model AccessTokenResponse {
     requestId?: string(name='requestId', description='request Id', example='0BA8CF68-9769E-4469-A14B-8772004287E2'),
     accessToken: string(name='access_token', description='用于调用业务接口的accessToken', example='cnskjajkahwdhwialsnd'),
-    expiresTime?: string(name='expires_time', description='accessToken过期时间，ISO时间', example='2019-09-01T06:57:48.813Z'),
+    expireTime?: string(name='expire_time', description='accessToken过期时间，ISO时间', example='2019-09-01T06:57:48.813Z'),
     refreshToken?: string(name='refresh_token', description='用于刷新accessToken', example='cnskjajkahwdhwialsnd'),
     role?: string(name='role', description='当前用户角色', example='user'),
     tokenType?: string(name='token_type', description='accessToken类型，Bearer', example='Bearer'),
