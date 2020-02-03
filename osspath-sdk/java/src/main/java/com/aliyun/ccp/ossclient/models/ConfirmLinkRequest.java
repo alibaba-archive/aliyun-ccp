@@ -8,4 +8,9 @@ public class ConfirmLinkRequest extends TeaModel {
     @Validation(required = true)
     public String temporaryToken;
 
+    public static ConfirmLinkRequest build(java.util.Map<String, ?> map) throws Exception {
+        ConfirmLinkRequest self = new ConfirmLinkRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

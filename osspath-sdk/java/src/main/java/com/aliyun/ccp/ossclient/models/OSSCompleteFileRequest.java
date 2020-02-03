@@ -20,4 +20,9 @@ public class OSSCompleteFileRequest extends TeaModel {
     @NameInMap("share_id")
     public String shareId;
 
+    public static OSSCompleteFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        OSSCompleteFileRequest self = new OSSCompleteFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

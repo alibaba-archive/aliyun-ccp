@@ -27,4 +27,9 @@ public class OSSGetUploadUrlResponse extends TeaModel {
     @NameInMap("upload_id")
     public String uploadId;
 
+    public static OSSGetUploadUrlResponse build(java.util.Map<String, ?> map) throws Exception {
+        OSSGetUploadUrlResponse self = new OSSGetUploadUrlResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

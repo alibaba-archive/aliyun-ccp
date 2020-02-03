@@ -33,4 +33,9 @@ public class CreateDriveRequest extends TeaModel {
     @NameInMap("total_size")
     public Long totalSize;
 
+    public static CreateDriveRequest build(java.util.Map<String, ?> map) throws Exception {
+        CreateDriveRequest self = new CreateDriveRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

@@ -18,4 +18,9 @@ public class BaseGetUploadUrlRequest extends TeaModel {
     @Validation(required = true)
     public String uploadId;
 
+    public static BaseGetUploadUrlRequest build(java.util.Map<String, ?> map) throws Exception {
+        BaseGetUploadUrlRequest self = new BaseGetUploadUrlRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

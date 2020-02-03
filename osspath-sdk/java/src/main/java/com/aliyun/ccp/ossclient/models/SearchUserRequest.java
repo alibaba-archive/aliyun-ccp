@@ -28,4 +28,9 @@ public class SearchUserRequest extends TeaModel {
     @NameInMap("user_name")
     public String userName;
 
+    public static SearchUserRequest build(java.util.Map<String, ?> map) throws Exception {
+        SearchUserRequest self = new SearchUserRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

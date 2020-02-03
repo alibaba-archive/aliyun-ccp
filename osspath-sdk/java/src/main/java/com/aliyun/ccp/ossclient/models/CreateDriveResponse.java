@@ -13,4 +13,9 @@ public class CreateDriveResponse extends TeaModel {
     @NameInMap("drive_id")
     public String driveId;
 
+    public static CreateDriveResponse build(java.util.Map<String, ?> map) throws Exception {
+        CreateDriveResponse self = new CreateDriveResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

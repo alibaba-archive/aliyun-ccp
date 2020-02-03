@@ -8,4 +8,9 @@ public class GetDomainRequest extends TeaModel {
     @Validation(required = true)
     public String domainId;
 
+    public static GetDomainRequest build(java.util.Map<String, ?> map) throws Exception {
+        GetDomainRequest self = new GetDomainRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

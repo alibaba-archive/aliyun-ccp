@@ -16,4 +16,9 @@ public class ImageMediaResponse extends TeaModel {
     @NameInMap("width")
     public Long width;
 
+    public static ImageMediaResponse build(java.util.Map<String, ?> map) throws Exception {
+        ImageMediaResponse self = new ImageMediaResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

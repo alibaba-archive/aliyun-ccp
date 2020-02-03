@@ -18,4 +18,9 @@ public class LoginByCodeRequest extends TeaModel {
     @Validation(required = true)
     public String type;
 
+    public static LoginByCodeRequest build(java.util.Map<String, ?> map) throws Exception {
+        LoginByCodeRequest self = new LoginByCodeRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

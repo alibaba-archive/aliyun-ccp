@@ -27,4 +27,9 @@ public class OSSListUploadedPartRequest extends TeaModel {
     @NameInMap("upload_id")
     public String uploadId;
 
+    public static OSSListUploadedPartRequest build(java.util.Map<String, ?> map) throws Exception {
+        OSSListUploadedPartRequest self = new OSSListUploadedPartRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

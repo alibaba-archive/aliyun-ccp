@@ -33,4 +33,9 @@ public class OSSCopyFileRequest extends TeaModel {
     @NameInMap("to_share_id")
     public String toShareId;
 
+    public static OSSCopyFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        OSSCopyFileRequest self = new OSSCopyFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

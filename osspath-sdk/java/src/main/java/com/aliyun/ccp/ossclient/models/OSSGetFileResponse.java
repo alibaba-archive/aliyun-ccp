@@ -78,4 +78,9 @@ public class OSSGetFileResponse extends TeaModel {
     @NameInMap("url")
     public String url;
 
+    public static OSSGetFileResponse build(java.util.Map<String, ?> map) throws Exception {
+        OSSGetFileResponse self = new OSSGetFileResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

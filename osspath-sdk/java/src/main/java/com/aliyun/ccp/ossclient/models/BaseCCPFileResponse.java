@@ -93,4 +93,9 @@ public class BaseCCPFileResponse extends TeaModel {
     @NameInMap("url")
     public String url;
 
+    public static BaseCCPFileResponse build(java.util.Map<String, ?> map) throws Exception {
+        BaseCCPFileResponse self = new BaseCCPFileResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

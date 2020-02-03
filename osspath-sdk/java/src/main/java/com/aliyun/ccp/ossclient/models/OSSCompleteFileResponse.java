@@ -81,4 +81,9 @@ public class OSSCompleteFileResponse extends TeaModel {
     @NameInMap("crc")
     public String crc;
 
+    public static OSSCompleteFileResponse build(java.util.Map<String, ?> map) throws Exception {
+        OSSCompleteFileResponse self = new OSSCompleteFileResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

@@ -28,4 +28,9 @@ public class AddStoreRequest extends TeaModel {
     @Validation(required = true)
     public String type;
 
+    public static AddStoreRequest build(java.util.Map<String, ?> map) throws Exception {
+        AddStoreRequest self = new AddStoreRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

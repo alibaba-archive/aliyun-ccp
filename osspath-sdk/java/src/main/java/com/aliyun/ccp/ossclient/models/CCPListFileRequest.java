@@ -49,4 +49,9 @@ public class CCPListFileRequest extends TeaModel {
     @Validation(pattern = "[a-z0-9.-_]{1,50}")
     public String parentFileId;
 
+    public static CCPListFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        CCPListFileRequest self = new CCPListFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

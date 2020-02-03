@@ -22,4 +22,9 @@ public class CCPDeleteFileResponse extends TeaModel {
     @Validation(pattern = "[a-z0-9]{1, 50}")
     public String fileId;
 
+    public static CCPDeleteFileResponse build(java.util.Map<String, ?> map) throws Exception {
+        CCPDeleteFileResponse self = new CCPDeleteFileResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

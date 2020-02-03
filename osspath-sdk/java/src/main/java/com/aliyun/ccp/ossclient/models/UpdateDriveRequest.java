@@ -20,4 +20,9 @@ public class UpdateDriveRequest extends TeaModel {
     @NameInMap("total_size")
     public Long totalSize;
 
+    public static UpdateDriveRequest build(java.util.Map<String, ?> map) throws Exception {
+        UpdateDriveRequest self = new UpdateDriveRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

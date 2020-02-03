@@ -10,4 +10,9 @@ public class ListMyDriveRequest extends TeaModel {
     @NameInMap("marker")
     public String marker;
 
+    public static ListMyDriveRequest build(java.util.Map<String, ?> map) throws Exception {
+        ListMyDriveRequest self = new ListMyDriveRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

@@ -78,4 +78,9 @@ public class OSSUpdateFileMetaResponse extends TeaModel {
     @NameInMap("url")
     public String url;
 
+    public static OSSUpdateFileMetaResponse build(java.util.Map<String, ?> map) throws Exception {
+        OSSUpdateFileMetaResponse self = new OSSUpdateFileMetaResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

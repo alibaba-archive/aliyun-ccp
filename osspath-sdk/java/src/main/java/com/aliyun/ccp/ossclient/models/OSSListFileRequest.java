@@ -29,4 +29,9 @@ public class OSSListFileRequest extends TeaModel {
     @Validation(required = true, pattern = "[0-9]+")
     public String shareId;
 
+    public static OSSListFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        OSSListFileRequest self = new OSSListFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

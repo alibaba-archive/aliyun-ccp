@@ -11,4 +11,9 @@ public class GetUserAccessTokenRequest extends TeaModel {
     @Validation(required = true)
     public String userId;
 
+    public static GetUserAccessTokenRequest build(java.util.Map<String, ?> map) throws Exception {
+        GetUserAccessTokenRequest self = new GetUserAccessTokenRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

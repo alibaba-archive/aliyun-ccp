@@ -18,4 +18,9 @@ public class CCPCompleteFileRequest extends TeaModel {
     @Validation(pattern = "[a-z0-9]{1,50}")
     public String fileId;
 
+    public static CCPCompleteFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        CCPCompleteFileRequest self = new CCPCompleteFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

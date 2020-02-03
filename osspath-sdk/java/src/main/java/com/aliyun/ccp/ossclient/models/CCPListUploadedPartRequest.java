@@ -23,4 +23,9 @@ public class CCPListUploadedPartRequest extends TeaModel {
     @NameInMap("upload_id")
     public String uploadId;
 
+    public static CCPListUploadedPartRequest build(java.util.Map<String, ?> map) throws Exception {
+        CCPListUploadedPartRequest self = new CCPListUploadedPartRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

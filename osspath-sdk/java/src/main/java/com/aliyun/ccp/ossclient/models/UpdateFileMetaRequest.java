@@ -34,4 +34,9 @@ public class UpdateFileMetaRequest extends TeaModel {
     @NameInMap("tags")
     public java.util.Map<String, Object> tags;
 
+    public static UpdateFileMetaRequest build(java.util.Map<String, ?> map) throws Exception {
+        UpdateFileMetaRequest self = new UpdateFileMetaRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

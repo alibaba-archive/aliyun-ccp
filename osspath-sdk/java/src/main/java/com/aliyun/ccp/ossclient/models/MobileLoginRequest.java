@@ -30,4 +30,9 @@ public class MobileLoginRequest extends TeaModel {
     @NameInMap("sms_code_id")
     public String smsCodeId;
 
+    public static MobileLoginRequest build(java.util.Map<String, ?> map) throws Exception {
+        MobileLoginRequest self = new MobileLoginRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

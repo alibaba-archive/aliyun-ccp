@@ -8,4 +8,9 @@ public class GetAppRequest extends TeaModel {
     @Validation(required = true)
     public String appId;
 
+    public static GetAppRequest build(java.util.Map<String, ?> map) throws Exception {
+        GetAppRequest self = new GetAppRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

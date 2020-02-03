@@ -46,4 +46,9 @@ public class CreateUserResponse extends TeaModel {
     @NameInMap("user_name")
     public String userName;
 
+    public static CreateUserResponse build(java.util.Map<String, ?> map) throws Exception {
+        CreateUserResponse self = new CreateUserResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

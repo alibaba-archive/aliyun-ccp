@@ -49,4 +49,9 @@ public class GetShareResponse extends TeaModel {
     @NameInMap("updated_at")
     public String updatedAt;
 
+    public static GetShareResponse build(java.util.Map<String, ?> map) throws Exception {
+        GetShareResponse self = new GetShareResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

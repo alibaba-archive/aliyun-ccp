@@ -10,4 +10,9 @@ public class LinkInfo extends TeaModel {
     @NameInMap("type")
     public String type;
 
+    public static LinkInfo build(java.util.Map<String, ?> map) throws Exception {
+        LinkInfo self = new LinkInfo();
+        return TeaModel.build(map, self);
+    }
+
 }

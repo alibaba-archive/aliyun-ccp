@@ -29,4 +29,9 @@ public class UpdateUserRequest extends TeaModel {
     @Validation(required = true)
     public String userId;
 
+    public static UpdateUserRequest build(java.util.Map<String, ?> map) throws Exception {
+        UpdateUserRequest self = new UpdateUserRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

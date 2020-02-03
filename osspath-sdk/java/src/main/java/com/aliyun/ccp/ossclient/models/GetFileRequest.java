@@ -24,4 +24,9 @@ public class GetFileRequest extends TeaModel {
     @NameInMap("share_id")
     public String shareId;
 
+    public static GetFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        GetFileRequest self = new GetFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

@@ -16,4 +16,9 @@ public class OSSGetDownloadUrlResponse extends TeaModel {
     @NameInMap("url")
     public String url;
 
+    public static OSSGetDownloadUrlResponse build(java.util.Map<String, ?> map) throws Exception {
+        OSSGetDownloadUrlResponse self = new OSSGetDownloadUrlResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

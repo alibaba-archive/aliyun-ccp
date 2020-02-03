@@ -14,4 +14,9 @@ public class BaseCompleteFileRequest extends TeaModel {
     @NameInMap("upload_id")
     public String uploadId;
 
+    public static BaseCompleteFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        BaseCompleteFileRequest self = new BaseCompleteFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

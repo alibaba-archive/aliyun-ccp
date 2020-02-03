@@ -13,4 +13,9 @@ public class ListShareResponse extends TeaModel {
     @NameInMap("next_marker")
     public String nextMarker;
 
+    public static ListShareResponse build(java.util.Map<String, ?> map) throws Exception {
+        ListShareResponse self = new ListShareResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

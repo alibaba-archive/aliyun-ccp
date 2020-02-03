@@ -18,4 +18,9 @@ public class CCPGetFileRequest extends TeaModel {
     @NameInMap("image_url_process")
     public String imageUrlProcess;
 
+    public static CCPGetFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        CCPGetFileRequest self = new CCPGetFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }
