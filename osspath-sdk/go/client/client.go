@@ -1,3 +1,4 @@
+// This file is auto-generated, don't edit it. Thanks.
 package client
 
 import (
@@ -5025,7 +5026,7 @@ func (s *UserAuthentication) SetUserID(v string) *UserAuthentication {
 type AccessTokenResponse struct {
 	RequestId    *string `json:"requestId" xml:"requestId"`
 	AccessToken  *string `json:"access_token" xml:"access_token" require:"true"`
-	ExpiresTime  *string `json:"expires_time" xml:"expires_time"`
+	ExpireTime   *string `json:"expire_time" xml:"expire_time"`
 	RefreshToken *string `json:"refresh_token" xml:"refresh_token"`
 	Role         *string `json:"role" xml:"role"`
 	TokenType    *string `json:"token_type" xml:"token_type"`
@@ -5050,8 +5051,8 @@ func (s *AccessTokenResponse) SetAccessToken(v string) *AccessTokenResponse {
 	return s
 }
 
-func (s *AccessTokenResponse) SetExpiresTime(v string) *AccessTokenResponse {
-	s.ExpiresTime = &v
+func (s *AccessTokenResponse) SetExpireTime(v string) *AccessTokenResponse {
+	s.ExpireTime = &v
 	return s
 }
 

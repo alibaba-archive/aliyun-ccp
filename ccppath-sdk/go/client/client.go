@@ -1,3 +1,4 @@
+// This file is auto-generated, don't edit it. Thanks.
 package client
 
 import (
@@ -11693,7 +11694,7 @@ func (client *Client) DeleteFile(request *CCPDeleteFileRequest, runtime *Runtime
 			}
 
 			if client.IsStatusCode(response_, 204) {
-				return &CCPDeleteFileResponse{}, _err
+				return nil, _err
 			}
 
 			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
