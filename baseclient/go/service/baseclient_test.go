@@ -170,7 +170,7 @@ func Test_RefreshTokenWithConcurrent(t *testing.T) {
 	originTestHookDo := hookdo
 	defer func() { hookdo = originTestHookDo }()
 	hookdo = func(resp *tea.Response, err error) (*tea.Response, error) {
-		tmp := `{"expires_time": "2006-01-02T15:04:05Z","access_token":"access_token","refresh_token":"refresh_token"}`
+		tmp := `{"expire_time": "2006-01-02T15:04:05Z","access_token":"access_token","refresh_token":"refresh_token"}`
 		httpresponse := &http.Response{
 			StatusCode: 200,
 			Body:       ioutil.NopCloser(strings.NewReader(tmp)),
@@ -218,7 +218,7 @@ func Test_GetAccessToken(t *testing.T) {
 	}
 
 	hookdo = func(resp *tea.Response, err error) (*tea.Response, error) {
-		tmp := `{"expires_time": "2006-01-T15:04:05Z"}`
+		tmp := `{"expire_time": "2006-01-T15:04:05Z"}`
 		httpresponse := &http.Response{
 			StatusCode: 200,
 			Body:       ioutil.NopCloser(strings.NewReader(tmp)),
@@ -232,7 +232,7 @@ func Test_GetAccessToken(t *testing.T) {
 	utils.AssertEqual(t, err1.Error(), `parsing time "2006-01-T15:04:05Z" as "2006-01-02T15:04:05Z07:00": cannot parse "T15:04:05Z" as "02"`)
 
 	hookdo = func(resp *tea.Response, err error) (*tea.Response, error) {
-		tmp := `{"expires_time": "2006-01-02T15:04:05Z","access_token":"access_token","refresh_token":"refresh_token"}`
+		tmp := `{"expire_time": "2006-01-02T15:04:05Z","access_token":"access_token","refresh_token":"refresh_token"}`
 		httpresponse := &http.Response{
 			StatusCode: 200,
 			Body:       ioutil.NopCloser(strings.NewReader(tmp)),

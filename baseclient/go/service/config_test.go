@@ -115,7 +115,7 @@ func Test_refreshAccessToken(t *testing.T) {
 	utils.AssertEqual(t, "refresh_token error", err.Error())
 
 	hookdo = func(resp *tea.Response, err error) (*tea.Response, error) {
-		tmp := `{"expires_time": 10}`
+		tmp := `{"expire_time": 10}`
 		httpresponse := &http.Response{
 			StatusCode: 200,
 			Body:       ioutil.NopCloser(strings.NewReader(tmp)),
@@ -127,10 +127,10 @@ func Test_refreshAccessToken(t *testing.T) {
 	utils.AssertEqual(t, "", at)
 	utils.AssertEqual(t, "", rt)
 	utils.AssertNil(t, up)
-	utils.AssertEqual(t, "json: cannot unmarshal number into Go struct field AccessTokenResponse.expires_time of type string", err.Error())
+	utils.AssertEqual(t, "json: cannot unmarshal number into Go struct field AccessTokenResponse.expire_time of type string", err.Error())
 
 	hookdo = func(resp *tea.Response, err error) (*tea.Response, error) {
-		tmp := `{"expires_time": "2006-01-02T15:04:05Z","access_token":"access_token","refresh_token":"refresh_token"}`
+		tmp := `{"expire_time": "2006-01-02T15:04:05Z","access_token":"access_token","refresh_token":"refresh_token"}`
 		httpresponse := &http.Response{
 			StatusCode: 200,
 			Body:       ioutil.NopCloser(strings.NewReader(tmp)),

@@ -39,7 +39,7 @@ type Sorter struct {
 type AccessTokenResponse struct {
 	AccessToken  string `json:"access_token"`
 	RefreshToken string `json:"refresh_token"`
-	ExpireTime   string `json:"expires_time"`
+	ExpireTime   string `json:"expire_time"`
 }
 
 type credentialUpdater struct {
