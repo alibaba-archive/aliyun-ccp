@@ -1,20 +1,23 @@
 {
-  "scope": "alibabacloud",
-  "name": "OSSClient",
-  "version": "1.0.0",
-  "main": "./oss.tea",
-  "java": {
-    "package": "com.aliyun.ccp.ossclient",
-    "baseClient": "com.aliyun.ccp.baseclient.BaseClient"
-  },
-  "csharp": {
-    "namespace": "Aliyun.SDK.CCP.OSSClient",
-    "baseClient": "Aliyun.SDK.CCP:BaseClient"
-  },
-  "go": {
-    "baseClient": "github.com/aliyun/aliyun-ccp/baseclient/go"
-  },
-  "typescript": {
-    "baseClient": "@alicloud/ccp-baseclient"
-  }
+	"scope": "alibabacloud",
+	"name": "OSSClient",
+	"version": "1.0.0",
+	"main": "./oss.tea",
+	"releases": {
+		"go": "github.com/aliyun/aliyun-ccp/osspath-sdk/go/client:v1.0.3"
+	},
+	"java": {
+		"package": "com.aliyun.ccp.ossclient",
+		"baseClient": "com.aliyun.ccp.baseclient.BaseClient"
+	},
+	"csharp": {
+		"namespace": "Aliyun.SDK.CCP.OSSClient",
+		"baseClient": "Aliyun.SDK.CCP:BaseClient"
+	},
+	"go": {
+		"baseClient": "github.com/aliyun/aliyun-ccp/baseclient/go"
+	},
+	"typescript": {
+		"baseClient": "@alicloud/ccp-baseclient"
+	}
 }
