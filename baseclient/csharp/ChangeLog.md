@@ -1,3 +1,7 @@
+### 2020-02-04 Version 0.0.10
+* Improved Tea Reference version 0.2.2
+* Improved Credential Reference version 0.0.3
+
 ### 2020-01-08 Version 0.0.9
 * Improved Tea Reference version 0.2.1
 
