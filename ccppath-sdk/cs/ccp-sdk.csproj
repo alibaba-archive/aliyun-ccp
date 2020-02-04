@@ -43,7 +43,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aliyun.SDK.CCP.BaseClient" Version="0.0.9" />
+    <PackageReference Include="Aliyun.SDK.CCP.BaseClient" Version="0.0.10" />
   </ItemGroup>
 
 </Project>
