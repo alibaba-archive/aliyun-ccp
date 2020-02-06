@@ -3469,7 +3469,7 @@ export class UserAuthentication extends $tea.Model {
 export class AccessTokenResponse extends $tea.Model {
   requestId?: string;
   accessToken: string;
-  expiresTime?: string;
+  expireTime?: string;
   refreshToken?: string;
   role?: string;
   tokenType?: string;
@@ -3478,7 +3478,7 @@ export class AccessTokenResponse extends $tea.Model {
     return {
       requestId: 'requestId',
       accessToken: 'access_token',
-      expiresTime: 'expires_time',
+      expireTime: 'expire_time',
       refreshToken: 'refresh_token',
       role: 'role',
       tokenType: 'token_type',
@@ -3490,7 +3490,7 @@ export class AccessTokenResponse extends $tea.Model {
     return {
       requestId: 'string',
       accessToken: 'string',
-      expiresTime: 'string',
+      expireTime: 'string',
       refreshToken: 'string',
       role: 'string',
       tokenType: 'string',

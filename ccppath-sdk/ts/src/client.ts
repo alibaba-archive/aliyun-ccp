@@ -1,4 +1,5 @@
 // This file is auto-generated, don't edit it
+import { Readable } from 'stream';
 import * as $tea from '@alicloud/tea-typescript';
 import BaseClient from '@alicloud/ccp-baseclient';
 
@@ -55,7 +56,7 @@ export class RuntimeOptions extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -110,7 +111,7 @@ export class Config extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -171,7 +172,7 @@ export class AccountAccessTokenResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -202,7 +203,7 @@ export class AccountLinkRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -239,7 +240,7 @@ export class AddStoreRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -261,7 +262,7 @@ export class AppAccessStrategy extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -292,7 +293,7 @@ export class AuthConfig extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -392,7 +393,7 @@ export class BaseCCPFileResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -447,7 +448,7 @@ export class BaseDriveResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -532,7 +533,7 @@ export class BaseOSSFileResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -593,14 +594,14 @@ export class BaseShareResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
 
 export class BatchSubResponse extends $tea.Model {
   requestId?: string;
-  body?: object;
+  body?: {[key: string]: any};
   id?: string;
   status?: number;
   static names(): { [key: string]: string } {
@@ -615,13 +616,13 @@ export class BatchSubResponse extends $tea.Model {
   static types(): { [key: string]: any } {
     return {
       requestId: 'string',
-      body: 'object',
+      body: '{[key: string]: any}',
       id: 'string',
       status: 'number',
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -643,7 +644,7 @@ export class CCPBatchResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -746,7 +747,7 @@ export class CCPCompleteFileResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -777,7 +778,7 @@ export class CCPCopyFileResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -820,7 +821,7 @@ export class CCPCreateFileResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -851,7 +852,7 @@ export class CCPDeleteFileResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -879,7 +880,7 @@ export class CCPDeleteFilesResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -907,7 +908,7 @@ export class CCPGetAsyncTaskResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -935,7 +936,7 @@ export class CCPGetDownloadUrlResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1035,7 +1036,7 @@ export class CCPGetFileResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1072,7 +1073,7 @@ export class CCPGetUploadUrlResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1097,7 +1098,7 @@ export class CCPListFileResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1128,7 +1129,7 @@ export class CCPListUploadedPartResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1159,7 +1160,7 @@ export class CCPMoveFileResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1184,7 +1185,7 @@ export class CCPSearchFileResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1284,7 +1285,7 @@ export class CCPUpdateFileMetaResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1303,7 +1304,7 @@ export class CancelLinkRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1328,7 +1329,7 @@ export class Captcha extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1347,7 +1348,7 @@ export class ConfirmLinkRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1378,7 +1379,7 @@ export class CorsRule extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1415,7 +1416,7 @@ export class CreateAppRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1424,7 +1425,7 @@ export class CreateDomainRequest extends $tea.Model {
   authAlipayAppId?: string;
   authAlipayEnbale?: boolean;
   authAlipayPrivateKey?: string;
-  authConfig?: object;
+  authConfig?: {[key: string]: any};
   authDingdingAppId?: string;
   authDingdingAppSecret?: string;
   authDingdingEnable?: boolean;
@@ -1483,7 +1484,7 @@ export class CreateDomainRequest extends $tea.Model {
       authAlipayAppId: 'string',
       authAlipayEnbale: 'boolean',
       authAlipayPrivateKey: 'string',
-      authConfig: 'object',
+      authConfig: '{[key: string]: any}',
       authDingdingAppId: 'string',
       authDingdingAppSecret: 'string',
       authDingdingEnable: 'boolean',
@@ -1509,7 +1510,7 @@ export class CreateDomainRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1534,7 +1535,7 @@ export class CreateDriveResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1559,7 +1560,7 @@ export class CreateShareResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1590,7 +1591,7 @@ export class DefaultChangePasswordRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1615,7 +1616,7 @@ export class DefaultSetPasswordRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1634,7 +1635,7 @@ export class DeleteAppRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1653,7 +1654,7 @@ export class DeleteDomainRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1672,7 +1673,7 @@ export class DeleteDriveResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1694,7 +1695,7 @@ export class GetAccessTokenByLinkInfoRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1713,7 +1714,7 @@ export class GetAppRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1735,7 +1736,7 @@ export class GetByLinkInfoRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1754,7 +1755,7 @@ export class GetCaptchaRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1773,7 +1774,7 @@ export class GetDomainRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1828,7 +1829,7 @@ export class GetDriveResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1847,7 +1848,7 @@ export class GetLinkInfoByUserIDRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1908,7 +1909,7 @@ export class GetShareResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1936,7 +1937,7 @@ export class ImageMediaResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1958,7 +1959,7 @@ export class LinkInfo extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -1980,7 +1981,7 @@ export class LinkInfoListResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2020,7 +2021,7 @@ export class LinkInfoResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2042,7 +2043,7 @@ export class ListAppsRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2064,7 +2065,7 @@ export class ListDomainsRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2089,7 +2090,7 @@ export class ListDriveResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2114,7 +2115,7 @@ export class ListShareResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2139,7 +2140,7 @@ export class ListStoreFileResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2161,7 +2162,7 @@ export class ListStoreResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2180,7 +2181,7 @@ export class ListStoresRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2208,7 +2209,7 @@ export class LoginByCodeRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2230,7 +2231,7 @@ export class MobileCheckExistRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2255,7 +2256,7 @@ export class MobileCheckExistResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2295,7 +2296,7 @@ export class MobileLoginRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2323,7 +2324,7 @@ export class MobileRegisterRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2354,7 +2355,7 @@ export class MobileSendSmsCodeRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2376,7 +2377,7 @@ export class MobileSendSmsCodeResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2464,7 +2465,7 @@ export class OSSCompleteFileResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2498,7 +2499,7 @@ export class OSSCopyFileResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2538,7 +2539,7 @@ export class OSSCreateFileResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2572,7 +2573,7 @@ export class OSSDeleteFileResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2603,7 +2604,7 @@ export class OSSDeleteFilesResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2631,7 +2632,7 @@ export class OSSGetDownloadUrlResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2716,7 +2717,7 @@ export class OSSGetFileResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2753,7 +2754,7 @@ export class OSSGetUploadUrlResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2778,7 +2779,7 @@ export class OSSListFileResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2809,7 +2810,7 @@ export class OSSListUploadedPartResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2843,7 +2844,7 @@ export class OSSMoveFileResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2868,7 +2869,7 @@ export class OSSSearchFileResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2953,7 +2954,7 @@ export class OSSUpdateFileMetaResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -2987,7 +2988,7 @@ export class PreHashCheckSuccessResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3009,7 +3010,7 @@ export class RemoveStoreRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3034,7 +3035,7 @@ export class SetStoreCorsRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3065,7 +3066,7 @@ export class StoreFile extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3120,7 +3121,7 @@ export class StoreItemResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3145,7 +3146,7 @@ export class TokenRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3185,7 +3186,7 @@ export class UpdateAppRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3194,7 +3195,7 @@ export class UpdateDomainRequest extends $tea.Model {
   authAlipayAppId?: string;
   authAlipayEnbale?: boolean;
   authAlipayPrivateKey?: string;
-  authConfig?: object;
+  authConfig?: {[key: string]: any};
   authDingdingAppId?: string;
   authDingdingAppSecret?: string;
   authDingdingEnable?: boolean;
@@ -3251,7 +3252,7 @@ export class UpdateDomainRequest extends $tea.Model {
       authAlipayAppId: 'string',
       authAlipayEnbale: 'boolean',
       authAlipayPrivateKey: 'string',
-      authConfig: 'object',
+      authConfig: '{[key: string]: any}',
       authDingdingAppId: 'string',
       authDingdingAppSecret: 'string',
       authDingdingEnable: 'boolean',
@@ -3276,7 +3277,7 @@ export class UpdateDomainRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3331,7 +3332,7 @@ export class UpdateDriveResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3392,7 +3393,7 @@ export class UpdateShareResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3420,7 +3421,7 @@ export class UploadPartInfo extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3460,7 +3461,7 @@ export class UserAuthentication extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3485,7 +3486,7 @@ export class BaseCompleteFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3519,7 +3520,7 @@ export class BaseCreateFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3547,7 +3548,7 @@ export class BaseGetUploadUrlRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3578,7 +3579,7 @@ export class BaseListFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3603,14 +3604,14 @@ export class BaseMoveFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
 
 export class BatchSubRequest extends $tea.Model {
-  body?: object;
-  headers?: object;
+  body?: {[key: string]: any};
+  headers?: {[key: string]: any};
   id: string;
   method: string;
   url: string;
@@ -3626,15 +3627,15 @@ export class BatchSubRequest extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      body: 'object',
-      headers: 'object',
+      body: '{[key: string]: any}',
+      headers: '{[key: string]: any}',
       id: 'string',
       method: 'string',
       url: 'string',
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3656,7 +3657,7 @@ export class CCPBatchRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3684,7 +3685,7 @@ export class CCPCompleteFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3718,7 +3719,7 @@ export class CCPCopyFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3785,7 +3786,7 @@ export class CCPCreateFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3810,7 +3811,7 @@ export class CCPDeleteFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3832,7 +3833,7 @@ export class CCPDeleteFilesRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3851,7 +3852,7 @@ export class CCPGetAsyncTaskRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3879,7 +3880,7 @@ export class CCPGetDownloadUrlRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3907,7 +3908,7 @@ export class CCPGetFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3938,7 +3939,7 @@ export class CCPGetUploadUrlRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -3996,7 +3997,7 @@ export class CCPListFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4027,7 +4028,7 @@ export class CCPListUploadedPartRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4058,7 +4059,7 @@ export class CCPMoveFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4095,7 +4096,7 @@ export class CCPSearchFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4138,7 +4139,7 @@ export class CCPUpdateFileMetaRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4172,7 +4173,7 @@ export class CompleteFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4218,7 +4219,7 @@ export class CopyFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4261,7 +4262,7 @@ export class CreateDriveRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4282,7 +4283,7 @@ export class CreateFileRequest extends $tea.Model {
   preHash?: string;
   shareId?: string;
   size: number;
-  tags?: object;
+  tags?: {[key: string]: any};
   type: string;
   static names(): { [key: string]: string } {
     return {
@@ -4323,12 +4324,12 @@ export class CreateFileRequest extends $tea.Model {
       preHash: 'string',
       shareId: 'string',
       size: 'number',
-      tags: 'object',
+      tags: '{[key: string]: any}',
       type: 'string',
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4368,7 +4369,7 @@ export class CreateShareRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4387,7 +4388,7 @@ export class DeleteDriveRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4418,7 +4419,7 @@ export class DeleteFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4437,7 +4438,7 @@ export class DeleteShareRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4465,7 +4466,7 @@ export class DownloadRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4484,7 +4485,7 @@ export class GetAsyncTaskRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4503,7 +4504,7 @@ export class GetDefaultDriveRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4537,7 +4538,7 @@ export class GetDownloadUrlRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4556,7 +4557,7 @@ export class GetDriveRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4590,7 +4591,7 @@ export class GetFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4609,7 +4610,7 @@ export class GetShareRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4646,7 +4647,7 @@ export class GetUploadUrlRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4671,7 +4672,7 @@ export class ListDriveRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4717,7 +4718,7 @@ export class ListFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4739,7 +4740,7 @@ export class ListMyDriveRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4767,7 +4768,7 @@ export class ListShareRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4798,7 +4799,7 @@ export class ListStoreFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4817,7 +4818,7 @@ export class ListStoreRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4848,7 +4849,7 @@ export class OSSCompleteFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4888,7 +4889,7 @@ export class OSSCopyFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4931,7 +4932,7 @@ export class OSSCreateFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4959,7 +4960,7 @@ export class OSSDeleteFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -4990,7 +4991,7 @@ export class OSSGetDownloadUrlRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5021,7 +5022,7 @@ export class OSSGetFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5055,7 +5056,7 @@ export class OSSGetUploadUrlRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5092,7 +5093,7 @@ export class OSSListFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5126,7 +5127,7 @@ export class OSSListUploadedPartRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5160,7 +5161,7 @@ export class OSSMoveFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5209,7 +5210,7 @@ export class Store extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5228,7 +5229,7 @@ export class UCGetObjectInfoByObjectKeyRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5247,7 +5248,7 @@ export class UCGetObjectInfoBySha1Request extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5278,7 +5279,7 @@ export class UpdateDriveRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5292,7 +5293,7 @@ export class UpdateFileMetaRequest extends $tea.Model {
   name: string;
   shareId?: string;
   starred?: boolean;
-  tags?: object;
+  tags?: {[key: string]: any};
   static names(): { [key: string]: string } {
     return {
       description: 'description',
@@ -5317,11 +5318,11 @@ export class UpdateFileMetaRequest extends $tea.Model {
       name: 'string',
       shareId: 'string',
       starred: 'boolean',
-      tags: 'object',
+      tags: '{[key: string]: any}',
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5355,7 +5356,7 @@ export class UpdateShareRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5413,7 +5414,7 @@ export class BaseUserResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5456,7 +5457,7 @@ export class CreateUserRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5514,7 +5515,7 @@ export class CreateUserResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5533,7 +5534,7 @@ export class DeleteUserRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5552,7 +5553,7 @@ export class DeleteUserResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5571,7 +5572,7 @@ export class GetUserRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5629,7 +5630,7 @@ export class GetUserResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5651,7 +5652,7 @@ export class ListUserRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5676,7 +5677,7 @@ export class ListUserResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5716,7 +5717,7 @@ export class SearchUserRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5756,7 +5757,7 @@ export class UpdateUserRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5814,7 +5815,7 @@ export class UpdateUserResponse extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5839,7 +5840,7 @@ export class DownloadFileRequest extends $tea.Model {
     };
   }
 
-  constructor(map: { [key: string]: any }) {
+  constructor(map?: { [key: string]: any }) {
     super(map);
   }
 }
@@ -5847,11 +5848,11 @@ export class DownloadFileRequest extends $tea.Model {
 
 export default class Client extends BaseClient {
   constructor(config: Config) {
-    super(config.toMap());
+    super($tea.toMap(config));
   }
 
-  async cancelLink(request: CancelLinkRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async cancelLink(request: CancelLinkRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -5907,14 +5908,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<AccountAccessTokenResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new AccountAccessTokenResponse({}));
         }
 
@@ -5929,13 +5932,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -5948,8 +5952,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async confirmLink(request: ConfirmLinkRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async confirmLink(request: ConfirmLinkRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -6005,14 +6009,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<AccountAccessTokenResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new AccountAccessTokenResponse({}));
         }
 
@@ -6027,13 +6033,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -6046,8 +6053,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async changePassword(request: DefaultChangePasswordRequest, runtime: RuntimeOptions): Promise<void>  {
-    let _runtime : {[key: string]: any} = {
+  async changePassword(request: DefaultChangePasswordRequest, runtime: RuntimeOptions): Promise<void> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -6103,10 +6110,11 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 204)) {
           return ;
         }
@@ -6122,13 +6130,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -6141,8 +6150,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async setPassword(request: DefaultSetPasswordRequest, runtime: RuntimeOptions): Promise<void>  {
-    let _runtime : {[key: string]: any} = {
+  async setPassword(request: DefaultSetPasswordRequest, runtime: RuntimeOptions): Promise<void> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -6198,10 +6207,11 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 204)) {
           return ;
         }
@@ -6217,13 +6227,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -6236,8 +6247,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getAccessTokenByLinkInfo(request: GetAccessTokenByLinkInfoRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async getAccessTokenByLinkInfo(request: GetAccessTokenByLinkInfoRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -6293,14 +6304,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<AccountAccessTokenResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new AccountAccessTokenResponse({}));
         }
 
@@ -6315,13 +6328,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -6334,8 +6348,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getCaptcha(request: GetCaptchaRequest, runtime: RuntimeOptions): Promise<Captcha>  {
-    let _runtime : {[key: string]: any} = {
+  async getCaptcha(request: GetCaptchaRequest, runtime: RuntimeOptions): Promise<Captcha> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -6391,14 +6405,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<Captcha>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new Captcha({}));
         }
 
@@ -6413,13 +6429,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -6432,8 +6449,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getLinkInfo(request: GetByLinkInfoRequest, runtime: RuntimeOptions): Promise<LinkInfoResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async getLinkInfo(request: GetByLinkInfoRequest, runtime: RuntimeOptions): Promise<LinkInfoResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -6489,14 +6506,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<LinkInfoResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new LinkInfoResponse({}));
         }
 
@@ -6511,13 +6530,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -6530,8 +6550,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getLinkInfoByUserId(request: GetLinkInfoByUserIDRequest, runtime: RuntimeOptions): Promise<LinkInfoListResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async getLinkInfoByUserId(request: GetLinkInfoByUserIDRequest, runtime: RuntimeOptions): Promise<LinkInfoListResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -6587,14 +6607,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<LinkInfoListResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new LinkInfoListResponse({}));
         }
 
@@ -6609,13 +6631,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -6628,8 +6651,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async link(request: AccountLinkRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async link(request: AccountLinkRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -6685,14 +6708,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<AccountAccessTokenResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new AccountAccessTokenResponse({}));
         }
 
@@ -6707,13 +6732,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -6726,8 +6752,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async checkExist(request: MobileCheckExistRequest, runtime: RuntimeOptions): Promise<MobileCheckExistResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async checkExist(request: MobileCheckExistRequest, runtime: RuntimeOptions): Promise<MobileCheckExistResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -6783,14 +6809,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<MobileCheckExistResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new MobileCheckExistResponse({}));
         }
 
@@ -6805,13 +6833,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -6824,8 +6853,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async login(request: MobileLoginRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async login(request: MobileLoginRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -6881,14 +6910,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<AccountAccessTokenResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new AccountAccessTokenResponse({}));
         }
 
@@ -6903,13 +6934,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -6922,8 +6954,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async register(request: MobileRegisterRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async register(request: MobileRegisterRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -6979,14 +7011,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<AccountAccessTokenResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new AccountAccessTokenResponse({}));
         }
 
@@ -7001,13 +7035,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -7020,8 +7055,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async mobileSendSmsCode(request: MobileSendSmsCodeRequest, runtime: RuntimeOptions): Promise<MobileSendSmsCodeResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async mobileSendSmsCode(request: MobileSendSmsCodeRequest, runtime: RuntimeOptions): Promise<MobileSendSmsCodeResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -7077,14 +7112,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<MobileSendSmsCodeResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new MobileSendSmsCodeResponse({}));
         }
 
@@ -7099,13 +7136,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -7118,8 +7156,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async token(request: TokenRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async token(request: TokenRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -7175,14 +7213,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<AccountAccessTokenResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new AccountAccessTokenResponse({}));
         }
 
@@ -7197,13 +7237,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -7216,8 +7257,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getAsyncTaskInfo(request: CCPGetAsyncTaskRequest, runtime: RuntimeOptions): Promise<CCPGetAsyncTaskResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async getAsyncTaskInfo(request: CCPGetAsyncTaskRequest, runtime: RuntimeOptions): Promise<CCPGetAsyncTaskResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -7273,14 +7314,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<CCPGetAsyncTaskResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new CCPGetAsyncTaskResponse({}));
         }
 
@@ -7295,13 +7338,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -7314,8 +7358,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async operation(request: CCPBatchRequest, runtime: RuntimeOptions): Promise<CCPBatchResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async operation(request: CCPBatchRequest, runtime: RuntimeOptions): Promise<CCPBatchResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -7371,14 +7415,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<CCPBatchResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new CCPBatchResponse({}));
         }
 
@@ -7393,13 +7439,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -7412,8 +7459,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async createDrive(request: CreateDriveRequest, runtime: RuntimeOptions): Promise<CreateDriveResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async createDrive(request: CreateDriveRequest, runtime: RuntimeOptions): Promise<CreateDriveResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -7469,14 +7516,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 201)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<CreateDriveResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new CreateDriveResponse({}));
         }
 
@@ -7491,13 +7540,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -7510,8 +7560,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async deleteDrive(request: DeleteDriveRequest, runtime: RuntimeOptions): Promise<void>  {
-    let _runtime : {[key: string]: any} = {
+  async deleteDrive(request: DeleteDriveRequest, runtime: RuntimeOptions): Promise<void> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -7567,10 +7617,11 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 204)) {
           return ;
         }
@@ -7586,13 +7637,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -7605,8 +7657,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getDrive(request: GetDriveRequest, runtime: RuntimeOptions): Promise<GetDriveResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async getDrive(request: GetDriveRequest, runtime: RuntimeOptions): Promise<GetDriveResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -7662,14 +7714,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<GetDriveResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new GetDriveResponse({}));
         }
 
@@ -7684,13 +7738,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -7703,8 +7758,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getDefaultDrive(request: GetDefaultDriveRequest, runtime: RuntimeOptions): Promise<GetDriveResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async getDefaultDrive(request: GetDefaultDriveRequest, runtime: RuntimeOptions): Promise<GetDriveResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -7760,14 +7815,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<GetDriveResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new GetDriveResponse({}));
         }
 
@@ -7782,13 +7839,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -7801,8 +7859,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async listDrives(request: ListDriveRequest, runtime: RuntimeOptions): Promise<ListDriveResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async listDrives(request: ListDriveRequest, runtime: RuntimeOptions): Promise<ListDriveResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -7858,14 +7916,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<ListDriveResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new ListDriveResponse({}));
         }
 
@@ -7880,13 +7940,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -7899,8 +7960,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async listMyDrives(request: ListMyDriveRequest, runtime: RuntimeOptions): Promise<ListDriveResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async listMyDrives(request: ListMyDriveRequest, runtime: RuntimeOptions): Promise<ListDriveResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -7956,14 +8017,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<ListDriveResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new ListDriveResponse({}));
         }
 
@@ -7978,13 +8041,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -7997,8 +8061,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async updateDrive(request: UpdateDriveRequest, runtime: RuntimeOptions): Promise<UpdateDriveResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async updateDrive(request: UpdateDriveRequest, runtime: RuntimeOptions): Promise<UpdateDriveResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -8054,14 +8118,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<UpdateDriveResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new UpdateDriveResponse({}));
         }
 
@@ -8076,13 +8142,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -8095,8 +8162,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async completeFile(request: CCPCompleteFileRequest, runtime: RuntimeOptions): Promise<CCPCompleteFileResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async completeFile(request: CCPCompleteFileRequest, runtime: RuntimeOptions): Promise<CCPCompleteFileResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -8152,14 +8219,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<CCPCompleteFileResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new CCPCompleteFileResponse({}));
         }
 
@@ -8174,13 +8243,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -8193,8 +8263,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async copyFile(request: CCPCopyFileRequest, runtime: RuntimeOptions): Promise<CCPCopyFileResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async copyFile(request: CCPCopyFileRequest, runtime: RuntimeOptions): Promise<CCPCopyFileResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -8250,21 +8320,24 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 201)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<CCPCopyFileResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new CCPCopyFileResponse({}));
         }
 
         if (this._isStatusCode(response_, 202)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<CCPCopyFileResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new CCPCopyFileResponse({}));
         }
 
@@ -8279,13 +8352,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -8298,8 +8372,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async createFile(request: CCPCreateFileRequest, runtime: RuntimeOptions): Promise<CCPCreateFileResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async createFile(request: CCPCreateFileRequest, runtime: RuntimeOptions): Promise<CCPCreateFileResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -8355,14 +8429,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 201)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<CCPCreateFileResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new CCPCreateFileResponse({}));
         }
 
@@ -8377,13 +8453,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -8396,8 +8473,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async deleteFile(request: CCPDeleteFileRequest, runtime: RuntimeOptions): Promise<CCPDeleteFileResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async deleteFile(request: CCPDeleteFileRequest, runtime: RuntimeOptions): Promise<CCPDeleteFileResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -8453,14 +8530,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 202)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<CCPDeleteFileResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new CCPDeleteFileResponse({}));
         }
 
@@ -8479,13 +8558,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -8498,8 +8578,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async downloadFile(request: DownloadFileRequest, runtime: RuntimeOptions): Promise<CCPGetDownloadUrlRequest>  {
-    let _runtime : {[key: string]: any} = {
+  async downloadFile(request: DownloadFileRequest, runtime: RuntimeOptions): Promise<CCPGetDownloadUrlRequest> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -8541,7 +8621,7 @@ export default class Client extends BaseClient {
         request_.protocol = this._getProtocol(this._protocol, "https");
         request_.method = "GET";
         request_.pathname = this._getPathname(this._nickname, `/v2/file/download`);
-        request_.query = this._toQuery(request.toMap());
+        request_.query = this._toQuery($tea.toMap(request));
         request_.headers = {
           'user-agent': this._getUserAgent(),
           host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
@@ -8558,6 +8638,7 @@ export default class Client extends BaseClient {
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._notEmpty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
@@ -8569,13 +8650,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -8588,8 +8670,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getFile(request: CCPGetFileRequest, runtime: RuntimeOptions): Promise<CCPGetFileResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async getFile(request: CCPGetFileRequest, runtime: RuntimeOptions): Promise<CCPGetFileResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -8645,14 +8727,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<CCPGetFileResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new CCPGetFileResponse({}));
         }
 
@@ -8667,13 +8751,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -8686,8 +8771,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getDownloadUrl(request: CCPGetDownloadUrlRequest, runtime: RuntimeOptions): Promise<CCPGetDownloadUrlResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async getDownloadUrl(request: CCPGetDownloadUrlRequest, runtime: RuntimeOptions): Promise<CCPGetDownloadUrlResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -8743,14 +8828,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<CCPGetDownloadUrlResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new CCPGetDownloadUrlResponse({}));
         }
 
@@ -8765,13 +8852,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -8784,8 +8872,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getUploadUrl(request: CCPGetUploadUrlRequest, runtime: RuntimeOptions): Promise<CCPGetUploadUrlResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async getUploadUrl(request: CCPGetUploadUrlRequest, runtime: RuntimeOptions): Promise<CCPGetUploadUrlResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -8841,14 +8929,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<CCPGetUploadUrlResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new CCPGetUploadUrlResponse({}));
         }
 
@@ -8863,13 +8953,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -8882,8 +8973,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async listFile(request: CCPListFileRequest, runtime: RuntimeOptions): Promise<CCPListFileResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async listFile(request: CCPListFileRequest, runtime: RuntimeOptions): Promise<CCPListFileResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -8939,14 +9030,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<CCPListFileResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new CCPListFileResponse({}));
         }
 
@@ -8961,13 +9054,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -8980,8 +9074,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async listUploadedParts(request: CCPListUploadedPartRequest, runtime: RuntimeOptions): Promise<CCPListUploadedPartResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async listUploadedParts(request: CCPListUploadedPartRequest, runtime: RuntimeOptions): Promise<CCPListUploadedPartResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -9037,14 +9131,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<CCPListUploadedPartResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new CCPListUploadedPartResponse({}));
         }
 
@@ -9059,13 +9155,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -9078,8 +9175,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async moveFile(request: CCPMoveFileRequest, runtime: RuntimeOptions): Promise<CCPMoveFileResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async moveFile(request: CCPMoveFileRequest, runtime: RuntimeOptions): Promise<CCPMoveFileResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -9135,14 +9232,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<CCPMoveFileResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new CCPMoveFileResponse({}));
         }
 
@@ -9157,13 +9256,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -9176,8 +9276,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async searchFile(request: CCPSearchFileRequest, runtime: RuntimeOptions): Promise<CCPSearchFileResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async searchFile(request: CCPSearchFileRequest, runtime: RuntimeOptions): Promise<CCPSearchFileResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -9233,14 +9333,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<CCPSearchFileResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new CCPSearchFileResponse({}));
         }
 
@@ -9255,13 +9357,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -9274,8 +9377,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async updateFile(request: CCPUpdateFileMetaRequest, runtime: RuntimeOptions): Promise<CCPUpdateFileMetaResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async updateFile(request: CCPUpdateFileMetaRequest, runtime: RuntimeOptions): Promise<CCPUpdateFileMetaResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -9331,14 +9434,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<CCPUpdateFileMetaResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new CCPUpdateFileMetaResponse({}));
         }
 
@@ -9353,13 +9458,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -9372,8 +9478,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async createUser(request: CreateUserRequest, runtime: RuntimeOptions): Promise<CreateUserResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async createUser(request: CreateUserRequest, runtime: RuntimeOptions): Promise<CreateUserResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -9429,14 +9535,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 201)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<CreateUserResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new CreateUserResponse({}));
         }
 
@@ -9451,13 +9559,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -9470,8 +9579,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async deleteUser(request: DeleteUserRequest, runtime: RuntimeOptions): Promise<void>  {
-    let _runtime : {[key: string]: any} = {
+  async deleteUser(request: DeleteUserRequest, runtime: RuntimeOptions): Promise<void> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -9527,10 +9636,11 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 204)) {
           return ;
         }
@@ -9546,13 +9656,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -9565,8 +9676,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getUser(request: GetUserRequest, runtime: RuntimeOptions): Promise<GetUserResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async getUser(request: GetUserRequest, runtime: RuntimeOptions): Promise<GetUserResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -9622,14 +9733,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<GetUserResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new GetUserResponse({}));
         }
 
@@ -9644,13 +9757,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -9663,8 +9777,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async listUsers(request: ListUserRequest, runtime: RuntimeOptions): Promise<ListUserResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async listUsers(request: ListUserRequest, runtime: RuntimeOptions): Promise<ListUserResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -9720,14 +9834,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<ListUserResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new ListUserResponse({}));
         }
 
@@ -9742,13 +9858,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -9761,8 +9878,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async searchUser(request: SearchUserRequest, runtime: RuntimeOptions): Promise<ListUserResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async searchUser(request: SearchUserRequest, runtime: RuntimeOptions): Promise<ListUserResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -9818,14 +9935,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<ListUserResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new ListUserResponse({}));
         }
 
@@ -9840,13 +9959,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
@@ -9859,8 +9979,8 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async updateUser(request: UpdateUserRequest, runtime: RuntimeOptions): Promise<UpdateUserResponse>  {
-    let _runtime : {[key: string]: any} = {
+  async updateUser(request: UpdateUserRequest, runtime: RuntimeOptions): Promise<UpdateUserResponse> {
+    let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
       connectTimeout: runtime.connectTimeout,
@@ -9916,14 +10036,16 @@ export default class Client extends BaseClient {
           request_.headers["x-acs-signature-version"] = "1.0";
           request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString(request.toMap()));
+        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
+        let respMap : {[key: string]: any} = null;
         if (this._isStatusCode(response_, 200)) {
+          respMap = await this._readAsJSON(response_);
           return $tea.cast<UpdateUserResponse>({
             requestId: response_.headers["x-ca-request-id"],
-            ...await this._readAsJSON(response_),
+            ...respMap,
           }, new UpdateUserResponse({}));
         }
 
@@ -9938,13 +10060,14 @@ export default class Client extends BaseClient {
           });
         }
 
+        respMap = await this._readAsJSON(response_);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
             statusCode: response_.statusCode,
             statusMessage: response_.statusMessage,
           },
-          ...await this._readAsJSON(response_),
+          ...respMap,
         });
       } catch (ex) {
         if ($tea.isRetryable(ex)) {
