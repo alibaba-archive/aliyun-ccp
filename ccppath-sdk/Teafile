@@ -6,7 +6,7 @@
 	"releases": {
 		"go": "github.com/aliyun/aliyun-ccp/ccppath-sdk/go/client:v1.0.3",
 		"ts": "@alicloud/ccppath-sdk:1.2.0",
-		"csharp":"Aliyun.SDK.CCP.Client:0.0.5"
+		"csharp": "Aliyun.SDK.CCP.Client:0.0.5"
 	},
 	"java": {
 		"package": "com.aliyun.ccp.ccpclient",
@@ -21,5 +21,9 @@
 	},
 	"typescript": {
 		"baseClient": "@alicloud/ccp-baseclient"
+	},
+	"swift5": {
+		"package": "AliyunCCPSDK",
+		"baseClient": "Aliyun.SDK.CCP.BaseClient"
 	}
 }
