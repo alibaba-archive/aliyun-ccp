@@ -21,17 +21,27 @@ public class CCPListFileRequest extends TeaModel {
     @NameInMap("marker")
     public String marker;
 
+    @NameInMap("video_thumbnail_process")
+    public String videoThumbnailProcess;
+
     @NameInMap("Starred")
     public boolean Starred;
+
+    @NameInMap("all")
+    public boolean all;
 
     @NameInMap("category")
     public String category;
 
-    @NameInMap("custom_index_key")
-    public String customIndexKey;
+    @NameInMap("order_by")
+    public String orderBy;
 
     @NameInMap("order_direction")
     public String orderDirection;
+
+    @NameInMap("parent_file_id")
+    @Validation(pattern = "[a-z0-9.-_]{1,50}")
+    public String parentFileId;
 
     @NameInMap("status")
     public String status;
@@ -39,15 +49,8 @@ public class CCPListFileRequest extends TeaModel {
     @NameInMap("type")
     public String type;
 
-    @NameInMap("all")
-    public boolean all;
-
-    @NameInMap("order_by")
-    public String orderBy;
-
-    @NameInMap("parent_file_id")
-    @Validation(pattern = "[a-z0-9.-_]{1,50}")
-    public String parentFileId;
+    @NameInMap("url_expire_sec")
+    public Long urlExpireSec;
 
     public static CCPListFileRequest build(java.util.Map<String, ?> map) throws Exception {
         CCPListFileRequest self = new CCPListFileRequest();

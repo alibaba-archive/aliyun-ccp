@@ -29,6 +29,12 @@ public class OSSListFileRequest extends TeaModel {
     @Validation(required = true, pattern = "[0-9]+")
     public String shareId;
 
+    @NameInMap("url_expire_sec")
+    public Long urlExpireSec;
+
+    @NameInMap("video_thumbnail_process")
+    public String videoThumbnailProcess;
+
     public static OSSListFileRequest build(java.util.Map<String, ?> map) throws Exception {
         OSSListFileRequest self = new OSSListFileRequest();
         return TeaModel.build(map, self);

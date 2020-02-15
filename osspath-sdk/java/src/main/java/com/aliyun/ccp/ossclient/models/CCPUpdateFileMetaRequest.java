@@ -14,6 +14,9 @@ public class CCPUpdateFileMetaRequest extends TeaModel {
     @Validation(required = true, pattern = "[0-9]+")
     public String driveId;
 
+    @NameInMap("encrypt_mode")
+    public String encryptMode;
+
     @NameInMap("file_id")
     @Validation(required = true, pattern = "[a-z0-9.-_]{1,50}")
     public String fileId;
@@ -28,7 +31,7 @@ public class CCPUpdateFileMetaRequest extends TeaModel {
     public String meta;
 
     @NameInMap("name")
-    @Validation(pattern = "[a-zA-Z0-9.-]{1,1000}")
+    @Validation(pattern = ".{1,1000}")
     public String name;
 
     @NameInMap("starred")
