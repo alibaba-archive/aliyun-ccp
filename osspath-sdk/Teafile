@@ -6,7 +6,8 @@
 	"releases": {
 		"go": "github.com/aliyun/aliyun-ccp/osspath-sdk/go/client:v1.0.3",
 		"ts": "@alicloud/osspath-sdk:1.1.0",
-		"csharp":"Aliyun.SDK.CCP.OSS.Client:0.0.5"
+		"csharp":"Aliyun.SDK.CCP.OSS.Client:0.0.5",
+		"java" : "com.aliyun:ccp-oss-client:1.1.3"
 	},
 	"java": {
 		"package": "com.aliyun.ccp.ossclient",
