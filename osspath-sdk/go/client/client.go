@@ -6278,7 +6278,7 @@ func (s *BaseCompleteFileRequest) SetUploadId(v string) *BaseCompleteFileRequest
 type BaseCreateFileRequest struct {
 	ContentMd5   *string           `json:"content_md5" xml:"content_md5" require:"true"`
 	ContentType  *string           `json:"content_type" xml:"content_type" require:"true"`
-	Name         *string           `json:"name" xml:"name" require:"true" pattern:"[a-z0-9.-_]{1,1000}"`
+	Name         *string           `json:"name" xml:"name" require:"true"`
 	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	Size         *int64            `json:"size" xml:"size" require:"true"`
 	Type         *string           `json:"type" xml:"type" require:"true"`
@@ -6363,6 +6363,7 @@ type BaseListFileRequest struct {
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
 	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1,3}"`
 	Marker                *string `json:"marker" xml:"marker"`
+	VideoThumbnailProcess *string `json:"video_thumbnail_process" xml:"video_thumbnail_process"`
 }
 
 func (s BaseListFileRequest) String() string {
@@ -6398,9 +6399,14 @@ func (s *BaseListFileRequest) SetMarker(v string) *BaseListFileRequest {
 	return s
 }
 
+func (s *BaseListFileRequest) SetVideoThumbnailProcess(v string) *BaseListFileRequest {
+	s.VideoThumbnailProcess = &v
+	return s
+}
+
 type BaseMoveFileRequest struct {
 	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	NewName   *string `json:"new_name" xml:"new_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	NewName   *string `json:"new_name" xml:"new_name" pattern:".{1,1000}"`
 	Overwrite *bool   `json:"overwrite" xml:"overwrite"`
 }
 
@@ -6530,7 +6536,7 @@ type CCPCopyFileRequest struct {
 	AutoRename     *bool   `json:"auto_rename" xml:"auto_rename"`
 	DriveId        *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	FileId         *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	NewName        *string `json:"new_name" xml:"new_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	NewName        *string `json:"new_name" xml:"new_name" pattern:".{1,1000}"`
 	ToDriveId      *string `json:"to_drive_id" xml:"to_drive_id" pattern:"[0-9]+"`
 	ToParentFileId *string `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 }
@@ -6576,7 +6582,7 @@ func (s *CCPCopyFileRequest) SetToParentFileId(v string) *CCPCopyFileRequest {
 type CCPCreateFileRequest struct {
 	ContentMd5      *string           `json:"content_md5" xml:"content_md5"`
 	ContentType     *string           `json:"content_type" xml:"content_type"`
-	Name            *string           `json:"name" xml:"name" pattern:"[a-z0-9.-_]{1,1000}"`
+	Name            *string           `json:"name" xml:"name"`
 	PartInfoList    []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	Size            *int64            `json:"size" xml:"size"`
 	Type            *string           `json:"type" xml:"type"`
@@ -6585,6 +6591,7 @@ type CCPCreateFileRequest struct {
 	ContentHashName *string           `json:"content_hash_name" xml:"content_hash_name"`
 	Description     *string           `json:"description" xml:"description" maxLength:"0"`
 	DriveId         *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	EncryptMode     *string           `json:"encrypt_mode" xml:"encrypt_mode"`
 	FileId          *string           `json:"file_id" xml:"file_id"`
 	Hidden          *bool             `json:"hidden" xml:"hidden"`
 	Labels          []*string         `json:"labels" xml:"labels" type:"Repeated"`
@@ -6653,6 +6660,11 @@ func (s *CCPCreateFileRequest) SetDescription(v string) *CCPCreateFileRequest {
 
 func (s *CCPCreateFileRequest) SetDriveId(v string) *CCPCreateFileRequest {
 	s.DriveId = &v
+	return s
+}
+
+func (s *CCPCreateFileRequest) SetEncryptMode(v string) *CCPCreateFileRequest {
+	s.EncryptMode = &v
 	return s
 }
 
@@ -6759,7 +6771,7 @@ type CCPGetDownloadUrlRequest struct {
 	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
 	FileId    *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	FileName  *string `json:"file_name" xml:"file_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	FileName  *string `json:"file_name" xml:"file_name" pattern:".{1,1000}"`
 }
 
 func (s CCPGetDownloadUrlRequest) String() string {
@@ -6795,6 +6807,8 @@ type CCPGetFileRequest struct {
 	FileId                *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
+	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec"`
+	VideoThumbnailProcess *string `json:"video_thumbnail_process" xml:"video_thumbnail_process"`
 }
 
 func (s CCPGetFileRequest) String() string {
@@ -6822,6 +6836,16 @@ func (s *CCPGetFileRequest) SetImageThumbnailProcess(v string) *CCPGetFileReques
 
 func (s *CCPGetFileRequest) SetImageUrlProcess(v string) *CCPGetFileRequest {
 	s.ImageUrlProcess = &v
+	return s
+}
+
+func (s *CCPGetFileRequest) SetUrlExpireSec(v int64) *CCPGetFileRequest {
+	s.UrlExpireSec = &v
+	return s
+}
+
+func (s *CCPGetFileRequest) SetVideoThumbnailProcess(v string) *CCPGetFileRequest {
+	s.VideoThumbnailProcess = &v
 	return s
 }
 
@@ -6872,15 +6896,16 @@ type CCPListFileRequest struct {
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
 	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1,3}"`
 	Marker                *string `json:"marker" xml:"marker"`
+	VideoThumbnailProcess *string `json:"video_thumbnail_process" xml:"video_thumbnail_process"`
 	Starred               *bool   `json:"Starred" xml:"Starred"`
+	All                   *bool   `json:"all" xml:"all"`
 	Category              *string `json:"category" xml:"category"`
-	CustomIndexKey        *string `json:"custom_index_key" xml:"custom_index_key"`
+	OrderBy               *string `json:"order_by" xml:"order_by"`
 	OrderDirection        *string `json:"order_direction" xml:"order_direction"`
+	ParentFileId          *string `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	Status                *string `json:"status" xml:"status"`
 	Type                  *string `json:"type" xml:"type"`
-	All                   *bool   `json:"all" xml:"all"`
-	OrderBy               *string `json:"order_by" xml:"order_by"`
-	ParentFileId          *string `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec"`
 }
 
 func (s CCPListFileRequest) String() string {
@@ -6916,8 +6941,18 @@ func (s *CCPListFileRequest) SetMarker(v string) *CCPListFileRequest {
 	return s
 }
 
+func (s *CCPListFileRequest) SetVideoThumbnailProcess(v string) *CCPListFileRequest {
+	s.VideoThumbnailProcess = &v
+	return s
+}
+
 func (s *CCPListFileRequest) SetStarred(v bool) *CCPListFileRequest {
 	s.Starred = &v
+	return s
+}
+
+func (s *CCPListFileRequest) SetAll(v bool) *CCPListFileRequest {
+	s.All = &v
 	return s
 }
 
@@ -6926,13 +6961,18 @@ func (s *CCPListFileRequest) SetCategory(v string) *CCPListFileRequest {
 	return s
 }
 
-func (s *CCPListFileRequest) SetCustomIndexKey(v string) *CCPListFileRequest {
-	s.CustomIndexKey = &v
+func (s *CCPListFileRequest) SetOrderBy(v string) *CCPListFileRequest {
+	s.OrderBy = &v
 	return s
 }
 
 func (s *CCPListFileRequest) SetOrderDirection(v string) *CCPListFileRequest {
 	s.OrderDirection = &v
+	return s
+}
+
+func (s *CCPListFileRequest) SetParentFileId(v string) *CCPListFileRequest {
+	s.ParentFileId = &v
 	return s
 }
 
@@ -6946,18 +6986,8 @@ func (s *CCPListFileRequest) SetType(v string) *CCPListFileRequest {
 	return s
 }
 
-func (s *CCPListFileRequest) SetAll(v bool) *CCPListFileRequest {
-	s.All = &v
-	return s
-}
-
-func (s *CCPListFileRequest) SetOrderBy(v string) *CCPListFileRequest {
-	s.OrderBy = &v
-	return s
-}
-
-func (s *CCPListFileRequest) SetParentFileId(v string) *CCPListFileRequest {
-	s.ParentFileId = &v
+func (s *CCPListFileRequest) SetUrlExpireSec(v int64) *CCPListFileRequest {
+	s.UrlExpireSec = &v
 	return s
 }
 
@@ -7004,7 +7034,7 @@ func (s *CCPListUploadedPartRequest) SetUploadId(v string) *CCPListUploadedPartR
 
 type CCPMoveFileRequest struct {
 	DriveId        *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	NewName        *string `json:"new_name" xml:"new_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	NewName        *string `json:"new_name" xml:"new_name" pattern:".{1,1000}"`
 	Overwrite      *bool   `json:"overwrite" xml:"overwrite"`
 	FileId         *string `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	ToParentFileId *string `json:"to_parent_file_id" xml:"to_parent_file_id" maxLength:"50"`
@@ -7051,6 +7081,8 @@ type CCPSearchFileRequest struct {
 	Marker                *string `json:"marker" xml:"marker"`
 	OrderBy               *string `json:"order_by" xml:"order_by"`
 	Query                 *string `json:"query" xml:"query" maxLength:"4096"`
+	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec"`
+	VideoThumbnailProcess *string `json:"video_thumbnail_process" xml:"video_thumbnail_process"`
 }
 
 func (s CCPSearchFileRequest) String() string {
@@ -7096,15 +7128,26 @@ func (s *CCPSearchFileRequest) SetQuery(v string) *CCPSearchFileRequest {
 	return s
 }
 
+func (s *CCPSearchFileRequest) SetUrlExpireSec(v int64) *CCPSearchFileRequest {
+	s.UrlExpireSec = &v
+	return s
+}
+
+func (s *CCPSearchFileRequest) SetVideoThumbnailProcess(v string) *CCPSearchFileRequest {
+	s.VideoThumbnailProcess = &v
+	return s
+}
+
 type CCPUpdateFileMetaRequest struct {
 	CustomIndexKey *string   `json:"custom_index_key" xml:"custom_index_key"`
 	Description    *string   `json:"description" xml:"description" maxLength:"1024"`
 	DriveId        *string   `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	EncryptMode    *string   `json:"encrypt_mode" xml:"encrypt_mode"`
 	FileId         *string   `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	Hidden         *bool     `json:"hidden" xml:"hidden"`
 	Labels         []*string `json:"labels" xml:"labels" type:"Repeated"`
 	Meta           *string   `json:"meta" xml:"meta"`
-	Name           *string   `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	Name           *string   `json:"name" xml:"name" pattern:".{1,1000}"`
 	Starred        *bool     `json:"starred" xml:"starred"`
 }
 
@@ -7128,6 +7171,11 @@ func (s *CCPUpdateFileMetaRequest) SetDescription(v string) *CCPUpdateFileMetaRe
 
 func (s *CCPUpdateFileMetaRequest) SetDriveId(v string) *CCPUpdateFileMetaRequest {
 	s.DriveId = &v
+	return s
+}
+
+func (s *CCPUpdateFileMetaRequest) SetEncryptMode(v string) *CCPUpdateFileMetaRequest {
+	s.EncryptMode = &v
 	return s
 }
 
@@ -7215,8 +7263,10 @@ type CopyFileRequest struct {
 	NewName          *string `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	Overwrite        *bool   `json:"overwrite" xml:"overwrite"`
 	ShareId          *string `json:"share_id" xml:"share_id"`
+	ToDriveId        *string `json:"to_drive_id" xml:"to_drive_id" require:"true" pattern:"[0-9]+"`
 	ToParentFileId   *string `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	ToParentFilePath *string `json:"to_parent_file_path" xml:"to_parent_file_path"`
+	ToShareId        *string `json:"to_share_id" xml:"to_share_id"`
 }
 
 func (s CopyFileRequest) String() string {
@@ -7257,6 +7307,11 @@ func (s *CopyFileRequest) SetShareId(v string) *CopyFileRequest {
 	return s
 }
 
+func (s *CopyFileRequest) SetToDriveId(v string) *CopyFileRequest {
+	s.ToDriveId = &v
+	return s
+}
+
 func (s *CopyFileRequest) SetToParentFileId(v string) *CopyFileRequest {
 	s.ToParentFileId = &v
 	return s
@@ -7267,11 +7322,17 @@ func (s *CopyFileRequest) SetToParentFilePath(v string) *CopyFileRequest {
 	return s
 }
 
+func (s *CopyFileRequest) SetToShareId(v string) *CopyFileRequest {
+	s.ToShareId = &v
+	return s
+}
+
 type CreateDriveRequest struct {
 	Default      *bool   `json:"default" xml:"default"`
 	Description  *string `json:"description" xml:"description"`
 	DriveName    *string `json:"drive_name" xml:"drive_name" require:"true"`
 	DriveType    *string `json:"drive_type" xml:"drive_type"`
+	EncryptMode  *string `json:"encrypt_mode" xml:"encrypt_mode"`
 	Owner        *string `json:"owner" xml:"owner" require:"true"`
 	RelativePath *string `json:"relative_path" xml:"relative_path"`
 	Status       *string `json:"status" xml:"status"`
@@ -7304,6 +7365,11 @@ func (s *CreateDriveRequest) SetDriveName(v string) *CreateDriveRequest {
 
 func (s *CreateDriveRequest) SetDriveType(v string) *CreateDriveRequest {
 	s.DriveType = &v
+	return s
+}
+
+func (s *CreateDriveRequest) SetEncryptMode(v string) *CreateDriveRequest {
+	s.EncryptMode = &v
 	return s
 }
 
@@ -7341,7 +7407,7 @@ type CreateFileRequest struct {
 	DriveId         *string                `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	Hidden          *bool                  `json:"hidden" xml:"hidden"`
 	Meta            *string                `json:"meta" xml:"meta"`
-	Name            *string                `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	Name            *string                `json:"name" xml:"name" require:"true"`
 	ParentFileId    *string                `json:"parent_file_id" xml:"parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
 	ParentFilePath  *string                `json:"parent_file_path" xml:"parent_file_path"`
 	PartInfoList    []*UploadPartInfo      `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
@@ -7446,14 +7512,15 @@ func (s *CreateFileRequest) SetType(v string) *CreateFileRequest {
 }
 
 type CreateShareRequest struct {
-	Description   *string   `json:"description" xml:"description"`
-	DriveId       *string   `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	Expiration    *string   `json:"expiration" xml:"expiration"`
-	Owner         *string   `json:"owner" xml:"owner" require:"true"`
-	Permissions   []*string `json:"permissions" xml:"permissions" type:"Repeated"`
-	ShareFilePath *string   `json:"share_file_path" xml:"share_file_path" require:"true"`
-	ShareName     *string   `json:"share_name" xml:"share_name"`
-	Status        *string   `json:"status" xml:"status"`
+	Description   *string                  `json:"description" xml:"description"`
+	DriveId       *string                  `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	Expiration    *string                  `json:"expiration" xml:"expiration"`
+	Owner         *string                  `json:"owner" xml:"owner" require:"true"`
+	Permissions   []*string                `json:"permissions" xml:"permissions" type:"Repeated"`
+	ShareFilePath *string                  `json:"share_file_path" xml:"share_file_path" require:"true"`
+	ShareName     *string                  `json:"share_name" xml:"share_name"`
+	SharePolicy   []*SharePermissionPolicy `json:"share_policy" xml:"share_policy" type:"Repeated"`
+	Status        *string                  `json:"status" xml:"status"`
 }
 
 func (s CreateShareRequest) String() string {
@@ -7496,6 +7563,11 @@ func (s *CreateShareRequest) SetShareFilePath(v string) *CreateShareRequest {
 
 func (s *CreateShareRequest) SetShareName(v string) *CreateShareRequest {
 	s.ShareName = &v
+	return s
+}
+
+func (s *CreateShareRequest) SetSharePolicy(v []*SharePermissionPolicy) *CreateShareRequest {
+	s.SharePolicy = v
 	return s
 }
 
@@ -7953,10 +8025,10 @@ func (s *ListMyDriveRequest) SetMarker(v string) *ListMyDriveRequest {
 }
 
 type ListShareRequest struct {
-	Creator *string `json:"creator" xml:"creator" require:"true"`
+	Creator *string `json:"creator" xml:"creator"`
 	Limit   *int    `json:"limit" xml:"limit" require:"true"`
 	Marker  *string `json:"marker" xml:"marker"`
-	Owner   *string `json:"owner" xml:"owner" require:"true"`
+	Owner   *string `json:"owner" xml:"owner"`
 }
 
 func (s ListShareRequest) String() string {
@@ -8148,7 +8220,7 @@ func (s *OSSCopyFileRequest) SetToShareId(v string) *OSSCopyFileRequest {
 type OSSCreateFileRequest struct {
 	ContentMd5     *string           `json:"content_md5" xml:"content_md5"`
 	ContentType    *string           `json:"content_type" xml:"content_type"`
-	Name           *string           `json:"name" xml:"name" pattern:"[a-z0-9.-_]{1,1000}"`
+	Name           *string           `json:"name" xml:"name"`
 	PartInfoList   []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	Size           *int64            `json:"size" xml:"size"`
 	Type           *string           `json:"type" xml:"type"`
@@ -8211,8 +8283,8 @@ func (s *OSSCreateFileRequest) SetShareId(v string) *OSSCreateFileRequest {
 }
 
 type OSSDeleteFileRequest struct {
-	DriveId     *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FilePath    *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000" pattern:"[a-z0-9.-_]{1,1000}"`
+	DriveId     *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	FilePath    *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
 	Permanently *bool   `json:"permanently" xml:"permanently"`
 	ShareId     *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
 }
@@ -8246,11 +8318,11 @@ func (s *OSSDeleteFileRequest) SetShareId(v string) *OSSDeleteFileRequest {
 }
 
 type OSSGetDownloadUrlRequest struct {
-	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	DriveId   *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
-	FileName  *string `json:"file_name" xml:"file_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	FilePath  *string `json:"file_path" xml:"file_path" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	ShareId   *string `json:"share_id" xml:"share_id" require:"true" pattern:"[0-9a-z-]+"`
+	FileName  *string `json:"file_name" xml:"file_name"`
+	FilePath  *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
+	ShareId   *string `json:"share_id" xml:"share_id" pattern:"[0-9a-z-]+"`
 }
 
 func (s OSSGetDownloadUrlRequest) String() string {
@@ -8287,11 +8359,12 @@ func (s *OSSGetDownloadUrlRequest) SetShareId(v string) *OSSGetDownloadUrlReques
 }
 
 type OSSGetFileRequest struct {
-	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FilePath              *string `json:"file_path" xml:"file_path" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	DriveId               *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	FilePath              *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
 	ShareId               *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
+	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec"`
 }
 
 func (s OSSGetFileRequest) String() string {
@@ -8324,6 +8397,11 @@ func (s *OSSGetFileRequest) SetImageUrlProcess(v string) *OSSGetFileRequest {
 
 func (s *OSSGetFileRequest) SetShareId(v string) *OSSGetFileRequest {
 	s.ShareId = &v
+	return s
+}
+
+func (s *OSSGetFileRequest) SetUrlExpireSec(v int64) *OSSGetFileRequest {
+	s.UrlExpireSec = &v
 	return s
 }
 
@@ -8382,6 +8460,8 @@ type OSSListFileRequest struct {
 	Marker                *string `json:"marker" xml:"marker"`
 	ParentFilePath        *string `json:"parent_file_path" xml:"parent_file_path" require:"true"`
 	ShareId               *string `json:"share_id" xml:"share_id" require:"true" pattern:"[0-9]+"`
+	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec"`
+	VideoThumbnailProcess *string `json:"video_thumbnail_process" xml:"video_thumbnail_process"`
 }
 
 func (s OSSListFileRequest) String() string {
@@ -8427,8 +8507,18 @@ func (s *OSSListFileRequest) SetShareId(v string) *OSSListFileRequest {
 	return s
 }
 
+func (s *OSSListFileRequest) SetUrlExpireSec(v int64) *OSSListFileRequest {
+	s.UrlExpireSec = &v
+	return s
+}
+
+func (s *OSSListFileRequest) SetVideoThumbnailProcess(v string) *OSSListFileRequest {
+	s.VideoThumbnailProcess = &v
+	return s
+}
+
 type OSSListUploadedPartRequest struct {
-	DriveId          *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	DriveId          *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	FilePath         *string `json:"file_path" xml:"file_path" require:"true"`
 	Limit            *int64  `json:"limit" xml:"limit" require:"true" pattern:"[0-9]+"`
 	PartNumberMarker *int64  `json:"part_number_marker" xml:"part_number_marker" pattern:"[0-9]+"`
@@ -8477,7 +8567,7 @@ func (s *OSSListUploadedPartRequest) SetUploadId(v string) *OSSListUploadedPartR
 type OSSMoveFileRequest struct {
 	DriveId          *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	FilePath         *string `json:"file_path" xml:"file_path"`
-	NewName          *string `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	NewName          *string `json:"new_name" xml:"new_name" require:"true"`
 	Overwrite        *bool   `json:"overwrite" xml:"overwrite"`
 	ShareId          *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
 	ToParentFilePath *string `json:"to_parent_file_path" xml:"to_parent_file_path"`
@@ -8521,6 +8611,41 @@ func (s *OSSMoveFileRequest) SetToParentFilePath(v string) *OSSMoveFileRequest {
 	return s
 }
 
+type SharePermissionPolicy struct {
+	FilePath              *string   `json:"file_path" xml:"file_path"`
+	PermissionInheritable *bool     `json:"permission_inheritable" xml:"permission_inheritable"`
+	PermissionList        []*string `json:"permission_list" xml:"permission_list" type:"Repeated"`
+	PermissionType        *string   `json:"permission_type" xml:"permission_type"`
+}
+
+func (s SharePermissionPolicy) String() string {
+	return service.Prettify(s)
+}
+
+func (s SharePermissionPolicy) GoString() string {
+	return s.String()
+}
+
+func (s *SharePermissionPolicy) SetFilePath(v string) *SharePermissionPolicy {
+	s.FilePath = &v
+	return s
+}
+
+func (s *SharePermissionPolicy) SetPermissionInheritable(v bool) *SharePermissionPolicy {
+	s.PermissionInheritable = &v
+	return s
+}
+
+func (s *SharePermissionPolicy) SetPermissionList(v []*string) *SharePermissionPolicy {
+	s.PermissionList = v
+	return s
+}
+
+func (s *SharePermissionPolicy) SetPermissionType(v string) *SharePermissionPolicy {
+	s.PermissionType = &v
+	return s
+}
+
 type UCGetObjectInfoByObjectKeyRequest struct {
 	ObjectKey *string `json:"object_key" xml:"object_key"`
 }
@@ -8556,11 +8681,13 @@ func (s *UCGetObjectInfoBySha1Request) SetSha1(v string) *UCGetObjectInfoBySha1R
 }
 
 type UpdateDriveRequest struct {
-	Description *string `json:"description" xml:"description"`
-	DriveId     *string `json:"drive_id" xml:"drive_id" require:"true"`
-	DriveName   *string `json:"drive_name" xml:"drive_name"`
-	Status      *string `json:"status" xml:"status"`
-	TotalSize   *int64  `json:"total_size" xml:"total_size"`
+	Description       *string `json:"description" xml:"description"`
+	DriveId           *string `json:"drive_id" xml:"drive_id" require:"true"`
+	DriveName         *string `json:"drive_name" xml:"drive_name"`
+	EncryptDataAccess *bool   `json:"encrypt_data_access" xml:"encrypt_data_access"`
+	EncryptMode       *string `json:"encrypt_mode" xml:"encrypt_mode"`
+	Status            *string `json:"status" xml:"status"`
+	TotalSize         *int64  `json:"total_size" xml:"total_size"`
 }
 
 func (s UpdateDriveRequest) String() string {
@@ -8583,6 +8710,16 @@ func (s *UpdateDriveRequest) SetDriveId(v string) *UpdateDriveRequest {
 
 func (s *UpdateDriveRequest) SetDriveName(v string) *UpdateDriveRequest {
 	s.DriveName = &v
+	return s
+}
+
+func (s *UpdateDriveRequest) SetEncryptDataAccess(v bool) *UpdateDriveRequest {
+	s.EncryptDataAccess = &v
+	return s
+}
+
+func (s *UpdateDriveRequest) SetEncryptMode(v string) *UpdateDriveRequest {
+	s.EncryptMode = &v
 	return s
 }
 
@@ -8662,12 +8799,13 @@ func (s *UpdateFileMetaRequest) SetTags(v map[string]interface{}) *UpdateFileMet
 }
 
 type UpdateShareRequest struct {
-	Description *string   `json:"description" xml:"description" maxLength:"1024"`
-	Expiration  *string   `json:"expiration" xml:"expiration"`
-	Permissions []*string `json:"permissions" xml:"permissions" type:"Repeated"`
-	ShareId     *string   `json:"share_id" xml:"share_id" require:"true"`
-	ShareName   *string   `json:"share_name" xml:"share_name"`
-	Status      *string   `json:"status" xml:"status"`
+	Description *string                  `json:"description" xml:"description" maxLength:"1024"`
+	Expiration  *string                  `json:"expiration" xml:"expiration"`
+	Permissions []*string                `json:"permissions" xml:"permissions" type:"Repeated"`
+	ShareId     *string                  `json:"share_id" xml:"share_id" require:"true"`
+	ShareName   *string                  `json:"share_name" xml:"share_name"`
+	SharePolicy []*SharePermissionPolicy `json:"share_policy" xml:"share_policy" type:"Repeated"`
+	Status      *string                  `json:"status" xml:"status"`
 }
 
 func (s UpdateShareRequest) String() string {
@@ -8700,6 +8838,11 @@ func (s *UpdateShareRequest) SetShareId(v string) *UpdateShareRequest {
 
 func (s *UpdateShareRequest) SetShareName(v string) *UpdateShareRequest {
 	s.ShareName = &v
+	return s
+}
+
+func (s *UpdateShareRequest) SetSharePolicy(v []*SharePermissionPolicy) *UpdateShareRequest {
+	s.SharePolicy = v
 	return s
 }
 
