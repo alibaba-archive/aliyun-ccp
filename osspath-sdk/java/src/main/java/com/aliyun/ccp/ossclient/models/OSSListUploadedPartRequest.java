@@ -5,7 +5,7 @@ import com.aliyun.tea.*;
 
 public class OSSListUploadedPartRequest extends TeaModel {
     @NameInMap("drive_id")
-    @Validation(required = true, pattern = "[0-9]+")
+    @Validation(pattern = "[0-9]+")
     public String driveId;
 
     @NameInMap("file_path")

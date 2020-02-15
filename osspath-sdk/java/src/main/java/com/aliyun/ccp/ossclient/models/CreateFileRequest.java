@@ -31,7 +31,7 @@ public class CreateFileRequest extends TeaModel {
     public String meta;
 
     @NameInMap("name")
-    @Validation(required = true, pattern = "[a-zA-Z0-9.-]{1,1000}")
+    @Validation(required = true)
     public String name;
 
     @NameInMap("parent_file_id")

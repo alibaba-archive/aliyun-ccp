@@ -5,7 +5,6 @@ import com.aliyun.tea.*;
 
 public class ListShareRequest extends TeaModel {
     @NameInMap("creator")
-    @Validation(required = true)
     public String creator;
 
     @NameInMap("limit")
@@ -16,7 +15,6 @@ public class ListShareRequest extends TeaModel {
     public String marker;
 
     @NameInMap("owner")
-    @Validation(required = true)
     public String owner;
 
     public static ListShareRequest build(java.util.Map<String, ?> map) throws Exception {

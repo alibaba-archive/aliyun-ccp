@@ -14,6 +14,12 @@ public class UpdateDriveRequest extends TeaModel {
     @NameInMap("drive_name")
     public String driveName;
 
+    @NameInMap("encrypt_data_access")
+    public boolean encryptDataAccess;
+
+    @NameInMap("encrypt_mode")
+    public String encryptMode;
+
     @NameInMap("status")
     public String status;
 

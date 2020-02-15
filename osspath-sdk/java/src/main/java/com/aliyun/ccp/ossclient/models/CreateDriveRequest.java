@@ -17,6 +17,9 @@ public class CreateDriveRequest extends TeaModel {
     @NameInMap("drive_type")
     public String driveType;
 
+    @NameInMap("encrypt_mode")
+    public String encryptMode;
+
     @NameInMap("owner")
     @Validation(required = true)
     public String owner;

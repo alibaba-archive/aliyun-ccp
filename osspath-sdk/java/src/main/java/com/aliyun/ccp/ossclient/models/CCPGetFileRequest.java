@@ -18,6 +18,12 @@ public class CCPGetFileRequest extends TeaModel {
     @NameInMap("image_url_process")
     public String imageUrlProcess;
 
+    @NameInMap("url_expire_sec")
+    public Long urlExpireSec;
+
+    @NameInMap("video_thumbnail_process")
+    public String videoThumbnailProcess;
+
     public static CCPGetFileRequest build(java.util.Map<String, ?> map) throws Exception {
         CCPGetFileRequest self = new CCPGetFileRequest();
         return TeaModel.build(map, self);
