@@ -34,6 +34,10 @@ doc/
 .nyc_output/
 node_modules/
 coverage/
+coverage.out
 dist/
 .DS_Store
 .history/
+coverage.html
+.libraries.json
+libraries/
