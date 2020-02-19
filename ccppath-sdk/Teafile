@@ -25,6 +25,6 @@
 	},
 	"swift5": {
 		"package": "AliyunCCPSDK",
-		"baseClient": "Aliyun.SDK.CCP.BaseClient"
+		"baseClient": "AliyunCCPSDK.BaseClient"
 	}
 }

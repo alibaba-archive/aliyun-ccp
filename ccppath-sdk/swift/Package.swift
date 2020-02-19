@@ -11,16 +11,15 @@ let package = Package(
             targets: ["AliyunCCPSDK"])
     ],
     dependencies: [
-        .package(url: "https://github.com/aliyun/tea-swift.git", from: "0.1.0")
+        .package(url: "https://github.com/aliyun/tea-swift.git", from: "0.1.1"),
+        .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", from: "1.3.0")
     ],
     targets: [
         .target(
             name: "AliyunCCPSDK",
-            dependencies: ["Tea"],
-            path: "./"),
+            dependencies: ["Tea", "CryptoSwift"]),
         .testTarget(
             name: "AliyunCCPSDKTests",
-            dependencies: ["AliyunCCPSDK", "Tea"],
-            path: "./Tests/")
+            dependencies: ["AliyunCCPSDK", "Tea", "CryptoSwift"])
     ]
 )
