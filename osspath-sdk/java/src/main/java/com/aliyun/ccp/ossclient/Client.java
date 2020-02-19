@@ -3089,6 +3089,113 @@ public class Client extends BaseClient {
         throw new TeaUnretryableException(_lastRequest);
     }
 
+    public OSSGetSecureUrlResponse getSecureUrl(OSSGetSecureUrlRequest request, RuntimeOptions runtime) throws Exception {
+        TeaModel.validateParams(request, "request");
+        TeaModel.validateParams(runtime, "runtime");
+        java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
+            new TeaPair("timeouted", "retry"),
+            new TeaPair("readTimeout", runtime.readTimeout),
+            new TeaPair("connectTimeout", runtime.connectTimeout),
+            new TeaPair("localAddr", runtime.localAddr),
+            new TeaPair("httpProxy", runtime.httpProxy),
+            new TeaPair("httpsProxy", runtime.httpsProxy),
+            new TeaPair("noProxy", runtime.noProxy),
+            new TeaPair("maxIdleConns", runtime.maxIdleConns),
+            new TeaPair("socks5Proxy", runtime.socks5Proxy),
+            new TeaPair("socks5NetWork", runtime.socks5NetWork),
+            new TeaPair("retry", TeaConverter.buildMap(
+                new TeaPair("retryable", runtime.autoretry),
+                new TeaPair("maxAttempts", _defaultNumber(runtime.maxAttempts, 3))
+            )),
+            new TeaPair("backoff", TeaConverter.buildMap(
+                new TeaPair("policy", _default(runtime.backoffPolicy, "no")),
+                new TeaPair("period", _defaultNumber(runtime.backoffPeriod, 1))
+            )),
+            new TeaPair("ignoreSSL", runtime.ignoreSSL)
+        );
+
+        TeaRequest _lastRequest = null;
+        long _now = System.currentTimeMillis();
+        int _retryTimes = 0;
+        while (Tea.allowRetry((java.util.Map<String, Object>) runtime_.get("retry"), _retryTimes, _now)) {
+            if (_retryTimes > 0) {
+                int backoffTime = Tea.getBackoffTime(runtime_.get("backoff"), _retryTimes);
+                if (backoffTime > 0) {
+                    Tea.sleep(backoffTime);
+                }
+            }
+            _retryTimes = _retryTimes + 1;
+            try {
+                TeaRequest request_ = new TeaRequest();
+                String accesskeyId = _getAccessKeyId();
+                String accessKeySecret = _getAccessKeySecret();
+                String accessToken = _getAccessToken();
+                request_.protocol = _getProtocol(_protocol, "https");
+                request_.method = "POST";
+                request_.pathname = _getPathname(_nickname, "/v2/osspath/file/get_secure_url");
+                request_.headers = TeaConverter.buildMap(
+                    new TeaPair("user-agent", _getUserAgent()),
+                    new TeaPair("host", _getHost(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                    new TeaPair("content-type", "application/json; charset=utf-8")
+                );
+                if (_notEmpty(accessToken)) {
+                    request_.headers.put("authorization", "Bearer " + accessToken + "");
+                } else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret)) {
+                    request_.headers.put("date", _getRFC2616Date());
+                    request_.headers.put("accept", "application/json");
+                    request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
+                    request_.headers.put("x-acs-signature-version", "1.0");
+                    request_.headers.put("authorization", "acs " + accesskeyId + ":" + _getSignature(request_) + "");
+                }
+
+                request_.body = Tea.toReadable(_toJSONString(TeaModel.buildMap(request)));
+                _lastRequest = request_;
+                TeaResponse response_ = Tea.doAction(request_, runtime_);
+
+                java.util.Map<String, Object> respMap = null;
+                if (_isStatusCode(response_, 200)) {
+                    respMap = _readAsJSON(response_);
+                    return TeaModel.toModel(TeaConverter.merge(Object.class,
+                        TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id"))
+                        ),
+                        respMap
+                    ), new OSSGetSecureUrlResponse());
+                }
+
+                if (_notEmpty(response_.headers.get("x-ca-error-message"))) {
+                    throw new TeaException(TeaConverter.buildMap(
+                        new TeaPair("data", TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
+                            new TeaPair("statusCode", response_.statusCode),
+                            new TeaPair("statusMessage", response_.statusMessage)
+                        )),
+                        new TeaPair("message", response_.headers.get("x-ca-error-message"))
+                    ));
+                }
+
+                respMap = _readAsJSON(response_);
+                throw new TeaException(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("data", TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
+                            new TeaPair("statusCode", response_.statusCode),
+                            new TeaPair("statusMessage", response_.statusMessage)
+                        ))
+                    ),
+                    respMap
+                ));
+            } catch (Exception e) {
+                if (Tea.isRetryable(e)) {
+                    continue;
+                }
+                throw e;
+            }
+        }
+
+        throw new TeaUnretryableException(_lastRequest);
+    }
+
     public OSSGetUploadUrlResponse getUploadUrl(OSSGetUploadUrlRequest request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
