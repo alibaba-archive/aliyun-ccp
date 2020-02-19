@@ -7,6 +7,10 @@ public class ListShareRequest extends TeaModel {
     @NameInMap("creator")
     public String creator;
 
+    @NameInMap("drive_id")
+    @Validation(pattern = "[0-9]+")
+    public String driveId;
+
     @NameInMap("limit")
     @Validation(required = true)
     public Integer limit;
@@ -16,6 +20,9 @@ public class ListShareRequest extends TeaModel {
 
     @NameInMap("owner")
     public String owner;
+
+    @NameInMap("share_file_path")
+    public String shareFilePath;
 
     public static ListShareRequest build(java.util.Map<String, ?> map) throws Exception {
         ListShareRequest self = new ListShareRequest();

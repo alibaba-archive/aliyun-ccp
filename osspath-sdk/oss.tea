@@ -1780,7 +1780,7 @@ type: boolean', example=false),
   }
 
   /**
-   * 文件移动请求
+   * copy file request
    */
   model CopyFileRequest {
     driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
@@ -1790,8 +1790,10 @@ type: boolean', example=false),
     overwrite?: boolean(name='overwrite', default=false, description='overwrite
 type: boolean'),
     shareId?: string(name='share_id'),
+    toDriveId: string(name='to_drive_id', description='to_drive_id', example='1', pattern='[0-9]+'),
     toParentFileId: string(name='to_parent_file_id', description='to_parent_file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
     toParentFilePath?: string(name='to_parent_file_path'),
+    toShareId?: string(name='to_share_id'),
   }
 
   /**
@@ -1991,9 +1993,11 @@ type:string', example='image/resize,w_200'),
    */
   model ListShareRequest {
     creator?: string(name='creator', description='creator', example='tom'),
+    driveId?: string(name='drive_id', example='1', pattern='[0-9]+'),
     limit: integer(name='limit', description='limit', example=50, format='int32', maximum=100, minimum=1),
     marker?: string(name='marker', description='marker'),
     owner?: string(name='owner', description='Owner', example='jack'),
+    shareFilePath?: string(name='share_file_path', description='share_file_path', example='/a/b/'),
   }
 
   /**
