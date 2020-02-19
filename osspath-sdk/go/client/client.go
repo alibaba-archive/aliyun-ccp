@@ -7263,10 +7263,8 @@ type CopyFileRequest struct {
 	NewName          *string `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	Overwrite        *bool   `json:"overwrite" xml:"overwrite"`
 	ShareId          *string `json:"share_id" xml:"share_id"`
-	ToDriveId        *string `json:"to_drive_id" xml:"to_drive_id" require:"true" pattern:"[0-9]+"`
 	ToParentFileId   *string `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	ToParentFilePath *string `json:"to_parent_file_path" xml:"to_parent_file_path"`
-	ToShareId        *string `json:"to_share_id" xml:"to_share_id"`
 }
 
 func (s CopyFileRequest) String() string {
@@ -7307,11 +7305,6 @@ func (s *CopyFileRequest) SetShareId(v string) *CopyFileRequest {
 	return s
 }
 
-func (s *CopyFileRequest) SetToDriveId(v string) *CopyFileRequest {
-	s.ToDriveId = &v
-	return s
-}
-
 func (s *CopyFileRequest) SetToParentFileId(v string) *CopyFileRequest {
 	s.ToParentFileId = &v
 	return s
@@ -7319,11 +7312,6 @@ func (s *CopyFileRequest) SetToParentFileId(v string) *CopyFileRequest {
 
 func (s *CopyFileRequest) SetToParentFilePath(v string) *CopyFileRequest {
 	s.ToParentFilePath = &v
-	return s
-}
-
-func (s *CopyFileRequest) SetToShareId(v string) *CopyFileRequest {
-	s.ToShareId = &v
 	return s
 }
 
@@ -8402,6 +8390,88 @@ func (s *OSSGetFileRequest) SetShareId(v string) *OSSGetFileRequest {
 
 func (s *OSSGetFileRequest) SetUrlExpireSec(v int64) *OSSGetFileRequest {
 	s.UrlExpireSec = &v
+	return s
+}
+
+type OSSGetSecureUrlRequest struct {
+	DriveId   *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
+	FileName  *string `json:"file_name" xml:"file_name"`
+	FilePath  *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
+	SecureIp  *string `json:"secure_ip" xml:"secure_ip"`
+	ShareId   *string `json:"share_id" xml:"share_id" pattern:"[0-9a-z-]+"`
+}
+
+func (s OSSGetSecureUrlRequest) String() string {
+	return service.Prettify(s)
+}
+
+func (s OSSGetSecureUrlRequest) GoString() string {
+	return s.String()
+}
+
+func (s *OSSGetSecureUrlRequest) SetDriveId(v string) *OSSGetSecureUrlRequest {
+	s.DriveId = &v
+	return s
+}
+
+func (s *OSSGetSecureUrlRequest) SetExpireSec(v int64) *OSSGetSecureUrlRequest {
+	s.ExpireSec = &v
+	return s
+}
+
+func (s *OSSGetSecureUrlRequest) SetFileName(v string) *OSSGetSecureUrlRequest {
+	s.FileName = &v
+	return s
+}
+
+func (s *OSSGetSecureUrlRequest) SetFilePath(v string) *OSSGetSecureUrlRequest {
+	s.FilePath = &v
+	return s
+}
+
+func (s *OSSGetSecureUrlRequest) SetSecureIp(v string) *OSSGetSecureUrlRequest {
+	s.SecureIp = &v
+	return s
+}
+
+func (s *OSSGetSecureUrlRequest) SetShareId(v string) *OSSGetSecureUrlRequest {
+	s.ShareId = &v
+	return s
+}
+
+type OSSGetSecureUrlResponse struct {
+	RequestId  *string `json:"requestId" xml:"requestId"`
+	Expiration *string `json:"expiration" xml:"expiration"`
+	Method     *string `json:"method" xml:"method"`
+	Url        *string `json:"url" xml:"url"`
+}
+
+func (s OSSGetSecureUrlResponse) String() string {
+	return service.Prettify(s)
+}
+
+func (s OSSGetSecureUrlResponse) GoString() string {
+	return s.String()
+}
+
+func (s *OSSGetSecureUrlResponse) SetRequestId(v string) *OSSGetSecureUrlResponse {
+	s.RequestId = &v
+	return s
+}
+
+func (s *OSSGetSecureUrlResponse) SetExpiration(v string) *OSSGetSecureUrlResponse {
+	s.Expiration = &v
+	return s
+}
+
+func (s *OSSGetSecureUrlResponse) SetMethod(v string) *OSSGetSecureUrlResponse {
+	s.Method = &v
+	return s
+}
+
+func (s *OSSGetSecureUrlResponse) SetUrl(v string) *OSSGetSecureUrlResponse {
+	s.Url = &v
 	return s
 }
 
@@ -13168,6 +13238,134 @@ func (client *Client) GetDownloadUrl(request *OSSGetDownloadUrlRequest, runtime 
 				}
 
 				_result = &OSSGetDownloadUrlResponse{}
+				_err = tea.Convert(tea.ToMap(map[string]interface{}{
+					"requestId": response_.Headers["x-ca-request-id"],
+				}, respMap), &_result)
+				return _result, _err
+			}
+
+			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    response_.StatusCode,
+						"statusMessage": response_.StatusMessage,
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			respMap, _err = client.ReadAsJSON(response_)
+			if _err != nil {
+				return nil, _err
+			}
+
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    response_.StatusCode,
+					"statusMessage": response_.StatusMessage,
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+func (client *Client) GetSecureUrl(request *OSSGetSecureUrlRequest, runtime *RuntimeOptions) (_result *OSSGetSecureUrlResponse, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+		},
+		"backoff": map[string]interface{}{
+			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &OSSGetSecureUrlResponse{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*OSSGetSecureUrlResponse, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Method = "POST"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/get_secure_url")
+			request_.Headers = map[string]string{
+				"user-agent":   client.GetUserAgent(),
+				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"content-type": "application/json; charset=utf-8",
+			}
+			if client.NotEmpty(accessToken) {
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
+			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
+				request_.Headers["date"] = client.GetRFC2616Date()
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+			}
+
+			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			respMap := make(map[string]interface{})
+			if client.IsStatusCode(response_, 200) {
+				respMap, _err = client.ReadAsJSON(response_)
+				if _err != nil {
+					return nil, _err
+				}
+
+				_result = &OSSGetSecureUrlResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
 				}, respMap), &_result)
