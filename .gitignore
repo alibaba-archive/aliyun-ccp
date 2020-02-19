@@ -41,3 +41,11 @@ dist/
 coverage.html
 .libraries.json
 libraries/
+
+#csharp
+**/csharp/**/bin/
+**/csharp/**/obj/
+**/csharp/**/.vs/
+**/cs/**/bin/
+**/cs/**/obj/
+**/cs/**/.vs/
