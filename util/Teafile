@@ -1,0 +1,18 @@
+{
+	"scope": "alibabacloud",
+	"name": "CCPUtil",
+	"version": "0.0.4",
+	"main": "./main.tea",
+	"releases": {
+		"go": "github.com/aliyun/aliyun-ccp/util/golang/service:v0.0.1",
+		"ts": "@alicloud/ccp-util:^0.0.1",
+		"csharp": "AlibabaCloud.CCPUtil:0.0.1",
+		"java": "com.aliyun:ccp-util:0.0.1"
+	},
+	"java": {
+		"package": "com.aliyun.ccputil"
+	},
+	"csharp":{
+		"namespace": "AlibabaCloud.CCPUtil"
+	}
+}
