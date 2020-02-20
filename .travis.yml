@@ -15,6 +15,10 @@ jobs:
       script:
         - cd baseclient/java
         - mvn test -B
+        - cd ../../util/java/
+        - mvn test -B
+        - cd ../../credential/java/
+        - mvn test -B
       after_success:
         - bash <(curl -s https://codecov.io/bash) -cF java
     - language: go
