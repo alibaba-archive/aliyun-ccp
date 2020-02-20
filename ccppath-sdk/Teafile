@@ -26,5 +26,11 @@
 	"swift5": {
 		"package": "AliyunCCPSDK",
 		"baseClient": "Aliyun.SDK.CCP.BaseClient"
+	},
+	"libraries": {
+		"Util": "alibabacloud:Util:*",
+		"CCPUtil": "alibabacloud:CCPUtil:*",
+		"Credential": "alibabacloud:Credential:*",
+		"AccessTokenCredential": "alibabacloud:AccessTokenCredential:*"
 	}
 }
