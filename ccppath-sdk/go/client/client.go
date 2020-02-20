@@ -2,10 +2,11 @@
 package client
 
 import (
-	"encoding/json"
-
 	"github.com/alibabacloud-go/tea/tea"
-	"github.com/aliyun/aliyun-ccp/baseclient/go/service"
+	accesstokencredential "github.com/aliyun/aliyun-ccp/credential/golang/service"
+	ccputil "github.com/aliyun/aliyun-ccp/util/golang/service"
+	credential "github.com/aliyun/credentials-go/credentials"
+	util "github.com/aliyun/tea-util/golang/service"
 )
 
 type RuntimeOptions struct {
@@ -26,7 +27,7 @@ type RuntimeOptions struct {
 }
 
 func (s RuntimeOptions) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s RuntimeOptions) GoString() string {
@@ -117,10 +118,11 @@ type Config struct {
 	AccessToken     *string `json:"accessToken" xml:"accessToken"`
 	ExpireTime      *string `json:"expireTime" xml:"expireTime"`
 	Nickname        *string `json:"nickname" xml:"nickname"`
+	UserAgent       *string `json:"userAgent" xml:"userAgent"`
 }
 
 func (s Config) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s Config) GoString() string {
@@ -192,6 +194,11 @@ func (s *Config) SetNickname(v string) *Config {
 	return s
 }
 
+func (s *Config) SetUserAgent(v string) *Config {
+	s.UserAgent = &v
+	return s
+}
+
 type AccountAccessTokenResponse struct {
 	RequestId      *string     `json:"requestId" xml:"requestId"`
 	AccessToken    *string     `json:"access_token" xml:"access_token" require:"true"`
@@ -211,7 +218,7 @@ type AccountAccessTokenResponse struct {
 }
 
 func (s AccountAccessTokenResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s AccountAccessTokenResponse) GoString() string {
@@ -302,7 +309,7 @@ type AccountLinkRequest struct {
 }
 
 func (s AccountLinkRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s AccountLinkRequest) GoString() string {
@@ -345,7 +352,7 @@ type AddStoreRequest struct {
 }
 
 func (s AddStoreRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s AddStoreRequest) GoString() string {
@@ -393,7 +400,7 @@ type AppAccessStrategy struct {
 }
 
 func (s AppAccessStrategy) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s AppAccessStrategy) GoString() string {
@@ -419,7 +426,7 @@ type AuthConfig struct {
 }
 
 func (s AuthConfig) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s AuthConfig) GoString() string {
@@ -483,7 +490,7 @@ type BaseCCPFileResponse struct {
 }
 
 func (s BaseCCPFileResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s BaseCCPFileResponse) GoString() string {
@@ -647,7 +654,7 @@ type BaseDriveResponse struct {
 }
 
 func (s BaseDriveResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s BaseDriveResponse) GoString() string {
@@ -746,7 +753,7 @@ type BaseOSSFileResponse struct {
 }
 
 func (s BaseOSSFileResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s BaseOSSFileResponse) GoString() string {
@@ -887,7 +894,7 @@ type BaseShareResponse struct {
 }
 
 func (s BaseShareResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s BaseShareResponse) GoString() string {
@@ -977,7 +984,7 @@ type BatchSubResponse struct {
 }
 
 func (s BatchSubResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s BatchSubResponse) GoString() string {
@@ -1010,7 +1017,7 @@ type CCPBatchResponse struct {
 }
 
 func (s CCPBatchResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPBatchResponse) GoString() string {
@@ -1060,7 +1067,7 @@ type CCPCompleteFileResponse struct {
 }
 
 func (s CCPCompleteFileResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPCompleteFileResponse) GoString() string {
@@ -1221,7 +1228,7 @@ type CCPCopyFileResponse struct {
 }
 
 func (s CCPCopyFileResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPCopyFileResponse) GoString() string {
@@ -1266,7 +1273,7 @@ type CCPCreateFileResponse struct {
 }
 
 func (s CCPCreateFileResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPCreateFileResponse) GoString() string {
@@ -1327,7 +1334,7 @@ type CCPDeleteFileResponse struct {
 }
 
 func (s CCPDeleteFileResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPDeleteFileResponse) GoString() string {
@@ -1367,7 +1374,7 @@ type CCPDeleteFilesResponse struct {
 }
 
 func (s CCPDeleteFilesResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPDeleteFilesResponse) GoString() string {
@@ -1402,7 +1409,7 @@ type CCPGetAsyncTaskResponse struct {
 }
 
 func (s CCPGetAsyncTaskResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPGetAsyncTaskResponse) GoString() string {
@@ -1437,7 +1444,7 @@ type CCPGetDownloadUrlResponse struct {
 }
 
 func (s CCPGetDownloadUrlResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPGetDownloadUrlResponse) GoString() string {
@@ -1496,7 +1503,7 @@ type CCPGetFileResponse struct {
 }
 
 func (s CCPGetFileResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPGetFileResponse) GoString() string {
@@ -1654,7 +1661,7 @@ type CCPGetUploadUrlResponse struct {
 }
 
 func (s CCPGetUploadUrlResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPGetUploadUrlResponse) GoString() string {
@@ -1703,7 +1710,7 @@ type CCPListFileResponse struct {
 }
 
 func (s CCPListFileResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPListFileResponse) GoString() string {
@@ -1734,7 +1741,7 @@ type CCPListUploadedPartResponse struct {
 }
 
 func (s CCPListUploadedPartResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPListUploadedPartResponse) GoString() string {
@@ -1775,7 +1782,7 @@ type CCPMoveFileResponse struct {
 }
 
 func (s CCPMoveFileResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPMoveFileResponse) GoString() string {
@@ -1814,7 +1821,7 @@ type CCPSearchFileResponse struct {
 }
 
 func (s CCPSearchFileResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPSearchFileResponse) GoString() string {
@@ -1868,7 +1875,7 @@ type CCPUpdateFileMetaResponse struct {
 }
 
 func (s CCPUpdateFileMetaResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPUpdateFileMetaResponse) GoString() string {
@@ -2020,7 +2027,7 @@ type CancelLinkRequest struct {
 }
 
 func (s CancelLinkRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CancelLinkRequest) GoString() string {
@@ -2039,7 +2046,7 @@ type Captcha struct {
 }
 
 func (s Captcha) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s Captcha) GoString() string {
@@ -2066,7 +2073,7 @@ type ConfirmLinkRequest struct {
 }
 
 func (s ConfirmLinkRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s ConfirmLinkRequest) GoString() string {
@@ -2087,7 +2094,7 @@ type CorsRule struct {
 }
 
 func (s CorsRule) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CorsRule) GoString() string {
@@ -2130,7 +2137,7 @@ type CreateAppRequest struct {
 }
 
 func (s CreateAppRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CreateAppRequest) GoString() string {
@@ -2202,7 +2209,7 @@ type CreateDomainRequest struct {
 }
 
 func (s CreateDomainRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CreateDomainRequest) GoString() string {
@@ -2346,7 +2353,7 @@ type CreateDriveResponse struct {
 }
 
 func (s CreateDriveResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CreateDriveResponse) GoString() string {
@@ -2375,7 +2382,7 @@ type CreateShareResponse struct {
 }
 
 func (s CreateShareResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CreateShareResponse) GoString() string {
@@ -2406,7 +2413,7 @@ type DefaultChangePasswordRequest struct {
 }
 
 func (s DefaultChangePasswordRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s DefaultChangePasswordRequest) GoString() string {
@@ -2445,7 +2452,7 @@ type DefaultSetPasswordRequest struct {
 }
 
 func (s DefaultSetPasswordRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s DefaultSetPasswordRequest) GoString() string {
@@ -2472,7 +2479,7 @@ type DeleteAppRequest struct {
 }
 
 func (s DeleteAppRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s DeleteAppRequest) GoString() string {
@@ -2489,7 +2496,7 @@ type DeleteDomainRequest struct {
 }
 
 func (s DeleteDomainRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s DeleteDomainRequest) GoString() string {
@@ -2506,7 +2513,7 @@ type DeleteDriveResponse struct {
 }
 
 func (s DeleteDriveResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s DeleteDriveResponse) GoString() string {
@@ -2524,7 +2531,7 @@ type GetAccessTokenByLinkInfoRequest struct {
 }
 
 func (s GetAccessTokenByLinkInfoRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s GetAccessTokenByLinkInfoRequest) GoString() string {
@@ -2546,7 +2553,7 @@ type GetAppRequest struct {
 }
 
 func (s GetAppRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s GetAppRequest) GoString() string {
@@ -2564,7 +2571,7 @@ type GetByLinkInfoRequest struct {
 }
 
 func (s GetByLinkInfoRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s GetByLinkInfoRequest) GoString() string {
@@ -2586,7 +2593,7 @@ type GetCaptchaRequest struct {
 }
 
 func (s GetCaptchaRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s GetCaptchaRequest) GoString() string {
@@ -2603,7 +2610,7 @@ type GetDomainRequest struct {
 }
 
 func (s GetDomainRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s GetDomainRequest) GoString() string {
@@ -2632,7 +2639,7 @@ type GetDriveResponse struct {
 }
 
 func (s GetDriveResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s GetDriveResponse) GoString() string {
@@ -2709,7 +2716,7 @@ type GetLinkInfoByUserIDRequest struct {
 }
 
 func (s GetLinkInfoByUserIDRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s GetLinkInfoByUserIDRequest) GoString() string {
@@ -2740,7 +2747,7 @@ type GetShareResponse struct {
 }
 
 func (s GetShareResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s GetShareResponse) GoString() string {
@@ -2830,7 +2837,7 @@ type ImageMediaResponse struct {
 }
 
 func (s ImageMediaResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s ImageMediaResponse) GoString() string {
@@ -2863,7 +2870,7 @@ type LinkInfo struct {
 }
 
 func (s LinkInfo) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s LinkInfo) GoString() string {
@@ -2886,7 +2893,7 @@ type LinkInfoListResponse struct {
 }
 
 func (s LinkInfoListResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s LinkInfoListResponse) GoString() string {
@@ -2915,7 +2922,7 @@ type LinkInfoResponse struct {
 }
 
 func (s LinkInfoResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s LinkInfoResponse) GoString() string {
@@ -2968,7 +2975,7 @@ type ListAppsRequest struct {
 }
 
 func (s ListAppsRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s ListAppsRequest) GoString() string {
@@ -2991,7 +2998,7 @@ type ListDomainsRequest struct {
 }
 
 func (s ListDomainsRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s ListDomainsRequest) GoString() string {
@@ -3015,7 +3022,7 @@ type ListDriveResponse struct {
 }
 
 func (s ListDriveResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s ListDriveResponse) GoString() string {
@@ -3044,7 +3051,7 @@ type ListShareResponse struct {
 }
 
 func (s ListShareResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s ListShareResponse) GoString() string {
@@ -3073,7 +3080,7 @@ type ListStoreFileResponse struct {
 }
 
 func (s ListStoreFileResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s ListStoreFileResponse) GoString() string {
@@ -3101,7 +3108,7 @@ type ListStoreResponse struct {
 }
 
 func (s ListStoreResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s ListStoreResponse) GoString() string {
@@ -3123,7 +3130,7 @@ type ListStoresRequest struct {
 }
 
 func (s ListStoresRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s ListStoresRequest) GoString() string {
@@ -3143,7 +3150,7 @@ type LoginByCodeRequest struct {
 }
 
 func (s LoginByCodeRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s LoginByCodeRequest) GoString() string {
@@ -3176,7 +3183,7 @@ type MobileCheckExistRequest struct {
 }
 
 func (s MobileCheckExistRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s MobileCheckExistRequest) GoString() string {
@@ -3200,7 +3207,7 @@ type MobileCheckExistResponse struct {
 }
 
 func (s MobileCheckExistResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s MobileCheckExistResponse) GoString() string {
@@ -3234,7 +3241,7 @@ type MobileLoginRequest struct {
 }
 
 func (s MobileLoginRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s MobileLoginRequest) GoString() string {
@@ -3289,7 +3296,7 @@ type MobileRegisterRequest struct {
 }
 
 func (s MobileRegisterRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s MobileRegisterRequest) GoString() string {
@@ -3325,7 +3332,7 @@ type MobileSendSmsCodeRequest struct {
 }
 
 func (s MobileSendSmsCodeRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s MobileSendSmsCodeRequest) GoString() string {
@@ -3363,7 +3370,7 @@ type MobileSendSmsCodeResponse struct {
 }
 
 func (s MobileSendSmsCodeResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s MobileSendSmsCodeResponse) GoString() string {
@@ -3408,7 +3415,7 @@ type OSSCompleteFileResponse struct {
 }
 
 func (s OSSCompleteFileResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSCompleteFileResponse) GoString() string {
@@ -3545,7 +3552,7 @@ type OSSCopyFileResponse struct {
 }
 
 func (s OSSCopyFileResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSCopyFileResponse) GoString() string {
@@ -3594,7 +3601,7 @@ type OSSCreateFileResponse struct {
 }
 
 func (s OSSCreateFileResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSCreateFileResponse) GoString() string {
@@ -3651,7 +3658,7 @@ type OSSDeleteFileResponse struct {
 }
 
 func (s OSSDeleteFileResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSDeleteFileResponse) GoString() string {
@@ -3697,7 +3704,7 @@ type OSSDeleteFilesResponse struct {
 }
 
 func (s OSSDeleteFilesResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSDeleteFilesResponse) GoString() string {
@@ -3737,7 +3744,7 @@ type OSSGetDownloadUrlResponse struct {
 }
 
 func (s OSSGetDownloadUrlResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSGetDownloadUrlResponse) GoString() string {
@@ -3791,7 +3798,7 @@ type OSSGetFileResponse struct {
 }
 
 func (s OSSGetFileResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSGetFileResponse) GoString() string {
@@ -3924,7 +3931,7 @@ type OSSGetUploadUrlResponse struct {
 }
 
 func (s OSSGetUploadUrlResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSGetUploadUrlResponse) GoString() string {
@@ -3973,7 +3980,7 @@ type OSSListFileResponse struct {
 }
 
 func (s OSSListFileResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSListFileResponse) GoString() string {
@@ -4004,7 +4011,7 @@ type OSSListUploadedPartResponse struct {
 }
 
 func (s OSSListUploadedPartResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSListUploadedPartResponse) GoString() string {
@@ -4046,7 +4053,7 @@ type OSSMoveFileResponse struct {
 }
 
 func (s OSSMoveFileResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSMoveFileResponse) GoString() string {
@@ -4090,7 +4097,7 @@ type OSSSearchFileResponse struct {
 }
 
 func (s OSSSearchFileResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSSearchFileResponse) GoString() string {
@@ -4139,7 +4146,7 @@ type OSSUpdateFileMetaResponse struct {
 }
 
 func (s OSSUpdateFileMetaResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSUpdateFileMetaResponse) GoString() string {
@@ -4271,7 +4278,7 @@ type PreHashCheckSuccessResponse struct {
 }
 
 func (s PreHashCheckSuccessResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s PreHashCheckSuccessResponse) GoString() string {
@@ -4314,7 +4321,7 @@ type RemoveStoreRequest struct {
 }
 
 func (s RemoveStoreRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s RemoveStoreRequest) GoString() string {
@@ -4338,7 +4345,7 @@ type SetStoreCorsRequest struct {
 }
 
 func (s SetStoreCorsRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s SetStoreCorsRequest) GoString() string {
@@ -4369,7 +4376,7 @@ type StoreFile struct {
 }
 
 func (s StoreFile) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s StoreFile) GoString() string {
@@ -4418,7 +4425,7 @@ type StoreItemResponse struct {
 }
 
 func (s StoreItemResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s StoreItemResponse) GoString() string {
@@ -4497,7 +4504,7 @@ type TokenRequest struct {
 }
 
 func (s TokenRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s TokenRequest) GoString() string {
@@ -4531,7 +4538,7 @@ type UpdateAppRequest struct {
 }
 
 func (s UpdateAppRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s UpdateAppRequest) GoString() string {
@@ -4607,7 +4614,7 @@ type UpdateDomainRequest struct {
 }
 
 func (s UpdateDomainRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s UpdateDomainRequest) GoString() string {
@@ -4756,7 +4763,7 @@ type UpdateDriveResponse struct {
 }
 
 func (s UpdateDriveResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s UpdateDriveResponse) GoString() string {
@@ -4847,7 +4854,7 @@ type UpdateShareResponse struct {
 }
 
 func (s UpdateShareResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s UpdateShareResponse) GoString() string {
@@ -4937,7 +4944,7 @@ type UploadPartInfo struct {
 }
 
 func (s UploadPartInfo) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s UploadPartInfo) GoString() string {
@@ -4976,7 +4983,7 @@ type UserAuthentication struct {
 }
 
 func (s UserAuthentication) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s UserAuthentication) GoString() string {
@@ -5030,7 +5037,7 @@ type BaseCompleteFileRequest struct {
 }
 
 func (s BaseCompleteFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s BaseCompleteFileRequest) GoString() string {
@@ -5062,7 +5069,7 @@ type BaseCreateFileRequest struct {
 }
 
 func (s BaseCreateFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s BaseCreateFileRequest) GoString() string {
@@ -5107,7 +5114,7 @@ type BaseGetUploadUrlRequest struct {
 }
 
 func (s BaseGetUploadUrlRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s BaseGetUploadUrlRequest) GoString() string {
@@ -5143,7 +5150,7 @@ type BaseListFileRequest struct {
 }
 
 func (s BaseListFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s BaseListFileRequest) GoString() string {
@@ -5182,7 +5189,7 @@ type BaseMoveFileRequest struct {
 }
 
 func (s BaseMoveFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s BaseMoveFileRequest) GoString() string {
@@ -5213,7 +5220,7 @@ type BatchSubRequest struct {
 }
 
 func (s BatchSubRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s BatchSubRequest) GoString() string {
@@ -5251,7 +5258,7 @@ type CCPBatchRequest struct {
 }
 
 func (s CCPBatchRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPBatchRequest) GoString() string {
@@ -5276,7 +5283,7 @@ type CCPCompleteFileRequest struct {
 }
 
 func (s CCPCompleteFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPCompleteFileRequest) GoString() string {
@@ -5313,7 +5320,7 @@ type CCPCopyFileRequest struct {
 }
 
 func (s CCPCopyFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPCopyFileRequest) GoString() string {
@@ -5371,7 +5378,7 @@ type CCPCreateFileRequest struct {
 }
 
 func (s CCPCreateFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPCreateFileRequest) GoString() string {
@@ -5470,7 +5477,7 @@ type CCPDeleteFileRequest struct {
 }
 
 func (s CCPDeleteFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPDeleteFileRequest) GoString() string {
@@ -5498,7 +5505,7 @@ type CCPDeleteFilesRequest struct {
 }
 
 func (s CCPDeleteFilesRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPDeleteFilesRequest) GoString() string {
@@ -5520,7 +5527,7 @@ type CCPGetAsyncTaskRequest struct {
 }
 
 func (s CCPGetAsyncTaskRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPGetAsyncTaskRequest) GoString() string {
@@ -5540,7 +5547,7 @@ type CCPGetDownloadUrlRequest struct {
 }
 
 func (s CCPGetDownloadUrlRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPGetDownloadUrlRequest) GoString() string {
@@ -5575,7 +5582,7 @@ type CCPGetFileRequest struct {
 }
 
 func (s CCPGetFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPGetFileRequest) GoString() string {
@@ -5611,7 +5618,7 @@ type CCPGetUploadUrlRequest struct {
 }
 
 func (s CCPGetUploadUrlRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPGetUploadUrlRequest) GoString() string {
@@ -5661,7 +5668,7 @@ type CCPListFileRequest struct {
 }
 
 func (s CCPListFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPListFileRequest) GoString() string {
@@ -5747,7 +5754,7 @@ type CCPListUploadedPartRequest struct {
 }
 
 func (s CCPListUploadedPartRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPListUploadedPartRequest) GoString() string {
@@ -5788,7 +5795,7 @@ type CCPMoveFileRequest struct {
 }
 
 func (s CCPMoveFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPMoveFileRequest) GoString() string {
@@ -5831,7 +5838,7 @@ type CCPSearchFileRequest struct {
 }
 
 func (s CCPSearchFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPSearchFileRequest) GoString() string {
@@ -5886,7 +5893,7 @@ type CCPUpdateFileMetaRequest struct {
 }
 
 func (s CCPUpdateFileMetaRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CCPUpdateFileMetaRequest) GoString() string {
@@ -5948,7 +5955,7 @@ type CompleteFileRequest struct {
 }
 
 func (s CompleteFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CompleteFileRequest) GoString() string {
@@ -5999,7 +6006,7 @@ type CopyFileRequest struct {
 }
 
 func (s CopyFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CopyFileRequest) GoString() string {
@@ -6069,7 +6076,7 @@ type CreateDriveRequest struct {
 }
 
 func (s CreateDriveRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CreateDriveRequest) GoString() string {
@@ -6142,7 +6149,7 @@ type CreateFileRequest struct {
 }
 
 func (s CreateFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CreateFileRequest) GoString() string {
@@ -6246,7 +6253,7 @@ type CreateShareRequest struct {
 }
 
 func (s CreateShareRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CreateShareRequest) GoString() string {
@@ -6298,7 +6305,7 @@ type DeleteDriveRequest struct {
 }
 
 func (s DeleteDriveRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s DeleteDriveRequest) GoString() string {
@@ -6319,7 +6326,7 @@ type DeleteFileRequest struct {
 }
 
 func (s DeleteFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s DeleteFileRequest) GoString() string {
@@ -6356,7 +6363,7 @@ type DeleteShareRequest struct {
 }
 
 func (s DeleteShareRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s DeleteShareRequest) GoString() string {
@@ -6376,7 +6383,7 @@ type DownloadRequest struct {
 }
 
 func (s DownloadRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s DownloadRequest) GoString() string {
@@ -6408,7 +6415,7 @@ type GetAsyncTaskRequest struct {
 }
 
 func (s GetAsyncTaskRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s GetAsyncTaskRequest) GoString() string {
@@ -6425,7 +6432,7 @@ type GetDefaultDriveRequest struct {
 }
 
 func (s GetDefaultDriveRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s GetDefaultDriveRequest) GoString() string {
@@ -6447,7 +6454,7 @@ type GetDownloadUrlRequest struct {
 }
 
 func (s GetDownloadUrlRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s GetDownloadUrlRequest) GoString() string {
@@ -6489,7 +6496,7 @@ type GetDriveRequest struct {
 }
 
 func (s GetDriveRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s GetDriveRequest) GoString() string {
@@ -6511,7 +6518,7 @@ type GetFileRequest struct {
 }
 
 func (s GetFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s GetFileRequest) GoString() string {
@@ -6553,7 +6560,7 @@ type GetShareRequest struct {
 }
 
 func (s GetShareRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s GetShareRequest) GoString() string {
@@ -6576,7 +6583,7 @@ type GetUploadUrlRequest struct {
 }
 
 func (s GetUploadUrlRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s GetUploadUrlRequest) GoString() string {
@@ -6625,7 +6632,7 @@ type ListDriveRequest struct {
 }
 
 func (s ListDriveRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s ListDriveRequest) GoString() string {
@@ -6661,7 +6668,7 @@ type ListFileRequest struct {
 }
 
 func (s ListFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s ListFileRequest) GoString() string {
@@ -6724,7 +6731,7 @@ type ListMyDriveRequest struct {
 }
 
 func (s ListMyDriveRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s ListMyDriveRequest) GoString() string {
@@ -6749,7 +6756,7 @@ type ListShareRequest struct {
 }
 
 func (s ListShareRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s ListShareRequest) GoString() string {
@@ -6785,7 +6792,7 @@ type ListStoreFileRequest struct {
 }
 
 func (s ListStoreFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s ListStoreFileRequest) GoString() string {
@@ -6822,7 +6829,7 @@ type ListStoreRequest struct {
 }
 
 func (s ListStoreRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s ListStoreRequest) GoString() string {
@@ -6843,7 +6850,7 @@ type OSSCompleteFileRequest struct {
 }
 
 func (s OSSCompleteFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSCompleteFileRequest) GoString() string {
@@ -6887,7 +6894,7 @@ type OSSCopyFileRequest struct {
 }
 
 func (s OSSCopyFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSCopyFileRequest) GoString() string {
@@ -6947,7 +6954,7 @@ type OSSCreateFileRequest struct {
 }
 
 func (s OSSCreateFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSCreateFileRequest) GoString() string {
@@ -7007,7 +7014,7 @@ type OSSDeleteFileRequest struct {
 }
 
 func (s OSSDeleteFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSDeleteFileRequest) GoString() string {
@@ -7043,7 +7050,7 @@ type OSSGetDownloadUrlRequest struct {
 }
 
 func (s OSSGetDownloadUrlRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSGetDownloadUrlRequest) GoString() string {
@@ -7084,7 +7091,7 @@ type OSSGetFileRequest struct {
 }
 
 func (s OSSGetFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSGetFileRequest) GoString() string {
@@ -7126,7 +7133,7 @@ type OSSGetUploadUrlRequest struct {
 }
 
 func (s OSSGetUploadUrlRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSGetUploadUrlRequest) GoString() string {
@@ -7174,7 +7181,7 @@ type OSSListFileRequest struct {
 }
 
 func (s OSSListFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSListFileRequest) GoString() string {
@@ -7226,7 +7233,7 @@ type OSSListUploadedPartRequest struct {
 }
 
 func (s OSSListUploadedPartRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSListUploadedPartRequest) GoString() string {
@@ -7273,7 +7280,7 @@ type OSSMoveFileRequest struct {
 }
 
 func (s OSSMoveFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s OSSMoveFileRequest) GoString() string {
@@ -7325,7 +7332,7 @@ type Store struct {
 }
 
 func (s Store) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s Store) GoString() string {
@@ -7392,7 +7399,7 @@ type UCGetObjectInfoByObjectKeyRequest struct {
 }
 
 func (s UCGetObjectInfoByObjectKeyRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s UCGetObjectInfoByObjectKeyRequest) GoString() string {
@@ -7409,7 +7416,7 @@ type UCGetObjectInfoBySha1Request struct {
 }
 
 func (s UCGetObjectInfoBySha1Request) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s UCGetObjectInfoBySha1Request) GoString() string {
@@ -7430,7 +7437,7 @@ type UpdateDriveRequest struct {
 }
 
 func (s UpdateDriveRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s UpdateDriveRequest) GoString() string {
@@ -7475,7 +7482,7 @@ type UpdateFileMetaRequest struct {
 }
 
 func (s UpdateFileMetaRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s UpdateFileMetaRequest) GoString() string {
@@ -7537,7 +7544,7 @@ type UpdateShareRequest struct {
 }
 
 func (s UpdateShareRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s UpdateShareRequest) GoString() string {
@@ -7592,7 +7599,7 @@ type BaseUserResponse struct {
 }
 
 func (s BaseUserResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s BaseUserResponse) GoString() string {
@@ -7682,7 +7689,7 @@ type CreateUserRequest struct {
 }
 
 func (s CreateUserRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CreateUserRequest) GoString() string {
@@ -7752,7 +7759,7 @@ type CreateUserResponse struct {
 }
 
 func (s CreateUserResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s CreateUserResponse) GoString() string {
@@ -7834,7 +7841,7 @@ type DeleteUserRequest struct {
 }
 
 func (s DeleteUserRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s DeleteUserRequest) GoString() string {
@@ -7851,7 +7858,7 @@ type DeleteUserResponse struct {
 }
 
 func (s DeleteUserResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s DeleteUserResponse) GoString() string {
@@ -7868,7 +7875,7 @@ type GetUserRequest struct {
 }
 
 func (s GetUserRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s GetUserRequest) GoString() string {
@@ -7898,7 +7905,7 @@ type GetUserResponse struct {
 }
 
 func (s GetUserResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s GetUserResponse) GoString() string {
@@ -7981,7 +7988,7 @@ type ListUserRequest struct {
 }
 
 func (s ListUserRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s ListUserRequest) GoString() string {
@@ -8005,7 +8012,7 @@ type ListUserResponse struct {
 }
 
 func (s ListUserResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s ListUserResponse) GoString() string {
@@ -8039,7 +8046,7 @@ type SearchUserRequest struct {
 }
 
 func (s SearchUserRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s SearchUserRequest) GoString() string {
@@ -8098,7 +8105,7 @@ type UpdateUserRequest struct {
 }
 
 func (s UpdateUserRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s UpdateUserRequest) GoString() string {
@@ -8163,7 +8170,7 @@ type UpdateUserResponse struct {
 }
 
 func (s UpdateUserResponse) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s UpdateUserResponse) GoString() string {
@@ -8247,7 +8254,7 @@ type DownloadFileRequest struct {
 }
 
 func (s DownloadFileRequest) String() string {
-	return service.Prettify(s)
+	return tea.Prettify(s)
 }
 
 func (s DownloadFileRequest) GoString() string {
@@ -8270,22 +8277,79 @@ func (s *DownloadFileRequest) SetImageProcess(v string) *DownloadFileRequest {
 }
 
 type Client struct {
-	service.BaseClient
+	DomainId              string
+	Endpoint              string
+	Protocol              string
+	Nickname              string
+	UserAgent             string
+	Credential            credential.Credential
+	AccessTokenCredential *accesstokencredential.AccessTokenCredential
 }
 
 func NewClient(config *Config) (*Client, error) {
-	client := &Client{}
-	input := make(map[string]interface{})
-	byt, _ := json.Marshal(config)
-	err := json.Unmarshal(byt, &input)
-	if err != nil {
-		return nil, err
+	client := new(Client)
+	err := client.init(config)
+	return client, err
+}
+
+func (client *Client) init(config *Config) (_err error) {
+	if util.IsUnset(tea.ToMap(config)) {
+		_err = tea.NewSDKError(map[string]interface{}{
+			"name":    "ParameterMissing",
+			"message": "'config' can not be unset",
+		})
+		return _err
 	}
-	err = client.InitClient(input)
-	if err != nil {
-		return nil, err
+
+	if util.Empty(tea.StringValue(config.DomainId)) {
+		_err = tea.NewSDKError(map[string]interface{}{
+			"name":    "ParameterMissing",
+			"message": "'config.domainId' can not be empty",
+		})
+		return _err
 	}
-	return client, nil
+
+	if !util.Empty(tea.StringValue(config.AccessToken)) || !util.Empty(tea.StringValue(config.RefreshToken)) {
+		accessConfig := &accesstokencredential.Config{
+			AccessToken:  config.AccessToken,
+			Endpoint:     config.Endpoint,
+			DomainId:     config.DomainId,
+			ClientId:     config.ClientId,
+			RefreshToken: config.RefreshToken,
+			ClientSecret: config.ClientSecret,
+			ExpireTime:   config.ExpireTime,
+		}
+		client.AccessTokenCredential, _err = accesstokencredential.NewAccessTokenCredential(accessConfig)
+		if _err != nil {
+			return _err
+		}
+
+	}
+
+	if !util.Empty(tea.StringValue(config.AccessKeyId)) {
+		if util.Empty(tea.StringValue(config.CredentialType)) {
+			config.CredentialType = tea.String("access_key")
+		}
+
+		credentialConfig := &credential.Config{
+			AccessKeyId:     config.AccessKeyId,
+			Type:            config.CredentialType,
+			AccessKeySecret: config.AccessKeySecret,
+			SecurityToken:   config.SecurityToken,
+		}
+		client.Credential, _err = credential.NewCredential(credentialConfig)
+		if _err != nil {
+			return _err
+		}
+
+	}
+
+	client.Endpoint = tea.StringValue(config.Endpoint)
+	client.Protocol = tea.StringValue(config.Protocol)
+	client.DomainId = tea.StringValue(config.DomainId)
+	client.UserAgent = tea.StringValue(config.UserAgent)
+	client.Nickname = tea.StringValue(config.Nickname)
+	return nil
 }
 
 func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOptions) (_result *AccountAccessTokenResponse, _err error) {
@@ -8310,11 +8374,11 @@ func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOpt
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -8340,41 +8404,52 @@ func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOpt
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/cancel_link")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/cancel_link")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &AccountAccessTokenResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -8382,7 +8457,7 @@ func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOpt
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -8394,11 +8469,12 @@ func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOpt
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -8438,11 +8514,11 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeO
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -8468,41 +8544,52 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeO
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/confirm_link")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/confirm_link")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &AccountAccessTokenResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -8510,7 +8597,7 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeO
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -8522,11 +8609,12 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeO
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -8566,11 +8654,11 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runt
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -8595,40 +8683,50 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runt
 				return _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/default/change_password")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/default/change_password")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 204) {
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 204) {
 				return _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -8640,11 +8738,12 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runt
 				return _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -8684,11 +8783,11 @@ func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *R
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -8713,40 +8812,50 @@ func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *R
 				return _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/default/set_password")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/default/set_password")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 204) {
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 204) {
 				return _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -8758,11 +8867,12 @@ func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *R
 				return _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -8802,11 +8912,11 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -8832,41 +8942,52 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_access_token_by_link_info")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/get_access_token_by_link_info")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &AccountAccessTokenResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -8874,7 +8995,7 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -8886,11 +9007,12 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -8930,11 +9052,11 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOpt
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -8960,41 +9082,52 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOpt
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_captcha")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/get_captcha")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &Captcha{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -9002,7 +9135,7 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOpt
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -9014,11 +9147,12 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOpt
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -9058,11 +9192,11 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *Runtim
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -9088,41 +9222,52 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *Runtim
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_link_info")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/get_link_info")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &LinkInfoResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -9130,7 +9275,7 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *Runtim
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -9142,11 +9287,12 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *Runtim
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -9186,11 +9332,11 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, r
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -9216,41 +9362,52 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, r
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_link_info_by_user_id")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/get_link_info_by_user_id")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &LinkInfoListResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -9258,7 +9415,7 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, r
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -9270,11 +9427,12 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, r
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -9314,11 +9472,11 @@ func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions)
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -9344,41 +9502,52 @@ func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions)
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/link")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/link")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &AccountAccessTokenResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -9386,7 +9555,7 @@ func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions)
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -9398,11 +9567,12 @@ func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions)
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -9442,11 +9612,11 @@ func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *Runt
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -9472,41 +9642,52 @@ func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *Runt
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/check_exist")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/mobile/check_exist")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &MobileCheckExistResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -9514,7 +9695,7 @@ func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *Runt
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -9526,11 +9707,12 @@ func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *Runt
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -9570,11 +9752,11 @@ func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -9600,41 +9782,52 @@ func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/login")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/mobile/login")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &AccountAccessTokenResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -9642,7 +9835,7 @@ func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -9654,11 +9847,12 @@ func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -9698,11 +9892,11 @@ func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeO
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -9728,41 +9922,52 @@ func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeO
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/register")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/mobile/register")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &AccountAccessTokenResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -9770,7 +9975,7 @@ func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeO
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -9782,11 +9987,12 @@ func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeO
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -9826,11 +10032,11 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runti
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -9856,41 +10062,52 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runti
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/send_sms_code")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/mobile/send_sms_code")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &MobileSendSmsCodeResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -9898,7 +10115,7 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runti
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -9910,11 +10127,12 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runti
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -9954,11 +10172,11 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (_re
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -9984,41 +10202,52 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (_re
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/token")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/token")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &AccountAccessTokenResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -10026,7 +10255,7 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (_re
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -10038,11 +10267,12 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (_re
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -10082,11 +10312,11 @@ func (client *Client) GetAsyncTaskInfo(request *CCPGetAsyncTaskRequest, runtime 
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -10112,41 +10342,52 @@ func (client *Client) GetAsyncTaskInfo(request *CCPGetAsyncTaskRequest, runtime 
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/async_task/get")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/async_task/get")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &CCPGetAsyncTaskResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -10154,7 +10395,7 @@ func (client *Client) GetAsyncTaskInfo(request *CCPGetAsyncTaskRequest, runtime 
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -10166,11 +10407,12 @@ func (client *Client) GetAsyncTaskInfo(request *CCPGetAsyncTaskRequest, runtime 
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -10210,11 +10452,11 @@ func (client *Client) Operation(request *CCPBatchRequest, runtime *RuntimeOption
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -10240,41 +10482,52 @@ func (client *Client) Operation(request *CCPBatchRequest, runtime *RuntimeOption
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/batch")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/batch")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &CCPBatchResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -10282,7 +10535,7 @@ func (client *Client) Operation(request *CCPBatchRequest, runtime *RuntimeOption
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -10294,11 +10547,12 @@ func (client *Client) Operation(request *CCPBatchRequest, runtime *RuntimeOption
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -10338,11 +10592,11 @@ func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeO
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -10368,41 +10622,52 @@ func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeO
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/create")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/drive/create")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 201) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 201) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &CreateDriveResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -10410,7 +10675,7 @@ func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeO
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -10422,11 +10687,12 @@ func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeO
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -10466,11 +10732,11 @@ func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeO
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -10495,40 +10761,50 @@ func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeO
 				return _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/delete")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/drive/delete")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 204) {
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 204) {
 				return _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -10540,11 +10816,12 @@ func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeO
 				return _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -10584,11 +10861,11 @@ func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -10614,41 +10891,52 @@ func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/get")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/drive/get")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &GetDriveResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -10656,7 +10944,7 @@ func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -10668,11 +10956,12 @@ func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -10712,11 +11001,11 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -10742,41 +11031,52 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/get_default_drive")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/drive/get_default_drive")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &GetDriveResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -10784,7 +11084,7 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -10796,11 +11096,12 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -10840,11 +11141,11 @@ func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOpti
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -10870,41 +11171,52 @@ func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOpti
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/list")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/drive/list")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &ListDriveResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -10912,7 +11224,7 @@ func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOpti
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -10924,11 +11236,12 @@ func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOpti
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -10968,11 +11281,11 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *Runtime
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -10998,41 +11311,52 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *Runtime
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/list_my_drives")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/drive/list_my_drives")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &ListDriveResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -11040,7 +11364,7 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *Runtime
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -11052,11 +11376,12 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *Runtime
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -11096,11 +11421,11 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeO
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -11126,41 +11451,52 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeO
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/update")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/drive/update")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &UpdateDriveResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -11168,7 +11504,7 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeO
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -11180,11 +11516,12 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeO
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -11224,11 +11561,11 @@ func (client *Client) CompleteFile(request *CCPCompleteFileRequest, runtime *Run
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -11254,41 +11591,52 @@ func (client *Client) CompleteFile(request *CCPCompleteFileRequest, runtime *Run
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/complete")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/complete")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &CCPCompleteFileResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -11296,7 +11644,7 @@ func (client *Client) CompleteFile(request *CCPCompleteFileRequest, runtime *Run
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -11308,11 +11656,12 @@ func (client *Client) CompleteFile(request *CCPCompleteFileRequest, runtime *Run
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -11352,11 +11701,11 @@ func (client *Client) CopyFile(request *CCPCopyFileRequest, runtime *RuntimeOpti
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -11382,41 +11731,52 @@ func (client *Client) CopyFile(request *CCPCopyFileRequest, runtime *RuntimeOpti
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/copy")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/copy")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 201) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 201) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &CCPCopyFileResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -11424,12 +11784,13 @@ func (client *Client) CopyFile(request *CCPCopyFileRequest, runtime *RuntimeOpti
 				return _result, _err
 			}
 
-			if client.IsStatusCode(response_, 202) {
-				respMap, _err = client.ReadAsJSON(response_)
+			if util.EqualNumber(response_.StatusCode, 202) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &CCPCopyFileResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -11437,7 +11798,7 @@ func (client *Client) CopyFile(request *CCPCopyFileRequest, runtime *RuntimeOpti
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -11449,11 +11810,12 @@ func (client *Client) CopyFile(request *CCPCopyFileRequest, runtime *RuntimeOpti
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -11493,11 +11855,11 @@ func (client *Client) CreateFile(request *CCPCreateFileRequest, runtime *Runtime
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -11523,41 +11885,52 @@ func (client *Client) CreateFile(request *CCPCreateFileRequest, runtime *Runtime
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/create")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/create")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 201) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 201) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &CCPCreateFileResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -11565,7 +11938,7 @@ func (client *Client) CreateFile(request *CCPCreateFileRequest, runtime *Runtime
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -11577,11 +11950,12 @@ func (client *Client) CreateFile(request *CCPCreateFileRequest, runtime *Runtime
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -11621,11 +11995,11 @@ func (client *Client) DeleteFile(request *CCPDeleteFileRequest, runtime *Runtime
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -11651,41 +12025,52 @@ func (client *Client) DeleteFile(request *CCPDeleteFileRequest, runtime *Runtime
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/delete")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/delete")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 202) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 202) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &CCPDeleteFileResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -11693,11 +12078,12 @@ func (client *Client) DeleteFile(request *CCPDeleteFileRequest, runtime *Runtime
 				return _result, _err
 			}
 
-			if client.IsStatusCode(response_, 204) {
-				return nil, _err
+			if util.EqualNumber(response_.StatusCode, 204) {
+				_result = nil
+				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -11709,11 +12095,12 @@ func (client *Client) DeleteFile(request *CCPDeleteFileRequest, runtime *Runtime
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -11753,11 +12140,11 @@ func (client *Client) DownloadFile(request *DownloadFileRequest, runtime *Runtim
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -11783,27 +12170,36 @@ func (client *Client) DownloadFile(request *DownloadFileRequest, runtime *Runtim
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "GET"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/download")
-			request_.Query = client.ToQuery(tea.ToMap(request))
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/download")
+			request_.Query = ccputil.ToQuery(tea.ToMap(request))
 			request_.Headers = map[string]string{
 				"user-agent": client.GetUserAgent(),
-				"host":       client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":       util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			response_, _err := tea.DoRequest(request_, _runtime)
@@ -11811,7 +12207,8 @@ func (client *Client) DownloadFile(request *DownloadFileRequest, runtime *Runtim
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			obj := interface{}(nil)
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -11823,11 +12220,12 @@ func (client *Client) DownloadFile(request *DownloadFileRequest, runtime *Runtim
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -11867,11 +12265,11 @@ func (client *Client) GetFile(request *CCPGetFileRequest, runtime *RuntimeOption
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -11897,41 +12295,52 @@ func (client *Client) GetFile(request *CCPGetFileRequest, runtime *RuntimeOption
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/get")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/get")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &CCPGetFileResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -11939,7 +12348,7 @@ func (client *Client) GetFile(request *CCPGetFileRequest, runtime *RuntimeOption
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -11951,11 +12360,12 @@ func (client *Client) GetFile(request *CCPGetFileRequest, runtime *RuntimeOption
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -11995,11 +12405,11 @@ func (client *Client) GetDownloadUrl(request *CCPGetDownloadUrlRequest, runtime 
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -12025,41 +12435,52 @@ func (client *Client) GetDownloadUrl(request *CCPGetDownloadUrlRequest, runtime 
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/get_download_url")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/get_download_url")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &CCPGetDownloadUrlResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -12067,7 +12488,7 @@ func (client *Client) GetDownloadUrl(request *CCPGetDownloadUrlRequest, runtime 
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -12079,11 +12500,12 @@ func (client *Client) GetDownloadUrl(request *CCPGetDownloadUrlRequest, runtime 
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -12123,11 +12545,11 @@ func (client *Client) GetUploadUrl(request *CCPGetUploadUrlRequest, runtime *Run
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -12153,41 +12575,52 @@ func (client *Client) GetUploadUrl(request *CCPGetUploadUrlRequest, runtime *Run
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/get_upload_url")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/get_upload_url")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &CCPGetUploadUrlResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -12195,7 +12628,7 @@ func (client *Client) GetUploadUrl(request *CCPGetUploadUrlRequest, runtime *Run
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -12207,11 +12640,12 @@ func (client *Client) GetUploadUrl(request *CCPGetUploadUrlRequest, runtime *Run
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -12251,11 +12685,11 @@ func (client *Client) ListFile(request *CCPListFileRequest, runtime *RuntimeOpti
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -12281,41 +12715,52 @@ func (client *Client) ListFile(request *CCPListFileRequest, runtime *RuntimeOpti
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/list")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/list")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &CCPListFileResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -12323,7 +12768,7 @@ func (client *Client) ListFile(request *CCPListFileRequest, runtime *RuntimeOpti
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -12335,11 +12780,12 @@ func (client *Client) ListFile(request *CCPListFileRequest, runtime *RuntimeOpti
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -12379,11 +12825,11 @@ func (client *Client) ListUploadedParts(request *CCPListUploadedPartRequest, run
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -12409,41 +12855,52 @@ func (client *Client) ListUploadedParts(request *CCPListUploadedPartRequest, run
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/list_uploaded_parts")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/list_uploaded_parts")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &CCPListUploadedPartResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -12451,7 +12908,7 @@ func (client *Client) ListUploadedParts(request *CCPListUploadedPartRequest, run
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -12463,11 +12920,12 @@ func (client *Client) ListUploadedParts(request *CCPListUploadedPartRequest, run
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -12507,11 +12965,11 @@ func (client *Client) MoveFile(request *CCPMoveFileRequest, runtime *RuntimeOpti
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -12537,41 +12995,52 @@ func (client *Client) MoveFile(request *CCPMoveFileRequest, runtime *RuntimeOpti
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/move")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/move")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &CCPMoveFileResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -12579,7 +13048,7 @@ func (client *Client) MoveFile(request *CCPMoveFileRequest, runtime *RuntimeOpti
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -12591,11 +13060,12 @@ func (client *Client) MoveFile(request *CCPMoveFileRequest, runtime *RuntimeOpti
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -12635,11 +13105,11 @@ func (client *Client) SearchFile(request *CCPSearchFileRequest, runtime *Runtime
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -12665,41 +13135,52 @@ func (client *Client) SearchFile(request *CCPSearchFileRequest, runtime *Runtime
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/search")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/search")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &CCPSearchFileResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -12707,7 +13188,7 @@ func (client *Client) SearchFile(request *CCPSearchFileRequest, runtime *Runtime
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -12719,11 +13200,12 @@ func (client *Client) SearchFile(request *CCPSearchFileRequest, runtime *Runtime
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -12763,11 +13245,11 @@ func (client *Client) UpdateFile(request *CCPUpdateFileMetaRequest, runtime *Run
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -12793,41 +13275,52 @@ func (client *Client) UpdateFile(request *CCPUpdateFileMetaRequest, runtime *Run
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/update")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/update")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &CCPUpdateFileMetaResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -12835,7 +13328,7 @@ func (client *Client) UpdateFile(request *CCPUpdateFileMetaRequest, runtime *Run
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -12847,11 +13340,12 @@ func (client *Client) UpdateFile(request *CCPUpdateFileMetaRequest, runtime *Run
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -12891,11 +13385,11 @@ func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOpt
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -12921,41 +13415,52 @@ func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOpt
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/create")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/user/create")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 201) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 201) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &CreateUserResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -12963,7 +13468,7 @@ func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOpt
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -12975,11 +13480,12 @@ func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOpt
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -13019,11 +13525,11 @@ func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOpt
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -13048,40 +13554,50 @@ func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOpt
 				return _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/delete")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/user/delete")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 204) {
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 204) {
 				return _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -13093,11 +13609,12 @@ func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOpt
 				return _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -13137,11 +13654,11 @@ func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) 
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -13167,41 +13684,52 @@ func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) 
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/get")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/user/get")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &GetUserResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -13209,7 +13737,7 @@ func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) 
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -13221,11 +13749,12 @@ func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) 
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -13265,11 +13794,11 @@ func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOption
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -13295,41 +13824,52 @@ func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOption
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/list")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/user/list")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &ListUserResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -13337,7 +13877,7 @@ func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOption
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -13349,11 +13889,12 @@ func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOption
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -13393,11 +13934,11 @@ func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOpt
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -13423,41 +13964,52 @@ func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOpt
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/search")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/user/search")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &ListUserResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -13465,7 +14017,7 @@ func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOpt
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -13477,11 +14029,12 @@ func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOpt
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -13521,11 +14074,11 @@ func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOpt
 		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
 		"retry": map[string]interface{}{
 			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": client.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
 		},
 		"backoff": map[string]interface{}{
-			"policy": client.Default(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": client.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
 		},
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
@@ -13551,41 +14104,52 @@ func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOpt
 				return nil, _err
 			}
 
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
 			accessToken, _err := client.GetAccessToken()
 			if _err != nil {
 				return nil, _err
 			}
 
-			request_.Protocol = client.GetProtocol(client.Protocol, "https")
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/update")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/user/update")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
-				"host":         client.GetHost(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}
-			if client.NotEmpty(accessToken) {
+			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if client.NotEmpty(accesskeyId) && client.NotEmpty(accessKeySecret) {
-				request_.Headers["date"] = client.GetRFC2616Date()
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(client.GetSignature(request_))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(client.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
 			}
 			respMap := make(map[string]interface{})
-			if client.IsStatusCode(response_, 200) {
-				respMap, _err = client.ReadAsJSON(response_)
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
 					return nil, _err
 				}
 
+				respMap = util.AssertAsMap(obj)
 				_result = &UpdateUserResponse{}
 				_err = tea.Convert(tea.ToMap(map[string]interface{}{
 					"requestId": response_.Headers["x-ca-request-id"],
@@ -13593,7 +14157,7 @@ func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOpt
 				return _result, _err
 			}
 
-			if client.NotEmpty(response_.Headers["x-ca-error-message"]) {
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
 						"requestId":     response_.Headers["x-ca-request-id"],
@@ -13605,11 +14169,12 @@ func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOpt
 				return nil, _err
 			}
 
-			respMap, _err = client.ReadAsJSON(response_)
+			obj, _err = util.ReadAsJSON(response_.Body)
 			if _err != nil {
 				return nil, _err
 			}
 
+			respMap = util.AssertAsMap(obj)
 			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
 				"data": map[string]interface{}{
 					"requestId":     response_.Headers["x-ca-request-id"],
@@ -13625,4 +14190,110 @@ func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOpt
 	}
 
 	return _resp, _err
+}
+
+func (client *Client) SetExpireTime(expireTime string) (_err error) {
+	if util.IsUnset(client.AccessTokenCredential) {
+		return _err
+	}
+
+	client.AccessTokenCredential.SetExpireTime(expireTime)
+	return _err
+}
+
+func (client *Client) GetExpireTime() (_result string) {
+	if util.IsUnset(client.AccessTokenCredential) {
+		_result = ""
+		return _result
+	}
+
+	expireTime := client.AccessTokenCredential.GetExpireTime()
+	_result = expireTime
+	return _result
+}
+
+func (client *Client) SetUserAgent(userAgent string) {
+	client.UserAgent = userAgent
+}
+
+func (client *Client) AppendUserAgent(userAgent string) {
+	client.UserAgent = tea.ToString(client.UserAgent) + " " + tea.ToString(userAgent)
+}
+
+func (client *Client) GetUserAgent() (_result string) {
+	userAgent := util.GetUserAgent(client.UserAgent)
+	_result = userAgent
+	return _result
+}
+
+func (client *Client) SetRefreshToken(token string) {
+	if util.IsUnset(client.AccessTokenCredential) {
+		return
+	}
+
+	client.AccessTokenCredential.SetRefreshToken(token)
+}
+
+func (client *Client) GetRefreshToken() (_result string) {
+	if util.IsUnset(client.AccessTokenCredential) {
+		_result = ""
+		return _result
+	}
+
+	token := client.AccessTokenCredential.GetRefreshToken()
+	_result = token
+	return _result
+}
+
+func (client *Client) SetAccessToken(token string) {
+	if util.IsUnset(client.AccessTokenCredential) {
+		return
+	}
+
+	client.AccessTokenCredential.SetAccessToken(token)
+}
+
+func (client *Client) GetAccessToken() (_result string, _err error) {
+	if util.IsUnset(client.AccessTokenCredential) {
+		_result = ""
+		return _result, _err
+	}
+
+	token, _err := client.AccessTokenCredential.GetAccessToken()
+	if _err != nil {
+		return "", _err
+	}
+
+	_result = token
+	return _result, _err
+}
+
+func (client *Client) GetAccessKeyId() (_result string, _err error) {
+	if util.IsUnset(client.Credential) {
+		_result = ""
+		return _result, _err
+	}
+
+	accessKeyId, _err := client.Credential.GetAccessKeyId()
+	if _err != nil {
+		return "", _err
+	}
+
+	_result = accessKeyId
+	return _result, _err
+}
+
+func (client *Client) GetAccessKeySecret() (_result string, _err error) {
+	if util.IsUnset(client.Credential) {
+		_result = ""
+		return _result, _err
+	}
+
+	secret, _err := client.Credential.GetAccessKeySecret()
+	if _err != nil {
+		return "", _err
+	}
+
+	_result = secret
+	return _result, _err
 }
