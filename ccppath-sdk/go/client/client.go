@@ -4,9 +4,9 @@ package client
 import (
 	"github.com/alibabacloud-go/tea/tea"
 	accesstokencredential "github.com/aliyun/aliyun-ccp/credential/golang/service"
+	ccputil "github.com/aliyun/aliyun-ccp/util/golang/service"
 	credential "github.com/aliyun/credentials-go/credentials"
 	util "github.com/aliyun/tea-util/golang/service"
-	roautil "gitlab.alibaba-inc.com/alicloud-sdk/roa-util/golang/service"
 )
 
 type RuntimeOptions struct {
@@ -8416,7 +8416,7 @@ func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOpt
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/cancel_link")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/cancel_link")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
@@ -8433,8 +8433,7 @@ func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOpt
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -8557,7 +8556,7 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeO
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/confirm_link")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/confirm_link")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
@@ -8574,8 +8573,7 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeO
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -8697,7 +8695,7 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runt
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/default/change_password")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/default/change_password")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
@@ -8714,8 +8712,7 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runt
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -8827,7 +8824,7 @@ func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *R
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/default/set_password")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/default/set_password")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
@@ -8844,8 +8841,7 @@ func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *R
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -8958,7 +8954,7 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_access_token_by_link_info")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/get_access_token_by_link_info")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
@@ -8975,8 +8971,7 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -9099,7 +9094,7 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOpt
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_captcha")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/get_captcha")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
@@ -9116,8 +9111,7 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOpt
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -9240,7 +9234,7 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *Runtim
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_link_info")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/get_link_info")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
@@ -9257,8 +9251,7 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *Runtim
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -9381,7 +9374,7 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, r
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_link_info_by_user_id")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/get_link_info_by_user_id")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
@@ -9398,8 +9391,7 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, r
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -9522,7 +9514,7 @@ func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions)
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/link")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/link")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
@@ -9539,8 +9531,7 @@ func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions)
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -9663,7 +9654,7 @@ func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *Runt
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/check_exist")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/mobile/check_exist")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
@@ -9680,8 +9671,7 @@ func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *Runt
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -9804,7 +9794,7 @@ func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/login")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/mobile/login")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
@@ -9821,8 +9811,7 @@ func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -9945,7 +9934,7 @@ func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeO
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/register")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/mobile/register")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
@@ -9962,8 +9951,7 @@ func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeO
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -10086,7 +10074,7 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runti
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/send_sms_code")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/mobile/send_sms_code")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
@@ -10103,8 +10091,7 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runti
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -10227,7 +10214,7 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (_re
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/token")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/account/token")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
@@ -10244,8 +10231,7 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (_re
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -10368,7 +10354,7 @@ func (client *Client) GetAsyncTaskInfo(request *CCPGetAsyncTaskRequest, runtime 
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/async_task/get")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/async_task/get")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -10385,8 +10371,7 @@ func (client *Client) GetAsyncTaskInfo(request *CCPGetAsyncTaskRequest, runtime 
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -10509,7 +10494,7 @@ func (client *Client) Operation(request *CCPBatchRequest, runtime *RuntimeOption
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/batch")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/batch")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -10526,8 +10511,7 @@ func (client *Client) Operation(request *CCPBatchRequest, runtime *RuntimeOption
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -10650,7 +10634,7 @@ func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeO
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/create")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/drive/create")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -10667,8 +10651,7 @@ func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeO
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -10790,7 +10773,7 @@ func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeO
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/delete")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/drive/delete")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -10807,8 +10790,7 @@ func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeO
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -10921,7 +10903,7 @@ func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/get")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/drive/get")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -10938,8 +10920,7 @@ func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -11062,7 +11043,7 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/get_default_drive")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/drive/get_default_drive")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -11079,8 +11060,7 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -11203,7 +11183,7 @@ func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOpti
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/list")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/drive/list")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -11220,8 +11200,7 @@ func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOpti
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -11344,7 +11323,7 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *Runtime
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/list_my_drives")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/drive/list_my_drives")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -11361,8 +11340,7 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *Runtime
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -11485,7 +11463,7 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeO
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/update")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/drive/update")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -11502,8 +11480,7 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeO
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -11626,7 +11603,7 @@ func (client *Client) CompleteFile(request *CCPCompleteFileRequest, runtime *Run
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/complete")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/complete")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -11643,8 +11620,7 @@ func (client *Client) CompleteFile(request *CCPCompleteFileRequest, runtime *Run
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -11767,7 +11743,7 @@ func (client *Client) CopyFile(request *CCPCopyFileRequest, runtime *RuntimeOpti
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/copy")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/copy")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -11784,8 +11760,7 @@ func (client *Client) CopyFile(request *CCPCopyFileRequest, runtime *RuntimeOpti
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -11922,7 +11897,7 @@ func (client *Client) CreateFile(request *CCPCreateFileRequest, runtime *Runtime
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/create")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/create")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -11939,8 +11914,7 @@ func (client *Client) CreateFile(request *CCPCreateFileRequest, runtime *Runtime
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -12063,7 +12037,7 @@ func (client *Client) DeleteFile(request *CCPDeleteFileRequest, runtime *Runtime
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/delete")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/delete")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -12080,8 +12054,7 @@ func (client *Client) DeleteFile(request *CCPDeleteFileRequest, runtime *Runtime
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -12209,8 +12182,8 @@ func (client *Client) DownloadFile(request *DownloadFileRequest, runtime *Runtim
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "GET"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/download")
-			request_.Query = util.StringifyMapValue(tea.ToMap(request))
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/download")
+			request_.Query = ccputil.ToQuery(tea.ToMap(request))
 			request_.Headers = map[string]string{
 				"user-agent": client.GetUserAgent(),
 				"host":       util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -12226,8 +12199,7 @@ func (client *Client) DownloadFile(request *DownloadFileRequest, runtime *Runtim
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			response_, _err := tea.DoRequest(request_, _runtime)
@@ -12335,7 +12307,7 @@ func (client *Client) GetFile(request *CCPGetFileRequest, runtime *RuntimeOption
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/get")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/get")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -12352,8 +12324,7 @@ func (client *Client) GetFile(request *CCPGetFileRequest, runtime *RuntimeOption
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -12476,7 +12447,7 @@ func (client *Client) GetDownloadUrl(request *CCPGetDownloadUrlRequest, runtime 
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/get_download_url")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/get_download_url")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -12493,8 +12464,7 @@ func (client *Client) GetDownloadUrl(request *CCPGetDownloadUrlRequest, runtime 
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -12617,7 +12587,7 @@ func (client *Client) GetUploadUrl(request *CCPGetUploadUrlRequest, runtime *Run
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/get_upload_url")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/get_upload_url")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -12634,8 +12604,7 @@ func (client *Client) GetUploadUrl(request *CCPGetUploadUrlRequest, runtime *Run
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -12758,7 +12727,7 @@ func (client *Client) ListFile(request *CCPListFileRequest, runtime *RuntimeOpti
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/list")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/list")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -12775,8 +12744,7 @@ func (client *Client) ListFile(request *CCPListFileRequest, runtime *RuntimeOpti
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -12899,7 +12867,7 @@ func (client *Client) ListUploadedParts(request *CCPListUploadedPartRequest, run
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/list_uploaded_parts")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/list_uploaded_parts")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -12916,8 +12884,7 @@ func (client *Client) ListUploadedParts(request *CCPListUploadedPartRequest, run
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -13040,7 +13007,7 @@ func (client *Client) MoveFile(request *CCPMoveFileRequest, runtime *RuntimeOpti
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/move")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/move")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -13057,8 +13024,7 @@ func (client *Client) MoveFile(request *CCPMoveFileRequest, runtime *RuntimeOpti
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -13181,7 +13147,7 @@ func (client *Client) SearchFile(request *CCPSearchFileRequest, runtime *Runtime
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/search")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/search")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -13198,8 +13164,7 @@ func (client *Client) SearchFile(request *CCPSearchFileRequest, runtime *Runtime
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -13322,7 +13287,7 @@ func (client *Client) UpdateFile(request *CCPUpdateFileMetaRequest, runtime *Run
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/update")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/file/update")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -13339,8 +13304,7 @@ func (client *Client) UpdateFile(request *CCPUpdateFileMetaRequest, runtime *Run
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -13463,7 +13427,7 @@ func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOpt
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/create")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/user/create")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -13480,8 +13444,7 @@ func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOpt
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -13603,7 +13566,7 @@ func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOpt
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/delete")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/user/delete")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -13620,8 +13583,7 @@ func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOpt
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -13734,7 +13696,7 @@ func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) 
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/get")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/user/get")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -13751,8 +13713,7 @@ func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) 
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -13875,7 +13836,7 @@ func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOption
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/list")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/user/list")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -13892,8 +13853,7 @@ func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOption
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -14016,7 +13976,7 @@ func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOpt
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/search")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/user/search")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -14033,8 +13993,7 @@ func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOpt
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -14157,7 +14116,7 @@ func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOpt
 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/update")
+			request_.Pathname = ccputil.GetPathname(client.Nickname, "/v2/user/update")
 			request_.Headers = map[string]string{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
@@ -14174,8 +14133,7 @@ func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOpt
 				request_.Headers["accept"] = "application/json"
 				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
 				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(ccputil.GetSignature(request_, accessKeySecret))
 			}
 
 			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
@@ -14232,17 +14190,6 @@ func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOpt
 	}
 
 	return _resp, _err
-}
-
-func (client *Client) GetPathname(nickname string, path string) (_result string) {
-	if util.Empty(nickname) {
-		_result = path
-		return _result
-	}
-
-	_result = ""
-	_result = "/" + tea.ToString(nickname) + tea.ToString(path)
-	return _result, nil
 }
 
 func (client *Client) SetExpireTime(expireTime string) (_err error) {
