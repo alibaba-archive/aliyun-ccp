@@ -1,7 +1,5 @@
 static function getPathname(nickName: string, path: string): string;
 
-static function toQuery(model: any): map[string]string;
+static function toQuery(model: map[string]any): map[string]string;
 
 static function getSignature(request: $Request, secret: string): string;
-
-static function getUserAgent(userAgent: string): string;

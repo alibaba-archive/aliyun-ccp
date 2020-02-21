@@ -10,15 +10,12 @@ import (
 	"hash"
 	"io"
 	"reflect"
-	"runtime"
 	"sort"
 	"strconv"
 	"strings"
 
 	"github.com/alibabacloud-go/tea/tea"
 )
-
-var defaultUserAgent = fmt.Sprintf("AlibabaCloud (%s; %s) Golang/%s Core/%s", runtime.GOOS, runtime.GOARCH, strings.Trim(runtime.Version(), "go"), "0.01")
 
 type Sorter struct {
 	Keys []string
@@ -66,25 +63,14 @@ func GetPathname(nickName string, path string) string {
 	return "/" + nickName + path
 }
 
-func ToQuery(request interface{}) map[string]string {
-	tmp := make(map[string]interface{})
-	byt, _ := json.Marshal(request)
-	_ = json.Unmarshal(byt, &tmp)
-
+func ToQuery(request map[string]interface{}) map[string]string {
 	result := make(map[string]string)
-	for key, value := range tmp {
+	for key, value := range request {
 		filterValue := reflect.ValueOf(value)
 		flatRepeatedList(filterValue, result, key)
 	}
 
 	return result
-}
-
-func GetUserAgent(userAgent string) string {
-	if userAgent != "" {
-		return defaultUserAgent + " " + userAgent
-	}
-	return defaultUserAgent
 }
 
 func GetSignature(request *tea.Request, secret string) string {

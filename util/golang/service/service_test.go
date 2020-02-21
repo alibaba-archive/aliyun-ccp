@@ -34,10 +34,6 @@ func Test_ToQuery(t *testing.T) {
 	utils.AssertEqual(t, "1", out["number"])
 }
 
-func Test_UserAgent(t *testing.T) {
-	utils.AssertContains(t, GetUserAgent("ccp"), "ccp")
-}
-
 func Test_Sorter(t *testing.T) {
 	tmp := map[string]string{
 		"key":   "ccp",
