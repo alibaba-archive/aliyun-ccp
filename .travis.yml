@@ -15,8 +15,6 @@ jobs:
       script:
         - cd baseclient/java
         - mvn test -B
-        - cd ../../util/java/
-        - mvn test -B
         - cd ../../credential/java/
         - mvn test -B
       after_success:
@@ -30,9 +28,6 @@ jobs:
         - cd baseclient/go
         - go mod tidy
         - go test -race -coverprofile=coverage.txt -covermode=atomic ./service/... ./utils...
-        - cd ./../../util/golang
-        - go mod tidy
-        - go test -race -coverprofile=coverage.txt -covermode=atomic ./service/...
         - cd ./../../credential/golang
         - go mod tidy
         - go test -race -coverprofile=coverage.txt -covermode=atomic ./service/...
@@ -59,28 +54,7 @@ jobs:
         - dotnet test unitTests/ /p:AltCover=true
       after_success:
         - bash <(curl -s https://codecov.io/bash) -cF csharp
-    - language: csharp
-      mono: none
-      dist: xenial
-      branches:
-        only:
-          - master
-      before_install:
-        - wget https://download.visualstudio.microsoft.com/download/pr/42f39f2f-3f24-4340-8c57-0a3133620c21/0a353696275b00cbddc9f60069867cfc/dotnet-sdk-2.2.110-linux-x64.tar.gz
-        - mkdir -p ~/dotnet/ && tar zxf dotnet-sdk-2.2.110-linux-x64.tar.gz -C ~/dotnet/
-        - sudo ln -sf ~/dotnet/dotnet /usr/bin/dotnet
-        - dotnet --info
-      install:
-        - cd util/csharp/tests
-        - dotnet tool install --global altcover.visualizer
-        - dotnet restore
-        - dotnet build
-        - cd ../
-      script:
-        - dotnet test tests/ /p:AltCover=true
-      after_success:
-        - bash <(curl -s https://codecov.io/bash) -cF util-csharp
-    - language: csharp
+   - language: csharp
       mono: none
       dist: xenial
       branches:
