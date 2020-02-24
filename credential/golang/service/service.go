@@ -23,13 +23,14 @@ var RefreshFailCallbackFn = func(err error) {
 }
 
 type AccessTokenCredential struct {
-	*credentialUpdater
-	AccessToken  *string
-	RefreshToken *string
-	Endpoint     *string
-	DomainId     *string
-	ClientId     *string
-	ClientSecret *string
+	AccessToken   *string
+	RefreshToken  *string
+	Endpoint      *string
+	DomainId      *string
+	ClientId      *string
+	ClientSecret  *string
+	ExpireTime    *int64
+	ExpireTimeRaw *string
 }
 
 type Config struct {
@@ -54,7 +55,6 @@ type credentialUpdater struct {
 
 func NewAccessTokenCredential(config *Config) (*AccessTokenCredential, error) {
 	a := new(AccessTokenCredential)
-	a.credentialUpdater = new(credentialUpdater)
 	a.AccessToken = config.AccessToken
 	a.RefreshToken = config.RefreshToken
 	a.Endpoint = config.Endpoint
@@ -72,15 +72,12 @@ func (a *AccessTokenCredential) SetExpireTime(expireTime string) error {
 	}
 	unix := expiretime.Unix()
 	a.ExpireTime = &unix
+	a.ExpireTimeRaw = &expireTime
 	return nil
 }
 
 func (a *AccessTokenCredential) GetExpireTime() string {
-	if a.ExpireTime == nil {
-		return ""
-	}
-	timeUTC := time.Unix(*a.ExpireTime, 0)
-	return timeUTC.Format(time.RFC3339)
+	return tea.StringValue(a.ExpireTimeRaw)
 }
 
 func (a *AccessTokenCredential) SetRefreshToken(token string) {
@@ -102,13 +99,14 @@ func (a *AccessTokenCredential) GetAccessToken() (string, error) {
 
 	mutex.Lock()
 	if a.needUpdateCredential() && tea.StringValue(a.RefreshToken) != "" {
-		accessToken, refreshToken, update, err :=
+		accessToken, refreshToken, expireTimeRaw, expireTime, err :=
 			refreshAccessToken(tea.StringValue(a.Endpoint), tea.StringValue(a.DomainId),
 				tea.StringValue(a.RefreshToken), tea.StringValue(a.ClientId), tea.StringValue(a.ClientSecret))
-		if accessToken != "" && refreshToken != "" && update != nil {
+		if accessToken != "" && refreshToken != "" {
 			a.AccessToken = &accessToken
 			a.RefreshToken = &refreshToken
-			a.credentialUpdater = update
+			a.ExpireTime = &expireTime
+			a.ExpireTimeRaw = &expireTimeRaw
 			mutex.Unlock()
 			return accessToken, nil
 		}
@@ -121,11 +119,11 @@ func (a *AccessTokenCredential) GetAccessToken() (string, error) {
 
 }
 
-func (updater *credentialUpdater) needUpdateCredential() bool {
-	if updater.ExpireTime == nil {
+func (a *AccessTokenCredential) needUpdateCredential() bool {
+	if a.ExpireTime == nil {
 		return false
 	}
-	return *updater.ExpireTime-time.Now().Unix() <= 5
+	return *a.ExpireTime-time.Now().Unix() <= 5
 }
 
 func getRFC2616Date() string {
@@ -133,7 +131,7 @@ func getRFC2616Date() string {
 	return time.Now().In(gmt).Format("Mon, 02 Jan 2006 15:04:05 GMT")
 }
 
-func refreshAccessToken(endpoint, domainId, refreshToken, clientId, clientSecret string) (string, string, *credentialUpdater, error) {
+func refreshAccessToken(endpoint, domainId, refreshToken, clientId, clientSecret string) (string, string, string, int64, error) {
 	request := tea.NewRequest()
 	request.Protocol = "http"
 	request.Method = "POST"
@@ -154,37 +152,34 @@ func refreshAccessToken(endpoint, domainId, refreshToken, clientId, clientSecret
 	response, err := hookdo(tea.DoRequest(request, nil))
 	if err != nil {
 		RefreshFailCallbackFn(err)
-		return "", "", nil, err
+		return "", "", "", 0, err
 	}
 
 	body, err := response.ReadBody()
 	if err != nil {
 		RefreshFailCallbackFn(err)
-		return "", "", nil, err
+		return "", "", "", 0, err
 	}
 
 	if response.StatusCode != 200 {
 		err = errors.New(string(body))
 		RefreshFailCallbackFn(err)
-		return "", "", nil, err
+		return "", "", "", 0, err
 	}
 
 	accessToken := new(accessTokenResponse)
 	err = json.Unmarshal(body, &accessToken)
 	if err != nil {
 		RefreshFailCallbackFn(err)
-		return "", "", nil, err
+		return "", "", "", 0, err
 	}
 
 	expiretime, err := time.Parse(time.RFC3339, accessToken.ExpireTime)
 	if err != nil {
 		RefreshFailCallbackFn(err)
-		return "", "", nil, err
+		return "", "", "", 0, err
 	}
 	expireTime := expiretime.Unix()
-	update := &credentialUpdater{
-		ExpireTime: &expireTime,
-	}
 	RefreshCallbackFn(accessToken.RefreshToken, accessToken.AccessToken, accessToken.ExpireTime)
-	return accessToken.AccessToken, accessToken.RefreshToken, update, nil
+	return accessToken.AccessToken, accessToken.RefreshToken, accessToken.ExpireTime, expireTime, nil
 }
