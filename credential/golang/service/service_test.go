@@ -16,7 +16,6 @@ var a *AccessTokenCredential
 
 func Test_Init(t *testing.T) {
 	a = new(AccessTokenCredential)
-	a.credentialUpdater = new(credentialUpdater)
 	err := a.SetExpireTime("2006-01-T15:04:05Z")
 	utils.AssertContains(t, err.Error(), `parsing time "2006-01-T15:04:05Z" as "2006-01-02T15:04:05Z07:00"`)
 
@@ -145,10 +144,11 @@ func Test_refreshAccessToken(t *testing.T) {
 	hookdo = func(response *tea.Response, err error) (*tea.Response, error) {
 		return nil, errors.New("refresh_token error")
 	}
-	at, rt, up, err := refreshAccessToken("", "ccp", "refresh_token", "client_id", "client_secret")
+	at, rt, expireRaw, expire, err := refreshAccessToken("", "ccp", "refresh_token", "client_id", "client_secret")
 	utils.AssertEqual(t, "", at)
 	utils.AssertEqual(t, "", rt)
-	utils.AssertNil(t, up)
+	utils.AssertEqual(t, "", expireRaw)
+	utils.AssertEqual(t, int64(0), expire)
 	utils.AssertEqual(t, "refresh_token error", err.Error())
 
 	hookdo = func(resp *tea.Response, err error) (*tea.Response, error) {
@@ -160,10 +160,11 @@ func Test_refreshAccessToken(t *testing.T) {
 		resp = tea.NewResponse(httpresponse)
 		return resp, nil
 	}
-	at, rt, up, err = refreshAccessToken("endpoint", "ccp", "refresh_token", "client_id", "client_secret")
+	at, rt, expireRaw, expire, err = refreshAccessToken("endpoint", "ccp", "refresh_token", "client_id", "client_secret")
 	utils.AssertEqual(t, "", at)
 	utils.AssertEqual(t, "", rt)
-	utils.AssertNil(t, up)
+	utils.AssertEqual(t, "", expireRaw)
+	utils.AssertEqual(t, int64(0), expire)
 	utils.AssertEqual(t, "json: cannot unmarshal number into Go struct field accessTokenResponse.expire_time of type string", err.Error())
 
 	hookdo = func(resp *tea.Response, err error) (*tea.Response, error) {
@@ -175,13 +176,21 @@ func Test_refreshAccessToken(t *testing.T) {
 		resp = tea.NewResponse(httpresponse)
 		return resp, nil
 	}
-	at, rt, up, err = refreshAccessToken("endpoint", "ccp", "refresh_token", "client_id", "client_secret")
+	at, rt, expireRaw, expire, err = refreshAccessToken("endpoint", "ccp", "refresh_token", "client_id", "client_secret")
 	utils.AssertEqual(t, "access_token", at)
 	utils.AssertEqual(t, "refresh_token", rt)
+	utils.AssertEqual(t, "2006-01-02T15:04:05Z", expireRaw)
+	utils.AssertEqual(t, int64(1136214245), expire)
 	utils.AssertNil(t, err)
-	utils.AssertNotNil(t, up)
 
-	ifUpdate := up.needUpdateCredential()
+	config := &Config{
+		AccessToken:  &at,
+		RefreshToken: &rt,
+		ExpireTime:   &expireRaw,
+	}
+	a, err = NewAccessTokenCredential(config)
+	utils.AssertNil(t, err)
+	ifUpdate := a.needUpdateCredential()
 	utils.AssertEqual(t, true, ifUpdate)
 
 	hookdo = func(resp *tea.Response, err error) (*tea.Response, error) {
@@ -193,9 +202,10 @@ func Test_refreshAccessToken(t *testing.T) {
 		resp = tea.NewResponse(httpresponse)
 		return resp, nil
 	}
-	at, rt, up, err = refreshAccessToken("endpoint", "ccp", "refresh_token", "client_id", "client_secret")
+	at, rt, expireRaw, expire, err = refreshAccessToken("endpoint", "ccp", "refresh_token", "client_id", "client_secret")
 	utils.AssertEqual(t, "", at)
 	utils.AssertEqual(t, "", rt)
+	utils.AssertEqual(t, "", expireRaw)
+	utils.AssertEqual(t, int64(0), expire)
 	utils.AssertNotNil(t, err)
-	utils.AssertNil(t, up)
 }
