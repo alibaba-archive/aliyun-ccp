@@ -2,7 +2,7 @@
  *
  */
 import Util;
-import CCPUtil;
+import ROAUtil;
 import Credential;
 import AccessTokenCredential;
 
@@ -2152,7 +2152,7 @@ api cancelLink(request: CancelLinkRequest, runtime: RuntimeOptions): AccountAcce
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/account/cancel_link`);
+  __request.pathname = getPathname(@nickname, `/v2/account/cancel_link`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -2169,7 +2169,8 @@ api cancelLink(request: CancelLinkRequest, runtime: RuntimeOptions): AccountAcce
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -2241,7 +2242,7 @@ api confirmLink(request: ConfirmLinkRequest, runtime: RuntimeOptions): AccountAc
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/account/confirm_link`);
+  __request.pathname = getPathname(@nickname, `/v2/account/confirm_link`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -2258,7 +2259,8 @@ api confirmLink(request: ConfirmLinkRequest, runtime: RuntimeOptions): AccountAc
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -2329,7 +2331,7 @@ api changePassword(request: DefaultChangePasswordRequest, runtime: RuntimeOption
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/account/default/change_password`);
+  __request.pathname = getPathname(@nickname, `/v2/account/default/change_password`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -2346,7 +2348,8 @@ api changePassword(request: DefaultChangePasswordRequest, runtime: RuntimeOption
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -2412,7 +2415,7 @@ api setPassword(request: DefaultSetPasswordRequest, runtime: RuntimeOptions): vo
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/account/default/set_password`);
+  __request.pathname = getPathname(@nickname, `/v2/account/default/set_password`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -2429,7 +2432,8 @@ api setPassword(request: DefaultSetPasswordRequest, runtime: RuntimeOptions): vo
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -2496,7 +2500,7 @@ api getAccessTokenByLinkInfo(request: GetAccessTokenByLinkInfoRequest, runtime: 
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/account/get_access_token_by_link_info`);
+  __request.pathname = getPathname(@nickname, `/v2/account/get_access_token_by_link_info`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -2513,7 +2517,8 @@ api getAccessTokenByLinkInfo(request: GetAccessTokenByLinkInfoRequest, runtime: 
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -2584,7 +2589,7 @@ api getCaptcha(request: GetCaptchaRequest, runtime: RuntimeOptions): Captcha  {
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/account/get_captcha`);
+  __request.pathname = getPathname(@nickname, `/v2/account/get_captcha`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -2601,7 +2606,8 @@ api getCaptcha(request: GetCaptchaRequest, runtime: RuntimeOptions): Captcha  {
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -2673,7 +2679,7 @@ api getLinkInfo(request: GetByLinkInfoRequest, runtime: RuntimeOptions): LinkInf
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/account/get_link_info`);
+  __request.pathname = getPathname(@nickname, `/v2/account/get_link_info`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -2690,7 +2696,8 @@ api getLinkInfo(request: GetByLinkInfoRequest, runtime: RuntimeOptions): LinkInf
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -2761,7 +2768,7 @@ api getLinkInfoByUserId(request: GetLinkInfoByUserIDRequest, runtime: RuntimeOpt
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/account/get_link_info_by_user_id`);
+  __request.pathname = getPathname(@nickname, `/v2/account/get_link_info_by_user_id`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -2778,7 +2785,8 @@ api getLinkInfoByUserId(request: GetLinkInfoByUserIDRequest, runtime: RuntimeOpt
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -2851,7 +2859,7 @@ api link(request: AccountLinkRequest, runtime: RuntimeOptions): AccountAccessTok
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/account/link`);
+  __request.pathname = getPathname(@nickname, `/v2/account/link`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -2868,7 +2876,8 @@ api link(request: AccountLinkRequest, runtime: RuntimeOptions): AccountAccessTok
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -2940,7 +2949,7 @@ api checkExist(request: MobileCheckExistRequest, runtime: RuntimeOptions): Mobil
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/account/mobile/check_exist`);
+  __request.pathname = getPathname(@nickname, `/v2/account/mobile/check_exist`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -2957,7 +2966,8 @@ api checkExist(request: MobileCheckExistRequest, runtime: RuntimeOptions): Mobil
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -3029,7 +3039,7 @@ api login(request: MobileLoginRequest, runtime: RuntimeOptions): AccountAccessTo
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/account/mobile/login`);
+  __request.pathname = getPathname(@nickname, `/v2/account/mobile/login`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -3046,7 +3056,8 @@ api login(request: MobileLoginRequest, runtime: RuntimeOptions): AccountAccessTo
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -3118,7 +3129,7 @@ api register(request: MobileRegisterRequest, runtime: RuntimeOptions): AccountAc
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/account/mobile/register`);
+  __request.pathname = getPathname(@nickname, `/v2/account/mobile/register`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -3135,7 +3146,8 @@ api register(request: MobileRegisterRequest, runtime: RuntimeOptions): AccountAc
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -3206,7 +3218,7 @@ api mobileSendSmsCode(request: MobileSendSmsCodeRequest, runtime: RuntimeOptions
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/account/mobile/send_sms_code`);
+  __request.pathname = getPathname(@nickname, `/v2/account/mobile/send_sms_code`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -3223,7 +3235,8 @@ api mobileSendSmsCode(request: MobileSendSmsCodeRequest, runtime: RuntimeOptions
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -3294,7 +3307,7 @@ api token(request: TokenRequest, runtime: RuntimeOptions): AccountAccessTokenRes
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/account/token`);
+  __request.pathname = getPathname(@nickname, `/v2/account/token`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
@@ -3311,7 +3324,8 @@ api token(request: TokenRequest, runtime: RuntimeOptions): AccountAccessTokenRes
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -3386,7 +3400,7 @@ api getAsyncTaskInfo(request: CCPGetAsyncTaskRequest, runtime: RuntimeOptions): 
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/async_task/get`);
+  __request.pathname = getPathname(@nickname, `/v2/async_task/get`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -3403,7 +3417,8 @@ api getAsyncTaskInfo(request: CCPGetAsyncTaskRequest, runtime: RuntimeOptions): 
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -3477,7 +3492,7 @@ api operation(request: CCPBatchRequest, runtime: RuntimeOptions): CCPBatchRespon
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/batch`);
+  __request.pathname = getPathname(@nickname, `/v2/batch`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -3494,7 +3509,8 @@ api operation(request: CCPBatchRequest, runtime: RuntimeOptions): CCPBatchRespon
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -3569,7 +3585,7 @@ api createDrive(request: CreateDriveRequest, runtime: RuntimeOptions): CreateDri
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/drive/create`);
+  __request.pathname = getPathname(@nickname, `/v2/drive/create`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -3586,7 +3602,8 @@ api createDrive(request: CreateDriveRequest, runtime: RuntimeOptions): CreateDri
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -3659,7 +3676,7 @@ api deleteDrive(request: DeleteDriveRequest, runtime: RuntimeOptions): void  {
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/drive/delete`);
+  __request.pathname = getPathname(@nickname, `/v2/drive/delete`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -3676,7 +3693,8 @@ api deleteDrive(request: DeleteDriveRequest, runtime: RuntimeOptions): void  {
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -3745,7 +3763,7 @@ api getDrive(request: GetDriveRequest, runtime: RuntimeOptions): GetDriveRespons
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/drive/get`);
+  __request.pathname = getPathname(@nickname, `/v2/drive/get`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -3762,7 +3780,8 @@ api getDrive(request: GetDriveRequest, runtime: RuntimeOptions): GetDriveRespons
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -3837,7 +3856,7 @@ api getDefaultDrive(request: GetDefaultDriveRequest, runtime: RuntimeOptions): G
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/drive/get_default_drive`);
+  __request.pathname = getPathname(@nickname, `/v2/drive/get_default_drive`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -3854,7 +3873,8 @@ api getDefaultDrive(request: GetDefaultDriveRequest, runtime: RuntimeOptions): G
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -3927,7 +3947,7 @@ api listDrives(request: ListDriveRequest, runtime: RuntimeOptions): ListDriveRes
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/drive/list`);
+  __request.pathname = getPathname(@nickname, `/v2/drive/list`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -3944,7 +3964,8 @@ api listDrives(request: ListDriveRequest, runtime: RuntimeOptions): ListDriveRes
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -4017,7 +4038,7 @@ api listMyDrives(request: ListMyDriveRequest, runtime: RuntimeOptions): ListDriv
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/drive/list_my_drives`);
+  __request.pathname = getPathname(@nickname, `/v2/drive/list_my_drives`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4034,7 +4055,8 @@ api listMyDrives(request: ListMyDriveRequest, runtime: RuntimeOptions): ListDriv
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -4108,7 +4130,7 @@ api updateDrive(request: UpdateDriveRequest, runtime: RuntimeOptions): UpdateDri
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/drive/update`);
+  __request.pathname = getPathname(@nickname, `/v2/drive/update`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4125,7 +4147,8 @@ api updateDrive(request: UpdateDriveRequest, runtime: RuntimeOptions): UpdateDri
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -4199,7 +4222,7 @@ api completeFile(request: CCPCompleteFileRequest, runtime: RuntimeOptions): CCPC
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/file/complete`);
+  __request.pathname = getPathname(@nickname, `/v2/file/complete`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4216,7 +4239,8 @@ api completeFile(request: CCPCompleteFileRequest, runtime: RuntimeOptions): CCPC
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -4290,7 +4314,7 @@ api copyFile(request: CCPCopyFileRequest, runtime: RuntimeOptions): CCPCopyFileR
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/file/copy`);
+  __request.pathname = getPathname(@nickname, `/v2/file/copy`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4307,7 +4331,8 @@ api copyFile(request: CCPCopyFileRequest, runtime: RuntimeOptions): CCPCopyFileR
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -4392,7 +4417,7 @@ api createFile(request: CCPCreateFileRequest, runtime: RuntimeOptions): CCPCreat
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/file/create`);
+  __request.pathname = getPathname(@nickname, `/v2/file/create`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4409,7 +4434,8 @@ api createFile(request: CCPCreateFileRequest, runtime: RuntimeOptions): CCPCreat
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -4483,7 +4509,7 @@ api deleteFile(request: CCPDeleteFileRequest, runtime: RuntimeOptions): CCPDelet
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/file/delete`);
+  __request.pathname = getPathname(@nickname, `/v2/file/delete`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4500,7 +4526,8 @@ api deleteFile(request: CCPDeleteFileRequest, runtime: RuntimeOptions): CCPDelet
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -4584,8 +4611,8 @@ api downloadFile(request: DownloadFileRequest, runtime: RuntimeOptions): CCPGetD
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'GET';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/file/download`);
-  __request.query = CCPUtil.toQuery(request);
+  __request.pathname = getPathname(@nickname, `/v2/file/download`);
+  __request.query = Util.stringifyMapValue(request);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4601,7 +4628,8 @@ api downloadFile(request: DownloadFileRequest, runtime: RuntimeOptions): CCPGetD
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
 } returns {
   var respMap : object = null;
@@ -4665,7 +4693,7 @@ api getFile(request: CCPGetFileRequest, runtime: RuntimeOptions): CCPGetFileResp
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/file/get`);
+  __request.pathname = getPathname(@nickname, `/v2/file/get`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4682,7 +4710,8 @@ api getFile(request: CCPGetFileRequest, runtime: RuntimeOptions): CCPGetFileResp
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -4756,7 +4785,7 @@ api getDownloadUrl(request: CCPGetDownloadUrlRequest, runtime: RuntimeOptions): 
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/file/get_download_url`);
+  __request.pathname = getPathname(@nickname, `/v2/file/get_download_url`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4773,7 +4802,8 @@ api getDownloadUrl(request: CCPGetDownloadUrlRequest, runtime: RuntimeOptions): 
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -4847,7 +4877,7 @@ api getUploadUrl(request: CCPGetUploadUrlRequest, runtime: RuntimeOptions): CCPG
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/file/get_upload_url`);
+  __request.pathname = getPathname(@nickname, `/v2/file/get_upload_url`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4864,7 +4894,8 @@ api getUploadUrl(request: CCPGetUploadUrlRequest, runtime: RuntimeOptions): CCPG
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -4938,7 +4969,7 @@ api listFile(request: CCPListFileRequest, runtime: RuntimeOptions): CCPListFileR
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/file/list`);
+  __request.pathname = getPathname(@nickname, `/v2/file/list`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -4955,7 +4986,8 @@ api listFile(request: CCPListFileRequest, runtime: RuntimeOptions): CCPListFileR
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -5029,7 +5061,7 @@ api listUploadedParts(request: CCPListUploadedPartRequest, runtime: RuntimeOptio
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/file/list_uploaded_parts`);
+  __request.pathname = getPathname(@nickname, `/v2/file/list_uploaded_parts`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -5046,7 +5078,8 @@ api listUploadedParts(request: CCPListUploadedPartRequest, runtime: RuntimeOptio
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -5120,7 +5153,7 @@ api moveFile(request: CCPMoveFileRequest, runtime: RuntimeOptions): CCPMoveFileR
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/file/move`);
+  __request.pathname = getPathname(@nickname, `/v2/file/move`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -5137,7 +5170,8 @@ api moveFile(request: CCPMoveFileRequest, runtime: RuntimeOptions): CCPMoveFileR
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -5211,7 +5245,7 @@ api searchFile(request: CCPSearchFileRequest, runtime: RuntimeOptions): CCPSearc
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/file/search`);
+  __request.pathname = getPathname(@nickname, `/v2/file/search`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -5228,7 +5262,8 @@ api searchFile(request: CCPSearchFileRequest, runtime: RuntimeOptions): CCPSearc
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -5302,7 +5337,7 @@ api updateFile(request: CCPUpdateFileMetaRequest, runtime: RuntimeOptions): CCPU
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/file/update`);
+  __request.pathname = getPathname(@nickname, `/v2/file/update`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -5319,7 +5354,8 @@ api updateFile(request: CCPUpdateFileMetaRequest, runtime: RuntimeOptions): CCPU
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -5391,7 +5427,7 @@ api createUser(request: CreateUserRequest, runtime: RuntimeOptions): CreateUserR
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/user/create`);
+  __request.pathname = getPathname(@nickname, `/v2/user/create`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -5408,7 +5444,8 @@ api createUser(request: CreateUserRequest, runtime: RuntimeOptions): CreateUserR
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -5480,7 +5517,7 @@ api deleteUser(request: DeleteUserRequest, runtime: RuntimeOptions): void  {
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/user/delete`);
+  __request.pathname = getPathname(@nickname, `/v2/user/delete`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -5497,7 +5534,8 @@ api deleteUser(request: DeleteUserRequest, runtime: RuntimeOptions): void  {
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -5565,7 +5603,7 @@ api getUser(request: GetUserRequest, runtime: RuntimeOptions): GetUserResponse  
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/user/get`);
+  __request.pathname = getPathname(@nickname, `/v2/user/get`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -5582,7 +5620,8 @@ api getUser(request: GetUserRequest, runtime: RuntimeOptions): GetUserResponse  
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -5654,7 +5693,7 @@ api listUsers(request: ListUserRequest, runtime: RuntimeOptions): ListUserRespon
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/user/list`);
+  __request.pathname = getPathname(@nickname, `/v2/user/list`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -5671,7 +5710,8 @@ api listUsers(request: ListUserRequest, runtime: RuntimeOptions): ListUserRespon
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -5743,7 +5783,7 @@ api searchUser(request: SearchUserRequest, runtime: RuntimeOptions): ListUserRes
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/user/search`);
+  __request.pathname = getPathname(@nickname, `/v2/user/search`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -5760,7 +5800,8 @@ api searchUser(request: SearchUserRequest, runtime: RuntimeOptions): ListUserRes
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -5833,7 +5874,7 @@ api updateUser(request: UpdateUserRequest, runtime: RuntimeOptions): UpdateUserR
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
-  __request.pathname = CCPUtil.getPathname(@nickname, `/v2/user/update`);
+  __request.pathname = getPathname(@nickname, `/v2/user/update`);
   __request.headers = {
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
@@ -5850,7 +5891,8 @@ api updateUser(request: UpdateUserRequest, runtime: RuntimeOptions): UpdateUserR
     __request.headers.accept = 'application/json';
     __request.headers.x-acs-signature-method = 'HMAC-SHA1';
     __request.headers.x-acs-signature-version = '1.0';
-    __request.headers.authorization = `acs ${accesskeyId}:${CCPUtil.getSignature(__request, accessKeySecret)}`;
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
   __request.body = Util.toJSONString(request);
 } returns {
@@ -5905,6 +5947,13 @@ api updateUser(request: UpdateUserRequest, runtime: RuntimeOptions): UpdateUserR
     period = Util.defaultNumber(runtime.backoffPeriod, 1),
   },
   ignoreSSL = runtime.ignoreSSL
+}
+
+function getPathname(nickname: string, path: string): string {
+  if (Util.empty(nickname)) {
+    return path;
+  }
+  return `/${nickname}${path}`;
 }
 
 async function setExpireTime(expireTime: string): void{

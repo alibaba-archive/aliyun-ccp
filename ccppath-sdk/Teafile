@@ -29,7 +29,7 @@
 	},
 	"libraries": {
 		"Util": "alibabacloud:Util:*",
-		"CCPUtil": "alibabacloud:CCPUtil:*",
+		"ROAUtil": "alibabacloud:ROAUtil:*",
 		"Credential": "alibabacloud:Credential:*",
 		"AccessTokenCredential": "alibabacloud:AccessTokenCredential:*"
 	}
