@@ -4,7 +4,7 @@
 
     <groupId>com.aliyun</groupId>
     <artifactId>ccp-oss-client</artifactId>
-    <version>1.1.5</version>
+    <version>1.1.6</version>
     <packaging>jar</packaging>
 
     <name>ccp-oss-client</name>
