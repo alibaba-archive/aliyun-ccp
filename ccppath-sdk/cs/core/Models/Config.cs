@@ -61,6 +61,10 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         [Validation(Required=false)]
         public string Nickname { get; set; }
 
+        [NameInMap("userAgent")]
+        [Validation(Required=false)]
+        public string UserAgent { get; set; }
+
     }
 
 }

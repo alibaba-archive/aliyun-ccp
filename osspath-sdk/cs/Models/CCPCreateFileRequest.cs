@@ -18,7 +18,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         public string ContentType { get; set; }
 
         [NameInMap("name")]
-        [Validation(Required=false, Pattern="[a-z0-9.-_]{1,1000}")]
+        [Validation(Required=false)]
         public string Name { get; set; }
 
         [NameInMap("part_info_list")]
@@ -52,6 +52,10 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         [NameInMap("drive_id")]
         [Validation(Required=false, Pattern="[0-9]+")]
         public string DriveId { get; set; }
+
+        [NameInMap("encrypt_mode")]
+        [Validation(Required=false)]
+        public string EncryptMode { get; set; }
 
         [NameInMap("file_id")]
         [Validation(Required=false)]

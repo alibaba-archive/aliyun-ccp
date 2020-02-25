@@ -10,8 +10,12 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 {
     public class ListShareRequest : TeaModel {
         [NameInMap("creator")]
-        [Validation(Required=true)]
+        [Validation(Required=false)]
         public string Creator { get; set; }
+
+        [NameInMap("drive_id")]
+        [Validation(Required=false, Pattern="[0-9]+")]
+        public string DriveId { get; set; }
 
         [NameInMap("limit")]
         [Validation(Required=true)]
@@ -22,8 +26,12 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         public string Marker { get; set; }
 
         [NameInMap("owner")]
-        [Validation(Required=true)]
+        [Validation(Required=false)]
         public string Owner { get; set; }
+
+        [NameInMap("share_file_path")]
+        [Validation(Required=false)]
+        public string ShareFilePath { get; set; }
 
     }
 

@@ -10,7 +10,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 {
     public class OSSGetDownloadUrlRequest : TeaModel {
         [NameInMap("drive_id")]
-        [Validation(Required=true, Pattern="[0-9]+")]
+        [Validation(Required=false, Pattern="[0-9]+")]
         public string DriveId { get; set; }
 
         [NameInMap("expire_sec")]
@@ -18,15 +18,15 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         public long ExpireSec { get; set; }
 
         [NameInMap("file_name")]
-        [Validation(Required=false, Pattern="[a-zA-Z0-9.-]{1,1000}")]
+        [Validation(Required=false)]
         public string FileName { get; set; }
 
         [NameInMap("file_path")]
-        [Validation(Required=true, MaxLength=50, Pattern="[a-z0-9.-_]{1,50}")]
+        [Validation(Required=true, MaxLength=1000)]
         public string FilePath { get; set; }
 
         [NameInMap("share_id")]
-        [Validation(Required=true, Pattern="[0-9a-z-]+")]
+        [Validation(Required=false, Pattern="[0-9a-z-]+")]
         public string ShareId { get; set; }
 
     }

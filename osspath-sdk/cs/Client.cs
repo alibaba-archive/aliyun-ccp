@@ -8,22 +8,79 @@ using System.Threading.Tasks;
 
 using Tea;
 
-using Aliyun.SDK.CCP;
 using Aliyun.SDK.CCP.OSSClient.Models;
 
 namespace Aliyun.SDK.CCP.OSSClient
 {
-    public class Client : BaseClient
+    public class Client 
     {
+        private string _domainId;
+        private string _endpoint;
+        private string _protocol;
+        private string _nickname;
+        private string _userAgent;
+        private Aliyun.Credentials.Client _credential;
+        private AlibabaCloud.AccessTokenCredential.Client _accessTokenCredential;
 
-        public Client(Config config): base(config.ToMap())
-        { }
+        public Client(Config config)
+        {
+            if (AlibabaCloud.TeaUtil.Common.IsUnset(config.ToMap()))
+            {
+                throw new TeaException(new Dictionary<string, string>
+                {
+                    {"name", "ParameterMissing"},
+                    {"message", "'config' can not be unset"},
+                });
+            }
+            if (AlibabaCloud.TeaUtil.Common.Empty(config.DomainId))
+            {
+                throw new TeaException(new Dictionary<string, string>
+                {
+                    {"name", "ParameterMissing"},
+                    {"message", "'config.domainId' can not be empty"},
+                });
+            }
+            if (!AlibabaCloud.TeaUtil.Common.Empty(config.AccessToken) || !AlibabaCloud.TeaUtil.Common.Empty(config.RefreshToken))
+            {
+                AlibabaCloud.AccessTokenCredential.Models.Config accessConfig = new AlibabaCloud.AccessTokenCredential.Models.Config
+                {
+                    AccessToken = config.AccessToken,
+                    Endpoint = config.Endpoint,
+                    DomainId = config.DomainId,
+                    ClientId = config.ClientId,
+                    RefreshToken = config.RefreshToken,
+                    ClientSecret = config.ClientSecret,
+                    ExpireTime = config.ExpireTime,
+                };
+                this._accessTokenCredential = new AlibabaCloud.AccessTokenCredential.Client(accessConfig);
+            }
+            if (!AlibabaCloud.TeaUtil.Common.Empty(config.AccessKeyId))
+            {
+                if (AlibabaCloud.TeaUtil.Common.Empty(config.CredentialType))
+                {
+                    config.CredentialType = "access_key";
+                }
+                Aliyun.Credentials.Models.Config credentialConfig = new Aliyun.Credentials.Models.Config
+                {
+                    AccessKeyId = config.AccessKeyId,
+                    Type = config.CredentialType,
+                    AccessKeySecret = config.AccessKeySecret,
+                    SecurityToken = config.SecurityToken,
+                };
+                this._credential = new Aliyun.Credentials.Client(credentialConfig);
+            }
+            this._endpoint = config.Endpoint;
+            this._protocol = config.Protocol;
+            this._domainId = config.DomainId;
+            this._userAgent = config.UserAgent;
+            this._nickname = config.Nickname;
+        }
 
         public AccountAccessTokenResponse CancelLink(CancelLinkRequest request, RuntimeOptions runtime)
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -35,15 +92,15 @@ namespace Aliyun.SDK.CCP.OSSClient
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -66,38 +123,46 @@ namespace Aliyun.SDK.CCP.OSSClient
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/cancel_link");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/cancel_link");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -107,11 +172,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -120,12 +185,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -153,7 +219,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -165,15 +231,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -196,38 +262,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/cancel_link");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/cancel_link");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -237,11 +311,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -250,12 +324,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -283,7 +358,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -295,15 +370,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -326,38 +401,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/confirm_link");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/confirm_link");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -367,11 +450,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -380,12 +463,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -413,7 +497,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -425,15 +509,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -456,38 +540,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/confirm_link");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/confirm_link");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -497,11 +589,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -510,12 +602,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -543,7 +636,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -555,15 +648,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -586,44 +679,51 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/default/change_password");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/default/change_password");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 204))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 204))
                     {
                         return ;
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -632,12 +732,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -665,7 +766,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -677,15 +778,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -708,44 +809,51 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/default/change_password");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/default/change_password");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 204))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 204))
                     {
                         return ;
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -754,12 +862,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -787,7 +896,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -799,15 +908,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -830,44 +939,51 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/default/set_password");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/default/set_password");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 204))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 204))
                     {
                         return ;
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -876,12 +992,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -909,7 +1026,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -921,15 +1038,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -952,44 +1069,51 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/default/set_password");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/default/set_password");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 204))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 204))
                     {
                         return ;
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -998,12 +1122,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1031,7 +1156,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -1043,15 +1168,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -1074,38 +1199,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/get_access_token_by_link_info");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/get_access_token_by_link_info");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -1115,11 +1248,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1128,12 +1261,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1161,7 +1295,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -1173,15 +1307,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -1204,38 +1338,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/get_access_token_by_link_info");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/get_access_token_by_link_info");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -1245,11 +1387,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1258,12 +1400,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1291,7 +1434,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -1303,15 +1446,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -1334,38 +1477,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/get_captcha");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/get_captcha");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<Captcha>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -1375,11 +1526,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1388,12 +1539,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1421,7 +1573,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -1433,15 +1585,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -1464,38 +1616,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/get_captcha");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/get_captcha");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<Captcha>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -1505,11 +1665,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1518,12 +1678,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1551,7 +1712,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -1563,15 +1724,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -1594,38 +1755,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/get_link_info");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/get_link_info");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<LinkInfoResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -1635,11 +1804,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1648,12 +1817,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1681,7 +1851,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -1693,15 +1863,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -1724,38 +1894,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/get_link_info");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/get_link_info");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<LinkInfoResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -1765,11 +1943,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1778,12 +1956,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1811,7 +1990,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -1823,15 +2002,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -1854,38 +2033,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/get_link_info_by_user_id");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/get_link_info_by_user_id");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<LinkInfoListResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -1895,11 +2082,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1908,12 +2095,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -1941,7 +2129,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -1953,15 +2141,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -1984,38 +2172,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/get_link_info_by_user_id");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/get_link_info_by_user_id");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<LinkInfoListResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -2025,11 +2221,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2038,12 +2234,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2071,7 +2268,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -2083,15 +2280,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -2114,38 +2311,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/link");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/link");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -2155,11 +2360,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2168,12 +2373,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2201,7 +2407,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -2213,15 +2419,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -2244,38 +2450,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/link");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/link");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -2285,11 +2499,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2298,12 +2512,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2331,7 +2546,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -2343,15 +2558,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -2374,38 +2589,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/mobile/check_exist");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/mobile/check_exist");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<MobileCheckExistResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -2415,11 +2638,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2428,12 +2651,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2461,7 +2685,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -2473,15 +2697,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -2504,38 +2728,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/mobile/check_exist");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/mobile/check_exist");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<MobileCheckExistResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -2545,11 +2777,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2558,12 +2790,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2591,7 +2824,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -2603,15 +2836,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -2634,38 +2867,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/mobile/login");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/mobile/login");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -2675,11 +2916,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2688,12 +2929,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2721,7 +2963,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -2733,15 +2975,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -2764,38 +3006,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/mobile/login");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/mobile/login");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -2805,11 +3055,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2818,12 +3068,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2851,7 +3102,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -2863,15 +3114,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -2894,38 +3145,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/mobile/register");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/mobile/register");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -2935,11 +3194,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2948,12 +3207,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -2981,7 +3241,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -2993,15 +3253,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -3024,38 +3284,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/mobile/register");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/mobile/register");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -3065,11 +3333,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3078,12 +3346,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3111,7 +3380,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -3123,15 +3392,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -3154,38 +3423,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/mobile/send_sms_code");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/mobile/send_sms_code");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<MobileSendSmsCodeResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -3195,11 +3472,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3208,12 +3485,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3241,7 +3519,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -3253,15 +3531,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -3284,38 +3562,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/mobile/send_sms_code");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/mobile/send_sms_code");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<MobileSendSmsCodeResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -3325,11 +3611,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3338,12 +3624,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3371,7 +3658,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -3383,15 +3670,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -3414,38 +3701,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/token");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/token");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -3455,11 +3750,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3468,12 +3763,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3501,7 +3797,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -3513,15 +3809,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -3544,38 +3840,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/account/token");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/account/token");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<AccountAccessTokenResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -3585,11 +3889,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3598,12 +3902,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3631,7 +3936,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -3643,15 +3948,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -3674,38 +3979,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/domain/list_stores");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/domain/list_stores");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<ListStoresResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -3715,11 +4028,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3728,12 +4041,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3761,7 +4075,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -3773,15 +4087,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -3804,38 +4118,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/domain/list_stores");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/domain/list_stores");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<ListStoresResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -3845,11 +4167,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3858,12 +4180,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3891,7 +4214,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -3903,15 +4226,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -3934,38 +4257,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/user/get_access_token");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/user/get_access_token");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<AccessTokenResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -3975,11 +4306,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -3988,12 +4319,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -4021,7 +4353,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -4033,15 +4365,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -4064,38 +4396,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/user/get_access_token");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/user/get_access_token");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<AccessTokenResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -4105,11 +4445,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -4118,12 +4458,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -4151,7 +4492,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -4163,15 +4504,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -4194,38 +4535,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/drive/create");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/drive/create");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 201))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 201))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<CreateDriveResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -4235,11 +4584,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -4248,12 +4597,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -4281,7 +4631,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -4293,15 +4643,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -4324,38 +4674,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/drive/create");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/drive/create");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 201))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 201))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<CreateDriveResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -4365,11 +4723,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -4378,12 +4736,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -4411,7 +4770,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -4423,15 +4782,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -4454,44 +4813,51 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/drive/delete");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/drive/delete");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 204))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 204))
                     {
                         return ;
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -4500,12 +4866,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -4533,7 +4900,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -4545,15 +4912,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -4576,44 +4943,51 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/drive/delete");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/drive/delete");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 204))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 204))
                     {
                         return ;
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -4622,12 +4996,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -4655,7 +5030,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -4667,15 +5042,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -4698,38 +5073,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/drive/get");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/drive/get");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<GetDriveResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -4739,11 +5122,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -4752,12 +5135,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -4785,7 +5169,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -4797,15 +5181,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -4828,38 +5212,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/drive/get");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/drive/get");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<GetDriveResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -4869,11 +5261,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -4882,12 +5274,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -4915,7 +5308,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -4927,15 +5320,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -4958,38 +5351,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/drive/get_default_drive");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/drive/get_default_drive");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<GetDriveResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -4999,11 +5400,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -5012,12 +5413,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -5045,7 +5447,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -5057,15 +5459,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -5088,38 +5490,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/drive/get_default_drive");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/drive/get_default_drive");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<GetDriveResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -5129,11 +5539,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -5142,12 +5552,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -5175,7 +5586,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -5187,15 +5598,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -5218,38 +5629,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/drive/list");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/drive/list");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<ListDriveResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -5259,11 +5678,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -5272,12 +5691,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -5305,7 +5725,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -5317,15 +5737,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -5348,38 +5768,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/drive/list");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/drive/list");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<ListDriveResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -5389,11 +5817,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -5402,12 +5830,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -5435,7 +5864,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -5447,15 +5876,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -5478,38 +5907,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/drive/list_my_drives");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/drive/list_my_drives");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<ListDriveResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -5519,11 +5956,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -5532,12 +5969,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -5565,7 +6003,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -5577,15 +6015,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -5608,38 +6046,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/drive/list_my_drives");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/drive/list_my_drives");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<ListDriveResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -5649,11 +6095,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -5662,12 +6108,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -5695,7 +6142,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -5707,15 +6154,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -5738,38 +6185,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/drive/update");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/drive/update");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<UpdateDriveResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -5779,11 +6234,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -5792,12 +6247,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -5825,7 +6281,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -5837,15 +6293,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -5868,38 +6324,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/drive/update");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/drive/update");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<UpdateDriveResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -5909,11 +6373,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -5922,12 +6386,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -5955,7 +6420,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -5967,15 +6432,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -5998,38 +6463,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/file/complete");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/complete");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<OSSCompleteFileResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -6039,11 +6512,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -6052,12 +6525,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -6085,7 +6559,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -6097,15 +6571,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -6128,38 +6602,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/file/complete");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/complete");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<OSSCompleteFileResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -6169,11 +6651,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -6182,12 +6664,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -6215,7 +6698,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -6227,15 +6710,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -6258,38 +6741,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/file/copy");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/copy");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 201))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 201))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<OSSCopyFileResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -6299,11 +6790,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -6312,12 +6803,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -6345,7 +6837,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -6357,15 +6849,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -6388,38 +6880,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/file/copy");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/copy");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 201))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 201))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<OSSCopyFileResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -6429,11 +6929,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -6442,12 +6942,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -6475,7 +6976,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -6487,15 +6988,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -6518,38 +7019,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/file/create");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/create");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 201))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 201))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<OSSCreateFileResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -6559,11 +7068,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -6572,12 +7081,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -6605,7 +7115,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -6617,15 +7127,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -6648,38 +7158,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/file/create");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/create");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 201))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 201))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<OSSCreateFileResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -6689,11 +7207,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -6702,12 +7220,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -6735,7 +7254,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -6747,15 +7266,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -6778,44 +7297,51 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/file/delete");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/delete");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 204))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 204))
                     {
                         return ;
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -6824,12 +7350,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -6857,7 +7384,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -6869,15 +7396,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -6900,44 +7427,51 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/file/delete");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/delete");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 204))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 204))
                     {
                         return ;
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -6946,12 +7480,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -6979,7 +7514,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -6991,15 +7526,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -7022,38 +7557,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/file/get");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/get");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<OSSGetFileResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -7063,11 +7606,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -7076,12 +7619,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -7109,7 +7653,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -7121,15 +7665,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -7152,38 +7696,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/file/get");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/get");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<OSSGetFileResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -7193,11 +7745,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -7206,12 +7758,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -7239,7 +7792,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -7251,15 +7804,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -7282,38 +7835,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/file/get_download_url");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/get_download_url");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<OSSGetDownloadUrlResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -7323,11 +7884,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -7336,12 +7897,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -7369,7 +7931,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -7381,15 +7943,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -7412,38 +7974,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/file/get_download_url");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/get_download_url");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<OSSGetDownloadUrlResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -7453,11 +8023,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -7466,12 +8036,291 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
+                            {
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"statusCode", response_.StatusCode},
+                                {"statusMessage", response_.StatusMessage},
+                            }},
+                        },
+                        respMap
+                    ));
+                }
+                catch (Exception e)
+                {
+                    if (TeaCore.IsRetryable(e))
+                    {
+                        _lastException = e;
+                        continue;
+                    }
+                    throw e;
+                }
+            }
+
+            throw new TeaUnretryableException(_lastRequest, _lastException);
+        }
+
+        public OSSGetSecureUrlResponse GetSecureUrl(OSSGetSecureUrlRequest request, RuntimeOptions runtime)
+        {
+            request.Validate();
+            runtime.Validate();
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
+            {
+                {"timeouted", "retry"},
+                {"readTimeout", runtime.ReadTimeout},
+                {"connectTimeout", runtime.ConnectTimeout},
+                {"localAddr", runtime.LocalAddr},
+                {"httpProxy", runtime.HttpProxy},
+                {"httpsProxy", runtime.HttpsProxy},
+                {"noProxy", runtime.NoProxy},
+                {"maxIdleConns", runtime.MaxIdleConns},
+                {"socks5Proxy", runtime.Socks5Proxy},
+                {"socks5NetWork", runtime.Socks5NetWork},
+                {"retry", new Dictionary<string, object>
+                {
+                    {"retryable", runtime.Autoretry},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
+                }},
+                {"backoff", new Dictionary<string, object>
+                {
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
+                }},
+                {"ignoreSSL", runtime.IgnoreSSL},
+            };
+
+            TeaRequest _lastRequest = null;
+            Exception _lastException = null;
+            long _now = System.DateTime.Now.Millisecond;
+            int _retryTimes = 0;
+            while (TeaCore.AllowRetry((IDictionary) runtime_["retry"], _retryTimes, _now))
+            {
+                if (_retryTimes > 0)
+                {
+                    int backoffTime = TeaCore.GetBackoffTime((IDictionary)runtime_["backoff"], _retryTimes);
+                    if (backoffTime > 0)
+                    {
+                        TeaCore.Sleep(backoffTime);
+                    }
+                }
+                _retryTimes = _retryTimes + 1;
+                try
+                {
+                    TeaRequest request_ = new TeaRequest();
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
+                    request_.Method = "POST";
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/get_secure_url");
+                    request_.Headers = new Dictionary<string, string>
+                    {
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"content-type", "application/json; charset=utf-8"},
+                    };
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
+                    {
+                        request_.Headers["authorization"] = "Bearer " + accessToken;
+                    }
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
+                    {
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
+                        request_.Headers["accept"] = "application/json";
+                        request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
+                        request_.Headers["x-acs-signature-version"] = "1.0";
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
+                    }
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    _lastRequest = request_;
+                    TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
+
+                    Dictionary<string, object> respMap = null;
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
+                    {
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
+                        return TeaModel.ToObject<OSSGetSecureUrlResponse>(TeaConverter.merge<object>
+                        (
+                            new Dictionary<string, object>()
+                            {
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                            },
+                            respMap
+                        ));
+                    }
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    {
+                        throw new TeaException(new Dictionary<string, object>
+                        {
+                            {"data", new Dictionary<string, object>
+                            {
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"statusCode", response_.StatusCode},
+                                {"statusMessage", response_.StatusMessage},
+                            }},
+                            {"message", response_.Headers["x-ca-error-message"]},
+                        });
+                    }
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
+                    throw new TeaException(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"data", new Dictionary<string, object>
+                            {
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"statusCode", response_.StatusCode},
+                                {"statusMessage", response_.StatusMessage},
+                            }},
+                        },
+                        respMap
+                    ));
+                }
+                catch (Exception e)
+                {
+                    if (TeaCore.IsRetryable(e))
+                    {
+                        _lastException = e;
+                        continue;
+                    }
+                    throw e;
+                }
+            }
+
+            throw new TeaUnretryableException(_lastRequest, _lastException);
+        }
+
+        public async Task<OSSGetSecureUrlResponse> GetSecureUrlAsync(OSSGetSecureUrlRequest request, RuntimeOptions runtime)
+        {
+            request.Validate();
+            runtime.Validate();
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
+            {
+                {"timeouted", "retry"},
+                {"readTimeout", runtime.ReadTimeout},
+                {"connectTimeout", runtime.ConnectTimeout},
+                {"localAddr", runtime.LocalAddr},
+                {"httpProxy", runtime.HttpProxy},
+                {"httpsProxy", runtime.HttpsProxy},
+                {"noProxy", runtime.NoProxy},
+                {"maxIdleConns", runtime.MaxIdleConns},
+                {"socks5Proxy", runtime.Socks5Proxy},
+                {"socks5NetWork", runtime.Socks5NetWork},
+                {"retry", new Dictionary<string, object>
+                {
+                    {"retryable", runtime.Autoretry},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
+                }},
+                {"backoff", new Dictionary<string, object>
+                {
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
+                }},
+                {"ignoreSSL", runtime.IgnoreSSL},
+            };
+
+            TeaRequest _lastRequest = null;
+            Exception _lastException = null;
+            long _now = System.DateTime.Now.Millisecond;
+            int _retryTimes = 0;
+            while (TeaCore.AllowRetry((IDictionary) runtime_["retry"], _retryTimes, _now))
+            {
+                if (_retryTimes > 0)
+                {
+                    int backoffTime = TeaCore.GetBackoffTime((IDictionary)runtime_["backoff"], _retryTimes);
+                    if (backoffTime > 0)
+                    {
+                        TeaCore.Sleep(backoffTime);
+                    }
+                }
+                _retryTimes = _retryTimes + 1;
+                try
+                {
+                    TeaRequest request_ = new TeaRequest();
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
+                    request_.Method = "POST";
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/get_secure_url");
+                    request_.Headers = new Dictionary<string, string>
+                    {
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"content-type", "application/json; charset=utf-8"},
+                    };
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
+                    {
+                        request_.Headers["authorization"] = "Bearer " + accessToken;
+                    }
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
+                    {
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
+                        request_.Headers["accept"] = "application/json";
+                        request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
+                        request_.Headers["x-acs-signature-version"] = "1.0";
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
+                    }
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    _lastRequest = request_;
+                    TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
+
+                    Dictionary<string, object> respMap = null;
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
+                    {
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
+                        return TeaModel.ToObject<OSSGetSecureUrlResponse>(TeaConverter.merge<object>
+                        (
+                            new Dictionary<string, object>()
+                            {
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                            },
+                            respMap
+                        ));
+                    }
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    {
+                        throw new TeaException(new Dictionary<string, object>
+                        {
+                            {"data", new Dictionary<string, object>
+                            {
+                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"statusCode", response_.StatusCode},
+                                {"statusMessage", response_.StatusMessage},
+                            }},
+                            {"message", response_.Headers["x-ca-error-message"]},
+                        });
+                    }
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
+                    throw new TeaException(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -7499,7 +8348,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -7511,15 +8360,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -7542,38 +8391,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/file/get_upload_url");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/get_upload_url");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<OSSGetUploadUrlResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -7583,11 +8440,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -7596,12 +8453,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -7629,7 +8487,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -7641,15 +8499,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -7672,38 +8530,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/file/get_upload_url");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/get_upload_url");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<OSSGetUploadUrlResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -7713,11 +8579,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -7726,12 +8592,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -7759,7 +8626,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -7771,15 +8638,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -7802,38 +8669,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/file/list");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/list");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<OSSListFileResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -7843,11 +8718,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -7856,12 +8731,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -7889,7 +8765,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -7901,15 +8777,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -7932,38 +8808,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/file/list");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/list");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<OSSListFileResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -7973,11 +8857,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -7986,12 +8870,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -8019,7 +8904,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -8031,15 +8916,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -8062,38 +8947,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/file/list_uploaded_parts");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/list_uploaded_parts");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<OSSListUploadedPartResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -8103,11 +8996,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -8116,12 +9009,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -8149,7 +9043,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -8161,15 +9055,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -8192,38 +9086,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/file/list_uploaded_parts");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/list_uploaded_parts");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<OSSListUploadedPartResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -8233,11 +9135,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -8246,12 +9148,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -8279,7 +9182,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -8291,15 +9194,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -8322,38 +9225,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/file/move");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/move");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<OSSMoveFileResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -8363,11 +9274,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -8376,12 +9287,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -8409,7 +9321,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -8421,15 +9333,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -8452,38 +9364,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/file/move");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/file/move");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<OSSMoveFileResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -8493,11 +9413,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -8506,12 +9426,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -8539,7 +9460,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -8551,15 +9472,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -8582,38 +9503,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/share/create");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/share/create");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 201))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 201))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<CreateShareResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -8623,11 +9552,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -8636,12 +9565,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -8669,7 +9599,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -8681,15 +9611,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -8712,38 +9642,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/share/create");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/share/create");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 201))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 201))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<CreateShareResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -8753,11 +9691,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -8766,12 +9704,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -8799,7 +9738,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -8811,15 +9750,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -8842,44 +9781,51 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/share/delete");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/share/delete");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 204))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 204))
                     {
                         return ;
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -8888,12 +9834,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -8921,7 +9868,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -8933,15 +9880,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -8964,44 +9911,51 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/share/delete");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/share/delete");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 204))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 204))
                     {
                         return ;
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -9010,12 +9964,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -9043,7 +9998,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -9055,15 +10010,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -9086,38 +10041,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/share/get");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/share/get");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<GetShareResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -9127,11 +10090,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -9140,12 +10103,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -9173,7 +10137,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -9185,15 +10149,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -9216,38 +10180,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/share/get");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/share/get");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<GetShareResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -9257,11 +10229,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -9270,12 +10242,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -9303,7 +10276,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -9315,15 +10288,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -9346,38 +10319,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/share/list");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/share/list");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<ListShareResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -9387,11 +10368,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -9400,12 +10381,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -9433,7 +10415,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -9445,15 +10427,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -9476,38 +10458,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/share/list");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/share/list");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<ListShareResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -9517,11 +10507,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -9530,12 +10520,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -9563,7 +10554,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -9575,15 +10566,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -9606,38 +10597,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/share/update");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/share/update");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<UpdateShareResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -9647,11 +10646,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -9660,12 +10659,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -9693,7 +10693,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -9705,15 +10705,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -9736,38 +10736,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/share/update");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/share/update");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<UpdateShareResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -9777,11 +10785,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -9790,12 +10798,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -9823,7 +10832,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -9835,15 +10844,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -9866,38 +10875,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/store_file/list");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/store_file/list");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<ListStoreFileResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -9907,11 +10924,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -9920,12 +10937,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -9953,7 +10971,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -9965,15 +10983,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -9996,38 +11014,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/osspath/store_file/list");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/osspath/store_file/list");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<ListStoreFileResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -10037,11 +11063,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -10050,12 +11076,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -10083,7 +11110,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -10095,15 +11122,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -10126,38 +11153,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/user/create");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/user/create");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 201))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 201))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<CreateUserResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -10167,11 +11202,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -10180,12 +11215,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -10213,7 +11249,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -10225,15 +11261,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -10256,38 +11292,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/user/create");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/user/create");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 201))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 201))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<CreateUserResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -10297,11 +11341,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -10310,12 +11354,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -10343,7 +11388,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -10355,15 +11400,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -10386,44 +11431,51 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/user/delete");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/user/delete");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 204))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 204))
                     {
                         return ;
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -10432,12 +11484,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -10465,7 +11518,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -10477,15 +11530,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -10508,44 +11561,51 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/user/delete");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/user/delete");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 204))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 204))
                     {
                         return ;
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -10554,12 +11614,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -10587,7 +11648,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -10599,15 +11660,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -10630,38 +11691,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/user/get");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/user/get");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<GetUserResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -10671,11 +11740,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -10684,12 +11753,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -10717,7 +11787,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -10729,15 +11799,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -10760,38 +11830,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/user/get");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/user/get");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<GetUserResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -10801,11 +11879,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -10814,12 +11892,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -10847,7 +11926,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -10859,15 +11938,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -10890,38 +11969,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/user/list");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/user/list");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<ListUserResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -10931,11 +12018,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -10944,12 +12031,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -10977,7 +12065,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -10989,15 +12077,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -11020,38 +12108,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/user/list");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/user/list");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<ListUserResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -11061,11 +12157,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -11074,12 +12170,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -11107,7 +12204,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -11119,15 +12216,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -11150,38 +12247,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/user/search");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/user/search");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<ListUserResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -11191,11 +12296,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -11204,12 +12309,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -11237,7 +12343,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -11249,15 +12355,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -11280,38 +12386,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/user/search");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/user/search");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<ListUserResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -11321,11 +12435,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -11334,12 +12448,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -11367,7 +12482,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -11379,15 +12494,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -11410,38 +12525,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = GetAccessKeyId();
+                    string accessKeySecret = GetAccessKeySecret();
+                    string securityToken = GetAccessKeySecret();
+                    string accessToken = GetAccessToken();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/user/update");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/user/update");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<UpdateUserResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -11451,11 +12574,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -11464,12 +12587,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -11497,7 +12621,7 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
         {
             request.Validate();
             runtime.Validate();
-            Dictionary<string, object> runtime_ = new Dictionary<string, object>()
+            Dictionary<string, object> runtime_ = new Dictionary<string, object>
             {
                 {"timeouted", "retry"},
                 {"readTimeout", runtime.ReadTimeout},
@@ -11509,15 +12633,15 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 {"maxIdleConns", runtime.MaxIdleConns},
                 {"socks5Proxy", runtime.Socks5Proxy},
                 {"socks5NetWork", runtime.Socks5NetWork},
-                {"retry", new Dictionary<string, object>()
+                {"retry", new Dictionary<string, object>
                 {
                     {"retryable", runtime.Autoretry},
-                    {"maxAttempts", _defaultNumber(runtime.MaxAttempts, 3)},
+                    {"maxAttempts", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.MaxAttempts, 3)},
                 }},
-                {"backoff", new Dictionary<string, object>()
+                {"backoff", new Dictionary<string, object>
                 {
-                    {"policy", _default(runtime.BackoffPolicy, "no")},
-                    {"period", _defaultNumber(runtime.BackoffPeriod, 1)},
+                    {"policy", AlibabaCloud.TeaUtil.Common.DefaultString(runtime.BackoffPolicy, "no")},
+                    {"period", AlibabaCloud.TeaUtil.Common.DefaultNumber(runtime.BackoffPeriod, 1)},
                 }},
                 {"ignoreSSL", runtime.IgnoreSSL},
             };
@@ -11540,38 +12664,46 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                 try
                 {
                     TeaRequest request_ = new TeaRequest();
-                    string accesskeyId = _getAccessKeyId();
-                    string accessKeySecret = _getAccessKeySecret();
-                    string accessToken = _getAccessToken();
-                    request_.Protocol = _getProtocol(_protocol, "https");
+                    string accesskeyId = await GetAccessKeyIdAsync();
+                    string accessKeySecret = await GetAccessKeySecretAsync();
+                    string securityToken = await GetAccessKeySecretAsync();
+                    string accessToken = await GetAccessTokenAsync();
+                    request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
-                    request_.Pathname = _getPathname(_nickname, "/v2/user/update");
-                    request_.Headers = new Dictionary<string, string>()
+                    request_.Pathname = GetPathname(_nickname, "/v2/user/update");
+                    request_.Headers = new Dictionary<string, string>
                     {
-                        {"user-agent", _getUserAgent()},
-                        {"host", _getHost(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        {"user-agent", GetUserAgent()},
+                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
                         {"content-type", "application/json; charset=utf-8"},
                     };
-                    if (_notEmpty(accessToken))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
                     }
-else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
+                    else if (!AlibabaCloud.TeaUtil.Common.Empty(accesskeyId) && !AlibabaCloud.TeaUtil.Common.Empty(accessKeySecret))
                     {
-                        request_.Headers["date"] = _getRFC2616Date();
+                        if (!AlibabaCloud.TeaUtil.Common.Empty(securityToken))
+                        {
+                            request_.Headers["x-acs-security-token"] = securityToken;
+                        }
+                        request_.Headers["date"] = AlibabaCloud.TeaUtil.Common.GetDateUTCString();
                         request_.Headers["accept"] = "application/json";
                         request_.Headers["x-acs-signature-method"] = "HMAC-SHA1";
                         request_.Headers["x-acs-signature-version"] = "1.0";
-                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + _getSignature(request_);
+                        string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
+                        request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(_toJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
                     Dictionary<string, object> respMap = null;
-                    if (_isStatusCode(response_, 200))
+                    object obj = null;
+                    if (AlibabaCloud.TeaUtil.Common.EqualNumber(response_.StatusCode, 200))
                     {
-                        respMap = _readAsJSON(response_);
+                        obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                        respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                         return TeaModel.ToObject<UpdateUserResponse>(TeaConverter.merge<object>
                         (
                             new Dictionary<string, object>()
@@ -11581,11 +12713,11 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             respMap
                         ));
                     }
-                    if (_notEmpty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
                     {
-                        throw new TeaException(new Dictionary<string, object>()
+                        throw new TeaException(new Dictionary<string, object>
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -11594,12 +12726,13 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
                             {"message", response_.Headers["x-ca-error-message"]},
                         });
                     }
-                    respMap = _readAsJSON(response_);
+                    obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
+                    respMap = AlibabaCloud.TeaUtil.Common.AssertAsMap(obj);
                     throw new TeaException(TeaConverter.merge<object>
                     (
                         new Dictionary<string, object>()
                         {
-                            {"data", new Dictionary<string, object>()
+                            {"data", new Dictionary<string, object>
                             {
                                 {"requestId", response_.Headers["x-ca-request-id"]},
                                 {"statusCode", response_.StatusCode},
@@ -11621,6 +12754,147 @@ else if (_notEmpty(accesskeyId) && _notEmpty(accessKeySecret))
             }
 
             throw new TeaUnretryableException(_lastRequest, _lastException);
+        }
+
+        public string GetPathname(string nickname, string path)
+        {
+            if (AlibabaCloud.TeaUtil.Common.Empty(nickname))
+            {
+                return path;
+            }
+            return "/" + nickname + path;
+        }
+
+        public void SetExpireTime(string expireTime)
+        {
+            if (AlibabaCloud.TeaUtil.Common.IsUnset(_accessTokenCredential))
+            {
+                return ;
+            }
+            this._accessTokenCredential.SetExpireTime(expireTime);
+        }
+
+        public async Task SetExpireTimeAsync(string expireTime)
+        {
+            if (AlibabaCloud.TeaUtil.Common.IsUnset(_accessTokenCredential))
+            {
+                return ;
+            }
+            await this._accessTokenCredential.SetExpireTimeAsync(expireTime);
+        }
+
+        public string GetExpireTime()
+        {
+            if (AlibabaCloud.TeaUtil.Common.IsUnset(_accessTokenCredential))
+            {
+                return "";
+            }
+            string expireTime = this._accessTokenCredential.GetExpireTime();
+            return expireTime;
+        }
+
+        public void SetUserAgent(string userAgent)
+        {
+            this._userAgent = userAgent;
+        }
+
+        public void AppendUserAgent(string userAgent)
+        {
+            this._userAgent = _userAgent + " " + userAgent;
+        }
+
+        public string GetUserAgent()
+        {
+            string userAgent = AlibabaCloud.TeaUtil.Common.GetUserAgent(_userAgent);
+            return userAgent;
+        }
+
+        public void SetRefreshToken(string token)
+        {
+            if (AlibabaCloud.TeaUtil.Common.IsUnset(_accessTokenCredential))
+            {
+                return ;
+            }
+            this._accessTokenCredential.SetRefreshToken(token);
+        }
+
+        public string GetRefreshToken()
+        {
+            if (AlibabaCloud.TeaUtil.Common.IsUnset(_accessTokenCredential))
+            {
+                return "";
+            }
+            string token = this._accessTokenCredential.GetRefreshToken();
+            return token;
+        }
+
+        public void SetAccessToken(string token)
+        {
+            if (AlibabaCloud.TeaUtil.Common.IsUnset(_accessTokenCredential))
+            {
+                return ;
+            }
+            this._accessTokenCredential.SetAccessToken(token);
+        }
+
+        public string GetAccessToken()
+        {
+            if (AlibabaCloud.TeaUtil.Common.IsUnset(_accessTokenCredential))
+            {
+                return "";
+            }
+            string token = this._accessTokenCredential.GetAccessToken();
+            return token;
+        }
+
+        public async Task<string> GetAccessTokenAsync()
+        {
+            if (AlibabaCloud.TeaUtil.Common.IsUnset(_accessTokenCredential))
+            {
+                return "";
+            }
+            string token = await this._accessTokenCredential.GetAccessTokenAsync();
+            return token;
+        }
+
+        public string GetAccessKeyId()
+        {
+            if (AlibabaCloud.TeaUtil.Common.IsUnset(_credential))
+            {
+                return "";
+            }
+            string accessKeyId = this._credential.GetAccessKeyId();
+            return accessKeyId;
+        }
+
+        public async Task<string> GetAccessKeyIdAsync()
+        {
+            if (AlibabaCloud.TeaUtil.Common.IsUnset(_credential))
+            {
+                return "";
+            }
+            string accessKeyId = await this._credential.GetAccessKeyIdAsync();
+            return accessKeyId;
+        }
+
+        public string GetAccessKeySecret()
+        {
+            if (AlibabaCloud.TeaUtil.Common.IsUnset(_credential))
+            {
+                return "";
+            }
+            string secret = this._credential.GetAccessKeySecret();
+            return secret;
+        }
+
+        public async Task<string> GetAccessKeySecretAsync()
+        {
+            if (AlibabaCloud.TeaUtil.Common.IsUnset(_credential))
+            {
+                return "";
+            }
+            string secret = await this._credential.GetAccessKeySecretAsync();
+            return secret;
         }
 
     }

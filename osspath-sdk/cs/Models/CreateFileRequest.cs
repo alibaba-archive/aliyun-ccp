@@ -42,7 +42,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         public string Meta { get; set; }
 
         [NameInMap("name")]
-        [Validation(Required=true, Pattern="[a-zA-Z0-9.-]{1,1000}")]
+        [Validation(Required=true)]
         public string Name { get; set; }
 
         [NameInMap("parent_file_id")]

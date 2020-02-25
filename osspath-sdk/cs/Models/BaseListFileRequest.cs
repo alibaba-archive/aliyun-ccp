@@ -29,6 +29,10 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         [Validation(Required=false)]
         public string Marker { get; set; }
 
+        [NameInMap("video_thumbnail_process")]
+        [Validation(Required=false)]
+        public string VideoThumbnailProcess { get; set; }
+
     }
 
 }
