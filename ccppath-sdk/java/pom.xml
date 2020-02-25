@@ -54,8 +54,28 @@
     <dependencies>
         <dependency>
             <groupId>com.aliyun</groupId>
-            <artifactId>ccp-baseclient</artifactId>
-            <version>1.0.2</version>
+            <artifactId>tea-util</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>roa-util</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>ccp-credentials</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>credentials-java</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>tea</artifactId>
+            <version>RELEASE</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

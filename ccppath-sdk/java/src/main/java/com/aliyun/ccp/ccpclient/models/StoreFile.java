@@ -19,4 +19,9 @@ public class StoreFile extends TeaModel {
     @NameInMap("type")
     public String type;
 
+    public static StoreFile build(java.util.Map<String, ?> map) throws Exception {
+        StoreFile self = new StoreFile();
+        return TeaModel.build(map, self);
+    }
+
 }

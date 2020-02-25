@@ -49,4 +49,9 @@ public class StoreItemResponse extends TeaModel {
     @Validation(required = true)
     public String type;
 
+    public static StoreItemResponse build(java.util.Map<String, ?> map) throws Exception {
+        StoreItemResponse self = new StoreItemResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

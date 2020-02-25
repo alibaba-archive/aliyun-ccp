@@ -22,4 +22,9 @@ public class OSSGetFileRequest extends TeaModel {
     @Validation(pattern = "[0-9a-zA-z-]+")
     public String shareId;
 
+    public static OSSGetFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        OSSGetFileRequest self = new OSSGetFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

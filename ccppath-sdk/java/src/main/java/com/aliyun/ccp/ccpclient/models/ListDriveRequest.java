@@ -13,4 +13,9 @@ public class ListDriveRequest extends TeaModel {
     @NameInMap("owner")
     public String owner;
 
+    public static ListDriveRequest build(java.util.Map<String, ?> map) throws Exception {
+        ListDriveRequest self = new ListDriveRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

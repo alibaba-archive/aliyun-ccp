@@ -25,4 +25,9 @@ public class OSSCopyFileResponse extends TeaModel {
     @Validation(pattern = "[a-z0-9A-Z]+")
     public String shareId;
 
+    public static OSSCopyFileResponse build(java.util.Map<String, ?> map) throws Exception {
+        OSSCopyFileResponse self = new OSSCopyFileResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

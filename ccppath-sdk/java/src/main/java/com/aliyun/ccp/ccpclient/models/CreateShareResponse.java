@@ -13,4 +13,9 @@ public class CreateShareResponse extends TeaModel {
     @NameInMap("share_id")
     public String shareId;
 
+    public static CreateShareResponse build(java.util.Map<String, ?> map) throws Exception {
+        CreateShareResponse self = new CreateShareResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

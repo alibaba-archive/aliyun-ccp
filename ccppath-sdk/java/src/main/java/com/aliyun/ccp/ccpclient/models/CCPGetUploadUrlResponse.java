@@ -28,4 +28,9 @@ public class CCPGetUploadUrlResponse extends TeaModel {
     @NameInMap("upload_id")
     public String uploadId;
 
+    public static CCPGetUploadUrlResponse build(java.util.Map<String, ?> map) throws Exception {
+        CCPGetUploadUrlResponse self = new CCPGetUploadUrlResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

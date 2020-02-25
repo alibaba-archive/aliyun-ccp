@@ -25,4 +25,9 @@ public class GetDownloadUrlRequest extends TeaModel {
     @NameInMap("share_id")
     public String shareId;
 
+    public static GetDownloadUrlRequest build(java.util.Map<String, ?> map) throws Exception {
+        GetDownloadUrlRequest self = new GetDownloadUrlRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

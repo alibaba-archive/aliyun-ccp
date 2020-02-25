@@ -13,4 +13,9 @@ public class ListStoreFileResponse extends TeaModel {
     @NameInMap("next_marker")
     public String nextMarker;
 
+    public static ListStoreFileResponse build(java.util.Map<String, ?> map) throws Exception {
+        ListStoreFileResponse self = new ListStoreFileResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

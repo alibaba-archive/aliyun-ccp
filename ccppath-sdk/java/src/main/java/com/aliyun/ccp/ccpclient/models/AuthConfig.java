@@ -19,4 +19,9 @@ public class AuthConfig extends TeaModel {
     @NameInMap("enterprise_id")
     public String enterpriseId;
 
+    public static AuthConfig build(java.util.Map<String, ?> map) throws Exception {
+        AuthConfig self = new AuthConfig();
+        return TeaModel.build(map, self);
+    }
+
 }

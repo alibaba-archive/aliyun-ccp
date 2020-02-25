@@ -18,4 +18,9 @@ public class CCPDeleteFilesResponse extends TeaModel {
     @Validation(pattern = "[0-9]+")
     public String driveId;
 
+    public static CCPDeleteFilesResponse build(java.util.Map<String, ?> map) throws Exception {
+        CCPDeleteFilesResponse self = new CCPDeleteFilesResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

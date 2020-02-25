@@ -16,4 +16,9 @@ public class CCPGetDownloadUrlResponse extends TeaModel {
     @NameInMap("url")
     public String url;
 
+    public static CCPGetDownloadUrlResponse build(java.util.Map<String, ?> map) throws Exception {
+        CCPGetDownloadUrlResponse self = new CCPGetDownloadUrlResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

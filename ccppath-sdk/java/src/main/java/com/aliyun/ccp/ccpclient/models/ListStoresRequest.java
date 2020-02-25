@@ -8,4 +8,9 @@ public class ListStoresRequest extends TeaModel {
     @Validation(required = true)
     public String domainId;
 
+    public static ListStoresRequest build(java.util.Map<String, ?> map) throws Exception {
+        ListStoresRequest self = new ListStoresRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

@@ -25,4 +25,9 @@ public class OSSDeleteFileResponse extends TeaModel {
     @Validation(pattern = "[a-z0-9A-Z]+")
     public String shareId;
 
+    public static OSSDeleteFileResponse build(java.util.Map<String, ?> map) throws Exception {
+        OSSDeleteFileResponse self = new OSSDeleteFileResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

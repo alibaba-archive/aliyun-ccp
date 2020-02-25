@@ -23,4 +23,9 @@ public class PreHashCheckSuccessResponse extends TeaModel {
     @NameInMap("pre_hash")
     public String preHash;
 
+    public static PreHashCheckSuccessResponse build(java.util.Map<String, ?> map) throws Exception {
+        PreHashCheckSuccessResponse self = new PreHashCheckSuccessResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

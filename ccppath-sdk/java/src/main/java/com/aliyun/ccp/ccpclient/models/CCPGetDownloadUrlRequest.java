@@ -19,4 +19,9 @@ public class CCPGetDownloadUrlRequest extends TeaModel {
     @Validation(pattern = "[a-zA-Z0-9.-]{1,1000}")
     public String fileName;
 
+    public static CCPGetDownloadUrlRequest build(java.util.Map<String, ?> map) throws Exception {
+        CCPGetDownloadUrlRequest self = new CCPGetDownloadUrlRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

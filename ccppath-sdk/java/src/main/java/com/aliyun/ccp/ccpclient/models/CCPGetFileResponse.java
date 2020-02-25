@@ -93,4 +93,9 @@ public class CCPGetFileResponse extends TeaModel {
     @NameInMap("url")
     public String url;
 
+    public static CCPGetFileResponse build(java.util.Map<String, ?> map) throws Exception {
+        CCPGetFileResponse self = new CCPGetFileResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

@@ -21,4 +21,9 @@ public class CCPGetUploadUrlRequest extends TeaModel {
     @Validation(pattern = "[a-z0-9]{1,50}")
     public String fileId;
 
+    public static CCPGetUploadUrlRequest build(java.util.Map<String, ?> map) throws Exception {
+        CCPGetUploadUrlRequest self = new CCPGetUploadUrlRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

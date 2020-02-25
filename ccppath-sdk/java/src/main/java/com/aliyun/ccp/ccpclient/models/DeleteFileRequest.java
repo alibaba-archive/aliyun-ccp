@@ -21,4 +21,9 @@ public class DeleteFileRequest extends TeaModel {
     @NameInMap("share_id")
     public String shareId;
 
+    public static DeleteFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        DeleteFileRequest self = new DeleteFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

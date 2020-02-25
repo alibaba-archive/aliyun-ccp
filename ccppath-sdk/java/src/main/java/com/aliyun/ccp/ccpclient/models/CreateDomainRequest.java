@@ -85,4 +85,9 @@ public class CreateDomainRequest extends TeaModel {
     @Validation(required = true)
     public String[] storeRegionList;
 
+    public static CreateDomainRequest build(java.util.Map<String, ?> map) throws Exception {
+        CreateDomainRequest self = new CreateDomainRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

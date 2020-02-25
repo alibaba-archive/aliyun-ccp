@@ -78,4 +78,9 @@ public class BaseOSSFileResponse extends TeaModel {
     @NameInMap("url")
     public String url;
 
+    public static BaseOSSFileResponse build(java.util.Map<String, ?> map) throws Exception {
+        BaseOSSFileResponse self = new BaseOSSFileResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

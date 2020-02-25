@@ -16,4 +16,9 @@ public class Captcha extends TeaModel {
     @Validation(required = true)
     public String captchaId;
 
+    public static Captcha build(java.util.Map<String, ?> map) throws Exception {
+        Captcha self = new Captcha();
+        return TeaModel.build(map, self);
+    }
+
 }

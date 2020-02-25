@@ -25,4 +25,9 @@ public class OSSMoveFileRequest extends TeaModel {
     @NameInMap("to_parent_file_path")
     public String toParentFilePath;
 
+    public static OSSMoveFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        OSSMoveFileRequest self = new OSSMoveFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

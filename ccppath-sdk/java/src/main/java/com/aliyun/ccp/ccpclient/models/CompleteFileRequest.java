@@ -25,4 +25,9 @@ public class CompleteFileRequest extends TeaModel {
     @Validation(required = true)
     public String uploadId;
 
+    public static CompleteFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        CompleteFileRequest self = new CompleteFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

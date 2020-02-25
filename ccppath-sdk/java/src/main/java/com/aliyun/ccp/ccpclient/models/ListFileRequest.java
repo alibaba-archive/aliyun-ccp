@@ -37,4 +37,9 @@ public class ListFileRequest extends TeaModel {
     @NameInMap("status")
     public String status;
 
+    public static ListFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        ListFileRequest self = new ListFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

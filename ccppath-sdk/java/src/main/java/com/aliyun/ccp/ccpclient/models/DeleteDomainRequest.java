@@ -8,4 +8,9 @@ public class DeleteDomainRequest extends TeaModel {
     @Validation(required = true)
     public String domainId;
 
+    public static DeleteDomainRequest build(java.util.Map<String, ?> map) throws Exception {
+        DeleteDomainRequest self = new DeleteDomainRequest();
+        return TeaModel.build(map, self);
+    }
+
 }
