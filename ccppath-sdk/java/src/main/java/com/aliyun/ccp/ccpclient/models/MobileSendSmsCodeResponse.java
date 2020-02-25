@@ -11,4 +11,9 @@ public class MobileSendSmsCodeResponse extends TeaModel {
     @Validation(required = true)
     public String smsCodeId;
 
+    public static MobileSendSmsCodeResponse build(java.util.Map<String, ?> map) throws Exception {
+        MobileSendSmsCodeResponse self = new MobileSendSmsCodeResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

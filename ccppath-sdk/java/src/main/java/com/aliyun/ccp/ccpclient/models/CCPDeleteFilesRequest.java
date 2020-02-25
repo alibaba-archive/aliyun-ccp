@@ -12,4 +12,9 @@ public class CCPDeleteFilesRequest extends TeaModel {
     @Validation(required = true)
     public String[] fileIdList;
 
+    public static CCPDeleteFilesRequest build(java.util.Map<String, ?> map) throws Exception {
+        CCPDeleteFilesRequest self = new CCPDeleteFilesRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

@@ -46,4 +46,9 @@ public class RuntimeOptions extends TeaModel {
     @NameInMap("socks5NetWork")
     public String socks5NetWork;
 
+    public static RuntimeOptions build(java.util.Map<String, ?> map) throws Exception {
+        RuntimeOptions self = new RuntimeOptions();
+        return TeaModel.build(map, self);
+    }
+
 }

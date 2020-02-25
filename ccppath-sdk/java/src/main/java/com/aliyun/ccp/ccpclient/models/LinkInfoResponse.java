@@ -35,4 +35,9 @@ public class LinkInfoResponse extends TeaModel {
     @Validation(required = true)
     public String userId;
 
+    public static LinkInfoResponse build(java.util.Map<String, ?> map) throws Exception {
+        LinkInfoResponse self = new LinkInfoResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

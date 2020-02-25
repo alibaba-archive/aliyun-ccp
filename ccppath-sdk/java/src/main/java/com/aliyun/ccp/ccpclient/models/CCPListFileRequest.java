@@ -49,4 +49,9 @@ public class CCPListFileRequest extends TeaModel {
     @NameInMap("custom_index_key")
     public String customIndexKey;
 
+    public static CCPListFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        CCPListFileRequest self = new CCPListFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

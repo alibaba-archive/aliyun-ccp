@@ -35,4 +35,9 @@ public class CCPCreateFileResponse extends TeaModel {
     @NameInMap("upload_id")
     public String uploadId;
 
+    public static CCPCreateFileResponse build(java.util.Map<String, ?> map) throws Exception {
+        CCPCreateFileResponse self = new CCPCreateFileResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

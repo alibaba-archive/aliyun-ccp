@@ -13,4 +13,9 @@ public class CCPSearchFileResponse extends TeaModel {
     @NameInMap("next_marker")
     public String nextMarker;
 
+    public static CCPSearchFileResponse build(java.util.Map<String, ?> map) throws Exception {
+        CCPSearchFileResponse self = new CCPSearchFileResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

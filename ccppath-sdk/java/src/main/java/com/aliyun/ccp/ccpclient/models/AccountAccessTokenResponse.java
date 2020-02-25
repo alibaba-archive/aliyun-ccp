@@ -51,4 +51,9 @@ public class AccountAccessTokenResponse extends TeaModel {
     @NameInMap("user_name")
     public String userName;
 
+    public static AccountAccessTokenResponse build(java.util.Map<String, ?> map) throws Exception {
+        AccountAccessTokenResponse self = new AccountAccessTokenResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

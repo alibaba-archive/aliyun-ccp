@@ -58,4 +58,9 @@ public class CCPCreateFileRequest extends TeaModel {
     @NameInMap("pre_hash")
     public String preHash;
 
+    public static CCPCreateFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        CCPCreateFileRequest self = new CCPCreateFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

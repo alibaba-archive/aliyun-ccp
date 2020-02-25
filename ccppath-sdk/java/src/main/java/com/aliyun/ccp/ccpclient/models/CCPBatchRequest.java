@@ -12,4 +12,9 @@ public class CCPBatchRequest extends TeaModel {
     @Validation(required = true)
     public String resource;
 
+    public static CCPBatchRequest build(java.util.Map<String, ?> map) throws Exception {
+        CCPBatchRequest self = new CCPBatchRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

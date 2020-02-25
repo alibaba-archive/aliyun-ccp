@@ -39,4 +39,9 @@ public class CopyFileRequest extends TeaModel {
     @NameInMap("to_share_id")
     public String toShareId;
 
+    public static CopyFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        CopyFileRequest self = new CopyFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

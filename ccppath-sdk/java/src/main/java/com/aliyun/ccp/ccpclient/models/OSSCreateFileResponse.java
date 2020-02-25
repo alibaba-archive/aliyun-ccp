@@ -31,4 +31,9 @@ public class OSSCreateFileResponse extends TeaModel {
     @NameInMap("upload_id")
     public String uploadId;
 
+    public static OSSCreateFileResponse build(java.util.Map<String, ?> map) throws Exception {
+        OSSCreateFileResponse self = new OSSCreateFileResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

@@ -25,4 +25,9 @@ public class OSSMoveFileResponse extends TeaModel {
     @Validation(pattern = "[a-z0-9A-Z]+")
     public String shareId;
 
+    public static OSSMoveFileResponse build(java.util.Map<String, ?> map) throws Exception {
+        OSSMoveFileResponse self = new OSSMoveFileResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

@@ -24,4 +24,9 @@ public class DefaultChangePasswordRequest extends TeaModel {
     @Validation(required = true)
     public String smsCodeId;
 
+    public static DefaultChangePasswordRequest build(java.util.Map<String, ?> map) throws Exception {
+        DefaultChangePasswordRequest self = new DefaultChangePasswordRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

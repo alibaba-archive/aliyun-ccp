@@ -15,4 +15,9 @@ public class DownloadFileRequest extends TeaModel {
     @NameInMap("ImageProcess")
     public String ImageProcess;
 
+    public static DownloadFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        DownloadFileRequest self = new DownloadFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

@@ -19,4 +19,9 @@ public class ListStoreFileRequest extends TeaModel {
     @NameInMap("type")
     public String type;
 
+    public static ListStoreFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        ListStoreFileRequest self = new ListStoreFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

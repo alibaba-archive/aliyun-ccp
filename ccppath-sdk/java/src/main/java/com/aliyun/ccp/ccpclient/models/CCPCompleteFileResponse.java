@@ -96,4 +96,9 @@ public class CCPCompleteFileResponse extends TeaModel {
     @NameInMap("crc")
     public String crc;
 
+    public static CCPCompleteFileResponse build(java.util.Map<String, ?> map) throws Exception {
+        CCPCompleteFileResponse self = new CCPCompleteFileResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

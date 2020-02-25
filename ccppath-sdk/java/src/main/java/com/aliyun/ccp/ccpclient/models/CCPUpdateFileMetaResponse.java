@@ -93,4 +93,9 @@ public class CCPUpdateFileMetaResponse extends TeaModel {
     @NameInMap("url")
     public String url;
 
+    public static CCPUpdateFileMetaResponse build(java.util.Map<String, ?> map) throws Exception {
+        CCPUpdateFileMetaResponse self = new CCPUpdateFileMetaResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

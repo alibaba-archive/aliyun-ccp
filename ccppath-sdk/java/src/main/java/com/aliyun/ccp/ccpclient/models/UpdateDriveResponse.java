@@ -43,4 +43,9 @@ public class UpdateDriveResponse extends TeaModel {
     @NameInMap("used_size")
     public Long usedSize;
 
+    public static UpdateDriveResponse build(java.util.Map<String, ?> map) throws Exception {
+        UpdateDriveResponse self = new UpdateDriveResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

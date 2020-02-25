@@ -27,4 +27,9 @@ public class BaseCreateFileRequest extends TeaModel {
     @Validation(required = true)
     public String type;
 
+    public static BaseCreateFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        BaseCreateFileRequest self = new BaseCreateFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

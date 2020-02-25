@@ -15,4 +15,9 @@ public class CCPDeleteFileRequest extends TeaModel {
     @NameInMap("permanently")
     public boolean permanently;
 
+    public static CCPDeleteFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        CCPDeleteFileRequest self = new CCPDeleteFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

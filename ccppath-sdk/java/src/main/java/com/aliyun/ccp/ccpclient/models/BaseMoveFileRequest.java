@@ -15,4 +15,9 @@ public class BaseMoveFileRequest extends TeaModel {
     @NameInMap("overwrite")
     public boolean overwrite;
 
+    public static BaseMoveFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        BaseMoveFileRequest self = new BaseMoveFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

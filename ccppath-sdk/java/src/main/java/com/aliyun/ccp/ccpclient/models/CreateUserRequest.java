@@ -32,4 +32,9 @@ public class CreateUserRequest extends TeaModel {
     @NameInMap("user_name")
     public String userName;
 
+    public static CreateUserRequest build(java.util.Map<String, ?> map) throws Exception {
+        CreateUserRequest self = new CreateUserRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

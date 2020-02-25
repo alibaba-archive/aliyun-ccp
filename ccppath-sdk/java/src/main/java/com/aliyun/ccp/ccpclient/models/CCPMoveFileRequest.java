@@ -22,4 +22,9 @@ public class CCPMoveFileRequest extends TeaModel {
     @NameInMap("to_parent_file_id")
     public String toParentFileId;
 
+    public static CCPMoveFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        CCPMoveFileRequest self = new CCPMoveFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

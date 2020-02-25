@@ -20,4 +20,9 @@ public class CCPListUploadedPartResponse extends TeaModel {
     @NameInMap("uploaded_parts")
     public UploadPartInfo[] uploadedParts;
 
+    public static CCPListUploadedPartResponse build(java.util.Map<String, ?> map) throws Exception {
+        CCPListUploadedPartResponse self = new CCPListUploadedPartResponse();
+        return TeaModel.build(map, self);
+    }
+
 }

@@ -8,4 +8,9 @@ public class GetDriveRequest extends TeaModel {
     @Validation(required = true)
     public String driveId;
 
+    public static GetDriveRequest build(java.util.Map<String, ?> map) throws Exception {
+        GetDriveRequest self = new GetDriveRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

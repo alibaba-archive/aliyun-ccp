@@ -27,4 +27,9 @@ public class CCPCopyFileRequest extends TeaModel {
     @Validation(required = true, pattern = "[a-z0-9.-_]{1,50}")
     public String toParentFileId;
 
+    public static CCPCopyFileRequest build(java.util.Map<String, ?> map) throws Exception {
+        CCPCopyFileRequest self = new CCPCopyFileRequest();
+        return TeaModel.build(map, self);
+    }
+
 }

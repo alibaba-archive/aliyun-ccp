@@ -10,4 +10,9 @@ public class ListDomainsRequest extends TeaModel {
     @NameInMap("marker")
     public String marker;
 
+    public static ListDomainsRequest build(java.util.Map<String, ?> map) throws Exception {
+        ListDomainsRequest self = new ListDomainsRequest();
+        return TeaModel.build(map, self);
+    }
+
 }
