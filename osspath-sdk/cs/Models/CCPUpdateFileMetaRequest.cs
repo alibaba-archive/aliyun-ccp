@@ -21,6 +21,10 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         [Validation(Required=true, Pattern="[0-9]+")]
         public string DriveId { get; set; }
 
+        [NameInMap("encrypt_mode")]
+        [Validation(Required=false)]
+        public string EncryptMode { get; set; }
+
         [NameInMap("file_id")]
         [Validation(Required=true, MaxLength=50, Pattern="[a-z0-9.-_]{1,50}")]
         public string FileId { get; set; }
@@ -38,7 +42,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         public string Meta { get; set; }
 
         [NameInMap("name")]
-        [Validation(Required=false, Pattern="[a-zA-Z0-9.-]{1,1000}")]
+        [Validation(Required=false, Pattern=".{1,1000}")]
         public string Name { get; set; }
 
         [NameInMap("starred")]

@@ -8,21 +8,29 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
-    public class OSSDeleteFileRequest : TeaModel {
+    public class OSSGetSecureUrlRequest : TeaModel {
         [NameInMap("drive_id")]
         [Validation(Required=false, Pattern="[0-9]+")]
         public string DriveId { get; set; }
+
+        [NameInMap("expire_sec")]
+        [Validation(Required=false)]
+        public long ExpireSec { get; set; }
+
+        [NameInMap("file_name")]
+        [Validation(Required=false)]
+        public string FileName { get; set; }
 
         [NameInMap("file_path")]
         [Validation(Required=true, MaxLength=1000)]
         public string FilePath { get; set; }
 
-        [NameInMap("permanently")]
+        [NameInMap("secure_ip")]
         [Validation(Required=false)]
-        public bool? Permanently { get; set; }
+        public string SecureIp { get; set; }
 
         [NameInMap("share_id")]
-        [Validation(Required=false, Pattern="[0-9a-zA-z-]+")]
+        [Validation(Required=false, Pattern="[0-9a-z-]+")]
         public string ShareId { get; set; }
 
     }

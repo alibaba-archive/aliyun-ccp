@@ -37,6 +37,14 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         [Validation(Required=false, MaxLength=4096)]
         public string Query { get; set; }
 
+        [NameInMap("url_expire_sec")]
+        [Validation(Required=false)]
+        public long UrlExpireSec { get; set; }
+
+        [NameInMap("video_thumbnail_process")]
+        [Validation(Required=false)]
+        public string VideoThumbnailProcess { get; set; }
+
     }
 
 }

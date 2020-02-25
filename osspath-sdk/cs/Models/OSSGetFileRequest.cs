@@ -10,11 +10,11 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
 {
     public class OSSGetFileRequest : TeaModel {
         [NameInMap("drive_id")]
-        [Validation(Required=true, Pattern="[0-9]+")]
+        [Validation(Required=false, Pattern="[0-9]+")]
         public string DriveId { get; set; }
 
         [NameInMap("file_path")]
-        [Validation(Required=true, MaxLength=50, Pattern="[a-z0-9.-_]{1,50}")]
+        [Validation(Required=true, MaxLength=1000)]
         public string FilePath { get; set; }
 
         [NameInMap("image_thumbnail_process")]
@@ -28,6 +28,10 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         [NameInMap("share_id")]
         [Validation(Required=false, Pattern="[0-9a-zA-z-]+")]
         public string ShareId { get; set; }
+
+        [NameInMap("url_expire_sec")]
+        [Validation(Required=false)]
+        public long UrlExpireSec { get; set; }
 
     }
 

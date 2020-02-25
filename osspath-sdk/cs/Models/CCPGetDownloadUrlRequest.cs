@@ -22,7 +22,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         public string FileId { get; set; }
 
         [NameInMap("file_name")]
-        [Validation(Required=true, Pattern="[a-zA-Z0-9.-]{1,1000}")]
+        [Validation(Required=false, Pattern=".{1,1000}")]
         public string FileName { get; set; }
 
     }
