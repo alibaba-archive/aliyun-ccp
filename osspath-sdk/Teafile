@@ -1,6 +1,6 @@
 {
 	"scope": "alibabacloud",
-	"name": "OSSClient",
+	"name": "OSSPath",
 	"version": "1.0.0",
 	"main": "./oss.tea",
 	"releases": {

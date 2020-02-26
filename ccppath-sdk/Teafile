@@ -1,6 +1,6 @@
 {
 	"scope": "alibabacloud",
-	"name": "CCPClient",
+	"name": "CCPPath",
 	"version": "1.0.0",
 	"main": "./ccp.tea",
 	"releases": {
