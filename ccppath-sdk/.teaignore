@@ -1,2 +1,11 @@
 .git/
 .gitignore/
+go
+cs
+java
+libraries
+swift
+ts
+.libraries.json
+.DS_Store
+.teaignore
