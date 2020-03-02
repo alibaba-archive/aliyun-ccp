@@ -1,3 +1,6 @@
+2020-03-02 Version: v1.2.0
+- Add extra header.
+
 2020-02-25 Version: v1.1.0
 - Remove BaseClient.
 

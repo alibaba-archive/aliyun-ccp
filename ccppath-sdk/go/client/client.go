@@ -301,11 +301,12 @@ func (s *AccountAccessTokenResponse) SetUserName(v string) *AccountAccessTokenRe
 }
 
 type AccountLinkRequest struct {
-	Detail   *string `json:"detail" xml:"detail"`
-	Identity *string `json:"identity" xml:"identity" require:"true"`
-	Status   *string `json:"status" xml:"status"`
-	Type     *string `json:"type" xml:"type" require:"true"`
-	UserId   *string `json:"user_id" xml:"user_id" require:"true"`
+	Header   *AccountLinkRequestHeader `json:"header" xml:"header" type:"Struct"`
+	Detail   *string                   `json:"detail" xml:"detail"`
+	Identity *string                   `json:"identity" xml:"identity" require:"true"`
+	Status   *string                   `json:"status" xml:"status"`
+	Type     *string                   `json:"type" xml:"type" require:"true"`
+	UserId   *string                   `json:"user_id" xml:"user_id" require:"true"`
 }
 
 func (s AccountLinkRequest) String() string {
@@ -314,6 +315,11 @@ func (s AccountLinkRequest) String() string {
 
 func (s AccountLinkRequest) GoString() string {
 	return s.String()
+}
+
+func (s *AccountLinkRequest) SetHeader(v *AccountLinkRequestHeader) *AccountLinkRequest {
+	s.Header = v
+	return s
 }
 
 func (s *AccountLinkRequest) SetDetail(v string) *AccountLinkRequest {
@@ -341,14 +347,38 @@ func (s *AccountLinkRequest) SetUserId(v string) *AccountLinkRequest {
 	return s
 }
 
+type AccountLinkRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s AccountLinkRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s AccountLinkRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *AccountLinkRequestHeader) SetTraceId(v string) *AccountLinkRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *AccountLinkRequestHeader) SetDeviceId(v string) *AccountLinkRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type AddStoreRequest struct {
-	BasePath  *string `json:"base_path" xml:"base_path"`
-	Bucket    *string `json:"bucket" xml:"bucket"`
-	DomainId  *string `json:"domain_id" xml:"domain_id" require:"true"`
-	Endpoint  *string `json:"endpoint" xml:"endpoint" require:"true"`
-	Ownership *string `json:"ownership" xml:"ownership"`
-	RoleArn   *string `json:"role_arn" xml:"role_arn"`
-	Type      *string `json:"type" xml:"type" require:"true"`
+	Header    *AddStoreRequestHeader `json:"header" xml:"header" type:"Struct"`
+	BasePath  *string                `json:"base_path" xml:"base_path"`
+	Bucket    *string                `json:"bucket" xml:"bucket"`
+	DomainId  *string                `json:"domain_id" xml:"domain_id" require:"true"`
+	Endpoint  *string                `json:"endpoint" xml:"endpoint" require:"true"`
+	Ownership *string                `json:"ownership" xml:"ownership"`
+	RoleArn   *string                `json:"role_arn" xml:"role_arn"`
+	Type      *string                `json:"type" xml:"type" require:"true"`
 }
 
 func (s AddStoreRequest) String() string {
@@ -357,6 +387,11 @@ func (s AddStoreRequest) String() string {
 
 func (s AddStoreRequest) GoString() string {
 	return s.String()
+}
+
+func (s *AddStoreRequest) SetHeader(v *AddStoreRequestHeader) *AddStoreRequest {
+	s.Header = v
+	return s
 }
 
 func (s *AddStoreRequest) SetBasePath(v string) *AddStoreRequest {
@@ -391,6 +426,29 @@ func (s *AddStoreRequest) SetRoleArn(v string) *AddStoreRequest {
 
 func (s *AddStoreRequest) SetType(v string) *AddStoreRequest {
 	s.Type = &v
+	return s
+}
+
+type AddStoreRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s AddStoreRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s AddStoreRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *AddStoreRequestHeader) SetTraceId(v string) *AddStoreRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *AddStoreRequestHeader) SetDeviceId(v string) *AddStoreRequestHeader {
+	s.DeviceId = &v
 	return s
 }
 
@@ -2023,7 +2081,8 @@ func (s *CCPUpdateFileMetaResponse) SetUrl(v string) *CCPUpdateFileMetaResponse 
 }
 
 type CancelLinkRequest struct {
-	TemporaryToken *string `json:"temporary_token" xml:"temporary_token" require:"true"`
+	Header         *CancelLinkRequestHeader `json:"header" xml:"header" type:"Struct"`
+	TemporaryToken *string                  `json:"temporary_token" xml:"temporary_token" require:"true"`
 }
 
 func (s CancelLinkRequest) String() string {
@@ -2034,8 +2093,36 @@ func (s CancelLinkRequest) GoString() string {
 	return s.String()
 }
 
+func (s *CancelLinkRequest) SetHeader(v *CancelLinkRequestHeader) *CancelLinkRequest {
+	s.Header = v
+	return s
+}
+
 func (s *CancelLinkRequest) SetTemporaryToken(v string) *CancelLinkRequest {
 	s.TemporaryToken = &v
+	return s
+}
+
+type CancelLinkRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CancelLinkRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CancelLinkRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CancelLinkRequestHeader) SetTraceId(v string) *CancelLinkRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CancelLinkRequestHeader) SetDeviceId(v string) *CancelLinkRequestHeader {
+	s.DeviceId = &v
 	return s
 }
 
@@ -2069,7 +2156,8 @@ func (s *Captcha) SetCaptchaId(v string) *Captcha {
 }
 
 type ConfirmLinkRequest struct {
-	TemporaryToken *string `json:"temporary_token" xml:"temporary_token" require:"true"`
+	Header         *ConfirmLinkRequestHeader `json:"header" xml:"header" type:"Struct"`
+	TemporaryToken *string                   `json:"temporary_token" xml:"temporary_token" require:"true"`
 }
 
 func (s ConfirmLinkRequest) String() string {
@@ -2080,8 +2168,36 @@ func (s ConfirmLinkRequest) GoString() string {
 	return s.String()
 }
 
+func (s *ConfirmLinkRequest) SetHeader(v *ConfirmLinkRequestHeader) *ConfirmLinkRequest {
+	s.Header = v
+	return s
+}
+
 func (s *ConfirmLinkRequest) SetTemporaryToken(v string) *ConfirmLinkRequest {
 	s.TemporaryToken = &v
+	return s
+}
+
+type ConfirmLinkRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s ConfirmLinkRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ConfirmLinkRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *ConfirmLinkRequestHeader) SetTraceId(v string) *ConfirmLinkRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *ConfirmLinkRequestHeader) SetDeviceId(v string) *ConfirmLinkRequestHeader {
+	s.DeviceId = &v
 	return s
 }
 
@@ -2127,13 +2243,14 @@ func (s *CorsRule) SetMaxAgeSeconds(v int64) *CorsRule {
 }
 
 type CreateAppRequest struct {
-	AppName      *string   `json:"app_name" xml:"app_name" require:"true" maxLength:"128"`
-	Description  *string   `json:"description" xml:"description" maxLength:"128"`
-	IsThirdParty *bool     `json:"is_third_party" xml:"is_third_party"`
-	Logo         *string   `json:"logo" xml:"logo" require:"true"`
-	RedirectUri  *string   `json:"redirect_uri" xml:"redirect_uri"`
-	Scope        []*string `json:"scope" xml:"scope" require:"true" type:"Repeated"`
-	Type         *string   `json:"type" xml:"type" require:"true"`
+	Header       *CreateAppRequestHeader `json:"header" xml:"header" type:"Struct"`
+	AppName      *string                 `json:"app_name" xml:"app_name" require:"true" maxLength:"128"`
+	Description  *string                 `json:"description" xml:"description" maxLength:"128"`
+	IsThirdParty *bool                   `json:"is_third_party" xml:"is_third_party"`
+	Logo         *string                 `json:"logo" xml:"logo" require:"true"`
+	RedirectUri  *string                 `json:"redirect_uri" xml:"redirect_uri"`
+	Scope        []*string               `json:"scope" xml:"scope" require:"true" type:"Repeated"`
+	Type         *string                 `json:"type" xml:"type" require:"true"`
 }
 
 func (s CreateAppRequest) String() string {
@@ -2142,6 +2259,11 @@ func (s CreateAppRequest) String() string {
 
 func (s CreateAppRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CreateAppRequest) SetHeader(v *CreateAppRequestHeader) *CreateAppRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CreateAppRequest) SetAppName(v string) *CreateAppRequest {
@@ -2179,33 +2301,57 @@ func (s *CreateAppRequest) SetType(v string) *CreateAppRequest {
 	return s
 }
 
+type CreateAppRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CreateAppRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CreateAppRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CreateAppRequestHeader) SetTraceId(v string) *CreateAppRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CreateAppRequestHeader) SetDeviceId(v string) *CreateAppRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CreateDomainRequest struct {
-	AuthAlipayAppId            *string                `json:"auth_alipay_app_id" xml:"auth_alipay_app_id"`
-	AuthAlipayEnbale           *bool                  `json:"auth_alipay_enbale" xml:"auth_alipay_enbale"`
-	AuthAlipayPrivateKey       *string                `json:"auth_alipay_private_key" xml:"auth_alipay_private_key"`
-	AuthConfig                 map[string]interface{} `json:"auth_config" xml:"auth_config"`
-	AuthDingdingAppId          *string                `json:"auth_dingding_app_id" xml:"auth_dingding_app_id"`
-	AuthDingdingAppSecret      *string                `json:"auth_dingding_app_secret" xml:"auth_dingding_app_secret"`
-	AuthDingdingEnable         *bool                  `json:"auth_dingding_enable" xml:"auth_dingding_enable"`
-	AuthEndpointEnable         *bool                  `json:"auth_endpoint_enable" xml:"auth_endpoint_enable"`
-	AuthRamAppId               *string                `json:"auth_ram_app_id" xml:"auth_ram_app_id"`
-	AuthRamAppSecret           *string                `json:"auth_ram_app_secret" xml:"auth_ram_app_secret"`
-	AuthRamEnable              *bool                  `json:"auth_ram_enable" xml:"auth_ram_enable"`
-	DataHashName               *string                `json:"data_hash_name" xml:"data_hash_name"`
-	Description                *string                `json:"description" xml:"description"`
-	DomainName                 *string                `json:"domain_name" xml:"domain_name" require:"true"`
-	EventFilenameMatches       *string                `json:"event_filename_matches" xml:"event_filename_matches"`
-	EventMnsEndpoint           *string                `json:"event_mns_endpoint" xml:"event_mns_endpoint"`
-	EventMnsTopic              *string                `json:"event_mns_topic" xml:"event_mns_topic"`
-	EventNames                 []*string              `json:"event_names" xml:"event_names" type:"Repeated"`
-	EventRoleArn               *string                `json:"event_role_arn" xml:"event_role_arn"`
-	InitDriveEnable            *bool                  `json:"init_drive_enable" xml:"init_drive_enable"`
-	InitDriveSize              *int64                 `json:"init_drive_size" xml:"init_drive_size"`
-	PathType                   *string                `json:"path_type" xml:"path_type" require:"true"`
-	PublishedAppAccessStrategy *AppAccessStrategy     `json:"published_app_access_strategy" xml:"published_app_access_strategy"`
-	Sharable                   *bool                  `json:"sharable" xml:"sharable"`
-	StoreLevel                 *string                `json:"store_level" xml:"store_level"`
-	StoreRegionList            []*string              `json:"store_region_list" xml:"store_region_list" require:"true" type:"Repeated"`
+	Header                     *CreateDomainRequestHeader `json:"header" xml:"header" type:"Struct"`
+	AuthAlipayAppId            *string                    `json:"auth_alipay_app_id" xml:"auth_alipay_app_id"`
+	AuthAlipayEnbale           *bool                      `json:"auth_alipay_enbale" xml:"auth_alipay_enbale"`
+	AuthAlipayPrivateKey       *string                    `json:"auth_alipay_private_key" xml:"auth_alipay_private_key"`
+	AuthConfig                 map[string]interface{}     `json:"auth_config" xml:"auth_config"`
+	AuthDingdingAppId          *string                    `json:"auth_dingding_app_id" xml:"auth_dingding_app_id"`
+	AuthDingdingAppSecret      *string                    `json:"auth_dingding_app_secret" xml:"auth_dingding_app_secret"`
+	AuthDingdingEnable         *bool                      `json:"auth_dingding_enable" xml:"auth_dingding_enable"`
+	AuthEndpointEnable         *bool                      `json:"auth_endpoint_enable" xml:"auth_endpoint_enable"`
+	AuthRamAppId               *string                    `json:"auth_ram_app_id" xml:"auth_ram_app_id"`
+	AuthRamAppSecret           *string                    `json:"auth_ram_app_secret" xml:"auth_ram_app_secret"`
+	AuthRamEnable              *bool                      `json:"auth_ram_enable" xml:"auth_ram_enable"`
+	DataHashName               *string                    `json:"data_hash_name" xml:"data_hash_name"`
+	Description                *string                    `json:"description" xml:"description"`
+	DomainName                 *string                    `json:"domain_name" xml:"domain_name" require:"true"`
+	EventFilenameMatches       *string                    `json:"event_filename_matches" xml:"event_filename_matches"`
+	EventMnsEndpoint           *string                    `json:"event_mns_endpoint" xml:"event_mns_endpoint"`
+	EventMnsTopic              *string                    `json:"event_mns_topic" xml:"event_mns_topic"`
+	EventNames                 []*string                  `json:"event_names" xml:"event_names" type:"Repeated"`
+	EventRoleArn               *string                    `json:"event_role_arn" xml:"event_role_arn"`
+	InitDriveEnable            *bool                      `json:"init_drive_enable" xml:"init_drive_enable"`
+	InitDriveSize              *int64                     `json:"init_drive_size" xml:"init_drive_size"`
+	PathType                   *string                    `json:"path_type" xml:"path_type" require:"true"`
+	PublishedAppAccessStrategy *AppAccessStrategy         `json:"published_app_access_strategy" xml:"published_app_access_strategy"`
+	Sharable                   *bool                      `json:"sharable" xml:"sharable"`
+	StoreLevel                 *string                    `json:"store_level" xml:"store_level"`
+	StoreRegionList            []*string                  `json:"store_region_list" xml:"store_region_list" require:"true" type:"Repeated"`
 }
 
 func (s CreateDomainRequest) String() string {
@@ -2214,6 +2360,11 @@ func (s CreateDomainRequest) String() string {
 
 func (s CreateDomainRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CreateDomainRequest) SetHeader(v *CreateDomainRequestHeader) *CreateDomainRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CreateDomainRequest) SetAuthAlipayAppId(v string) *CreateDomainRequest {
@@ -2346,6 +2497,29 @@ func (s *CreateDomainRequest) SetStoreRegionList(v []*string) *CreateDomainReque
 	return s
 }
 
+type CreateDomainRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CreateDomainRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CreateDomainRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CreateDomainRequestHeader) SetTraceId(v string) *CreateDomainRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CreateDomainRequestHeader) SetDeviceId(v string) *CreateDomainRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CreateDriveResponse struct {
 	RequestId *string `json:"requestId" xml:"requestId"`
 	DomainId  *string `json:"domain_id" xml:"domain_id"`
@@ -2405,11 +2579,12 @@ func (s *CreateShareResponse) SetShareId(v string) *CreateShareResponse {
 }
 
 type DefaultChangePasswordRequest struct {
-	AppId       *string `json:"app_id" xml:"app_id" require:"true"`
-	NewPassword *string `json:"new_password" xml:"new_password" require:"true"`
-	PhoneNumber *string `json:"phone_number" xml:"phone_number" require:"true"`
-	SmsCode     *string `json:"sms_code" xml:"sms_code" require:"true"`
-	SmsCodeId   *string `json:"sms_code_id" xml:"sms_code_id" require:"true"`
+	Header      *DefaultChangePasswordRequestHeader `json:"header" xml:"header" type:"Struct"`
+	AppId       *string                             `json:"app_id" xml:"app_id" require:"true"`
+	NewPassword *string                             `json:"new_password" xml:"new_password" require:"true"`
+	PhoneNumber *string                             `json:"phone_number" xml:"phone_number" require:"true"`
+	SmsCode     *string                             `json:"sms_code" xml:"sms_code" require:"true"`
+	SmsCodeId   *string                             `json:"sms_code_id" xml:"sms_code_id" require:"true"`
 }
 
 func (s DefaultChangePasswordRequest) String() string {
@@ -2418,6 +2593,11 @@ func (s DefaultChangePasswordRequest) String() string {
 
 func (s DefaultChangePasswordRequest) GoString() string {
 	return s.String()
+}
+
+func (s *DefaultChangePasswordRequest) SetHeader(v *DefaultChangePasswordRequestHeader) *DefaultChangePasswordRequest {
+	s.Header = v
+	return s
 }
 
 func (s *DefaultChangePasswordRequest) SetAppId(v string) *DefaultChangePasswordRequest {
@@ -2445,10 +2625,34 @@ func (s *DefaultChangePasswordRequest) SetSmsCodeId(v string) *DefaultChangePass
 	return s
 }
 
+type DefaultChangePasswordRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s DefaultChangePasswordRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s DefaultChangePasswordRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *DefaultChangePasswordRequestHeader) SetTraceId(v string) *DefaultChangePasswordRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *DefaultChangePasswordRequestHeader) SetDeviceId(v string) *DefaultChangePasswordRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type DefaultSetPasswordRequest struct {
-	AppId       *string `json:"app_id" xml:"app_id" require:"true"`
-	NewPassword *string `json:"new_password" xml:"new_password" require:"true"`
-	State       *string `json:"state" xml:"state" require:"true"`
+	Header      *DefaultSetPasswordRequestHeader `json:"header" xml:"header" type:"Struct"`
+	AppId       *string                          `json:"app_id" xml:"app_id" require:"true"`
+	NewPassword *string                          `json:"new_password" xml:"new_password" require:"true"`
+	State       *string                          `json:"state" xml:"state" require:"true"`
 }
 
 func (s DefaultSetPasswordRequest) String() string {
@@ -2457,6 +2661,11 @@ func (s DefaultSetPasswordRequest) String() string {
 
 func (s DefaultSetPasswordRequest) GoString() string {
 	return s.String()
+}
+
+func (s *DefaultSetPasswordRequest) SetHeader(v *DefaultSetPasswordRequestHeader) *DefaultSetPasswordRequest {
+	s.Header = v
+	return s
 }
 
 func (s *DefaultSetPasswordRequest) SetAppId(v string) *DefaultSetPasswordRequest {
@@ -2474,8 +2683,32 @@ func (s *DefaultSetPasswordRequest) SetState(v string) *DefaultSetPasswordReques
 	return s
 }
 
+type DefaultSetPasswordRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s DefaultSetPasswordRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s DefaultSetPasswordRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *DefaultSetPasswordRequestHeader) SetTraceId(v string) *DefaultSetPasswordRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *DefaultSetPasswordRequestHeader) SetDeviceId(v string) *DefaultSetPasswordRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type DeleteAppRequest struct {
-	AppId *string `json:"app_id" xml:"app_id" require:"true"`
+	Header *DeleteAppRequestHeader `json:"header" xml:"header" type:"Struct"`
+	AppId  *string                 `json:"app_id" xml:"app_id" require:"true"`
 }
 
 func (s DeleteAppRequest) String() string {
@@ -2486,13 +2719,42 @@ func (s DeleteAppRequest) GoString() string {
 	return s.String()
 }
 
+func (s *DeleteAppRequest) SetHeader(v *DeleteAppRequestHeader) *DeleteAppRequest {
+	s.Header = v
+	return s
+}
+
 func (s *DeleteAppRequest) SetAppId(v string) *DeleteAppRequest {
 	s.AppId = &v
 	return s
 }
 
+type DeleteAppRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s DeleteAppRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s DeleteAppRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *DeleteAppRequestHeader) SetTraceId(v string) *DeleteAppRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *DeleteAppRequestHeader) SetDeviceId(v string) *DeleteAppRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type DeleteDomainRequest struct {
-	DomainId *string `json:"domain_id" xml:"domain_id" require:"true"`
+	Header   *DeleteDomainRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DomainId *string                    `json:"domain_id" xml:"domain_id" require:"true"`
 }
 
 func (s DeleteDomainRequest) String() string {
@@ -2503,8 +2765,36 @@ func (s DeleteDomainRequest) GoString() string {
 	return s.String()
 }
 
+func (s *DeleteDomainRequest) SetHeader(v *DeleteDomainRequestHeader) *DeleteDomainRequest {
+	s.Header = v
+	return s
+}
+
 func (s *DeleteDomainRequest) SetDomainId(v string) *DeleteDomainRequest {
 	s.DomainId = &v
+	return s
+}
+
+type DeleteDomainRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s DeleteDomainRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s DeleteDomainRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *DeleteDomainRequestHeader) SetTraceId(v string) *DeleteDomainRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *DeleteDomainRequestHeader) SetDeviceId(v string) *DeleteDomainRequestHeader {
+	s.DeviceId = &v
 	return s
 }
 
@@ -2526,8 +2816,9 @@ func (s *DeleteDriveResponse) SetRequestId(v string) *DeleteDriveResponse {
 }
 
 type GetAccessTokenByLinkInfoRequest struct {
-	Identity *string `json:"identity" xml:"identity" require:"true"`
-	Type     *string `json:"type" xml:"type" require:"true"`
+	Header   *GetAccessTokenByLinkInfoRequestHeader `json:"header" xml:"header" type:"Struct"`
+	Identity *string                                `json:"identity" xml:"identity" require:"true"`
+	Type     *string                                `json:"type" xml:"type" require:"true"`
 }
 
 func (s GetAccessTokenByLinkInfoRequest) String() string {
@@ -2536,6 +2827,11 @@ func (s GetAccessTokenByLinkInfoRequest) String() string {
 
 func (s GetAccessTokenByLinkInfoRequest) GoString() string {
 	return s.String()
+}
+
+func (s *GetAccessTokenByLinkInfoRequest) SetHeader(v *GetAccessTokenByLinkInfoRequestHeader) *GetAccessTokenByLinkInfoRequest {
+	s.Header = v
+	return s
 }
 
 func (s *GetAccessTokenByLinkInfoRequest) SetIdentity(v string) *GetAccessTokenByLinkInfoRequest {
@@ -2548,8 +2844,32 @@ func (s *GetAccessTokenByLinkInfoRequest) SetType(v string) *GetAccessTokenByLin
 	return s
 }
 
+type GetAccessTokenByLinkInfoRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s GetAccessTokenByLinkInfoRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetAccessTokenByLinkInfoRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *GetAccessTokenByLinkInfoRequestHeader) SetTraceId(v string) *GetAccessTokenByLinkInfoRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *GetAccessTokenByLinkInfoRequestHeader) SetDeviceId(v string) *GetAccessTokenByLinkInfoRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type GetAppRequest struct {
-	AppId *string `json:"app_id" xml:"app_id" require:"true"`
+	Header *GetAppRequestHeader `json:"header" xml:"header" type:"Struct"`
+	AppId  *string              `json:"app_id" xml:"app_id" require:"true"`
 }
 
 func (s GetAppRequest) String() string {
@@ -2560,14 +2880,43 @@ func (s GetAppRequest) GoString() string {
 	return s.String()
 }
 
+func (s *GetAppRequest) SetHeader(v *GetAppRequestHeader) *GetAppRequest {
+	s.Header = v
+	return s
+}
+
 func (s *GetAppRequest) SetAppId(v string) *GetAppRequest {
 	s.AppId = &v
 	return s
 }
 
+type GetAppRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s GetAppRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetAppRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *GetAppRequestHeader) SetTraceId(v string) *GetAppRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *GetAppRequestHeader) SetDeviceId(v string) *GetAppRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type GetByLinkInfoRequest struct {
-	Identity *string `json:"identity" xml:"identity" require:"true"`
-	Type     *string `json:"type" xml:"type" require:"true"`
+	Header   *GetByLinkInfoRequestHeader `json:"header" xml:"header" type:"Struct"`
+	Identity *string                     `json:"identity" xml:"identity" require:"true"`
+	Type     *string                     `json:"type" xml:"type" require:"true"`
 }
 
 func (s GetByLinkInfoRequest) String() string {
@@ -2576,6 +2925,11 @@ func (s GetByLinkInfoRequest) String() string {
 
 func (s GetByLinkInfoRequest) GoString() string {
 	return s.String()
+}
+
+func (s *GetByLinkInfoRequest) SetHeader(v *GetByLinkInfoRequestHeader) *GetByLinkInfoRequest {
+	s.Header = v
+	return s
 }
 
 func (s *GetByLinkInfoRequest) SetIdentity(v string) *GetByLinkInfoRequest {
@@ -2588,8 +2942,32 @@ func (s *GetByLinkInfoRequest) SetType(v string) *GetByLinkInfoRequest {
 	return s
 }
 
+type GetByLinkInfoRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s GetByLinkInfoRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetByLinkInfoRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *GetByLinkInfoRequestHeader) SetTraceId(v string) *GetByLinkInfoRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *GetByLinkInfoRequestHeader) SetDeviceId(v string) *GetByLinkInfoRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type GetCaptchaRequest struct {
-	AppId *string `json:"app_id" xml:"app_id" require:"true"`
+	Header *GetCaptchaRequestHeader `json:"header" xml:"header" type:"Struct"`
+	AppId  *string                  `json:"app_id" xml:"app_id" require:"true"`
 }
 
 func (s GetCaptchaRequest) String() string {
@@ -2600,13 +2978,42 @@ func (s GetCaptchaRequest) GoString() string {
 	return s.String()
 }
 
+func (s *GetCaptchaRequest) SetHeader(v *GetCaptchaRequestHeader) *GetCaptchaRequest {
+	s.Header = v
+	return s
+}
+
 func (s *GetCaptchaRequest) SetAppId(v string) *GetCaptchaRequest {
 	s.AppId = &v
 	return s
 }
 
+type GetCaptchaRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s GetCaptchaRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetCaptchaRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *GetCaptchaRequestHeader) SetTraceId(v string) *GetCaptchaRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *GetCaptchaRequestHeader) SetDeviceId(v string) *GetCaptchaRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type GetDomainRequest struct {
-	DomainId *string `json:"domain_id" xml:"domain_id" require:"true"`
+	Header   *GetDomainRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DomainId *string                 `json:"domain_id" xml:"domain_id" require:"true"`
 }
 
 func (s GetDomainRequest) String() string {
@@ -2617,8 +3024,36 @@ func (s GetDomainRequest) GoString() string {
 	return s.String()
 }
 
+func (s *GetDomainRequest) SetHeader(v *GetDomainRequestHeader) *GetDomainRequest {
+	s.Header = v
+	return s
+}
+
 func (s *GetDomainRequest) SetDomainId(v string) *GetDomainRequest {
 	s.DomainId = &v
+	return s
+}
+
+type GetDomainRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s GetDomainRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetDomainRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *GetDomainRequestHeader) SetTraceId(v string) *GetDomainRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *GetDomainRequestHeader) SetDeviceId(v string) *GetDomainRequestHeader {
+	s.DeviceId = &v
 	return s
 }
 
@@ -2712,7 +3147,8 @@ func (s *GetDriveResponse) SetUsedSize(v int64) *GetDriveResponse {
 }
 
 type GetLinkInfoByUserIDRequest struct {
-	UserId *string `json:"user_id" xml:"user_id" require:"true"`
+	Header *GetLinkInfoByUserIDRequestHeader `json:"header" xml:"header" type:"Struct"`
+	UserId *string                           `json:"user_id" xml:"user_id" require:"true"`
 }
 
 func (s GetLinkInfoByUserIDRequest) String() string {
@@ -2723,8 +3159,36 @@ func (s GetLinkInfoByUserIDRequest) GoString() string {
 	return s.String()
 }
 
+func (s *GetLinkInfoByUserIDRequest) SetHeader(v *GetLinkInfoByUserIDRequestHeader) *GetLinkInfoByUserIDRequest {
+	s.Header = v
+	return s
+}
+
 func (s *GetLinkInfoByUserIDRequest) SetUserId(v string) *GetLinkInfoByUserIDRequest {
 	s.UserId = &v
+	return s
+}
+
+type GetLinkInfoByUserIDRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s GetLinkInfoByUserIDRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetLinkInfoByUserIDRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *GetLinkInfoByUserIDRequestHeader) SetTraceId(v string) *GetLinkInfoByUserIDRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *GetLinkInfoByUserIDRequestHeader) SetDeviceId(v string) *GetLinkInfoByUserIDRequestHeader {
+	s.DeviceId = &v
 	return s
 }
 
@@ -2970,8 +3434,9 @@ func (s *LinkInfoResponse) SetUserId(v string) *LinkInfoResponse {
 }
 
 type ListAppsRequest struct {
-	Limit  *int    `json:"limit" xml:"limit"`
-	Marker *string `json:"marker" xml:"marker"`
+	Header *ListAppsRequestHeader `json:"header" xml:"header" type:"Struct"`
+	Limit  *int                   `json:"limit" xml:"limit"`
+	Marker *string                `json:"marker" xml:"marker"`
 }
 
 func (s ListAppsRequest) String() string {
@@ -2980,6 +3445,11 @@ func (s ListAppsRequest) String() string {
 
 func (s ListAppsRequest) GoString() string {
 	return s.String()
+}
+
+func (s *ListAppsRequest) SetHeader(v *ListAppsRequestHeader) *ListAppsRequest {
+	s.Header = v
+	return s
 }
 
 func (s *ListAppsRequest) SetLimit(v int) *ListAppsRequest {
@@ -2992,9 +3462,33 @@ func (s *ListAppsRequest) SetMarker(v string) *ListAppsRequest {
 	return s
 }
 
+type ListAppsRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s ListAppsRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListAppsRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *ListAppsRequestHeader) SetTraceId(v string) *ListAppsRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *ListAppsRequestHeader) SetDeviceId(v string) *ListAppsRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type ListDomainsRequest struct {
-	Limit  *int    `json:"limit" xml:"limit"`
-	Marker *string `json:"marker" xml:"marker"`
+	Header *ListDomainsRequestHeader `json:"header" xml:"header" type:"Struct"`
+	Limit  *int                      `json:"limit" xml:"limit"`
+	Marker *string                   `json:"marker" xml:"marker"`
 }
 
 func (s ListDomainsRequest) String() string {
@@ -3005,6 +3499,11 @@ func (s ListDomainsRequest) GoString() string {
 	return s.String()
 }
 
+func (s *ListDomainsRequest) SetHeader(v *ListDomainsRequestHeader) *ListDomainsRequest {
+	s.Header = v
+	return s
+}
+
 func (s *ListDomainsRequest) SetLimit(v int) *ListDomainsRequest {
 	s.Limit = &v
 	return s
@@ -3012,6 +3511,29 @@ func (s *ListDomainsRequest) SetLimit(v int) *ListDomainsRequest {
 
 func (s *ListDomainsRequest) SetMarker(v string) *ListDomainsRequest {
 	s.Marker = &v
+	return s
+}
+
+type ListDomainsRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s ListDomainsRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListDomainsRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *ListDomainsRequestHeader) SetTraceId(v string) *ListDomainsRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *ListDomainsRequestHeader) SetDeviceId(v string) *ListDomainsRequestHeader {
+	s.DeviceId = &v
 	return s
 }
 
@@ -3126,7 +3648,8 @@ func (s *ListStoreResponse) SetItems(v []*StoreItemResponse) *ListStoreResponse 
 }
 
 type ListStoresRequest struct {
-	DomainId *string `json:"domain_id" xml:"domain_id" require:"true"`
+	Header   *ListStoresRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DomainId *string                  `json:"domain_id" xml:"domain_id" require:"true"`
 }
 
 func (s ListStoresRequest) String() string {
@@ -3137,16 +3660,45 @@ func (s ListStoresRequest) GoString() string {
 	return s.String()
 }
 
+func (s *ListStoresRequest) SetHeader(v *ListStoresRequestHeader) *ListStoresRequest {
+	s.Header = v
+	return s
+}
+
 func (s *ListStoresRequest) SetDomainId(v string) *ListStoresRequest {
 	s.DomainId = &v
 	return s
 }
 
+type ListStoresRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s ListStoresRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListStoresRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *ListStoresRequestHeader) SetTraceId(v string) *ListStoresRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *ListStoresRequestHeader) SetDeviceId(v string) *ListStoresRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type LoginByCodeRequest struct {
-	AccessToken *string `json:"access_token" xml:"access_token"`
-	AppId       *string `json:"app_id" xml:"app_id" require:"true"`
-	AuthCode    *string `json:"auth_code" xml:"auth_code"`
-	Type        *string `json:"type" xml:"type" require:"true"`
+	Header      *LoginByCodeRequestHeader `json:"header" xml:"header" type:"Struct"`
+	AccessToken *string                   `json:"access_token" xml:"access_token"`
+	AppId       *string                   `json:"app_id" xml:"app_id" require:"true"`
+	AuthCode    *string                   `json:"auth_code" xml:"auth_code"`
+	Type        *string                   `json:"type" xml:"type" require:"true"`
 }
 
 func (s LoginByCodeRequest) String() string {
@@ -3155,6 +3707,11 @@ func (s LoginByCodeRequest) String() string {
 
 func (s LoginByCodeRequest) GoString() string {
 	return s.String()
+}
+
+func (s *LoginByCodeRequest) SetHeader(v *LoginByCodeRequestHeader) *LoginByCodeRequest {
+	s.Header = v
+	return s
 }
 
 func (s *LoginByCodeRequest) SetAccessToken(v string) *LoginByCodeRequest {
@@ -3177,9 +3734,33 @@ func (s *LoginByCodeRequest) SetType(v string) *LoginByCodeRequest {
 	return s
 }
 
+type LoginByCodeRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s LoginByCodeRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s LoginByCodeRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *LoginByCodeRequestHeader) SetTraceId(v string) *LoginByCodeRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *LoginByCodeRequestHeader) SetDeviceId(v string) *LoginByCodeRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type MobileCheckExistRequest struct {
-	AppId       *string `json:"app_id" xml:"app_id" require:"true"`
-	PhoneNumber *string `json:"phone_number" xml:"phone_number" require:"true"`
+	Header      *MobileCheckExistRequestHeader `json:"header" xml:"header" type:"Struct"`
+	AppId       *string                        `json:"app_id" xml:"app_id" require:"true"`
+	PhoneNumber *string                        `json:"phone_number" xml:"phone_number" require:"true"`
 }
 
 func (s MobileCheckExistRequest) String() string {
@@ -3190,6 +3771,11 @@ func (s MobileCheckExistRequest) GoString() string {
 	return s.String()
 }
 
+func (s *MobileCheckExistRequest) SetHeader(v *MobileCheckExistRequestHeader) *MobileCheckExistRequest {
+	s.Header = v
+	return s
+}
+
 func (s *MobileCheckExistRequest) SetAppId(v string) *MobileCheckExistRequest {
 	s.AppId = &v
 	return s
@@ -3197,6 +3783,29 @@ func (s *MobileCheckExistRequest) SetAppId(v string) *MobileCheckExistRequest {
 
 func (s *MobileCheckExistRequest) SetPhoneNumber(v string) *MobileCheckExistRequest {
 	s.PhoneNumber = &v
+	return s
+}
+
+type MobileCheckExistRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s MobileCheckExistRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s MobileCheckExistRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *MobileCheckExistRequestHeader) SetTraceId(v string) *MobileCheckExistRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *MobileCheckExistRequestHeader) SetDeviceId(v string) *MobileCheckExistRequestHeader {
+	s.DeviceId = &v
 	return s
 }
 
@@ -3230,14 +3839,15 @@ func (s *MobileCheckExistResponse) SetPhoneNumber(v string) *MobileCheckExistRes
 }
 
 type MobileLoginRequest struct {
-	AppId        *string `json:"app_id" xml:"app_id" require:"true"`
-	AutoRegister *bool   `json:"auto_register" xml:"auto_register"`
-	CaptchaId    *string `json:"captcha_id" xml:"captcha_id"`
-	CaptchaText  *string `json:"captcha_text" xml:"captcha_text"`
-	Password     *string `json:"password" xml:"password"`
-	PhoneNumber  *string `json:"phone_number" xml:"phone_number" require:"true"`
-	SmsCode      *string `json:"sms_code" xml:"sms_code"`
-	SmsCodeId    *string `json:"sms_code_id" xml:"sms_code_id"`
+	Header       *MobileLoginRequestHeader `json:"header" xml:"header" type:"Struct"`
+	AppId        *string                   `json:"app_id" xml:"app_id" require:"true"`
+	AutoRegister *bool                     `json:"auto_register" xml:"auto_register"`
+	CaptchaId    *string                   `json:"captcha_id" xml:"captcha_id"`
+	CaptchaText  *string                   `json:"captcha_text" xml:"captcha_text"`
+	Password     *string                   `json:"password" xml:"password"`
+	PhoneNumber  *string                   `json:"phone_number" xml:"phone_number" require:"true"`
+	SmsCode      *string                   `json:"sms_code" xml:"sms_code"`
+	SmsCodeId    *string                   `json:"sms_code_id" xml:"sms_code_id"`
 }
 
 func (s MobileLoginRequest) String() string {
@@ -3246,6 +3856,11 @@ func (s MobileLoginRequest) String() string {
 
 func (s MobileLoginRequest) GoString() string {
 	return s.String()
+}
+
+func (s *MobileLoginRequest) SetHeader(v *MobileLoginRequestHeader) *MobileLoginRequest {
+	s.Header = v
+	return s
 }
 
 func (s *MobileLoginRequest) SetAppId(v string) *MobileLoginRequest {
@@ -3288,11 +3903,35 @@ func (s *MobileLoginRequest) SetSmsCodeId(v string) *MobileLoginRequest {
 	return s
 }
 
+type MobileLoginRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s MobileLoginRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s MobileLoginRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *MobileLoginRequestHeader) SetTraceId(v string) *MobileLoginRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *MobileLoginRequestHeader) SetDeviceId(v string) *MobileLoginRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type MobileRegisterRequest struct {
-	AppId       *string `json:"app_id" xml:"app_id" require:"true"`
-	PhoneNumber *string `json:"phone_number" xml:"phone_number" require:"true"`
-	SmsCode     *string `json:"sms_code" xml:"sms_code" require:"true"`
-	SmsCodeId   *string `json:"sms_code_id" xml:"sms_code_id" require:"true"`
+	Header      *MobileRegisterRequestHeader `json:"header" xml:"header" type:"Struct"`
+	AppId       *string                      `json:"app_id" xml:"app_id" require:"true"`
+	PhoneNumber *string                      `json:"phone_number" xml:"phone_number" require:"true"`
+	SmsCode     *string                      `json:"sms_code" xml:"sms_code" require:"true"`
+	SmsCodeId   *string                      `json:"sms_code_id" xml:"sms_code_id" require:"true"`
 }
 
 func (s MobileRegisterRequest) String() string {
@@ -3301,6 +3940,11 @@ func (s MobileRegisterRequest) String() string {
 
 func (s MobileRegisterRequest) GoString() string {
 	return s.String()
+}
+
+func (s *MobileRegisterRequest) SetHeader(v *MobileRegisterRequestHeader) *MobileRegisterRequest {
+	s.Header = v
+	return s
 }
 
 func (s *MobileRegisterRequest) SetAppId(v string) *MobileRegisterRequest {
@@ -3323,12 +3967,36 @@ func (s *MobileRegisterRequest) SetSmsCodeId(v string) *MobileRegisterRequest {
 	return s
 }
 
+type MobileRegisterRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s MobileRegisterRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s MobileRegisterRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *MobileRegisterRequestHeader) SetTraceId(v string) *MobileRegisterRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *MobileRegisterRequestHeader) SetDeviceId(v string) *MobileRegisterRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type MobileSendSmsCodeRequest struct {
-	AppId       *string `json:"app_id" xml:"app_id" require:"true"`
-	CaptchaId   *string `json:"captcha_id" xml:"captcha_id"`
-	CaptchaText *string `json:"captcha_text" xml:"captcha_text"`
-	PhoneNumber *string `json:"phone_number" xml:"phone_number" require:"true"`
-	Type        *string `json:"type" xml:"type" require:"true"`
+	Header      *MobileSendSmsCodeRequestHeader `json:"header" xml:"header" type:"Struct"`
+	AppId       *string                         `json:"app_id" xml:"app_id" require:"true"`
+	CaptchaId   *string                         `json:"captcha_id" xml:"captcha_id"`
+	CaptchaText *string                         `json:"captcha_text" xml:"captcha_text"`
+	PhoneNumber *string                         `json:"phone_number" xml:"phone_number" require:"true"`
+	Type        *string                         `json:"type" xml:"type" require:"true"`
 }
 
 func (s MobileSendSmsCodeRequest) String() string {
@@ -3337,6 +4005,11 @@ func (s MobileSendSmsCodeRequest) String() string {
 
 func (s MobileSendSmsCodeRequest) GoString() string {
 	return s.String()
+}
+
+func (s *MobileSendSmsCodeRequest) SetHeader(v *MobileSendSmsCodeRequestHeader) *MobileSendSmsCodeRequest {
+	s.Header = v
+	return s
 }
 
 func (s *MobileSendSmsCodeRequest) SetAppId(v string) *MobileSendSmsCodeRequest {
@@ -3361,6 +4034,29 @@ func (s *MobileSendSmsCodeRequest) SetPhoneNumber(v string) *MobileSendSmsCodeRe
 
 func (s *MobileSendSmsCodeRequest) SetType(v string) *MobileSendSmsCodeRequest {
 	s.Type = &v
+	return s
+}
+
+type MobileSendSmsCodeRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s MobileSendSmsCodeRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s MobileSendSmsCodeRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *MobileSendSmsCodeRequestHeader) SetTraceId(v string) *MobileSendSmsCodeRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *MobileSendSmsCodeRequestHeader) SetDeviceId(v string) *MobileSendSmsCodeRequestHeader {
+	s.DeviceId = &v
 	return s
 }
 
@@ -4316,8 +5012,9 @@ func (s *PreHashCheckSuccessResponse) SetPreHash(v string) *PreHashCheckSuccessR
 }
 
 type RemoveStoreRequest struct {
-	DomainId *string `json:"domain_id" xml:"domain_id" require:"true"`
-	StoreId  *string `json:"store_id" xml:"store_id" require:"true"`
+	Header   *RemoveStoreRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DomainId *string                   `json:"domain_id" xml:"domain_id" require:"true"`
+	StoreId  *string                   `json:"store_id" xml:"store_id" require:"true"`
 }
 
 func (s RemoveStoreRequest) String() string {
@@ -4326,6 +5023,11 @@ func (s RemoveStoreRequest) String() string {
 
 func (s RemoveStoreRequest) GoString() string {
 	return s.String()
+}
+
+func (s *RemoveStoreRequest) SetHeader(v *RemoveStoreRequestHeader) *RemoveStoreRequest {
+	s.Header = v
+	return s
 }
 
 func (s *RemoveStoreRequest) SetDomainId(v string) *RemoveStoreRequest {
@@ -4338,10 +5040,34 @@ func (s *RemoveStoreRequest) SetStoreId(v string) *RemoveStoreRequest {
 	return s
 }
 
+type RemoveStoreRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s RemoveStoreRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s RemoveStoreRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *RemoveStoreRequestHeader) SetTraceId(v string) *RemoveStoreRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *RemoveStoreRequestHeader) SetDeviceId(v string) *RemoveStoreRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type SetStoreCorsRequest struct {
-	CorsRule *CorsRule `json:"cors_rule" xml:"cors_rule" require:"true"`
-	DomainId *string   `json:"domain_id" xml:"domain_id" require:"true"`
-	StoreId  *string   `json:"store_id" xml:"store_id" require:"true"`
+	Header   *SetStoreCorsRequestHeader `json:"header" xml:"header" type:"Struct"`
+	CorsRule *CorsRule                  `json:"cors_rule" xml:"cors_rule" require:"true"`
+	DomainId *string                    `json:"domain_id" xml:"domain_id" require:"true"`
+	StoreId  *string                    `json:"store_id" xml:"store_id" require:"true"`
 }
 
 func (s SetStoreCorsRequest) String() string {
@@ -4350,6 +5076,11 @@ func (s SetStoreCorsRequest) String() string {
 
 func (s SetStoreCorsRequest) GoString() string {
 	return s.String()
+}
+
+func (s *SetStoreCorsRequest) SetHeader(v *SetStoreCorsRequestHeader) *SetStoreCorsRequest {
+	s.Header = v
+	return s
 }
 
 func (s *SetStoreCorsRequest) SetCorsRule(v *CorsRule) *SetStoreCorsRequest {
@@ -4364,6 +5095,29 @@ func (s *SetStoreCorsRequest) SetDomainId(v string) *SetStoreCorsRequest {
 
 func (s *SetStoreCorsRequest) SetStoreId(v string) *SetStoreCorsRequest {
 	s.StoreId = &v
+	return s
+}
+
+type SetStoreCorsRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s SetStoreCorsRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s SetStoreCorsRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *SetStoreCorsRequestHeader) SetTraceId(v string) *SetStoreCorsRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *SetStoreCorsRequestHeader) SetDeviceId(v string) *SetStoreCorsRequestHeader {
+	s.DeviceId = &v
 	return s
 }
 
@@ -4498,9 +5252,10 @@ func (s *StoreItemResponse) SetType(v string) *StoreItemResponse {
 }
 
 type TokenRequest struct {
-	AppId        *string `json:"app_id" xml:"app_id" require:"true"`
-	GrantType    *string `json:"grant_type" xml:"grant_type" require:"true"`
-	RefreshToken *string `json:"refresh_token" xml:"refresh_token" require:"true"`
+	Header       *TokenRequestHeader `json:"header" xml:"header" type:"Struct"`
+	AppId        *string             `json:"app_id" xml:"app_id" require:"true"`
+	GrantType    *string             `json:"grant_type" xml:"grant_type" require:"true"`
+	RefreshToken *string             `json:"refresh_token" xml:"refresh_token" require:"true"`
 }
 
 func (s TokenRequest) String() string {
@@ -4509,6 +5264,11 @@ func (s TokenRequest) String() string {
 
 func (s TokenRequest) GoString() string {
 	return s.String()
+}
+
+func (s *TokenRequest) SetHeader(v *TokenRequestHeader) *TokenRequest {
+	s.Header = v
+	return s
 }
 
 func (s *TokenRequest) SetAppId(v string) *TokenRequest {
@@ -4526,15 +5286,39 @@ func (s *TokenRequest) SetRefreshToken(v string) *TokenRequest {
 	return s
 }
 
+type TokenRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s TokenRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s TokenRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *TokenRequestHeader) SetTraceId(v string) *TokenRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *TokenRequestHeader) SetDeviceId(v string) *TokenRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type UpdateAppRequest struct {
-	AppId        *string   `json:"app_id" xml:"app_id" require:"true"`
-	AppName      *string   `json:"app_name" xml:"app_name" require:"true" maxLength:"128" pattern:"[0-9a-zA-Z]+"`
-	Description  *string   `json:"description" xml:"description" maxLength:"128"`
-	IsThirdParty *bool     `json:"is_third_party" xml:"is_third_party" require:"true"`
-	Logo         *string   `json:"logo" xml:"logo" require:"true"`
-	RedirectUri  *string   `json:"redirect_uri" xml:"redirect_uri" require:"true"`
-	Scope        []*string `json:"scope" xml:"scope" require:"true" type:"Repeated"`
-	Type         *string   `json:"type" xml:"type" require:"true"`
+	Header       *UpdateAppRequestHeader `json:"header" xml:"header" type:"Struct"`
+	AppId        *string                 `json:"app_id" xml:"app_id" require:"true"`
+	AppName      *string                 `json:"app_name" xml:"app_name" require:"true" maxLength:"128" pattern:"[0-9a-zA-Z]+"`
+	Description  *string                 `json:"description" xml:"description" maxLength:"128"`
+	IsThirdParty *bool                   `json:"is_third_party" xml:"is_third_party" require:"true"`
+	Logo         *string                 `json:"logo" xml:"logo" require:"true"`
+	RedirectUri  *string                 `json:"redirect_uri" xml:"redirect_uri" require:"true"`
+	Scope        []*string               `json:"scope" xml:"scope" require:"true" type:"Repeated"`
+	Type         *string                 `json:"type" xml:"type" require:"true"`
 }
 
 func (s UpdateAppRequest) String() string {
@@ -4543,6 +5327,11 @@ func (s UpdateAppRequest) String() string {
 
 func (s UpdateAppRequest) GoString() string {
 	return s.String()
+}
+
+func (s *UpdateAppRequest) SetHeader(v *UpdateAppRequestHeader) *UpdateAppRequest {
+	s.Header = v
+	return s
 }
 
 func (s *UpdateAppRequest) SetAppId(v string) *UpdateAppRequest {
@@ -4585,32 +5374,56 @@ func (s *UpdateAppRequest) SetType(v string) *UpdateAppRequest {
 	return s
 }
 
+type UpdateAppRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s UpdateAppRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s UpdateAppRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *UpdateAppRequestHeader) SetTraceId(v string) *UpdateAppRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *UpdateAppRequestHeader) SetDeviceId(v string) *UpdateAppRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type UpdateDomainRequest struct {
-	AuthAlipayAppId            *string                `json:"auth_alipay_app_id" xml:"auth_alipay_app_id"`
-	AuthAlipayEnbale           *bool                  `json:"auth_alipay_enbale" xml:"auth_alipay_enbale"`
-	AuthAlipayPrivateKey       *string                `json:"auth_alipay_private_key" xml:"auth_alipay_private_key"`
-	AuthConfig                 map[string]interface{} `json:"auth_config" xml:"auth_config"`
-	AuthDingdingAppId          *string                `json:"auth_dingding_app_id" xml:"auth_dingding_app_id"`
-	AuthDingdingAppSecret      *string                `json:"auth_dingding_app_secret" xml:"auth_dingding_app_secret"`
-	AuthDingdingEnable         *bool                  `json:"auth_dingding_enable" xml:"auth_dingding_enable"`
-	AuthEndpointEnable         *bool                  `json:"auth_endpoint_enable" xml:"auth_endpoint_enable"`
-	AuthRamAppId               *string                `json:"auth_ram_app_id" xml:"auth_ram_app_id"`
-	AuthRamAppSecret           *string                `json:"auth_ram_app_secret" xml:"auth_ram_app_secret"`
-	AuthRamEnable              *bool                  `json:"auth_ram_enable" xml:"auth_ram_enable"`
-	DataHashName               *string                `json:"data_hash_name" xml:"data_hash_name"`
-	Description                *string                `json:"description" xml:"description"`
-	DomainId                   *string                `json:"domain_id" xml:"domain_id" require:"true"`
-	DomainName                 *string                `json:"domain_name" xml:"domain_name"`
-	EventFilenameMatches       *string                `json:"event_filename_matches" xml:"event_filename_matches"`
-	EventMnsEndpoint           *string                `json:"event_mns_endpoint" xml:"event_mns_endpoint"`
-	EventMnsTopic              *string                `json:"event_mns_topic" xml:"event_mns_topic"`
-	EventNames                 []*string              `json:"event_names" xml:"event_names" type:"Repeated"`
-	EventRoleArn               *string                `json:"event_role_arn" xml:"event_role_arn"`
-	InitDriveEnable            *bool                  `json:"init_drive_enable" xml:"init_drive_enable"`
-	InitDriveSize              *int64                 `json:"init_drive_size" xml:"init_drive_size"`
-	InitDriveStoreId           *string                `json:"init_drive_store_id" xml:"init_drive_store_id"`
-	PublishedAppAccessStrategy *AppAccessStrategy     `json:"published_app_access_strategy" xml:"published_app_access_strategy"`
-	Sharable                   *bool                  `json:"sharable" xml:"sharable"`
+	Header                     *UpdateDomainRequestHeader `json:"header" xml:"header" type:"Struct"`
+	AuthAlipayAppId            *string                    `json:"auth_alipay_app_id" xml:"auth_alipay_app_id"`
+	AuthAlipayEnbale           *bool                      `json:"auth_alipay_enbale" xml:"auth_alipay_enbale"`
+	AuthAlipayPrivateKey       *string                    `json:"auth_alipay_private_key" xml:"auth_alipay_private_key"`
+	AuthConfig                 map[string]interface{}     `json:"auth_config" xml:"auth_config"`
+	AuthDingdingAppId          *string                    `json:"auth_dingding_app_id" xml:"auth_dingding_app_id"`
+	AuthDingdingAppSecret      *string                    `json:"auth_dingding_app_secret" xml:"auth_dingding_app_secret"`
+	AuthDingdingEnable         *bool                      `json:"auth_dingding_enable" xml:"auth_dingding_enable"`
+	AuthEndpointEnable         *bool                      `json:"auth_endpoint_enable" xml:"auth_endpoint_enable"`
+	AuthRamAppId               *string                    `json:"auth_ram_app_id" xml:"auth_ram_app_id"`
+	AuthRamAppSecret           *string                    `json:"auth_ram_app_secret" xml:"auth_ram_app_secret"`
+	AuthRamEnable              *bool                      `json:"auth_ram_enable" xml:"auth_ram_enable"`
+	DataHashName               *string                    `json:"data_hash_name" xml:"data_hash_name"`
+	Description                *string                    `json:"description" xml:"description"`
+	DomainId                   *string                    `json:"domain_id" xml:"domain_id" require:"true"`
+	DomainName                 *string                    `json:"domain_name" xml:"domain_name"`
+	EventFilenameMatches       *string                    `json:"event_filename_matches" xml:"event_filename_matches"`
+	EventMnsEndpoint           *string                    `json:"event_mns_endpoint" xml:"event_mns_endpoint"`
+	EventMnsTopic              *string                    `json:"event_mns_topic" xml:"event_mns_topic"`
+	EventNames                 []*string                  `json:"event_names" xml:"event_names" type:"Repeated"`
+	EventRoleArn               *string                    `json:"event_role_arn" xml:"event_role_arn"`
+	InitDriveEnable            *bool                      `json:"init_drive_enable" xml:"init_drive_enable"`
+	InitDriveSize              *int64                     `json:"init_drive_size" xml:"init_drive_size"`
+	InitDriveStoreId           *string                    `json:"init_drive_store_id" xml:"init_drive_store_id"`
+	PublishedAppAccessStrategy *AppAccessStrategy         `json:"published_app_access_strategy" xml:"published_app_access_strategy"`
+	Sharable                   *bool                      `json:"sharable" xml:"sharable"`
 }
 
 func (s UpdateDomainRequest) String() string {
@@ -4619,6 +5432,11 @@ func (s UpdateDomainRequest) String() string {
 
 func (s UpdateDomainRequest) GoString() string {
 	return s.String()
+}
+
+func (s *UpdateDomainRequest) SetHeader(v *UpdateDomainRequestHeader) *UpdateDomainRequest {
+	s.Header = v
+	return s
 }
 
 func (s *UpdateDomainRequest) SetAuthAlipayAppId(v string) *UpdateDomainRequest {
@@ -4743,6 +5561,29 @@ func (s *UpdateDomainRequest) SetPublishedAppAccessStrategy(v *AppAccessStrategy
 
 func (s *UpdateDomainRequest) SetSharable(v bool) *UpdateDomainRequest {
 	s.Sharable = &v
+	return s
+}
+
+type UpdateDomainRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s UpdateDomainRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s UpdateDomainRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *UpdateDomainRequestHeader) SetTraceId(v string) *UpdateDomainRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *UpdateDomainRequestHeader) SetDeviceId(v string) *UpdateDomainRequestHeader {
+	s.DeviceId = &v
 	return s
 }
 
@@ -5031,9 +5872,10 @@ func (s *UserAuthentication) SetUserID(v string) *UserAuthentication {
 }
 
 type BaseCompleteFileRequest struct {
-	DriveId      *string           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	UploadId     *string           `json:"upload_id" xml:"upload_id"`
+	Header       *BaseCompleteFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId      *string                        `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	PartInfoList []*UploadPartInfo              `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
+	UploadId     *string                        `json:"upload_id" xml:"upload_id"`
 }
 
 func (s BaseCompleteFileRequest) String() string {
@@ -5042,6 +5884,11 @@ func (s BaseCompleteFileRequest) String() string {
 
 func (s BaseCompleteFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *BaseCompleteFileRequest) SetHeader(v *BaseCompleteFileRequestHeader) *BaseCompleteFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *BaseCompleteFileRequest) SetDriveId(v string) *BaseCompleteFileRequest {
@@ -5059,13 +5906,37 @@ func (s *BaseCompleteFileRequest) SetUploadId(v string) *BaseCompleteFileRequest
 	return s
 }
 
+type BaseCompleteFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s BaseCompleteFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s BaseCompleteFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *BaseCompleteFileRequestHeader) SetTraceId(v string) *BaseCompleteFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *BaseCompleteFileRequestHeader) SetDeviceId(v string) *BaseCompleteFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type BaseCreateFileRequest struct {
-	ContentMd5   *string           `json:"content_md5" xml:"content_md5" require:"true"`
-	ContentType  *string           `json:"content_type" xml:"content_type" require:"true"`
-	Name         *string           `json:"name" xml:"name" require:"true" pattern:"[a-z0-9.-_]{1,1000}"`
-	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	Size         *int64            `json:"size" xml:"size" require:"true"`
-	Type         *string           `json:"type" xml:"type" require:"true"`
+	Header       *BaseCreateFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	ContentMd5   *string                      `json:"content_md5" xml:"content_md5" require:"true"`
+	ContentType  *string                      `json:"content_type" xml:"content_type" require:"true"`
+	Name         *string                      `json:"name" xml:"name" require:"true" pattern:"[a-z0-9.-_]{1,1000}"`
+	PartInfoList []*UploadPartInfo            `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
+	Size         *int64                       `json:"size" xml:"size" require:"true"`
+	Type         *string                      `json:"type" xml:"type" require:"true"`
 }
 
 func (s BaseCreateFileRequest) String() string {
@@ -5074,6 +5945,11 @@ func (s BaseCreateFileRequest) String() string {
 
 func (s BaseCreateFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *BaseCreateFileRequest) SetHeader(v *BaseCreateFileRequestHeader) *BaseCreateFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *BaseCreateFileRequest) SetContentMd5(v string) *BaseCreateFileRequest {
@@ -5106,11 +5982,35 @@ func (s *BaseCreateFileRequest) SetType(v string) *BaseCreateFileRequest {
 	return s
 }
 
+type BaseCreateFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s BaseCreateFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s BaseCreateFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *BaseCreateFileRequestHeader) SetTraceId(v string) *BaseCreateFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *BaseCreateFileRequestHeader) SetDeviceId(v string) *BaseCreateFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type BaseGetUploadUrlRequest struct {
-	ContentMd5   *string           `json:"content_md5" xml:"content_md5" maxLength:"32"`
-	DriveId      *string           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	UploadId     *string           `json:"upload_id" xml:"upload_id" require:"true"`
+	Header       *BaseGetUploadUrlRequestHeader `json:"header" xml:"header" type:"Struct"`
+	ContentMd5   *string                        `json:"content_md5" xml:"content_md5" maxLength:"32"`
+	DriveId      *string                        `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	PartInfoList []*UploadPartInfo              `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
+	UploadId     *string                        `json:"upload_id" xml:"upload_id" require:"true"`
 }
 
 func (s BaseGetUploadUrlRequest) String() string {
@@ -5119,6 +6019,11 @@ func (s BaseGetUploadUrlRequest) String() string {
 
 func (s BaseGetUploadUrlRequest) GoString() string {
 	return s.String()
+}
+
+func (s *BaseGetUploadUrlRequest) SetHeader(v *BaseGetUploadUrlRequestHeader) *BaseGetUploadUrlRequest {
+	s.Header = v
+	return s
 }
 
 func (s *BaseGetUploadUrlRequest) SetContentMd5(v string) *BaseGetUploadUrlRequest {
@@ -5141,12 +6046,36 @@ func (s *BaseGetUploadUrlRequest) SetUploadId(v string) *BaseGetUploadUrlRequest
 	return s
 }
 
+type BaseGetUploadUrlRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s BaseGetUploadUrlRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s BaseGetUploadUrlRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *BaseGetUploadUrlRequestHeader) SetTraceId(v string) *BaseGetUploadUrlRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *BaseGetUploadUrlRequestHeader) SetDeviceId(v string) *BaseGetUploadUrlRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type BaseListFileRequest struct {
-	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
-	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
-	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1,3}"`
-	Marker                *string `json:"marker" xml:"marker"`
+	Header                *BaseListFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId               *string                    `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	ImageThumbnailProcess *string                    `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
+	ImageUrlProcess       *string                    `json:"image_url_process" xml:"image_url_process"`
+	Limit                 *int64                     `json:"limit" xml:"limit" pattern:"[0-9]{1,3}"`
+	Marker                *string                    `json:"marker" xml:"marker"`
 }
 
 func (s BaseListFileRequest) String() string {
@@ -5155,6 +6084,11 @@ func (s BaseListFileRequest) String() string {
 
 func (s BaseListFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *BaseListFileRequest) SetHeader(v *BaseListFileRequestHeader) *BaseListFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *BaseListFileRequest) SetDriveId(v string) *BaseListFileRequest {
@@ -5182,10 +6116,34 @@ func (s *BaseListFileRequest) SetMarker(v string) *BaseListFileRequest {
 	return s
 }
 
+type BaseListFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s BaseListFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s BaseListFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *BaseListFileRequestHeader) SetTraceId(v string) *BaseListFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *BaseListFileRequestHeader) SetDeviceId(v string) *BaseListFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type BaseMoveFileRequest struct {
-	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	NewName   *string `json:"new_name" xml:"new_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	Overwrite *bool   `json:"overwrite" xml:"overwrite"`
+	Header    *BaseMoveFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId   *string                    `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	NewName   *string                    `json:"new_name" xml:"new_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	Overwrite *bool                      `json:"overwrite" xml:"overwrite"`
 }
 
 func (s BaseMoveFileRequest) String() string {
@@ -5194,6 +6152,11 @@ func (s BaseMoveFileRequest) String() string {
 
 func (s BaseMoveFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *BaseMoveFileRequest) SetHeader(v *BaseMoveFileRequestHeader) *BaseMoveFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *BaseMoveFileRequest) SetDriveId(v string) *BaseMoveFileRequest {
@@ -5211,7 +6174,31 @@ func (s *BaseMoveFileRequest) SetOverwrite(v bool) *BaseMoveFileRequest {
 	return s
 }
 
+type BaseMoveFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s BaseMoveFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s BaseMoveFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *BaseMoveFileRequestHeader) SetTraceId(v string) *BaseMoveFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *BaseMoveFileRequestHeader) SetDeviceId(v string) *BaseMoveFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type BatchSubRequest struct {
+	Header  *BatchSubRequestHeader `json:"header" xml:"header" type:"Struct"`
 	Body    map[string]interface{} `json:"body" xml:"body"`
 	Headers map[string]interface{} `json:"headers" xml:"headers"`
 	Id      *string                `json:"id" xml:"id" require:"true"`
@@ -5225,6 +6212,11 @@ func (s BatchSubRequest) String() string {
 
 func (s BatchSubRequest) GoString() string {
 	return s.String()
+}
+
+func (s *BatchSubRequest) SetHeader(v *BatchSubRequestHeader) *BatchSubRequest {
+	s.Header = v
+	return s
 }
 
 func (s *BatchSubRequest) SetBody(v map[string]interface{}) *BatchSubRequest {
@@ -5252,9 +6244,33 @@ func (s *BatchSubRequest) SetUrl(v string) *BatchSubRequest {
 	return s
 }
 
+type BatchSubRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s BatchSubRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s BatchSubRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *BatchSubRequestHeader) SetTraceId(v string) *BatchSubRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *BatchSubRequestHeader) SetDeviceId(v string) *BatchSubRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CCPBatchRequest struct {
-	Requests []*BatchSubRequest `json:"requests" xml:"requests" require:"true" type:"Repeated"`
-	Resource *string            `json:"resource" xml:"resource" require:"true"`
+	Header   *CCPBatchRequestHeader `json:"header" xml:"header" type:"Struct"`
+	Requests []*BatchSubRequest     `json:"requests" xml:"requests" require:"true" type:"Repeated"`
+	Resource *string                `json:"resource" xml:"resource" require:"true"`
 }
 
 func (s CCPBatchRequest) String() string {
@@ -5263,6 +6279,11 @@ func (s CCPBatchRequest) String() string {
 
 func (s CCPBatchRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CCPBatchRequest) SetHeader(v *CCPBatchRequestHeader) *CCPBatchRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CCPBatchRequest) SetRequests(v []*BatchSubRequest) *CCPBatchRequest {
@@ -5275,11 +6296,35 @@ func (s *CCPBatchRequest) SetResource(v string) *CCPBatchRequest {
 	return s
 }
 
+type CCPBatchRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CCPBatchRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPBatchRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CCPBatchRequestHeader) SetTraceId(v string) *CCPBatchRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CCPBatchRequestHeader) SetDeviceId(v string) *CCPBatchRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CCPCompleteFileRequest struct {
-	DriveId      *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	UploadId     *string           `json:"upload_id" xml:"upload_id"`
-	FileId       *string           `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	Header       *CCPCompleteFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId      *string                       `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	PartInfoList []*UploadPartInfo             `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
+	UploadId     *string                       `json:"upload_id" xml:"upload_id"`
+	FileId       *string                       `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
 }
 
 func (s CCPCompleteFileRequest) String() string {
@@ -5288,6 +6333,11 @@ func (s CCPCompleteFileRequest) String() string {
 
 func (s CCPCompleteFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CCPCompleteFileRequest) SetHeader(v *CCPCompleteFileRequestHeader) *CCPCompleteFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CCPCompleteFileRequest) SetDriveId(v string) *CCPCompleteFileRequest {
@@ -5310,13 +6360,37 @@ func (s *CCPCompleteFileRequest) SetFileId(v string) *CCPCompleteFileRequest {
 	return s
 }
 
+type CCPCompleteFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CCPCompleteFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPCompleteFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CCPCompleteFileRequestHeader) SetTraceId(v string) *CCPCompleteFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CCPCompleteFileRequestHeader) SetDeviceId(v string) *CCPCompleteFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CCPCopyFileRequest struct {
-	AutoRename     *bool   `json:"auto_rename" xml:"auto_rename"`
-	DriveId        *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId         *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	NewName        *string `json:"new_name" xml:"new_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	ToDriveId      *string `json:"to_drive_id" xml:"to_drive_id" pattern:"[0-9]+"`
-	ToParentFileId *string `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	Header         *CCPCopyFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	AutoRename     *bool                     `json:"auto_rename" xml:"auto_rename"`
+	DriveId        *string                   `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	FileId         *string                   `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	NewName        *string                   `json:"new_name" xml:"new_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	ToDriveId      *string                   `json:"to_drive_id" xml:"to_drive_id" pattern:"[0-9]+"`
+	ToParentFileId *string                   `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 }
 
 func (s CCPCopyFileRequest) String() string {
@@ -5325,6 +6399,11 @@ func (s CCPCopyFileRequest) String() string {
 
 func (s CCPCopyFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CCPCopyFileRequest) SetHeader(v *CCPCopyFileRequestHeader) *CCPCopyFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CCPCopyFileRequest) SetAutoRename(v bool) *CCPCopyFileRequest {
@@ -5357,24 +6436,48 @@ func (s *CCPCopyFileRequest) SetToParentFileId(v string) *CCPCopyFileRequest {
 	return s
 }
 
+type CCPCopyFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CCPCopyFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPCopyFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CCPCopyFileRequestHeader) SetTraceId(v string) *CCPCopyFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CCPCopyFileRequestHeader) SetDeviceId(v string) *CCPCopyFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CCPCreateFileRequest struct {
-	ContentMd5      *string           `json:"content_md5" xml:"content_md5"`
-	ContentType     *string           `json:"content_type" xml:"content_type"`
-	Name            *string           `json:"name" xml:"name" pattern:"[a-z0-9.-_]{1,1000}"`
-	PartInfoList    []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	Size            *int64            `json:"size" xml:"size"`
-	Type            *string           `json:"type" xml:"type"`
-	AutoRename      *bool             `json:"auto_rename" xml:"auto_rename"`
-	ContentHash     *string           `json:"content_hash" xml:"content_hash"`
-	ContentHashName *string           `json:"content_hash_name" xml:"content_hash_name"`
-	Description     *string           `json:"description" xml:"description" maxLength:"0"`
-	DriveId         *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	FileId          *string           `json:"file_id" xml:"file_id"`
-	Hidden          *bool             `json:"hidden" xml:"hidden"`
-	Labels          []*string         `json:"labels" xml:"labels" type:"Repeated"`
-	Meta            *string           `json:"meta" xml:"meta"`
-	ParentFileId    *string           `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
-	PreHash         *string           `json:"pre_hash" xml:"pre_hash"`
+	Header          *CCPCreateFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	ContentMd5      *string                     `json:"content_md5" xml:"content_md5"`
+	ContentType     *string                     `json:"content_type" xml:"content_type"`
+	Name            *string                     `json:"name" xml:"name" pattern:"[a-z0-9.-_]{1,1000}"`
+	PartInfoList    []*UploadPartInfo           `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
+	Size            *int64                      `json:"size" xml:"size"`
+	Type            *string                     `json:"type" xml:"type"`
+	AutoRename      *bool                       `json:"auto_rename" xml:"auto_rename"`
+	ContentHash     *string                     `json:"content_hash" xml:"content_hash"`
+	ContentHashName *string                     `json:"content_hash_name" xml:"content_hash_name"`
+	Description     *string                     `json:"description" xml:"description" maxLength:"0"`
+	DriveId         *string                     `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	FileId          *string                     `json:"file_id" xml:"file_id"`
+	Hidden          *bool                       `json:"hidden" xml:"hidden"`
+	Labels          []*string                   `json:"labels" xml:"labels" type:"Repeated"`
+	Meta            *string                     `json:"meta" xml:"meta"`
+	ParentFileId    *string                     `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	PreHash         *string                     `json:"pre_hash" xml:"pre_hash"`
 }
 
 func (s CCPCreateFileRequest) String() string {
@@ -5383,6 +6486,11 @@ func (s CCPCreateFileRequest) String() string {
 
 func (s CCPCreateFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CCPCreateFileRequest) SetHeader(v *CCPCreateFileRequestHeader) *CCPCreateFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CCPCreateFileRequest) SetContentMd5(v string) *CCPCreateFileRequest {
@@ -5470,10 +6578,34 @@ func (s *CCPCreateFileRequest) SetPreHash(v string) *CCPCreateFileRequest {
 	return s
 }
 
+type CCPCreateFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CCPCreateFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPCreateFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CCPCreateFileRequestHeader) SetTraceId(v string) *CCPCreateFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CCPCreateFileRequestHeader) SetDeviceId(v string) *CCPCreateFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CCPDeleteFileRequest struct {
-	DriveId     *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId      *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	Permanently *bool   `json:"permanently" xml:"permanently"`
+	Header      *CCPDeleteFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId     *string                     `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	FileId      *string                     `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	Permanently *bool                       `json:"permanently" xml:"permanently"`
 }
 
 func (s CCPDeleteFileRequest) String() string {
@@ -5482,6 +6614,11 @@ func (s CCPDeleteFileRequest) String() string {
 
 func (s CCPDeleteFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CCPDeleteFileRequest) SetHeader(v *CCPDeleteFileRequestHeader) *CCPDeleteFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CCPDeleteFileRequest) SetDriveId(v string) *CCPDeleteFileRequest {
@@ -5499,9 +6636,33 @@ func (s *CCPDeleteFileRequest) SetPermanently(v bool) *CCPDeleteFileRequest {
 	return s
 }
 
+type CCPDeleteFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CCPDeleteFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPDeleteFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CCPDeleteFileRequestHeader) SetTraceId(v string) *CCPDeleteFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CCPDeleteFileRequestHeader) SetDeviceId(v string) *CCPDeleteFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CCPDeleteFilesRequest struct {
-	DriveId    *string   `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileIdList []*string `json:"file_id_list" xml:"file_id_list" require:"true" type:"Repeated"`
+	Header     *CCPDeleteFilesRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId    *string                      `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	FileIdList []*string                    `json:"file_id_list" xml:"file_id_list" require:"true" type:"Repeated"`
 }
 
 func (s CCPDeleteFilesRequest) String() string {
@@ -5510,6 +6671,11 @@ func (s CCPDeleteFilesRequest) String() string {
 
 func (s CCPDeleteFilesRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CCPDeleteFilesRequest) SetHeader(v *CCPDeleteFilesRequestHeader) *CCPDeleteFilesRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CCPDeleteFilesRequest) SetDriveId(v string) *CCPDeleteFilesRequest {
@@ -5522,8 +6688,32 @@ func (s *CCPDeleteFilesRequest) SetFileIdList(v []*string) *CCPDeleteFilesReques
 	return s
 }
 
+type CCPDeleteFilesRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CCPDeleteFilesRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPDeleteFilesRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CCPDeleteFilesRequestHeader) SetTraceId(v string) *CCPDeleteFilesRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CCPDeleteFilesRequestHeader) SetDeviceId(v string) *CCPDeleteFilesRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CCPGetAsyncTaskRequest struct {
-	AsyncTaskId *string `json:"async_task_id" xml:"async_task_id"`
+	Header      *CCPGetAsyncTaskRequestHeader `json:"header" xml:"header" type:"Struct"`
+	AsyncTaskId *string                       `json:"async_task_id" xml:"async_task_id"`
 }
 
 func (s CCPGetAsyncTaskRequest) String() string {
@@ -5534,16 +6724,45 @@ func (s CCPGetAsyncTaskRequest) GoString() string {
 	return s.String()
 }
 
+func (s *CCPGetAsyncTaskRequest) SetHeader(v *CCPGetAsyncTaskRequestHeader) *CCPGetAsyncTaskRequest {
+	s.Header = v
+	return s
+}
+
 func (s *CCPGetAsyncTaskRequest) SetAsyncTaskId(v string) *CCPGetAsyncTaskRequest {
 	s.AsyncTaskId = &v
 	return s
 }
 
+type CCPGetAsyncTaskRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CCPGetAsyncTaskRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPGetAsyncTaskRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CCPGetAsyncTaskRequestHeader) SetTraceId(v string) *CCPGetAsyncTaskRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CCPGetAsyncTaskRequestHeader) SetDeviceId(v string) *CCPGetAsyncTaskRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CCPGetDownloadUrlRequest struct {
-	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
-	FileId    *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	FileName  *string `json:"file_name" xml:"file_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	Header    *CCPGetDownloadUrlRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId   *string                         `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	ExpireSec *int64                          `json:"expire_sec" xml:"expire_sec"`
+	FileId    *string                         `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	FileName  *string                         `json:"file_name" xml:"file_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 }
 
 func (s CCPGetDownloadUrlRequest) String() string {
@@ -5552,6 +6771,11 @@ func (s CCPGetDownloadUrlRequest) String() string {
 
 func (s CCPGetDownloadUrlRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CCPGetDownloadUrlRequest) SetHeader(v *CCPGetDownloadUrlRequestHeader) *CCPGetDownloadUrlRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CCPGetDownloadUrlRequest) SetDriveId(v string) *CCPGetDownloadUrlRequest {
@@ -5574,11 +6798,35 @@ func (s *CCPGetDownloadUrlRequest) SetFileName(v string) *CCPGetDownloadUrlReque
 	return s
 }
 
+type CCPGetDownloadUrlRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CCPGetDownloadUrlRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPGetDownloadUrlRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CCPGetDownloadUrlRequestHeader) SetTraceId(v string) *CCPGetDownloadUrlRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CCPGetDownloadUrlRequestHeader) SetDeviceId(v string) *CCPGetDownloadUrlRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CCPGetFileRequest struct {
-	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId                *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
-	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
+	Header                *CCPGetFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId               *string                  `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	FileId                *string                  `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	ImageThumbnailProcess *string                  `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
+	ImageUrlProcess       *string                  `json:"image_url_process" xml:"image_url_process"`
 }
 
 func (s CCPGetFileRequest) String() string {
@@ -5587,6 +6835,11 @@ func (s CCPGetFileRequest) String() string {
 
 func (s CCPGetFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CCPGetFileRequest) SetHeader(v *CCPGetFileRequestHeader) *CCPGetFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CCPGetFileRequest) SetDriveId(v string) *CCPGetFileRequest {
@@ -5609,12 +6862,36 @@ func (s *CCPGetFileRequest) SetImageUrlProcess(v string) *CCPGetFileRequest {
 	return s
 }
 
+type CCPGetFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CCPGetFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPGetFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CCPGetFileRequestHeader) SetTraceId(v string) *CCPGetFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CCPGetFileRequestHeader) SetDeviceId(v string) *CCPGetFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CCPGetUploadUrlRequest struct {
-	ContentMd5   *string           `json:"content_md5" xml:"content_md5" maxLength:"32"`
-	DriveId      *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	UploadId     *string           `json:"upload_id" xml:"upload_id"`
-	FileId       *string           `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	Header       *CCPGetUploadUrlRequestHeader `json:"header" xml:"header" type:"Struct"`
+	ContentMd5   *string                       `json:"content_md5" xml:"content_md5" maxLength:"32"`
+	DriveId      *string                       `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	PartInfoList []*UploadPartInfo             `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
+	UploadId     *string                       `json:"upload_id" xml:"upload_id"`
+	FileId       *string                       `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
 }
 
 func (s CCPGetUploadUrlRequest) String() string {
@@ -5623,6 +6900,11 @@ func (s CCPGetUploadUrlRequest) String() string {
 
 func (s CCPGetUploadUrlRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CCPGetUploadUrlRequest) SetHeader(v *CCPGetUploadUrlRequestHeader) *CCPGetUploadUrlRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CCPGetUploadUrlRequest) SetContentMd5(v string) *CCPGetUploadUrlRequest {
@@ -5650,21 +6932,45 @@ func (s *CCPGetUploadUrlRequest) SetFileId(v string) *CCPGetUploadUrlRequest {
 	return s
 }
 
+type CCPGetUploadUrlRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CCPGetUploadUrlRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPGetUploadUrlRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CCPGetUploadUrlRequestHeader) SetTraceId(v string) *CCPGetUploadUrlRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CCPGetUploadUrlRequestHeader) SetDeviceId(v string) *CCPGetUploadUrlRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CCPListFileRequest struct {
-	DriveId               *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
-	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
-	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1,3}"`
-	Marker                *string `json:"marker" xml:"marker"`
-	Starred               *bool   `json:"Starred" xml:"Starred"`
-	All                   *bool   `json:"all" xml:"all"`
-	Category              *string `json:"category" xml:"category"`
-	OrderBy               *string `json:"order_by" xml:"order_by"`
-	OrderDirection        *string `json:"order_direction" xml:"order_direction"`
-	ParentFileId          *string `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	Status                *string `json:"status" xml:"status"`
-	Type                  *string `json:"type" xml:"type"`
-	CustomIndexKey        *string `json:"custom_index_key" xml:"custom_index_key"`
+	Header                *CCPListFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId               *string                   `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	ImageThumbnailProcess *string                   `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
+	ImageUrlProcess       *string                   `json:"image_url_process" xml:"image_url_process"`
+	Limit                 *int64                    `json:"limit" xml:"limit" pattern:"[0-9]{1,3}"`
+	Marker                *string                   `json:"marker" xml:"marker"`
+	Starred               *bool                     `json:"Starred" xml:"Starred"`
+	All                   *bool                     `json:"all" xml:"all"`
+	Category              *string                   `json:"category" xml:"category"`
+	OrderBy               *string                   `json:"order_by" xml:"order_by"`
+	OrderDirection        *string                   `json:"order_direction" xml:"order_direction"`
+	ParentFileId          *string                   `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	Status                *string                   `json:"status" xml:"status"`
+	Type                  *string                   `json:"type" xml:"type"`
+	CustomIndexKey        *string                   `json:"custom_index_key" xml:"custom_index_key"`
 }
 
 func (s CCPListFileRequest) String() string {
@@ -5673,6 +6979,11 @@ func (s CCPListFileRequest) String() string {
 
 func (s CCPListFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CCPListFileRequest) SetHeader(v *CCPListFileRequestHeader) *CCPListFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CCPListFileRequest) SetDriveId(v string) *CCPListFileRequest {
@@ -5745,12 +7056,36 @@ func (s *CCPListFileRequest) SetCustomIndexKey(v string) *CCPListFileRequest {
 	return s
 }
 
+type CCPListFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CCPListFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPListFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CCPListFileRequestHeader) SetTraceId(v string) *CCPListFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CCPListFileRequestHeader) SetDeviceId(v string) *CCPListFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CCPListUploadedPartRequest struct {
-	DriveId          *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId           *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	Limit            *int64  `json:"limit" xml:"limit" require:"true" pattern:"[0-9]+"`
-	PartNumberMarker *int64  `json:"part_number_marker" xml:"part_number_marker" pattern:"[0-9]+"`
-	UploadId         *string `json:"upload_id" xml:"upload_id"`
+	Header           *CCPListUploadedPartRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId          *string                           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	FileId           *string                           `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	Limit            *int64                            `json:"limit" xml:"limit" require:"true" pattern:"[0-9]+"`
+	PartNumberMarker *int64                            `json:"part_number_marker" xml:"part_number_marker" pattern:"[0-9]+"`
+	UploadId         *string                           `json:"upload_id" xml:"upload_id"`
 }
 
 func (s CCPListUploadedPartRequest) String() string {
@@ -5759,6 +7094,11 @@ func (s CCPListUploadedPartRequest) String() string {
 
 func (s CCPListUploadedPartRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CCPListUploadedPartRequest) SetHeader(v *CCPListUploadedPartRequestHeader) *CCPListUploadedPartRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CCPListUploadedPartRequest) SetDriveId(v string) *CCPListUploadedPartRequest {
@@ -5786,12 +7126,36 @@ func (s *CCPListUploadedPartRequest) SetUploadId(v string) *CCPListUploadedPartR
 	return s
 }
 
+type CCPListUploadedPartRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CCPListUploadedPartRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPListUploadedPartRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CCPListUploadedPartRequestHeader) SetTraceId(v string) *CCPListUploadedPartRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CCPListUploadedPartRequestHeader) SetDeviceId(v string) *CCPListUploadedPartRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CCPMoveFileRequest struct {
-	DriveId        *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	NewName        *string `json:"new_name" xml:"new_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	Overwrite      *bool   `json:"overwrite" xml:"overwrite"`
-	FileId         *string `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	ToParentFileId *string `json:"to_parent_file_id" xml:"to_parent_file_id" maxLength:"50"`
+	Header         *CCPMoveFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId        *string                   `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	NewName        *string                   `json:"new_name" xml:"new_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	Overwrite      *bool                     `json:"overwrite" xml:"overwrite"`
+	FileId         *string                   `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	ToParentFileId *string                   `json:"to_parent_file_id" xml:"to_parent_file_id" maxLength:"50"`
 }
 
 func (s CCPMoveFileRequest) String() string {
@@ -5800,6 +7164,11 @@ func (s CCPMoveFileRequest) String() string {
 
 func (s CCPMoveFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CCPMoveFileRequest) SetHeader(v *CCPMoveFileRequestHeader) *CCPMoveFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CCPMoveFileRequest) SetDriveId(v string) *CCPMoveFileRequest {
@@ -5827,14 +7196,38 @@ func (s *CCPMoveFileRequest) SetToParentFileId(v string) *CCPMoveFileRequest {
 	return s
 }
 
+type CCPMoveFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CCPMoveFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPMoveFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CCPMoveFileRequestHeader) SetTraceId(v string) *CCPMoveFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CCPMoveFileRequestHeader) SetDeviceId(v string) *CCPMoveFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CCPSearchFileRequest struct {
-	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
-	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
-	Limit                 *int    `json:"limit" xml:"limit"`
-	Marker                *string `json:"marker" xml:"marker"`
-	OrderBy               *string `json:"order_by" xml:"order_by"`
-	Query                 *string `json:"query" xml:"query" maxLength:"4096"`
+	Header                *CCPSearchFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId               *string                     `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	ImageThumbnailProcess *string                     `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
+	ImageUrlProcess       *string                     `json:"image_url_process" xml:"image_url_process"`
+	Limit                 *int                        `json:"limit" xml:"limit"`
+	Marker                *string                     `json:"marker" xml:"marker"`
+	OrderBy               *string                     `json:"order_by" xml:"order_by"`
+	Query                 *string                     `json:"query" xml:"query" maxLength:"4096"`
 }
 
 func (s CCPSearchFileRequest) String() string {
@@ -5843,6 +7236,11 @@ func (s CCPSearchFileRequest) String() string {
 
 func (s CCPSearchFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CCPSearchFileRequest) SetHeader(v *CCPSearchFileRequestHeader) *CCPSearchFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CCPSearchFileRequest) SetDriveId(v string) *CCPSearchFileRequest {
@@ -5880,16 +7278,40 @@ func (s *CCPSearchFileRequest) SetQuery(v string) *CCPSearchFileRequest {
 	return s
 }
 
+type CCPSearchFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CCPSearchFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPSearchFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CCPSearchFileRequestHeader) SetTraceId(v string) *CCPSearchFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CCPSearchFileRequestHeader) SetDeviceId(v string) *CCPSearchFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CCPUpdateFileMetaRequest struct {
-	CustomIndexKey *string   `json:"custom_index_key" xml:"custom_index_key"`
-	Description    *string   `json:"description" xml:"description" maxLength:"1024"`
-	DriveId        *string   `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId         *string   `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	Hidden         *bool     `json:"hidden" xml:"hidden"`
-	Labels         []*string `json:"labels" xml:"labels" type:"Repeated"`
-	Meta           *string   `json:"meta" xml:"meta"`
-	Name           *string   `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	Starred        *bool     `json:"starred" xml:"starred"`
+	Header         *CCPUpdateFileMetaRequestHeader `json:"header" xml:"header" type:"Struct"`
+	CustomIndexKey *string                         `json:"custom_index_key" xml:"custom_index_key"`
+	Description    *string                         `json:"description" xml:"description" maxLength:"1024"`
+	DriveId        *string                         `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	FileId         *string                         `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	Hidden         *bool                           `json:"hidden" xml:"hidden"`
+	Labels         []*string                       `json:"labels" xml:"labels" type:"Repeated"`
+	Meta           *string                         `json:"meta" xml:"meta"`
+	Name           *string                         `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	Starred        *bool                           `json:"starred" xml:"starred"`
 }
 
 func (s CCPUpdateFileMetaRequest) String() string {
@@ -5898,6 +7320,11 @@ func (s CCPUpdateFileMetaRequest) String() string {
 
 func (s CCPUpdateFileMetaRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CCPUpdateFileMetaRequest) SetHeader(v *CCPUpdateFileMetaRequestHeader) *CCPUpdateFileMetaRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CCPUpdateFileMetaRequest) SetCustomIndexKey(v string) *CCPUpdateFileMetaRequest {
@@ -5945,13 +7372,37 @@ func (s *CCPUpdateFileMetaRequest) SetStarred(v bool) *CCPUpdateFileMetaRequest 
 	return s
 }
 
+type CCPUpdateFileMetaRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CCPUpdateFileMetaRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPUpdateFileMetaRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CCPUpdateFileMetaRequestHeader) SetTraceId(v string) *CCPUpdateFileMetaRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CCPUpdateFileMetaRequestHeader) SetDeviceId(v string) *CCPUpdateFileMetaRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CompleteFileRequest struct {
-	DriveId      *string           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId       *string           `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
-	FilePath     *string           `json:"file_path" xml:"file_path"`
-	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	ShareId      *string           `json:"share_id" xml:"share_id"`
-	UploadId     *string           `json:"upload_id" xml:"upload_id" require:"true"`
+	Header       *CompleteFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId      *string                    `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	FileId       *string                    `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	FilePath     *string                    `json:"file_path" xml:"file_path"`
+	PartInfoList []*UploadPartInfo          `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
+	ShareId      *string                    `json:"share_id" xml:"share_id"`
+	UploadId     *string                    `json:"upload_id" xml:"upload_id" require:"true"`
 }
 
 func (s CompleteFileRequest) String() string {
@@ -5960,6 +7411,11 @@ func (s CompleteFileRequest) String() string {
 
 func (s CompleteFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CompleteFileRequest) SetHeader(v *CompleteFileRequestHeader) *CompleteFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CompleteFileRequest) SetDriveId(v string) *CompleteFileRequest {
@@ -5992,17 +7448,41 @@ func (s *CompleteFileRequest) SetUploadId(v string) *CompleteFileRequest {
 	return s
 }
 
+type CompleteFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CompleteFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CompleteFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CompleteFileRequestHeader) SetTraceId(v string) *CompleteFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CompleteFileRequestHeader) SetDeviceId(v string) *CompleteFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CopyFileRequest struct {
-	DriveId          *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId           *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	FilePath         *string `json:"file_path" xml:"file_path"`
-	NewName          *string `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	Overwrite        *bool   `json:"overwrite" xml:"overwrite"`
-	ShareId          *string `json:"share_id" xml:"share_id"`
-	ToDriveId        *string `json:"to_drive_id" xml:"to_drive_id" require:"true" pattern:"[0-9]+"`
-	ToParentFileId   *string `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	ToParentFilePath *string `json:"to_parent_file_path" xml:"to_parent_file_path"`
-	ToShareId        *string `json:"to_share_id" xml:"to_share_id"`
+	Header           *CopyFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId          *string                `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	FileId           *string                `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	FilePath         *string                `json:"file_path" xml:"file_path"`
+	NewName          *string                `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	Overwrite        *bool                  `json:"overwrite" xml:"overwrite"`
+	ShareId          *string                `json:"share_id" xml:"share_id"`
+	ToDriveId        *string                `json:"to_drive_id" xml:"to_drive_id" require:"true" pattern:"[0-9]+"`
+	ToParentFileId   *string                `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	ToParentFilePath *string                `json:"to_parent_file_path" xml:"to_parent_file_path"`
+	ToShareId        *string                `json:"to_share_id" xml:"to_share_id"`
 }
 
 func (s CopyFileRequest) String() string {
@@ -6011,6 +7491,11 @@ func (s CopyFileRequest) String() string {
 
 func (s CopyFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CopyFileRequest) SetHeader(v *CopyFileRequestHeader) *CopyFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CopyFileRequest) SetDriveId(v string) *CopyFileRequest {
@@ -6063,16 +7548,40 @@ func (s *CopyFileRequest) SetToShareId(v string) *CopyFileRequest {
 	return s
 }
 
+type CopyFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CopyFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CopyFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CopyFileRequestHeader) SetTraceId(v string) *CopyFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CopyFileRequestHeader) SetDeviceId(v string) *CopyFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CreateDriveRequest struct {
-	Default      *bool   `json:"default" xml:"default"`
-	Description  *string `json:"description" xml:"description"`
-	DriveName    *string `json:"drive_name" xml:"drive_name" require:"true"`
-	DriveType    *string `json:"drive_type" xml:"drive_type"`
-	Owner        *string `json:"owner" xml:"owner" require:"true"`
-	RelativePath *string `json:"relative_path" xml:"relative_path"`
-	Status       *string `json:"status" xml:"status"`
-	StoreId      *string `json:"store_id" xml:"store_id"`
-	TotalSize    *int64  `json:"total_size" xml:"total_size"`
+	Header       *CreateDriveRequestHeader `json:"header" xml:"header" type:"Struct"`
+	Default      *bool                     `json:"default" xml:"default"`
+	Description  *string                   `json:"description" xml:"description"`
+	DriveName    *string                   `json:"drive_name" xml:"drive_name" require:"true"`
+	DriveType    *string                   `json:"drive_type" xml:"drive_type"`
+	Owner        *string                   `json:"owner" xml:"owner" require:"true"`
+	RelativePath *string                   `json:"relative_path" xml:"relative_path"`
+	Status       *string                   `json:"status" xml:"status"`
+	StoreId      *string                   `json:"store_id" xml:"store_id"`
+	TotalSize    *int64                    `json:"total_size" xml:"total_size"`
 }
 
 func (s CreateDriveRequest) String() string {
@@ -6081,6 +7590,11 @@ func (s CreateDriveRequest) String() string {
 
 func (s CreateDriveRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CreateDriveRequest) SetHeader(v *CreateDriveRequestHeader) *CreateDriveRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CreateDriveRequest) SetDefault(v bool) *CreateDriveRequest {
@@ -6128,24 +7642,48 @@ func (s *CreateDriveRequest) SetTotalSize(v int64) *CreateDriveRequest {
 	return s
 }
 
+type CreateDriveRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CreateDriveRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CreateDriveRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CreateDriveRequestHeader) SetTraceId(v string) *CreateDriveRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CreateDriveRequestHeader) SetDeviceId(v string) *CreateDriveRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CreateFileRequest struct {
-	ContentHash     *string                `json:"content_hash" xml:"content_hash"`
-	ContentHashName *string                `json:"content_hash_name" xml:"content_hash_name"`
-	ContentMd5      *string                `json:"content_md5" xml:"content_md5" maxLength:"32"`
-	ContentType     *string                `json:"content_type" xml:"content_type" require:"true"`
-	Description     *string                `json:"description" xml:"description" maxLength:"0"`
-	DriveId         *string                `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	Hidden          *bool                  `json:"hidden" xml:"hidden"`
-	Meta            *string                `json:"meta" xml:"meta"`
-	Name            *string                `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	ParentFileId    *string                `json:"parent_file_id" xml:"parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
-	ParentFilePath  *string                `json:"parent_file_path" xml:"parent_file_path"`
-	PartInfoList    []*UploadPartInfo      `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	PreHash         *string                `json:"pre_hash" xml:"pre_hash"`
-	ShareId         *string                `json:"share_id" xml:"share_id"`
-	Size            *int64                 `json:"size" xml:"size" require:"true"`
-	Tags            map[string]interface{} `json:"tags" xml:"tags"`
-	Type            *string                `json:"type" xml:"type" require:"true"`
+	Header          *CreateFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	ContentHash     *string                  `json:"content_hash" xml:"content_hash"`
+	ContentHashName *string                  `json:"content_hash_name" xml:"content_hash_name"`
+	ContentMd5      *string                  `json:"content_md5" xml:"content_md5" maxLength:"32"`
+	ContentType     *string                  `json:"content_type" xml:"content_type" require:"true"`
+	Description     *string                  `json:"description" xml:"description" maxLength:"0"`
+	DriveId         *string                  `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	Hidden          *bool                    `json:"hidden" xml:"hidden"`
+	Meta            *string                  `json:"meta" xml:"meta"`
+	Name            *string                  `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	ParentFileId    *string                  `json:"parent_file_id" xml:"parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	ParentFilePath  *string                  `json:"parent_file_path" xml:"parent_file_path"`
+	PartInfoList    []*UploadPartInfo        `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
+	PreHash         *string                  `json:"pre_hash" xml:"pre_hash"`
+	ShareId         *string                  `json:"share_id" xml:"share_id"`
+	Size            *int64                   `json:"size" xml:"size" require:"true"`
+	Tags            map[string]interface{}   `json:"tags" xml:"tags"`
+	Type            *string                  `json:"type" xml:"type" require:"true"`
 }
 
 func (s CreateFileRequest) String() string {
@@ -6154,6 +7692,11 @@ func (s CreateFileRequest) String() string {
 
 func (s CreateFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CreateFileRequest) SetHeader(v *CreateFileRequestHeader) *CreateFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CreateFileRequest) SetContentHash(v string) *CreateFileRequest {
@@ -6241,15 +7784,39 @@ func (s *CreateFileRequest) SetType(v string) *CreateFileRequest {
 	return s
 }
 
+type CreateFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CreateFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CreateFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CreateFileRequestHeader) SetTraceId(v string) *CreateFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CreateFileRequestHeader) SetDeviceId(v string) *CreateFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type CreateShareRequest struct {
-	Description   *string   `json:"description" xml:"description"`
-	DriveId       *string   `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	Expiration    *string   `json:"expiration" xml:"expiration"`
-	Owner         *string   `json:"owner" xml:"owner" require:"true"`
-	Permissions   []*string `json:"permissions" xml:"permissions" type:"Repeated"`
-	ShareFilePath *string   `json:"share_file_path" xml:"share_file_path" require:"true"`
-	ShareName     *string   `json:"share_name" xml:"share_name"`
-	Status        *string   `json:"status" xml:"status"`
+	Header        *CreateShareRequestHeader `json:"header" xml:"header" type:"Struct"`
+	Description   *string                   `json:"description" xml:"description"`
+	DriveId       *string                   `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	Expiration    *string                   `json:"expiration" xml:"expiration"`
+	Owner         *string                   `json:"owner" xml:"owner" require:"true"`
+	Permissions   []*string                 `json:"permissions" xml:"permissions" type:"Repeated"`
+	ShareFilePath *string                   `json:"share_file_path" xml:"share_file_path" require:"true"`
+	ShareName     *string                   `json:"share_name" xml:"share_name"`
+	Status        *string                   `json:"status" xml:"status"`
 }
 
 func (s CreateShareRequest) String() string {
@@ -6258,6 +7825,11 @@ func (s CreateShareRequest) String() string {
 
 func (s CreateShareRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CreateShareRequest) SetHeader(v *CreateShareRequestHeader) *CreateShareRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CreateShareRequest) SetDescription(v string) *CreateShareRequest {
@@ -6300,8 +7872,32 @@ func (s *CreateShareRequest) SetStatus(v string) *CreateShareRequest {
 	return s
 }
 
+type CreateShareRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CreateShareRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CreateShareRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CreateShareRequestHeader) SetTraceId(v string) *CreateShareRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CreateShareRequestHeader) SetDeviceId(v string) *CreateShareRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type DeleteDriveRequest struct {
-	DriveId *string `json:"drive_id" xml:"drive_id" require:"true"`
+	Header  *DeleteDriveRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId *string                   `json:"drive_id" xml:"drive_id" require:"true"`
 }
 
 func (s DeleteDriveRequest) String() string {
@@ -6312,17 +7908,46 @@ func (s DeleteDriveRequest) GoString() string {
 	return s.String()
 }
 
+func (s *DeleteDriveRequest) SetHeader(v *DeleteDriveRequestHeader) *DeleteDriveRequest {
+	s.Header = v
+	return s
+}
+
 func (s *DeleteDriveRequest) SetDriveId(v string) *DeleteDriveRequest {
 	s.DriveId = &v
 	return s
 }
 
+type DeleteDriveRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s DeleteDriveRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s DeleteDriveRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *DeleteDriveRequestHeader) SetTraceId(v string) *DeleteDriveRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *DeleteDriveRequestHeader) SetDeviceId(v string) *DeleteDriveRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type DeleteFileRequest struct {
-	DriveId     *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId      *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	FilePath    *string `json:"file_path" xml:"file_path"`
-	Permanently *bool   `json:"permanently" xml:"permanently"`
-	ShareId     *string `json:"share_id" xml:"share_id"`
+	Header      *DeleteFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId     *string                  `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	FileId      *string                  `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	FilePath    *string                  `json:"file_path" xml:"file_path"`
+	Permanently *bool                    `json:"permanently" xml:"permanently"`
+	ShareId     *string                  `json:"share_id" xml:"share_id"`
 }
 
 func (s DeleteFileRequest) String() string {
@@ -6331,6 +7956,11 @@ func (s DeleteFileRequest) String() string {
 
 func (s DeleteFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *DeleteFileRequest) SetHeader(v *DeleteFileRequestHeader) *DeleteFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *DeleteFileRequest) SetDriveId(v string) *DeleteFileRequest {
@@ -6358,8 +7988,32 @@ func (s *DeleteFileRequest) SetShareId(v string) *DeleteFileRequest {
 	return s
 }
 
+type DeleteFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s DeleteFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s DeleteFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *DeleteFileRequestHeader) SetTraceId(v string) *DeleteFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *DeleteFileRequestHeader) SetDeviceId(v string) *DeleteFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type DeleteShareRequest struct {
-	ShareId *string `json:"share_id" xml:"share_id" require:"true"`
+	Header  *DeleteShareRequestHeader `json:"header" xml:"header" type:"Struct"`
+	ShareId *string                   `json:"share_id" xml:"share_id" require:"true"`
 }
 
 func (s DeleteShareRequest) String() string {
@@ -6370,16 +8024,45 @@ func (s DeleteShareRequest) GoString() string {
 	return s.String()
 }
 
+func (s *DeleteShareRequest) SetHeader(v *DeleteShareRequestHeader) *DeleteShareRequest {
+	s.Header = v
+	return s
+}
+
 func (s *DeleteShareRequest) SetShareId(v string) *DeleteShareRequest {
 	s.ShareId = &v
 	return s
 }
 
+type DeleteShareRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s DeleteShareRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s DeleteShareRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *DeleteShareRequestHeader) SetTraceId(v string) *DeleteShareRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *DeleteShareRequestHeader) SetDeviceId(v string) *DeleteShareRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type DownloadRequest struct {
-	DriveID      *string `json:"DriveID" xml:"DriveID" require:"true" pattern:"[0-9]+"`
-	FileID       *string `json:"FileID" xml:"FileID" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	ImageProcess *string `json:"ImageProcess" xml:"ImageProcess"`
-	ShareID      *string `json:"ShareID" xml:"ShareID"`
+	Header       *DownloadRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveID      *string                `json:"DriveID" xml:"DriveID" require:"true" pattern:"[0-9]+"`
+	FileID       *string                `json:"FileID" xml:"FileID" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	ImageProcess *string                `json:"ImageProcess" xml:"ImageProcess"`
+	ShareID      *string                `json:"ShareID" xml:"ShareID"`
 }
 
 func (s DownloadRequest) String() string {
@@ -6388,6 +8071,11 @@ func (s DownloadRequest) String() string {
 
 func (s DownloadRequest) GoString() string {
 	return s.String()
+}
+
+func (s *DownloadRequest) SetHeader(v *DownloadRequestHeader) *DownloadRequest {
+	s.Header = v
+	return s
 }
 
 func (s *DownloadRequest) SetDriveID(v string) *DownloadRequest {
@@ -6410,8 +8098,32 @@ func (s *DownloadRequest) SetShareID(v string) *DownloadRequest {
 	return s
 }
 
+type DownloadRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s DownloadRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s DownloadRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *DownloadRequestHeader) SetTraceId(v string) *DownloadRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *DownloadRequestHeader) SetDeviceId(v string) *DownloadRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type GetAsyncTaskRequest struct {
-	AsyncTaskId *string `json:"async_task_id" xml:"async_task_id"`
+	Header      *GetAsyncTaskRequestHeader `json:"header" xml:"header" type:"Struct"`
+	AsyncTaskId *string                    `json:"async_task_id" xml:"async_task_id"`
 }
 
 func (s GetAsyncTaskRequest) String() string {
@@ -6422,13 +8134,42 @@ func (s GetAsyncTaskRequest) GoString() string {
 	return s.String()
 }
 
+func (s *GetAsyncTaskRequest) SetHeader(v *GetAsyncTaskRequestHeader) *GetAsyncTaskRequest {
+	s.Header = v
+	return s
+}
+
 func (s *GetAsyncTaskRequest) SetAsyncTaskId(v string) *GetAsyncTaskRequest {
 	s.AsyncTaskId = &v
 	return s
 }
 
+type GetAsyncTaskRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s GetAsyncTaskRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetAsyncTaskRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *GetAsyncTaskRequestHeader) SetTraceId(v string) *GetAsyncTaskRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *GetAsyncTaskRequestHeader) SetDeviceId(v string) *GetAsyncTaskRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type GetDefaultDriveRequest struct {
-	UserId *string `json:"user_id" xml:"user_id"`
+	Header *GetDefaultDriveRequestHeader `json:"header" xml:"header" type:"Struct"`
+	UserId *string                       `json:"user_id" xml:"user_id"`
 }
 
 func (s GetDefaultDriveRequest) String() string {
@@ -6439,18 +8180,47 @@ func (s GetDefaultDriveRequest) GoString() string {
 	return s.String()
 }
 
+func (s *GetDefaultDriveRequest) SetHeader(v *GetDefaultDriveRequestHeader) *GetDefaultDriveRequest {
+	s.Header = v
+	return s
+}
+
 func (s *GetDefaultDriveRequest) SetUserId(v string) *GetDefaultDriveRequest {
 	s.UserId = &v
 	return s
 }
 
+type GetDefaultDriveRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s GetDefaultDriveRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetDefaultDriveRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *GetDefaultDriveRequestHeader) SetTraceId(v string) *GetDefaultDriveRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *GetDefaultDriveRequestHeader) SetDeviceId(v string) *GetDefaultDriveRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type GetDownloadUrlRequest struct {
-	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
-	FileId    *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	FileName  *string `json:"file_name" xml:"file_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	FilePath  *string `json:"file_path" xml:"file_path"`
-	ShareId   *string `json:"share_id" xml:"share_id"`
+	Header    *GetDownloadUrlRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId   *string                      `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	ExpireSec *int64                       `json:"expire_sec" xml:"expire_sec"`
+	FileId    *string                      `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	FileName  *string                      `json:"file_name" xml:"file_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	FilePath  *string                      `json:"file_path" xml:"file_path"`
+	ShareId   *string                      `json:"share_id" xml:"share_id"`
 }
 
 func (s GetDownloadUrlRequest) String() string {
@@ -6459,6 +8229,11 @@ func (s GetDownloadUrlRequest) String() string {
 
 func (s GetDownloadUrlRequest) GoString() string {
 	return s.String()
+}
+
+func (s *GetDownloadUrlRequest) SetHeader(v *GetDownloadUrlRequestHeader) *GetDownloadUrlRequest {
+	s.Header = v
+	return s
 }
 
 func (s *GetDownloadUrlRequest) SetDriveId(v string) *GetDownloadUrlRequest {
@@ -6491,8 +8266,32 @@ func (s *GetDownloadUrlRequest) SetShareId(v string) *GetDownloadUrlRequest {
 	return s
 }
 
+type GetDownloadUrlRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s GetDownloadUrlRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetDownloadUrlRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *GetDownloadUrlRequestHeader) SetTraceId(v string) *GetDownloadUrlRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *GetDownloadUrlRequestHeader) SetDeviceId(v string) *GetDownloadUrlRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type GetDriveRequest struct {
-	DriveId *string `json:"drive_id" xml:"drive_id" require:"true"`
+	Header  *GetDriveRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId *string                `json:"drive_id" xml:"drive_id" require:"true"`
 }
 
 func (s GetDriveRequest) String() string {
@@ -6503,18 +8302,47 @@ func (s GetDriveRequest) GoString() string {
 	return s.String()
 }
 
+func (s *GetDriveRequest) SetHeader(v *GetDriveRequestHeader) *GetDriveRequest {
+	s.Header = v
+	return s
+}
+
 func (s *GetDriveRequest) SetDriveId(v string) *GetDriveRequest {
 	s.DriveId = &v
 	return s
 }
 
+type GetDriveRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s GetDriveRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetDriveRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *GetDriveRequestHeader) SetTraceId(v string) *GetDriveRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *GetDriveRequestHeader) SetDeviceId(v string) *GetDriveRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type GetFileRequest struct {
-	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId                *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	FilePath              *string `json:"file_path" xml:"file_path"`
-	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
-	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
-	ShareId               *string `json:"share_id" xml:"share_id"`
+	Header                *GetFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId               *string               `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	FileId                *string               `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	FilePath              *string               `json:"file_path" xml:"file_path"`
+	ImageThumbnailProcess *string               `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
+	ImageUrlProcess       *string               `json:"image_url_process" xml:"image_url_process"`
+	ShareId               *string               `json:"share_id" xml:"share_id"`
 }
 
 func (s GetFileRequest) String() string {
@@ -6523,6 +8351,11 @@ func (s GetFileRequest) String() string {
 
 func (s GetFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *GetFileRequest) SetHeader(v *GetFileRequestHeader) *GetFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *GetFileRequest) SetDriveId(v string) *GetFileRequest {
@@ -6555,8 +8388,32 @@ func (s *GetFileRequest) SetShareId(v string) *GetFileRequest {
 	return s
 }
 
+type GetFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s GetFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *GetFileRequestHeader) SetTraceId(v string) *GetFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *GetFileRequestHeader) SetDeviceId(v string) *GetFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type GetShareRequest struct {
-	ShareId *string `json:"share_id" xml:"share_id"`
+	Header  *GetShareRequestHeader `json:"header" xml:"header" type:"Struct"`
+	ShareId *string                `json:"share_id" xml:"share_id"`
 }
 
 func (s GetShareRequest) String() string {
@@ -6567,19 +8424,48 @@ func (s GetShareRequest) GoString() string {
 	return s.String()
 }
 
+func (s *GetShareRequest) SetHeader(v *GetShareRequestHeader) *GetShareRequest {
+	s.Header = v
+	return s
+}
+
 func (s *GetShareRequest) SetShareId(v string) *GetShareRequest {
 	s.ShareId = &v
 	return s
 }
 
+type GetShareRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s GetShareRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetShareRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *GetShareRequestHeader) SetTraceId(v string) *GetShareRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *GetShareRequestHeader) SetDeviceId(v string) *GetShareRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type GetUploadUrlRequest struct {
-	ContentMd5   *string           `json:"content_md5" xml:"content_md5" maxLength:"32"`
-	DriveId      *string           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId       *string           `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
-	FilePath     *string           `json:"file_path" xml:"file_path"`
-	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	ShareId      *string           `json:"share_id" xml:"share_id"`
-	UploadId     *string           `json:"upload_id" xml:"upload_id" require:"true"`
+	Header       *GetUploadUrlRequestHeader `json:"header" xml:"header" type:"Struct"`
+	ContentMd5   *string                    `json:"content_md5" xml:"content_md5" maxLength:"32"`
+	DriveId      *string                    `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	FileId       *string                    `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	FilePath     *string                    `json:"file_path" xml:"file_path"`
+	PartInfoList []*UploadPartInfo          `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
+	ShareId      *string                    `json:"share_id" xml:"share_id"`
+	UploadId     *string                    `json:"upload_id" xml:"upload_id" require:"true"`
 }
 
 func (s GetUploadUrlRequest) String() string {
@@ -6588,6 +8474,11 @@ func (s GetUploadUrlRequest) String() string {
 
 func (s GetUploadUrlRequest) GoString() string {
 	return s.String()
+}
+
+func (s *GetUploadUrlRequest) SetHeader(v *GetUploadUrlRequestHeader) *GetUploadUrlRequest {
+	s.Header = v
+	return s
 }
 
 func (s *GetUploadUrlRequest) SetContentMd5(v string) *GetUploadUrlRequest {
@@ -6625,10 +8516,34 @@ func (s *GetUploadUrlRequest) SetUploadId(v string) *GetUploadUrlRequest {
 	return s
 }
 
+type GetUploadUrlRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s GetUploadUrlRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetUploadUrlRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *GetUploadUrlRequestHeader) SetTraceId(v string) *GetUploadUrlRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *GetUploadUrlRequestHeader) SetDeviceId(v string) *GetUploadUrlRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type ListDriveRequest struct {
-	Limit  *int    `json:"limit" xml:"limit"`
-	Marker *string `json:"marker" xml:"marker"`
-	Owner  *string `json:"owner" xml:"owner"`
+	Header *ListDriveRequestHeader `json:"header" xml:"header" type:"Struct"`
+	Limit  *int                    `json:"limit" xml:"limit"`
+	Marker *string                 `json:"marker" xml:"marker"`
+	Owner  *string                 `json:"owner" xml:"owner"`
 }
 
 func (s ListDriveRequest) String() string {
@@ -6637,6 +8552,11 @@ func (s ListDriveRequest) String() string {
 
 func (s ListDriveRequest) GoString() string {
 	return s.String()
+}
+
+func (s *ListDriveRequest) SetHeader(v *ListDriveRequestHeader) *ListDriveRequest {
+	s.Header = v
+	return s
 }
 
 func (s *ListDriveRequest) SetLimit(v int) *ListDriveRequest {
@@ -6654,17 +8574,41 @@ func (s *ListDriveRequest) SetOwner(v string) *ListDriveRequest {
 	return s
 }
 
+type ListDriveRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s ListDriveRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListDriveRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *ListDriveRequestHeader) SetTraceId(v string) *ListDriveRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *ListDriveRequestHeader) SetDeviceId(v string) *ListDriveRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type ListFileRequest struct {
-	All                   *bool   `json:"all" xml:"all"`
-	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
-	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
-	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1,3}"`
-	Marker                *string `json:"marker" xml:"marker"`
-	ParentFileId          *string `json:"parent_file_id" xml:"parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	ParentFilePath        *string `json:"parent_file_path" xml:"parent_file_path"`
-	ShareId               *string `json:"share_id" xml:"share_id"`
-	Status                *string `json:"status" xml:"status"`
+	Header                *ListFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	All                   *bool                  `json:"all" xml:"all"`
+	DriveId               *string                `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	ImageThumbnailProcess *string                `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
+	ImageUrlProcess       *string                `json:"image_url_process" xml:"image_url_process"`
+	Limit                 *int64                 `json:"limit" xml:"limit" pattern:"[0-9]{1,3}"`
+	Marker                *string                `json:"marker" xml:"marker"`
+	ParentFileId          *string                `json:"parent_file_id" xml:"parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	ParentFilePath        *string                `json:"parent_file_path" xml:"parent_file_path"`
+	ShareId               *string                `json:"share_id" xml:"share_id"`
+	Status                *string                `json:"status" xml:"status"`
 }
 
 func (s ListFileRequest) String() string {
@@ -6673,6 +8617,11 @@ func (s ListFileRequest) String() string {
 
 func (s ListFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *ListFileRequest) SetHeader(v *ListFileRequestHeader) *ListFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *ListFileRequest) SetAll(v bool) *ListFileRequest {
@@ -6725,9 +8674,33 @@ func (s *ListFileRequest) SetStatus(v string) *ListFileRequest {
 	return s
 }
 
+type ListFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s ListFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *ListFileRequestHeader) SetTraceId(v string) *ListFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *ListFileRequestHeader) SetDeviceId(v string) *ListFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type ListMyDriveRequest struct {
-	Limit  *int    `json:"limit" xml:"limit"`
-	Marker *string `json:"marker" xml:"marker"`
+	Header *ListMyDriveRequestHeader `json:"header" xml:"header" type:"Struct"`
+	Limit  *int                      `json:"limit" xml:"limit"`
+	Marker *string                   `json:"marker" xml:"marker"`
 }
 
 func (s ListMyDriveRequest) String() string {
@@ -6736,6 +8709,11 @@ func (s ListMyDriveRequest) String() string {
 
 func (s ListMyDriveRequest) GoString() string {
 	return s.String()
+}
+
+func (s *ListMyDriveRequest) SetHeader(v *ListMyDriveRequestHeader) *ListMyDriveRequest {
+	s.Header = v
+	return s
 }
 
 func (s *ListMyDriveRequest) SetLimit(v int) *ListMyDriveRequest {
@@ -6748,11 +8726,35 @@ func (s *ListMyDriveRequest) SetMarker(v string) *ListMyDriveRequest {
 	return s
 }
 
+type ListMyDriveRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s ListMyDriveRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListMyDriveRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *ListMyDriveRequestHeader) SetTraceId(v string) *ListMyDriveRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *ListMyDriveRequestHeader) SetDeviceId(v string) *ListMyDriveRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type ListShareRequest struct {
-	Creator *string `json:"creator" xml:"creator" require:"true"`
-	Limit   *int    `json:"limit" xml:"limit" require:"true"`
-	Marker  *string `json:"marker" xml:"marker"`
-	Owner   *string `json:"owner" xml:"owner" require:"true"`
+	Header  *ListShareRequestHeader `json:"header" xml:"header" type:"Struct"`
+	Creator *string                 `json:"creator" xml:"creator" require:"true"`
+	Limit   *int                    `json:"limit" xml:"limit" require:"true"`
+	Marker  *string                 `json:"marker" xml:"marker"`
+	Owner   *string                 `json:"owner" xml:"owner" require:"true"`
 }
 
 func (s ListShareRequest) String() string {
@@ -6761,6 +8763,11 @@ func (s ListShareRequest) String() string {
 
 func (s ListShareRequest) GoString() string {
 	return s.String()
+}
+
+func (s *ListShareRequest) SetHeader(v *ListShareRequestHeader) *ListShareRequest {
+	s.Header = v
+	return s
 }
 
 func (s *ListShareRequest) SetCreator(v string) *ListShareRequest {
@@ -6783,12 +8790,36 @@ func (s *ListShareRequest) SetOwner(v string) *ListShareRequest {
 	return s
 }
 
+type ListShareRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s ListShareRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListShareRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *ListShareRequestHeader) SetTraceId(v string) *ListShareRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *ListShareRequestHeader) SetDeviceId(v string) *ListShareRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type ListStoreFileRequest struct {
-	Limit          *int64  `json:"limit" xml:"limit"`
-	Marker         *string `json:"marker" xml:"marker"`
-	ParentFilePath *string `json:"parent_file_path" xml:"parent_file_path"`
-	StoreId        *string `json:"store_id" xml:"store_id"`
-	Type           *string `json:"type" xml:"type"`
+	Header         *ListStoreFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	Limit          *int64                      `json:"limit" xml:"limit"`
+	Marker         *string                     `json:"marker" xml:"marker"`
+	ParentFilePath *string                     `json:"parent_file_path" xml:"parent_file_path"`
+	StoreId        *string                     `json:"store_id" xml:"store_id"`
+	Type           *string                     `json:"type" xml:"type"`
 }
 
 func (s ListStoreFileRequest) String() string {
@@ -6797,6 +8828,11 @@ func (s ListStoreFileRequest) String() string {
 
 func (s ListStoreFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *ListStoreFileRequest) SetHeader(v *ListStoreFileRequestHeader) *ListStoreFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *ListStoreFileRequest) SetLimit(v int64) *ListStoreFileRequest {
@@ -6824,8 +8860,32 @@ func (s *ListStoreFileRequest) SetType(v string) *ListStoreFileRequest {
 	return s
 }
 
+type ListStoreFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s ListStoreFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListStoreFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *ListStoreFileRequestHeader) SetTraceId(v string) *ListStoreFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *ListStoreFileRequestHeader) SetDeviceId(v string) *ListStoreFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type ListStoreRequest struct {
-	DomainId *string `json:"domain_id" xml:"domain_id"`
+	Header   *ListStoreRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DomainId *string                 `json:"domain_id" xml:"domain_id"`
 }
 
 func (s ListStoreRequest) String() string {
@@ -6836,17 +8896,46 @@ func (s ListStoreRequest) GoString() string {
 	return s.String()
 }
 
+func (s *ListStoreRequest) SetHeader(v *ListStoreRequestHeader) *ListStoreRequest {
+	s.Header = v
+	return s
+}
+
 func (s *ListStoreRequest) SetDomainId(v string) *ListStoreRequest {
 	s.DomainId = &v
 	return s
 }
 
+type ListStoreRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s ListStoreRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListStoreRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *ListStoreRequestHeader) SetTraceId(v string) *ListStoreRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *ListStoreRequestHeader) SetDeviceId(v string) *ListStoreRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type OSSCompleteFileRequest struct {
-	DriveId      *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	UploadId     *string           `json:"upload_id" xml:"upload_id"`
-	FilePath     *string           `json:"file_path" xml:"file_path"`
-	ShareId      *string           `json:"share_id" xml:"share_id"`
+	Header       *OSSCompleteFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId      *string                       `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	PartInfoList []*UploadPartInfo             `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
+	UploadId     *string                       `json:"upload_id" xml:"upload_id"`
+	FilePath     *string                       `json:"file_path" xml:"file_path"`
+	ShareId      *string                       `json:"share_id" xml:"share_id"`
 }
 
 func (s OSSCompleteFileRequest) String() string {
@@ -6855,6 +8944,11 @@ func (s OSSCompleteFileRequest) String() string {
 
 func (s OSSCompleteFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *OSSCompleteFileRequest) SetHeader(v *OSSCompleteFileRequestHeader) *OSSCompleteFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *OSSCompleteFileRequest) SetDriveId(v string) *OSSCompleteFileRequest {
@@ -6882,15 +8976,39 @@ func (s *OSSCompleteFileRequest) SetShareId(v string) *OSSCompleteFileRequest {
 	return s
 }
 
+type OSSCompleteFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s OSSCompleteFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s OSSCompleteFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *OSSCompleteFileRequestHeader) SetTraceId(v string) *OSSCompleteFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *OSSCompleteFileRequestHeader) SetDeviceId(v string) *OSSCompleteFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type OSSCopyFileRequest struct {
-	DriveId          *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	FilePath         *string `json:"file_path" xml:"file_path"`
-	NewName          *string `json:"new_name" xml:"new_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	Overwrite        *bool   `json:"overwrite" xml:"overwrite"`
-	ShareId          *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
-	ToDriveId        *string `json:"to_drive_id" xml:"to_drive_id" require:"true" pattern:"[0-9]+"`
-	ToParentFilePath *string `json:"to_parent_file_path" xml:"to_parent_file_path" require:"true"`
-	ToShareId        *string `json:"to_share_id" xml:"to_share_id"`
+	Header           *OSSCopyFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId          *string                   `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	FilePath         *string                   `json:"file_path" xml:"file_path"`
+	NewName          *string                   `json:"new_name" xml:"new_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	Overwrite        *bool                     `json:"overwrite" xml:"overwrite"`
+	ShareId          *string                   `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
+	ToDriveId        *string                   `json:"to_drive_id" xml:"to_drive_id" require:"true" pattern:"[0-9]+"`
+	ToParentFilePath *string                   `json:"to_parent_file_path" xml:"to_parent_file_path" require:"true"`
+	ToShareId        *string                   `json:"to_share_id" xml:"to_share_id"`
 }
 
 func (s OSSCopyFileRequest) String() string {
@@ -6899,6 +9017,11 @@ func (s OSSCopyFileRequest) String() string {
 
 func (s OSSCopyFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *OSSCopyFileRequest) SetHeader(v *OSSCopyFileRequestHeader) *OSSCopyFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *OSSCopyFileRequest) SetDriveId(v string) *OSSCopyFileRequest {
@@ -6941,16 +9064,40 @@ func (s *OSSCopyFileRequest) SetToShareId(v string) *OSSCopyFileRequest {
 	return s
 }
 
+type OSSCopyFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s OSSCopyFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s OSSCopyFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *OSSCopyFileRequestHeader) SetTraceId(v string) *OSSCopyFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *OSSCopyFileRequestHeader) SetDeviceId(v string) *OSSCopyFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type OSSCreateFileRequest struct {
-	ContentMd5     *string           `json:"content_md5" xml:"content_md5"`
-	ContentType    *string           `json:"content_type" xml:"content_type"`
-	Name           *string           `json:"name" xml:"name" pattern:"[a-z0-9.-_]{1,1000}"`
-	PartInfoList   []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	Size           *int64            `json:"size" xml:"size"`
-	Type           *string           `json:"type" xml:"type"`
-	DriveId        *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	ParentFilePath *string           `json:"parent_file_path" xml:"parent_file_path"`
-	ShareId        *string           `json:"share_id" xml:"share_id" maxLength:"40"`
+	Header         *OSSCreateFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	ContentMd5     *string                     `json:"content_md5" xml:"content_md5"`
+	ContentType    *string                     `json:"content_type" xml:"content_type"`
+	Name           *string                     `json:"name" xml:"name" pattern:"[a-z0-9.-_]{1,1000}"`
+	PartInfoList   []*UploadPartInfo           `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
+	Size           *int64                      `json:"size" xml:"size"`
+	Type           *string                     `json:"type" xml:"type"`
+	DriveId        *string                     `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	ParentFilePath *string                     `json:"parent_file_path" xml:"parent_file_path"`
+	ShareId        *string                     `json:"share_id" xml:"share_id" maxLength:"40"`
 }
 
 func (s OSSCreateFileRequest) String() string {
@@ -6959,6 +9106,11 @@ func (s OSSCreateFileRequest) String() string {
 
 func (s OSSCreateFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *OSSCreateFileRequest) SetHeader(v *OSSCreateFileRequestHeader) *OSSCreateFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *OSSCreateFileRequest) SetContentMd5(v string) *OSSCreateFileRequest {
@@ -7006,11 +9158,35 @@ func (s *OSSCreateFileRequest) SetShareId(v string) *OSSCreateFileRequest {
 	return s
 }
 
+type OSSCreateFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s OSSCreateFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s OSSCreateFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *OSSCreateFileRequestHeader) SetTraceId(v string) *OSSCreateFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *OSSCreateFileRequestHeader) SetDeviceId(v string) *OSSCreateFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type OSSDeleteFileRequest struct {
-	DriveId     *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FilePath    *string `json:"file_path" xml:"file_path" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	Permanently *bool   `json:"permanently" xml:"permanently"`
-	ShareId     *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
+	Header      *OSSDeleteFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId     *string                     `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	FilePath    *string                     `json:"file_path" xml:"file_path" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	Permanently *bool                       `json:"permanently" xml:"permanently"`
+	ShareId     *string                     `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
 }
 
 func (s OSSDeleteFileRequest) String() string {
@@ -7019,6 +9195,11 @@ func (s OSSDeleteFileRequest) String() string {
 
 func (s OSSDeleteFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *OSSDeleteFileRequest) SetHeader(v *OSSDeleteFileRequestHeader) *OSSDeleteFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *OSSDeleteFileRequest) SetDriveId(v string) *OSSDeleteFileRequest {
@@ -7041,12 +9222,36 @@ func (s *OSSDeleteFileRequest) SetShareId(v string) *OSSDeleteFileRequest {
 	return s
 }
 
+type OSSDeleteFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s OSSDeleteFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s OSSDeleteFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *OSSDeleteFileRequestHeader) SetTraceId(v string) *OSSDeleteFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *OSSDeleteFileRequestHeader) SetDeviceId(v string) *OSSDeleteFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type OSSGetDownloadUrlRequest struct {
-	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
-	FileName  *string `json:"file_name" xml:"file_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	FilePath  *string `json:"file_path" xml:"file_path" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	ShareId   *string `json:"share_id" xml:"share_id" require:"true" pattern:"[0-9a-z-]+"`
+	Header    *OSSGetDownloadUrlRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId   *string                         `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	ExpireSec *int64                          `json:"expire_sec" xml:"expire_sec"`
+	FileName  *string                         `json:"file_name" xml:"file_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	FilePath  *string                         `json:"file_path" xml:"file_path" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	ShareId   *string                         `json:"share_id" xml:"share_id" require:"true" pattern:"[0-9a-z-]+"`
 }
 
 func (s OSSGetDownloadUrlRequest) String() string {
@@ -7055,6 +9260,11 @@ func (s OSSGetDownloadUrlRequest) String() string {
 
 func (s OSSGetDownloadUrlRequest) GoString() string {
 	return s.String()
+}
+
+func (s *OSSGetDownloadUrlRequest) SetHeader(v *OSSGetDownloadUrlRequestHeader) *OSSGetDownloadUrlRequest {
+	s.Header = v
+	return s
 }
 
 func (s *OSSGetDownloadUrlRequest) SetDriveId(v string) *OSSGetDownloadUrlRequest {
@@ -7082,12 +9292,36 @@ func (s *OSSGetDownloadUrlRequest) SetShareId(v string) *OSSGetDownloadUrlReques
 	return s
 }
 
+type OSSGetDownloadUrlRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s OSSGetDownloadUrlRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s OSSGetDownloadUrlRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *OSSGetDownloadUrlRequestHeader) SetTraceId(v string) *OSSGetDownloadUrlRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *OSSGetDownloadUrlRequestHeader) SetDeviceId(v string) *OSSGetDownloadUrlRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type OSSGetFileRequest struct {
-	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FilePath              *string `json:"file_path" xml:"file_path" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
-	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
-	ShareId               *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
+	Header                *OSSGetFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId               *string                  `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	FilePath              *string                  `json:"file_path" xml:"file_path" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	ImageThumbnailProcess *string                  `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
+	ImageUrlProcess       *string                  `json:"image_url_process" xml:"image_url_process"`
+	ShareId               *string                  `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
 }
 
 func (s OSSGetFileRequest) String() string {
@@ -7096,6 +9330,11 @@ func (s OSSGetFileRequest) String() string {
 
 func (s OSSGetFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *OSSGetFileRequest) SetHeader(v *OSSGetFileRequestHeader) *OSSGetFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *OSSGetFileRequest) SetDriveId(v string) *OSSGetFileRequest {
@@ -7123,13 +9362,37 @@ func (s *OSSGetFileRequest) SetShareId(v string) *OSSGetFileRequest {
 	return s
 }
 
+type OSSGetFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s OSSGetFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s OSSGetFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *OSSGetFileRequestHeader) SetTraceId(v string) *OSSGetFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *OSSGetFileRequestHeader) SetDeviceId(v string) *OSSGetFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type OSSGetUploadUrlRequest struct {
-	ContentMd5   *string           `json:"content_md5" xml:"content_md5" maxLength:"32"`
-	DriveId      *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	UploadId     *string           `json:"upload_id" xml:"upload_id"`
-	FilePath     *string           `json:"file_path" xml:"file_path"`
-	ShareId      *string           `json:"share_id" xml:"share_id" pattern:"[0-9]+"`
+	Header       *OSSGetUploadUrlRequestHeader `json:"header" xml:"header" type:"Struct"`
+	ContentMd5   *string                       `json:"content_md5" xml:"content_md5" maxLength:"32"`
+	DriveId      *string                       `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	PartInfoList []*UploadPartInfo             `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
+	UploadId     *string                       `json:"upload_id" xml:"upload_id"`
+	FilePath     *string                       `json:"file_path" xml:"file_path"`
+	ShareId      *string                       `json:"share_id" xml:"share_id" pattern:"[0-9]+"`
 }
 
 func (s OSSGetUploadUrlRequest) String() string {
@@ -7138,6 +9401,11 @@ func (s OSSGetUploadUrlRequest) String() string {
 
 func (s OSSGetUploadUrlRequest) GoString() string {
 	return s.String()
+}
+
+func (s *OSSGetUploadUrlRequest) SetHeader(v *OSSGetUploadUrlRequestHeader) *OSSGetUploadUrlRequest {
+	s.Header = v
+	return s
 }
 
 func (s *OSSGetUploadUrlRequest) SetContentMd5(v string) *OSSGetUploadUrlRequest {
@@ -7170,14 +9438,38 @@ func (s *OSSGetUploadUrlRequest) SetShareId(v string) *OSSGetUploadUrlRequest {
 	return s
 }
 
+type OSSGetUploadUrlRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s OSSGetUploadUrlRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s OSSGetUploadUrlRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *OSSGetUploadUrlRequestHeader) SetTraceId(v string) *OSSGetUploadUrlRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *OSSGetUploadUrlRequestHeader) SetDeviceId(v string) *OSSGetUploadUrlRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type OSSListFileRequest struct {
-	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
-	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
-	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1,3}"`
-	Marker                *string `json:"marker" xml:"marker"`
-	ParentFilePath        *string `json:"parent_file_path" xml:"parent_file_path" require:"true"`
-	ShareId               *string `json:"share_id" xml:"share_id" require:"true" pattern:"[0-9]+"`
+	Header                *OSSListFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId               *string                   `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	ImageThumbnailProcess *string                   `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
+	ImageUrlProcess       *string                   `json:"image_url_process" xml:"image_url_process"`
+	Limit                 *int64                    `json:"limit" xml:"limit" pattern:"[0-9]{1,3}"`
+	Marker                *string                   `json:"marker" xml:"marker"`
+	ParentFilePath        *string                   `json:"parent_file_path" xml:"parent_file_path" require:"true"`
+	ShareId               *string                   `json:"share_id" xml:"share_id" require:"true" pattern:"[0-9]+"`
 }
 
 func (s OSSListFileRequest) String() string {
@@ -7186,6 +9478,11 @@ func (s OSSListFileRequest) String() string {
 
 func (s OSSListFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *OSSListFileRequest) SetHeader(v *OSSListFileRequestHeader) *OSSListFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *OSSListFileRequest) SetDriveId(v string) *OSSListFileRequest {
@@ -7223,13 +9520,37 @@ func (s *OSSListFileRequest) SetShareId(v string) *OSSListFileRequest {
 	return s
 }
 
+type OSSListFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s OSSListFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s OSSListFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *OSSListFileRequestHeader) SetTraceId(v string) *OSSListFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *OSSListFileRequestHeader) SetDeviceId(v string) *OSSListFileRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type OSSListUploadedPartRequest struct {
-	DriveId          *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FilePath         *string `json:"file_path" xml:"file_path" require:"true"`
-	Limit            *int64  `json:"limit" xml:"limit" require:"true" pattern:"[0-9]+"`
-	PartNumberMarker *int64  `json:"part_number_marker" xml:"part_number_marker" pattern:"[0-9]+"`
-	ShareId          *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
-	UploadId         *string `json:"upload_id" xml:"upload_id"`
+	Header           *OSSListUploadedPartRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId          *string                           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	FilePath         *string                           `json:"file_path" xml:"file_path" require:"true"`
+	Limit            *int64                            `json:"limit" xml:"limit" require:"true" pattern:"[0-9]+"`
+	PartNumberMarker *int64                            `json:"part_number_marker" xml:"part_number_marker" pattern:"[0-9]+"`
+	ShareId          *string                           `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
+	UploadId         *string                           `json:"upload_id" xml:"upload_id"`
 }
 
 func (s OSSListUploadedPartRequest) String() string {
@@ -7238,6 +9559,11 @@ func (s OSSListUploadedPartRequest) String() string {
 
 func (s OSSListUploadedPartRequest) GoString() string {
 	return s.String()
+}
+
+func (s *OSSListUploadedPartRequest) SetHeader(v *OSSListUploadedPartRequestHeader) *OSSListUploadedPartRequest {
+	s.Header = v
+	return s
 }
 
 func (s *OSSListUploadedPartRequest) SetDriveId(v string) *OSSListUploadedPartRequest {
@@ -7270,13 +9596,37 @@ func (s *OSSListUploadedPartRequest) SetUploadId(v string) *OSSListUploadedPartR
 	return s
 }
 
+type OSSListUploadedPartRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s OSSListUploadedPartRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s OSSListUploadedPartRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *OSSListUploadedPartRequestHeader) SetTraceId(v string) *OSSListUploadedPartRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *OSSListUploadedPartRequestHeader) SetDeviceId(v string) *OSSListUploadedPartRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type OSSMoveFileRequest struct {
-	DriveId          *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FilePath         *string `json:"file_path" xml:"file_path"`
-	NewName          *string `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	Overwrite        *bool   `json:"overwrite" xml:"overwrite"`
-	ShareId          *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
-	ToParentFilePath *string `json:"to_parent_file_path" xml:"to_parent_file_path"`
+	Header           *OSSMoveFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveId          *string                   `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	FilePath         *string                   `json:"file_path" xml:"file_path"`
+	NewName          *string                   `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	Overwrite        *bool                     `json:"overwrite" xml:"overwrite"`
+	ShareId          *string                   `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
+	ToParentFilePath *string                   `json:"to_parent_file_path" xml:"to_parent_file_path"`
 }
 
 func (s OSSMoveFileRequest) String() string {
@@ -7285,6 +9635,11 @@ func (s OSSMoveFileRequest) String() string {
 
 func (s OSSMoveFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *OSSMoveFileRequest) SetHeader(v *OSSMoveFileRequestHeader) *OSSMoveFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *OSSMoveFileRequest) SetDriveId(v string) *OSSMoveFileRequest {
@@ -7314,6 +9669,29 @@ func (s *OSSMoveFileRequest) SetShareId(v string) *OSSMoveFileRequest {
 
 func (s *OSSMoveFileRequest) SetToParentFilePath(v string) *OSSMoveFileRequest {
 	s.ToParentFilePath = &v
+	return s
+}
+
+type OSSMoveFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s OSSMoveFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s OSSMoveFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *OSSMoveFileRequestHeader) SetTraceId(v string) *OSSMoveFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *OSSMoveFileRequestHeader) SetDeviceId(v string) *OSSMoveFileRequestHeader {
+	s.DeviceId = &v
 	return s
 }
 
@@ -7395,7 +9773,8 @@ func (s *Store) SetType(v string) *Store {
 }
 
 type UCGetObjectInfoByObjectKeyRequest struct {
-	ObjectKey *string `json:"object_key" xml:"object_key"`
+	Header    *UCGetObjectInfoByObjectKeyRequestHeader `json:"header" xml:"header" type:"Struct"`
+	ObjectKey *string                                  `json:"object_key" xml:"object_key"`
 }
 
 func (s UCGetObjectInfoByObjectKeyRequest) String() string {
@@ -7406,13 +9785,42 @@ func (s UCGetObjectInfoByObjectKeyRequest) GoString() string {
 	return s.String()
 }
 
+func (s *UCGetObjectInfoByObjectKeyRequest) SetHeader(v *UCGetObjectInfoByObjectKeyRequestHeader) *UCGetObjectInfoByObjectKeyRequest {
+	s.Header = v
+	return s
+}
+
 func (s *UCGetObjectInfoByObjectKeyRequest) SetObjectKey(v string) *UCGetObjectInfoByObjectKeyRequest {
 	s.ObjectKey = &v
 	return s
 }
 
+type UCGetObjectInfoByObjectKeyRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s UCGetObjectInfoByObjectKeyRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s UCGetObjectInfoByObjectKeyRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *UCGetObjectInfoByObjectKeyRequestHeader) SetTraceId(v string) *UCGetObjectInfoByObjectKeyRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *UCGetObjectInfoByObjectKeyRequestHeader) SetDeviceId(v string) *UCGetObjectInfoByObjectKeyRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type UCGetObjectInfoBySha1Request struct {
-	Sha1 *string `json:"sha1" xml:"sha1"`
+	Header *UCGetObjectInfoBySha1RequestHeader `json:"header" xml:"header" type:"Struct"`
+	Sha1   *string                             `json:"sha1" xml:"sha1"`
 }
 
 func (s UCGetObjectInfoBySha1Request) String() string {
@@ -7423,17 +9831,46 @@ func (s UCGetObjectInfoBySha1Request) GoString() string {
 	return s.String()
 }
 
+func (s *UCGetObjectInfoBySha1Request) SetHeader(v *UCGetObjectInfoBySha1RequestHeader) *UCGetObjectInfoBySha1Request {
+	s.Header = v
+	return s
+}
+
 func (s *UCGetObjectInfoBySha1Request) SetSha1(v string) *UCGetObjectInfoBySha1Request {
 	s.Sha1 = &v
 	return s
 }
 
+type UCGetObjectInfoBySha1RequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s UCGetObjectInfoBySha1RequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s UCGetObjectInfoBySha1RequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *UCGetObjectInfoBySha1RequestHeader) SetTraceId(v string) *UCGetObjectInfoBySha1RequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *UCGetObjectInfoBySha1RequestHeader) SetDeviceId(v string) *UCGetObjectInfoBySha1RequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type UpdateDriveRequest struct {
-	Description *string `json:"description" xml:"description"`
-	DriveId     *string `json:"drive_id" xml:"drive_id" require:"true"`
-	DriveName   *string `json:"drive_name" xml:"drive_name"`
-	Status      *string `json:"status" xml:"status"`
-	TotalSize   *int64  `json:"total_size" xml:"total_size"`
+	Header      *UpdateDriveRequestHeader `json:"header" xml:"header" type:"Struct"`
+	Description *string                   `json:"description" xml:"description"`
+	DriveId     *string                   `json:"drive_id" xml:"drive_id" require:"true"`
+	DriveName   *string                   `json:"drive_name" xml:"drive_name"`
+	Status      *string                   `json:"status" xml:"status"`
+	TotalSize   *int64                    `json:"total_size" xml:"total_size"`
 }
 
 func (s UpdateDriveRequest) String() string {
@@ -7442,6 +9879,11 @@ func (s UpdateDriveRequest) String() string {
 
 func (s UpdateDriveRequest) GoString() string {
 	return s.String()
+}
+
+func (s *UpdateDriveRequest) SetHeader(v *UpdateDriveRequestHeader) *UpdateDriveRequest {
+	s.Header = v
+	return s
 }
 
 func (s *UpdateDriveRequest) SetDescription(v string) *UpdateDriveRequest {
@@ -7469,16 +9911,40 @@ func (s *UpdateDriveRequest) SetTotalSize(v int64) *UpdateDriveRequest {
 	return s
 }
 
+type UpdateDriveRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s UpdateDriveRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s UpdateDriveRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *UpdateDriveRequestHeader) SetTraceId(v string) *UpdateDriveRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *UpdateDriveRequestHeader) SetDeviceId(v string) *UpdateDriveRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type UpdateFileMetaRequest struct {
-	Description *string                `json:"description" xml:"description" maxLength:"1000"`
-	DriveId     *string                `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId      *string                `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	Hidden      *bool                  `json:"hidden" xml:"hidden"`
-	Meta        *string                `json:"meta" xml:"meta"`
-	Name        *string                `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	ShareId     *string                `json:"share_id" xml:"share_id"`
-	Starred     *bool                  `json:"starred" xml:"starred"`
-	Tags        map[string]interface{} `json:"tags" xml:"tags"`
+	Header      *UpdateFileMetaRequestHeader `json:"header" xml:"header" type:"Struct"`
+	Description *string                      `json:"description" xml:"description" maxLength:"1000"`
+	DriveId     *string                      `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	FileId      *string                      `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	Hidden      *bool                        `json:"hidden" xml:"hidden"`
+	Meta        *string                      `json:"meta" xml:"meta"`
+	Name        *string                      `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	ShareId     *string                      `json:"share_id" xml:"share_id"`
+	Starred     *bool                        `json:"starred" xml:"starred"`
+	Tags        map[string]interface{}       `json:"tags" xml:"tags"`
 }
 
 func (s UpdateFileMetaRequest) String() string {
@@ -7487,6 +9953,11 @@ func (s UpdateFileMetaRequest) String() string {
 
 func (s UpdateFileMetaRequest) GoString() string {
 	return s.String()
+}
+
+func (s *UpdateFileMetaRequest) SetHeader(v *UpdateFileMetaRequestHeader) *UpdateFileMetaRequest {
+	s.Header = v
+	return s
 }
 
 func (s *UpdateFileMetaRequest) SetDescription(v string) *UpdateFileMetaRequest {
@@ -7534,13 +10005,37 @@ func (s *UpdateFileMetaRequest) SetTags(v map[string]interface{}) *UpdateFileMet
 	return s
 }
 
+type UpdateFileMetaRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s UpdateFileMetaRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s UpdateFileMetaRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *UpdateFileMetaRequestHeader) SetTraceId(v string) *UpdateFileMetaRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *UpdateFileMetaRequestHeader) SetDeviceId(v string) *UpdateFileMetaRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type UpdateShareRequest struct {
-	Description *string   `json:"description" xml:"description" maxLength:"1024"`
-	Expiration  *string   `json:"expiration" xml:"expiration"`
-	Permissions []*string `json:"permissions" xml:"permissions" type:"Repeated"`
-	ShareId     *string   `json:"share_id" xml:"share_id" require:"true"`
-	ShareName   *string   `json:"share_name" xml:"share_name"`
-	Status      *string   `json:"status" xml:"status"`
+	Header      *UpdateShareRequestHeader `json:"header" xml:"header" type:"Struct"`
+	Description *string                   `json:"description" xml:"description" maxLength:"1024"`
+	Expiration  *string                   `json:"expiration" xml:"expiration"`
+	Permissions []*string                 `json:"permissions" xml:"permissions" type:"Repeated"`
+	ShareId     *string                   `json:"share_id" xml:"share_id" require:"true"`
+	ShareName   *string                   `json:"share_name" xml:"share_name"`
+	Status      *string                   `json:"status" xml:"status"`
 }
 
 func (s UpdateShareRequest) String() string {
@@ -7549,6 +10044,11 @@ func (s UpdateShareRequest) String() string {
 
 func (s UpdateShareRequest) GoString() string {
 	return s.String()
+}
+
+func (s *UpdateShareRequest) SetHeader(v *UpdateShareRequestHeader) *UpdateShareRequest {
+	s.Header = v
+	return s
 }
 
 func (s *UpdateShareRequest) SetDescription(v string) *UpdateShareRequest {
@@ -7578,6 +10078,29 @@ func (s *UpdateShareRequest) SetShareName(v string) *UpdateShareRequest {
 
 func (s *UpdateShareRequest) SetStatus(v string) *UpdateShareRequest {
 	s.Status = &v
+	return s
+}
+
+type UpdateShareRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s UpdateShareRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s UpdateShareRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *UpdateShareRequestHeader) SetTraceId(v string) *UpdateShareRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *UpdateShareRequestHeader) SetDeviceId(v string) *UpdateShareRequestHeader {
+	s.DeviceId = &v
 	return s
 }
 
@@ -7677,15 +10200,16 @@ func (s *BaseUserResponse) SetUserName(v string) *BaseUserResponse {
 }
 
 type CreateUserRequest struct {
-	Avatar      *string `json:"avatar" xml:"avatar"`
-	Description *string `json:"description" xml:"description"`
-	Email       *string `json:"email" xml:"email"`
-	NickName    *string `json:"nick_name" xml:"nick_name"`
-	Phone       *string `json:"phone" xml:"phone"`
-	Role        *string `json:"role" xml:"role"`
-	Status      *string `json:"status" xml:"status"`
-	UserId      *string `json:"user_id" xml:"user_id" require:"true"`
-	UserName    *string `json:"user_name" xml:"user_name"`
+	Header      *CreateUserRequestHeader `json:"header" xml:"header" type:"Struct"`
+	Avatar      *string                  `json:"avatar" xml:"avatar"`
+	Description *string                  `json:"description" xml:"description"`
+	Email       *string                  `json:"email" xml:"email"`
+	NickName    *string                  `json:"nick_name" xml:"nick_name"`
+	Phone       *string                  `json:"phone" xml:"phone"`
+	Role        *string                  `json:"role" xml:"role"`
+	Status      *string                  `json:"status" xml:"status"`
+	UserId      *string                  `json:"user_id" xml:"user_id" require:"true"`
+	UserName    *string                  `json:"user_name" xml:"user_name"`
 }
 
 func (s CreateUserRequest) String() string {
@@ -7694,6 +10218,11 @@ func (s CreateUserRequest) String() string {
 
 func (s CreateUserRequest) GoString() string {
 	return s.String()
+}
+
+func (s *CreateUserRequest) SetHeader(v *CreateUserRequestHeader) *CreateUserRequest {
+	s.Header = v
+	return s
 }
 
 func (s *CreateUserRequest) SetAvatar(v string) *CreateUserRequest {
@@ -7738,6 +10267,29 @@ func (s *CreateUserRequest) SetUserId(v string) *CreateUserRequest {
 
 func (s *CreateUserRequest) SetUserName(v string) *CreateUserRequest {
 	s.UserName = &v
+	return s
+}
+
+type CreateUserRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s CreateUserRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CreateUserRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *CreateUserRequestHeader) SetTraceId(v string) *CreateUserRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *CreateUserRequestHeader) SetDeviceId(v string) *CreateUserRequestHeader {
+	s.DeviceId = &v
 	return s
 }
 
@@ -7837,7 +10389,8 @@ func (s *CreateUserResponse) SetUserName(v string) *CreateUserResponse {
 }
 
 type DeleteUserRequest struct {
-	UserId *string `json:"user_id" xml:"user_id" require:"true"`
+	Header *DeleteUserRequestHeader `json:"header" xml:"header" type:"Struct"`
+	UserId *string                  `json:"user_id" xml:"user_id" require:"true"`
 }
 
 func (s DeleteUserRequest) String() string {
@@ -7848,8 +10401,36 @@ func (s DeleteUserRequest) GoString() string {
 	return s.String()
 }
 
+func (s *DeleteUserRequest) SetHeader(v *DeleteUserRequestHeader) *DeleteUserRequest {
+	s.Header = v
+	return s
+}
+
 func (s *DeleteUserRequest) SetUserId(v string) *DeleteUserRequest {
 	s.UserId = &v
+	return s
+}
+
+type DeleteUserRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s DeleteUserRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s DeleteUserRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *DeleteUserRequestHeader) SetTraceId(v string) *DeleteUserRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *DeleteUserRequestHeader) SetDeviceId(v string) *DeleteUserRequestHeader {
+	s.DeviceId = &v
 	return s
 }
 
@@ -7871,7 +10452,8 @@ func (s *DeleteUserResponse) SetRequestId(v string) *DeleteUserResponse {
 }
 
 type GetUserRequest struct {
-	UserId *string `json:"user_id" xml:"user_id"`
+	Header *GetUserRequestHeader `json:"header" xml:"header" type:"Struct"`
+	UserId *string               `json:"user_id" xml:"user_id"`
 }
 
 func (s GetUserRequest) String() string {
@@ -7882,8 +10464,36 @@ func (s GetUserRequest) GoString() string {
 	return s.String()
 }
 
+func (s *GetUserRequest) SetHeader(v *GetUserRequestHeader) *GetUserRequest {
+	s.Header = v
+	return s
+}
+
 func (s *GetUserRequest) SetUserId(v string) *GetUserRequest {
 	s.UserId = &v
+	return s
+}
+
+type GetUserRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s GetUserRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetUserRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *GetUserRequestHeader) SetTraceId(v string) *GetUserRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *GetUserRequestHeader) SetDeviceId(v string) *GetUserRequestHeader {
+	s.DeviceId = &v
 	return s
 }
 
@@ -7983,8 +10593,9 @@ func (s *GetUserResponse) SetUserName(v string) *GetUserResponse {
 }
 
 type ListUserRequest struct {
-	Limit  *int    `json:"limit" xml:"limit"`
-	Marker *string `json:"marker" xml:"marker"`
+	Header *ListUserRequestHeader `json:"header" xml:"header" type:"Struct"`
+	Limit  *int                   `json:"limit" xml:"limit"`
+	Marker *string                `json:"marker" xml:"marker"`
 }
 
 func (s ListUserRequest) String() string {
@@ -7995,6 +10606,11 @@ func (s ListUserRequest) GoString() string {
 	return s.String()
 }
 
+func (s *ListUserRequest) SetHeader(v *ListUserRequestHeader) *ListUserRequest {
+	s.Header = v
+	return s
+}
+
 func (s *ListUserRequest) SetLimit(v int) *ListUserRequest {
 	s.Limit = &v
 	return s
@@ -8002,6 +10618,29 @@ func (s *ListUserRequest) SetLimit(v int) *ListUserRequest {
 
 func (s *ListUserRequest) SetMarker(v string) *ListUserRequest {
 	s.Marker = &v
+	return s
+}
+
+type ListUserRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s ListUserRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListUserRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *ListUserRequestHeader) SetTraceId(v string) *ListUserRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *ListUserRequestHeader) SetDeviceId(v string) *ListUserRequestHeader {
+	s.DeviceId = &v
 	return s
 }
 
@@ -8035,14 +10674,15 @@ func (s *ListUserResponse) SetNextMarker(v string) *ListUserResponse {
 }
 
 type SearchUserRequest struct {
-	Email    *string `json:"email" xml:"email"`
-	Limit    *int    `json:"limit" xml:"limit"`
-	Marker   *string `json:"marker" xml:"marker"`
-	NickName *string `json:"nick_name" xml:"nick_name"`
-	Phone    *string `json:"phone" xml:"phone"`
-	Role     *string `json:"role" xml:"role"`
-	Status   *string `json:"status" xml:"status"`
-	UserName *string `json:"user_name" xml:"user_name"`
+	Header   *SearchUserRequestHeader `json:"header" xml:"header" type:"Struct"`
+	Email    *string                  `json:"email" xml:"email"`
+	Limit    *int                     `json:"limit" xml:"limit"`
+	Marker   *string                  `json:"marker" xml:"marker"`
+	NickName *string                  `json:"nick_name" xml:"nick_name"`
+	Phone    *string                  `json:"phone" xml:"phone"`
+	Role     *string                  `json:"role" xml:"role"`
+	Status   *string                  `json:"status" xml:"status"`
+	UserName *string                  `json:"user_name" xml:"user_name"`
 }
 
 func (s SearchUserRequest) String() string {
@@ -8051,6 +10691,11 @@ func (s SearchUserRequest) String() string {
 
 func (s SearchUserRequest) GoString() string {
 	return s.String()
+}
+
+func (s *SearchUserRequest) SetHeader(v *SearchUserRequestHeader) *SearchUserRequest {
+	s.Header = v
+	return s
 }
 
 func (s *SearchUserRequest) SetEmail(v string) *SearchUserRequest {
@@ -8093,15 +10738,39 @@ func (s *SearchUserRequest) SetUserName(v string) *SearchUserRequest {
 	return s
 }
 
+type SearchUserRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s SearchUserRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s SearchUserRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *SearchUserRequestHeader) SetTraceId(v string) *SearchUserRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *SearchUserRequestHeader) SetDeviceId(v string) *SearchUserRequestHeader {
+	s.DeviceId = &v
+	return s
+}
+
 type UpdateUserRequest struct {
-	Avatar      *string `json:"avatar" xml:"avatar"`
-	Description *string `json:"description" xml:"description"`
-	Email       *string `json:"email" xml:"email"`
-	NickName    *string `json:"nick_name" xml:"nick_name"`
-	Phone       *string `json:"phone" xml:"phone"`
-	Role        *string `json:"role" xml:"role"`
-	Status      *string `json:"status" xml:"status"`
-	UserId      *string `json:"user_id" xml:"user_id" require:"true"`
+	Header      *UpdateUserRequestHeader `json:"header" xml:"header" type:"Struct"`
+	Avatar      *string                  `json:"avatar" xml:"avatar"`
+	Description *string                  `json:"description" xml:"description"`
+	Email       *string                  `json:"email" xml:"email"`
+	NickName    *string                  `json:"nick_name" xml:"nick_name"`
+	Phone       *string                  `json:"phone" xml:"phone"`
+	Role        *string                  `json:"role" xml:"role"`
+	Status      *string                  `json:"status" xml:"status"`
+	UserId      *string                  `json:"user_id" xml:"user_id" require:"true"`
 }
 
 func (s UpdateUserRequest) String() string {
@@ -8110,6 +10779,11 @@ func (s UpdateUserRequest) String() string {
 
 func (s UpdateUserRequest) GoString() string {
 	return s.String()
+}
+
+func (s *UpdateUserRequest) SetHeader(v *UpdateUserRequestHeader) *UpdateUserRequest {
+	s.Header = v
+	return s
 }
 
 func (s *UpdateUserRequest) SetAvatar(v string) *UpdateUserRequest {
@@ -8149,6 +10823,29 @@ func (s *UpdateUserRequest) SetStatus(v string) *UpdateUserRequest {
 
 func (s *UpdateUserRequest) SetUserId(v string) *UpdateUserRequest {
 	s.UserId = &v
+	return s
+}
+
+type UpdateUserRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s UpdateUserRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s UpdateUserRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *UpdateUserRequestHeader) SetTraceId(v string) *UpdateUserRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *UpdateUserRequestHeader) SetDeviceId(v string) *UpdateUserRequestHeader {
+	s.DeviceId = &v
 	return s
 }
 
@@ -8248,9 +10945,10 @@ func (s *UpdateUserResponse) SetUserName(v string) *UpdateUserResponse {
 }
 
 type DownloadFileRequest struct {
-	DriveID      *string `json:"DriveID" xml:"DriveID" require:"true"`
-	FileID       *string `json:"FileID" xml:"FileID" require:"true"`
-	ImageProcess *string `json:"ImageProcess" xml:"ImageProcess"`
+	Header       *DownloadFileRequestHeader `json:"header" xml:"header" type:"Struct"`
+	DriveID      *string                    `json:"DriveID" xml:"DriveID" require:"true"`
+	FileID       *string                    `json:"FileID" xml:"FileID" require:"true"`
+	ImageProcess *string                    `json:"ImageProcess" xml:"ImageProcess"`
 }
 
 func (s DownloadFileRequest) String() string {
@@ -8259,6 +10957,11 @@ func (s DownloadFileRequest) String() string {
 
 func (s DownloadFileRequest) GoString() string {
 	return s.String()
+}
+
+func (s *DownloadFileRequest) SetHeader(v *DownloadFileRequestHeader) *DownloadFileRequest {
+	s.Header = v
+	return s
 }
 
 func (s *DownloadFileRequest) SetDriveID(v string) *DownloadFileRequest {
@@ -8273,6 +10976,29 @@ func (s *DownloadFileRequest) SetFileID(v string) *DownloadFileRequest {
 
 func (s *DownloadFileRequest) SetImageProcess(v string) *DownloadFileRequest {
 	s.ImageProcess = &v
+	return s
+}
+
+type DownloadFileRequestHeader struct {
+	TraceId  *string `json:"x-pds-trace-id" xml:"x-pds-trace-id"`
+	DeviceId *string `json:"x-pds-device-id" xml:"x-pds-device-id"`
+}
+
+func (s DownloadFileRequestHeader) String() string {
+	return tea.Prettify(s)
+}
+
+func (s DownloadFileRequestHeader) GoString() string {
+	return s.String()
+}
+
+func (s *DownloadFileRequestHeader) SetTraceId(v string) *DownloadFileRequestHeader {
+	s.TraceId = &v
+	return s
+}
+
+func (s *DownloadFileRequestHeader) SetDeviceId(v string) *DownloadFileRequestHeader {
+	s.DeviceId = &v
 	return s
 }
 
@@ -8417,11 +11143,11 @@ func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOpt
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/cancel_link")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -8437,7 +11163,7 @@ func (client *Client) CancelLink(request *CancelLinkRequest, runtime *RuntimeOpt
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -8558,11 +11284,11 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeO
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/confirm_link")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -8578,7 +11304,7 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequest, runtime *RuntimeO
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -8698,11 +11424,11 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runt
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/default/change_password")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -8718,7 +11444,7 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequest, runt
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return _err
@@ -8828,11 +11554,11 @@ func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *R
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/default/set_password")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -8848,7 +11574,7 @@ func (client *Client) SetPassword(request *DefaultSetPasswordRequest, runtime *R
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return _err
@@ -8959,11 +11685,11 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_access_token_by_link_info")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -8979,7 +11705,7 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -9100,11 +11826,11 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOpt
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_captcha")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -9120,7 +11846,7 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequest, runtime *RuntimeOpt
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -9241,11 +11967,11 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *Runtim
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_link_info")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -9261,7 +11987,7 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequest, runtime *Runtim
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -9382,11 +12108,11 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, r
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/get_link_info_by_user_id")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -9402,7 +12128,7 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequest, r
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -9523,11 +12249,11 @@ func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions)
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/link")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -9543,7 +12269,7 @@ func (client *Client) Link(request *AccountLinkRequest, runtime *RuntimeOptions)
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -9664,11 +12390,11 @@ func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *Runt
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/check_exist")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -9684,7 +12410,7 @@ func (client *Client) CheckExist(request *MobileCheckExistRequest, runtime *Runt
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -9805,11 +12531,11 @@ func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/login")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -9825,7 +12551,7 @@ func (client *Client) Login(request *MobileLoginRequest, runtime *RuntimeOptions
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -9946,11 +12672,11 @@ func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeO
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/register")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -9966,7 +12692,7 @@ func (client *Client) Register(request *MobileRegisterRequest, runtime *RuntimeO
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -10087,11 +12813,11 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runti
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/mobile/send_sms_code")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -10107,7 +12833,7 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequest, runti
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -10228,11 +12954,11 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (_re
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/account/token")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".auth.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -10248,7 +12974,7 @@ func (client *Client) Token(request *TokenRequest, runtime *RuntimeOptions) (_re
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -10369,11 +13095,11 @@ func (client *Client) GetAsyncTaskInfo(request *CCPGetAsyncTaskRequest, runtime 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/async_task/get")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -10389,7 +13115,7 @@ func (client *Client) GetAsyncTaskInfo(request *CCPGetAsyncTaskRequest, runtime 
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -10510,11 +13236,11 @@ func (client *Client) Operation(request *CCPBatchRequest, runtime *RuntimeOption
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/batch")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -10530,7 +13256,7 @@ func (client *Client) Operation(request *CCPBatchRequest, runtime *RuntimeOption
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -10651,11 +13377,11 @@ func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeO
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/create")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -10671,7 +13397,7 @@ func (client *Client) CreateDrive(request *CreateDriveRequest, runtime *RuntimeO
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -10791,11 +13517,11 @@ func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeO
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/delete")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -10811,7 +13537,7 @@ func (client *Client) DeleteDrive(request *DeleteDriveRequest, runtime *RuntimeO
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return _err
@@ -10922,11 +13648,11 @@ func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/get")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -10942,7 +13668,7 @@ func (client *Client) GetDrive(request *GetDriveRequest, runtime *RuntimeOptions
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -11063,11 +13789,11 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/get_default_drive")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -11083,7 +13809,7 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequest, runtime *
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -11204,11 +13930,11 @@ func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOpti
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/list")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -11224,7 +13950,7 @@ func (client *Client) ListDrives(request *ListDriveRequest, runtime *RuntimeOpti
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -11345,11 +14071,11 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *Runtime
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/list_my_drives")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -11365,7 +14091,7 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequest, runtime *Runtime
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -11486,11 +14212,11 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeO
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/drive/update")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -11506,7 +14232,7 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequest, runtime *RuntimeO
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -11627,11 +14353,11 @@ func (client *Client) CompleteFile(request *CCPCompleteFileRequest, runtime *Run
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/complete")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -11647,7 +14373,7 @@ func (client *Client) CompleteFile(request *CCPCompleteFileRequest, runtime *Run
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -11768,11 +14494,11 @@ func (client *Client) CopyFile(request *CCPCopyFileRequest, runtime *RuntimeOpti
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/copy")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -11788,7 +14514,7 @@ func (client *Client) CopyFile(request *CCPCopyFileRequest, runtime *RuntimeOpti
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -11923,11 +14649,11 @@ func (client *Client) CreateFile(request *CCPCreateFileRequest, runtime *Runtime
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/create")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -11943,7 +14669,7 @@ func (client *Client) CreateFile(request *CCPCreateFileRequest, runtime *Runtime
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -12064,11 +14790,11 @@ func (client *Client) DeleteFile(request *CCPDeleteFileRequest, runtime *Runtime
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/delete")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -12084,7 +14810,7 @@ func (client *Client) DeleteFile(request *CCPDeleteFileRequest, runtime *Runtime
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -12210,11 +14936,11 @@ func (client *Client) DownloadFile(request *DownloadFileRequest, runtime *Runtim
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "GET"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/download")
-			request_.Query = util.StringifyMapValue(tea.ToMap(request))
-			request_.Headers = map[string]string{
+			request_.Query = util.StringifyMapValue(roautil.DeleteSpecialKey(tea.ToMap(request), "header"))
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent": client.GetUserAgent(),
 				"host":       util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -12336,11 +15062,11 @@ func (client *Client) GetFile(request *CCPGetFileRequest, runtime *RuntimeOption
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/get")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -12356,7 +15082,7 @@ func (client *Client) GetFile(request *CCPGetFileRequest, runtime *RuntimeOption
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -12477,11 +15203,11 @@ func (client *Client) GetDownloadUrl(request *CCPGetDownloadUrlRequest, runtime 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/get_download_url")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -12497,7 +15223,7 @@ func (client *Client) GetDownloadUrl(request *CCPGetDownloadUrlRequest, runtime 
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -12618,11 +15344,11 @@ func (client *Client) GetUploadUrl(request *CCPGetUploadUrlRequest, runtime *Run
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/get_upload_url")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -12638,7 +15364,7 @@ func (client *Client) GetUploadUrl(request *CCPGetUploadUrlRequest, runtime *Run
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -12759,11 +15485,11 @@ func (client *Client) ListFile(request *CCPListFileRequest, runtime *RuntimeOpti
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/list")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -12779,7 +15505,7 @@ func (client *Client) ListFile(request *CCPListFileRequest, runtime *RuntimeOpti
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -12900,11 +15626,11 @@ func (client *Client) ListUploadedParts(request *CCPListUploadedPartRequest, run
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/list_uploaded_parts")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -12920,7 +15646,7 @@ func (client *Client) ListUploadedParts(request *CCPListUploadedPartRequest, run
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -13041,11 +15767,11 @@ func (client *Client) MoveFile(request *CCPMoveFileRequest, runtime *RuntimeOpti
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/move")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -13061,7 +15787,7 @@ func (client *Client) MoveFile(request *CCPMoveFileRequest, runtime *RuntimeOpti
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -13182,11 +15908,11 @@ func (client *Client) SearchFile(request *CCPSearchFileRequest, runtime *Runtime
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/search")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -13202,7 +15928,7 @@ func (client *Client) SearchFile(request *CCPSearchFileRequest, runtime *Runtime
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -13323,11 +16049,11 @@ func (client *Client) UpdateFile(request *CCPUpdateFileMetaRequest, runtime *Run
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/file/update")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -13343,7 +16069,7 @@ func (client *Client) UpdateFile(request *CCPUpdateFileMetaRequest, runtime *Run
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -13464,11 +16190,11 @@ func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOpt
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/create")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -13484,7 +16210,7 @@ func (client *Client) CreateUser(request *CreateUserRequest, runtime *RuntimeOpt
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -13604,11 +16330,11 @@ func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOpt
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/delete")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -13624,7 +16350,7 @@ func (client *Client) DeleteUser(request *DeleteUserRequest, runtime *RuntimeOpt
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return _err
@@ -13735,11 +16461,11 @@ func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) 
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/get")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -13755,7 +16481,7 @@ func (client *Client) GetUser(request *GetUserRequest, runtime *RuntimeOptions) 
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -13876,11 +16602,11 @@ func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOption
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/list")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -13896,7 +16622,7 @@ func (client *Client) ListUsers(request *ListUserRequest, runtime *RuntimeOption
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -14017,11 +16743,11 @@ func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOpt
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/search")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -14037,7 +16763,7 @@ func (client *Client) SearchUser(request *SearchUserRequest, runtime *RuntimeOpt
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err
@@ -14158,11 +16884,11 @@ func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOpt
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/user/update")
-			request_.Headers = map[string]string{
+			request_.Headers = util.StringifyMapValue(tea.ToMap(map[string]interface{}{
 				"user-agent":   client.GetUserAgent(),
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
-			}
+			}, request.Header))
 			if !util.Empty(accessToken) {
 				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
 			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
@@ -14178,7 +16904,7 @@ func (client *Client) UpdateUser(request *UpdateUserRequest, runtime *RuntimeOpt
 				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
 			}
 
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request)))
+			request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
 			response_, _err := tea.DoRequest(request_, _runtime)
 			if _err != nil {
 				return nil, _err

@@ -121,6 +121,10 @@ model AccountAccessTokenResponse {
  * 
  */
 model AccountLinkRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   detail?: string(name='detail', description='账号信息', example='{name:jack,age:20}'),
   identity: string(name='identity', description='唯一身份标识', example='15208333333'),
   status?: string(name='status', description='状态', example='normal'),
@@ -132,6 +136,10 @@ model AccountLinkRequest {
  * 
  */
 model AddStoreRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   basePath?: string(name='base_path', description='存储公共前缀', example='ccp-data'),
   bucket?: string(name='bucket', description='bucket名称', example='data-sz-bucket'),
   domainId: string(name='domain_id', description='domain ID', example='sz100'),
@@ -518,6 +526,10 @@ type: boolean', example=false),
  * 
  */
 model CancelLinkRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   temporaryToken: string(name='temporary_token', description='待绑定的临时token，此token只能访问绑定、取消绑定接口', example='ey***s='),
 }
 
@@ -534,6 +546,10 @@ model Captcha {
  * 
  */
 model ConfirmLinkRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   temporaryToken: string(name='temporary_token', description='待绑定的临时token，此token只能访问绑定、取消绑定接口', example='ey***s='),
 }
 
@@ -552,6 +568,10 @@ model CorsRule {
  * 
  */
 model CreateAppRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   appName: string(name='app_name', description='App名称', example='图片分享应用', maxLength=128, minLength=1),
   description?: string(name='description', description='App描述', example='测试专用', maxLength=128, minLength=0),
   isThirdParty?: boolean(name='is_third_party', default=false, description='是否是domain私有App', example=false),
@@ -565,6 +585,10 @@ model CreateAppRequest {
  * create domain request
  */
 model CreateDomainRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   authAlipayAppId?: string(name='auth_alipay_app_id', description='支付宝 App Id', example='abc'),
   authAlipayEnbale?: boolean(name='auth_alipay_enbale', description='启用支付宝认证', example=true),
   authAlipayPrivateKey?: string(name='auth_alipay_private_key', description='支付宝 App Secret', example='abc'),
@@ -615,6 +639,10 @@ model CreateShareResponse {
  * 
  */
 model DefaultChangePasswordRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   appId: string(name='app_id', description='App ID, 当前访问的App', example='csaklidwasdhjwid'),
   newPassword: string(name='new_password', description='新密码，必须包含数字和字母，长度8-32个字符', example='123456,abc'),
   phoneNumber: string(name='phone_number', description='手机号', example='152*****341'),
@@ -626,6 +654,10 @@ model DefaultChangePasswordRequest {
  * 
  */
 model DefaultSetPasswordRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   appId: string(name='app_id', description='App ID, 当前访问的App', example='csaklidwasdhjwid'),
   newPassword: string(name='new_password', description='新密码，必须包含数字和字母，长度8-32个字符', example='123456,abc'),
   state: string(name='state', description='临时操作权限码', example='abc'),
@@ -635,6 +667,10 @@ model DefaultSetPasswordRequest {
  * 
  */
 model DeleteAppRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   appId: string(name='app_id', description='App ID', example='CNMrhxwPJHAReExa'),
 }
 
@@ -642,6 +678,10 @@ model DeleteAppRequest {
  * delete domain request
  */
 model DeleteDomainRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   domainId: string(name='domain_id', description='Domain ID', example='sz111'),
 }
 
@@ -656,6 +696,10 @@ model DeleteDriveResponse {
  * 
  */
 model GetAccessTokenByLinkInfoRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   identity: string(name='identity', description='唯一身份标识', example='15208333333'),
   type: string(name='type', description='认证类型', example='mobile'),
 }
@@ -664,6 +708,10 @@ model GetAccessTokenByLinkInfoRequest {
  * 
  */
 model GetAppRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   appId: string(name='app_id', description='App ID', example='CNMrhxwPJHAReExa'),
 }
 
@@ -671,6 +719,10 @@ model GetAppRequest {
  * 
  */
 model GetByLinkInfoRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   identity: string(name='identity', description='唯一身份标识', example='15208333333'),
   type: string(name='type', description='认证类型', example='mobile'),
 }
@@ -679,6 +731,10 @@ model GetByLinkInfoRequest {
  * 
  */
 model GetCaptchaRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   appId: string(name='app_id', description='App ID, 当前访问的App', example='csaklidwasdhjwid'),
 }
 
@@ -686,6 +742,10 @@ model GetCaptchaRequest {
  * get domain request
  */
 model GetDomainRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   domainId: string(name='domain_id', description='Domain ID', example='sz111'),
 }
 
@@ -712,6 +772,10 @@ model GetDriveResponse {
  * 
  */
 model GetLinkInfoByUserIDRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   userId: string(name='user_id', description='user ID', example='123987123617823'),
 }
 
@@ -780,6 +844,10 @@ model LinkInfoResponse {
  * 
  */
 model ListAppsRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   limit?: integer(name='limit', default=50, description='返回结果数据', example=100, format='int32', maximum=100, minimum=1),
   marker?: string(name='marker', description='下次查询游标', example='ncsajnsalsa='),
 }
@@ -788,6 +856,10 @@ model ListAppsRequest {
  * list domain request
  */
 model ListDomainsRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   limit?: integer(name='limit', description='分页大小', example=100, format='int32', maximum=100, minimum=1),
   marker?: string(name='marker', description='查询游标', example='abcd'),
 }
@@ -832,6 +904,10 @@ model ListStoreResponse {
  * 
  */
 model ListStoresRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   domainId: string(name='domain_id', description='domain ID', example='sz100'),
 }
 
@@ -839,6 +915,10 @@ model ListStoresRequest {
  * 
  */
 model LoginByCodeRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   accessToken?: string(name='access_token', description='鉴权后返回的accessToken，淘宝登录需要此字段', example='csaklidwasdhjwid'),
   appId: string(name='app_id', description='App ID, 当前访问的App', example='csaklidwasdhjwid'),
   authCode?: string(name='auth_code', description='鉴权后返回的AuthCode，支付宝登录需要此字段', example='csaklidwasdhjwid'),
@@ -849,6 +929,10 @@ model LoginByCodeRequest {
  * 
  */
 model MobileCheckExistRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   appId: string(name='app_id', description='App ID, 当前访问的App', example='csaklidwasdhjwid'),
   phoneNumber: string(name='phone_number', description='待查询的手机号', example='152*****341'),
 }
@@ -866,6 +950,10 @@ model MobileCheckExistResponse {
  * 
  */
 model MobileLoginRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   appId: string(name='app_id', description='App ID, 当前访问的App', example='csaklidwasdhjwid'),
   autoRegister?: boolean(name='auto_register', default=false, description='是否自动注册用户，使用密码登录此参数不生效', example=false),
   captchaId?: string(name='captcha_id', description='图片验证码ID, 密码登录需要此参数', example='abc'),
@@ -880,6 +968,10 @@ model MobileLoginRequest {
  * 
  */
 model MobileRegisterRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   appId: string(name='app_id', description='App ID, 当前访问的App', example='csaklidwasdhjwid'),
   phoneNumber: string(name='phone_number', description='待查询的手机号', example='152*****341'),
   smsCode: string(name='sms_code', description='短信验证码内容', example='1234'),
@@ -890,6 +982,10 @@ model MobileRegisterRequest {
  * 
  */
 model MobileSendSmsCodeRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   appId: string(name='app_id', description='App ID, 当前访问的App', example='csaklidwasdhjwid'),
   captchaId?: string(name='captcha_id', description='图片验证码ID', example='abc'),
   captchaText?: string(name='captcha_text', description='用户输入的验证码值', example='abc'),
@@ -1122,6 +1218,10 @@ model PreHashCheckSuccessResponse {
  * 
  */
 model RemoveStoreRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   domainId: string(name='domain_id', description='domain ID', example='sz100'),
   storeId: string(name='store_id', description='store ID', example='cdjaksbwuiqbxuiassd'),
 }
@@ -1130,6 +1230,10 @@ model RemoveStoreRequest {
  * 
  */
 model SetStoreCorsRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   corsRule: CorsRule(name='cors_rule', $ref='#/definitions/CorsRule'),
   domainId: string(name='domain_id', description='domain ID', example='sz100'),
   storeId: string(name='store_id', description='store ID', example='cdjaksbwuiqbxuiassd'),
@@ -1169,6 +1273,10 @@ model StoreItemResponse {
  * 
  */
 model TokenRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   appId: string(name='app_id', description='App ID, 当前访问的App', example='csaklidwasdhjwid'),
   grantType: string(name='grant_type', description='只能填refresh_token', example='refresh_token'),
   refreshToken: string(name='refresh_token', description='refresh token, 登录时返回的', example='ybb3WJy2CwXHoM6hBcydGlvzMoJkFpkk'),
@@ -1178,6 +1286,10 @@ model TokenRequest {
  * 
  */
 model UpdateAppRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   appId: string(name='app_id', description='App ID', example='CNMrhxwPJHAReExa'),
   appName: string(name='app_name', description='App名称', example='图片分享应用', maxLength=128, minLength=1, pattern='[0-9a-zA-Z]+'),
   description?: string(name='description', description='App描述', example='测试专用', maxLength=128, minLength=0),
@@ -1192,6 +1304,10 @@ model UpdateAppRequest {
  * update domain request
  */
 model UpdateDomainRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   authAlipayAppId?: string(name='auth_alipay_app_id', description='支付宝 App Id', example='abc'),
   authAlipayEnbale?: boolean(name='auth_alipay_enbale', description='启用支付宝认证', example=true),
   authAlipayPrivateKey?: string(name='auth_alipay_private_key', description='支付宝 App Secret', example='abc'),
@@ -1287,6 +1403,10 @@ model UserAuthentication {
  * complete file request
  */
 model BaseCompleteFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   partInfoList?: [ UploadPartInfo ](name='part_info_list', description='part_info_list', items='{"$ref":"#/definitions/UploadPartInfo"}'),
   uploadId?: string(name='upload_id', description='upload_id'),
@@ -1296,6 +1416,10 @@ model BaseCompleteFileRequest {
  * create file request
  */
 model BaseCreateFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   contentMd5: string(name='content_md5', description='ContentMd5', example='E10ADC3949BA59ABBE56E057F20F883E'),
   contentType: string(name='content_type', description='ContentType', example='application/json'),
   name: string(name='name', description='Name', example='ccp.jpg', maximum=1024, minimum=1, pattern='[a-z0-9.-_]{1,1000}'),
@@ -1308,6 +1432,10 @@ model BaseCreateFileRequest {
  * 获取文件上传URL
  */
 model BaseGetUploadUrlRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   contentMd5?: string(name='content_md5', description='content_md5', example='E10ADC3949BA59ABBE56E057F20F883E', maxLength=32),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   partInfoList?: [ UploadPartInfo ](name='part_info_list', description='upload_part_list', example='', items='{"$ref":"#/definitions/UploadPartInfo"}'),
@@ -1318,6 +1446,10 @@ model BaseGetUploadUrlRequest {
  * list file request
  */
 model BaseListFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   imageThumbnailProcess?: string(name='image_thumbnail_process', description='image_thumbnail_process', example='image/resize,w_200'),
   imageUrlProcess?: string(name='image_url_process', description='image_url_process', example='image/resize,w_200'),
@@ -1329,6 +1461,10 @@ model BaseListFileRequest {
  * 文件移动请求
  */
 model BaseMoveFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   newName?: string(name='new_name', description='new_name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1000}'),
   overwrite?: boolean(name='overwrite', default=false, description='overwrite
@@ -1339,6 +1475,10 @@ type: boolean', example=false),
  * 
  */
 model BatchSubRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   body?: object(name='body', additionalProperties='{"type":"object"}', description='body 子请求的请求参数 json 字符串，可参考对于子请求文档, 当指定了body 必须传headers ： "Content-Type" 对应的类型，目前子请求入参是"application/json"', example='{"drive_id":"101","file_id":"xxxxxx"}'),
   headers?: object(name='headers', additionalProperties='{"type":"string"}', description='headers 请求头，表示body传入数据的类型', example='{"Content-Type":"application/json"}'),
   id: string(name='id', description='id 用于request 和 response关联， 不允许重复', example='"1"'),
@@ -1350,6 +1490,10 @@ model BatchSubRequest {
  * 批处理
  */
 model CCPBatchRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   requests: [ BatchSubRequest ](name='requests', description='Requests 请求合集', items='{"$ref":"#/definitions/BatchSubRequest"}'),
   resource: string(name='resource', description='支持的资源类型', example='"file"'),
 }
@@ -1358,6 +1502,10 @@ model CCPBatchRequest {
  * 合并文件上传任务
  */
 model CCPCompleteFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   partInfoList?: [ UploadPartInfo ](name='part_info_list', description='part_info_list', items='{"$ref":"#/definitions/UploadPartInfo"}'),
   uploadId?: string(name='upload_id', description='upload_id'),
@@ -1368,6 +1516,10 @@ model CCPCompleteFileRequest {
  * 文件拷贝
  */
 model CCPCopyFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   autoRename?: boolean(name='auto_rename', default=false, description='auto_rename
 type: boolean', example=false),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
@@ -1381,6 +1533,10 @@ type: boolean', example=false),
  * 创建文件
  */
 model CCPCreateFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   contentMd5?: string(name='content_md5', description='ContentMd5', example='E10ADC3949BA59ABBE56E057F20F883E'),
   contentType?: string(name='content_type', description='ContentType', example='application/json'),
   name?: string(name='name', description='Name', example='ccp.jpg', maximum=1024, minimum=1, pattern='[a-z0-9.-_]{1,1000}'),
@@ -1404,6 +1560,10 @@ model CCPCreateFileRequest {
  * 删除文件请求
  */
 model CCPDeleteFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   fileId: string(name='file_id', description='file_id', example='5d792010669a1dd91087479e8071c9ae212065cc', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
   permanently?: boolean(name='permanently', default=false, description='permanently
@@ -1414,6 +1574,10 @@ type: false', example=false),
  * 批量删除文件请求
  */
 model CCPDeleteFilesRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   fileIdList: [ string ](name='file_id_list', description='file_id_list', example='', items='{"type":"string"}', maxItems=100),
 }
@@ -1422,6 +1586,10 @@ model CCPDeleteFilesRequest {
  * 获取异步人去信息
  */
 model CCPGetAsyncTaskRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   asyncTaskId?: string(name='async_task_id', description='async_task_id
 type:string', example='000e89fb-cf8f-11e9-8ab4-b6e980803a3b'),
 }
@@ -1430,6 +1598,10 @@ type:string', example='000e89fb-cf8f-11e9-8ab4-b6e980803a3b'),
  * 获取文件下载地址的请求body
  */
 model CCPGetDownloadUrlRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   expireSec?: long(name='expire_sec', default=900, description='expire_sec', example=15, format='int64', maximum=14400, minimum=0),
   fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
@@ -1440,6 +1612,10 @@ model CCPGetDownloadUrlRequest {
  * 获取文件元数据
  */
 model CCPGetFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   fileId: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
   imageThumbnailProcess?: string(name='image_thumbnail_process', description='image_thumbnail_process
@@ -1452,6 +1628,10 @@ type:string', example='image/crop,w_100,h_100/rounded-corners,r_10/format,png'),
  * 获取文件上传URL
  */
 model CCPGetUploadUrlRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   contentMd5?: string(name='content_md5', description='content_md5', example='E10ADC3949BA59ABBE56E057F20F883E', maxLength=32),
   driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   partInfoList?: [ UploadPartInfo ](name='part_info_list', description='upload_part_list', example='', items='{"$ref":"#/definitions/UploadPartInfo"}'),
@@ -1463,6 +1643,10 @@ model CCPGetUploadUrlRequest {
  * 列举文件
  */
 model CCPListFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   imageThumbnailProcess?: string(name='image_thumbnail_process', description='image_thumbnail_process', example='image/resize,w_200'),
   imageUrlProcess?: string(name='image_url_process', description='image_url_process', example='image/resize,w_200'),
@@ -1483,6 +1667,10 @@ model CCPListFileRequest {
  * 列举uploadID对应的已上传分片
  */
 model CCPListUploadedPartRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   fileId: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
   limit: long(name='limit', default=1000, description='limit', example=1, format='int64', maximum=1000, minimum=1, pattern='[0-9]+'),
@@ -1494,6 +1682,10 @@ model CCPListUploadedPartRequest {
  * 文件移动请求
  */
 model CCPMoveFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   newName?: string(name='new_name', description='new_name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1000}'),
   overwrite?: boolean(name='overwrite', default=false, description='overwrite
@@ -1506,6 +1698,10 @@ type: boolean', example=false),
  * 搜索文件元数据
  */
 model CCPSearchFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   imageThumbnailProcess?: string(name='image_thumbnail_process', description='image_thumbnail_process', example='image/resize,m_fill,h_128,w_128,limit_0'),
   imageUrlProcess?: string(name='image_url_process', description='image_url_process', example='image/resize,m_fill,h_128,w_128,limit_0'),
@@ -1519,6 +1715,10 @@ model CCPSearchFileRequest {
  * 更新文件元数据
  */
 model CCPUpdateFileMetaRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   customIndexKey?: string(name='custom_index_key'),
   description?: string(name='description', description='description
 type: string', example='description', maxLength=1024),
@@ -1537,6 +1737,10 @@ type: boolean', example=false),
  * complete file request
  */
 model CompleteFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9]{1,50}'),
   filePath?: string(name='file_path'),
@@ -1549,6 +1753,10 @@ model CompleteFileRequest {
  * copy file request
  */
 model CopyFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
   filePath?: string(name='file_path'),
@@ -1566,6 +1774,10 @@ type: boolean'),
  * create drive request
  */
 model CreateDriveRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   default?: boolean(name='default', default=false, description='是否默认drive, 只允许设置一个默认drive', example=true),
   description?: string(name='description', description='描述信息', example='ccp team drive', maximum=1024),
   driveName: string(name='drive_name', description='Drive 名称', example='ccpdrive', maximum=1024),
@@ -1581,6 +1793,10 @@ model CreateDriveRequest {
  * create file request
  */
 model CreateFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   contentHash?: string(name='content_hash', description='ContentHash'),
   contentHashName?: string(name='content_hash_name', description='ContentHashName', enum='sha1', example='sha1'),
   contentMd5?: string(name='content_md5', description='ContentMd5', maxLength=32),
@@ -1604,6 +1820,10 @@ model CreateFileRequest {
  * create share request
  */
 model CreateShareRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   description?: string(name='description', description='description', example='share description'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   expiration?: string(name='expiration', description='expiration', example='2006-01-02T15:04:05.999Z'),
@@ -1618,6 +1838,10 @@ model CreateShareRequest {
  * Delete drive request
  */
 model DeleteDriveRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='Drive ID', example='123'),
 }
 
@@ -1625,6 +1849,10 @@ model DeleteDriveRequest {
  * 删除文件请求
  */
 model DeleteFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
   filePath?: string(name='file_path'),
@@ -1636,6 +1864,10 @@ model DeleteFileRequest {
  * delete share request
  */
 model DeleteShareRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   shareId: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6'),
 }
 
@@ -1643,6 +1875,10 @@ model DeleteShareRequest {
  * 下载文件请求body
  */
 model DownloadRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   DriveID: string(name='DriveID', description='drive_id', example='1', pattern='[0-9]+'),
   FileID: string(name='FileID', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
   ImageProcess?: string(name='ImageProcess', description='image_process', example='image/resize,w_200'),
@@ -1653,6 +1889,10 @@ model DownloadRequest {
  * 获取异步人去信息
  */
 model GetAsyncTaskRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   asyncTaskId?: string(name='async_task_id', description='async_task_id
 type:string', example='000e89fb-cf8f-11e9-8ab4-b6e980803a3b'),
 }
@@ -1661,6 +1901,10 @@ type:string', example='000e89fb-cf8f-11e9-8ab4-b6e980803a3b'),
  * Get default drive request
  */
 model GetDefaultDriveRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   userId?: string(name='user_id', description='用户ID', example='abc'),
 }
 
@@ -1668,6 +1912,10 @@ model GetDefaultDriveRequest {
  * 获取文件下载地址的请求body
  */
 model GetDownloadUrlRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   expireSec?: long(name='expire_sec', default=900, description='expire_sec', example=15, format='int64', maximum=14400, minimum=0),
   fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
@@ -1680,6 +1928,10 @@ model GetDownloadUrlRequest {
  * Get drive request
  */
 model GetDriveRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='Drive ID', example='123'),
 }
 
@@ -1687,6 +1939,10 @@ model GetDriveRequest {
  * 获取文件元数据
  */
 model GetFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
   filePath?: string(name='file_path'),
@@ -1701,6 +1957,10 @@ type:string', example='image/resize,w_200'),
  * get share request
  */
 model GetShareRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6'),
 }
 
@@ -1708,6 +1968,10 @@ model GetShareRequest {
  * 获取文件上传URL
  */
 model GetUploadUrlRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   contentMd5?: string(name='content_md5', description='content_md5', maxLength=32),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9]{1,50}'),
@@ -1721,6 +1985,10 @@ model GetUploadUrlRequest {
  * List drive request
  */
 model ListDriveRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   limit?: integer(name='limit', default=100, description='每页大小限制', example=10, format='int32', maximum=100, minimum=1),
   marker?: string(name='marker', description='翻页标记, 接口返回的标记值', example='marker'),
   owner?: string(name='owner', description='所属者', example='abc'),
@@ -1730,6 +1998,10 @@ model ListDriveRequest {
  * list file request
  */
 model ListFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   all?: boolean(name='all', description='all', enum='false,  true'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   imageThumbnailProcess?: string(name='image_thumbnail_process', description='image_thumbnail_process'),
@@ -1746,6 +2018,10 @@ model ListFileRequest {
  * List my drive request
  */
 model ListMyDriveRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   limit?: integer(name='limit', default=100, description='每页大小限制', example=10, format='int32', maximum=100, minimum=1),
   marker?: string(name='marker', description='翻页标记, 接口返回的标记值', example='marker'),
 }
@@ -1754,6 +2030,10 @@ model ListMyDriveRequest {
  * list share request
  */
 model ListShareRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   creator: string(name='creator', description='creator', example='abc'),
   limit: integer(name='limit', description='limit', example=50, format='int32', maximum=100, minimum=1),
   marker?: string(name='marker', description='marker'),
@@ -1764,6 +2044,10 @@ model ListShareRequest {
  * list store file
  */
 model ListStoreFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   limit?: long(name='limit', default=100, description='limit', example=50, format='int64', maximum=1000, minimum=1),
   marker?: string(name='marker', description='marker'),
   parentFilePath?: string(name='parent_file_path', description='parent_file_path'),
@@ -1775,6 +2059,10 @@ model ListStoreFileRequest {
  * list storage file
  */
 model ListStoreRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   domainId?: string(name='domain_id', description='domain_id', example='10'),
 }
 
@@ -1782,6 +2070,10 @@ model ListStoreRequest {
  * complete file request
  */
 model OSSCompleteFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   partInfoList?: [ UploadPartInfo ](name='part_info_list', description='part_info_list', items='{"$ref":"#/definitions/UploadPartInfo"}'),
   uploadId?: string(name='upload_id', description='upload_id'),
@@ -1793,6 +2085,10 @@ model OSSCompleteFileRequest {
  * copy file request
  */
 model OSSCopyFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   filePath?: string(name='file_path', description='file_path', example='/a/b/c.jpg'),
   newName?: string(name='new_name', description='new_name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1000}'),
@@ -1808,6 +2104,10 @@ type: boolean'),
  * create file request
  */
 model OSSCreateFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   contentMd5?: string(name='content_md5', description='ContentMd5', example='E10ADC3949BA59ABBE56E057F20F883E'),
   contentType?: string(name='content_type', description='ContentType', example='application/json'),
   name?: string(name='name', description='Name', example='ccp.jpg', maximum=1024, minimum=1, pattern='[a-z0-9.-_]{1,1000}'),
@@ -1823,6 +2123,10 @@ model OSSCreateFileRequest {
  * 删除文件请求
  */
 model OSSDeleteFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   filePath: string(name='file_path', description='file_path', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
   permanently?: boolean(name='permanently', description='permanently
@@ -1834,6 +2138,10 @@ type: false', example=false),
  * 获取文件下载地址的请求body
  */
 model OSSGetDownloadUrlRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   expireSec?: long(name='expire_sec', default=900, description='expire_sec', example=15, format='int64', maximum=14400, minimum=0),
   fileName?: string(name='file_name', description='file_name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1000}'),
@@ -1845,6 +2153,10 @@ model OSSGetDownloadUrlRequest {
  * 获取文件元数据
  */
 model OSSGetFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   filePath: string(name='file_path', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
   imageThumbnailProcess?: string(name='image_thumbnail_process', description='image_thumbnail_process
@@ -1858,6 +2170,10 @@ type:string', example='image/resize,w_200'),
  * 获取文件上传URL
  */
 model OSSGetUploadUrlRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   contentMd5?: string(name='content_md5', description='content_md5', example='E10ADC3949BA59ABBE56E057F20F883E', maxLength=32),
   driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   partInfoList?: [ UploadPartInfo ](name='part_info_list', description='upload_part_list', example='', items='{"$ref":"#/definitions/UploadPartInfo"}'),
@@ -1870,6 +2186,10 @@ model OSSGetUploadUrlRequest {
  * list file request
  */
 model OSSListFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   imageThumbnailProcess?: string(name='image_thumbnail_process', description='image_thumbnail_process', example='image/resize,w_200'),
   imageUrlProcess?: string(name='image_url_process', description='image_url_process', example='image/resize,w_200'),
@@ -1883,6 +2203,10 @@ model OSSListFileRequest {
  * 列举uploadID对应的已上传分片
  */
 model OSSListUploadedPartRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   filePath: string(name='file_path', description='file_path', example='/a/b/c.jpg'),
   limit: long(name='limit', default=1000, description='limit', example=1, format='int64', maximum=1000, minimum=1, pattern='[0-9]+'),
@@ -1895,6 +2219,10 @@ model OSSListUploadedPartRequest {
  * 文件移动请求
  */
 model OSSMoveFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   filePath?: string(name='file_path', description='file_path', example='/a/b/c.jpg'),
   newName: string(name='new_name', description='new_name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1000}'),
@@ -1925,6 +2253,10 @@ model Store {
  * UCGetObjectInfoByObjectKeyRequest
  */
 model UCGetObjectInfoByObjectKeyRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   objectKey?: string(name='object_key'),
 }
 
@@ -1932,6 +2264,10 @@ model UCGetObjectInfoByObjectKeyRequest {
  * UCGetObjectInfoBySha1Request
  */
 model UCGetObjectInfoBySha1Request {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   sha1?: string(name='sha1'),
 }
 
@@ -1939,6 +2275,10 @@ model UCGetObjectInfoBySha1Request {
  * Update drive request
  */
 model UpdateDriveRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   description?: string(name='description', description='描述信息', example='ccp team drive', maximum=1024),
   driveId: string(name='drive_id', description='Drive ID', example='123'),
   driveName?: string(name='drive_name', description='Drive 名称', example='ccpdrive', maximum=1024),
@@ -1950,6 +2290,10 @@ model UpdateDriveRequest {
  * 更新文件元数据
  */
 model UpdateFileMetaRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   description?: string(name='description', description='description
 type: string', maxLength=1000),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
@@ -1968,6 +2312,10 @@ type: boolean'),
  * update share request
  */
 model UpdateShareRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   description?: string(name='description', description='description', example='share description', maxLength=1024),
   expiration?: string(name='expiration', description='expiration', example='2006-01-02T15:04:05.999Z'),
   permissions?: [ string ](name='permissions', description='permissions', example='', items='{"type":"string"}'),
@@ -2000,6 +2348,10 @@ model BaseUserResponse {
  * Create user request
  */
 model CreateUserRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   avatar?: string(name='avatar', description='头像', example='http://a.b.c/ccp.jpg'),
   description?: string(name='description', description='描述信息', example='ccp team user', maximum=1024),
   email?: string(name='email', description='邮箱', example='123@ccp.com'),
@@ -2035,6 +2387,10 @@ model CreateUserResponse {
  * Delete user request
  */
 model DeleteUserRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   userId: string(name='user_id', description='用户 ID', example='ccpuserid'),
 }
 
@@ -2049,6 +2405,10 @@ model DeleteUserResponse {
  * Get user request
  */
 model GetUserRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   userId?: string(name='user_id', description='用户 ID, 使用ak方式访问，该项必传, access_token访问如果不传，默认取自己的user信息
 example'),
 }
@@ -2077,6 +2437,10 @@ model GetUserResponse {
  * List user request
  */
 model ListUserRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   limit?: integer(name='limit', default=100, description='每页大小限制', example=10, format='int32', maximum=100, minimum=1),
   marker?: string(name='marker', description='翻页标记', example='marker'),
 }
@@ -2094,6 +2458,10 @@ model ListUserResponse {
  * Search user request
  */
 model SearchUserRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   email?: string(name='email', description='邮箱', example='abc@ccp.com'),
   limit?: integer(name='limit', default=100, description='每页大小限制', example=10, format='int32', maximum=100, minimum=1),
   marker?: string(name='marker', description='翻页标记', example='marker'),
@@ -2108,6 +2476,10 @@ model SearchUserRequest {
  * Update user request
  */
 model UpdateUserRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   avatar?: string(name='avatar', description='头像', example='http://a.b.c/ccp.jpg'),
   description?: string(name='description', description='描述信息', example='ccp team user', maximum=1024),
   email?: string(name='email', description='邮箱', example='123@ccp.com'),
@@ -2153,11 +2525,12 @@ api cancelLink(request: CancelLinkRequest, runtime: RuntimeOptions): AccountAcce
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/account/cancel_link`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -2172,7 +2545,7 @@ api cancelLink(request: CancelLinkRequest, runtime: RuntimeOptions): AccountAcce
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -2243,11 +2616,12 @@ api confirmLink(request: ConfirmLinkRequest, runtime: RuntimeOptions): AccountAc
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/account/confirm_link`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -2262,7 +2636,7 @@ api confirmLink(request: ConfirmLinkRequest, runtime: RuntimeOptions): AccountAc
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -2332,11 +2706,12 @@ api changePassword(request: DefaultChangePasswordRequest, runtime: RuntimeOption
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/account/default/change_password`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -2351,7 +2726,7 @@ api changePassword(request: DefaultChangePasswordRequest, runtime: RuntimeOption
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -2416,11 +2791,12 @@ api setPassword(request: DefaultSetPasswordRequest, runtime: RuntimeOptions): vo
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/account/default/set_password`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -2435,7 +2811,7 @@ api setPassword(request: DefaultSetPasswordRequest, runtime: RuntimeOptions): vo
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -2501,11 +2877,12 @@ api getAccessTokenByLinkInfo(request: GetAccessTokenByLinkInfoRequest, runtime: 
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/account/get_access_token_by_link_info`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -2520,7 +2897,7 @@ api getAccessTokenByLinkInfo(request: GetAccessTokenByLinkInfoRequest, runtime: 
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -2590,11 +2967,12 @@ api getCaptcha(request: GetCaptchaRequest, runtime: RuntimeOptions): Captcha  {
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/account/get_captcha`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -2609,7 +2987,7 @@ api getCaptcha(request: GetCaptchaRequest, runtime: RuntimeOptions): Captcha  {
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -2680,11 +3058,12 @@ api getLinkInfo(request: GetByLinkInfoRequest, runtime: RuntimeOptions): LinkInf
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/account/get_link_info`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -2699,7 +3078,7 @@ api getLinkInfo(request: GetByLinkInfoRequest, runtime: RuntimeOptions): LinkInf
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -2769,11 +3148,12 @@ api getLinkInfoByUserId(request: GetLinkInfoByUserIDRequest, runtime: RuntimeOpt
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/account/get_link_info_by_user_id`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -2788,7 +3168,7 @@ api getLinkInfoByUserId(request: GetLinkInfoByUserIDRequest, runtime: RuntimeOpt
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -2860,11 +3240,12 @@ api link(request: AccountLinkRequest, runtime: RuntimeOptions): AccountAccessTok
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/account/link`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -2879,7 +3260,7 @@ api link(request: AccountLinkRequest, runtime: RuntimeOptions): AccountAccessTok
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -2950,11 +3331,12 @@ api checkExist(request: MobileCheckExistRequest, runtime: RuntimeOptions): Mobil
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/account/mobile/check_exist`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -2969,7 +3351,7 @@ api checkExist(request: MobileCheckExistRequest, runtime: RuntimeOptions): Mobil
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -3040,11 +3422,12 @@ api login(request: MobileLoginRequest, runtime: RuntimeOptions): AccountAccessTo
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/account/mobile/login`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -3059,7 +3442,7 @@ api login(request: MobileLoginRequest, runtime: RuntimeOptions): AccountAccessTo
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -3130,11 +3513,12 @@ api register(request: MobileRegisterRequest, runtime: RuntimeOptions): AccountAc
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/account/mobile/register`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -3149,7 +3533,7 @@ api register(request: MobileRegisterRequest, runtime: RuntimeOptions): AccountAc
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -3219,11 +3603,12 @@ api mobileSendSmsCode(request: MobileSendSmsCodeRequest, runtime: RuntimeOptions
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/account/mobile/send_sms_code`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -3238,7 +3623,7 @@ api mobileSendSmsCode(request: MobileSendSmsCodeRequest, runtime: RuntimeOptions
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -3308,11 +3693,12 @@ api token(request: TokenRequest, runtime: RuntimeOptions): AccountAccessTokenRes
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/account/token`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.auth.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -3327,7 +3713,7 @@ api token(request: TokenRequest, runtime: RuntimeOptions): AccountAccessTokenRes
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -3401,11 +3787,12 @@ api getAsyncTaskInfo(request: CCPGetAsyncTaskRequest, runtime: RuntimeOptions): 
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/async_task/get`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -3420,7 +3807,7 @@ api getAsyncTaskInfo(request: CCPGetAsyncTaskRequest, runtime: RuntimeOptions): 
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -3493,11 +3880,12 @@ api operation(request: CCPBatchRequest, runtime: RuntimeOptions): CCPBatchRespon
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/batch`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -3512,7 +3900,7 @@ api operation(request: CCPBatchRequest, runtime: RuntimeOptions): CCPBatchRespon
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -3586,11 +3974,12 @@ api createDrive(request: CreateDriveRequest, runtime: RuntimeOptions): CreateDri
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/drive/create`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -3605,7 +3994,7 @@ api createDrive(request: CreateDriveRequest, runtime: RuntimeOptions): CreateDri
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -3677,11 +4066,12 @@ api deleteDrive(request: DeleteDriveRequest, runtime: RuntimeOptions): void  {
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/drive/delete`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -3696,7 +4086,7 @@ api deleteDrive(request: DeleteDriveRequest, runtime: RuntimeOptions): void  {
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -3764,11 +4154,12 @@ api getDrive(request: GetDriveRequest, runtime: RuntimeOptions): GetDriveRespons
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/drive/get`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -3783,7 +4174,7 @@ api getDrive(request: GetDriveRequest, runtime: RuntimeOptions): GetDriveRespons
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -3857,11 +4248,12 @@ api getDefaultDrive(request: GetDefaultDriveRequest, runtime: RuntimeOptions): G
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/drive/get_default_drive`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -3876,7 +4268,7 @@ api getDefaultDrive(request: GetDefaultDriveRequest, runtime: RuntimeOptions): G
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -3948,11 +4340,12 @@ api listDrives(request: ListDriveRequest, runtime: RuntimeOptions): ListDriveRes
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/drive/list`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -3967,7 +4360,7 @@ api listDrives(request: ListDriveRequest, runtime: RuntimeOptions): ListDriveRes
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -4039,11 +4432,12 @@ api listMyDrives(request: ListMyDriveRequest, runtime: RuntimeOptions): ListDriv
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/drive/list_my_drives`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -4058,7 +4452,7 @@ api listMyDrives(request: ListMyDriveRequest, runtime: RuntimeOptions): ListDriv
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -4131,11 +4525,12 @@ api updateDrive(request: UpdateDriveRequest, runtime: RuntimeOptions): UpdateDri
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/drive/update`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -4150,7 +4545,7 @@ api updateDrive(request: UpdateDriveRequest, runtime: RuntimeOptions): UpdateDri
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -4223,11 +4618,12 @@ api completeFile(request: CCPCompleteFileRequest, runtime: RuntimeOptions): CCPC
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/file/complete`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -4242,7 +4638,7 @@ api completeFile(request: CCPCompleteFileRequest, runtime: RuntimeOptions): CCPC
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -4315,11 +4711,12 @@ api copyFile(request: CCPCopyFileRequest, runtime: RuntimeOptions): CCPCopyFileR
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/file/copy`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -4334,7 +4731,7 @@ api copyFile(request: CCPCopyFileRequest, runtime: RuntimeOptions): CCPCopyFileR
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -4418,11 +4815,12 @@ api createFile(request: CCPCreateFileRequest, runtime: RuntimeOptions): CCPCreat
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/file/create`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -4437,7 +4835,7 @@ api createFile(request: CCPCreateFileRequest, runtime: RuntimeOptions): CCPCreat
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -4510,11 +4908,12 @@ api deleteFile(request: CCPDeleteFileRequest, runtime: RuntimeOptions): CCPDelet
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/file/delete`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -4529,7 +4928,7 @@ api deleteFile(request: CCPDeleteFileRequest, runtime: RuntimeOptions): CCPDelet
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -4589,6 +4988,10 @@ api deleteFile(request: CCPDeleteFileRequest, runtime: RuntimeOptions): CCPDelet
 }
 
 model DownloadFileRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
   DriveID: string(name='DriveID', description='drive id', example='1'),
   FileID: string(name='FileID', description='file id', example='5d79206586bb5dd69fb34c349282718146c55da7'),
   ImageProcess?: string(name='ImageProcess', description='image process', example='image/resize,w_200'),
@@ -4612,11 +5015,12 @@ api downloadFile(request: DownloadFileRequest, runtime: RuntimeOptions): CCPGetD
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'GET';
   __request.pathname = getPathname(@nickname, `/v2/file/download`);
-  __request.query = Util.stringifyMapValue(request);
-  __request.headers = {
+  __request.query = Util.stringifyMapValue(ROAUtil.deleteSpecialKey(request, 'header'));
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -4694,11 +5098,12 @@ api getFile(request: CCPGetFileRequest, runtime: RuntimeOptions): CCPGetFileResp
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/file/get`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -4713,7 +5118,7 @@ api getFile(request: CCPGetFileRequest, runtime: RuntimeOptions): CCPGetFileResp
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -4786,11 +5191,12 @@ api getDownloadUrl(request: CCPGetDownloadUrlRequest, runtime: RuntimeOptions): 
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/file/get_download_url`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -4805,7 +5211,7 @@ api getDownloadUrl(request: CCPGetDownloadUrlRequest, runtime: RuntimeOptions): 
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -4878,11 +5284,12 @@ api getUploadUrl(request: CCPGetUploadUrlRequest, runtime: RuntimeOptions): CCPG
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/file/get_upload_url`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -4897,7 +5304,7 @@ api getUploadUrl(request: CCPGetUploadUrlRequest, runtime: RuntimeOptions): CCPG
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -4970,11 +5377,12 @@ api listFile(request: CCPListFileRequest, runtime: RuntimeOptions): CCPListFileR
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/file/list`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -4989,7 +5397,7 @@ api listFile(request: CCPListFileRequest, runtime: RuntimeOptions): CCPListFileR
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -5062,11 +5470,12 @@ api listUploadedParts(request: CCPListUploadedPartRequest, runtime: RuntimeOptio
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/file/list_uploaded_parts`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -5081,7 +5490,7 @@ api listUploadedParts(request: CCPListUploadedPartRequest, runtime: RuntimeOptio
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -5154,11 +5563,12 @@ api moveFile(request: CCPMoveFileRequest, runtime: RuntimeOptions): CCPMoveFileR
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/file/move`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -5173,7 +5583,7 @@ api moveFile(request: CCPMoveFileRequest, runtime: RuntimeOptions): CCPMoveFileR
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -5246,11 +5656,12 @@ api searchFile(request: CCPSearchFileRequest, runtime: RuntimeOptions): CCPSearc
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/file/search`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -5265,7 +5676,7 @@ api searchFile(request: CCPSearchFileRequest, runtime: RuntimeOptions): CCPSearc
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -5338,11 +5749,12 @@ api updateFile(request: CCPUpdateFileMetaRequest, runtime: RuntimeOptions): CCPU
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/file/update`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -5357,7 +5769,7 @@ api updateFile(request: CCPUpdateFileMetaRequest, runtime: RuntimeOptions): CCPU
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -5428,11 +5840,12 @@ api createUser(request: CreateUserRequest, runtime: RuntimeOptions): CreateUserR
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/user/create`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -5447,7 +5860,7 @@ api createUser(request: CreateUserRequest, runtime: RuntimeOptions): CreateUserR
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -5518,11 +5931,12 @@ api deleteUser(request: DeleteUserRequest, runtime: RuntimeOptions): void  {
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/user/delete`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -5537,7 +5951,7 @@ api deleteUser(request: DeleteUserRequest, runtime: RuntimeOptions): void  {
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -5604,11 +6018,12 @@ api getUser(request: GetUserRequest, runtime: RuntimeOptions): GetUserResponse  
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/user/get`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -5623,7 +6038,7 @@ api getUser(request: GetUserRequest, runtime: RuntimeOptions): GetUserResponse  
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -5694,11 +6109,12 @@ api listUsers(request: ListUserRequest, runtime: RuntimeOptions): ListUserRespon
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/user/list`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -5713,7 +6129,7 @@ api listUsers(request: ListUserRequest, runtime: RuntimeOptions): ListUserRespon
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -5784,11 +6200,12 @@ api searchUser(request: SearchUserRequest, runtime: RuntimeOptions): ListUserRes
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/user/search`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -5803,7 +6220,7 @@ api searchUser(request: SearchUserRequest, runtime: RuntimeOptions): ListUserRes
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
@@ -5875,11 +6292,12 @@ api updateUser(request: UpdateUserRequest, runtime: RuntimeOptions): UpdateUserR
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/user/update`);
-  __request.headers = {
+  __request.headers = Util.stringifyMapValue({
     user-agent = getUserAgent(),
     host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
     content-type = 'application/json; charset=utf-8',
-  };
+    ...request.header
+  });
 
   if (!Util.empty(accessToken)) {
     __request.headers.authorization = `Bearer ${accessToken}`;
@@ -5894,7 +6312,7 @@ api updateUser(request: UpdateUserRequest, runtime: RuntimeOptions): UpdateUserR
     var stringToSign = ROAUtil.getStringToSign(__request);
     __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
   }
-  __request.body = Util.toJSONString(request);
+  __request.body = Util.toJSONString(ROAUtil.deleteSpecialKey(request, 'header'));
 } returns {
   var respMap : object = null;
   var obj : any = null;
