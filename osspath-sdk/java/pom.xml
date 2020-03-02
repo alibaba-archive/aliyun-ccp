@@ -4,7 +4,7 @@
 
     <groupId>com.aliyun</groupId>
     <artifactId>ccp-oss-client</artifactId>
-    <version>1.1.6</version>
+    <version>1.1.7</version>
     <packaging>jar</packaging>
 
     <name>ccp-oss-client</name>
@@ -54,27 +54,27 @@
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>tea-util</artifactId>
-            <version>RELEASE</version>
+            <version>0.1.5</version>
         </dependency>
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>roa-util</artifactId>
-            <version>RELEASE</version>
+            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>ccp-credentials</artifactId>
-            <version>RELEASE</version>
+            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>credentials-java</artifactId>
-            <version>RELEASE</version>
+            <version>0.1.0</version>
         </dependency>
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>tea</artifactId>
-            <version>RELEASE</version>
+            <version>0.0.20</version>
         </dependency>
         <dependency>
             <groupId>com.aliyun</groupId>
