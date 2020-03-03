@@ -11,7 +11,7 @@ public class AuthConfig extends TeaModel {
     public String appSecret;
 
     @NameInMap("enable")
-    public boolean enable;
+    public Boolean enable;
 
     @NameInMap("endpoint")
     public String endpoint;

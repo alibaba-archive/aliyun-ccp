@@ -4,6 +4,9 @@ package com.aliyun.ccp.ossclient.models;
 import com.aliyun.tea.*;
 
 public class LoginByCodeRequest extends TeaModel {
+    @NameInMap("header")
+    public LoginByCodeRequestHeader header;
+
     @NameInMap("access_token")
     public String accessToken;
 
@@ -21,6 +24,20 @@ public class LoginByCodeRequest extends TeaModel {
     public static LoginByCodeRequest build(java.util.Map<String, ?> map) throws Exception {
         LoginByCodeRequest self = new LoginByCodeRequest();
         return TeaModel.build(map, self);
+    }
+
+    public static class LoginByCodeRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static LoginByCodeRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            LoginByCodeRequestHeader self = new LoginByCodeRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
     }
 
 }

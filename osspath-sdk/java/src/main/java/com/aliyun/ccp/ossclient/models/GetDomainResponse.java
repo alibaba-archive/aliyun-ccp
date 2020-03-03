@@ -11,7 +11,7 @@ public class GetDomainResponse extends TeaModel {
     public String authAlipayAppId;
 
     @NameInMap("auth_alipay_enable")
-    public boolean authAlipayEnable;
+    public Boolean authAlipayEnable;
 
     @NameInMap("auth_alipay_private_key")
     public String authAlipayPrivateKey;
@@ -26,10 +26,10 @@ public class GetDomainResponse extends TeaModel {
     public String authDingdingAppSecret;
 
     @NameInMap("auth_dingding_enable")
-    public boolean authDingdingEnable;
+    public Boolean authDingdingEnable;
 
     @NameInMap("auth_endpoint_enable")
-    public boolean authEndpointEnable;
+    public Boolean authEndpointEnable;
 
     @NameInMap("auth_ram_app_id")
     public String authRamAppId;
@@ -38,7 +38,7 @@ public class GetDomainResponse extends TeaModel {
     public String authRamAppSecret;
 
     @NameInMap("auth_ram_enable")
-    public boolean authRamEnable;
+    public Boolean authRamEnable;
 
     @NameInMap("created_at")
     public String createdAt;
@@ -65,13 +65,13 @@ public class GetDomainResponse extends TeaModel {
     public String eventMnsTopic;
 
     @NameInMap("event_names")
-    public String[] eventNames;
+    public java.util.List<String> eventNames;
 
     @NameInMap("event_role_arn")
     public String eventRoleArn;
 
     @NameInMap("init_drive_enable")
-    public boolean initDriveEnable;
+    public Boolean initDriveEnable;
 
     @NameInMap("init_drive_size")
     public Long initDriveSize;
@@ -86,13 +86,13 @@ public class GetDomainResponse extends TeaModel {
     public AppAccessStrategy publishedAppAccessStrategy;
 
     @NameInMap("sharable")
-    public boolean sharable;
+    public Boolean sharable;
 
     @NameInMap("store_level")
     public String storeLevel;
 
     @NameInMap("store_region_list")
-    public String[] storeRegionList;
+    public java.util.List<String> storeRegionList;
 
     @NameInMap("updated_at")
     public String updatedAt;

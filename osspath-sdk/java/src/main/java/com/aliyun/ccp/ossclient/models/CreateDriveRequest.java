@@ -4,8 +4,11 @@ package com.aliyun.ccp.ossclient.models;
 import com.aliyun.tea.*;
 
 public class CreateDriveRequest extends TeaModel {
+    @NameInMap("header")
+    public CreateDriveRequestHeader header;
+
     @NameInMap("default")
-    public boolean _default;
+    public Boolean _default;
 
     @NameInMap("description")
     public String description;
@@ -39,6 +42,20 @@ public class CreateDriveRequest extends TeaModel {
     public static CreateDriveRequest build(java.util.Map<String, ?> map) throws Exception {
         CreateDriveRequest self = new CreateDriveRequest();
         return TeaModel.build(map, self);
+    }
+
+    public static class CreateDriveRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static CreateDriveRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            CreateDriveRequestHeader self = new CreateDriveRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
     }
 
 }

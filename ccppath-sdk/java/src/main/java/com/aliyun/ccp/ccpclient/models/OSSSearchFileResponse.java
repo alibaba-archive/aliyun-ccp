@@ -8,7 +8,7 @@ public class OSSSearchFileResponse extends TeaModel {
     public String requestId;
 
     @NameInMap("items")
-    public BaseOSSFileResponse[] items;
+    public java.util.List<BaseOSSFileResponse> items;
 
     @NameInMap("next_marker")
     public String nextMarker;

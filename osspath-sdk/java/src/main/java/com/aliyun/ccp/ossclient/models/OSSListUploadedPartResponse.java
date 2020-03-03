@@ -17,7 +17,7 @@ public class OSSListUploadedPartResponse extends TeaModel {
     public String uploadId;
 
     @NameInMap("uploaded_parts")
-    public UploadPartInfo[] uploadedParts;
+    public java.util.List<UploadPartInfo> uploadedParts;
 
     public static OSSListUploadedPartResponse build(java.util.Map<String, ?> map) throws Exception {
         OSSListUploadedPartResponse self = new OSSListUploadedPartResponse();

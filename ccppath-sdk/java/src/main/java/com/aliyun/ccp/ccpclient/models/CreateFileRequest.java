@@ -4,6 +4,9 @@ package com.aliyun.ccp.ccpclient.models;
 import com.aliyun.tea.*;
 
 public class CreateFileRequest extends TeaModel {
+    @NameInMap("header")
+    public CreateFileRequestHeader header;
+
     @NameInMap("content_hash")
     public String contentHash;
 
@@ -25,7 +28,7 @@ public class CreateFileRequest extends TeaModel {
     public String driveId;
 
     @NameInMap("hidden")
-    public boolean hidden;
+    public Boolean hidden;
 
     @NameInMap("meta")
     public String meta;
@@ -42,7 +45,7 @@ public class CreateFileRequest extends TeaModel {
     public String parentFilePath;
 
     @NameInMap("part_info_list")
-    public UploadPartInfo[] partInfoList;
+    public java.util.List<UploadPartInfo> partInfoList;
 
     @NameInMap("pre_hash")
     public String preHash;
@@ -64,6 +67,62 @@ public class CreateFileRequest extends TeaModel {
     public static CreateFileRequest build(java.util.Map<String, ?> map) throws Exception {
         CreateFileRequest self = new CreateFileRequest();
         return TeaModel.build(map, self);
+    }
+
+    public static class BaseCreateFileRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static BaseCreateFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            BaseCreateFileRequestHeader self = new BaseCreateFileRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
+    }
+
+    public static class CCPCreateFileRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static CCPCreateFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            CCPCreateFileRequestHeader self = new CCPCreateFileRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
+    }
+
+    public static class CreateFileRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static CreateFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            CreateFileRequestHeader self = new CreateFileRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
+    }
+
+    public static class OSSCreateFileRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static OSSCreateFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            OSSCreateFileRequestHeader self = new OSSCreateFileRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
     }
 
 }

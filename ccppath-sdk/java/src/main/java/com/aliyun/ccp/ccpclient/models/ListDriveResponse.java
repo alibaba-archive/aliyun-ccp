@@ -8,7 +8,7 @@ public class ListDriveResponse extends TeaModel {
     public String requestId;
 
     @NameInMap("items")
-    public BaseDriveResponse[] items;
+    public java.util.List<BaseDriveResponse> items;
 
     @NameInMap("next_marker")
     public String nextMarker;

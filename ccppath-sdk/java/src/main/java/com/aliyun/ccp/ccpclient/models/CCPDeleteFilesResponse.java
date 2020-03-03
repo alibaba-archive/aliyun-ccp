@@ -8,7 +8,7 @@ public class CCPDeleteFilesResponse extends TeaModel {
     public String requestId;
 
     @NameInMap("deleted_file_id_list")
-    public String[] deletedFileIdList;
+    public java.util.List<String> deletedFileIdList;
 
     @NameInMap("domain_id")
     @Validation(pattern = "[a-z0-9A-Z]+")

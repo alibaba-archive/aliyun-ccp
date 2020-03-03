@@ -5,16 +5,16 @@ import com.aliyun.tea.*;
 
 public class CorsRule extends TeaModel {
     @NameInMap("allowed_header")
-    public String[] allowedHeader;
+    public java.util.List<String> allowedHeader;
 
     @NameInMap("allowed_method")
-    public String[] allowedMethod;
+    public java.util.List<String> allowedMethod;
 
     @NameInMap("allowed_origin")
-    public String[] allowedOrigin;
+    public java.util.List<String> allowedOrigin;
 
     @NameInMap("expose_header")
-    public String[] exposeHeader;
+    public java.util.List<String> exposeHeader;
 
     @NameInMap("max_age_seconds")
     public Long maxAgeSeconds;

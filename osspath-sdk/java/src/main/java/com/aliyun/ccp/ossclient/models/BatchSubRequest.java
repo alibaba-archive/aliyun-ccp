@@ -4,6 +4,9 @@ package com.aliyun.ccp.ossclient.models;
 import com.aliyun.tea.*;
 
 public class BatchSubRequest extends TeaModel {
+    @NameInMap("header")
+    public BatchSubRequestHeader header;
+
     @NameInMap("body")
     public java.util.Map<String, Object> body;
 
@@ -25,6 +28,20 @@ public class BatchSubRequest extends TeaModel {
     public static BatchSubRequest build(java.util.Map<String, ?> map) throws Exception {
         BatchSubRequest self = new BatchSubRequest();
         return TeaModel.build(map, self);
+    }
+
+    public static class BatchSubRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static BatchSubRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            BatchSubRequestHeader self = new BatchSubRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
     }
 
 }

@@ -11,11 +11,6 @@
 ```xml
 <dependency>
     <groupId>com.aliyun</groupId>
-    <artifactId>ccp-baseclient</artifactId>
-    <version>使用maven标签所示版本</version>
-</dependency>
-<dependency>
-    <groupId>com.aliyun</groupId>
     <artifactId>ccp-oss-client</artifactId>
     <version>使用maven标签所示版本</version>
 </dependency>

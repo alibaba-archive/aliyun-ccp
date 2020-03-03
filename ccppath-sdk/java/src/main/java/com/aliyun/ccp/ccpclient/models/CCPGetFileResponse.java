@@ -47,13 +47,13 @@ public class CCPGetFileResponse extends TeaModel {
     public String fileId;
 
     @NameInMap("hidden")
-    public boolean hidden;
+    public Boolean hidden;
 
     @NameInMap("image_media_metadata")
     public ImageMediaResponse imageMediaMetadata;
 
     @NameInMap("labels")
-    public String[] labels;
+    public java.util.List<String> labels;
 
     @NameInMap("meta")
     public String meta;
@@ -70,7 +70,7 @@ public class CCPGetFileResponse extends TeaModel {
     public Long size;
 
     @NameInMap("starred")
-    public boolean starred;
+    public Boolean starred;
 
     @NameInMap("status")
     public String status;

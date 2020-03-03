@@ -33,7 +33,7 @@ public class ClientTest {
         ListDriveRequest request = new ListDriveRequest();
         RuntimeOptions runtime = new RuntimeOptions();
         ListDriveResponse result = client.listDrives(request, runtime);
-        assertEquals(2, result.items.length);
+        assertEquals(2, result.items.size());
         assertEquals("", result.nextMarker);
     }
 

@@ -9,7 +9,7 @@ public class ListAppsResponse extends TeaModel {
 
     @NameInMap("items")
     @Validation(required = true)
-    public GetAppResponse[] items;
+    public java.util.List<GetAppResponse> items;
 
     @NameInMap("next_marker")
     public String nextMarker;

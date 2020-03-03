@@ -8,7 +8,7 @@ public class ListShareResponse extends TeaModel {
     public String requestId;
 
     @NameInMap("items")
-    public BaseShareResponse[] items;
+    public java.util.List<BaseShareResponse> items;
 
     @NameInMap("next_marker")
     public String nextMarker;

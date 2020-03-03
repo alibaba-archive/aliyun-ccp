@@ -19,7 +19,7 @@ public class OSSCreateFileResponse extends TeaModel {
     public String filePath;
 
     @NameInMap("part_info_list")
-    public UploadPartInfo[] partInfoList;
+    public java.util.List<UploadPartInfo> partInfoList;
 
     @NameInMap("share_id")
     @Validation(pattern = "[0-9]+")

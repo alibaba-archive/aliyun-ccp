@@ -4,6 +4,9 @@ package com.aliyun.ccp.ccpclient.models;
 import com.aliyun.tea.*;
 
 public class CCPCreateFileRequest extends TeaModel {
+    @NameInMap("header")
+    public CCPCreateFileRequestHeader header;
+
     @NameInMap("content_md5")
     public String contentMd5;
 
@@ -15,7 +18,7 @@ public class CCPCreateFileRequest extends TeaModel {
     public String name;
 
     @NameInMap("part_info_list")
-    public UploadPartInfo[] partInfoList;
+    public java.util.List<UploadPartInfo> partInfoList;
 
     @NameInMap("size")
     public Long size;
@@ -24,7 +27,7 @@ public class CCPCreateFileRequest extends TeaModel {
     public String type;
 
     @NameInMap("auto_rename")
-    public boolean autoRename;
+    public Boolean autoRename;
 
     @NameInMap("content_hash")
     public String contentHash;
@@ -43,10 +46,10 @@ public class CCPCreateFileRequest extends TeaModel {
     public String fileId;
 
     @NameInMap("hidden")
-    public boolean hidden;
+    public Boolean hidden;
 
     @NameInMap("labels")
-    public String[] labels;
+    public java.util.List<String> labels;
 
     @NameInMap("meta")
     public String meta;
@@ -61,6 +64,20 @@ public class CCPCreateFileRequest extends TeaModel {
     public static CCPCreateFileRequest build(java.util.Map<String, ?> map) throws Exception {
         CCPCreateFileRequest self = new CCPCreateFileRequest();
         return TeaModel.build(map, self);
+    }
+
+    public static class CCPCreateFileRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static CCPCreateFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            CCPCreateFileRequestHeader self = new CCPCreateFileRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
     }
 
 }
