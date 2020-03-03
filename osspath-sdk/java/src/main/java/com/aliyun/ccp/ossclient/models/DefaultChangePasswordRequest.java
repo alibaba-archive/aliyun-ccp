@@ -4,6 +4,9 @@ package com.aliyun.ccp.ossclient.models;
 import com.aliyun.tea.*;
 
 public class DefaultChangePasswordRequest extends TeaModel {
+    @NameInMap("header")
+    public DefaultChangePasswordRequestHeader header;
+
     @NameInMap("app_id")
     @Validation(required = true)
     public String appId;
@@ -27,6 +30,20 @@ public class DefaultChangePasswordRequest extends TeaModel {
     public static DefaultChangePasswordRequest build(java.util.Map<String, ?> map) throws Exception {
         DefaultChangePasswordRequest self = new DefaultChangePasswordRequest();
         return TeaModel.build(map, self);
+    }
+
+    public static class DefaultChangePasswordRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static DefaultChangePasswordRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            DefaultChangePasswordRequestHeader self = new DefaultChangePasswordRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
     }
 
 }

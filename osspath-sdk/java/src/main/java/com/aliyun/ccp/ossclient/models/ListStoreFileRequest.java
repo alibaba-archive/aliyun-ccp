@@ -4,6 +4,9 @@ package com.aliyun.ccp.ossclient.models;
 import com.aliyun.tea.*;
 
 public class ListStoreFileRequest extends TeaModel {
+    @NameInMap("header")
+    public ListStoreFileRequestHeader header;
+
     @NameInMap("limit")
     public Long limit;
 
@@ -22,6 +25,20 @@ public class ListStoreFileRequest extends TeaModel {
     public static ListStoreFileRequest build(java.util.Map<String, ?> map) throws Exception {
         ListStoreFileRequest self = new ListStoreFileRequest();
         return TeaModel.build(map, self);
+    }
+
+    public static class ListStoreFileRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static ListStoreFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            ListStoreFileRequestHeader self = new ListStoreFileRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
     }
 
 }

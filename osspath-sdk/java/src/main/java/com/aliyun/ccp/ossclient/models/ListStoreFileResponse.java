@@ -8,7 +8,7 @@ public class ListStoreFileResponse extends TeaModel {
     public String requestId;
 
     @NameInMap("items")
-    public StoreFile[] items;
+    public java.util.List<StoreFile> items;
 
     @NameInMap("next_marker")
     public String nextMarker;

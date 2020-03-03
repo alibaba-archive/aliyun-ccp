@@ -8,7 +8,7 @@ public class ListUserResponse extends TeaModel {
     public String requestId;
 
     @NameInMap("items")
-    public BaseUserResponse[] items;
+    public java.util.List<BaseUserResponse> items;
 
     @NameInMap("next_marker")
     public String nextMarker;

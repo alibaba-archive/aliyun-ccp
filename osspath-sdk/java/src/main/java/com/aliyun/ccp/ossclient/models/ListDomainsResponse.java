@@ -8,7 +8,7 @@ public class ListDomainsResponse extends TeaModel {
     public String requestId;
 
     @NameInMap("items")
-    public BaseDomainResponse[] items;
+    public java.util.List<BaseDomainResponse> items;
 
     @NameInMap("next_marker")
     public String nextMarker;

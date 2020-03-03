@@ -4,6 +4,9 @@ package com.aliyun.ccp.ossclient.models;
 import com.aliyun.tea.*;
 
 public class OSSCopyFileRequest extends TeaModel {
+    @NameInMap("header")
+    public OSSCopyFileRequestHeader header;
+
     @NameInMap("drive_id")
     @Validation(pattern = "[0-9]+")
     public String driveId;
@@ -16,7 +19,7 @@ public class OSSCopyFileRequest extends TeaModel {
     public String newName;
 
     @NameInMap("overwrite")
-    public boolean overwrite;
+    public Boolean overwrite;
 
     @NameInMap("share_id")
     @Validation(pattern = "[0-9a-zA-z-]+")
@@ -36,6 +39,20 @@ public class OSSCopyFileRequest extends TeaModel {
     public static OSSCopyFileRequest build(java.util.Map<String, ?> map) throws Exception {
         OSSCopyFileRequest self = new OSSCopyFileRequest();
         return TeaModel.build(map, self);
+    }
+
+    public static class OSSCopyFileRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static OSSCopyFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            OSSCopyFileRequestHeader self = new OSSCopyFileRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
     }
 
 }

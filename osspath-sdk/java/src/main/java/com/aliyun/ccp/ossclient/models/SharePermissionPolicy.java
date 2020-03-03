@@ -8,10 +8,10 @@ public class SharePermissionPolicy extends TeaModel {
     public String filePath;
 
     @NameInMap("permission_inheritable")
-    public boolean permissionInheritable;
+    public Boolean permissionInheritable;
 
     @NameInMap("permission_list")
-    public String[] permissionList;
+    public java.util.List<String> permissionList;
 
     @NameInMap("permission_type")
     public String permissionType;

@@ -4,6 +4,9 @@ package com.aliyun.ccp.ossclient.models;
 import com.aliyun.tea.*;
 
 public class CCPListFileRequest extends TeaModel {
+    @NameInMap("header")
+    public CCPListFileRequestHeader header;
+
     @NameInMap("drive_id")
     @Validation(pattern = "[0-9]+")
     public String driveId;
@@ -25,10 +28,10 @@ public class CCPListFileRequest extends TeaModel {
     public String videoThumbnailProcess;
 
     @NameInMap("Starred")
-    public boolean Starred;
+    public Boolean Starred;
 
     @NameInMap("all")
-    public boolean all;
+    public Boolean all;
 
     @NameInMap("category")
     public String category;
@@ -55,6 +58,20 @@ public class CCPListFileRequest extends TeaModel {
     public static CCPListFileRequest build(java.util.Map<String, ?> map) throws Exception {
         CCPListFileRequest self = new CCPListFileRequest();
         return TeaModel.build(map, self);
+    }
+
+    public static class CCPListFileRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static CCPListFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            CCPListFileRequestHeader self = new CCPListFileRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
     }
 
 }

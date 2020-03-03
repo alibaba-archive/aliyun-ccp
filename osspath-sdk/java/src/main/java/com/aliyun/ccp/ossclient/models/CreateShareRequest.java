@@ -4,6 +4,9 @@ package com.aliyun.ccp.ossclient.models;
 import com.aliyun.tea.*;
 
 public class CreateShareRequest extends TeaModel {
+    @NameInMap("header")
+    public CreateShareRequestHeader header;
+
     @NameInMap("description")
     public String description;
 
@@ -19,7 +22,7 @@ public class CreateShareRequest extends TeaModel {
     public String owner;
 
     @NameInMap("permissions")
-    public String[] permissions;
+    public java.util.List<String> permissions;
 
     @NameInMap("share_file_path")
     @Validation(required = true)
@@ -29,7 +32,7 @@ public class CreateShareRequest extends TeaModel {
     public String shareName;
 
     @NameInMap("share_policy")
-    public SharePermissionPolicy[] sharePolicy;
+    public java.util.List<SharePermissionPolicy> sharePolicy;
 
     @NameInMap("status")
     public String status;
@@ -37,6 +40,20 @@ public class CreateShareRequest extends TeaModel {
     public static CreateShareRequest build(java.util.Map<String, ?> map) throws Exception {
         CreateShareRequest self = new CreateShareRequest();
         return TeaModel.build(map, self);
+    }
+
+    public static class CreateShareRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static CreateShareRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            CreateShareRequestHeader self = new CreateShareRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
     }
 
 }

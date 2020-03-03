@@ -8,7 +8,7 @@ public class ListStoreResponse extends TeaModel {
     public String requestId;
 
     @NameInMap("items")
-    public StoreItemResponse[] items;
+    public java.util.List<StoreItemResponse> items;
 
     public static ListStoreResponse build(java.util.Map<String, ?> map) throws Exception {
         ListStoreResponse self = new ListStoreResponse();

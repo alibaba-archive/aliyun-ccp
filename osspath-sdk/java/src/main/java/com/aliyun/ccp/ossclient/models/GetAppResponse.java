@@ -45,11 +45,11 @@ public class GetAppResponse extends TeaModel {
 
     @NameInMap("scope")
     @Validation(required = true)
-    public String[] scope;
+    public java.util.List<String> scope;
 
     @NameInMap("screenshots")
     @Validation(required = true)
-    public String[] screenshots;
+    public java.util.List<String> screenshots;
 
     @NameInMap("stage")
     @Validation(required = true)

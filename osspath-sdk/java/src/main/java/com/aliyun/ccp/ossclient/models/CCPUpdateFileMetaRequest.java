@@ -4,6 +4,9 @@ package com.aliyun.ccp.ossclient.models;
 import com.aliyun.tea.*;
 
 public class CCPUpdateFileMetaRequest extends TeaModel {
+    @NameInMap("header")
+    public CCPUpdateFileMetaRequestHeader header;
+
     @NameInMap("custom_index_key")
     public String customIndexKey;
 
@@ -22,10 +25,10 @@ public class CCPUpdateFileMetaRequest extends TeaModel {
     public String fileId;
 
     @NameInMap("hidden")
-    public boolean hidden;
+    public Boolean hidden;
 
     @NameInMap("labels")
-    public String[] labels;
+    public java.util.List<String> labels;
 
     @NameInMap("meta")
     public String meta;
@@ -35,11 +38,25 @@ public class CCPUpdateFileMetaRequest extends TeaModel {
     public String name;
 
     @NameInMap("starred")
-    public boolean starred;
+    public Boolean starred;
 
     public static CCPUpdateFileMetaRequest build(java.util.Map<String, ?> map) throws Exception {
         CCPUpdateFileMetaRequest self = new CCPUpdateFileMetaRequest();
         return TeaModel.build(map, self);
+    }
+
+    public static class CCPUpdateFileMetaRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static CCPUpdateFileMetaRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            CCPUpdateFileMetaRequestHeader self = new CCPUpdateFileMetaRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
     }
 
 }

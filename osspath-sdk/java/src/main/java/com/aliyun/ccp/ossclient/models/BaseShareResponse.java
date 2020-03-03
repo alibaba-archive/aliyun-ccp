@@ -26,13 +26,13 @@ public class BaseShareResponse extends TeaModel {
     public String expiration;
 
     @NameInMap("expired")
-    public boolean expired;
+    public Boolean expired;
 
     @NameInMap("owner")
     public String owner;
 
     @NameInMap("permissions")
-    public String[] permissions;
+    public java.util.List<String> permissions;
 
     @NameInMap("share_file_path")
     public String shareFilePath;

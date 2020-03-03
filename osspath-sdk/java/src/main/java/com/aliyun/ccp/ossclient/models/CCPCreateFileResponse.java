@@ -24,10 +24,10 @@ public class CCPCreateFileResponse extends TeaModel {
     public String parentFileId;
 
     @NameInMap("part_info_list")
-    public UploadPartInfo[] partInfoList;
+    public java.util.List<UploadPartInfo> partInfoList;
 
     @NameInMap("rapid_upload")
-    public boolean rapidUpload;
+    public Boolean rapidUpload;
 
     @NameInMap("type")
     public String type;

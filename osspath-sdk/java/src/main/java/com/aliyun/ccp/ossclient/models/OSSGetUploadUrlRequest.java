@@ -4,6 +4,9 @@ package com.aliyun.ccp.ossclient.models;
 import com.aliyun.tea.*;
 
 public class OSSGetUploadUrlRequest extends TeaModel {
+    @NameInMap("header")
+    public OSSGetUploadUrlRequestHeader header;
+
     @NameInMap("content_md5")
     public String contentMd5;
 
@@ -12,7 +15,7 @@ public class OSSGetUploadUrlRequest extends TeaModel {
     public String driveId;
 
     @NameInMap("part_info_list")
-    public UploadPartInfo[] partInfoList;
+    public java.util.List<UploadPartInfo> partInfoList;
 
     @NameInMap("upload_id")
     public String uploadId;
@@ -27,6 +30,20 @@ public class OSSGetUploadUrlRequest extends TeaModel {
     public static OSSGetUploadUrlRequest build(java.util.Map<String, ?> map) throws Exception {
         OSSGetUploadUrlRequest self = new OSSGetUploadUrlRequest();
         return TeaModel.build(map, self);
+    }
+
+    public static class OSSGetUploadUrlRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static OSSGetUploadUrlRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            OSSGetUploadUrlRequestHeader self = new OSSGetUploadUrlRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
     }
 
 }

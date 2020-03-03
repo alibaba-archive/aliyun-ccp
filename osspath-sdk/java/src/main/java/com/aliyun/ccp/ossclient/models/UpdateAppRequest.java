@@ -4,6 +4,9 @@ package com.aliyun.ccp.ossclient.models;
 import com.aliyun.tea.*;
 
 public class UpdateAppRequest extends TeaModel {
+    @NameInMap("header")
+    public UpdateAppRequestHeader header;
+
     @NameInMap("app_id")
     @Validation(required = true)
     public String appId;
@@ -17,7 +20,7 @@ public class UpdateAppRequest extends TeaModel {
 
     @NameInMap("is_third_party")
     @Validation(required = true)
-    public boolean isThirdParty;
+    public Boolean isThirdParty;
 
     @NameInMap("logo")
     @Validation(required = true)
@@ -29,7 +32,7 @@ public class UpdateAppRequest extends TeaModel {
 
     @NameInMap("scope")
     @Validation(required = true)
-    public String[] scope;
+    public java.util.List<String> scope;
 
     @NameInMap("type")
     @Validation(required = true)
@@ -38,6 +41,20 @@ public class UpdateAppRequest extends TeaModel {
     public static UpdateAppRequest build(java.util.Map<String, ?> map) throws Exception {
         UpdateAppRequest self = new UpdateAppRequest();
         return TeaModel.build(map, self);
+    }
+
+    public static class UpdateAppRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static UpdateAppRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            UpdateAppRequestHeader self = new UpdateAppRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
     }
 
 }

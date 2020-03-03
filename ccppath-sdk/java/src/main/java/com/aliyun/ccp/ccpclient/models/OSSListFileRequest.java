@@ -4,6 +4,9 @@ package com.aliyun.ccp.ccpclient.models;
 import com.aliyun.tea.*;
 
 public class OSSListFileRequest extends TeaModel {
+    @NameInMap("header")
+    public OSSListFileRequestHeader header;
+
     @NameInMap("drive_id")
     @Validation(required = true, pattern = "[0-9]+")
     public String driveId;
@@ -32,6 +35,20 @@ public class OSSListFileRequest extends TeaModel {
     public static OSSListFileRequest build(java.util.Map<String, ?> map) throws Exception {
         OSSListFileRequest self = new OSSListFileRequest();
         return TeaModel.build(map, self);
+    }
+
+    public static class OSSListFileRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static OSSListFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            OSSListFileRequestHeader self = new OSSListFileRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
     }
 
 }

@@ -9,7 +9,7 @@ public class MobileCheckExistResponse extends TeaModel {
 
     @NameInMap("is_exist")
     @Validation(required = true)
-    public boolean isExist;
+    public Boolean isExist;
 
     @NameInMap("phone_number")
     @Validation(required = true)

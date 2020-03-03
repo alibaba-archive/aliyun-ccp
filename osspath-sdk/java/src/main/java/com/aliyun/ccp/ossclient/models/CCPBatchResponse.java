@@ -8,7 +8,7 @@ public class CCPBatchResponse extends TeaModel {
     public String requestId;
 
     @NameInMap("responses")
-    public BatchSubResponse[] responses;
+    public java.util.List<BatchSubResponse> responses;
 
     public static CCPBatchResponse build(java.util.Map<String, ?> map) throws Exception {
         CCPBatchResponse self = new CCPBatchResponse();

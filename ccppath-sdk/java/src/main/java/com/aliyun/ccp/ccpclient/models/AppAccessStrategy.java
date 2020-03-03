@@ -8,7 +8,7 @@ public class AppAccessStrategy extends TeaModel {
     public String effect;
 
     @NameInMap("except_app_id_list")
-    public String[] exceptAppIdList;
+    public java.util.List<String> exceptAppIdList;
 
     public static AppAccessStrategy build(java.util.Map<String, ?> map) throws Exception {
         AppAccessStrategy self = new AppAccessStrategy();

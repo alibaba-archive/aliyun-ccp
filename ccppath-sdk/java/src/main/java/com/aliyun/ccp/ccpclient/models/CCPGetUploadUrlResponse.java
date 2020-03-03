@@ -23,7 +23,7 @@ public class CCPGetUploadUrlResponse extends TeaModel {
     public String fileId;
 
     @NameInMap("part_info_list")
-    public UploadPartInfo[] partInfoList;
+    public java.util.List<UploadPartInfo> partInfoList;
 
     @NameInMap("upload_id")
     public String uploadId;

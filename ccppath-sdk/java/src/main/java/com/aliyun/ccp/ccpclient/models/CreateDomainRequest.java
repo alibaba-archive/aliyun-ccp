@@ -4,11 +4,14 @@ package com.aliyun.ccp.ccpclient.models;
 import com.aliyun.tea.*;
 
 public class CreateDomainRequest extends TeaModel {
+    @NameInMap("header")
+    public CreateDomainRequestHeader header;
+
     @NameInMap("auth_alipay_app_id")
     public String authAlipayAppId;
 
     @NameInMap("auth_alipay_enbale")
-    public boolean authAlipayEnbale;
+    public Boolean authAlipayEnbale;
 
     @NameInMap("auth_alipay_private_key")
     public String authAlipayPrivateKey;
@@ -23,10 +26,10 @@ public class CreateDomainRequest extends TeaModel {
     public String authDingdingAppSecret;
 
     @NameInMap("auth_dingding_enable")
-    public boolean authDingdingEnable;
+    public Boolean authDingdingEnable;
 
     @NameInMap("auth_endpoint_enable")
-    public boolean authEndpointEnable;
+    public Boolean authEndpointEnable;
 
     @NameInMap("auth_ram_app_id")
     public String authRamAppId;
@@ -35,7 +38,7 @@ public class CreateDomainRequest extends TeaModel {
     public String authRamAppSecret;
 
     @NameInMap("auth_ram_enable")
-    public boolean authRamEnable;
+    public Boolean authRamEnable;
 
     @NameInMap("data_hash_name")
     public String dataHashName;
@@ -57,13 +60,13 @@ public class CreateDomainRequest extends TeaModel {
     public String eventMnsTopic;
 
     @NameInMap("event_names")
-    public String[] eventNames;
+    public java.util.List<String> eventNames;
 
     @NameInMap("event_role_arn")
     public String eventRoleArn;
 
     @NameInMap("init_drive_enable")
-    public boolean initDriveEnable;
+    public Boolean initDriveEnable;
 
     @NameInMap("init_drive_size")
     public Long initDriveSize;
@@ -76,18 +79,32 @@ public class CreateDomainRequest extends TeaModel {
     public AppAccessStrategy publishedAppAccessStrategy;
 
     @NameInMap("sharable")
-    public boolean sharable;
+    public Boolean sharable;
 
     @NameInMap("store_level")
     public String storeLevel;
 
     @NameInMap("store_region_list")
     @Validation(required = true)
-    public String[] storeRegionList;
+    public java.util.List<String> storeRegionList;
 
     public static CreateDomainRequest build(java.util.Map<String, ?> map) throws Exception {
         CreateDomainRequest self = new CreateDomainRequest();
         return TeaModel.build(map, self);
+    }
+
+    public static class CreateDomainRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static CreateDomainRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            CreateDomainRequestHeader self = new CreateDomainRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
     }
 
 }

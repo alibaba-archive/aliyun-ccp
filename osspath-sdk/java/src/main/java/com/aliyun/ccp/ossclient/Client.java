@@ -107,11 +107,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/account/cancel_link");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -127,7 +130,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -223,11 +226,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/account/confirm_link");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -243,7 +249,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -339,11 +345,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/account/default/change_password");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -359,7 +368,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -448,11 +457,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/account/default/set_password");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -468,7 +480,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -557,11 +569,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/account/get_access_token_by_link_info");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -577,7 +592,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -673,11 +688,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/account/get_captcha");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -693,7 +711,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -789,11 +807,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/account/get_link_info");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -809,7 +830,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -905,11 +926,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/account/get_link_info_by_user_id");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -925,7 +949,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -1021,11 +1045,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/account/link");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -1041,7 +1068,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -1137,11 +1164,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/account/mobile/check_exist");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -1157,7 +1187,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -1253,11 +1283,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/account/mobile/login");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -1273,7 +1306,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -1369,11 +1402,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/account/mobile/register");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -1389,7 +1425,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -1485,11 +1521,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/account/mobile/send_sms_code");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -1505,7 +1544,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -1601,11 +1640,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/account/token");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -1621,7 +1663,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -1717,11 +1759,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/domain/list_stores");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -1737,7 +1782,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -1833,11 +1878,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/user/get_access_token");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -1853,7 +1901,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -1949,11 +1997,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/drive/create");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -1969,7 +2020,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -2065,11 +2116,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/drive/delete");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -2085,7 +2139,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -2174,11 +2228,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/drive/get");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -2194,7 +2251,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -2290,11 +2347,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/drive/get_default_drive");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -2310,7 +2370,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -2406,11 +2466,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/drive/list");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -2426,7 +2489,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -2522,11 +2585,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/drive/list_my_drives");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -2542,7 +2608,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -2638,11 +2704,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/drive/update");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -2658,7 +2727,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -2754,11 +2823,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/osspath/file/complete");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -2774,7 +2846,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -2870,11 +2942,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/osspath/file/copy");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -2890,7 +2965,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -2986,11 +3061,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/osspath/file/create");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -3006,7 +3084,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -3102,11 +3180,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/osspath/file/delete");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -3122,7 +3203,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -3211,11 +3292,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/osspath/file/get");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -3231,7 +3315,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -3327,11 +3411,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/osspath/file/get_download_url");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -3347,7 +3434,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -3443,11 +3530,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/osspath/file/get_secure_url");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -3463,7 +3553,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -3559,11 +3649,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/osspath/file/get_upload_url");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -3579,7 +3672,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -3675,11 +3768,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/osspath/file/list");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -3695,7 +3791,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -3791,11 +3887,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/osspath/file/list_uploaded_parts");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -3811,7 +3910,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -3907,11 +4006,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/osspath/file/move");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -3927,7 +4029,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -4023,11 +4125,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/osspath/share/create");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -4043,7 +4148,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -4139,11 +4244,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/osspath/share/delete");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -4159,7 +4267,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -4248,11 +4356,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/osspath/share/get");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -4268,7 +4379,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -4364,11 +4475,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/osspath/share/list");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -4384,7 +4498,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -4480,11 +4594,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/osspath/share/update");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -4500,7 +4617,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -4596,11 +4713,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/osspath/store_file/list");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -4616,7 +4736,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -4712,11 +4832,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/user/create");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -4732,7 +4855,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -4828,11 +4951,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/user/delete");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -4848,7 +4974,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -4937,11 +5063,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/user/get");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -4957,7 +5086,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -5053,11 +5182,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/user/list");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -5073,7 +5205,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -5169,11 +5301,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/user/search");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -5189,7 +5324,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 
@@ -5285,11 +5420,14 @@ public class Client {
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/user/update");
-                request_.headers = TeaConverter.buildMap(
-                    new TeaPair("user-agent", this.getUserAgent()),
-                    new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
-                    new TeaPair("content-type", "application/json; charset=utf-8")
-                );
+                request_.headers = com.aliyun.teautil.Common.stringifyMapValue(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".api.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.header
+                ));
                 if (!com.aliyun.teautil.Common.empty(accessToken)) {
                     request_.headers.put("authorization", "Bearer " + accessToken + "");
                 } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
@@ -5305,7 +5443,7 @@ public class Client {
                     request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
                 }
 
-                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request)));
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(com.aliyun.roautil.Client.deleteSpecialKey(TeaModel.buildMap(request), "header")));
                 _lastRequest = request_;
                 TeaResponse response_ = Tea.doAction(request_, runtime_);
 

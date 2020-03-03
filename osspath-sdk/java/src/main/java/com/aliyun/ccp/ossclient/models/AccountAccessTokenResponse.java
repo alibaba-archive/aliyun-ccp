@@ -18,7 +18,7 @@ public class AccountAccessTokenResponse extends TeaModel {
     public String defaultDriveId;
 
     @NameInMap("exist_link")
-    public LinkInfo[] existLink;
+    public java.util.List<LinkInfo> existLink;
 
     @NameInMap("expire_time")
     public String expireTime;
@@ -28,7 +28,7 @@ public class AccountAccessTokenResponse extends TeaModel {
 
     @NameInMap("need_link")
     @Validation(required = true)
-    public boolean needLink;
+    public Boolean needLink;
 
     @NameInMap("nick_name")
     public String nickName;

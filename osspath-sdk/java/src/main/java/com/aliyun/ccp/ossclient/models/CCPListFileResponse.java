@@ -8,7 +8,7 @@ public class CCPListFileResponse extends TeaModel {
     public String requestId;
 
     @NameInMap("items")
-    public BaseCCPFileResponse[] items;
+    public java.util.List<BaseCCPFileResponse> items;
 
     @NameInMap("next_marker")
     public String nextMarker;

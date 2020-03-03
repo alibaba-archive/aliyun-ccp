@@ -4,6 +4,9 @@ package com.aliyun.ccp.ossclient.models;
 import com.aliyun.tea.*;
 
 public class CopyFileRequest extends TeaModel {
+    @NameInMap("header")
+    public CopyFileRequestHeader header;
+
     @NameInMap("drive_id")
     @Validation(required = true, pattern = "[0-9]+")
     public String driveId;
@@ -20,7 +23,7 @@ public class CopyFileRequest extends TeaModel {
     public String newName;
 
     @NameInMap("overwrite")
-    public boolean overwrite;
+    public Boolean overwrite;
 
     @NameInMap("share_id")
     public String shareId;
@@ -42,6 +45,48 @@ public class CopyFileRequest extends TeaModel {
     public static CopyFileRequest build(java.util.Map<String, ?> map) throws Exception {
         CopyFileRequest self = new CopyFileRequest();
         return TeaModel.build(map, self);
+    }
+
+    public static class CCPCopyFileRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static CCPCopyFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            CCPCopyFileRequestHeader self = new CCPCopyFileRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
+    }
+
+    public static class CopyFileRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static CopyFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            CopyFileRequestHeader self = new CopyFileRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
+    }
+
+    public static class OSSCopyFileRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static OSSCopyFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            OSSCopyFileRequestHeader self = new OSSCopyFileRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
     }
 
 }

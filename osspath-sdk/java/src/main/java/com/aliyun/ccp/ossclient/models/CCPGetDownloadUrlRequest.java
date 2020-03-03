@@ -4,6 +4,9 @@ package com.aliyun.ccp.ossclient.models;
 import com.aliyun.tea.*;
 
 public class CCPGetDownloadUrlRequest extends TeaModel {
+    @NameInMap("header")
+    public CCPGetDownloadUrlRequestHeader header;
+
     @NameInMap("drive_id")
     @Validation(required = true, pattern = "[0-9]+")
     public String driveId;
@@ -22,6 +25,20 @@ public class CCPGetDownloadUrlRequest extends TeaModel {
     public static CCPGetDownloadUrlRequest build(java.util.Map<String, ?> map) throws Exception {
         CCPGetDownloadUrlRequest self = new CCPGetDownloadUrlRequest();
         return TeaModel.build(map, self);
+    }
+
+    public static class CCPGetDownloadUrlRequestHeader extends TeaModel {
+        @NameInMap("x-pds-trace-id")
+        public String traceId;
+
+        @NameInMap("x-pds-device-id")
+        public String deviceId;
+
+        public static CCPGetDownloadUrlRequestHeader build(java.util.Map<String, ?> map) throws Exception {
+            CCPGetDownloadUrlRequestHeader self = new CCPGetDownloadUrlRequestHeader();
+            return TeaModel.build(map, self);
+        }
+
     }
 
 }
