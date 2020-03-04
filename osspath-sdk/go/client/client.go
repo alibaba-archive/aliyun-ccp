@@ -17357,14 +17357,14 @@ func (client *Client) MoveFile(request *OSSMoveFileRequest, runtime *RuntimeOpti
   return _resp, _err
 }
 
-func (client *Client) VideoM3u8(request *OSSVideoM3U8Request, runtime *RuntimeOptions) (_err error) {
+func (client *Client) VideoM3u8(request *OSSVideoM3U8Request, runtime *RuntimeOptions) (_result []byte, _err error) {
   _err = tea.Validate(request)
   if _err != nil {
-    return _err
+    return nil, _err
   }
   _err = tea.Validate(runtime)
   if _err != nil {
-    return _err
+    return nil, _err
   }
   _runtime := map[string]interface{}{
     "timeouted": "retry",
@@ -17388,6 +17388,7 @@ func (client *Client) VideoM3u8(request *OSSVideoM3U8Request, runtime *RuntimeOp
     "ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
   }
 
+  _resp := make([]byte, 0)
   for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
     if _retryTimes > 0 {
       _backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
@@ -17396,26 +17397,26 @@ func (client *Client) VideoM3u8(request *OSSVideoM3U8Request, runtime *RuntimeOp
       }
     }
 
-    _err = func() error {
+    _resp, _err = func()([]byte, error){
       request_ := tea.NewRequest()
       accesskeyId, _err := client.GetAccessKeyId()
       if _err != nil {
-        return _err
+        return nil, _err
       }
 
       accessKeySecret, _err := client.GetAccessKeySecret()
       if _err != nil {
-        return _err
+        return nil, _err
       }
 
       securityToken, _err := client.GetAccessKeySecret()
       if _err != nil {
-        return _err
+        return nil, _err
       }
 
       accessToken, _err := client.GetAccessToken()
       if _err != nil {
-        return _err
+        return nil, _err
       }
 
       request_.Protocol = util.DefaultString(client.Protocol, "https")
@@ -17444,12 +17445,18 @@ func (client *Client) VideoM3u8(request *OSSVideoM3U8Request, runtime *RuntimeOp
       request_.Body = tea.ToReader(util.ToJSONString(roautil.DeleteSpecialKey(tea.ToMap(request), "header")))
       response_, _err := tea.DoRequest(request_, _runtime)
       if _err != nil {
-        return _err
+        return nil, _err
       }
       respMap := make(map[string]interface{})
       obj := interface{}(nil)
       if util.EqualNumber(response_.StatusCode, 200) {
-        return _err
+        byt, _err := util.ReadAsBytes(response_.Body)
+        if _err != nil {
+          return nil, _err
+        }
+
+        _result = byt
+        return _result , _err
       }
 
       if !util.Empty(response_.Headers["x-ca-error-message"]) {
@@ -17461,12 +17468,12 @@ func (client *Client) VideoM3u8(request *OSSVideoM3U8Request, runtime *RuntimeOp
           },
           "message": response_.Headers["x-ca-error-message"],
         })
-        return _err
+        return nil, _err
       }
 
       obj, _err = util.ReadAsJSON(response_.Body)
       if _err != nil {
-        return _err
+        return nil, _err
       }
 
       respMap = util.AssertAsMap(obj)
@@ -17477,14 +17484,14 @@ func (client *Client) VideoM3u8(request *OSSVideoM3U8Request, runtime *RuntimeOp
           "statusMessage": response_.StatusMessage,
         },
         },respMap))
-      return _err
+      return nil, _err
     }()
     if !tea.Retryable(_err) {
       break
     }
   }
 
-  return _err
+  return _resp, _err
 }
 
 func (client *Client) VideoTranscode(request *OSSVideoTranscodeRequest, runtime *RuntimeOptions) (_err error) {
@@ -19304,7 +19311,10 @@ func (client *Client) SetExpireTime (expireTime string) (_err error) {
     return _err
   }
 
-  client.AccessTokenCredential.SetExpireTime(expireTime)
+  _err = client.AccessTokenCredential.SetExpireTime(expireTime)
+  if _err != nil {
+    return
+  }
   return _err
 }
 

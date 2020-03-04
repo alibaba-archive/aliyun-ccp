@@ -5962,7 +5962,7 @@ api moveFile(request: OSSMoveFileRequest, runtime: RuntimeOptions): OSSMoveFileR
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api videoM3u8(request: OSSVideoM3U8Request, runtime: RuntimeOptions): void  {
+api videoM3u8(request: OSSVideoM3U8Request, runtime: RuntimeOptions): bytes  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -5995,7 +5995,8 @@ api videoM3u8(request: OSSVideoM3U8Request, runtime: RuntimeOptions): void  {
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-    return;
+    var byt = Util.readAsBytes(__response.body);
+    return byt;
   }
 
   if (!Util.empty(__response.headers.x-ca-error-message)) {

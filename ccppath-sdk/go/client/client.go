@@ -16976,7 +16976,10 @@ func (client *Client) SetExpireTime(expireTime string) (_err error) {
 		return _err
 	}
 
-	client.AccessTokenCredential.SetExpireTime(expireTime)
+	_err = client.AccessTokenCredential.SetExpireTime(expireTime)
+	if _err != nil {
+		return
+	}
 	return _err
 }
 

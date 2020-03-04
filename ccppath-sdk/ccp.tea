@@ -2550,7 +2550,7 @@ api cancelLink(request: CancelLinkRequest, runtime: RuntimeOptions): AccountAcce
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -2641,7 +2641,7 @@ api confirmLink(request: ConfirmLinkRequest, runtime: RuntimeOptions): AccountAc
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -2902,7 +2902,7 @@ api getAccessTokenByLinkInfo(request: GetAccessTokenByLinkInfoRequest, runtime: 
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -2992,7 +2992,7 @@ api getCaptcha(request: GetCaptchaRequest, runtime: RuntimeOptions): Captcha  {
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -3083,7 +3083,7 @@ api getLinkInfo(request: GetByLinkInfoRequest, runtime: RuntimeOptions): LinkInf
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -3173,7 +3173,7 @@ api getLinkInfoByUserId(request: GetLinkInfoByUserIDRequest, runtime: RuntimeOpt
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -3265,7 +3265,7 @@ api link(request: AccountLinkRequest, runtime: RuntimeOptions): AccountAccessTok
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -3356,7 +3356,7 @@ api checkExist(request: MobileCheckExistRequest, runtime: RuntimeOptions): Mobil
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -3447,7 +3447,7 @@ api login(request: MobileLoginRequest, runtime: RuntimeOptions): AccountAccessTo
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -3538,7 +3538,7 @@ api register(request: MobileRegisterRequest, runtime: RuntimeOptions): AccountAc
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -3628,7 +3628,7 @@ api mobileSendSmsCode(request: MobileSendSmsCodeRequest, runtime: RuntimeOptions
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -3718,7 +3718,7 @@ api token(request: TokenRequest, runtime: RuntimeOptions): AccountAccessTokenRes
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -3812,7 +3812,7 @@ api getAsyncTaskInfo(request: CCPGetAsyncTaskRequest, runtime: RuntimeOptions): 
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -3905,7 +3905,7 @@ api operation(request: CCPBatchRequest, runtime: RuntimeOptions): CCPBatchRespon
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -3999,7 +3999,7 @@ api createDrive(request: CreateDriveRequest, runtime: RuntimeOptions): CreateDri
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 201)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -4179,7 +4179,7 @@ api getDrive(request: GetDriveRequest, runtime: RuntimeOptions): GetDriveRespons
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -4273,7 +4273,7 @@ api getDefaultDrive(request: GetDefaultDriveRequest, runtime: RuntimeOptions): G
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -4365,7 +4365,7 @@ api listDrives(request: ListDriveRequest, runtime: RuntimeOptions): ListDriveRes
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -4457,7 +4457,7 @@ api listMyDrives(request: ListMyDriveRequest, runtime: RuntimeOptions): ListDriv
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -4550,7 +4550,7 @@ api updateDrive(request: UpdateDriveRequest, runtime: RuntimeOptions): UpdateDri
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -4643,7 +4643,7 @@ api completeFile(request: CCPCompleteFileRequest, runtime: RuntimeOptions): CCPC
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -4736,7 +4736,7 @@ api copyFile(request: CCPCopyFileRequest, runtime: RuntimeOptions): CCPCopyFileR
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 201)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -4745,7 +4745,7 @@ api copyFile(request: CCPCopyFileRequest, runtime: RuntimeOptions): CCPCopyFileR
   }
 
   if (Util.equalNumber(__response.statusCode, 202)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -4840,7 +4840,7 @@ api createFile(request: CCPCreateFileRequest, runtime: RuntimeOptions): CCPCreat
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 201)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -4933,7 +4933,7 @@ api deleteFile(request: CCPDeleteFileRequest, runtime: RuntimeOptions): CCPDelet
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 202)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -5123,7 +5123,7 @@ api getFile(request: CCPGetFileRequest, runtime: RuntimeOptions): CCPGetFileResp
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -5216,7 +5216,7 @@ api getDownloadUrl(request: CCPGetDownloadUrlRequest, runtime: RuntimeOptions): 
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -5309,7 +5309,7 @@ api getUploadUrl(request: CCPGetUploadUrlRequest, runtime: RuntimeOptions): CCPG
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -5402,7 +5402,7 @@ api listFile(request: CCPListFileRequest, runtime: RuntimeOptions): CCPListFileR
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -5495,7 +5495,7 @@ api listUploadedParts(request: CCPListUploadedPartRequest, runtime: RuntimeOptio
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -5588,7 +5588,7 @@ api moveFile(request: CCPMoveFileRequest, runtime: RuntimeOptions): CCPMoveFileR
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -5681,7 +5681,7 @@ api searchFile(request: CCPSearchFileRequest, runtime: RuntimeOptions): CCPSearc
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -5774,7 +5774,7 @@ api updateFile(request: CCPUpdateFileMetaRequest, runtime: RuntimeOptions): CCPU
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -5865,7 +5865,7 @@ api createUser(request: CreateUserRequest, runtime: RuntimeOptions): CreateUserR
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 201)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -6043,7 +6043,7 @@ api getUser(request: GetUserRequest, runtime: RuntimeOptions): GetUserResponse  
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -6134,7 +6134,7 @@ api listUsers(request: ListUserRequest, runtime: RuntimeOptions): ListUserRespon
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -6225,7 +6225,7 @@ api searchUser(request: SearchUserRequest, runtime: RuntimeOptions): ListUserRes
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
@@ -6317,7 +6317,7 @@ api updateUser(request: UpdateUserRequest, runtime: RuntimeOptions): UpdateUserR
   var respMap : object = null;
   var obj : any = null;
   if (Util.equalNumber(__response.statusCode, 200)) {
-  obj = Util.readAsJSON(__response.body);
+    obj = Util.readAsJSON(__response.body);
     respMap = Util.assertAsMap(obj);
     return {
       requestId = __response.headers.x-ca-request-id,
