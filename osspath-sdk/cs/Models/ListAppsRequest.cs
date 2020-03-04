@@ -9,6 +9,18 @@ using Tea;
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
     public class ListAppsRequest : TeaModel {
+        [NameInMap("header")]
+        [Validation(Required=false)]
+        public ListAppsRequestHeader Header { get; set; }
+        public class ListAppsRequestHeader : TeaModel {
+            [NameInMap("x-pds-trace-id")]
+            [Validation(Required=false)]
+            public string TraceId { get; set; }
+            [NameInMap("x-pds-device-id")]
+            [Validation(Required=false)]
+            public string DeviceId { get; set; }
+        };
+
         [NameInMap("limit")]
         [Validation(Required=false)]
         public int? Limit { get; set; }

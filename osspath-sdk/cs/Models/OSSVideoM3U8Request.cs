@@ -8,11 +8,11 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
-    public class CompleteFileRequest : TeaModel {
+    public class OSSVideoM3U8Request : TeaModel {
         [NameInMap("header")]
         [Validation(Required=false)]
-        public CompleteFileRequestHeader Header { get; set; }
-        public class CompleteFileRequestHeader : TeaModel {
+        public OSSVideoM3U8RequestHeader Header { get; set; }
+        public class OSSVideoM3U8RequestHeader : TeaModel {
             [NameInMap("x-pds-trace-id")]
             [Validation(Required=false)]
             public string TraceId { get; set; }
@@ -22,28 +22,24 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         };
 
         [NameInMap("drive_id")]
-        [Validation(Required=true, Pattern="[0-9]+")]
+        [Validation(Required=false, Pattern="[0-9]+")]
         public string DriveId { get; set; }
 
-        [NameInMap("file_id")]
-        [Validation(Required=true, MaxLength=50, Pattern="[a-z0-9]{1,50}")]
-        public string FileId { get; set; }
+        [NameInMap("expire_sec")]
+        [Validation(Required=false)]
+        public long ExpireSec { get; set; }
 
         [NameInMap("file_path")]
-        [Validation(Required=false)]
+        [Validation(Required=true, MaxLength=1000)]
         public string FilePath { get; set; }
 
-        [NameInMap("part_info_list")]
-        [Validation(Required=false)]
-        public List<UploadPartInfo> PartInfoList { get; set; }
-
         [NameInMap("share_id")]
-        [Validation(Required=false)]
+        [Validation(Required=false, Pattern="[0-9a-z-]+")]
         public string ShareId { get; set; }
 
-        [NameInMap("upload_id")]
+        [NameInMap("sign_token")]
         [Validation(Required=true)]
-        public string UploadId { get; set; }
+        public string SignToken { get; set; }
 
     }
 

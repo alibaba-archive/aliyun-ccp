@@ -9,6 +9,18 @@ using Tea;
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
     public class CreateDomainRequest : TeaModel {
+        [NameInMap("header")]
+        [Validation(Required=false)]
+        public CreateDomainRequestHeader Header { get; set; }
+        public class CreateDomainRequestHeader : TeaModel {
+            [NameInMap("x-pds-trace-id")]
+            [Validation(Required=false)]
+            public string TraceId { get; set; }
+            [NameInMap("x-pds-device-id")]
+            [Validation(Required=false)]
+            public string DeviceId { get; set; }
+        };
+
         [NameInMap("auth_alipay_app_id")]
         [Validation(Required=false)]
         public string AuthAlipayAppId { get; set; }

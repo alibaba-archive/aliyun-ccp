@@ -9,6 +9,18 @@ using Tea;
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
     public class CreateDriveRequest : TeaModel {
+        [NameInMap("header")]
+        [Validation(Required=false)]
+        public CreateDriveRequestHeader Header { get; set; }
+        public class CreateDriveRequestHeader : TeaModel {
+            [NameInMap("x-pds-trace-id")]
+            [Validation(Required=false)]
+            public string TraceId { get; set; }
+            [NameInMap("x-pds-device-id")]
+            [Validation(Required=false)]
+            public string DeviceId { get; set; }
+        };
+
         [NameInMap("default")]
         [Validation(Required=false)]
         public bool? Default { get; set; }
