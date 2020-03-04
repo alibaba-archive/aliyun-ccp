@@ -1673,7 +1673,7 @@ model BaseCompleteFileRequest {
     traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
     deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
   }(description='header', name='header'),
-  driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
+  driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   partInfoList?: [ UploadPartInfo ](name='part_info_list', description='part_info_list', items='{"$ref":"#/definitions/UploadPartInfo"}'),
   uploadId?: string(name='upload_id', description='upload_id'),
 }
@@ -1703,7 +1703,7 @@ model BaseGetUploadUrlRequest {
     deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
   }(description='header', name='header'),
   contentMd5?: string(name='content_md5', description='content_md5', example='E10ADC3949BA59ABBE56E057F20F883E', maxLength=32),
-  driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
+  driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   partInfoList?: [ UploadPartInfo ](name='part_info_list', description='upload_part_list', example='', items='{"$ref":"#/definitions/UploadPartInfo"}'),
   uploadId: string(name='upload_id', description='upload_id', example='3920F2BE4D9446D6967E2ED505A97EFD'),
 }
@@ -1716,13 +1716,28 @@ model BaseListFileRequest {
     traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
     deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
   }(description='header', name='header'),
-  driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
+  driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   imageThumbnailProcess?: string(name='image_thumbnail_process', description='image_thumbnail_process', example='image/resize,w_200'),
   imageUrlProcess?: string(name='image_url_process', description='image_url_process', example='image/resize,w_200'),
   limit?: long(name='limit', default=50, description='limit', example=10, format='int64', maximum=100, minimum=0, pattern='[0-9]{1,3}'),
   marker?: string(name='marker', description='marker', example='NWQ1Yjk4YmI1ZDRlYmU1Y2E0YWE0NmJhYWJmODBhNDQ2NzhlMTRhMg'),
   videoThumbnailProcess?: string(name='video_thumbnail_process', description='video_thumbnail_process
 type:string', example='video/snapshot,t_7000,f_jpg,w_800,h_600,m_fast'),
+}
+
+/**
+ * 
+ */
+model BaseMediaResponse {
+  requestId?: string(name='requestId', description='request Id', example='0BA8CF68-9769E-4469-A04B-8772004287E2'),
+  addressLine?: string(name='address_line', description='address_line', example='北京市昌平区白各庄新村路'),
+  city?: string(name='city', description='city', example='杭州'),
+  country?: string(name='country', description='country', example='中国'),
+  district?: string(name='district', description='district', example='余杭区'),
+  location?: string(name='location', description='location', example='40.110333,116.349311'),
+  province?: string(name='province', description='province', example='浙江省'),
+  time?: string(name='time', description='time', format='date-time'),
+  township?: string(name='township', description='township', example='沙河镇'),
 }
 
 /**
@@ -1914,6 +1929,31 @@ model CCPGetUploadUrlRequest {
 /**
  * 列举文件
  */
+model CCPListFileByCustomIndexKeyRequest {
+  header?: {
+    traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
+    deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
+  }(description='header', name='header'),
+  driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
+  imageThumbnailProcess?: string(name='image_thumbnail_process', description='image_thumbnail_process', example='image/resize,w_200'),
+  imageUrlProcess?: string(name='image_url_process', description='image_url_process', example='image/resize,w_200'),
+  limit?: long(name='limit', default=50, description='limit', example=10, format='int64', maximum=100, minimum=0, pattern='[0-9]{1,3}'),
+  marker?: string(name='marker', description='marker', example='NWQ1Yjk4YmI1ZDRlYmU1Y2E0YWE0NmJhYWJmODBhNDQ2NzhlMTRhMg'),
+  videoThumbnailProcess?: string(name='video_thumbnail_process', description='video_thumbnail_process
+type:string', example='video/snapshot,t_7000,f_jpg,w_800,h_600,m_fast'),
+  Starred?: boolean(name='Starred', description='starred', enum='false, true', example=false),
+  category?: string(name='category', description='category', enum='image, video, music, doc, other', example='image'),
+  customIndexKey?: string(name='custom_index_key', description='custom_index_key'),
+  encryptMode?: string(name='encrypt_mode', description='encrypt_mode'),
+  orderDirection?: string(name='order_direction', description='order_direction', enum='ASC, DESC', example='ASC'),
+  status?: string(name='status', default='available', description='status', enum='uploading, available', example='available'),
+  type?: string(name='type', description='type', enum='file, folder', example='file'),
+  urlExpireSec?: long(name='url_expire_sec', default=900, description='url_expire_sec', example=900, format='int64', maximum=14400, minimum=10),
+}
+
+/**
+ * 列举文件
+ */
 model CCPListFileRequest {
   header?: {
     traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
@@ -2028,7 +2068,7 @@ model CompleteFileRequest {
 }
 
 /**
- * copy file request
+ * 文件移动请求
  */
 model CopyFileRequest {
   header?: {
@@ -2042,10 +2082,8 @@ model CopyFileRequest {
   overwrite?: boolean(name='overwrite', default=false, description='overwrite
 type: boolean'),
   shareId?: string(name='share_id'),
-  toDriveId: string(name='to_drive_id', description='to_drive_id', example='1', pattern='[0-9]+'),
   toParentFileId: string(name='to_parent_file_id', description='to_parent_file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
   toParentFilePath?: string(name='to_parent_file_path'),
-  toShareId?: string(name='to_share_id'),
 }
 
 /**
@@ -2378,7 +2416,7 @@ model OSSCopyFileRequest {
   newName?: string(name='new_name', description='new_name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1000}'),
   overwrite?: boolean(name='overwrite', default=false, description='overwrite
 type: boolean'),
-  shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-z-]+'),
+  shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-Z-]+'),
   toDriveId: string(name='to_drive_id', description='to_drive_id', example='1', pattern='[0-9]+'),
   toParentFilePath: string(name='to_parent_file_path', description='to_parent_file_path', example='/a/b/c/'),
   toShareId?: string(name='to_share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6'),
@@ -2400,7 +2438,7 @@ model OSSCreateFileRequest {
   type?: string(name='type', description='Type', enum='file, folder', example='file'),
   driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   parentFilePath?: string(name='parent_file_path', description='parent_file_path'),
-  shareId?: string(name='share_id', description='share_id', maxLength=40, minLength=50),
+  shareId?: string(name='share_id', description='share_id', pattern='[0-9a-zA-Z-]+'),
 }
 
 /**
@@ -2415,7 +2453,7 @@ model OSSDeleteFileRequest {
   filePath: string(name='file_path', description='file_path', maxLength=1000, minLength=1),
   permanently?: boolean(name='permanently', description='permanently
 type: false', example=false),
-  shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-z-]+'),
+  shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-Z-]+'),
 }
 
 /**
@@ -2430,7 +2468,7 @@ model OSSGetDownloadUrlRequest {
   expireSec?: long(name='expire_sec', default=900, description='expire_sec', example=15, format='int64', maximum=14400, minimum=10),
   fileName?: string(name='file_name', description='file_name', example='ccp.jpg'),
   filePath: string(name='file_path', description='file_path', example='/a/b/c.jpg', maxLength=1000, minLength=1),
-  shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-z-]+'),
+  shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-Z-]+'),
 }
 
 /**
@@ -2447,7 +2485,7 @@ model OSSGetFileRequest {
 type:string', example='image/resize,w_200'),
   imageUrlProcess?: string(name='image_url_process', description='image_thumbnail_process
 type:string', example='image/resize,w_200'),
-  shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-z-]+'),
+  shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-Z-]+'),
   urlExpireSec?: long(name='url_expire_sec', default=900, description='url_expire_sec', example=900, format='int64', maximum=14400, minimum=10),
 }
 
@@ -2461,10 +2499,9 @@ model OSSGetSecureUrlRequest {
   }(description='header', name='header'),
   driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   expireSec?: long(name='expire_sec', default=60, description='expire_sec 单位秒', example=60, format='int64'),
-  fileName?: string(name='file_name', description='file_name', example='ccp.jpg'),
   filePath: string(name='file_path', description='file_path', example='/a/b/c.jpg', maxLength=1000, minLength=1),
   secureIp?: string(name='secure_ip', description='secure_ip', example='192.168.1.1/24'),
-  shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-z-]+'),
+  shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-Z-]+'),
 }
 
 /**
@@ -2473,7 +2510,6 @@ model OSSGetSecureUrlRequest {
 model OSSGetSecureUrlResponse {
   requestId?: string(name='requestId', description='request Id', example='0BA8CF68-9769E-4469-A04B-8772004287E2'),
   expiration?: string(name='expiration', description='expiration', example='2006-01-02T15:04:05.999Z07:00'),
-  method?: string(name='method', description='method', example='GET'),
   url?: string(name='url', description='url', example='https://ccp.data.aliyuncs.com/hz22%2F5d79219b0aa9a7c995a94a96993ba3205cd91c5a%2F5d79219bf3261a5d38744da0834ed489b677a27a?Expires=xxxOSSAccessKeyId=xxx&Signature=xxx&response-content-disposition=attachment%3Bfilename%3DtBiZAoJPC2c8b13450eda4292b7f5f8010618e078.txt'),
 }
 
@@ -2490,7 +2526,7 @@ model OSSGetUploadUrlRequest {
   partInfoList?: [ UploadPartInfo ](name='part_info_list', description='upload_part_list', example='', items='{"$ref":"#/definitions/UploadPartInfo"}'),
   uploadId?: string(name='upload_id', description='upload_id', example='3920F2BE4D9446D6967E2ED505A97EFD'),
   filePath?: string(name='file_path', description='file_path', example='/a/b/c.jpg'),
-  shareId?: string(name='share_id', description='share_id', example='1', pattern='[0-9]+'),
+  shareId?: string(name='share_id', description='share_id', example='1', pattern='[0-9a-zA-Z-]+'),
 }
 
 /**
@@ -2501,13 +2537,13 @@ model OSSListFileRequest {
     traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
     deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
   }(description='header', name='header'),
-  driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
+  driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   imageThumbnailProcess?: string(name='image_thumbnail_process', description='image_thumbnail_process', example='image/resize,w_200'),
   imageUrlProcess?: string(name='image_url_process', description='image_url_process', example='image/resize,w_200'),
   limit?: long(name='limit', default=50, description='limit', example=10, format='int64', maximum=100, minimum=0, pattern='[0-9]{1,3}'),
   marker?: string(name='marker', description='marker', example='NWQ1Yjk4YmI1ZDRlYmU1Y2E0YWE0NmJhYWJmODBhNDQ2NzhlMTRhMg'),
   parentFilePath: string(name='parent_file_path', description='ParentFilePath', example='/a/b/c.jpg'),
-  shareId: string(name='share_id', description='drive_id', example='1', pattern='[0-9]+'),
+  shareId?: string(name='share_id', description='share_id', example='1', pattern='[0-9a-zA-Z-]+'),
   urlExpireSec?: long(name='url_expire_sec', default=900, description='url_expire_sec', example=900, format='int64', maximum=14400, minimum=10),
   videoThumbnailProcess?: string(name='video_thumbnail_process', description='video_thumbnail_process
 type:string', example='video/snapshot,t_7000,f_jpg,w_800,h_600,m_fast'),
@@ -2525,7 +2561,7 @@ model OSSListUploadedPartRequest {
   filePath: string(name='file_path', description='file_path', example='/a/b/c.jpg'),
   limit: long(name='limit', default=1000, description='limit', example=1, format='int64', maximum=1000, minimum=1, pattern='[0-9]+'),
   partNumberMarker?: long(name='part_number_marker', description='part_number_marker', example=1, format='int64', minimum=1, pattern='[0-9]+'),
-  shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-z-]+'),
+  shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-Z-]+'),
   uploadId?: string(name='upload_id', description='upload_id', example='00668396C0814D818D90F0A92B04B355'),
 }
 
@@ -2537,12 +2573,12 @@ model OSSMoveFileRequest {
     traceId?: string(description='x-pds-trace-id', name='x-pds-trace-id'),
     deviceId?: string(description='x-pds-device-id', name='x-pds-device-id'),
   }(description='header', name='header'),
-  driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
+  driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   filePath?: string(name='file_path', description='file_path', example='/a/b/c.jpg'),
   newName: string(name='new_name', description='new_name', example='ccp.jpg'),
   overwrite?: boolean(name='overwrite', default=false, description='overwrite
 type: boolean'),
-  shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-z-]+'),
+  shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-Z-]+'),
   toParentFilePath?: string(name='to_parent_file_path', description='file_path', example='/a/b/c/'),
 }
 
@@ -2557,7 +2593,7 @@ model OSSVideoM3U8Request {
   driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   expireSec?: long(name='expire_sec', default=60, description='expire_sec', example=60, format='int64', maximum=86400, minimum=60),
   filePath: string(name='file_path', description='file_path', example='/a/b/c.mp4', maxLength=1000, minLength=1),
-  shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-z-]+'),
+  shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-Z-]+'),
   signToken: string(name='sign_token', description='sign_token', example='a8swq28ue21has22das213eds'),
 }
 
@@ -2571,7 +2607,7 @@ model OSSVideoTranscodeRequest {
   }(description='header', name='header'),
   driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   filePath: string(name='file_path', description='file_path', example='/a/b/c.mp4', maxLength=1000, minLength=1),
-  shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-z-]+'),
+  shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-Z-]+'),
 }
 
 /**
@@ -2660,6 +2696,22 @@ model UpdateShareRequest {
   shareName?: string(name='share_name', description='share_name', example='new_share_name'),
   sharePolicy?: [ SharePermissionPolicy ](name='share_policy', description='share_policy', items='{"$ref":"#/definitions/SharePermissionPolicy"}'),
   status?: string(name='status', description='status', enum='enabled, disabled', example='enabled'),
+}
+
+/**
+ * 
+ */
+model VideoMediaResponse {
+  requestId?: string(name='requestId', description='request Id', example='0BA8CF68-9769E-4469-A04B-8772004287E2'),
+  addressLine?: string(name='address_line', description='address_line', example='北京市昌平区白各庄新村路'),
+  city?: string(name='city', description='city', example='杭州'),
+  country?: string(name='country', description='country', example='中国'),
+  district?: string(name='district', description='district', example='余杭区'),
+  duration?: string(name='duration', description='duration 单位 秒', example='"7704.573000"'),
+  location?: string(name='location', description='location', example='40.110333,116.349311'),
+  province?: string(name='province', description='province', example='浙江省'),
+  time?: string(name='time', description='time', format='date-time'),
+  township?: string(name='township', description='township', example='沙河镇'),
 }
 
 /**
