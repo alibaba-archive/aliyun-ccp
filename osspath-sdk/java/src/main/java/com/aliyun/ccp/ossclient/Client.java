@@ -4080,7 +4080,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public void videoM3u8(OSSVideoM3U8Request request, RuntimeOptions runtime) throws Exception {
+    public byte[] videoM3u8(OSSVideoM3U8Request request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -4155,7 +4155,8 @@ public class Client {
                 java.util.Map<String, Object> respMap = null;
                 Object obj = null;
                 if (com.aliyun.teautil.Common.equalNumber(response_.statusCode, 200)) {
-                    return ;
+                    byte[] byt = com.aliyun.teautil.Common.readAsBytes(response_.body);
+                    return byt;
                 }
 
                 if (!com.aliyun.teautil.Common.empty(response_.headers.get("x-ca-error-message"))) {
