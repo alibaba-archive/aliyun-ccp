@@ -9,6 +9,18 @@ using Tea;
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
     public class UpdateUserRequest : TeaModel {
+        [NameInMap("header")]
+        [Validation(Required=false)]
+        public UpdateUserRequestHeader Header { get; set; }
+        public class UpdateUserRequestHeader : TeaModel {
+            [NameInMap("x-pds-trace-id")]
+            [Validation(Required=false)]
+            public string TraceId { get; set; }
+            [NameInMap("x-pds-device-id")]
+            [Validation(Required=false)]
+            public string DeviceId { get; set; }
+        };
+
         [NameInMap("avatar")]
         [Validation(Required=false)]
         public string Avatar { get; set; }

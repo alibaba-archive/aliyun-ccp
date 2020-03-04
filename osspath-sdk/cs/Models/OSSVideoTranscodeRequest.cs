@@ -8,11 +8,11 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
-    public class CCPDeleteFileRequest : TeaModel {
+    public class OSSVideoTranscodeRequest : TeaModel {
         [NameInMap("header")]
         [Validation(Required=false)]
-        public CCPDeleteFileRequestHeader Header { get; set; }
-        public class CCPDeleteFileRequestHeader : TeaModel {
+        public OSSVideoTranscodeRequestHeader Header { get; set; }
+        public class OSSVideoTranscodeRequestHeader : TeaModel {
             [NameInMap("x-pds-trace-id")]
             [Validation(Required=false)]
             public string TraceId { get; set; }
@@ -22,16 +22,16 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         };
 
         [NameInMap("drive_id")]
-        [Validation(Required=true, Pattern="[0-9]+")]
+        [Validation(Required=false, Pattern="[0-9]+")]
         public string DriveId { get; set; }
 
-        [NameInMap("file_id")]
-        [Validation(Required=true, MaxLength=50, Pattern="[a-z0-9.-_]{1,50}")]
-        public string FileId { get; set; }
+        [NameInMap("file_path")]
+        [Validation(Required=true, MaxLength=1000)]
+        public string FilePath { get; set; }
 
-        [NameInMap("permanently")]
-        [Validation(Required=false)]
-        public bool? Permanently { get; set; }
+        [NameInMap("share_id")]
+        [Validation(Required=false, Pattern="[0-9a-z-]+")]
+        public string ShareId { get; set; }
 
     }
 
