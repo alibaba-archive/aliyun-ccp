@@ -24,7 +24,7 @@ public class OSSListUploadedPartRequest extends TeaModel {
     public Long partNumberMarker;
 
     @NameInMap("share_id")
-    @Validation(pattern = "[0-9a-zA-z-]+")
+    @Validation(pattern = "[0-9a-zA-Z-]+")
     public String shareId;
 
     @NameInMap("upload_id")

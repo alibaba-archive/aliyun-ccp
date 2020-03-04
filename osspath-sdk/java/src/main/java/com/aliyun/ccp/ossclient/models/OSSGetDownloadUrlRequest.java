@@ -22,7 +22,7 @@ public class OSSGetDownloadUrlRequest extends TeaModel {
     public String filePath;
 
     @NameInMap("share_id")
-    @Validation(pattern = "[0-9a-z-]+")
+    @Validation(pattern = "[0-9a-zA-Z-]+")
     public String shareId;
 
     public static OSSGetDownloadUrlRequest build(java.util.Map<String, ?> map) throws Exception {

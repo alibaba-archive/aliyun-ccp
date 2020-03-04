@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class ClientTest {
@@ -34,6 +35,7 @@ public class ClientTest {
         RuntimeOptions runtime = new RuntimeOptions();
         ListDriveResponse result = client.listDrives(request, runtime);
         assertEquals(2, result.items.size());
+        assertTrue(result.items.get(0) instanceof BaseDriveResponse);
         assertEquals("", result.nextMarker);
     }
 
