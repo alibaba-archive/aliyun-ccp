@@ -9,6 +9,18 @@ using Tea;
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
     public class OSSGetDownloadUrlRequest : TeaModel {
+        [NameInMap("header")]
+        [Validation(Required=false)]
+        public OSSGetDownloadUrlRequestHeader Header { get; set; }
+        public class OSSGetDownloadUrlRequestHeader : TeaModel {
+            [NameInMap("x-pds-trace-id")]
+            [Validation(Required=false)]
+            public string TraceId { get; set; }
+            [NameInMap("x-pds-device-id")]
+            [Validation(Required=false)]
+            public string DeviceId { get; set; }
+        };
+
         [NameInMap("drive_id")]
         [Validation(Required=true, Pattern="[0-9]+")]
         public string DriveId { get; set; }

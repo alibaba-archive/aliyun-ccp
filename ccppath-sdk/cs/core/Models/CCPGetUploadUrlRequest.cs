@@ -9,6 +9,18 @@ using Tea;
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
     public class CCPGetUploadUrlRequest : TeaModel {
+        [NameInMap("header")]
+        [Validation(Required=false)]
+        public CCPGetUploadUrlRequestHeader Header { get; set; }
+        public class CCPGetUploadUrlRequestHeader : TeaModel {
+            [NameInMap("x-pds-trace-id")]
+            [Validation(Required=false)]
+            public string TraceId { get; set; }
+            [NameInMap("x-pds-device-id")]
+            [Validation(Required=false)]
+            public string DeviceId { get; set; }
+        };
+
         [NameInMap("content_md5")]
         [Validation(Required=false, MaxLength=32)]
         public string ContentMd5 { get; set; }
