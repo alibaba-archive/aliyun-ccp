@@ -130,12 +130,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/cancel_link");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -153,7 +157,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -269,12 +273,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/cancel_link");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -292,7 +300,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -408,12 +416,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/confirm_link");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -431,7 +443,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -547,12 +559,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/confirm_link");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -570,7 +586,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -686,12 +702,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/default/change_password");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -709,7 +729,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -816,12 +836,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/default/change_password");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -839,7 +863,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -946,12 +970,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/default/set_password");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -969,7 +997,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1076,12 +1104,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/default/set_password");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -1099,7 +1131,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -1206,12 +1238,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/get_access_token_by_link_info");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -1229,7 +1265,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1345,12 +1381,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/get_access_token_by_link_info");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -1368,7 +1408,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -1484,12 +1524,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/get_captcha");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -1507,7 +1551,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1623,12 +1667,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/get_captcha");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -1646,7 +1694,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -1762,12 +1810,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/get_link_info");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -1785,7 +1837,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -1901,12 +1953,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/get_link_info");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -1924,7 +1980,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -2040,12 +2096,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/get_link_info_by_user_id");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -2063,7 +2123,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2179,12 +2239,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/get_link_info_by_user_id");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -2202,7 +2266,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -2318,12 +2382,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/link");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -2341,7 +2409,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2457,12 +2525,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/link");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -2480,7 +2552,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -2596,12 +2668,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/mobile/check_exist");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -2619,7 +2695,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -2735,12 +2811,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/mobile/check_exist");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -2758,7 +2838,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -2874,12 +2954,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/mobile/login");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -2897,7 +2981,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3013,12 +3097,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/mobile/login");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -3036,7 +3124,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -3152,12 +3240,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/mobile/register");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -3175,7 +3267,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3291,12 +3383,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/mobile/register");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -3314,7 +3410,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -3430,12 +3526,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/mobile/send_sms_code");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -3453,7 +3553,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3569,12 +3669,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/mobile/send_sms_code");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -3592,7 +3696,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -3708,12 +3812,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/token");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -3731,7 +3839,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -3847,12 +3955,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/account/token");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".auth.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -3870,7 +3982,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -3986,12 +4098,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/async_task/get");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -4009,7 +4125,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -4125,12 +4241,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/async_task/get");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -4148,7 +4268,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -4264,12 +4384,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/batch");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -4287,7 +4411,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -4403,12 +4527,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/batch");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -4426,7 +4554,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -4542,12 +4670,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/drive/create");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -4565,7 +4697,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -4681,12 +4813,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/drive/create");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -4704,7 +4840,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -4820,12 +4956,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/drive/delete");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -4843,7 +4983,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -4950,12 +5090,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/drive/delete");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -4973,7 +5117,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -5080,12 +5224,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/drive/get");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -5103,7 +5251,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -5219,12 +5367,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/drive/get");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -5242,7 +5394,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -5358,12 +5510,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/drive/get_default_drive");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -5381,7 +5537,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -5497,12 +5653,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/drive/get_default_drive");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -5520,7 +5680,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -5636,12 +5796,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/drive/list");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -5659,7 +5823,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -5775,12 +5939,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/drive/list");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -5798,7 +5966,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -5914,12 +6082,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/drive/list_my_drives");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -5937,7 +6109,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -6053,12 +6225,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/drive/list_my_drives");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -6076,7 +6252,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -6192,12 +6368,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/drive/update");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -6215,7 +6395,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -6331,12 +6511,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/drive/update");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -6354,7 +6538,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -6470,12 +6654,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/complete");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -6493,7 +6681,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -6609,12 +6797,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/complete");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -6632,7 +6824,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -6748,12 +6940,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/copy");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -6771,7 +6967,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -6900,12 +7096,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/copy");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -6923,7 +7123,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -7052,12 +7252,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/create");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -7075,7 +7279,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -7191,12 +7395,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/create");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -7214,7 +7422,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -7330,12 +7538,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/delete");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -7353,7 +7565,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -7473,12 +7685,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/delete");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -7496,7 +7712,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -7616,12 +7832,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "GET";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/download");
-                    request_.Query = AlibabaCloud.TeaUtil.Common.StringifyMapValue(request.ToMap());
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                    };
+                    request_.Query = AlibabaCloud.TeaUtil.Common.StringifyMapValue(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header"));
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -7741,12 +7961,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "GET";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/download");
-                    request_.Query = AlibabaCloud.TeaUtil.Common.StringifyMapValue(request.ToMap());
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                    };
+                    request_.Query = AlibabaCloud.TeaUtil.Common.StringifyMapValue(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header"));
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -7866,12 +8090,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/get");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -7889,7 +8117,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -8005,12 +8233,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/get");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -8028,7 +8260,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -8144,12 +8376,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/get_download_url");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -8167,7 +8403,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -8283,12 +8519,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/get_download_url");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -8306,7 +8546,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -8422,12 +8662,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/get_upload_url");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -8445,7 +8689,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -8561,12 +8805,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/get_upload_url");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -8584,7 +8832,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -8700,12 +8948,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/list");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -8723,7 +8975,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -8839,12 +9091,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/list");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -8862,7 +9118,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -8978,12 +9234,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/list_uploaded_parts");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -9001,7 +9261,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -9117,12 +9377,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/list_uploaded_parts");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -9140,7 +9404,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -9256,12 +9520,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/move");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -9279,7 +9547,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -9395,12 +9663,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/move");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -9418,7 +9690,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -9534,12 +9806,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/search");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -9557,7 +9833,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -9673,12 +9949,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/search");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -9696,7 +9976,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -9812,12 +10092,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/update");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -9835,7 +10119,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -9951,12 +10235,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/file/update");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -9974,7 +10262,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -10090,12 +10378,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/user/create");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -10113,7 +10405,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -10229,12 +10521,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/user/create");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -10252,7 +10548,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -10368,12 +10664,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/user/delete");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -10391,7 +10691,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -10498,12 +10798,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/user/delete");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -10521,7 +10825,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -10628,12 +10932,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/user/get");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -10651,7 +10959,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -10767,12 +11075,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/user/get");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -10790,7 +11102,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -10906,12 +11218,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/user/list");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -10929,7 +11245,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -11045,12 +11361,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/user/list");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -11068,7 +11388,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -11184,12 +11504,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/user/search");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -11207,7 +11531,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -11323,12 +11647,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/user/search");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -11346,7 +11674,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 
@@ -11462,12 +11790,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/user/update");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -11485,7 +11817,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = TeaCore.DoAction(request_, runtime_);
 
@@ -11601,12 +11933,16 @@ namespace Aliyun.SDK.CCP.CCPClient
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
                     request_.Pathname = GetPathname(_nickname, "/v2/user/update");
-                    request_.Headers = new Dictionary<string, string>
-                    {
-                        {"user-agent", GetUserAgent()},
-                        {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
-                        {"content-type", "application/json; charset=utf-8"},
-                    };
+                    request_.Headers = AlibabaCloud.TeaUtil.Common.StringifyMapValue(TeaConverter.merge<object>
+                    (
+                        new Dictionary<string, object>()
+                        {
+                            {"user-agent", GetUserAgent()},
+                            {"host", AlibabaCloud.TeaUtil.Common.DefaultString(_endpoint, _domainId + ".api.alicloudccp.com")},
+                            {"content-type", "application/json; charset=utf-8"},
+                        },
+                        request.Header
+                    ));
                     if (!AlibabaCloud.TeaUtil.Common.Empty(accessToken))
                     {
                         request_.Headers["authorization"] = "Bearer " + accessToken;
@@ -11624,7 +11960,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         string stringToSign = AlibabaCloud.ROAUtil.Common.GetStringToSign(request_);
                         request_.Headers["authorization"] = "acs " + accesskeyId + ":" + AlibabaCloud.ROAUtil.Common.GetSignature(stringToSign, accessKeySecret);
                     }
-                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(request.ToMap()));
+                    request_.Body = TeaCore.BytesReadable(AlibabaCloud.TeaUtil.Common.ToJSONString(AlibabaCloud.ROAUtil.Common.DeleteSpecialKey(request.ToMap(), "header")));
                     _lastRequest = request_;
                     TeaResponse response_ = await TeaCore.DoActionAsync(request_, runtime_);
 

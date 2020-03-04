@@ -9,6 +9,18 @@ using Tea;
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
     public class ListShareRequest : TeaModel {
+        [NameInMap("header")]
+        [Validation(Required=false)]
+        public ListShareRequestHeader Header { get; set; }
+        public class ListShareRequestHeader : TeaModel {
+            [NameInMap("x-pds-trace-id")]
+            [Validation(Required=false)]
+            public string TraceId { get; set; }
+            [NameInMap("x-pds-device-id")]
+            [Validation(Required=false)]
+            public string DeviceId { get; set; }
+        };
+
         [NameInMap("creator")]
         [Validation(Required=true)]
         public string Creator { get; set; }

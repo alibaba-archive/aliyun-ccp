@@ -9,6 +9,18 @@ using Tea;
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
     public class CCPUpdateFileMetaRequest : TeaModel {
+        [NameInMap("header")]
+        [Validation(Required=false)]
+        public CCPUpdateFileMetaRequestHeader Header { get; set; }
+        public class CCPUpdateFileMetaRequestHeader : TeaModel {
+            [NameInMap("x-pds-trace-id")]
+            [Validation(Required=false)]
+            public string TraceId { get; set; }
+            [NameInMap("x-pds-device-id")]
+            [Validation(Required=false)]
+            public string DeviceId { get; set; }
+        };
+
         [NameInMap("custom_index_key")]
         [Validation(Required=false)]
         public string CustomIndexKey { get; set; }
