@@ -11,7 +11,7 @@ public class BaseGetUploadUrlRequest extends TeaModel {
     public String contentMd5;
 
     @NameInMap("drive_id")
-    @Validation(required = true, pattern = "[0-9]+")
+    @Validation(pattern = "[0-9]+")
     public String driveId;
 
     @NameInMap("part_info_list")

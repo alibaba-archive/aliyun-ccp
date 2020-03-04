@@ -14,9 +14,6 @@ public class OSSGetSecureUrlRequest extends TeaModel {
     @NameInMap("expire_sec")
     public Long expireSec;
 
-    @NameInMap("file_name")
-    public String fileName;
-
     @NameInMap("file_path")
     @Validation(required = true)
     public String filePath;
@@ -25,7 +22,7 @@ public class OSSGetSecureUrlRequest extends TeaModel {
     public String secureIp;
 
     @NameInMap("share_id")
-    @Validation(pattern = "[0-9a-z-]+")
+    @Validation(pattern = "[0-9a-zA-Z-]+")
     public String shareId;
 
     public static OSSGetSecureUrlRequest build(java.util.Map<String, ?> map) throws Exception {

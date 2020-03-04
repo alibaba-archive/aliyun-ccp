@@ -10,9 +10,6 @@ public class OSSGetSecureUrlResponse extends TeaModel {
     @NameInMap("expiration")
     public String expiration;
 
-    @NameInMap("method")
-    public String method;
-
     @NameInMap("url")
     public String url;
 

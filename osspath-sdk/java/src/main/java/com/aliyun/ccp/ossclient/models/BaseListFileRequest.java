@@ -8,7 +8,7 @@ public class BaseListFileRequest extends TeaModel {
     public BaseListFileRequestHeader header;
 
     @NameInMap("drive_id")
-    @Validation(required = true, pattern = "[0-9]+")
+    @Validation(pattern = "[0-9]+")
     public String driveId;
 
     @NameInMap("image_thumbnail_process")
