@@ -1,3 +1,6 @@
+2020-03-05 Version: v2.0.0
+- Update OSSPath and CCPPath.
+
 2020-03-04 Version: v1.2.1
 - Update OSSPath.
 

@@ -4,7 +4,7 @@
 	"version": "1.0.1",
 	"main": "./ccp.tea",
 	"releases": {
-		"go": "github.com/aliyun/aliyun-ccp/ccppath-sdk/go/client:v1.2.0",
+		"go": "github.com/aliyun/aliyun-ccp/ccppath-sdk/go/client:v2.0.0",
 		"ts": "@alicloud/ccppath-sdk:1.2.0",
 		"java": "com.aliyun:ccp-client:2.0.1",
 		"csharp": "Aliyun.SDK.CCP.Client:0.1.2"
