@@ -2740,7 +2740,7 @@ model CCPBatchRequestModel {
   body: CCPBatchRequest(description='body', name='body'),
 }
 
-model OperationModel {
+model BatchOperationModel {
   headers?: map[string]string(description='headers', name='headers'),
   body: CCPBatchResponse(description='body', name='body'),
 }
@@ -2755,7 +2755,7 @@ model OperationModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api operation(request: CCPBatchRequestModel, runtime: RuntimeOptions): OperationModel  {
+api batchOperation(request: CCPBatchRequestModel, runtime: RuntimeOptions): BatchOperationModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
