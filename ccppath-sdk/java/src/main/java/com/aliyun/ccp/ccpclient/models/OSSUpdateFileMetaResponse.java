@@ -3,10 +3,10 @@ package com.aliyun.ccp.ccpclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 更新文件元数据 response
+ */
 public class OSSUpdateFileMetaResponse extends TeaModel {
-    @NameInMap("requestId")
-    public String requestId;
-
     @NameInMap("content_hash")
     public String contentHash;
 

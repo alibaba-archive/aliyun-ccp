@@ -3,6 +3,9 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 
+ */
 public class CorsRule extends TeaModel {
     @NameInMap("allowed_header")
     public java.util.List<String> allowedHeader;

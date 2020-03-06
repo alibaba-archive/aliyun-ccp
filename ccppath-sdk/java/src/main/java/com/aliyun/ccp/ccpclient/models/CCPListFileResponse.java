@@ -3,10 +3,10 @@ package com.aliyun.ccp.ccpclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * List file response
+ */
 public class CCPListFileResponse extends TeaModel {
-    @NameInMap("requestId")
-    public String requestId;
-
     @NameInMap("items")
     public java.util.List<BaseCCPFileResponse> items;
 

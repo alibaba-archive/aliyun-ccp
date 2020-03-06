@@ -3,10 +3,10 @@ package com.aliyun.ccp.ccpclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * list drive response
+ */
 public class ListDriveResponse extends TeaModel {
-    @NameInMap("requestId")
-    public String requestId;
-
     @NameInMap("items")
     public java.util.List<BaseDriveResponse> items;
 

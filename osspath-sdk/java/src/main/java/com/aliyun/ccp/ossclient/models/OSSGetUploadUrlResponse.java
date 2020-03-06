@@ -3,10 +3,10 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * Get UploadUrl Response
+ */
 public class OSSGetUploadUrlResponse extends TeaModel {
-    @NameInMap("requestId")
-    public String requestId;
-
     @NameInMap("create_at")
     public String createAt;
 

@@ -3,10 +3,10 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * Base file response
+ */
 public class BaseOSSFileResponse extends TeaModel {
-    @NameInMap("requestId")
-    public String requestId;
-
     @NameInMap("content_hash")
     public String contentHash;
 

@@ -3,10 +3,10 @@ package com.aliyun.ccp.ccpclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * List share response
+ */
 public class ListShareResponse extends TeaModel {
-    @NameInMap("requestId")
-    public String requestId;
-
     @NameInMap("items")
     public java.util.List<BaseShareResponse> items;
 

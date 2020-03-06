@@ -3,10 +3,10 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 删除文件请求
+ */
 public class CCPDeleteFileRequest extends TeaModel {
-    @NameInMap("header")
-    public CCPDeleteFileRequestHeader header;
-
     @NameInMap("drive_id")
     @Validation(required = true, pattern = "[0-9]+")
     public String driveId;
@@ -21,20 +21,6 @@ public class CCPDeleteFileRequest extends TeaModel {
     public static CCPDeleteFileRequest build(java.util.Map<String, ?> map) throws Exception {
         CCPDeleteFileRequest self = new CCPDeleteFileRequest();
         return TeaModel.build(map, self);
-    }
-
-    public static class CCPDeleteFileRequestHeader extends TeaModel {
-        @NameInMap("x-pds-trace-id")
-        public String traceId;
-
-        @NameInMap("x-pds-device-id")
-        public String deviceId;
-
-        public static CCPDeleteFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
-            CCPDeleteFileRequestHeader self = new CCPDeleteFileRequestHeader();
-            return TeaModel.build(map, self);
-        }
-
     }
 
 }

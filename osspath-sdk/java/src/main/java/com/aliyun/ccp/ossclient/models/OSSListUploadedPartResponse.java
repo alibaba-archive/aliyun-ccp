@@ -3,10 +3,10 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 获取签名 response
+ */
 public class OSSListUploadedPartResponse extends TeaModel {
-    @NameInMap("requestId")
-    public String requestId;
-
     @NameInMap("file_path")
     public String filePath;
 

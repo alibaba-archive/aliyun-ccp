@@ -3,10 +3,10 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 获取文件上传URL
+ */
 public class CCPGetUploadUrlRequest extends TeaModel {
-    @NameInMap("header")
-    public CCPGetUploadUrlRequestHeader header;
-
     @NameInMap("content_md5")
     public String contentMd5;
 
@@ -27,20 +27,6 @@ public class CCPGetUploadUrlRequest extends TeaModel {
     public static CCPGetUploadUrlRequest build(java.util.Map<String, ?> map) throws Exception {
         CCPGetUploadUrlRequest self = new CCPGetUploadUrlRequest();
         return TeaModel.build(map, self);
-    }
-
-    public static class CCPGetUploadUrlRequestHeader extends TeaModel {
-        @NameInMap("x-pds-trace-id")
-        public String traceId;
-
-        @NameInMap("x-pds-device-id")
-        public String deviceId;
-
-        public static CCPGetUploadUrlRequestHeader build(java.util.Map<String, ?> map) throws Exception {
-            CCPGetUploadUrlRequestHeader self = new CCPGetUploadUrlRequestHeader();
-            return TeaModel.build(map, self);
-        }
-
     }
 
 }

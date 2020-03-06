@@ -3,10 +3,10 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * Create file response
+ */
 public class CCPCreateFileResponse extends TeaModel {
-    @NameInMap("requestId")
-    public String requestId;
-
     @NameInMap("domain_id")
     @Validation(pattern = "[a-z0-9]{1, 50}")
     public String domainId;

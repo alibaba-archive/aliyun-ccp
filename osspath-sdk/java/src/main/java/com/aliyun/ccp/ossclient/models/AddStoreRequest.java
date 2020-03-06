@@ -3,10 +3,10 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 
+ */
 public class AddStoreRequest extends TeaModel {
-    @NameInMap("header")
-    public AddStoreRequestHeader header;
-
     @NameInMap("base_path")
     public String basePath;
 
@@ -34,20 +34,6 @@ public class AddStoreRequest extends TeaModel {
     public static AddStoreRequest build(java.util.Map<String, ?> map) throws Exception {
         AddStoreRequest self = new AddStoreRequest();
         return TeaModel.build(map, self);
-    }
-
-    public static class AddStoreRequestHeader extends TeaModel {
-        @NameInMap("x-pds-trace-id")
-        public String traceId;
-
-        @NameInMap("x-pds-device-id")
-        public String deviceId;
-
-        public static AddStoreRequestHeader build(java.util.Map<String, ?> map) throws Exception {
-            AddStoreRequestHeader self = new AddStoreRequestHeader();
-            return TeaModel.build(map, self);
-        }
-
     }
 
 }

@@ -3,10 +3,10 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 获取签名 response
+ */
 public class CCPListUploadedPartResponse extends TeaModel {
-    @NameInMap("requestId")
-    public String requestId;
-
     @NameInMap("file_id")
     @Validation(pattern = "[a-z0-9]{1, 50}")
     public String fileId;

@@ -3,10 +3,10 @@ package com.aliyun.ccp.ccpclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 更新文件元数据
+ */
 public class UpdateFileMetaRequest extends TeaModel {
-    @NameInMap("header")
-    public UpdateFileMetaRequestHeader header;
-
     @NameInMap("description")
     public String description;
 
@@ -40,34 +40,6 @@ public class UpdateFileMetaRequest extends TeaModel {
     public static UpdateFileMetaRequest build(java.util.Map<String, ?> map) throws Exception {
         UpdateFileMetaRequest self = new UpdateFileMetaRequest();
         return TeaModel.build(map, self);
-    }
-
-    public static class CCPUpdateFileMetaRequestHeader extends TeaModel {
-        @NameInMap("x-pds-trace-id")
-        public String traceId;
-
-        @NameInMap("x-pds-device-id")
-        public String deviceId;
-
-        public static CCPUpdateFileMetaRequestHeader build(java.util.Map<String, ?> map) throws Exception {
-            CCPUpdateFileMetaRequestHeader self = new CCPUpdateFileMetaRequestHeader();
-            return TeaModel.build(map, self);
-        }
-
-    }
-
-    public static class UpdateFileMetaRequestHeader extends TeaModel {
-        @NameInMap("x-pds-trace-id")
-        public String traceId;
-
-        @NameInMap("x-pds-device-id")
-        public String deviceId;
-
-        public static UpdateFileMetaRequestHeader build(java.util.Map<String, ?> map) throws Exception {
-            UpdateFileMetaRequestHeader self = new UpdateFileMetaRequestHeader();
-            return TeaModel.build(map, self);
-        }
-
     }
 
 }

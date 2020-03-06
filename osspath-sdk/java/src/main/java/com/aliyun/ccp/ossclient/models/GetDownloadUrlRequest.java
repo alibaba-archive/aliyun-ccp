@@ -3,10 +3,10 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 获取文件下载地址的请求body
+ */
 public class GetDownloadUrlRequest extends TeaModel {
-    @NameInMap("header")
-    public GetDownloadUrlRequestHeader header;
-
     @NameInMap("drive_id")
     @Validation(required = true, pattern = "[0-9]+")
     public String driveId;
@@ -31,48 +31,6 @@ public class GetDownloadUrlRequest extends TeaModel {
     public static GetDownloadUrlRequest build(java.util.Map<String, ?> map) throws Exception {
         GetDownloadUrlRequest self = new GetDownloadUrlRequest();
         return TeaModel.build(map, self);
-    }
-
-    public static class CCPGetDownloadUrlRequestHeader extends TeaModel {
-        @NameInMap("x-pds-trace-id")
-        public String traceId;
-
-        @NameInMap("x-pds-device-id")
-        public String deviceId;
-
-        public static CCPGetDownloadUrlRequestHeader build(java.util.Map<String, ?> map) throws Exception {
-            CCPGetDownloadUrlRequestHeader self = new CCPGetDownloadUrlRequestHeader();
-            return TeaModel.build(map, self);
-        }
-
-    }
-
-    public static class GetDownloadUrlRequestHeader extends TeaModel {
-        @NameInMap("x-pds-trace-id")
-        public String traceId;
-
-        @NameInMap("x-pds-device-id")
-        public String deviceId;
-
-        public static GetDownloadUrlRequestHeader build(java.util.Map<String, ?> map) throws Exception {
-            GetDownloadUrlRequestHeader self = new GetDownloadUrlRequestHeader();
-            return TeaModel.build(map, self);
-        }
-
-    }
-
-    public static class OSSGetDownloadUrlRequestHeader extends TeaModel {
-        @NameInMap("x-pds-trace-id")
-        public String traceId;
-
-        @NameInMap("x-pds-device-id")
-        public String deviceId;
-
-        public static OSSGetDownloadUrlRequestHeader build(java.util.Map<String, ?> map) throws Exception {
-            OSSGetDownloadUrlRequestHeader self = new OSSGetDownloadUrlRequestHeader();
-            return TeaModel.build(map, self);
-        }
-
     }
 
 }

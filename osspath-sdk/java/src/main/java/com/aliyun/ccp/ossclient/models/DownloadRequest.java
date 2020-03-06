@@ -3,10 +3,10 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 下载文件请求body
+ */
 public class DownloadRequest extends TeaModel {
-    @NameInMap("header")
-    public DownloadRequestHeader header;
-
     @NameInMap("DriveID")
     @Validation(required = true, pattern = "[0-9]+")
     public String DriveID;
@@ -24,20 +24,6 @@ public class DownloadRequest extends TeaModel {
     public static DownloadRequest build(java.util.Map<String, ?> map) throws Exception {
         DownloadRequest self = new DownloadRequest();
         return TeaModel.build(map, self);
-    }
-
-    public static class DownloadRequestHeader extends TeaModel {
-        @NameInMap("x-pds-trace-id")
-        public String traceId;
-
-        @NameInMap("x-pds-device-id")
-        public String deviceId;
-
-        public static DownloadRequestHeader build(java.util.Map<String, ?> map) throws Exception {
-            DownloadRequestHeader self = new DownloadRequestHeader();
-            return TeaModel.build(map, self);
-        }
-
     }
 
 }

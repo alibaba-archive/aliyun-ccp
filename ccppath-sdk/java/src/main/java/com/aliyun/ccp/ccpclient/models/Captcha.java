@@ -3,6 +3,9 @@ package com.aliyun.ccp.ccpclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 
+ */
 public class Captcha extends TeaModel {
     @NameInMap("captcha")
     @Validation(required = true)

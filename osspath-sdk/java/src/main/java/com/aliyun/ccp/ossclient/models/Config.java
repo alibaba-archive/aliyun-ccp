@@ -14,8 +14,8 @@ public class Config extends TeaModel {
     @NameInMap("protocol")
     public String protocol;
 
-    @NameInMap("credentialType")
-    public String credentialType;
+    @NameInMap("type")
+    public String type;
 
     @NameInMap("securityToken")
     public String securityToken;

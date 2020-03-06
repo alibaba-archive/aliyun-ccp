@@ -3,10 +3,10 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 批量删除文件 response
+ */
 public class CCPDeleteFilesResponse extends TeaModel {
-    @NameInMap("requestId")
-    public String requestId;
-
     @NameInMap("deleted_file_id_list")
     public java.util.List<String> deletedFileIdList;
 

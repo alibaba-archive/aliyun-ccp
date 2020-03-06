@@ -3,6 +3,9 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 
+ */
 public class StoreFile extends TeaModel {
     @NameInMap("domain_id")
     public String domainId;

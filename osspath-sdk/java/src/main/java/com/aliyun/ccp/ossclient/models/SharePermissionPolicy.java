@@ -3,6 +3,9 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 
+ */
 public class SharePermissionPolicy extends TeaModel {
     @NameInMap("file_path")
     public String filePath;

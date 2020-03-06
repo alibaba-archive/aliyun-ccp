@@ -3,10 +3,10 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * Get AsyncTask Response
+ */
 public class CCPGetAsyncTaskResponse extends TeaModel {
-    @NameInMap("requestId")
-    public String requestId;
-
     @NameInMap("async_task_id")
     public String asyncTaskId;
 
