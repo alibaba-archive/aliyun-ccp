@@ -8,25 +8,16 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * 获取文件上传URL
+     */
     public class BaseGetUploadUrlRequest : TeaModel {
-        [NameInMap("header")]
-        [Validation(Required=false)]
-        public BaseGetUploadUrlRequestHeader Header { get; set; }
-        public class BaseGetUploadUrlRequestHeader : TeaModel {
-            [NameInMap("x-pds-trace-id")]
-            [Validation(Required=false)]
-            public string TraceId { get; set; }
-            [NameInMap("x-pds-device-id")]
-            [Validation(Required=false)]
-            public string DeviceId { get; set; }
-        };
-
         [NameInMap("content_md5")]
         [Validation(Required=false, MaxLength=32)]
         public string ContentMd5 { get; set; }
 
         [NameInMap("drive_id")]
-        [Validation(Required=true, Pattern="[0-9]+")]
+        [Validation(Required=false, Pattern="[0-9]+")]
         public string DriveId { get; set; }
 
         [NameInMap("part_info_list")]

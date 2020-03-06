@@ -8,21 +8,12 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * 文件移动请求
+     */
     public class OSSMoveFileRequest : TeaModel {
-        [NameInMap("header")]
-        [Validation(Required=false)]
-        public OSSMoveFileRequestHeader Header { get; set; }
-        public class OSSMoveFileRequestHeader : TeaModel {
-            [NameInMap("x-pds-trace-id")]
-            [Validation(Required=false)]
-            public string TraceId { get; set; }
-            [NameInMap("x-pds-device-id")]
-            [Validation(Required=false)]
-            public string DeviceId { get; set; }
-        };
-
         [NameInMap("drive_id")]
-        [Validation(Required=true, Pattern="[0-9]+")]
+        [Validation(Required=false, Pattern="[0-9]+")]
         public string DriveId { get; set; }
 
         [NameInMap("file_path")]
@@ -38,7 +29,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         public bool? Overwrite { get; set; }
 
         [NameInMap("share_id")]
-        [Validation(Required=false, Pattern="[0-9a-zA-z-]+")]
+        [Validation(Required=false, Pattern="[0-9a-zA-Z-]+")]
         public string ShareId { get; set; }
 
         [NameInMap("to_parent_file_path")]

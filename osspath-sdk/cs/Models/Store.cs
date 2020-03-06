@@ -8,6 +8,9 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * 
+     */
     public class Store : TeaModel {
         [NameInMap("accelerate_endpoint")]
         [Validation(Required=false)]

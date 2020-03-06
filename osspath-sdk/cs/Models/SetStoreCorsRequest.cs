@@ -8,19 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * 
+     */
     public class SetStoreCorsRequest : TeaModel {
-        [NameInMap("header")]
-        [Validation(Required=false)]
-        public SetStoreCorsRequestHeader Header { get; set; }
-        public class SetStoreCorsRequestHeader : TeaModel {
-            [NameInMap("x-pds-trace-id")]
-            [Validation(Required=false)]
-            public string TraceId { get; set; }
-            [NameInMap("x-pds-device-id")]
-            [Validation(Required=false)]
-            public string DeviceId { get; set; }
-        };
-
         [NameInMap("cors_rule")]
         [Validation(Required=true)]
         public CorsRule CorsRule { get; set; }

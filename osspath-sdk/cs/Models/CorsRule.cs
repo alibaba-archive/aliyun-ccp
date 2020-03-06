@@ -8,6 +8,9 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * 
+     */
     public class CorsRule : TeaModel {
         [NameInMap("allowed_header")]
         [Validation(Required=false)]

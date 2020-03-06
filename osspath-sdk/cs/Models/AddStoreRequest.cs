@@ -8,19 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * 
+     */
     public class AddStoreRequest : TeaModel {
-        [NameInMap("header")]
-        [Validation(Required=false)]
-        public AddStoreRequestHeader Header { get; set; }
-        public class AddStoreRequestHeader : TeaModel {
-            [NameInMap("x-pds-trace-id")]
-            [Validation(Required=false)]
-            public string TraceId { get; set; }
-            [NameInMap("x-pds-device-id")]
-            [Validation(Required=false)]
-            public string DeviceId { get; set; }
-        };
-
         [NameInMap("base_path")]
         [Validation(Required=false)]
         public string BasePath { get; set; }

@@ -8,6 +8,9 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * 
+     */
     public class SharePermissionPolicy : TeaModel {
         [NameInMap("file_path")]
         [Validation(Required=false)]

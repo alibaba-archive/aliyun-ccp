@@ -8,19 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
+    /**
+     * create file request
+     */
     public class BaseCreateFileRequest : TeaModel {
-        [NameInMap("header")]
-        [Validation(Required=false)]
-        public BaseCreateFileRequestHeader Header { get; set; }
-        public class BaseCreateFileRequestHeader : TeaModel {
-            [NameInMap("x-pds-trace-id")]
-            [Validation(Required=false)]
-            public string TraceId { get; set; }
-            [NameInMap("x-pds-device-id")]
-            [Validation(Required=false)]
-            public string DeviceId { get; set; }
-        };
-
         [NameInMap("content_md5")]
         [Validation(Required=true)]
         public string ContentMd5 { get; set; }

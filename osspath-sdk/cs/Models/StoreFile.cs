@@ -8,6 +8,9 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * 
+     */
     public class StoreFile : TeaModel {
         [NameInMap("domain_id")]
         [Validation(Required=false)]

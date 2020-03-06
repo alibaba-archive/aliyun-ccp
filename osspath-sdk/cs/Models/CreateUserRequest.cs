@@ -8,19 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * Create user request
+     */
     public class CreateUserRequest : TeaModel {
-        [NameInMap("header")]
-        [Validation(Required=false)]
-        public CreateUserRequestHeader Header { get; set; }
-        public class CreateUserRequestHeader : TeaModel {
-            [NameInMap("x-pds-trace-id")]
-            [Validation(Required=false)]
-            public string TraceId { get; set; }
-            [NameInMap("x-pds-device-id")]
-            [Validation(Required=false)]
-            public string DeviceId { get; set; }
-        };
-
         [NameInMap("avatar")]
         [Validation(Required=false)]
         public string Avatar { get; set; }

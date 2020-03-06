@@ -8,6 +8,9 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
+    /**
+     * 
+     */
     public class AppAccessStrategy : TeaModel {
         [NameInMap("effect")]
         [Validation(Required=false)]

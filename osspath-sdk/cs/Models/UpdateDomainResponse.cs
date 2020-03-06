@@ -8,11 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * create domain response
+     */
     public class UpdateDomainResponse : TeaModel {
-        [NameInMap("requestId")]
-        [Validation(Required=false)]
-        public string RequestId { get; set; }
-
         [NameInMap("auth_alipay_app_id")]
         [Validation(Required=false)]
         public string AuthAlipayAppId { get; set; }

@@ -21,9 +21,9 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         [Validation(Required=false)]
         public string Protocol { get; set; }
 
-        [NameInMap("credentialType")]
+        [NameInMap("type")]
         [Validation(Required=false)]
-        public string CredentialType { get; set; }
+        public string Type { get; set; }
 
         [NameInMap("securityToken")]
         [Validation(Required=false)]

@@ -8,19 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * update share request
+     */
     public class UpdateShareRequest : TeaModel {
-        [NameInMap("header")]
-        [Validation(Required=false)]
-        public UpdateShareRequestHeader Header { get; set; }
-        public class UpdateShareRequestHeader : TeaModel {
-            [NameInMap("x-pds-trace-id")]
-            [Validation(Required=false)]
-            public string TraceId { get; set; }
-            [NameInMap("x-pds-device-id")]
-            [Validation(Required=false)]
-            public string DeviceId { get; set; }
-        };
-
         [NameInMap("description")]
         [Validation(Required=false, MaxLength=1024)]
         public string Description { get; set; }

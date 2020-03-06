@@ -8,11 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
+    /**
+     * 文件移动 response
+     */
     public class OSSMoveFileResponse : TeaModel {
-        [NameInMap("requestId")]
-        [Validation(Required=false)]
-        public string RequestId { get; set; }
-
         [NameInMap("async_task_id")]
         [Validation(Required=false)]
         public string AsyncTaskId { get; set; }

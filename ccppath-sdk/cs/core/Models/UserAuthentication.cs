@@ -8,6 +8,9 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
+    /**
+     * 
+     */
     public class UserAuthentication : TeaModel {
         [NameInMap("AuthenticationType")]
         [Validation(Required=true)]
