@@ -8,7 +8,7 @@ import com.aliyun.tea.*;
  */
 public class BaseListFileRequest extends TeaModel {
     @NameInMap("drive_id")
-    @Validation(required = true, pattern = "[0-9]+")
+    @Validation(pattern = "[0-9]+")
     public String driveId;
 
     @NameInMap("image_thumbnail_process")
@@ -23,6 +23,9 @@ public class BaseListFileRequest extends TeaModel {
 
     @NameInMap("marker")
     public String marker;
+
+    @NameInMap("video_thumbnail_process")
+    public String videoThumbnailProcess;
 
     public static BaseListFileRequest build(java.util.Map<String, ?> map) throws Exception {
         BaseListFileRequest self = new BaseListFileRequest();

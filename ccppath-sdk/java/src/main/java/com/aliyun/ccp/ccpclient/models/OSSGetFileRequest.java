@@ -8,11 +8,11 @@ import com.aliyun.tea.*;
  */
 public class OSSGetFileRequest extends TeaModel {
     @NameInMap("drive_id")
-    @Validation(required = true, pattern = "[0-9]+")
+    @Validation(pattern = "[0-9]+")
     public String driveId;
 
     @NameInMap("file_path")
-    @Validation(required = true, pattern = "[a-z0-9.-_]{1,50}")
+    @Validation(required = true)
     public String filePath;
 
     @NameInMap("image_thumbnail_process")
@@ -24,6 +24,9 @@ public class OSSGetFileRequest extends TeaModel {
     @NameInMap("share_id")
     @Validation(pattern = "[0-9a-zA-z-]+")
     public String shareId;
+
+    @NameInMap("url_expire_sec")
+    public Long urlExpireSec;
 
     public static OSSGetFileRequest build(java.util.Map<String, ?> map) throws Exception {
         OSSGetFileRequest self = new OSSGetFileRequest();

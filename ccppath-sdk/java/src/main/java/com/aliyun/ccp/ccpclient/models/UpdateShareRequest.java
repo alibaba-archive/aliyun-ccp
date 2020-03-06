@@ -23,6 +23,9 @@ public class UpdateShareRequest extends TeaModel {
     @NameInMap("share_name")
     public String shareName;
 
+    @NameInMap("share_policy")
+    public java.util.List<SharePermissionPolicy> sharePolicy;
+
     @NameInMap("status")
     public String status;
 

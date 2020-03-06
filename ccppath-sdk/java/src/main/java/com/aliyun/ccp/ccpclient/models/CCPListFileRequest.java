@@ -24,6 +24,9 @@ public class CCPListFileRequest extends TeaModel {
     @NameInMap("marker")
     public String marker;
 
+    @NameInMap("video_thumbnail_process")
+    public String videoThumbnailProcess;
+
     @NameInMap("Starred")
     public Boolean Starred;
 
@@ -49,8 +52,8 @@ public class CCPListFileRequest extends TeaModel {
     @NameInMap("type")
     public String type;
 
-    @NameInMap("custom_index_key")
-    public String customIndexKey;
+    @NameInMap("url_expire_sec")
+    public Long urlExpireSec;
 
     public static CCPListFileRequest build(java.util.Map<String, ?> map) throws Exception {
         CCPListFileRequest self = new CCPListFileRequest();

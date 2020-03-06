@@ -3,7 +3,7 @@ package com.aliyun.ccp.ccpclient.models;
 
 import com.aliyun.tea.*;
 
-public class BatchOperationModel extends TeaModel {
+public class OperationModel extends TeaModel {
     @NameInMap("headers")
     public java.util.Map<String, String> headers;
 
@@ -11,8 +11,8 @@ public class BatchOperationModel extends TeaModel {
     @Validation(required = true)
     public CCPBatchResponse body;
 
-    public static BatchOperationModel build(java.util.Map<String, ?> map) throws Exception {
-        BatchOperationModel self = new BatchOperationModel();
+    public static OperationModel build(java.util.Map<String, ?> map) throws Exception {
+        OperationModel self = new OperationModel();
         return TeaModel.build(map, self);
     }
 
