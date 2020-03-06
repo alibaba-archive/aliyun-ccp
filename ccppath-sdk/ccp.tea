@@ -113,7 +113,7 @@ model CancelLinkModel {
  * @error Forbidden User not authorized to operate on the specified APIs.
  * @error InternalError The request has been failed due to some unknown error.
  */
-api CancelLink(request: CancelLinkRequestModel, runtime: RuntimeOptions): CancelLinkModel  {
+api cancelLink(request: CancelLinkRequestModel, runtime: RuntimeOptions): CancelLinkModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -214,7 +214,7 @@ model ConfirmLinkModel {
  * @error NotFound The resource {resource_name} cannot be found. Please check.
  * @error InternalError The request has been failed due to some unknown error.
  */
-api ConfirmLink(request: ConfirmLinkRequestModel, runtime: RuntimeOptions): ConfirmLinkModel  {
+api confirmLink(request: ConfirmLinkRequestModel, runtime: RuntimeOptions): ConfirmLinkModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -313,7 +313,7 @@ model ChangePasswordModel {
  * @error Forbidden User not authorized to operate on the specified APIs.
  * @error InternalError The request has been failed due to some unknown error.
  */
-api ChangePassword(request: DefaultChangePasswordRequestModel, runtime: RuntimeOptions): ChangePasswordModel  {
+api changePassword(request: DefaultChangePasswordRequestModel, runtime: RuntimeOptions): ChangePasswordModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -409,7 +409,7 @@ model SetPasswordModel {
  * @error Forbidden User not authorized to operate on the specified APIs.
  * @error InternalError The request has been failed due to some unknown error.
  */
-api SetPassword(request: DefaultSetPasswordRequestModel, runtime: RuntimeOptions): SetPasswordModel  {
+api setPassword(request: DefaultSetPasswordRequestModel, runtime: RuntimeOptions): SetPasswordModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -507,7 +507,7 @@ model GetAccessTokenByLinkInfoModel {
  * @error NotFound The resource {resource_name} cannot be found. Please check.
  * @error InternalError The request has been failed due to some unknown error.
  */
-api GetAccessTokenByLinkInfo(request: GetAccessTokenByLinkInfoRequestModel, runtime: RuntimeOptions): GetAccessTokenByLinkInfoModel  {
+api getAccessTokenByLinkInfo(request: GetAccessTokenByLinkInfoRequestModel, runtime: RuntimeOptions): GetAccessTokenByLinkInfoModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -607,7 +607,7 @@ model GetCaptchaModel {
  * @error Forbidden User not authorized to operate on the specified APIs.
  * @error InternalError The request has been failed due to some unknown error.
  */
-api GetCaptcha(request: GetCaptchaRequestModel, runtime: RuntimeOptions): GetCaptchaModel  {
+api getCaptcha(request: GetCaptchaRequestModel, runtime: RuntimeOptions): GetCaptchaModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -708,7 +708,7 @@ model GetLinkInfoModel {
  * @error NotFound The resource {resource_name} cannot be found. Please check.
  * @error InternalError The request has been failed due to some unknown error.
  */
-api GetLinkInfo(request: GetByLinkInfoRequestModel, runtime: RuntimeOptions): GetLinkInfoModel  {
+api getLinkInfo(request: GetByLinkInfoRequestModel, runtime: RuntimeOptions): GetLinkInfoModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -808,7 +808,7 @@ model GetLinkInfoByUserIdModel {
  * @error Forbidden User not authorized to operate on the specified APIs.
  * @error InternalError The request has been failed due to some unknown error.
  */
-api GetLinkInfoByUserId(request: GetLinkInfoByUserIDRequestModel, runtime: RuntimeOptions): GetLinkInfoByUserIdModel  {
+api getLinkInfoByUserId(request: GetLinkInfoByUserIDRequestModel, runtime: RuntimeOptions): GetLinkInfoByUserIdModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -910,7 +910,7 @@ model LinkModel {
  * @error AlreadyExist {resource} has already exists. {extra_msg}
  * @error InternalError The request has been failed due to some unknown error.
  */
-api Link(request: AccountLinkRequestModel, runtime: RuntimeOptions): LinkModel  {
+api link(request: AccountLinkRequestModel, runtime: RuntimeOptions): LinkModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -1011,7 +1011,7 @@ model CheckExistModel {
  * @error NotFound The resource {resource_name} cannot be found. Please check.
  * @error InternalError The request has been failed due to some unknown error.
  */
-api CheckExist(request: MobileCheckExistRequestModel, runtime: RuntimeOptions): CheckExistModel  {
+api checkExist(request: MobileCheckExistRequestModel, runtime: RuntimeOptions): CheckExistModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -1112,7 +1112,7 @@ model LoginModel {
  * @error NotFound The resource {resource_name} cannot be found. Please check.
  * @error InternalError The request has been failed due to some unknown error.
  */
-api Login(request: MobileLoginRequestModel, runtime: RuntimeOptions): LoginModel  {
+api login(request: MobileLoginRequestModel, runtime: RuntimeOptions): LoginModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -1213,7 +1213,7 @@ model RegisterModel {
  * @error AlreadyExist {resource} has already exists. {extra_msg}
  * @error InternalError The request has been failed due to some unknown error.
  */
-api Register(request: MobileRegisterRequestModel, runtime: RuntimeOptions): RegisterModel  {
+api register(request: MobileRegisterRequestModel, runtime: RuntimeOptions): RegisterModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -1313,7 +1313,7 @@ model MobileSendSmsCodeModel {
  * @error Forbidden User not authorized to operate on the specified APIs.
  * @error InternalError The request has been failed due to some unknown error.
  */
-api MobileSendSmsCode(request: MobileSendSmsCodeRequestModel, runtime: RuntimeOptions): MobileSendSmsCodeModel  {
+api mobileSendSmsCode(request: MobileSendSmsCodeRequestModel, runtime: RuntimeOptions): MobileSendSmsCodeModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -1413,7 +1413,7 @@ model TokenModel {
  * @error Forbidden User not authorized to operate on the specified APIs.
  * @error InternalError The request has been failed due to some unknown error.
  */
-api Token(request: TokenRequestModel, runtime: RuntimeOptions): TokenModel  {
+api token(request: TokenRequestModel, runtime: RuntimeOptions): TokenModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -2652,7 +2652,7 @@ model GetAsyncTaskInfoModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api GetAsyncTaskInfo(request: CCPGetAsyncTaskRequestModel, runtime: RuntimeOptions): GetAsyncTaskInfoModel  {
+api getAsyncTaskInfo(request: CCPGetAsyncTaskRequestModel, runtime: RuntimeOptions): GetAsyncTaskInfoModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -2755,7 +2755,7 @@ model OperationModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api Operation(request: CCPBatchRequestModel, runtime: RuntimeOptions): OperationModel  {
+api operation(request: CCPBatchRequestModel, runtime: RuntimeOptions): OperationModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -2859,7 +2859,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api CreateDrive(request: CreateDriveRequestModel, runtime: RuntimeOptions): CreateDriveModel  {
+api createDrive(request: CreateDriveRequestModel, runtime: RuntimeOptions): CreateDriveModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -2960,7 +2960,7 @@ model DeleteDriveModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api DeleteDrive(request: DeleteDriveRequestModel, runtime: RuntimeOptions): DeleteDriveModel  {
+api deleteDrive(request: DeleteDriveRequestModel, runtime: RuntimeOptions): DeleteDriveModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -3060,7 +3060,7 @@ model GetDriveModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api GetDrive(request: GetDriveRequestModel, runtime: RuntimeOptions): GetDriveModel  {
+api getDrive(request: GetDriveRequestModel, runtime: RuntimeOptions): GetDriveModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -3164,7 +3164,7 @@ model GetDefaultDriveModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api GetDefaultDrive(request: GetDefaultDriveRequestModel, runtime: RuntimeOptions): GetDefaultDriveModel  {
+api getDefaultDrive(request: GetDefaultDriveRequestModel, runtime: RuntimeOptions): GetDefaultDriveModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -3266,7 +3266,7 @@ model ListDrivesModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api ListDrives(request: ListDriveRequestModel, runtime: RuntimeOptions): ListDrivesModel  {
+api listDrives(request: ListDriveRequestModel, runtime: RuntimeOptions): ListDrivesModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -3368,7 +3368,7 @@ model ListMyDrivesModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api ListMyDrives(request: ListMyDriveRequestModel, runtime: RuntimeOptions): ListMyDrivesModel  {
+api listMyDrives(request: ListMyDriveRequestModel, runtime: RuntimeOptions): ListMyDrivesModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -3471,7 +3471,7 @@ model UpdateDriveModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api UpdateDrive(request: UpdateDriveRequestModel, runtime: RuntimeOptions): UpdateDriveModel  {
+api updateDrive(request: UpdateDriveRequestModel, runtime: RuntimeOptions): UpdateDriveModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -3574,7 +3574,7 @@ model CompleteFileModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api CompleteFile(request: CCPCompleteFileRequestModel, runtime: RuntimeOptions): CompleteFileModel  {
+api completeFile(request: CCPCompleteFileRequestModel, runtime: RuntimeOptions): CompleteFileModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -3677,7 +3677,7 @@ model CopyFileModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api CopyFile(request: CCPCopyFileRequestModel, runtime: RuntimeOptions): CopyFileModel  {
+api copyFile(request: CCPCopyFileRequestModel, runtime: RuntimeOptions): CopyFileModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -3791,7 +3791,7 @@ model CreateFileModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api CreateFile(request: CCPCreateFileRequestModel, runtime: RuntimeOptions): CreateFileModel  {
+api createFile(request: CCPCreateFileRequestModel, runtime: RuntimeOptions): CreateFileModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -3894,7 +3894,7 @@ model DeleteFileModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api DeleteFile(request: CCPDeleteFileRequestModel, runtime: RuntimeOptions): DeleteFileModel  {
+api deleteFile(request: CCPDeleteFileRequestModel, runtime: RuntimeOptions): DeleteFileModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -4009,7 +4009,7 @@ model DownloadFileModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api DownloadFile(request: DownloadFileRequestModel, runtime: RuntimeOptions): DownloadFileModel  {
+api downloadFile(request: DownloadFileRequestModel, runtime: RuntimeOptions): DownloadFileModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -4102,7 +4102,7 @@ model GetFileModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api GetFile(request: CCPGetFileRequestModel, runtime: RuntimeOptions): GetFileModel  {
+api getFile(request: CCPGetFileRequestModel, runtime: RuntimeOptions): GetFileModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -4205,7 +4205,7 @@ model GetDownloadUrlModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api GetDownloadUrl(request: CCPGetDownloadUrlRequestModel, runtime: RuntimeOptions): GetDownloadUrlModel  {
+api getDownloadUrl(request: CCPGetDownloadUrlRequestModel, runtime: RuntimeOptions): GetDownloadUrlModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -4308,7 +4308,7 @@ model GetUploadUrlModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api GetUploadUrl(request: CCPGetUploadUrlRequestModel, runtime: RuntimeOptions): GetUploadUrlModel  {
+api getUploadUrl(request: CCPGetUploadUrlRequestModel, runtime: RuntimeOptions): GetUploadUrlModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -4411,7 +4411,7 @@ model ListFileModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api ListFile(request: CCPListFileRequestModel, runtime: RuntimeOptions): ListFileModel  {
+api listFile(request: CCPListFileRequestModel, runtime: RuntimeOptions): ListFileModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -4514,7 +4514,7 @@ model ListUploadedPartsModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api ListUploadedParts(request: CCPListUploadedPartRequestModel, runtime: RuntimeOptions): ListUploadedPartsModel  {
+api listUploadedParts(request: CCPListUploadedPartRequestModel, runtime: RuntimeOptions): ListUploadedPartsModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -4617,7 +4617,7 @@ model MoveFileModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api MoveFile(request: CCPMoveFileRequestModel, runtime: RuntimeOptions): MoveFileModel  {
+api moveFile(request: CCPMoveFileRequestModel, runtime: RuntimeOptions): MoveFileModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -4720,7 +4720,7 @@ model SearchFileModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api SearchFile(request: CCPSearchFileRequestModel, runtime: RuntimeOptions): SearchFileModel  {
+api searchFile(request: CCPSearchFileRequestModel, runtime: RuntimeOptions): SearchFileModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -4823,7 +4823,7 @@ model UpdateFileModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api UpdateFile(request: CCPUpdateFileMetaRequestModel, runtime: RuntimeOptions): UpdateFileModel  {
+api updateFile(request: CCPUpdateFileMetaRequestModel, runtime: RuntimeOptions): UpdateFileModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -5617,7 +5617,7 @@ model CreateUserModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api CreateUser(request: CreateUserRequestModel, runtime: RuntimeOptions): CreateUserModel  {
+api createUser(request: CreateUserRequestModel, runtime: RuntimeOptions): CreateUserModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -5717,7 +5717,7 @@ model DeleteUserModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api DeleteUser(request: DeleteUserRequestModel, runtime: RuntimeOptions): DeleteUserModel  {
+api deleteUser(request: DeleteUserRequestModel, runtime: RuntimeOptions): DeleteUserModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -5816,7 +5816,7 @@ model GetUserModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api GetUser(request: GetUserRequestModel, runtime: RuntimeOptions): GetUserModel  {
+api getUser(request: GetUserRequestModel, runtime: RuntimeOptions): GetUserModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -5917,7 +5917,7 @@ model ListUsersModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api ListUsers(request: ListUserRequestModel, runtime: RuntimeOptions): ListUsersModel  {
+api listUsers(request: ListUserRequestModel, runtime: RuntimeOptions): ListUsersModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -6018,7 +6018,7 @@ model SearchUserModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api SearchUser(request: SearchUserRequestModel, runtime: RuntimeOptions): SearchUserModel  {
+api searchUser(request: SearchUserRequestModel, runtime: RuntimeOptions): SearchUserModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -6120,7 +6120,7 @@ model UpdateUserModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api UpdateUser(request: UpdateUserRequestModel, runtime: RuntimeOptions): UpdateUserModel  {
+api updateUser(request: UpdateUserRequestModel, runtime: RuntimeOptions): UpdateUserModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -6379,7 +6379,7 @@ model GetPhotoCountModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api GetPhotoCount(request: GetImageCountRequestModel, runtime: RuntimeOptions): GetPhotoCountModel  {
+api getPhotoCount(request: GetImageCountRequestModel, runtime: RuntimeOptions): GetPhotoCountModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -6482,7 +6482,7 @@ model ListAddressGroupsModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api ListAddressGroups(request: ListImageAddressGroupsRequestModel, runtime: RuntimeOptions): ListAddressGroupsModel  {
+api listAddressGroups(request: ListImageAddressGroupsRequestModel, runtime: RuntimeOptions): ListAddressGroupsModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -6585,7 +6585,7 @@ model ListFaceGroupsModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api ListFaceGroups(request: ListImageFaceGroupsRequestModel, runtime: RuntimeOptions): ListFaceGroupsModel  {
+api listFaceGroups(request: ListImageFaceGroupsRequestModel, runtime: RuntimeOptions): ListFaceGroupsModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
@@ -6688,7 +6688,7 @@ model ListTagsModel {
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-api ListTags(request: ListImageTagsRequestModel, runtime: RuntimeOptions): ListTagsModel  {
+api listTags(request: ListImageTagsRequestModel, runtime: RuntimeOptions): ListTagsModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getAccessKeySecret();
