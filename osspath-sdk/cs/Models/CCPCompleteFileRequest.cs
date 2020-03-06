@@ -8,19 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * 合并文件上传任务
+     */
     public class CCPCompleteFileRequest : TeaModel {
-        [NameInMap("header")]
-        [Validation(Required=false)]
-        public CCPCompleteFileRequestHeader Header { get; set; }
-        public class CCPCompleteFileRequestHeader : TeaModel {
-            [NameInMap("x-pds-trace-id")]
-            [Validation(Required=false)]
-            public string TraceId { get; set; }
-            [NameInMap("x-pds-device-id")]
-            [Validation(Required=false)]
-            public string DeviceId { get; set; }
-        };
-
         [NameInMap("drive_id")]
         [Validation(Required=false, Pattern="[0-9]+")]
         public string DriveId { get; set; }

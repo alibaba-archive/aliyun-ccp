@@ -8,11 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
+    /**
+     * Delete user response
+     */
     public class DeleteUserResponse : TeaModel {
-        [NameInMap("requestId")]
-        [Validation(Required=false)]
-        public string RequestId { get; set; }
-
     }
 
 }

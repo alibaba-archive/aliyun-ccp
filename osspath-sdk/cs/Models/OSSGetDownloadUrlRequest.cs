@@ -8,19 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * 获取文件下载地址的请求body
+     */
     public class OSSGetDownloadUrlRequest : TeaModel {
-        [NameInMap("header")]
-        [Validation(Required=false)]
-        public OSSGetDownloadUrlRequestHeader Header { get; set; }
-        public class OSSGetDownloadUrlRequestHeader : TeaModel {
-            [NameInMap("x-pds-trace-id")]
-            [Validation(Required=false)]
-            public string TraceId { get; set; }
-            [NameInMap("x-pds-device-id")]
-            [Validation(Required=false)]
-            public string DeviceId { get; set; }
-        };
-
         [NameInMap("drive_id")]
         [Validation(Required=false, Pattern="[0-9]+")]
         public string DriveId { get; set; }
@@ -38,7 +29,7 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         public string FilePath { get; set; }
 
         [NameInMap("share_id")]
-        [Validation(Required=false, Pattern="[0-9a-z-]+")]
+        [Validation(Required=false, Pattern="[0-9a-zA-Z-]+")]
         public string ShareId { get; set; }
 
     }

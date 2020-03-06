@@ -8,11 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
+    /**
+     * Get user response
+     */
     public class GetUserResponse : TeaModel {
-        [NameInMap("requestId")]
-        [Validation(Required=false)]
-        public string RequestId { get; set; }
-
         [NameInMap("avatar")]
         [Validation(Required=false)]
         public string Avatar { get; set; }

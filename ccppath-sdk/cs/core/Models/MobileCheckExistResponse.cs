@@ -8,11 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
+    /**
+     * 
+     */
     public class MobileCheckExistResponse : TeaModel {
-        [NameInMap("requestId")]
-        [Validation(Required=false)]
-        public string RequestId { get; set; }
-
         [NameInMap("is_exist")]
         [Validation(Required=true)]
         public bool? IsExist { get; set; }

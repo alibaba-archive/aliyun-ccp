@@ -8,11 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
+    /**
+     * Base file response
+     */
     public class BaseCCPFileResponse : TeaModel {
-        [NameInMap("requestId")]
-        [Validation(Required=false)]
-        public string RequestId { get; set; }
-
         [NameInMap("category")]
         [Validation(Required=false)]
         public string Category { get; set; }

@@ -8,11 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
+    /**
+     * 获取签名 response
+     */
     public class CCPListUploadedPartResponse : TeaModel {
-        [NameInMap("requestId")]
-        [Validation(Required=false)]
-        public string RequestId { get; set; }
-
         [NameInMap("file_id")]
         [Validation(Required=false, MaxLength=50, Pattern="[a-z0-9]{1, 50}")]
         public string FileId { get; set; }

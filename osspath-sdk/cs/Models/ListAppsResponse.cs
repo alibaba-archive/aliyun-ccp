@@ -8,11 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * 
+     */
     public class ListAppsResponse : TeaModel {
-        [NameInMap("requestId")]
-        [Validation(Required=false)]
-        public string RequestId { get; set; }
-
         [NameInMap("items")]
         [Validation(Required=true)]
         public List<GetAppResponse> Items { get; set; }

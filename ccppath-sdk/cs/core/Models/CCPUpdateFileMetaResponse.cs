@@ -8,11 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
+    /**
+     * 更新文件元数据 response
+     */
     public class CCPUpdateFileMetaResponse : TeaModel {
-        [NameInMap("requestId")]
-        [Validation(Required=false)]
-        public string RequestId { get; set; }
-
         [NameInMap("category")]
         [Validation(Required=false)]
         public string Category { get; set; }

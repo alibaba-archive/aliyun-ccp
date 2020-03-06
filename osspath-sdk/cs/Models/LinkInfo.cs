@@ -8,6 +8,9 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * 
+     */
     public class LinkInfo : TeaModel {
         [NameInMap("identity")]
         [Validation(Required=false)]

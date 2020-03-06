@@ -8,11 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * Get UploadUrl Response
+     */
     public class CCPGetUploadUrlResponse : TeaModel {
-        [NameInMap("requestId")]
-        [Validation(Required=false)]
-        public string RequestId { get; set; }
-
         [NameInMap("create_at")]
         [Validation(Required=false)]
         public string CreateAt { get; set; }

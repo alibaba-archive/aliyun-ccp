@@ -8,19 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * 删除文件请求
+     */
     public class CCPDeleteFileRequest : TeaModel {
-        [NameInMap("header")]
-        [Validation(Required=false)]
-        public CCPDeleteFileRequestHeader Header { get; set; }
-        public class CCPDeleteFileRequestHeader : TeaModel {
-            [NameInMap("x-pds-trace-id")]
-            [Validation(Required=false)]
-            public string TraceId { get; set; }
-            [NameInMap("x-pds-device-id")]
-            [Validation(Required=false)]
-            public string DeviceId { get; set; }
-        };
-
         [NameInMap("drive_id")]
         [Validation(Required=true, Pattern="[0-9]+")]
         public string DriveId { get; set; }

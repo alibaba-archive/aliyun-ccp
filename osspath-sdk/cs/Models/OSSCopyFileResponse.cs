@@ -8,11 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * 文件拷贝 response
+     */
     public class OSSCopyFileResponse : TeaModel {
-        [NameInMap("requestId")]
-        [Validation(Required=false)]
-        public string RequestId { get; set; }
-
         [NameInMap("async_task_id")]
         [Validation(Required=false)]
         public string AsyncTaskId { get; set; }

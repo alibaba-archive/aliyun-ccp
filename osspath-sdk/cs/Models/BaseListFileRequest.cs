@@ -8,21 +8,12 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * list file request
+     */
     public class BaseListFileRequest : TeaModel {
-        [NameInMap("header")]
-        [Validation(Required=false)]
-        public BaseListFileRequestHeader Header { get; set; }
-        public class BaseListFileRequestHeader : TeaModel {
-            [NameInMap("x-pds-trace-id")]
-            [Validation(Required=false)]
-            public string TraceId { get; set; }
-            [NameInMap("x-pds-device-id")]
-            [Validation(Required=false)]
-            public string DeviceId { get; set; }
-        };
-
         [NameInMap("drive_id")]
-        [Validation(Required=true, Pattern="[0-9]+")]
+        [Validation(Required=false, Pattern="[0-9]+")]
         public string DriveId { get; set; }
 
         [NameInMap("image_thumbnail_process")]

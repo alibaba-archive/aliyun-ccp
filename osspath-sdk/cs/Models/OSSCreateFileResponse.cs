@@ -8,11 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * Create file response
+     */
     public class OSSCreateFileResponse : TeaModel {
-        [NameInMap("requestId")]
-        [Validation(Required=false)]
-        public string RequestId { get; set; }
-
         [NameInMap("domain_id")]
         [Validation(Required=false, MaxLength=50, Pattern="[a-z0-9]{1, 50}")]
         public string DomainId { get; set; }

@@ -8,19 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * 获取异步人去信息
+     */
     public class CCPGetAsyncTaskRequest : TeaModel {
-        [NameInMap("header")]
-        [Validation(Required=false)]
-        public CCPGetAsyncTaskRequestHeader Header { get; set; }
-        public class CCPGetAsyncTaskRequestHeader : TeaModel {
-            [NameInMap("x-pds-trace-id")]
-            [Validation(Required=false)]
-            public string TraceId { get; set; }
-            [NameInMap("x-pds-device-id")]
-            [Validation(Required=false)]
-            public string DeviceId { get; set; }
-        };
-
         [NameInMap("async_task_id")]
         [Validation(Required=false)]
         public string AsyncTaskId { get; set; }

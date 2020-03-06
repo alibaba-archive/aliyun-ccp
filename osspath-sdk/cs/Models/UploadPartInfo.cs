@@ -8,6 +8,9 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * 
+     */
     public class UploadPartInfo : TeaModel {
         [NameInMap("etag")]
         [Validation(Required=false)]

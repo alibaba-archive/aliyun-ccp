@@ -8,11 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
+    /**
+     * complete file response
+     */
     public class OSSCompleteFileResponse : TeaModel {
-        [NameInMap("requestId")]
-        [Validation(Required=false)]
-        public string RequestId { get; set; }
-
         [NameInMap("content_hash")]
         [Validation(Required=false)]
         public string ContentHash { get; set; }

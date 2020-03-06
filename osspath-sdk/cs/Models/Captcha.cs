@@ -8,6 +8,9 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * 
+     */
     public class Captcha : TeaModel {
         [NameInMap("captcha")]
         [Validation(Required=true)]

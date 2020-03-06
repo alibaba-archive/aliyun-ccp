@@ -8,19 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
+    /**
+     * list domain request
+     */
     public class ListDomainsRequest : TeaModel {
-        [NameInMap("header")]
-        [Validation(Required=false)]
-        public ListDomainsRequestHeader Header { get; set; }
-        public class ListDomainsRequestHeader : TeaModel {
-            [NameInMap("x-pds-trace-id")]
-            [Validation(Required=false)]
-            public string TraceId { get; set; }
-            [NameInMap("x-pds-device-id")]
-            [Validation(Required=false)]
-            public string DeviceId { get; set; }
-        };
-
         [NameInMap("limit")]
         [Validation(Required=false)]
         public int? Limit { get; set; }

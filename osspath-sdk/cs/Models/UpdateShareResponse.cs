@@ -8,11 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * Update share response
+     */
     public class UpdateShareResponse : TeaModel {
-        [NameInMap("requestId")]
-        [Validation(Required=false)]
-        public string RequestId { get; set; }
-
         [NameInMap("created_at")]
         [Validation(Required=false)]
         public string CreatedAt { get; set; }

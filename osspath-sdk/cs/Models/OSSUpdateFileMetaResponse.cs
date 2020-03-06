@@ -8,11 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * 更新文件元数据 response
+     */
     public class OSSUpdateFileMetaResponse : TeaModel {
-        [NameInMap("requestId")]
-        [Validation(Required=false)]
-        public string RequestId { get; set; }
-
         [NameInMap("content_hash")]
         [Validation(Required=false)]
         public string ContentHash { get; set; }

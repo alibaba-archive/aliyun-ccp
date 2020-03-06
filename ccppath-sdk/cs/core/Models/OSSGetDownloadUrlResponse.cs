@@ -8,11 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
+    /**
+     * 获取download url response
+     */
     public class OSSGetDownloadUrlResponse : TeaModel {
-        [NameInMap("requestId")]
-        [Validation(Required=false)]
-        public string RequestId { get; set; }
-
         [NameInMap("expiration")]
         [Validation(Required=false)]
         public string Expiration { get; set; }

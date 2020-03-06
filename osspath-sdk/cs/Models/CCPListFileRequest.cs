@@ -8,19 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
+    /**
+     * 列举文件
+     */
     public class CCPListFileRequest : TeaModel {
-        [NameInMap("header")]
-        [Validation(Required=false)]
-        public CCPListFileRequestHeader Header { get; set; }
-        public class CCPListFileRequestHeader : TeaModel {
-            [NameInMap("x-pds-trace-id")]
-            [Validation(Required=false)]
-            public string TraceId { get; set; }
-            [NameInMap("x-pds-device-id")]
-            [Validation(Required=false)]
-            public string DeviceId { get; set; }
-        };
-
         [NameInMap("drive_id")]
         [Validation(Required=false, Pattern="[0-9]+")]
         public string DriveId { get; set; }

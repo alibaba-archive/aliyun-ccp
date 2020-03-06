@@ -8,11 +8,10 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
+    /**
+     * 批量删除文件 response
+     */
     public class OSSDeleteFilesResponse : TeaModel {
-        [NameInMap("requestId")]
-        [Validation(Required=false)]
-        public string RequestId { get; set; }
-
         [NameInMap("deleted_file_id_list")]
         [Validation(Required=false)]
         public List<string> DeletedFileIdList { get; set; }
