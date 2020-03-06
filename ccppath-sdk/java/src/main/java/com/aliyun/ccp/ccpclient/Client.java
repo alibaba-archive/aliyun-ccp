@@ -1811,7 +1811,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public BatchOperationModel batchOperation(CCPBatchRequestModel request, RuntimeOptions runtime) throws Exception {
+    public OperationModel operation(CCPBatchRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -1891,7 +1891,7 @@ public class Client {
                     return TeaModel.toModel(TeaConverter.buildMap(
                         new TeaPair("body", respMap),
                         new TeaPair("headers", response_.headers)
-                    ), new BatchOperationModel());
+                    ), new OperationModel());
                 }
 
                 if (!com.aliyun.teautil.Common.empty(response_.headers.get("x-ca-error-message"))) {

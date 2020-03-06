@@ -8,7 +8,7 @@ import com.aliyun.tea.*;
  */
 public class OSSListFileRequest extends TeaModel {
     @NameInMap("drive_id")
-    @Validation(required = true, pattern = "[0-9]+")
+    @Validation(pattern = "[0-9]+")
     public String driveId;
 
     @NameInMap("image_thumbnail_process")
@@ -29,8 +29,14 @@ public class OSSListFileRequest extends TeaModel {
     public String parentFilePath;
 
     @NameInMap("share_id")
-    @Validation(required = true, pattern = "[0-9]+")
+    @Validation(pattern = "[0-9]+")
     public String shareId;
+
+    @NameInMap("url_expire_sec")
+    public Long urlExpireSec;
+
+    @NameInMap("video_thumbnail_process")
+    public String videoThumbnailProcess;
 
     public static OSSListFileRequest build(java.util.Map<String, ?> map) throws Exception {
         OSSListFileRequest self = new OSSListFileRequest();

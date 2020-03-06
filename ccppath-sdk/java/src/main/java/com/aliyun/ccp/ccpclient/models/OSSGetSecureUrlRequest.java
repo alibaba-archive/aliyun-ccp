@@ -4,9 +4,9 @@ package com.aliyun.ccp.ccpclient.models;
 import com.aliyun.tea.*;
 
 /**
- * 获取文件下载地址的请求body
+ * 获取文件安全地址的请求body
  */
-public class OSSGetDownloadUrlRequest extends TeaModel {
+public class OSSGetSecureUrlRequest extends TeaModel {
     @NameInMap("drive_id")
     @Validation(pattern = "[0-9]+")
     public String driveId;
@@ -14,19 +14,19 @@ public class OSSGetDownloadUrlRequest extends TeaModel {
     @NameInMap("expire_sec")
     public Long expireSec;
 
-    @NameInMap("file_name")
-    public String fileName;
-
     @NameInMap("file_path")
     @Validation(required = true)
     public String filePath;
+
+    @NameInMap("secure_ip")
+    public String secureIp;
 
     @NameInMap("share_id")
     @Validation(pattern = "[0-9a-z-]+")
     public String shareId;
 
-    public static OSSGetDownloadUrlRequest build(java.util.Map<String, ?> map) throws Exception {
-        OSSGetDownloadUrlRequest self = new OSSGetDownloadUrlRequest();
+    public static OSSGetSecureUrlRequest build(java.util.Map<String, ?> map) throws Exception {
+        OSSGetSecureUrlRequest self = new OSSGetSecureUrlRequest();
         return TeaModel.build(map, self);
     }
 
