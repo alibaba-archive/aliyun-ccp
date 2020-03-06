@@ -3,10 +3,10 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 获取文件元数据
+ */
 public class CCPGetFileRequest extends TeaModel {
-    @NameInMap("header")
-    public CCPGetFileRequestHeader header;
-
     @NameInMap("drive_id")
     @Validation(required = true, pattern = "[0-9]+")
     public String driveId;
@@ -30,20 +30,6 @@ public class CCPGetFileRequest extends TeaModel {
     public static CCPGetFileRequest build(java.util.Map<String, ?> map) throws Exception {
         CCPGetFileRequest self = new CCPGetFileRequest();
         return TeaModel.build(map, self);
-    }
-
-    public static class CCPGetFileRequestHeader extends TeaModel {
-        @NameInMap("x-pds-trace-id")
-        public String traceId;
-
-        @NameInMap("x-pds-device-id")
-        public String deviceId;
-
-        public static CCPGetFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
-            CCPGetFileRequestHeader self = new CCPGetFileRequestHeader();
-            return TeaModel.build(map, self);
-        }
-
     }
 
 }

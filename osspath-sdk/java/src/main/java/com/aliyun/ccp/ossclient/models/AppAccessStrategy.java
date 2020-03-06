@@ -3,6 +3,9 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 
+ */
 public class AppAccessStrategy extends TeaModel {
     @NameInMap("effect")
     public String effect;

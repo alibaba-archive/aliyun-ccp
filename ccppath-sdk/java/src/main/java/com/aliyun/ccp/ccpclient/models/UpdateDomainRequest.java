@@ -3,10 +3,10 @@ package com.aliyun.ccp.ccpclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * update domain request
+ */
 public class UpdateDomainRequest extends TeaModel {
-    @NameInMap("header")
-    public UpdateDomainRequestHeader header;
-
     @NameInMap("auth_alipay_app_id")
     public String authAlipayAppId;
 
@@ -86,20 +86,6 @@ public class UpdateDomainRequest extends TeaModel {
     public static UpdateDomainRequest build(java.util.Map<String, ?> map) throws Exception {
         UpdateDomainRequest self = new UpdateDomainRequest();
         return TeaModel.build(map, self);
-    }
-
-    public static class UpdateDomainRequestHeader extends TeaModel {
-        @NameInMap("x-pds-trace-id")
-        public String traceId;
-
-        @NameInMap("x-pds-device-id")
-        public String deviceId;
-
-        public static UpdateDomainRequestHeader build(java.util.Map<String, ?> map) throws Exception {
-            UpdateDomainRequestHeader self = new UpdateDomainRequestHeader();
-            return TeaModel.build(map, self);
-        }
-
     }
 
 }

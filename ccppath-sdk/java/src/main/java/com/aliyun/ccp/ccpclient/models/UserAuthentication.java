@@ -3,6 +3,9 @@ package com.aliyun.ccp.ccpclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 
+ */
 public class UserAuthentication extends TeaModel {
     @NameInMap("AuthenticationType")
     @Validation(required = true)

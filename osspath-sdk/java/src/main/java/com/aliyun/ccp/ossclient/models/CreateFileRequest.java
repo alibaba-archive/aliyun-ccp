@@ -3,10 +3,10 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * create file request
+ */
 public class CreateFileRequest extends TeaModel {
-    @NameInMap("header")
-    public CreateFileRequestHeader header;
-
     @NameInMap("content_hash")
     public String contentHash;
 
@@ -67,62 +67,6 @@ public class CreateFileRequest extends TeaModel {
     public static CreateFileRequest build(java.util.Map<String, ?> map) throws Exception {
         CreateFileRequest self = new CreateFileRequest();
         return TeaModel.build(map, self);
-    }
-
-    public static class BaseCreateFileRequestHeader extends TeaModel {
-        @NameInMap("x-pds-trace-id")
-        public String traceId;
-
-        @NameInMap("x-pds-device-id")
-        public String deviceId;
-
-        public static BaseCreateFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
-            BaseCreateFileRequestHeader self = new BaseCreateFileRequestHeader();
-            return TeaModel.build(map, self);
-        }
-
-    }
-
-    public static class CCPCreateFileRequestHeader extends TeaModel {
-        @NameInMap("x-pds-trace-id")
-        public String traceId;
-
-        @NameInMap("x-pds-device-id")
-        public String deviceId;
-
-        public static CCPCreateFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
-            CCPCreateFileRequestHeader self = new CCPCreateFileRequestHeader();
-            return TeaModel.build(map, self);
-        }
-
-    }
-
-    public static class CreateFileRequestHeader extends TeaModel {
-        @NameInMap("x-pds-trace-id")
-        public String traceId;
-
-        @NameInMap("x-pds-device-id")
-        public String deviceId;
-
-        public static CreateFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
-            CreateFileRequestHeader self = new CreateFileRequestHeader();
-            return TeaModel.build(map, self);
-        }
-
-    }
-
-    public static class OSSCreateFileRequestHeader extends TeaModel {
-        @NameInMap("x-pds-trace-id")
-        public String traceId;
-
-        @NameInMap("x-pds-device-id")
-        public String deviceId;
-
-        public static OSSCreateFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
-            OSSCreateFileRequestHeader self = new OSSCreateFileRequestHeader();
-            return TeaModel.build(map, self);
-        }
-
     }
 
 }

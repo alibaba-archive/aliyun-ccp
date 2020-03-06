@@ -3,6 +3,9 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 
+ */
 public class AuthConfig extends TeaModel {
     @NameInMap("app_id")
     public String appId;

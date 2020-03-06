@@ -3,10 +3,10 @@ package com.aliyun.ccp.ccpclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 创建文件
+ */
 public class CCPCreateFileRequest extends TeaModel {
-    @NameInMap("header")
-    public CCPCreateFileRequestHeader header;
-
     @NameInMap("content_md5")
     public String contentMd5;
 
@@ -64,20 +64,6 @@ public class CCPCreateFileRequest extends TeaModel {
     public static CCPCreateFileRequest build(java.util.Map<String, ?> map) throws Exception {
         CCPCreateFileRequest self = new CCPCreateFileRequest();
         return TeaModel.build(map, self);
-    }
-
-    public static class CCPCreateFileRequestHeader extends TeaModel {
-        @NameInMap("x-pds-trace-id")
-        public String traceId;
-
-        @NameInMap("x-pds-device-id")
-        public String deviceId;
-
-        public static CCPCreateFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
-            CCPCreateFileRequestHeader self = new CCPCreateFileRequestHeader();
-            return TeaModel.build(map, self);
-        }
-
     }
 
 }

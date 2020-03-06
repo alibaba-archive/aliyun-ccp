@@ -3,10 +3,10 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * list file request
+ */
 public class BaseListFileRequest extends TeaModel {
-    @NameInMap("header")
-    public BaseListFileRequestHeader header;
-
     @NameInMap("drive_id")
     @Validation(pattern = "[0-9]+")
     public String driveId;
@@ -30,20 +30,6 @@ public class BaseListFileRequest extends TeaModel {
     public static BaseListFileRequest build(java.util.Map<String, ?> map) throws Exception {
         BaseListFileRequest self = new BaseListFileRequest();
         return TeaModel.build(map, self);
-    }
-
-    public static class BaseListFileRequestHeader extends TeaModel {
-        @NameInMap("x-pds-trace-id")
-        public String traceId;
-
-        @NameInMap("x-pds-device-id")
-        public String deviceId;
-
-        public static BaseListFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
-            BaseListFileRequestHeader self = new BaseListFileRequestHeader();
-            return TeaModel.build(map, self);
-        }
-
     }
 
 }

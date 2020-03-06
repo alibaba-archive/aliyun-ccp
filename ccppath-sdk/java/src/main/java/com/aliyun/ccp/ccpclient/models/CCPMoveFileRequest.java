@@ -3,10 +3,10 @@ package com.aliyun.ccp.ccpclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 文件移动请求
+ */
 public class CCPMoveFileRequest extends TeaModel {
-    @NameInMap("header")
-    public CCPMoveFileRequestHeader header;
-
     @NameInMap("drive_id")
     @Validation(pattern = "[0-9]+")
     public String driveId;
@@ -28,20 +28,6 @@ public class CCPMoveFileRequest extends TeaModel {
     public static CCPMoveFileRequest build(java.util.Map<String, ?> map) throws Exception {
         CCPMoveFileRequest self = new CCPMoveFileRequest();
         return TeaModel.build(map, self);
-    }
-
-    public static class CCPMoveFileRequestHeader extends TeaModel {
-        @NameInMap("x-pds-trace-id")
-        public String traceId;
-
-        @NameInMap("x-pds-device-id")
-        public String deviceId;
-
-        public static CCPMoveFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
-            CCPMoveFileRequestHeader self = new CCPMoveFileRequestHeader();
-            return TeaModel.build(map, self);
-        }
-
     }
 
 }

@@ -3,6 +3,9 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 
+ */
 public class Store extends TeaModel {
     @NameInMap("accelerate_endpoint")
     public String accelerateEndpoint;

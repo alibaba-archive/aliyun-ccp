@@ -3,10 +3,10 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * complete file request
+ */
 public class OSSCompleteFileRequest extends TeaModel {
-    @NameInMap("header")
-    public OSSCompleteFileRequestHeader header;
-
     @NameInMap("drive_id")
     @Validation(pattern = "[0-9]+")
     public String driveId;
@@ -26,20 +26,6 @@ public class OSSCompleteFileRequest extends TeaModel {
     public static OSSCompleteFileRequest build(java.util.Map<String, ?> map) throws Exception {
         OSSCompleteFileRequest self = new OSSCompleteFileRequest();
         return TeaModel.build(map, self);
-    }
-
-    public static class OSSCompleteFileRequestHeader extends TeaModel {
-        @NameInMap("x-pds-trace-id")
-        public String traceId;
-
-        @NameInMap("x-pds-device-id")
-        public String deviceId;
-
-        public static OSSCompleteFileRequestHeader build(java.util.Map<String, ?> map) throws Exception {
-            OSSCompleteFileRequestHeader self = new OSSCompleteFileRequestHeader();
-            return TeaModel.build(map, self);
-        }
-
     }
 
 }

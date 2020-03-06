@@ -3,6 +3,9 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
+/**
+ * 
+ */
 public class LinkInfo extends TeaModel {
     @NameInMap("identity")
     public String identity;
