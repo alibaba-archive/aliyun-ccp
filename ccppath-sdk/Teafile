@@ -7,7 +7,7 @@
 		"go": "github.com/aliyun/aliyun-ccp/ccppath-sdk/go/client:v2.0.0",
 		"ts": "@alicloud/ccppath-sdk:1.2.0",
 		"java": "com.aliyun:ccp-client:2.1.0",
-		"csharp": "Aliyun.SDK.CCP.Client:0.1.2"
+		"csharp": "Aliyun.SDK.CCP.Client:2.0.1"
 	},
 	"java": {
 		"package": "com.aliyun.ccp.ccpclient",
