@@ -1,5 +1,3 @@
-
-
 # 下载地址
 
 >  *https://github.com/aliyun/aliyun-ccp* 
@@ -31,7 +29,7 @@ CCPPath
 
 OSSPath
 
-~~~xml
+```xml
 <dependency>
     <groupId>com.aliyun</groupId>
     <artifactId>ccp-baseclient</artifactId>
@@ -42,7 +40,7 @@ OSSPath
     <artifactId>ccp-oss-client</artifactId>
     <version>1.0-SNAPSHOT</version>
 </dependency>
-~~~
+```
 
 **注意：请关注 [Git Hub](https://github.com/aliyun/aliyun-ccp)提供的最新版本，查看相关功能并选择使用。**
 
@@ -113,7 +111,7 @@ public class Demo {
 
 - 以下代码用于获取图片验证码，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 密码登录
 public static void getCaptcha() throws Exception {
     try {
@@ -132,28 +130,23 @@ public static void getCaptcha() throws Exception {
         System.out.println(e.getData());
     }
 }
-
-~~~
-
-
+```
 
 - 返回结果
 
-~~~JavaScript
+```jsonon
 {
     "captcha":"iVBORw0KGgoAAAANSUhEUgAAAFAAAAAaCAIAAACvsEzwAAABFUlEQVR42u3YwQ7CIAwGYOKDaLya7OBL+BDePRoT4/vPJSSEjFJ+2oEIW3oy0PHRDnVmHuwyO3gH93J9Xm85+PA4+REOmKYLGbGE5/vVBn/f2/O4hMZs9FrSjIMdtVEwKSSLTG7Bb8HZLc30MALmB7QLlmkHAiPa3sDIsE7AYHkbAtvvaw0YHNlQhRezZeee0nh5BWC/EkVamjHHtqAoWGbOe4ZtqZFfWrmHcxhIhYuD3Z2S2gpgmVn450G2u8i5mOzn1aFlV7LKwCQ0FRaqTOWcsSPazvUzZIPJbStaahCMT48lNIjHD0GpkQzKftkMzK9e8/yHecLPwZ0ihZuBK7yFKTq9uXdamp7/M7Df22JPcsxw4C/GgzEzOWpc1QAAAABJRU5ErkJggg==",
     "captchaFormat":"png",
     "captchaId":"f644d0b2a7d21a3caddb17377c90c28e8DPXYUIfvs3"
 }
-~~~
-
-
+```
 
 ### 获取短信验证码
 
 - 以下代码用于获取短信验证码，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 public void getMNSCode() throws Exception {
     try {
         MobileSendSmsCodeRequest sendSmsCodeRequest = new MobileSendSmsCodeRequest();
@@ -171,18 +164,18 @@ public void getMNSCode() throws Exception {
     }
 
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"07A5175C-E124-42EC-9304-2294DC2CEFAC",
     "smsCodeId":"b40bba70b37d74**********************6j3IW7HP"
 }
-~~~
+```
 
 
 
@@ -190,7 +183,7 @@ public void getMNSCode() throws Exception {
 
 - 以下代码用于验证手机号是否存在，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 public void checkMobileIsExist() throws Exception {
     try {
         MobileCheckExistRequest checkExistRequest = new MobileCheckExistRequest();
@@ -205,19 +198,19 @@ public void checkMobileIsExist() throws Exception {
         System.out.println(e.getData());
     }
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"4DB78761-20AE-4724-8960-ADD225F35A0F",
     "isExist":true,
     "phoneNumber":"13****25"
 }
-~~~
+```
 
 
 
@@ -225,7 +218,7 @@ public void checkMobileIsExist() throws Exception {
 
 - 以下代码用于手机号注册，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 public void register() throws Exception {
     try {
 
@@ -254,12 +247,12 @@ public void register() throws Exception {
     }
 
 }
-~~~
+```
 
 - <span id="jump">返回结果</span>
 
 
-~~~javascript
+```json
 {
     "access_token": "eyJhbGc***************iOiJSUzI1NiI",
     "refresh_token": "fvw1FLZ************tGjXxJl",
@@ -277,15 +270,13 @@ public void register() throws Exception {
     "need_link": false,
     "user_data": {}
 }
-~~~
-
-
+```
 
 ### 手机号短信登录
 
 - 以下代码用于短信登录，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 public void mnsLogin() throws Exception {
     try {
         // get login mns Code
@@ -311,7 +302,7 @@ public void mnsLogin() throws Exception {
         System.out.println(e.getData());
     }
 }
-~~~
+```
 
 
 
@@ -323,7 +314,7 @@ public void mnsLogin() throws Exception {
 
 - 以下代码用于设置登录密码，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 public void setPassWord() throws Exception {
     try {
         DefaultSetPasswordRequest setPasswordRequest = new DefaultSetPasswordRequest();
@@ -341,7 +332,7 @@ public void setPassWord() throws Exception {
 
 }
 
-~~~
+```
 
 
 
@@ -349,7 +340,7 @@ public void setPassWord() throws Exception {
 
 - 以下代码用于密码登录，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 
 // 密码登录
 public static void passwordLogin() throws Exception {
@@ -370,7 +361,7 @@ public static void passwordLogin() throws Exception {
     }
 }
 
-~~~
+```
 
 
 
@@ -382,7 +373,7 @@ public static void passwordLogin() throws Exception {
 
 - 以下代码用于修改登录密码，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 public void changePassWord() throws Exception {
     try {
         // get change passowrd mns Code
@@ -412,7 +403,7 @@ public void changePassWord() throws Exception {
     }
 
 }
-~~~
+```
 
 
 
@@ -420,7 +411,7 @@ public void changePassWord() throws Exception {
 
 - 以下代码用于刷新token，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 public void getTokenByRefreshToken() throws Exception {
     try {
         TokenRequest tokenRequest = new TokenRequest();
@@ -436,7 +427,7 @@ public void getTokenByRefreshToken() throws Exception {
     }
 
 }
-~~~
+```
 
 
 
@@ -448,7 +439,7 @@ public void getTokenByRefreshToken() throws Exception {
 
 - 以下代码用于获取用户认证方式，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~JAVA
+```JAVA
 public void getAccessTokenByLinkInfo() throws Exception {
     try {
         // 此接口需要ak，sk调用， 请使用ak, sk初始化客户端
@@ -465,7 +456,7 @@ public void getAccessTokenByLinkInfo() throws Exception {
     }
 
 }
-~~~
+```
 
 - 返回结果参见[手机号注册的返回结果](#手机号注册)
 
@@ -494,7 +485,7 @@ public void getLinkInfoByUserId() throws Exception {
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"F19338F6-55B6-45D4-9D29-3B950125B175",
     "items":[
@@ -509,7 +500,7 @@ public void getLinkInfoByUserId() throws Exception {
         }
     ]
 }
-~~~
+```
 
 
 
@@ -517,7 +508,7 @@ public void getLinkInfoByUserId() throws Exception {
 
 - 以下代码用于获取用户认证方式，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 public void getLinkInfo() throws Exception {
     try {
         // 此接口需要ak，sk调用， 请使用ak, sk初始化客户端
@@ -534,13 +525,13 @@ public void getLinkInfo() throws Exception {
     }
 
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"61AC56AD-E048-4292-8898-053287220B98",
     "authenticationType":"ding",
@@ -551,13 +542,13 @@ public void getLinkInfo() throws Exception {
     "status":"wait_link",
     "userId":"6c23c98*****7d8b3f9f5211"
 }
-~~~
+```
 
 ### 绑定用户认证方式
 
 - 以下代码用于绑定用户认证方式，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~JAVA
+```JAVA
 public void userLinkInfo() throws Exception {
     try {
         // 此接口需要ak，sk调用， 请使用ak, sk初始化客户端
@@ -577,13 +568,13 @@ public void userLinkInfo() throws Exception {
     }
 
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"2DB728B5-6468-4E41-9BDE-677433FFCE16",
     "accessToken":"eyJ*****igpwc",
@@ -606,7 +597,7 @@ public void userLinkInfo() throws Exception {
     "userId":"",
     "userName":""
 }
-~~~
+```
 
 
 
@@ -614,7 +605,7 @@ public void userLinkInfo() throws Exception {
 
 - 以下代码用于取消绑定关系，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 public void cancelLink() throws Exception {
     try {
         CancelLinkRequest cancelLinkRequest = new CancelLinkRequest();
@@ -629,7 +620,7 @@ public void cancelLink() throws Exception {
     }
 
 }
-~~~
+```
 
 
 
@@ -644,7 +635,7 @@ public void cancelLink() throws Exception {
 - 以下代码用于确定绑定关系，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 - 此接口只支持Access Token，不要使用AK，SK初始化客户端。
 
-~~~java
+```java
 public void confirmlLink() throws Exception {
     try {
         CancelLinkRequest cancelLinkRequest = new CancelLinkRequest();
@@ -659,7 +650,7 @@ public void confirmlLink() throws Exception {
     }
 
 }
-~~~
+```
 
 
 
@@ -700,7 +691,7 @@ public static void createUser() throws Exception {
 
 - 返回结果
 
-```javascript
+```json
 {
     "requestId":"44AF1DB3-119D-4A2E-B9F1-6155C613C9A9",
     "avatar":"",
@@ -723,7 +714,7 @@ public static void createUser() throws Exception {
 
 - 以下代码用于获取User，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~~java
+```java
 //获取User
 public static void getUser() throws Exception {
     try {
@@ -740,11 +731,11 @@ public static void getUser() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~~
+```
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"2E4824D1-AF73-4F3B-B8C0-C9F446DE4198",
     "avatar":"",
@@ -761,13 +752,13 @@ public static void getUser() throws Exception {
     "userId":"test_user",
     "userName":"test_user"
 }
-~~~
+```
 
 ### 列举User
 
 - 以下代码用于列举User，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~~java
+```java
 //列举User
 
 public static void listUser() throws Exception {
@@ -785,11 +776,11 @@ public static void listUser() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~~
+```
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"BD84CB38-20A2-4652-ABE8-E35580D77DC7",
     "items":[
@@ -886,7 +877,7 @@ public static void listUser() throws Exception {
     ],
     "nextMarker":""
 }
-~~~
+```
 
 
 
@@ -894,7 +885,7 @@ public static void listUser() throws Exception {
 
 - 以下代码用于更新User，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 //更新User
 public static void updateUser() throws Exception {
     try {
@@ -913,13 +904,13 @@ public static void updateUser() throws Exception {
     }
 }
 
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"56FEFF5B-9E88-403B-AED4-92B051BE4E74",
     "avatar":"",
@@ -936,7 +927,7 @@ public static void updateUser() throws Exception {
     "userId":"test_user",
     "userName":"test_user"
 }
-~~~
+```
 
 
 
@@ -944,7 +935,7 @@ public static void updateUser() throws Exception {
 
 - 以下代码用于搜索User，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // search user
 public static void searchUser() throws Exception {
     try {
@@ -963,13 +954,13 @@ public static void searchUser() throws Exception {
 }
 
 
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"0CCADE95-61CC-41BC-9047-39145CC50054",
     "items":[
@@ -991,7 +982,7 @@ public static void searchUser() throws Exception {
     ],
     "nextMarker":""
 }
-~~~
+```
 
 
 
@@ -999,7 +990,7 @@ public static void searchUser() throws Exception {
 
 - 以下代码用于删除User，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 删除User
 
 public static void deleteUser() throws Exception {
@@ -1014,7 +1005,7 @@ public static void deleteUser() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 
 
@@ -1028,7 +1019,7 @@ public static void deleteUser() throws Exception {
 
 - 以下代码用于创建Drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 public static void createDrive() throws Exception {
     try {
         // 获取store_id
@@ -1061,13 +1052,13 @@ public static void createDrive() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 // list_stores response
 {
     "requestId":"84BDA281-9B83-477B-B2CC-41D47C8FD982",
@@ -1094,7 +1085,7 @@ public static void createDrive() throws Exception {
     "domainId":"daily1405",
     "driveId":"1902"
 }
-~~~
+```
 
 
 
@@ -1127,7 +1118,7 @@ public static void listDrive() throws Exception {
 
 - 返回结果
 
-```javascript
+```json
 {
     "requestId":"871949D9-12A4-4220-B078-D6E937F90699",
     "items":[
@@ -1156,7 +1147,7 @@ public static void listDrive() throws Exception {
 
 - 以下代码用于查询Drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 查询 Drive
 public static void getDrive() throws Exception {
     try {
@@ -1173,13 +1164,13 @@ public static void getDrive() throws Exception {
     }
 }
 
-~~~
+```
 
 
 
 - 返回结果
 
-~~~JavaScript
+```json
 {
     "requestId":"C50006A6-D23B-43AA-B634-3656CB23D542",
     "creator":"6c23c9*************f5211",
@@ -1195,13 +1186,13 @@ public static void getDrive() throws Exception {
     "totalSize":1000000,
     "usedSize":0
 }
-~~~
+```
 
 ### 列举drive
 
 - 以下代码用于更新Drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 列举 Drive 
 public static void listDrive() throws Exception {
     try {
@@ -1219,13 +1210,13 @@ public static void listDrive() throws Exception {
     }
 }
 
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"51C9C618-25CE-487B-8A28-33827AF6DC99",
     "items":[
@@ -1247,7 +1238,7 @@ public static void listDrive() throws Exception {
     "nextMarker":""
 }
 
-~~~
+```
 
 
 
@@ -1255,7 +1246,7 @@ public static void listDrive() throws Exception {
 
 - 以下代码用于更新Drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 更新 Drive
 public static void updateDrive() throws Exception {
     try {
@@ -1274,13 +1265,13 @@ public static void updateDrive() throws Exception {
     }
 }
 
-~~~
+```
 
 
 
 - 返回结果
 
-~~~JavaScript
+```json
 {
     "requestId":"D88BC954-0BE8-4282-BDF3-6F964FC113DF",
     "creator":"6c23c**************9f5211",
@@ -1296,7 +1287,7 @@ public static void updateDrive() throws Exception {
     "totalSize":1000000,
     "usedSize":0
 }
-~~~
+```
 
 
 
@@ -1304,7 +1295,7 @@ public static void updateDrive() throws Exception {
 
 - 以下代码用于创建Drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 删除 Drive
 public static void deleteDrive() throws Exception {
     try {
@@ -1319,7 +1310,7 @@ public static void deleteDrive() throws Exception {
     }
 }
 
-~~~
+```
 
 
 
@@ -1329,7 +1320,7 @@ public static void deleteDrive() throws Exception {
 
 - 以下代码用于创建Share，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 格式化过期时间
 public static String getISOTime() {
     long currentTime = System.currentTimeMillis();
@@ -1368,19 +1359,19 @@ public static void createShare() throws Exception {
     }
 }
 
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"CD01D212-D12A-4250-A773-8296E01B226A",
     "domainId":"daily1405",
     "shareId":"47057f7b-8182-4d2d-ba1a-09ede78782d7"
 }
-~~~
+```
 
 
 
@@ -1388,7 +1379,7 @@ public static void createShare() throws Exception {
 
 - 以下代码用于列举Share，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 列举 Share
 public static void listShare() throws Exception {
     try {
@@ -1405,13 +1396,13 @@ public static void listShare() throws Exception {
     }
 }
 
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"4A5EF007-CA9B-49E2-A2A9-68108E34F7F7",
     "items":[
@@ -1436,7 +1427,7 @@ public static void listShare() throws Exception {
     ],
     "nextMarker":""
 }
-~~~
+```
 
 
 
@@ -1444,7 +1435,7 @@ public static void listShare() throws Exception {
 
 - 以下代码用于查询Share，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 查询Share
 public static void getShare() throws Exception {
     try {
@@ -1461,13 +1452,13 @@ public static void getShare() throws Exception {
     }
 }
 
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"3DC7F2B1-68D4-4B1D-BF12-3F3814C22278",
     "createdAt":"2019-10-28T06:22:21.163Z",
@@ -1487,7 +1478,7 @@ public static void getShare() throws Exception {
     "status":"enabled",
     "updatedAt":"2019-10-28T06:22:21.163Z"
 }
-~~~
+```
 
 
 
@@ -1495,7 +1486,7 @@ public static void getShare() throws Exception {
 
 - 以下代码用于更新Share，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 更新 Share
 public static void updateShare() throws Exception {
     try {
@@ -1514,13 +1505,13 @@ public static void updateShare() throws Exception {
 }
 
 
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"F693F9EB-863E-49AF-AE0D-AD158B3613D5",
     "createdAt":"2019-10-28T06:22:21.163Z",
@@ -1540,7 +1531,7 @@ public static void updateShare() throws Exception {
     "status":"enabled",
     "updatedAt":"2019-10-28T06:22:21.163Z"
 }
-~~~
+```
 
 
 
@@ -1548,7 +1539,7 @@ public static void updateShare() throws Exception {
 
 - 以下代码用于删除Share，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 删除 Share
 
 public static void deleteShare() throws Exception {
@@ -1564,7 +1555,7 @@ public static void deleteShare() throws Exception {
     }
 }
 
-~~~
+```
 
 ## OSSPath File相关 API
 
@@ -1573,7 +1564,7 @@ public static void deleteShare() throws Exception {
 - 以下代码用于创建File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 - 说明： 此处创建File 还需要上传文件到OSS， 具体操作详见最佳实践。
 
-~~~java
+```java
 // 创建文件
 public static void createFile() throws Exception {
     try {
@@ -1594,13 +1585,13 @@ public static void createFile() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 // 此处url省略部分，实际值详见接口调用返回的结果。
 {
     "requestId":"E30F4EC3-0655-44DD-8A8A-8D71848CCC44",
@@ -1616,7 +1607,7 @@ public static void createFile() throws Exception {
     "type":"file",
     "uploadId":"872F52602EB343D0ADCE3E75D008FB16"
 }
-~~~
+```
 
 
 
@@ -1624,7 +1615,7 @@ public static void createFile() throws Exception {
 
 - 以下代码用于列举File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 列举文件
 public static void listFile() throws Exception {
     try {
@@ -1645,13 +1636,13 @@ public static void listFile() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~JavaScript
+```json
 // 此处url省略部分，实际值详见接口调用返回的结果。
 {
     "requestId":"67AF911A-F8F8-4FD4-994C-797642468AFF",
@@ -1674,7 +1665,7 @@ public static void listFile() throws Exception {
     ],
     "nextMarker":""
 }
-~~~
+```
 
 
 
@@ -1682,7 +1673,7 @@ public static void listFile() throws Exception {
 
 - 以下代码用于查询File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 查询File
 public static void getFile() throws Exception {
     try {
@@ -1700,13 +1691,13 @@ public static void getFile() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"0AC2633C-A0F1-402B-9CCD-EE98FAD573B7",
     "contentType":"text/plain",
@@ -1723,13 +1714,13 @@ public static void getFile() throws Exception {
     "updatedAt":"2019-10-28T06:22:23Z",
     "url":"https://********.oss-cn-hangzhou.aliyuncs.***********8FB16"
 }
-~~~
+```
 
 ### 移动File
 
 - 以下代码用于移动File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 移动 File
 public static void moveFile() throws Exception {
     try {
@@ -1746,20 +1737,20 @@ public static void moveFile() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"757C1547-9354-444B-92D2-127A83AEA470",
     "domainId":"daily1405",
     "driveId":"1902",
     "filePath":"/test_folder/a.txt"
 }
-~~~
+```
 
 
 
@@ -1767,7 +1758,7 @@ public static void moveFile() throws Exception {
 
 - 以下代码用于复制File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 复制 File
 public static void copyFile() throws Exception {
     try {
@@ -1785,20 +1776,20 @@ public static void copyFile() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"24C7E91D-9715-4AE7-BDA1-4A082D7D3AA3",
     "domainId":"daily1405",
     "driveId":"1902",
     "filePath":"/a.txt"
 }
-~~~
+```
 
 
 
@@ -1806,7 +1797,7 @@ public static void copyFile() throws Exception {
 
 - 以下代码用于获取File上传地址，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 获取File上传地址
 public static void getFileUploadUrl() throws Exception {
     try {
@@ -1827,13 +1818,13 @@ public static void getFileUploadUrl() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"64062AF5-7ADF-4F7D-9878-9E2FA6AABE53",
     "createAt":"2019-10-28T06:22:22.231Z",
@@ -1848,7 +1839,7 @@ public static void getFileUploadUrl() throws Exception {
     ],
     "uploadId":"872F52602EB343D0ADCE3E75D008FB16"
 }
-~~~
+```
 
 
 
@@ -1856,7 +1847,7 @@ public static void getFileUploadUrl() throws Exception {
 
 - 以下代码用于获取File下载地址，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 获取File下载地址
 public static void getFileDownloadUrl() throws Exception {
     try {
@@ -1875,20 +1866,20 @@ public static void getFileDownloadUrl() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"6760BC8F-AA33-4862-AA26-0F8FA57EAF39",
     "expiration":"2019-10-28T07:22:24.044Z",
     "method":"GET",
     "url":"https://********.oss-cn-hangzhou.aliyuncs.***********8FB16"
 }
-~~~
+```
 
 
 
@@ -1897,7 +1888,7 @@ public static void getFileDownloadUrl() throws Exception {
 - 以下代码用于创建Complete File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 - 说明： 此处请求参数中的ETag是请求uploadUrl上传完成后从返回的Response Headers中获取的，详见最佳实践。
 
-~~~java
+```java
 // 合并File分片
 public static void completeFile() throws Exception {
     try {
@@ -1919,13 +1910,13 @@ public static void completeFile() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"B05D6ABD-AF30-4E10-B1FA-4168941EE750",
     "contentType":"text/plain",
@@ -1942,7 +1933,7 @@ public static void completeFile() throws Exception {
     "uploadId":"872F52602EB343D0ADCE3E75D008FB16",
     "crc":"6668564720710875145"
 }
-~~~
+```
 
 
 
@@ -1950,7 +1941,7 @@ public static void completeFile() throws Exception {
 
 - 以下代码用于删除File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 删除 file
 public static void deleteFile() throws Exception {
     try {
@@ -1967,13 +1958,13 @@ public static void deleteFile() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 ### 列举Stores File
 
 - 以下代码用于列举Stores File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档.
 
-~~~java
+```java
 // 列举 Stores File
 public static void listStoreFiles() throws Exception {
     try {
@@ -2002,13 +1993,13 @@ public static void listStoreFiles() throws Exception {
     }
 }
 
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"DB0A660A-C4B6-4620-BF83-B6CFCA31162C",
     "items":[
@@ -2043,7 +2034,7 @@ public static void listStoreFiles() throws Exception {
     ],
     "nextMarker":""
 }
-~~~
+```
 
 
 
@@ -2053,7 +2044,7 @@ public static void listStoreFiles() throws Exception {
 
 - 以下代码用于创建Drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 创建 Drive
 public static void createDrive() throws Exception {
     try {
@@ -2072,19 +2063,19 @@ public static void createDrive() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"6B556975-1A8D-4517-9227-D1CED662A24B",
     "domainId":"daily1404",
     "driveId":"603"
 }
-~~~
+```
 
 
 
@@ -2092,7 +2083,7 @@ public static void createDrive() throws Exception {
 
 - 以下代码用于列举drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 列举 Drive 
 public static void listDrive() throws Exception {
     try {
@@ -2111,13 +2102,13 @@ public static void listDrive() throws Exception {
 }
 
 
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"51C9C618-25CE-487B-8A28-33827AF6DC99",
     "items":[
@@ -2138,7 +2129,7 @@ public static void listDrive() throws Exception {
     ],
     "nextMarker":""
 }
-~~~
+```
 
 
 
@@ -2146,7 +2137,7 @@ public static void listDrive() throws Exception {
 
 - 以下代码用于查询drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 查询 Drive
 public static void getDrive() throws Exception {
     try {
@@ -2163,13 +2154,13 @@ public static void getDrive() throws Exception {
     }
 }
 
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"2A361340-F298-4685-8C8B-B34C12EE2F41",
     "creator":"",
@@ -2185,7 +2176,7 @@ public static void getDrive() throws Exception {
     "totalSize":100000,
     "usedSize":0
 }
-~~~
+```
 
 
 
@@ -2193,7 +2184,7 @@ public static void getDrive() throws Exception {
 
 - 以下代码用于更新drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 更新 Drive
 public static void updateDrive() throws Exception {
     try {
@@ -2212,13 +2203,13 @@ public static void updateDrive() throws Exception {
     }
 }
 
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"501B210E-0D4C-46E9-9D35-F1E86074A1D8",
     "creator":"",
@@ -2234,7 +2225,7 @@ public static void updateDrive() throws Exception {
     "totalSize":1000000,
     "usedSize":0
 }
-~~~
+```
 
 
 
@@ -2242,7 +2233,7 @@ public static void updateDrive() throws Exception {
 
 - 以下代码用于删除drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 删除 Drive
 public static void deleteDrive() throws Exception {
     try {
@@ -2257,7 +2248,7 @@ public static void deleteDrive() throws Exception {
     }
 }
 
-~~~
+```
 
 
 
@@ -2267,7 +2258,7 @@ public static void deleteDrive() throws Exception {
 
 - 以下代码用于创建Drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 创建文件
 public static void createFile() throws Exception {
     try {
@@ -2288,13 +2279,13 @@ public static void createFile() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~JavaScript
+```json
 {
     "requestId":"70BC9CC0-A4E9-49A1-9384-6C9CEF286981",
     "domainId":"daily1404",
@@ -2311,7 +2302,7 @@ public static void createFile() throws Exception {
     "type":"file",
     "uploadId":"DEB65A38FCCA410BAC6DD23A8A11F943"
 }
-~~~
+```
 
 
 
@@ -2319,7 +2310,7 @@ public static void createFile() throws Exception {
 
 - 以下代码用于列举File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 列举文件
 public static void listFile() throws Exception {
     try {
@@ -2339,13 +2330,13 @@ public static void listFile() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"98B303D7-711B-4E98-BAAE-A09B49A4168D",
     "items":[
@@ -2372,7 +2363,7 @@ public static void listFile() throws Exception {
     ],
     "nextMarker":""
 }
-~~~
+```
 
 
 
@@ -2380,7 +2371,7 @@ public static void listFile() throws Exception {
 
 - 以下代码用于查询File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 查询File
 public static void getFile() throws Exception {
     try {
@@ -2398,13 +2389,13 @@ public static void getFile() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"C32B9339-C65E-4AB6-86C9-AC4F172A0C63",
     "contentHash":"7C4A8D09CA3762AF61E59520943DC26494F8941B",
@@ -2428,7 +2419,7 @@ public static void getFile() throws Exception {
     "uploadId":"DEB65A38FCCA410BAC6DD23A8A11F943",
     "url":"https://*********.oss-cn-hangzhou.aliyuncs.com/*****F943"
 }
-~~~
+```
 
 
 
@@ -2436,7 +2427,7 @@ public static void getFile() throws Exception {
 
 - 以下代码用于移动File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 移动 File
 public static void moveFile() throws Exception {
     try {
@@ -2454,20 +2445,20 @@ public static void moveFile() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"B6E69EDE-D3C9-410E-B4D1-059355A38F34",
     "domainId":"daily1404",
     "driveId":"603",
     "fileId":"5db6a996aa1292d7563644f0bc4847107171ed7f"
 }
-~~~
+```
 
 
 
@@ -2475,7 +2466,7 @@ public static void moveFile() throws Exception {
 
 - 以下代码用于复制File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 复制 File
 public static void copyFile() throws Exception {
     try {
@@ -2493,20 +2484,20 @@ public static void copyFile() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"F001CD18-8BD8-481E-B1F1-8B804709A865",
     "domainId":"daily1404",
     "driveId":"603",
     "fileId":"5db6a997ce31eb635f2e4f4c9163ec3bd10af459"
 }
-~~~
+```
 
 
 
@@ -2514,7 +2505,7 @@ public static void copyFile() throws Exception {
 
 - 以下代码用于获取File上传地址，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 获取File上传地址
 public static void getFileUploadUrl() throws Exception {
     try {
@@ -2536,13 +2527,13 @@ public static void getFileUploadUrl() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"8E80078C-0749-4C03-A3AB-F0274D652114",
     "createAt":"2019-10-28T08:40:54.519Z",
@@ -2557,7 +2548,7 @@ public static void getFileUploadUrl() throws Exception {
     ],
     "uploadId":"DEB65A38FCCA410BAC6DD23A8A11F943"
 }
-~~~
+```
 
 
 
@@ -2565,7 +2556,7 @@ public static void getFileUploadUrl() throws Exception {
 
 - 以下代码用于获取File下载地，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 获取File下载地址
 public static void getFileDownloadUrl() throws Exception {
     try {
@@ -2585,20 +2576,20 @@ public static void getFileDownloadUrl() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"29B59FA4-C6BD-44F6-809F-BF788F435145",
     "expiration":"2019-10-28T09:40:55.716Z",
     "method":"GET",
     "url":"https://ccp-daily1404-hz-1571887934.oss-cn-hangzhou.aliyuncs.com/5db5910348946ee1835e4c139165301333e5f743%2F5db59103967263443aef47799253e5e63970d7ce?Expires=1572252955&OSSAccessKeyId=LTAIi5kx6X0mwR8k&Signature=urIb%2BP03nvZg0%2Birshzeow5u6ow%3D&response-content-disposition=attachment%3Bfilename%3Da.txt"
 }
-~~~
+```
 
 
 
@@ -2606,7 +2597,7 @@ public static void getFileDownloadUrl() throws Exception {
 
 - 以下代码用于Complete File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 合并File分片
 public static void completeFile() throws Exception {
     try {
@@ -2629,13 +2620,13 @@ public static void completeFile() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~
+```
 {
     "requestId":"6E4FCA06-8554-425A-8447-1A3826B064CA",
     "contentHash":"7C4A8D09CA3762AF61E59520943DC26494F8941B",
@@ -2658,7 +2649,7 @@ public static void completeFile() throws Exception {
     "uploadId":"DEB65A38FCCA410BAC6DD23A8A11F943",
     "crc":""
 }
-~~~
+```
 
 
 
@@ -2666,7 +2657,7 @@ public static void completeFile() throws Exception {
 
 - 以下代码用于更新File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 更新 file
 public static void updateFile() throws Exception {
     try {
@@ -2686,13 +2677,13 @@ public static void updateFile() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~javascript
+```json
 {
     "requestId":"C58CA3EC-A71B-4DEE-B319-C92E847C4702",
     "contentHash":"7C4A8D09CA3762AF61E59520943DC26494F8941B",
@@ -2717,7 +2708,7 @@ public static void updateFile() throws Exception {
     "uploadId":"DEB65A38FCCA410BAC6DD23A8A11F943",
     "url":"https://****.oss-cn-hangzhou.aliyuncs.com/****wZM%3D"
 }
-~~~
+```
 
 
 
@@ -2725,7 +2716,7 @@ public static void updateFile() throws Exception {
 
 - 以下代码用于搜索File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 搜索 file
 public static void searchFile() throws Exception {
     try {
@@ -2744,13 +2735,13 @@ public static void searchFile() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }   
 }
-~~~
+```
 
 
 
 - 返回结果
 
-~~~JavaScript
+```json
 {
     "requestId":"E285FC30-6414-4843-8F09-707DC610DA0B",
     "items":[
@@ -2780,7 +2771,7 @@ public static void searchFile() throws Exception {
     ],
     "nextMarker":""
 }
-~~~
+```
 
 
 
@@ -2788,7 +2779,7 @@ public static void searchFile() throws Exception {
 
 - 以下代码用于创建Drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-~~~java
+```java
 // 删除 file
 public static void deleteFile() throws Exception {
     try {
@@ -2804,7 +2795,7 @@ public static void deleteFile() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-~~~
+```
 
 # 附
 
@@ -2822,7 +2813,7 @@ public static void deleteFile() throws Exception {
 
 ## CCPPath 上传文件
 
-~~~java
+```java
 import com.aliyun.ccp.ccpclient.models.*;
 import com.aliyun.ccp.ccpclient.Client;
 import com.aliyun.tea.TeaException;
@@ -2903,5 +2894,4 @@ public class Demo {
         }
     }
 }
-~~~
-
+```

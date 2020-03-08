@@ -8,7 +8,7 @@
 ## 安装
 你可以使用 `go mod` 来管理你的依赖，
 ```go
-  go mod tidy
+$ go mod tidy
 ```
 
 ## 快速使用
