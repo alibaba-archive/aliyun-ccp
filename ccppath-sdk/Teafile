@@ -10,22 +10,13 @@
 		"csharp": "Aliyun.SDK.CCP.Client:2.0.1"
 	},
 	"java": {
-		"package": "com.aliyun.ccp.ccpclient",
-		"baseClient": "com.aliyun.ccp.baseclient.BaseClient"
+		"package": "com.aliyun.ccp.ccpclient"
 	},
 	"csharp": {
-		"namespace": "Aliyun.SDK.CCP.CCPClient",
-		"baseClient": "Aliyun.SDK.CCP:BaseClient"
-	},
-	"go": {
-		"baseClient": "github.com/aliyun/aliyun-ccp/baseclient/go"
-	},
-	"typescript": {
-		"baseClient": "@alicloud/ccp-baseclient"
+		"namespace": "Aliyun.SDK.CCP.CCPClient"
 	},
 	"swift5": {
-		"package": "AliyunCCPSDK",
-		"baseClient": "Aliyun.SDK.CCP.BaseClient"
+		"package": "AliyunCCPSDK"
 	},
 	"libraries": {
 		"Util": "alibabacloud:Util:*",
