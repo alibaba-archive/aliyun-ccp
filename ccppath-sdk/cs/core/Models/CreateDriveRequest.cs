@@ -28,6 +28,10 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         [Validation(Required=false)]
         public string DriveType { get; set; }
 
+        [NameInMap("encrypt_mode")]
+        [Validation(Required=false)]
+        public string EncryptMode { get; set; }
+
         [NameInMap("owner")]
         [Validation(Required=true)]
         public string Owner { get; set; }
