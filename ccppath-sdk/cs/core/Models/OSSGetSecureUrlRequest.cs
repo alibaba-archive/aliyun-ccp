@@ -9,32 +9,28 @@ using Tea;
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
     /**
-     * 获取文件元数据
+     * 获取文件安全地址的请求body
      */
-    public class OSSGetFileRequest : TeaModel {
+    public class OSSGetSecureUrlRequest : TeaModel {
         [NameInMap("drive_id")]
         [Validation(Required=false, Pattern="[0-9]+")]
         public string DriveId { get; set; }
+
+        [NameInMap("expire_sec")]
+        [Validation(Required=false)]
+        public long ExpireSec { get; set; }
 
         [NameInMap("file_path")]
         [Validation(Required=true, MaxLength=1000)]
         public string FilePath { get; set; }
 
-        [NameInMap("image_thumbnail_process")]
+        [NameInMap("secure_ip")]
         [Validation(Required=false)]
-        public string ImageThumbnailProcess { get; set; }
-
-        [NameInMap("image_url_process")]
-        [Validation(Required=false)]
-        public string ImageUrlProcess { get; set; }
+        public string SecureIp { get; set; }
 
         [NameInMap("share_id")]
-        [Validation(Required=false, Pattern="[0-9a-zA-z-]+")]
+        [Validation(Required=false, Pattern="[0-9a-z-]+")]
         public string ShareId { get; set; }
-
-        [NameInMap("url_expire_sec")]
-        [Validation(Required=false)]
-        public long UrlExpireSec { get; set; }
 
     }
 

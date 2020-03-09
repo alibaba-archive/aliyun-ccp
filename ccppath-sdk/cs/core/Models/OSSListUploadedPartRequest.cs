@@ -13,7 +13,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
      */
     public class OSSListUploadedPartRequest : TeaModel {
         [NameInMap("drive_id")]
-        [Validation(Required=true, Pattern="[0-9]+")]
+        [Validation(Required=false, Pattern="[0-9]+")]
         public string DriveId { get; set; }
 
         [NameInMap("file_path")]

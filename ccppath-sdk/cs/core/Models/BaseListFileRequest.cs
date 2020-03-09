@@ -13,7 +13,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
      */
     public class BaseListFileRequest : TeaModel {
         [NameInMap("drive_id")]
-        [Validation(Required=true, Pattern="[0-9]+")]
+        [Validation(Required=false, Pattern="[0-9]+")]
         public string DriveId { get; set; }
 
         [NameInMap("image_thumbnail_process")]
@@ -31,6 +31,10 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         [NameInMap("marker")]
         [Validation(Required=false)]
         public string Marker { get; set; }
+
+        [NameInMap("video_thumbnail_process")]
+        [Validation(Required=false)]
+        public string VideoThumbnailProcess { get; set; }
 
     }
 

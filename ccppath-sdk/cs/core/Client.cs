@@ -10513,6 +10513,7 @@ namespace Aliyun.SDK.CCP.CCPClient
          * @error AccessTokenInvalid AccessToken is invalid. {message}
          * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
          * @error NotFound The resource {resource_name} cannot be found. Please check.
+         * @error AlreadyExist {resource} has already exists. {extra_msg}
          * @error InternalError The request has been failed due to some unknown error.
          * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
          */
@@ -10663,6 +10664,7 @@ namespace Aliyun.SDK.CCP.CCPClient
          * @error AccessTokenInvalid AccessToken is invalid. {message}
          * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
          * @error NotFound The resource {resource_name} cannot be found. Please check.
+         * @error AlreadyExist {resource} has already exists. {extra_msg}
          * @error InternalError The request has been failed due to some unknown error.
          * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
          */
@@ -13781,7 +13783,7 @@ namespace Aliyun.SDK.CCP.CCPClient
         }
 
         /**
-         * 
+         * 展示标签集合
          */
         public string GetPathname(string nickname, string path)
         {
@@ -13793,7 +13795,7 @@ namespace Aliyun.SDK.CCP.CCPClient
         }
 
         /**
-         * 
+         * 展示标签集合
          */
         public void SetExpireTime(string expireTime)
         {
@@ -13805,7 +13807,7 @@ namespace Aliyun.SDK.CCP.CCPClient
         }
 
         /**
-         * 
+         * 展示标签集合
          */
         public async Task SetExpireTimeAsync(string expireTime)
         {
@@ -13817,7 +13819,7 @@ namespace Aliyun.SDK.CCP.CCPClient
         }
 
         /**
-         * 
+         * 展示标签集合
          */
         public string GetExpireTime()
         {
@@ -13830,7 +13832,7 @@ namespace Aliyun.SDK.CCP.CCPClient
         }
 
         /**
-         * 
+         * 展示标签集合
          */
         public void SetUserAgent(string userAgent)
         {
@@ -13838,7 +13840,7 @@ namespace Aliyun.SDK.CCP.CCPClient
         }
 
         /**
-         * 
+         * 展示标签集合
          */
         public void AppendUserAgent(string userAgent)
         {
@@ -13846,7 +13848,7 @@ namespace Aliyun.SDK.CCP.CCPClient
         }
 
         /**
-         * 
+         * 展示标签集合
          */
         public string GetUserAgent()
         {
@@ -13855,7 +13857,7 @@ namespace Aliyun.SDK.CCP.CCPClient
         }
 
         /**
-         * 
+         * 展示标签集合
          */
         public void SetRefreshToken(string token)
         {
@@ -13867,7 +13869,7 @@ namespace Aliyun.SDK.CCP.CCPClient
         }
 
         /**
-         * 
+         * 展示标签集合
          */
         public string GetRefreshToken()
         {
@@ -13880,7 +13882,7 @@ namespace Aliyun.SDK.CCP.CCPClient
         }
 
         /**
-         * 
+         * 展示标签集合
          */
         public void SetAccessToken(string token)
         {
@@ -13892,7 +13894,7 @@ namespace Aliyun.SDK.CCP.CCPClient
         }
 
         /**
-         * 
+         * 展示标签集合
          */
         public string GetAccessToken()
         {
@@ -13905,7 +13907,7 @@ namespace Aliyun.SDK.CCP.CCPClient
         }
 
         /**
-         * 
+         * 展示标签集合
          */
         public async Task<string> GetAccessTokenAsync()
         {
@@ -13918,7 +13920,7 @@ namespace Aliyun.SDK.CCP.CCPClient
         }
 
         /**
-         * 
+         * 展示标签集合
          */
         public string GetAccessKeyId()
         {
@@ -13931,7 +13933,7 @@ namespace Aliyun.SDK.CCP.CCPClient
         }
 
         /**
-         * 
+         * 展示标签集合
          */
         public async Task<string> GetAccessKeyIdAsync()
         {
@@ -13944,7 +13946,7 @@ namespace Aliyun.SDK.CCP.CCPClient
         }
 
         /**
-         * 
+         * 展示标签集合
          */
         public string GetAccessKeySecret()
         {
@@ -13957,7 +13959,7 @@ namespace Aliyun.SDK.CCP.CCPClient
         }
 
         /**
-         * 
+         * 展示标签集合
          */
         public async Task<string> GetAccessKeySecretAsync()
         {

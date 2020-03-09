@@ -21,7 +21,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         public string FilePath { get; set; }
 
         [NameInMap("new_name")]
-        [Validation(Required=true, Pattern="[a-zA-Z0-9.-]{1,1000}")]
+        [Validation(Required=true)]
         public string NewName { get; set; }
 
         [NameInMap("overwrite")]

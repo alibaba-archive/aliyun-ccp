@@ -32,6 +32,10 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         [Validation(Required=false)]
         public string Marker { get; set; }
 
+        [NameInMap("video_thumbnail_process")]
+        [Validation(Required=false)]
+        public string VideoThumbnailProcess { get; set; }
+
         [NameInMap("Starred")]
         [Validation(Required=false)]
         public bool? Starred { get; set; }
@@ -64,9 +68,9 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         [Validation(Required=false)]
         public string Type { get; set; }
 
-        [NameInMap("custom_index_key")]
+        [NameInMap("url_expire_sec")]
         [Validation(Required=false)]
-        public string CustomIndexKey { get; set; }
+        public long UrlExpireSec { get; set; }
 
     }
 

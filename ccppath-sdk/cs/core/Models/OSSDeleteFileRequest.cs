@@ -13,11 +13,11 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
      */
     public class OSSDeleteFileRequest : TeaModel {
         [NameInMap("drive_id")]
-        [Validation(Required=true, Pattern="[0-9]+")]
+        [Validation(Required=false, Pattern="[0-9]+")]
         public string DriveId { get; set; }
 
         [NameInMap("file_path")]
-        [Validation(Required=true, MaxLength=50, Pattern="[a-z0-9.-_]{1,50}")]
+        [Validation(Required=true, MaxLength=1000)]
         public string FilePath { get; set; }
 
         [NameInMap("permanently")]

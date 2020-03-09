@@ -40,6 +40,10 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         [Validation(Required=false)]
         public string ShareName { get; set; }
 
+        [NameInMap("share_policy")]
+        [Validation(Required=false)]
+        public List<SharePermissionPolicy> SharePolicy { get; set; }
+
         [NameInMap("status")]
         [Validation(Required=false)]
         public string Status { get; set; }
