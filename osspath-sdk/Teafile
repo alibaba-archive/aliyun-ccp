@@ -10,18 +10,10 @@
 		"java": "com.aliyun:ccp-oss-client:2.1.0"
 	},
 	"java": {
-		"package": "com.aliyun.ccp.ossclient",
-		"baseClient": "com.aliyun.ccp.baseclient.BaseClient"
+		"package": "com.aliyun.ccp.ossclient"
 	},
 	"csharp": {
-		"namespace": "Aliyun.SDK.CCP.OSSClient",
-		"baseClient": "Aliyun.SDK.CCP:BaseClient"
-	},
-	"go": {
-		"baseClient": "github.com/aliyun/aliyun-ccp/baseclient/go"
-	},
-	"typescript": {
-		"baseClient": "@alicloud/ccp-baseclient"
+		"namespace": "Aliyun.SDK.CCP.OSSClient"
 	},
 	"libraries": {
 		"Util": "alibabacloud:Util:*",
