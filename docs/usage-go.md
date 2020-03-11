@@ -30,7 +30,8 @@ func main() {
 	// 初始化 config
 	var config = new(osspath.Config).SetAccessKeyId("ACCESS_KEY_ID").
 		SetAccessKeySecret("ACCESS_KEY_SECRET").
-		SetType("access_key")
+		SetType("access_key").
+		SetDomainId("domainId")
 
 	// 创建客户端
 	client, err := facebody.NewClient(config)
