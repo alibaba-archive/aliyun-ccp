@@ -1,7 +1,7 @@
 module github.com/aliyun/aliyun-ccp/osspath-sdk/go
 
 require (
-	github.com/alibabacloud-go/tea v0.0.10
+	github.com/alibabacloud-go/tea v0.0.11
 	github.com/aliyun/aliyun-ccp/credential/golang v0.0.0-20200226063132-a38647f02ad0
 	github.com/aliyun/credentials-go v0.0.3
 	github.com/aliyun/tea-roa-util/golang v0.0.0-20200302073438-09f7e22d7bb6
