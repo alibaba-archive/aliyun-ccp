@@ -53,15 +53,17 @@ type credentialUpdater struct {
 	ExpireTime *int64
 }
 
-func NewAccessTokenCredential(config *Config) (*AccessTokenCredential, error) {
-	a := new(AccessTokenCredential)
+func NewAccessTokenCredential(config *Config) (a *AccessTokenCredential, err error) {
+	a = new(AccessTokenCredential)
 	a.AccessToken = config.AccessToken
 	a.RefreshToken = config.RefreshToken
 	a.Endpoint = config.Endpoint
 	a.ClientId = config.ClientId
 	a.ClientSecret = config.ClientSecret
 	a.DomainId = config.DomainId
-	err := a.SetExpireTime(tea.StringValue(config.ExpireTime))
+	if config.ExpireTime != nil {
+		err = a.SetExpireTime(tea.StringValue(config.ExpireTime))
+	}
 	return a, err
 }
 
