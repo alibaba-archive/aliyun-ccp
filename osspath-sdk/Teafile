@@ -7,7 +7,7 @@
 		"go": "github.com/aliyun/aliyun-ccp/osspath-sdk/go/client:v2.0.0",
 		"ts": "@alicloud/osspath-sdk:1.1.0",
 		"csharp": "Aliyun.SDK.CCP.OSS.Client:2.0.2",
-		"java": "com.aliyun:ccp-oss-client:2.2.1"
+		"java": "com.aliyun:ccp-oss-client:2.2.0"
 	},
 	"java": {
 		"package": "com.aliyun.ccp.ossclient"
