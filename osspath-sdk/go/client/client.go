@@ -7730,6 +7730,52 @@ func (s *MoveFileModel) SetBody(v *OSSMoveFileResponse) *MoveFileModel {
 	return s
 }
 
+type OSSVideoDefinitionRequestModel struct {
+	Headers map[string]string          `json:"headers" xml:"headers"`
+	Body    *OSSVideoDefinitionRequest `json:"body" xml:"body" require:"true"`
+}
+
+func (s OSSVideoDefinitionRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s OSSVideoDefinitionRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *OSSVideoDefinitionRequestModel) SetHeaders(v map[string]string) *OSSVideoDefinitionRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *OSSVideoDefinitionRequestModel) SetBody(v *OSSVideoDefinitionRequest) *OSSVideoDefinitionRequestModel {
+	s.Body = v
+	return s
+}
+
+type VideoDefinitionModel struct {
+	Headers map[string]string           `json:"headers" xml:"headers"`
+	Body    *OSSVideoDefinitionResponse `json:"body" xml:"body" require:"true"`
+}
+
+func (s VideoDefinitionModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s VideoDefinitionModel) GoString() string {
+	return s.String()
+}
+
+func (s *VideoDefinitionModel) SetHeaders(v map[string]string) *VideoDefinitionModel {
+	s.Headers = v
+	return s
+}
+
+func (s *VideoDefinitionModel) SetBody(v *OSSVideoDefinitionResponse) *VideoDefinitionModel {
+	s.Body = v
+	return s
+}
+
 type OSSVideoM3U8RequestModel struct {
 	Headers map[string]string    `json:"headers" xml:"headers"`
 	Body    *OSSVideoM3U8Request `json:"body" xml:"body" require:"true"`
@@ -7772,52 +7818,6 @@ func (s *VideoM3u8Model) SetHeaders(v map[string]string) *VideoM3u8Model {
 }
 
 func (s *VideoM3u8Model) SetBody(v []byte) *VideoM3u8Model {
-	s.Body = v
-	return s
-}
-
-type OSSVideoResolutionRequestModel struct {
-	Headers map[string]string          `json:"headers" xml:"headers"`
-	Body    *OSSVideoResolutionRequest `json:"body" xml:"body" require:"true"`
-}
-
-func (s OSSVideoResolutionRequestModel) String() string {
-	return tea.Prettify(s)
-}
-
-func (s OSSVideoResolutionRequestModel) GoString() string {
-	return s.String()
-}
-
-func (s *OSSVideoResolutionRequestModel) SetHeaders(v map[string]string) *OSSVideoResolutionRequestModel {
-	s.Headers = v
-	return s
-}
-
-func (s *OSSVideoResolutionRequestModel) SetBody(v *OSSVideoResolutionRequest) *OSSVideoResolutionRequestModel {
-	s.Body = v
-	return s
-}
-
-type VideoResolutionModel struct {
-	Headers map[string]string           `json:"headers" xml:"headers"`
-	Body    *OSSVideoResolutionResponse `json:"body" xml:"body" require:"true"`
-}
-
-func (s VideoResolutionModel) String() string {
-	return tea.Prettify(s)
-}
-
-func (s VideoResolutionModel) GoString() string {
-	return s.String()
-}
-
-func (s *VideoResolutionModel) SetHeaders(v map[string]string) *VideoResolutionModel {
-	s.Headers = v
-	return s
-}
-
-func (s *VideoResolutionModel) SetBody(v *OSSVideoResolutionResponse) *VideoResolutionModel {
 	s.Body = v
 	return s
 }
@@ -8305,6 +8305,68 @@ func (s *BaseListFileRequest) SetMarker(v string) *BaseListFileRequest {
 
 func (s *BaseListFileRequest) SetVideoThumbnailProcess(v string) *BaseListFileRequest {
 	s.VideoThumbnailProcess = &v
+	return s
+}
+
+/**
+ *
+ */
+type BaseMediaResponse struct {
+	AddressLine *string `json:"address_line" xml:"address_line"`
+	City        *string `json:"city" xml:"city"`
+	Country     *string `json:"country" xml:"country"`
+	District    *string `json:"district" xml:"district"`
+	Location    *string `json:"location" xml:"location"`
+	Province    *string `json:"province" xml:"province"`
+	Time        *string `json:"time" xml:"time"`
+	Township    *string `json:"township" xml:"township"`
+}
+
+func (s BaseMediaResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s BaseMediaResponse) GoString() string {
+	return s.String()
+}
+
+func (s *BaseMediaResponse) SetAddressLine(v string) *BaseMediaResponse {
+	s.AddressLine = &v
+	return s
+}
+
+func (s *BaseMediaResponse) SetCity(v string) *BaseMediaResponse {
+	s.City = &v
+	return s
+}
+
+func (s *BaseMediaResponse) SetCountry(v string) *BaseMediaResponse {
+	s.Country = &v
+	return s
+}
+
+func (s *BaseMediaResponse) SetDistrict(v string) *BaseMediaResponse {
+	s.District = &v
+	return s
+}
+
+func (s *BaseMediaResponse) SetLocation(v string) *BaseMediaResponse {
+	s.Location = &v
+	return s
+}
+
+func (s *BaseMediaResponse) SetProvince(v string) *BaseMediaResponse {
+	s.Province = &v
+	return s
+}
+
+func (s *BaseMediaResponse) SetTime(v string) *BaseMediaResponse {
+	s.Time = &v
+	return s
+}
+
+func (s *BaseMediaResponse) SetTownship(v string) *BaseMediaResponse {
+	s.Township = &v
 	return s
 }
 
@@ -9383,7 +9445,7 @@ func (s *CompleteFileRequest) SetUploadId(v string) *CompleteFileRequest {
 }
 
 /**
- * copy file request
+ * 文件移动请求
  */
 type CopyFileRequest struct {
 	DriveId          *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
@@ -9392,10 +9454,8 @@ type CopyFileRequest struct {
 	NewName          *string `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	Overwrite        *bool   `json:"overwrite" xml:"overwrite"`
 	ShareId          *string `json:"share_id" xml:"share_id"`
-	ToDriveId        *string `json:"to_drive_id" xml:"to_drive_id" require:"true" pattern:"[0-9]+"`
 	ToParentFileId   *string `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	ToParentFilePath *string `json:"to_parent_file_path" xml:"to_parent_file_path"`
-	ToShareId        *string `json:"to_share_id" xml:"to_share_id"`
 }
 
 func (s CopyFileRequest) String() string {
@@ -9436,11 +9496,6 @@ func (s *CopyFileRequest) SetShareId(v string) *CopyFileRequest {
 	return s
 }
 
-func (s *CopyFileRequest) SetToDriveId(v string) *CopyFileRequest {
-	s.ToDriveId = &v
-	return s
-}
-
 func (s *CopyFileRequest) SetToParentFileId(v string) *CopyFileRequest {
 	s.ToParentFileId = &v
 	return s
@@ -9448,11 +9503,6 @@ func (s *CopyFileRequest) SetToParentFileId(v string) *CopyFileRequest {
 
 func (s *CopyFileRequest) SetToParentFilePath(v string) *CopyFileRequest {
 	s.ToParentFilePath = &v
-	return s
-}
-
-func (s *CopyFileRequest) SetToShareId(v string) *CopyFileRequest {
-	s.ToShareId = &v
 	return s
 }
 
@@ -10965,13 +11015,71 @@ func (s *OSSMoveFileRequest) SetToParentFilePath(v string) *OSSMoveFileRequest {
 }
 
 /**
+ * 获取视频分辨率列表
+ */
+type OSSVideoDefinitionRequest struct {
+	DriveId    *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	FilePath   *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
+	Resolution *string `json:"resolution" xml:"resolution"`
+	ShareId    *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
+}
+
+func (s OSSVideoDefinitionRequest) String() string {
+	return tea.Prettify(s)
+}
+
+func (s OSSVideoDefinitionRequest) GoString() string {
+	return s.String()
+}
+
+func (s *OSSVideoDefinitionRequest) SetDriveId(v string) *OSSVideoDefinitionRequest {
+	s.DriveId = &v
+	return s
+}
+
+func (s *OSSVideoDefinitionRequest) SetFilePath(v string) *OSSVideoDefinitionRequest {
+	s.FilePath = &v
+	return s
+}
+
+func (s *OSSVideoDefinitionRequest) SetResolution(v string) *OSSVideoDefinitionRequest {
+	s.Resolution = &v
+	return s
+}
+
+func (s *OSSVideoDefinitionRequest) SetShareId(v string) *OSSVideoDefinitionRequest {
+	s.ShareId = &v
+	return s
+}
+
+/**
+ * 转码接口response
+ */
+type OSSVideoDefinitionResponse struct {
+	DefinitionList []*string `json:"definition_list" xml:"definition_list" type:"Repeated"`
+}
+
+func (s OSSVideoDefinitionResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s OSSVideoDefinitionResponse) GoString() string {
+	return s.String()
+}
+
+func (s *OSSVideoDefinitionResponse) SetDefinitionList(v []*string) *OSSVideoDefinitionResponse {
+	s.DefinitionList = v
+	return s
+}
+
+/**
  * 获取视频的m3u8文件
  */
 type OSSVideoM3U8Request struct {
+	Definition *string `json:"definition" xml:"definition"`
 	DriveId    *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	ExpireSec  *int64  `json:"expire_sec" xml:"expire_sec"`
 	FilePath   *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
-	Resolution *string `json:"resolution" xml:"resolution"`
 	ShareId    *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
 	SignToken  *string `json:"sign_token" xml:"sign_token" require:"true"`
 }
@@ -10982,6 +11090,11 @@ func (s OSSVideoM3U8Request) String() string {
 
 func (s OSSVideoM3U8Request) GoString() string {
 	return s.String()
+}
+
+func (s *OSSVideoM3U8Request) SetDefinition(v string) *OSSVideoM3U8Request {
+	s.Definition = &v
+	return s
 }
 
 func (s *OSSVideoM3U8Request) SetDriveId(v string) *OSSVideoM3U8Request {
@@ -10999,11 +11112,6 @@ func (s *OSSVideoM3U8Request) SetFilePath(v string) *OSSVideoM3U8Request {
 	return s
 }
 
-func (s *OSSVideoM3U8Request) SetResolution(v string) *OSSVideoM3U8Request {
-	s.Resolution = &v
-	return s
-}
-
 func (s *OSSVideoM3U8Request) SetShareId(v string) *OSSVideoM3U8Request {
 	s.ShareId = &v
 	return s
@@ -11011,38 +11119,6 @@ func (s *OSSVideoM3U8Request) SetShareId(v string) *OSSVideoM3U8Request {
 
 func (s *OSSVideoM3U8Request) SetSignToken(v string) *OSSVideoM3U8Request {
 	s.SignToken = &v
-	return s
-}
-
-/**
- * 获取视频分辨率列表
- */
-type OSSVideoResolutionRequest struct {
-	DriveId  *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	FilePath *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
-	ShareId  *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
-}
-
-func (s OSSVideoResolutionRequest) String() string {
-	return tea.Prettify(s)
-}
-
-func (s OSSVideoResolutionRequest) GoString() string {
-	return s.String()
-}
-
-func (s *OSSVideoResolutionRequest) SetDriveId(v string) *OSSVideoResolutionRequest {
-	s.DriveId = &v
-	return s
-}
-
-func (s *OSSVideoResolutionRequest) SetFilePath(v string) *OSSVideoResolutionRequest {
-	s.FilePath = &v
-	return s
-}
-
-func (s *OSSVideoResolutionRequest) SetShareId(v string) *OSSVideoResolutionRequest {
-	s.ShareId = &v
 	return s
 }
 
@@ -11114,6 +11190,7 @@ func (s *OSSVideoTranscodeRequest) SetShareId(v string) *OSSVideoTranscodeReques
  * 转码接口response
  */
 type OSSVideoTranscodeResponse struct {
+	DefinitionList []*string `json:"definition_list" xml:"definition_list" type:"Repeated"`
 	HlsTime        *int64    `json:"hls_time" xml:"hls_time"`
 	ResolutionList []*string `json:"resolution_list" xml:"resolution_list" type:"Repeated"`
 }
@@ -11124,6 +11201,11 @@ func (s OSSVideoTranscodeResponse) String() string {
 
 func (s OSSVideoTranscodeResponse) GoString() string {
 	return s.String()
+}
+
+func (s *OSSVideoTranscodeResponse) SetDefinitionList(v []*string) *OSSVideoTranscodeResponse {
+	s.DefinitionList = v
+	return s
 }
 
 func (s *OSSVideoTranscodeResponse) SetHlsTime(v int64) *OSSVideoTranscodeResponse {
@@ -17697,6 +17779,158 @@ func (client *Client) MoveFile(request *OSSMoveFileRequestModel, runtime *Runtim
 }
 
 /**
+ * 获取视频支持的分辨率
+ * @tags file
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
+ * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+ */
+func (client *Client) VideoDefinition(request *OSSVideoDefinitionRequestModel, runtime *RuntimeOptions) (_result *VideoDefinitionModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+		},
+		"backoff": map[string]interface{}{
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &VideoDefinitionModel{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*VideoDefinitionModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			securityToken, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
+			request_.Method = "POST"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/video_definition")
+			request_.Headers = tea.Merge(map[string]string{
+				"user-agent":   client.GetUserAgent(),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
+				"content-type": "application/json; charset=utf-8",
+			}, request.Headers)
+			if !util.Empty(accessToken) {
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
+			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+			}
+
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request.Body)))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			respMap := make(map[string]interface{})
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return nil, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &VideoDefinitionModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    response_.StatusCode,
+						"statusMessage": response_.StatusMessage,
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return nil, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    response_.StatusCode,
+					"statusMessage": response_.StatusMessage,
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
  * 获取视频转码后的m3u8文件
  * @tags file
  * @error InvalidParameter The input parameter {parameter_name} is not valid.
@@ -17807,158 +18041,6 @@ func (client *Client) VideoM3u8(request *OSSVideoM3U8RequestModel, runtime *Runt
 				_result = &VideoM3u8Model{}
 				_err = tea.Convert(map[string]interface{}{
 					"body":    byt,
-					"headers": response_.Headers,
-				}, &_result)
-				return _result, _err
-			}
-
-			if !util.Empty(response_.Headers["x-ca-error-message"]) {
-				_err = tea.NewSDKError(map[string]interface{}{
-					"data": map[string]interface{}{
-						"requestId":     response_.Headers["x-ca-request-id"],
-						"statusCode":    response_.StatusCode,
-						"statusMessage": response_.StatusMessage,
-					},
-					"message": response_.Headers["x-ca-error-message"],
-				})
-				return nil, _err
-			}
-
-			obj, _err = util.ReadAsJSON(response_.Body)
-			if _err != nil {
-				return nil, _err
-			}
-
-			respMap = util.AssertAsMap(obj)
-			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
-				"data": map[string]interface{}{
-					"requestId":     response_.Headers["x-ca-request-id"],
-					"statusCode":    response_.StatusCode,
-					"statusMessage": response_.StatusMessage,
-				},
-			}, respMap))
-			return nil, _err
-		}()
-		if !tea.Retryable(_err) {
-			break
-		}
-	}
-
-	return _resp, _err
-}
-
-/**
- * 获取视频支持的分辨率
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
-func (client *Client) VideoResolution(request *OSSVideoResolutionRequestModel, runtime *RuntimeOptions) (_result *VideoResolutionModel, _err error) {
-	_err = tea.Validate(request)
-	if _err != nil {
-		return nil, _err
-	}
-	_err = tea.Validate(runtime)
-	if _err != nil {
-		return nil, _err
-	}
-	_runtime := map[string]interface{}{
-		"timeouted":      "retry",
-		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
-		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
-		"localAddr":      tea.StringValue(runtime.LocalAddr),
-		"httpProxy":      tea.StringValue(runtime.HttpProxy),
-		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
-		"noProxy":        tea.StringValue(runtime.NoProxy),
-		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
-		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
-		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
-		"retry": map[string]interface{}{
-			"retryable":   tea.BoolValue(runtime.Autoretry),
-			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
-		},
-		"backoff": map[string]interface{}{
-			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
-			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
-		},
-		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
-	}
-
-	_resp := &VideoResolutionModel{}
-	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
-		if _retryTimes > 0 {
-			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
-			if _backoffTime > 0 {
-				tea.Sleep(_backoffTime)
-			}
-		}
-
-		_resp, _err = func() (*VideoResolutionModel, error) {
-			request_ := tea.NewRequest()
-			accesskeyId, _err := client.GetAccessKeyId()
-			if _err != nil {
-				return nil, _err
-			}
-
-			accessKeySecret, _err := client.GetAccessKeySecret()
-			if _err != nil {
-				return nil, _err
-			}
-
-			securityToken, _err := client.GetAccessKeySecret()
-			if _err != nil {
-				return nil, _err
-			}
-
-			accessToken, _err := client.GetAccessToken()
-			if _err != nil {
-				return nil, _err
-			}
-
-			request_.Protocol = util.DefaultString(client.Protocol, "https")
-			request_.Method = "POST"
-			request_.Pathname = client.GetPathname(client.Nickname, "/v2/osspath/file/video_resolution")
-			request_.Headers = tea.Merge(map[string]string{
-				"user-agent":   client.GetUserAgent(),
-				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.DomainId)+".api.alicloudccp.com"),
-				"content-type": "application/json; charset=utf-8",
-			}, request.Headers)
-			if !util.Empty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
-				if !util.Empty(securityToken) {
-					request_.Headers["x-acs-security-token"] = securityToken
-				}
-
-				request_.Headers["date"] = util.GetDateUTCString()
-				request_.Headers["accept"] = "application/json"
-				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
-				request_.Headers["x-acs-signature-version"] = "1.0"
-				stringToSign := roautil.GetStringToSign(request_)
-				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
-			}
-
-			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request.Body)))
-			response_, _err := tea.DoRequest(request_, _runtime)
-			if _err != nil {
-				return nil, _err
-			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
-			if util.EqualNumber(response_.StatusCode, 200) {
-				obj, _err = util.ReadAsJSON(response_.Body)
-				if _err != nil {
-					return nil, _err
-				}
-
-				respMap = util.AssertAsMap(obj)
-				_result = &VideoResolutionModel{}
-				_err = tea.Convert(map[string]interface{}{
-					"body":    respMap,
 					"headers": response_.Headers,
 				}, &_result)
 				return _result, _err
