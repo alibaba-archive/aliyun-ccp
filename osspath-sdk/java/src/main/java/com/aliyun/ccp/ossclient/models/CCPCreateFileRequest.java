@@ -53,6 +53,9 @@ public class CCPCreateFileRequest extends TeaModel {
     @NameInMap("labels")
     public java.util.List<String> labels;
 
+    @NameInMap("last_updated_at")
+    public String lastUpdatedAt;
+
     @NameInMap("meta")
     public String meta;
 
@@ -62,6 +65,9 @@ public class CCPCreateFileRequest extends TeaModel {
 
     @NameInMap("pre_hash")
     public String preHash;
+
+    @NameInMap("streams_info")
+    public java.util.Map<String, Object> streamsInfo;
 
     public static CCPCreateFileRequest build(java.util.Map<String, ?> map) throws Exception {
         CCPCreateFileRequest self = new CCPCreateFileRequest();

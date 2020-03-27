@@ -34,7 +34,6 @@ public class CCPUpdateFileMetaRequest extends TeaModel {
     public String meta;
 
     @NameInMap("name")
-    @Validation(pattern = ".{1,1000}")
     public String name;
 
     @NameInMap("starred")
