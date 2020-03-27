@@ -5029,6 +5029,109 @@ api videoM3u8(request: OSSVideoM3U8RequestModel, runtime: RuntimeOptions): Video
   ignoreSSL = runtime.ignoreSSL
 }
 
+model OSSVideoResolutionRequestModel {
+  headers?: map[string]string(description='headers', name='headers'),
+  body: OSSVideoResolutionRequest(description='body', name='body'),
+}
+
+model VideoResolutionModel {
+  headers?: map[string]string(description='headers', name='headers'),
+  body: OSSVideoResolutionResponse(description='body', name='body'),
+}
+
+/**
+ * 获取视频支持的分辨率
+ * @tags file
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
+ * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+ */
+api videoResolution(request: OSSVideoResolutionRequestModel, runtime: RuntimeOptions): VideoResolutionModel  {
+  var accesskeyId = getAccessKeyId();
+  var accessKeySecret = getAccessKeySecret();
+  var securityToken = getAccessKeySecret();
+  var accessToken = getAccessToken();
+  __request.protocol = Util.defaultString(@protocol, 'https');
+  __request.method = 'POST';
+  __request.pathname = getPathname(@nickname, `/v2/osspath/file/video_resolution`);
+  __request.headers = {
+    user-agent = getUserAgent(),
+    host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
+    content-type = 'application/json; charset=utf-8',
+    ...request.headers
+  };
+
+  if (!Util.empty(accessToken)) {
+    __request.headers.authorization = `Bearer ${accessToken}`;
+  } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+    if (!Util.empty(securityToken)) {
+      __request.headers.x-acs-security-token = securityToken;
+    }
+    __request.headers.date = Util.getDateUTCString();
+    __request.headers.accept = 'application/json';
+    __request.headers.x-acs-signature-method = 'HMAC-SHA1';
+    __request.headers.x-acs-signature-version = '1.0';
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
+  }
+  __request.body = Util.toJSONString(request.body);
+} returns {
+  var respMap : object = null;
+  var obj : any = null;
+  if (Util.equalNumber(__response.statusCode, 200)) {
+    obj = Util.readAsJSON(__response.body);
+    respMap = Util.assertAsMap(obj);
+    return {
+      body = respMap,
+      headers =  __response.headers,
+    };
+  }
+
+  if (!Util.empty(__response.headers.x-ca-error-message)) {
+    throw {
+      data = {
+        requestId = __response.headers.x-ca-request-id,
+        statusCode = __response.statusCode,
+        statusMessage = __response.statusMessage,
+      },
+      message = __response.headers.x-ca-error-message,
+    };
+  }
+  obj = Util.readAsJSON(__response.body);
+  respMap = Util.assertAsMap(obj);
+  throw {
+    data = {
+      requestId = __response.headers.x-ca-request-id,
+      statusCode = __response.statusCode,
+      statusMessage = __response.statusMessage,
+    },
+    ...respMap,
+  };
+} runtime {
+  timeouted = 'retry',
+  readTimeout = runtime.readTimeout,
+  connectTimeout = runtime.connectTimeout,
+  localAddr = runtime.localAddr,
+  httpProxy = runtime.httpProxy,
+  httpsProxy = runtime.httpsProxy,
+  noProxy = runtime.noProxy,
+  maxIdleConns = runtime.maxIdleConns,
+  socks5Proxy = runtime.socks5Proxy,
+  socks5NetWork = runtime.socks5NetWork,
+  retry = {
+    retryable = runtime.autoretry,
+    maxAttempts = Util.defaultNumber(runtime.maxAttempts, 3),
+  },
+  backoff = {
+    policy = Util.defaultString(runtime.backoffPolicy, 'no'),
+    period = Util.defaultNumber(runtime.backoffPeriod, 1),
+  },
+  ignoreSSL = runtime.ignoreSSL
+}
+
 model OSSVideoTranscodeRequestModel {
   headers?: map[string]string(description='headers', name='headers'),
   body: OSSVideoTranscodeRequest(description='body', name='body'),
@@ -5036,6 +5139,7 @@ model OSSVideoTranscodeRequestModel {
 
 model VideoTranscodeModel {
   headers?: map[string]string(description='headers', name='headers'),
+  body: OSSVideoTranscodeResponse(description='body', name='body'),
 }
 
 /**
@@ -5080,8 +5184,11 @@ api videoTranscode(request: OSSVideoTranscodeRequestModel, runtime: RuntimeOptio
 } returns {
   var respMap : object = null;
   var obj : any = null;
-  if (Util.equalNumber(__response.statusCode, 204)) {
+  if (Util.equalNumber(__response.statusCode, 200)) {
+    obj = Util.readAsJSON(__response.body);
+    respMap = Util.assertAsMap(obj);
     return {
+      body = respMap,
       headers =  __response.headers,
     };
   }
@@ -5785,25 +5892,11 @@ type:string', example='video/snapshot,t_7000,f_jpg,w_800,h_600,m_fast'),
 }
 
 /**
- * 
- */
-model BaseMediaResponse {
-  addressLine?: string(name='address_line', description='address_line', example='北京市昌平区白各庄新村路'),
-  city?: string(name='city', description='city', example='杭州'),
-  country?: string(name='country', description='country', example='中国'),
-  district?: string(name='district', description='district', example='余杭区'),
-  location?: string(name='location', description='location', example='40.110333,116.349311'),
-  province?: string(name='province', description='province', example='浙江省'),
-  time?: string(name='time', description='time', format='date-time'),
-  township?: string(name='township', description='township', example='沙河镇'),
-}
-
-/**
  * 文件移动请求
  */
 model BaseMoveFileRequest {
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
-  newName?: string(name='new_name', description='new_name', example='ccp.jpg', pattern='.{1,1000}'),
+  newName?: string(name='new_name', description='new_name', example='ccp.jpg', maximum=1024, minimum=1),
   overwrite?: boolean(name='overwrite', default=false, description='overwrite
 type: boolean', example=false),
 }
@@ -5845,7 +5938,7 @@ model CCPCopyFileRequest {
 type: boolean', example=false),
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   fileId: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
-  newName?: string(name='new_name', description='new_name', example='ccp.jpg', pattern='.{1,1000}'),
+  newName?: string(name='new_name', description='new_name', example='ccp.jpg', maximum=1024, minimum=1),
   toDriveId?: string(name='to_drive_id', description='to_drive_id', example='1', pattern='[0-9]+'),
   toParentFileId: string(name='to_parent_file_id', description='to_parent_file_id', example='root', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
 }
@@ -5869,9 +5962,11 @@ model CCPCreateFileRequest {
   fileId?: string(name='file_id', description='file_id'),
   hidden?: boolean(name='hidden', description='hidden', enum='true, false', example=false),
   labels?: [ string ](name='labels', description='labels', example='label1, label2', items='{"type":"string"}'),
+  lastUpdatedAt?: string(name='last_updated_at', description='last_updated_at', example='2019-08-20T06:51:27.292Z'),
   meta?: string(name='meta', description='meta', example='meta test'),
   parentFileId?: string(name='parent_file_id', description='parent_file_id', example='root', maxLength=50, minLength=40, pattern='[a-z0-9]{1,50}'),
   preHash?: string(name='pre_hash', description='pre_hash', example='E10ADC3949BA59ABBE56E057F20F883E'),
+  streamsInfo?: object(name='streams_info', additionalProperties='{"$ref":"#/definitions/StreamInfo"}', description='streams_info'),
 }
 
 /**
@@ -5907,7 +6002,7 @@ model CCPGetDownloadUrlRequest {
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   expireSec?: long(name='expire_sec', default=900, description='expire_sec', example=15, format='int64', maximum=14400, minimum=0),
   fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
-  fileName?: string(name='file_name', description='file_name', example='ccp.jpg', pattern='.{1,1000}'),
+  fileName?: string(name='file_name', description='file_name', example='ccp.jpg', maxLength=1024, minLength=1),
 }
 
 /**
@@ -5995,11 +6090,28 @@ model CCPListUploadedPartRequest {
  */
 model CCPMoveFileRequest {
   driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
-  newName?: string(name='new_name', description='new_name', example='ccp.jpg', pattern='.{1,1000}'),
+  newName?: string(name='new_name', description='new_name', example='ccp.jpg', maximum=1024, minimum=1),
   overwrite?: boolean(name='overwrite', default=false, description='overwrite
 type: boolean', example=false),
   fileId?: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
   toParentFileId?: string(name='to_parent_file_id', description='to_parent_file_id', example='root', maxLength=50, minLength=40),
+}
+
+/**
+ * 全量获取file元信息的请求body
+ */
+model CCPScanFileMetaRequest {
+  category?: string(name='category', description='category', example='image'),
+  driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
+  marker?: string(name='marker', description='marker', example='NWQ1Yjk4YmI1ZDRlYmU1Y2E0YWE0NmJhYWJmODBhNDQ2NzhlMTRhMg'),
+}
+
+/**
+ * scan file meta response
+ */
+model CCPScanFileMetaResponse {
+  items?: [ BaseCCPFileResponse ](name='items', description='items', example='', items='{"$ref":"#/definitions/BaseCCPFileResponse"}', maxItems=100),
+  nextMarker?: string(name='next_marker', description='next_marker', example='NWQ1YmI4MjA0ZGU1ZWNjYzAzODM0ZDVkODlkMWJiMzcyNzM1NTU4OA'),
 }
 
 /**
@@ -6032,7 +6144,7 @@ type: string', example='description', maxLength=1024),
 type: boolean', example=false),
   labels?: [ string ](name='labels', description='labels', example='label1, label2', items='{"type":"string"}'),
   meta?: string(name='meta', description='meta', example='meta test'),
-  name?: string(name='name', description='name', example='ccp.jpg', pattern='.{1,1000}'),
+  name?: string(name='name', description='name', example='ccp.jpg', maxLength=1024, minLength=1),
   starred?: boolean(name='starred', default=false, description='starred
 type: boolean', example=false),
 }
@@ -6050,7 +6162,7 @@ model CompleteFileRequest {
 }
 
 /**
- * 文件移动请求
+ * copy file request
  */
 model CopyFileRequest {
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
@@ -6060,8 +6172,10 @@ model CopyFileRequest {
   overwrite?: boolean(name='overwrite', default=false, description='overwrite
 type: boolean'),
   shareId?: string(name='share_id'),
+  toDriveId: string(name='to_drive_id', description='to_drive_id', example='1', pattern='[0-9]+'),
   toParentFileId: string(name='to_parent_file_id', description='to_parent_file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
   toParentFilePath?: string(name='to_parent_file_path'),
+  toShareId?: string(name='to_share_id'),
 }
 
 /**
@@ -6204,6 +6318,13 @@ type:string', example='image/resize,w_200'),
 }
 
 /**
+ * 获取最新游标
+ */
+model GetLastCursorRequest {
+  driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
+}
+
+/**
  * get share request
  */
 model GetShareRequest {
@@ -6230,6 +6351,16 @@ model ListDriveRequest {
   limit?: integer(name='limit', default=100, description='每页大小限制', example=10, format='int32', maximum=100, minimum=1),
   marker?: string(name='marker', description='翻页标记, 接口返回的标记值', example='marker'),
   owner?: string(name='owner', description='所属者', example='abc'),
+}
+
+/**
+ * 获取增量文件操作记录
+ */
+model ListFileDeltaRequest {
+  cursor?: string(name='cursor', description='cursor 游标', example='abc'),
+  driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
+  limit?: integer(name='limit', description='limit
+default 100', example=100, format='int32'),
 }
 
 /**
@@ -6442,8 +6573,25 @@ model OSSVideoM3U8Request {
   driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   expireSec?: long(name='expire_sec', default=60, description='expire_sec', example=60, format='int64', maximum=86400, minimum=60),
   filePath: string(name='file_path', description='file_path', example='/a/b/c.mp4', maxLength=1000, minLength=1),
+  resolution?: string(name='resolution', default='Original', description='resolution', example='Original'),
   shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-Z-]+'),
   signToken: string(name='sign_token', description='sign_token', example='a8swq28ue21has22das213eds'),
+}
+
+/**
+ * 获取视频分辨率列表
+ */
+model OSSVideoResolutionRequest {
+  driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
+  filePath: string(name='file_path', description='file_path', example='/a/b/c.mp4', maxLength=1000, minLength=1),
+  shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-Z-]+'),
+}
+
+/**
+ * 转码接口response
+ */
+model OSSVideoResolutionResponse {
+  resolutionList?: [ string ](name='resolution_list', description='resolution_list', example='', items='{"type":"string"}'),
 }
 
 /**
@@ -6452,7 +6600,17 @@ model OSSVideoM3U8Request {
 model OSSVideoTranscodeRequest {
   driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   filePath: string(name='file_path', description='file_path', example='/a/b/c.mp4', maxLength=1000, minLength=1),
+  hlsTime?: long(name='hls_time', description='hls_time', example=10, format='int64'),
+  remarks?: string(name='remarks', description='remarks', example='{"userID":"xxx"}'),
   shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-Z-]+'),
+}
+
+/**
+ * 转码接口response
+ */
+model OSSVideoTranscodeResponse {
+  hlsTime?: long(name='hls_time', description='hls_time', example=10, format='int64'),
+  resolutionList?: [ string ](name='resolution_list', description='resolution_list', example='', items='{"type":"string"}'),
 }
 
 /**
@@ -6463,6 +6621,30 @@ model SharePermissionPolicy {
   permissionInheritable?: boolean(name='permission_inheritable'),
   permissionList?: [ string ](name='permission_list', items='{"type":"string"}'),
   permissionType?: string(name='permission_type'),
+}
+
+/**
+ * 
+ */
+model StreamInfo {
+  contentHash?: string(name='content_hash', description='content_hash', example='7C4A8D09CA3762AF61E59520943DC26494F8941B'),
+  contentHashName?: string(name='content_hash_name', description='content_hash_name', enum='sha1', example='sha1'),
+  contentMd5: string(name='content_md5', description='ContentMd5', example='E10ADC3949BA59ABBE56E057F20F883E'),
+  partInfoList?: [ UploadPartInfo ](name='part_info_list', description='part_info_list', items='{"$ref":"#/definitions/UploadPartInfo"}'),
+  preHash?: string(name='pre_hash', description='pre_hash', example='E10ADC3949BA59ABBE56E057F20F883E'),
+  size: long(name='size', description='Size', format='int64', maximum=53687091200, minimum=0),
+}
+
+/**
+ * 
+ */
+model StreamUploadInfo {
+  partInfoList?: [ UploadPartInfo ](name='part_info_list', description='part_info_list', example='[', items='{"$ref":"#/definitions/UploadPartInfo"}'),
+  preRapidUpload?: boolean(name='pre_rapid_upload', description='pre_rapid_upload
+type: boolean', example=false),
+  rapidUpload?: boolean(name='rapid_upload', description='rapid_upload
+type: boolean', example=false),
+  uploadId?: string(name='upload_id', description='upload_id', example='C9DCFE5A82644AC7A02DB74C30C934A6'),
 }
 
 /**
@@ -6521,6 +6703,15 @@ model UpdateShareRequest {
   shareName?: string(name='share_name', description='share_name', example='new_share_name'),
   sharePolicy?: [ SharePermissionPolicy ](name='share_policy', description='share_policy', items='{"$ref":"#/definitions/SharePermissionPolicy"}'),
   status?: string(name='status', description='status', enum='enabled, disabled', example='enabled'),
+}
+
+/**
+ * 
+ */
+model UrlInfo {
+  downloadUrl?: string(name='download_url', description='download_url', example='https://ccp.data.aliyuncs.com/hz22%2F5d5b986facbec311ef844c25954f96821497b383%2F5d5b986f955410dd991646bb87c6b4e899eff525?Expires=xxx&OSSAccessKeyId=xxx&Signature=xxx'),
+  thumbnail?: string(name='thumbnail', description='thumbnail', example='https://ccp.data.aliyuncs.com/hz22%2F5d5b986facbec311ef844c25954f96821497b383%2F5d5b986f955410dd991646bb87c6b4e899eff525?Expires=xxx&OSSAccessKeyId=xxx&Signature=xxx'),
+  url?: string(name='url', description='url', example='https://ccp.data.aliyuncs.com/hz22%2F5d5b986facbec311ef844c25954f96821497b383%2F5d5b986f955410dd991646bb87c6b4e899eff525?Expires=xxx&OSSAccessKeyId=xxx&Signature=xxx'),
 }
 
 /**
