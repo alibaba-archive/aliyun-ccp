@@ -4,9 +4,9 @@ package com.aliyun.ccp.ossclient.models;
 import com.aliyun.tea.*;
 
 /**
- * 启动视频转码请求
+ * 获取视频分辨率列表
  */
-public class OSSVideoTranscodeRequest extends TeaModel {
+public class OSSVideoResolutionRequest extends TeaModel {
     @NameInMap("drive_id")
     @Validation(pattern = "[0-9]+")
     public String driveId;
@@ -15,18 +15,12 @@ public class OSSVideoTranscodeRequest extends TeaModel {
     @Validation(required = true)
     public String filePath;
 
-    @NameInMap("hls_time")
-    public Long hlsTime;
-
-    @NameInMap("remarks")
-    public String remarks;
-
     @NameInMap("share_id")
     @Validation(pattern = "[0-9a-zA-Z-]+")
     public String shareId;
 
-    public static OSSVideoTranscodeRequest build(java.util.Map<String, ?> map) throws Exception {
-        OSSVideoTranscodeRequest self = new OSSVideoTranscodeRequest();
+    public static OSSVideoResolutionRequest build(java.util.Map<String, ?> map) throws Exception {
+        OSSVideoResolutionRequest self = new OSSVideoResolutionRequest();
         return TeaModel.build(map, self);
     }
 

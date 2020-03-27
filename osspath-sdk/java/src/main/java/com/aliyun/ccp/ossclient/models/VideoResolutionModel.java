@@ -3,16 +3,16 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
-public class VideoTranscodeModel extends TeaModel {
+public class VideoResolutionModel extends TeaModel {
     @NameInMap("headers")
     public java.util.Map<String, String> headers;
 
     @NameInMap("body")
     @Validation(required = true)
-    public OSSVideoTranscodeResponse body;
+    public OSSVideoResolutionResponse body;
 
-    public static VideoTranscodeModel build(java.util.Map<String, ?> map) throws Exception {
-        VideoTranscodeModel self = new VideoTranscodeModel();
+    public static VideoResolutionModel build(java.util.Map<String, ?> map) throws Exception {
+        VideoResolutionModel self = new VideoResolutionModel();
         return TeaModel.build(map, self);
     }
 
