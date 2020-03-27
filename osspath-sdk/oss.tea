@@ -4927,6 +4927,109 @@ api moveFile(request: OSSMoveFileRequestModel, runtime: RuntimeOptions): MoveFil
   ignoreSSL = runtime.ignoreSSL
 }
 
+model OSSVideoDefinitionRequestModel {
+  headers?: map[string]string(description='headers', name='headers'),
+  body: OSSVideoDefinitionRequest(description='body', name='body'),
+}
+
+model VideoDefinitionModel {
+  headers?: map[string]string(description='headers', name='headers'),
+  body: OSSVideoDefinitionResponse(description='body', name='body'),
+}
+
+/**
+ * 获取视频支持的分辨率
+ * @tags file
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
+ * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+ */
+api videoDefinition(request: OSSVideoDefinitionRequestModel, runtime: RuntimeOptions): VideoDefinitionModel  {
+  var accesskeyId = getAccessKeyId();
+  var accessKeySecret = getAccessKeySecret();
+  var securityToken = getAccessKeySecret();
+  var accessToken = getAccessToken();
+  __request.protocol = Util.defaultString(@protocol, 'https');
+  __request.method = 'POST';
+  __request.pathname = getPathname(@nickname, `/v2/osspath/file/video_definition`);
+  __request.headers = {
+    user-agent = getUserAgent(),
+    host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
+    content-type = 'application/json; charset=utf-8',
+    ...request.headers
+  };
+
+  if (!Util.empty(accessToken)) {
+    __request.headers.authorization = `Bearer ${accessToken}`;
+  } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+    if (!Util.empty(securityToken)) {
+      __request.headers.x-acs-security-token = securityToken;
+    }
+    __request.headers.date = Util.getDateUTCString();
+    __request.headers.accept = 'application/json';
+    __request.headers.x-acs-signature-method = 'HMAC-SHA1';
+    __request.headers.x-acs-signature-version = '1.0';
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
+  }
+  __request.body = Util.toJSONString(request.body);
+} returns {
+  var respMap : object = null;
+  var obj : any = null;
+  if (Util.equalNumber(__response.statusCode, 200)) {
+    obj = Util.readAsJSON(__response.body);
+    respMap = Util.assertAsMap(obj);
+    return {
+      body = respMap,
+      headers =  __response.headers,
+    };
+  }
+
+  if (!Util.empty(__response.headers.x-ca-error-message)) {
+    throw {
+      data = {
+        requestId = __response.headers.x-ca-request-id,
+        statusCode = __response.statusCode,
+        statusMessage = __response.statusMessage,
+      },
+      message = __response.headers.x-ca-error-message,
+    };
+  }
+  obj = Util.readAsJSON(__response.body);
+  respMap = Util.assertAsMap(obj);
+  throw {
+    data = {
+      requestId = __response.headers.x-ca-request-id,
+      statusCode = __response.statusCode,
+      statusMessage = __response.statusMessage,
+    },
+    ...respMap,
+  };
+} runtime {
+  timeouted = 'retry',
+  readTimeout = runtime.readTimeout,
+  connectTimeout = runtime.connectTimeout,
+  localAddr = runtime.localAddr,
+  httpProxy = runtime.httpProxy,
+  httpsProxy = runtime.httpsProxy,
+  noProxy = runtime.noProxy,
+  maxIdleConns = runtime.maxIdleConns,
+  socks5Proxy = runtime.socks5Proxy,
+  socks5NetWork = runtime.socks5NetWork,
+  retry = {
+    retryable = runtime.autoretry,
+    maxAttempts = Util.defaultNumber(runtime.maxAttempts, 3),
+  },
+  backoff = {
+    policy = Util.defaultString(runtime.backoffPolicy, 'no'),
+    period = Util.defaultNumber(runtime.backoffPeriod, 1),
+  },
+  ignoreSSL = runtime.ignoreSSL
+}
+
 model OSSVideoM3U8RequestModel {
   headers?: map[string]string(description='headers', name='headers'),
   body: OSSVideoM3U8Request(description='body', name='body'),
@@ -4983,109 +5086,6 @@ api videoM3u8(request: OSSVideoM3U8RequestModel, runtime: RuntimeOptions): Video
     var byt = Util.readAsBytes(__response.body);
     return {
       body = byt,
-      headers =  __response.headers,
-    };
-  }
-
-  if (!Util.empty(__response.headers.x-ca-error-message)) {
-    throw {
-      data = {
-        requestId = __response.headers.x-ca-request-id,
-        statusCode = __response.statusCode,
-        statusMessage = __response.statusMessage,
-      },
-      message = __response.headers.x-ca-error-message,
-    };
-  }
-  obj = Util.readAsJSON(__response.body);
-  respMap = Util.assertAsMap(obj);
-  throw {
-    data = {
-      requestId = __response.headers.x-ca-request-id,
-      statusCode = __response.statusCode,
-      statusMessage = __response.statusMessage,
-    },
-    ...respMap,
-  };
-} runtime {
-  timeouted = 'retry',
-  readTimeout = runtime.readTimeout,
-  connectTimeout = runtime.connectTimeout,
-  localAddr = runtime.localAddr,
-  httpProxy = runtime.httpProxy,
-  httpsProxy = runtime.httpsProxy,
-  noProxy = runtime.noProxy,
-  maxIdleConns = runtime.maxIdleConns,
-  socks5Proxy = runtime.socks5Proxy,
-  socks5NetWork = runtime.socks5NetWork,
-  retry = {
-    retryable = runtime.autoretry,
-    maxAttempts = Util.defaultNumber(runtime.maxAttempts, 3),
-  },
-  backoff = {
-    policy = Util.defaultString(runtime.backoffPolicy, 'no'),
-    period = Util.defaultNumber(runtime.backoffPeriod, 1),
-  },
-  ignoreSSL = runtime.ignoreSSL
-}
-
-model OSSVideoResolutionRequestModel {
-  headers?: map[string]string(description='headers', name='headers'),
-  body: OSSVideoResolutionRequest(description='body', name='body'),
-}
-
-model VideoResolutionModel {
-  headers?: map[string]string(description='headers', name='headers'),
-  body: OSSVideoResolutionResponse(description='body', name='body'),
-}
-
-/**
- * 获取视频支持的分辨率
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
-api videoResolution(request: OSSVideoResolutionRequestModel, runtime: RuntimeOptions): VideoResolutionModel  {
-  var accesskeyId = getAccessKeyId();
-  var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
-  var accessToken = getAccessToken();
-  __request.protocol = Util.defaultString(@protocol, 'https');
-  __request.method = 'POST';
-  __request.pathname = getPathname(@nickname, `/v2/osspath/file/video_resolution`);
-  __request.headers = {
-    user-agent = getUserAgent(),
-    host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
-    content-type = 'application/json; charset=utf-8',
-    ...request.headers
-  };
-
-  if (!Util.empty(accessToken)) {
-    __request.headers.authorization = `Bearer ${accessToken}`;
-  } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
-    if (!Util.empty(securityToken)) {
-      __request.headers.x-acs-security-token = securityToken;
-    }
-    __request.headers.date = Util.getDateUTCString();
-    __request.headers.accept = 'application/json';
-    __request.headers.x-acs-signature-method = 'HMAC-SHA1';
-    __request.headers.x-acs-signature-version = '1.0';
-    var stringToSign = ROAUtil.getStringToSign(__request);
-    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
-  }
-  __request.body = Util.toJSONString(request.body);
-} returns {
-  var respMap : object = null;
-  var obj : any = null;
-  if (Util.equalNumber(__response.statusCode, 200)) {
-    obj = Util.readAsJSON(__response.body);
-    respMap = Util.assertAsMap(obj);
-    return {
-      body = respMap,
       headers =  __response.headers,
     };
   }
@@ -5892,6 +5892,20 @@ type:string', example='video/snapshot,t_7000,f_jpg,w_800,h_600,m_fast'),
 }
 
 /**
+ * 
+ */
+model BaseMediaResponse {
+  addressLine?: string(name='address_line', description='address_line', example='北京市昌平区白各庄新村路'),
+  city?: string(name='city', description='city', example='杭州'),
+  country?: string(name='country', description='country', example='中国'),
+  district?: string(name='district', description='district', example='余杭区'),
+  location?: string(name='location', description='location', example='40.110333,116.349311'),
+  province?: string(name='province', description='province', example='浙江省'),
+  time?: string(name='time', description='time', format='date-time'),
+  township?: string(name='township', description='township', example='沙河镇'),
+}
+
+/**
  * 文件移动请求
  */
 model BaseMoveFileRequest {
@@ -6162,7 +6176,7 @@ model CompleteFileRequest {
 }
 
 /**
- * copy file request
+ * 文件移动请求
  */
 model CopyFileRequest {
   driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
@@ -6172,10 +6186,8 @@ model CopyFileRequest {
   overwrite?: boolean(name='overwrite', default=false, description='overwrite
 type: boolean'),
   shareId?: string(name='share_id'),
-  toDriveId: string(name='to_drive_id', description='to_drive_id', example='1', pattern='[0-9]+'),
   toParentFileId: string(name='to_parent_file_id', description='to_parent_file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
   toParentFilePath?: string(name='to_parent_file_path'),
-  toShareId?: string(name='to_share_id'),
 }
 
 /**
@@ -6567,31 +6579,39 @@ type: boolean'),
 }
 
 /**
- * 获取视频的m3u8文件
- */
-model OSSVideoM3U8Request {
-  driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
-  expireSec?: long(name='expire_sec', default=60, description='expire_sec', example=60, format='int64', maximum=86400, minimum=60),
-  filePath: string(name='file_path', description='file_path', example='/a/b/c.mp4', maxLength=1000, minLength=1),
-  resolution?: string(name='resolution', default='Original', description='resolution', example='Original'),
-  shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-Z-]+'),
-  signToken: string(name='sign_token', description='sign_token', example='a8swq28ue21has22das213eds'),
-}
-
-/**
  * 获取视频分辨率列表
  */
-model OSSVideoResolutionRequest {
+model OSSVideoDefinitionRequest {
   driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   filePath: string(name='file_path', description='file_path', example='/a/b/c.mp4', maxLength=1000, minLength=1),
+  resolution?: string(name='resolution', $ref='#/definitions/Resolution'),
   shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-Z-]+'),
 }
 
 /**
  * 转码接口response
  */
+model OSSVideoDefinitionResponse {
+  definitionList?: [ string ](name='definition_list', description='definition_list', example='', items='{"type":"string"}'),
+}
+
+/**
+ * 获取视频的m3u8文件
+ */
+model OSSVideoM3U8Request {
+  definition?: string(name='definition', default='Original', description='definition', example='Original'),
+  driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
+  expireSec?: long(name='expire_sec', default=60, description='expire_sec', example=60, format='int64', maximum=86400, minimum=60),
+  filePath: string(name='file_path', description='file_path', example='/a/b/c.mp4', maxLength=1000, minLength=1),
+  shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-Z-]+'),
+  signToken: string(name='sign_token', description='sign_token', example='a8swq28ue21has22das213eds'),
+}
+
+/**
+ * 转码接口response
+ */
 model OSSVideoResolutionResponse {
-  resolutionList?: [ string ](name='resolution_list', description='resolution_list', example='', items='{"type":"string"}'),
+  resolutionList?: [ string ](name='resolution_list', description='resolution_list', example='', items='{"$ref":"#/definitions/Resolution"}'),
 }
 
 /**
@@ -6609,8 +6629,9 @@ model OSSVideoTranscodeRequest {
  * 转码接口response
  */
 model OSSVideoTranscodeResponse {
+  definitionList?: [ string ](name='definition_list', description='definition_list', example='', items='{"type":"string"}'),
   hlsTime?: long(name='hls_time', description='hls_time', example=10, format='int64'),
-  resolutionList?: [ string ](name='resolution_list', description='resolution_list', example='', items='{"type":"string"}'),
+  resolutionList?: [ string ](name='resolution_list', description='resolution_list', example='', items='{"$ref":"#/definitions/Resolution"}'),
 }
 
 /**
