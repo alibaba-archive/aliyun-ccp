@@ -7,6 +7,9 @@ import com.aliyun.tea.*;
  * 获取视频的m3u8文件
  */
 public class OSSVideoM3U8Request extends TeaModel {
+    @NameInMap("definition")
+    public String definition;
+
     @NameInMap("drive_id")
     @Validation(pattern = "[0-9]+")
     public String driveId;
@@ -17,9 +20,6 @@ public class OSSVideoM3U8Request extends TeaModel {
     @NameInMap("file_path")
     @Validation(required = true)
     public String filePath;
-
-    @NameInMap("resolution")
-    public String resolution;
 
     @NameInMap("share_id")
     @Validation(pattern = "[0-9a-zA-Z-]+")
