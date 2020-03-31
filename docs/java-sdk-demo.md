@@ -17,13 +17,8 @@ CCPPath
 ```xml
 <dependency>
     <groupId>com.aliyun</groupId>
-    <artifactId>ccp-baseclient</artifactId>
-    <version>1.0-SNAPSHOT</version>
-</dependency>
-<dependency>
-    <groupId>com.aliyun</groupId>
     <artifactId>ccp-client</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>RELEASE</version>
 </dependency>
 ```
 
@@ -32,13 +27,8 @@ OSSPath
 ```xml
 <dependency>
     <groupId>com.aliyun</groupId>
-    <artifactId>ccp-baseclient</artifactId>
-    <version>1.0-SNAPSHOT</version>
-</dependency>
-<dependency>
-    <groupId>com.aliyun</groupId>
     <artifactId>ccp-oss-client</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>RELEASE</version>
 </dependency>
 ```
 
@@ -115,14 +105,15 @@ public class Demo {
 // 密码登录
 public static void getCaptcha() throws Exception {
     try {
+        MobileLoginRequestModel requestModel1 = new MobileLoginRequestModel();
         MobileLoginRequest mobileLoginRequest = new MobileLoginRequest();
         mobileLoginRequest.appId = appId;
         mobileLoginRequest.phoneNumber = "13*****225";
         mobileLoginRequest.password = "*********";
-        AccountAccessTokenResponse tokenResponse = client.login(mobileLoginRequest, runtime);
-
+        requestModel1.body = mobileLoginRequest;
+        LoginModel tokenResponse = client.login(requestModel1, runtime);
         //  打印返回结果
-        System.out.println(new Gson().tojson(tokenResponse));
+        System.out.println(new Gson().toJson(tokenResponse.body));
 
     } catch (TeaException e) {
         System.out.println(e.getMessage());
@@ -149,14 +140,15 @@ public static void getCaptcha() throws Exception {
 ```java
 public void getMNSCode() throws Exception {
     try {
+        MobileSendSmsCodeRequestModel requestModel1 = new MobileSendSmsCodeRequestModel();
         MobileSendSmsCodeRequest sendSmsCodeRequest = new MobileSendSmsCodeRequest();
         sendSmsCodeRequest.appId = appId;
         sendSmsCodeRequest.phoneNumber = "132*****25";
         sendSmsCodeRequest.type = "login";
+        requestModel1.body = sendSmsCodeRequest;
+        MobileSendSmsCodeModel response = client.mobileSendSmsCode(requestModel1, runtime);
 
-        MobileSendSmsCodeResponse response = client.mobileSendSmsCode(sendSmsCodeRequest, runtime);
-
-        System.out.println(new Gson().toJson(response));
+        System.out.println(new Gson().toJson(response.body));
     } catch (TeaException e) {
         System.out.println(e.getCode());
         System.out.println(e.getMessage());

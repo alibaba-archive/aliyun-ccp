@@ -7,6 +7,9 @@ import com.aliyun.tea.*;
  * 转码接口response
  */
 public class OSSVideoTranscodeResponse extends TeaModel {
+    @NameInMap("definition_list")
+    public java.util.List<String> definitionList;
+
     @NameInMap("hls_time")
     public Long hlsTime;
 
