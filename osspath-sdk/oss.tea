@@ -5193,6 +5193,12 @@ api videoTranscode(request: OSSVideoTranscodeRequestModel, runtime: RuntimeOptio
     };
   }
 
+  if (Util.equalNumber(__response.statusCode, 204)) {
+    return {
+      headers =  __response.headers,
+    };
+  }
+
   if (!Util.empty(__response.headers.x-ca-error-message)) {
     throw {
       data = {
@@ -5963,10 +5969,11 @@ model CCPCreateFileRequest {
   hidden?: boolean(name='hidden', description='hidden', enum='true, false', example=false),
   labels?: [ string ](name='labels', description='labels', example='label1, label2', items='{"type":"string"}'),
   lastUpdatedAt?: string(name='last_updated_at', description='last_updated_at', example='2019-08-20T06:51:27.292Z'),
-  meta?: string(name='meta', description='meta', example='meta test'),
+  meta?: string(name='meta'),
   parentFileId?: string(name='parent_file_id', description='parent_file_id', example='root', maxLength=50, minLength=40, pattern='[a-z0-9]{1,50}'),
   preHash?: string(name='pre_hash', description='pre_hash', example='E10ADC3949BA59ABBE56E057F20F883E'),
   streamsInfo?: object(name='streams_info', additionalProperties='{"$ref":"#/definitions/StreamInfo"}', description='streams_info'),
+  userMeta?: string(name='user_meta', description='user_meta', example='user_meta'),
 }
 
 /**
@@ -6046,6 +6053,7 @@ type:string', example='video/snapshot,t_7000,f_jpg,w_800,h_600,m_fast'),
   category?: string(name='category', description='category', enum='image, video, music, doc, other', example='image'),
   customIndexKey?: string(name='custom_index_key', description='custom_index_key'),
   encryptMode?: string(name='encrypt_mode', description='encrypt_mode'),
+  fields?: string(name='fields', description='fields', example='*'),
   orderDirection?: string(name='order_direction', description='order_direction', enum='ASC, DESC', example='ASC'),
   status?: string(name='status', default='available', description='status', enum='uploading, available', example='available'),
   type?: string(name='type', description='type', enum='file, folder', example='file'),
@@ -6066,6 +6074,7 @@ type:string', example='video/snapshot,t_7000,f_jpg,w_800,h_600,m_fast'),
   Starred?: boolean(name='Starred', description='starred', enum='false, true', example=false),
   all?: boolean(name='all', default=true, description='all', enum='false, true', example=false),
   category?: string(name='category', description='category', enum='image, video, music, doc, other', example='image'),
+  fields?: string(name='fields', description='fields', example='*'),
   orderBy?: string(name='order_by', description='order_by', enum='update_time, name', example='name'),
   orderDirection?: string(name='order_direction', description='order_direction', enum='ASC, DESC', example='ASC'),
   parentFileId?: string(name='parent_file_id', description='ParentFileID', example='root', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
@@ -6143,10 +6152,11 @@ type: string', example='description', maxLength=1024),
   hidden?: boolean(name='hidden', default=false, description='hidden
 type: boolean', example=false),
   labels?: [ string ](name='labels', description='labels', example='label1, label2', items='{"type":"string"}'),
-  meta?: string(name='meta', description='meta', example='meta test'),
+  meta?: string(name='meta'),
   name?: string(name='name', description='name', example='ccp.jpg', maxLength=1024, minLength=1),
   starred?: boolean(name='starred', default=false, description='starred
 type: boolean', example=false),
+  userMeta?: string(name='user_meta', description='user_meta', example='user_meta'),
 }
 
 /**
@@ -6601,6 +6611,7 @@ model OSSVideoTranscodeRequest {
   hlsTime?: long(name='hls_time', description='hls_time', example=10, format='int64'),
   remarks?: string(name='remarks', description='remarks', example='{"userID":"xxx"}'),
   shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-Z-]+'),
+  transcode?: boolean(name='transcode', default=false, description='transcode', example=true),
 }
 
 /**
