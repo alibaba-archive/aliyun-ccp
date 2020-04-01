@@ -39,6 +39,9 @@ public class CCPUpdateFileMetaRequest extends TeaModel {
     @NameInMap("starred")
     public Boolean starred;
 
+    @NameInMap("user_meta")
+    public String userMeta;
+
     public static CCPUpdateFileMetaRequest build(java.util.Map<String, ?> map) throws Exception {
         CCPUpdateFileMetaRequest self = new CCPUpdateFileMetaRequest();
         return TeaModel.build(map, self);

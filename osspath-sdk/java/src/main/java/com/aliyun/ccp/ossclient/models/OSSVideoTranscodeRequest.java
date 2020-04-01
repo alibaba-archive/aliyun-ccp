@@ -25,6 +25,9 @@ public class OSSVideoTranscodeRequest extends TeaModel {
     @Validation(pattern = "[0-9a-zA-Z-]+")
     public String shareId;
 
+    @NameInMap("transcode")
+    public Boolean transcode;
+
     public static OSSVideoTranscodeRequest build(java.util.Map<String, ?> map) throws Exception {
         OSSVideoTranscodeRequest self = new OSSVideoTranscodeRequest();
         return TeaModel.build(map, self);

@@ -4344,6 +4344,12 @@ public class Client {
                     ), new VideoTranscodeModel());
                 }
 
+                if (com.aliyun.teautil.Common.equalNumber(response_.statusCode, 204)) {
+                    return TeaModel.toModel(TeaConverter.buildMap(
+                        new TeaPair("headers", response_.headers)
+                    ), new VideoTranscodeModel());
+                }
+
                 if (!com.aliyun.teautil.Common.empty(response_.headers.get("x-ca-error-message"))) {
                     throw new TeaException(TeaConverter.buildMap(
                         new TeaPair("data", TeaConverter.buildMap(

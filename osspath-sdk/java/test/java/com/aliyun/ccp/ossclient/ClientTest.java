@@ -29,8 +29,8 @@ public class ClientTest {
         Config config = new Config();
         config.domainId = "sz16";
         config.protocol = "http";
-        config.accessKeyId = System.getenv("accessKeyId");
-        config.accessKeySecret = System.getenv("AccessKeySecret");
+        config.accessKeyId = System.getenv("RAMAccessKeyId");
+        config.accessKeySecret = System.getenv("RAMAccessKeySecret");
         Client client = new Client(config);
         ListDriveRequestModel requestModel = new ListDriveRequestModel();
         ListDriveRequest request = new ListDriveRequest();

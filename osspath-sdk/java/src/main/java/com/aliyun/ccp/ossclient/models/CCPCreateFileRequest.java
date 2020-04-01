@@ -69,6 +69,9 @@ public class CCPCreateFileRequest extends TeaModel {
     @NameInMap("streams_info")
     public java.util.Map<String, Object> streamsInfo;
 
+    @NameInMap("user_meta")
+    public String userMeta;
+
     public static CCPCreateFileRequest build(java.util.Map<String, ?> map) throws Exception {
         CCPCreateFileRequest self = new CCPCreateFileRequest();
         return TeaModel.build(map, self);
