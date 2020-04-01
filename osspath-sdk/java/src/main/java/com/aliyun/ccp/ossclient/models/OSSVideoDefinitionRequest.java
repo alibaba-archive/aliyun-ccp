@@ -15,9 +15,6 @@ public class OSSVideoDefinitionRequest extends TeaModel {
     @Validation(required = true)
     public String filePath;
 
-    @NameInMap("resolution")
-    public String resolution;
-
     @NameInMap("share_id")
     @Validation(pattern = "[0-9a-zA-Z-]+")
     public String shareId;

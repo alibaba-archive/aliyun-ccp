@@ -36,6 +36,9 @@ public class CCPListFileRequest extends TeaModel {
     @NameInMap("category")
     public String category;
 
+    @NameInMap("fields")
+    public String fields;
+
     @NameInMap("order_by")
     public String orderBy;
 

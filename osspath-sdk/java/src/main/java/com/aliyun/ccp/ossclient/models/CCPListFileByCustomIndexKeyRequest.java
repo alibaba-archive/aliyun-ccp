@@ -39,6 +39,9 @@ public class CCPListFileByCustomIndexKeyRequest extends TeaModel {
     @NameInMap("encrypt_mode")
     public String encryptMode;
 
+    @NameInMap("fields")
+    public String fields;
+
     @NameInMap("order_direction")
     public String orderDirection;
 
