@@ -24,13 +24,13 @@ CCPPath
 
 OSSPath
 
-```xml
+~~~xml
 <dependency>
     <groupId>com.aliyun</groupId>
     <artifactId>ccp-oss-client</artifactId>
     <version>RELEASE</version>
 </dependency>
-```
+~~~
 
 **注意：请关注 [Git Hub](https://github.com/aliyun/aliyun-ccp)提供的最新版本，查看相关功能并选择使用。**
 
@@ -101,19 +101,17 @@ public class Demo {
 
 - 以下代码用于获取图片验证码，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
-// 密码登录
+~~~java
+// 获取图片验证码
 public static void getCaptcha() throws Exception {
     try {
-        MobileLoginRequestModel requestModel1 = new MobileLoginRequestModel();
-        MobileLoginRequest mobileLoginRequest = new MobileLoginRequest();
-        mobileLoginRequest.appId = appId;
-        mobileLoginRequest.phoneNumber = "13*****225";
-        mobileLoginRequest.password = "*********";
-        requestModel1.body = mobileLoginRequest;
-        LoginModel tokenResponse = client.login(requestModel1, runtime);
-        //  打印返回结果
-        System.out.println(new Gson().toJson(tokenResponse.body));
+        GetCaptchaRequestModel requestModel = new GetCaptchaRequestModel();
+        GetCaptchaRequest getCaptchaRequest = new GetCaptchaRequest();
+        getCaptchaRequest.appId = "***********";
+        requestModel.body = getCaptchaRequest;
+        GetCaptchaModel captcha = client.getCaptcha(requestModel, runtime);
+        // 打印结果
+        System.out.println(new Gson().toJson(captcha.body.captcha));
 
     } catch (TeaException e) {
         System.out.println(e.getMessage());
@@ -121,32 +119,38 @@ public static void getCaptcha() throws Exception {
         System.out.println(e.getData());
     }
 }
-```
+
+~~~
+
+
 
 - 返回结果
 
-```jsonon
+~~~JavaScript
 {
     "captcha":"iVBORw0KGgoAAAANSUhEUgAAAFAAAAAaCAIAAACvsEzwAAABFUlEQVR42u3YwQ7CIAwGYOKDaLya7OBL+BDePRoT4/vPJSSEjFJ+2oEIW3oy0PHRDnVmHuwyO3gH93J9Xm85+PA4+REOmKYLGbGE5/vVBn/f2/O4hMZs9FrSjIMdtVEwKSSLTG7Bb8HZLc30MALmB7QLlmkHAiPa3sDIsE7AYHkbAtvvaw0YHNlQhRezZeee0nh5BWC/EkVamjHHtqAoWGbOe4ZtqZFfWrmHcxhIhYuD3Z2S2gpgmVn450G2u8i5mOzn1aFlV7LKwCQ0FRaqTOWcsSPazvUzZIPJbStaahCMT48lNIjHD0GpkQzKftkMzK9e8/yHecLPwZ0ihZuBK7yFKTq9uXdamp7/M7Df22JPcsxw4C/GgzEzOWpc1QAAAABJRU5ErkJggg==",
     "captchaFormat":"png",
     "captchaId":"f644d0b2a7d21a3caddb17377c90c28e8DPXYUIfvs3"
 }
-```
+~~~
+
+
 
 ### 获取短信验证码
 
 - 以下代码用于获取短信验证码，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 public void getMNSCode() throws Exception {
     try {
-        MobileSendSmsCodeRequestModel requestModel1 = new MobileSendSmsCodeRequestModel();
+        MobileSendSmsCodeRequestModel requestModel = new MobileSendSmsCodeRequestModel();
         MobileSendSmsCodeRequest sendSmsCodeRequest = new MobileSendSmsCodeRequest();
         sendSmsCodeRequest.appId = appId;
-        sendSmsCodeRequest.phoneNumber = "132*****25";
-        sendSmsCodeRequest.type = "login";
-        requestModel1.body = sendSmsCodeRequest;
-        MobileSendSmsCodeModel response = client.mobileSendSmsCode(requestModel1, runtime);
+        sendSmsCodeRequest.phoneNumber = "13**********5";
+        sendSmsCodeRequest.type = "change_password";
+        requestModel.body = sendSmsCodeRequest;
+
+        MobileSendSmsCodeModel response = client.mobileSendSmsCode(requestModel, runtime);
 
         System.out.println(new Gson().toJson(response.body));
     } catch (TeaException e) {
@@ -156,18 +160,17 @@ public void getMNSCode() throws Exception {
     }
 
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"07A5175C-E124-42EC-9304-2294DC2CEFAC",
     "smsCodeId":"b40bba70b37d74**********************6j3IW7HP"
 }
-```
+~~~
 
 
 
@@ -175,34 +178,35 @@ public void getMNSCode() throws Exception {
 
 - 以下代码用于验证手机号是否存在，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 public void checkMobileIsExist() throws Exception {
     try {
+        MobileCheckExistRequestModel requestModel = new MobileCheckExistRequestModel();
         MobileCheckExistRequest checkExistRequest = new MobileCheckExistRequest();
         checkExistRequest.appId = appId;
-        checkExistRequest.phoneNumber = "13****25";
-        MobileCheckExistResponse checkExistResponse = client.checkExist(checkExistRequest, runtime);
+        checkExistRequest.phoneNumber = "13*****25";
+        requestModel.body = checkExistRequest;
+        CheckExistModel checkExistResponse = client.checkExist(requestModel, runtime);
         
-        System.out.println(new Gson().toJson(checkExistResponse));
+        System.out.println(new Gson().toJson(checkExistResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getCode());
         System.out.println(e.getMessage());
         System.out.println(e.getData());
     }
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"4DB78761-20AE-4724-8960-ADD225F35A0F",
     "isExist":true,
     "phoneNumber":"13****25"
 }
-```
+~~~
 
 
 
@@ -210,28 +214,20 @@ public void checkMobileIsExist() throws Exception {
 
 - 以下代码用于手机号注册，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 public void register() throws Exception {
     try {
-
-        // get register mns Code
-        MobileSendSmsCodeRequest sendSmsCodeRequest = new MobileSendSmsCodeRequest();
-        sendSmsCodeRequest.appId = appId;
-        sendSmsCodeRequest.phoneNumber = "13****25";
-        sendSmsCodeRequest.type = "change_password";
-        MobileSendSmsCodeResponse response = client.mobileSendSmsCode(sendSmsCodeRequest, runtime);
-        String changePasswordCode = response.smsCodeId;
-
-        // mobile register
+        MobileRegisterRequestModel requestModel = new MobileRegisterRequestModel();
         MobileRegisterRequest registerRequest = new MobileRegisterRequest();
         registerRequest.appId = appId;
-        registerRequest.phoneNumber = "132*****225";
-        registerRequest.smsCode = "123456";
-        registerRequest.smsCodeId = changePasswordCode;
+        registerRequest.phoneNumber = "132****225";
+        registerRequest.smsCode = "0****0";
+        registerRequest.smsCodeId = "674e************JRuoQgRu0R";
+        requestModel.body = registerRequest;
 
-        AccountAccessTokenResponse tokenResponse = client.register(registerRequest, runtime);
+        RegisterModel tokenResponse = client.register(requestModel, runtime);
 
-        System.out.println(new Gson().toJson(tokenResponse));
+        System.out.println(new Gson().toJson(tokenResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getCode());
         System.out.println(e.getMessage());
@@ -239,12 +235,12 @@ public void register() throws Exception {
     }
 
 }
-```
+~~~
 
 - <span id="jump">返回结果</span>
 
 
-```json
+~~~javascript
 {
     "access_token": "eyJhbGc***************iOiJSUzI1NiI",
     "refresh_token": "fvw1FLZ************tGjXxJl",
@@ -262,31 +258,26 @@ public void register() throws Exception {
     "need_link": false,
     "user_data": {}
 }
-```
+~~~
+
+
 
 ### 手机号短信登录
 
 - 以下代码用于短信登录，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 public void mnsLogin() throws Exception {
     try {
-        // get login mns Code
-        MobileSendSmsCodeRequest sendSmsCodeRequest = new MobileSendSmsCodeRequest();
-        sendSmsCodeRequest.appId = appId;
-        sendSmsCodeRequest.phoneNumber = "13****25";
-        sendSmsCodeRequest.type = "change_password";
-        MobileSendSmsCodeResponse response = client.mobileSendSmsCode(sendSmsCodeRequest, runtime);
-        String changePasswordCode = response.smsCodeId;
-
-
         // mns login
+        MobileLoginRequestModel requestModel = new MobileLoginRequestModel();
         MobileLoginRequest mobileLoginRequest = new MobileLoginRequest();
         mobileLoginRequest.appId = appId;
-        mobileLoginRequest.phoneNumber = "13297039225";
+        mobileLoginRequest.phoneNumber = "132**********#=&";
         mobileLoginRequest.smsCode = "123456";
         mobileLoginRequest.smsCodeId = changePasswordCode;
-        AccountAccessTokenResponse tokenResponse = client.login(mobileLoginRequest, runtime);
+        requestModel.body = mobileLoginRequest;
+        LoginModel tokenResponse = client.login(requestModel, runtime);
         System.out.println(new Gson().toJson(tokenResponse));
     } catch (TeaException e) {
         System.out.println(e.getCode());
@@ -294,7 +285,7 @@ public void mnsLogin() throws Exception {
         System.out.println(e.getData());
     }
 }
-```
+~~~
 
 
 
@@ -306,16 +297,16 @@ public void mnsLogin() throws Exception {
 
 - 以下代码用于设置登录密码，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 public void setPassWord() throws Exception {
     try {
+        DefaultSetPasswordRequestModel requestModel = new DefaultSetPasswordRequestModel();
         DefaultSetPasswordRequest setPasswordRequest = new DefaultSetPasswordRequest();
         setPasswordRequest.appId = appId;
         setPasswordRequest.newPassword = "1234567";
-        setPasswordRequest.state = "aKsdfGoeasd***ksFasds";
-        client.setPassword(setPasswordRequest, runtime);
-        
-        // 此结果不返回body
+        setPasswordRequest.state = "";
+        requestModel.body =setPasswordRequest;
+        client.setPassword(requestModel, runtime);
     } catch (TeaException e) {
         System.out.println(e.getCode());
         System.out.println(e.getMessage());
@@ -324,7 +315,7 @@ public void setPassWord() throws Exception {
 
 }
 
-```
+~~~
 
 
 
@@ -332,19 +323,20 @@ public void setPassWord() throws Exception {
 
 - 以下代码用于密码登录，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 
 // 密码登录
 public static void passwordLogin() throws Exception {
     try {
+        MobileLoginRequestModel requestModel = new MobileLoginRequestModel();
         MobileLoginRequest mobileLoginRequest = new MobileLoginRequest();
         mobileLoginRequest.appId = appId;
-        mobileLoginRequest.phoneNumber = "13*****225";
-        mobileLoginRequest.password = "*********";
-        AccountAccessTokenResponse tokenResponse = client.login(mobileLoginRequest, runtime);
-
-        //  打印返回结果
-        System.out.println(new Gson().tojson(tokenResponse));
+        mobileLoginRequest.phoneNumber = "132******25";
+        mobileLoginRequest.password = "123********456";
+        requestModel.body = mobileLoginRequest;
+        LoginModel tokenResponse = client.login(requestModel, runtime);
+        System.out.println(new Gson().toJson(tokenResponse.body));
+        assertNotNull(tokenResponse.body.accessToken);
 
     } catch (TeaException e) {
         System.out.println(e.getMessage());
@@ -353,7 +345,7 @@ public static void passwordLogin() throws Exception {
     }
 }
 
-```
+~~~
 
 
 
@@ -365,29 +357,19 @@ public static void passwordLogin() throws Exception {
 
 - 以下代码用于修改登录密码，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 public void changePassWord() throws Exception {
     try {
-        // get change passowrd mns Code
-        MobileSendSmsCodeRequest sendSmsCodeRequest = new MobileSendSmsCodeRequest();
-        sendSmsCodeRequest.appId = appId;
-        sendSmsCodeRequest.phoneNumber = "13****25";
-        sendSmsCodeRequest.type = "change_password";
-        MobileSendSmsCodeResponse response = client.mobileSendSmsCode(sendSmsCodeRequest, runtime);
-
-        String changePasswordCode = response.smsCodeId;
-
-        // chang password
+        DefaultChangePasswordRequestModel requestModel = new DefaultChangePasswordRequestModel();
         DefaultChangePasswordRequest changePasswordRequest = new DefaultChangePasswordRequest();
         changePasswordRequest.appId = appId;
-        changePasswordRequest.phoneNumber = "13****25";
-        changePasswordRequest.newPassword = "1234567";
-        changePasswordRequest.smsCode = "13124353";
-        changePasswordRequest.smsCodeId = changePasswordCode;
+        changePasswordRequest.phoneNumber = "13*****25";
+        changePasswordRequest.newPassword = "12*****9";
+        changePasswordRequest.smsCode = "6*****73";
+        changePasswordRequest.smsCodeId = "9751***********wru";
+        requestModel.body = changePasswordRequest;
 
-        client.changePassword(changePasswordRequest, runtime);
-        
-        //此接口不返回body
+        client.changePassword(requestModel, runtime);
     } catch (TeaException e) {
         System.out.println(e.getCode());
         System.out.println(e.getMessage());
@@ -395,7 +377,7 @@ public void changePassWord() throws Exception {
     }
 
 }
-```
+~~~
 
 
 
@@ -403,15 +385,17 @@ public void changePassWord() throws Exception {
 
 - 以下代码用于刷新token，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 public void getTokenByRefreshToken() throws Exception {
     try {
+        TokenRequestModel requestModel = new TokenRequestModel();
         TokenRequest tokenRequest = new TokenRequest();
         tokenRequest.appId = appId;
         tokenRequest.grantType = "refresh_token";
-        tokenRequest.refreshToken = "Dln*******Tcpz";
+        tokenRequest.refreshToken = "CzuJktQK*********TAVTJorJa";
+        requestModel.body = new TokenRequest();
 
-        AccountAccessTokenResponse tokenResponse = client.token(tokenRequest, runtime);
+        TokenModel tokenResponse = client.token(requestModel, runtime);
         System.out.println(new Gson().toJson(tokenResponse));
     } catch (TeaException e) {
         System.out.println(e.getCode());
@@ -419,7 +403,7 @@ public void getTokenByRefreshToken() throws Exception {
     }
 
 }
-```
+~~~
 
 
 
@@ -431,16 +415,18 @@ public void getTokenByRefreshToken() throws Exception {
 
 - 以下代码用于获取用户认证方式，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```JAVA
+~~~JAVA
 public void getAccessTokenByLinkInfo() throws Exception {
     try {
         // 此接口需要ak，sk调用， 请使用ak, sk初始化客户端
+        GetAccessTokenByLinkInfoRequestModel requestModel = new GetAccessTokenByLinkInfoRequestModel();
         GetAccessTokenByLinkInfoRequest getAccessTokenByLinkInfoRequest = new GetAccessTokenByLinkInfoRequest();
-        getAccessTokenByLinkInfoRequest.identity = "13297039225";
+        getAccessTokenByLinkInfoRequest.identity = "132********25";
         getAccessTokenByLinkInfoRequest.type = "mobile";
+        requestModel.body = getAccessTokenByLinkInfoRequest;
 
-        AccountAccessTokenResponse tokenResponse = client.getAccessTokenByLinkInfo(getAccessTokenByLinkInfoRequest, runtime);
-        System.out.println(new Gson().toJson(tokenResponse));
+        GetAccessTokenByLinkInfoModel tokenResponse = client.getAccessTokenByLinkInfo(requestModel, runtime);
+        System.out.println(new Gson().toJson(tokenResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getCode());
         System.out.println(e.getMessage());
@@ -448,7 +434,7 @@ public void getAccessTokenByLinkInfo() throws Exception {
     }
 
 }
-```
+~~~
 
 - 返回结果参见[手机号注册的返回结果](#手机号注册)
 
@@ -461,11 +447,12 @@ public void getAccessTokenByLinkInfo() throws Exception {
 public void getLinkInfoByUserId() throws Exception {
     try {
         // 此接口需要ak，sk调用， 请使用ak, sk初始化客户端
+        GetLinkInfoByUserIDRequestModel requestModel = new GetLinkInfoByUserIDRequestModel();
         GetLinkInfoByUserIDRequest linkInfoByUserIDRequest = new GetLinkInfoByUserIDRequest();
-        linkInfoByUserIDRequest.userId = "6c23c********5211";
-        LinkInfoListResponse listResponse = client.getLinkInfoByUserId(linkInfoByUserIDRequest, runtime);
-        
-        System.out.println(new Gson().toJson(listResponse));
+        linkInfoByUserIDRequest.userId = "6c23*********5211";
+        requestModel.body = linkInfoByUserIDRequest;
+        GetLinkInfoByUserIdModel listResponse = client.getLinkInfoByUserId(requestModel, runtime);
+        System.out.println(new Gson().toJson(listResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getCode());
         System.out.println(e.getMessage());
@@ -477,9 +464,8 @@ public void getLinkInfoByUserId() throws Exception {
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"F19338F6-55B6-45D4-9D29-3B950125B175",
     "items":[
         {
             "authenticationType":"mobile",
@@ -492,7 +478,7 @@ public void getLinkInfoByUserId() throws Exception {
         }
     ]
 }
-```
+~~~
 
 
 
@@ -500,16 +486,17 @@ public void getLinkInfoByUserId() throws Exception {
 
 - 以下代码用于获取用户认证方式，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 public void getLinkInfo() throws Exception {
     try {
         // 此接口需要ak，sk调用， 请使用ak, sk初始化客户端
+        GetByLinkInfoRequestModel requestModel = new GetByLinkInfoRequestModel();
         GetByLinkInfoRequest getByLinkInfoRequest = new GetByLinkInfoRequest();
         getByLinkInfoRequest.identity = "adsfqwrsfad";
         getByLinkInfoRequest.type = "ding";
-
-        LinkInfoResponse linkInfoResponse = client.getLinkInfo(getByLinkInfoRequest, runtime);
-        System.out.println(new Gson().toJson(linkInfoResponse));
+        requestModel.body = getByLinkInfoRequest;
+        GetLinkInfoModel linkInfoResponse = client.getLinkInfo(requestModel, runtime);
+        System.out.println(new Gson().toJson(linkInfoResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getCode());
         System.out.println(e.getMessage());
@@ -517,15 +504,14 @@ public void getLinkInfo() throws Exception {
     }
 
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"61AC56AD-E048-4292-8898-053287220B98",
     "authenticationType":"ding",
     "createdAt":1572427460313,
     "domainId":"daily1405",
@@ -534,25 +520,25 @@ public void getLinkInfo() throws Exception {
     "status":"wait_link",
     "userId":"6c23c98*****7d8b3f9f5211"
 }
-```
+~~~
 
 ### 绑定用户认证方式
 
 - 以下代码用于绑定用户认证方式，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```JAVA
+~~~JAVA
 public void userLinkInfo() throws Exception {
     try {
         // 此接口需要ak，sk调用， 请使用ak, sk初始化客户端
+        AccountLinkRequestModel requestModel = new AccountLinkRequestModel();
         AccountLinkRequest linkInfo = new AccountLinkRequest();
         linkInfo.type = "taobao";
         linkInfo.identity = "1234";
-        linkInfo.userId = "1eb*********08cb";
+        linkInfo.userId = "1eb15*************eff97708cb";
         linkInfo.status ="wait_link";
-
-        AccountAccessTokenResponse tokenResponse = client.link(linkInfo, runtime);
-
-        System.out.println(new Gson().toJson(tokenResponse));
+        requestModel.body = linkInfo;
+        LinkModel tokenResponse = new_client.link(requestModel, runtime);
+        System.out.println(new Gson().toJson(tokenResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getCode());
         System.out.println(e.getMessage());
@@ -560,16 +546,14 @@ public void userLinkInfo() throws Exception {
     }
 
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"2DB728B5-6468-4E41-9BDE-677433FFCE16",
-    "accessToken":"eyJ*****igpwc",
     "avatar":"",
     "defaultDriveId":"",
     "existLink":[
@@ -589,7 +573,7 @@ public void userLinkInfo() throws Exception {
     "userId":"",
     "userName":""
 }
-```
+~~~
 
 
 
@@ -597,14 +581,16 @@ public void userLinkInfo() throws Exception {
 
 - 以下代码用于取消绑定关系，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 public void cancelLink() throws Exception {
     try {
+        CancelLinkRequestModel requestModel = new CancelLinkRequestModel();
         CancelLinkRequest cancelLinkRequest = new CancelLinkRequest();
-        cancelLinkRequest.temporaryToken = "einR5cCI6IkpX****asfsdfdf";
-        AccountAccessTokenResponse tokenResponse = client.cancelLink(cancelLinkRequest, runtime);
+        cancelLinkRequest.temporaryToken = "eyJhbGciOiJSUzI1N*****pwc";
+        requestModel.body = cancelLinkRequest;
+        CancelLinkModel tokenResponse = client.cancelLink(requestModel, runtime);
 
-        System.out.println(new Gson().toJson(tokenResponse));
+        System.out.println(new Gson().toJson(tokenResponse.body));;
     } catch (TeaException e) {
         System.out.println(e.getCode());
         System.out.println(e.getMessage());
@@ -612,7 +598,7 @@ public void cancelLink() throws Exception {
     }
 
 }
-```
+~~~
 
 
 
@@ -627,12 +613,14 @@ public void cancelLink() throws Exception {
 - 以下代码用于确定绑定关系，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 - 此接口只支持Access Token，不要使用AK，SK初始化客户端。
 
-```java
-public void confirmlLink() throws Exception {
+~~~java
+public void confirmLink() throws Exception {
     try {
-        CancelLinkRequest cancelLinkRequest = new CancelLinkRequest();
-        cancelLinkRequest.temporaryToken = "einR5cCI6IkpX****asfsdfdf";
-        AccountAccessTokenResponse tokenResponse = client.cancelLink(cancelLinkRequest, runtime);
+        ConfirmLinkRequestModel requestModel = new ConfirmLinkRequestModel();
+        ConfirmLinkRequest confirmLinkRequest = new ConfirmLinkRequest();
+        confirmLinkRequest.temporaryToken = "eyJhbGciOiJSUzI1NiIsI（***qE";
+        requestModel.body = confirmLinkRequest;
+        ConfirmLinkModel tokenResponse = client.confirmLink(requestModel, runtime);
 
         System.out.println(new Gson().toJson(tokenResponse));
     } catch (TeaException e) {
@@ -642,7 +630,7 @@ public void confirmlLink() throws Exception {
     }
 
 }
-```
+~~~
 
 
 
@@ -663,14 +651,14 @@ public void confirmlLink() throws Exception {
 // 创建User
 public static void createUser() throws Exception {
     try {
+        CreateUserRequestModel requestModel = new CreateUserRequestModel();
         CreateUserRequest createUserRequest = new CreateUserRequest();
-        createUserRequest.userId = "test_user";
-        createUserRequest.role = "user";
-        createUserRequest.userName = "test_user";
-        CreateUserResponse createUserResponse = client.createUser(createUserRequest, runtime);
-
-        //  打印返回结果
-        System.out.println(new Gson().tojson(createUserResponse));
+        createUserRequest.userId = "***";
+        createUserRequest.role = "***";;
+        createUserRequest.userName = "***";;
+        requestModel.body = createUserRequest;
+        CreateUserModel createUserResponse = client.createUser(requestModel, runtimeOptions);
+        System.out.println(new Gson().toJson(createUserResponse.body));
 
     } catch (TeaException e) {
         System.out.println(e.getMessage());
@@ -683,9 +671,8 @@ public static void createUser() throws Exception {
 
 - 返回结果
 
-```json
+```javascript
 {
-    "requestId":"44AF1DB3-119D-4A2E-B9F1-6155C613C9A9",
     "avatar":"",
     "createdAt":1572225460185,
     "defaultDriveId":"",
@@ -706,16 +693,17 @@ public static void createUser() throws Exception {
 
 - 以下代码用于获取User，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~~java
 //获取User
 public static void getUser() throws Exception {
     try {
+        GetUserRequestModel requestModel = new GetUserRequestModel();
         GetUserRequest getUserRequest = new GetUserRequest();
-        getUserRequest.userId = userId;
-        GetUserResponse getUserResponse = client.getUser(getUserRequest, runtime);
+        getUserRequest.userId = "****";
+        requestModel.body = getUserRequest;
+        GetUserModel getUserResponse = client.getUser(requestModel, runtimeOptions);
 
-        //  打印返回结果
-        System.out.println(new Gson().tojson(getUserResponse));
+        System.out.println(new Gson().toJson(getUserResponse.body));
 
     } catch (TeaException e) {
         System.out.println(e.getMessage());
@@ -723,13 +711,12 @@ public static void getUser() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~~
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"2E4824D1-AF73-4F3B-B8C0-C9F446DE4198",
     "avatar":"",
     "createdAt":1572226149810,
     "defaultDriveId":"",
@@ -744,23 +731,24 @@ public static void getUser() throws Exception {
     "userId":"test_user",
     "userName":"test_user"
 }
-```
+~~~
 
 ### 列举User
 
 - 以下代码用于列举User，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~~java
 //列举User
 
 public static void listUser() throws Exception {
     try {
+        ListUserRequestModel requestModel = new ListUserRequestModel();
         ListUserRequest listUserRequest = new ListUserRequest();
         listUserRequest.limit = 10;
-        ListUserResponse listUserResponse = client.listUsers(listUserRequest, runtime);
-
-        //  打印返回结果
-        System.out.println(new Gson().tojson(listUserResponse));
+        requestModel.body = listUserRequest;
+        ListUsersModel listUserResponse = client.listUsers(requestModel, runtimeOptions);
+        
+        System.out.println(new Gson().toJson(listUserResponse.body));
 
     } catch (TeaException e) {
         System.out.println(e.getMessage());
@@ -768,13 +756,12 @@ public static void listUser() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~~
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"BD84CB38-20A2-4652-ABE8-E35580D77DC7",
     "items":[
         {
             "avatar":"",
@@ -828,13 +815,13 @@ public static void listUser() throws Exception {
             "description":"",
             "domainId":"daily1405",
             "email":"",
-            "nickName":"13297039225",
-            "phone":"13297039225",
+            "nickName":"1329***25",
+            "phone":"132****25",
             "role":"admin",
             "status":"enabled",
             "updatedAt":1571907859554,
             "userId":"6c23c98****************f5211",
-            "userName":"13297039225"
+            "userName":"132**********5"
         },
         {
             "avatar":"",
@@ -869,7 +856,7 @@ public static void listUser() throws Exception {
     ],
     "nextMarker":""
 }
-```
+~~~
 
 
 
@@ -877,18 +864,19 @@ public static void listUser() throws Exception {
 
 - 以下代码用于更新User，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 //更新User
 public static void updateUser() throws Exception {
     try {
+        UpdateUserRequestModel requestModel = new UpdateUserRequestModel();
         UpdateUserRequest updateUserRequest = new UpdateUserRequest();
         updateUserRequest.description = "test_user";
-        // userId为之前创建的user
-        updateUserRequest.userId = userId; 
-        UpdateUserResponse updateUserResponse = client.updateUser(updateUserRequest, runtime);
+        updateUserRequest.userId = "***";
+        requestModel.body = updateUserRequest;
+        UpdateUserModel updateUserResponse = client.updateUser(requestModel, runtimeOptions);
 
-        //  打印返回结果
-        System.out.println(new Gson().tojson(updateUserResponse));
+        System.out.println(new Gson().toJson(updateUserResponse.body));
+
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
@@ -896,15 +884,14 @@ public static void updateUser() throws Exception {
     }
 }
 
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"56FEFF5B-9E88-403B-AED4-92B051BE4E74",
     "avatar":"",
     "createdAt":1572226835585,
     "defaultDriveId":"",
@@ -919,7 +906,7 @@ public static void updateUser() throws Exception {
     "userId":"test_user",
     "userName":"test_user"
 }
-```
+~~~
 
 
 
@@ -927,17 +914,17 @@ public static void updateUser() throws Exception {
 
 - 以下代码用于搜索User，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // search user
 public static void searchUser() throws Exception {
     try {
-        SearchUserRequest searchUserRequest  = new SearchUserRequest();
-        searchUserRequest.userName  = "刘";
-        ListUserResponse listUserResponse = client.searchUser(searchUserRequest,runtimeOptions);
-
-
-        //  打印返回结果
-        System.out.println(new Gson().toJson(listUserResponse));
+        SearchUserRequestModel requestModel = new SearchUserRequestModel();
+        SearchUserRequest searchUserRequest = new SearchUserRequest();
+        searchUserRequest.userName = "***";
+        requestModel.body = searchUserRequest;
+        SearchUserModel listUserResponse1 = client.searchUser(requestModel, runtimeOptions);
+        
+        System.out.println(new Gson().toJson(listUserResponse1.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
@@ -946,15 +933,14 @@ public static void searchUser() throws Exception {
 }
 
 
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"0CCADE95-61CC-41BC-9047-39145CC50054",
     "items":[
         {
             "avatar":"",
@@ -974,7 +960,7 @@ public static void searchUser() throws Exception {
     ],
     "nextMarker":""
 }
-```
+~~~
 
 
 
@@ -982,14 +968,18 @@ public static void searchUser() throws Exception {
 
 - 以下代码用于删除User，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 删除User
 
 public static void deleteUser() throws Exception {
     try {
+        DeleteUserRequestModel requestModel = new DeleteUserRequestModel();
         DeleteUserRequest deleteUserRequest = new DeleteUserRequest();
-        deleteUserRequest.userId = userId;
-        client.deleteUser(deleteUserRequest, runtimeOptions);
+        deleteUserRequest.userId = "***";
+        requestModel.body = deleteUserRequest;
+
+        DeleteUserModel deleteUserResponse = client.deleteUser(requestModel, runtimeOptions);
+
         //此接口没有返回body
     } catch (TeaException e) {
         System.out.println(e.getMessage());
@@ -997,7 +987,7 @@ public static void deleteUser() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~
 
 
 
@@ -1011,49 +1001,50 @@ public static void deleteUser() throws Exception {
 
 - 以下代码用于创建Drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 public static void createDrive() throws Exception {
     try {
         // 获取store_id
-        ListStoresRequest listStoresRequest = new ListStoresRequest();
-        listStoresRequest.domainId = "daily1405";
-        ListStoresResponse listStoresResponse = client.listStores(listStoresRequest, runtime);
-
+        AdminListStoresRequestModel requestModel = new AdminListStoresRequestModel();
+        AdminListStoresRequest listStoresRequest = new AdminListStoresRequest();
+        requestModel.body = listStoresRequest;
+        AdminListStoresModel listStoresResponse = client.adminListStores(requestModel, runtime);
         //打印结果
-        System.out.println(new Gson().tojson(listStoresResponse));
+        System.out.println(new Gson().toJson(listStoresResponse.body));
 
         // 根据自己的需求从返回的结果中选择store_id
-        String storeId = listStoresResponse.items[0].storeIdstore_id;
+        String storeId = listStoresResponse.body.items.get(0).storeId;
 
         //创建drive
+        reateDriveRequestModel requestModel1 = new CreateDriveRequestModel();
         CreateDriveRequest createDriveRequest = new CreateDriveRequest();
         createDriveRequest.totalSize = 1000000L;
-        createDriveRequest.driveName = "test_drive";
-        createDriveRequest.description = "test_drive";
+        createDriveRequest.driveName = "java-sdk-test_drive";
+        createDriveRequest.description = "java-sdk-test_drive";
         createDriveRequest.driveType = "normal";
         createDriveRequest.relativePath = "/test_drive/";
         createDriveRequest.storeId = storeId;
         createDriveRequest.owner = userId;
-        CreateDriveResponse createDriveResponse = client.createDrive(createDriveRequest, runtime);
+        requestModel1.body = createDriveRequest;
+        CreateDriveModel createDriveResponse = client.createDrive(requestModel1, runtime);
 
         // 打印结果
-        System.out.println(new Gson().toJson(createDriveResponse));
+        System.out.println(new Gson().toJson(createDriveResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 // list_stores response
 {
-    "requestId":"84BDA281-9B83-477B-B2CC-41D47C8FD982",
     "items":[
         {
             "accelerateEndpoint":"",
@@ -1077,7 +1068,7 @@ public static void createDrive() throws Exception {
     "domainId":"daily1405",
     "driveId":"1902"
 }
-```
+~~~
 
 
 
@@ -1089,13 +1080,15 @@ public static void createDrive() throws Exception {
 // 列举 Drive 
 public static void listDrive() throws Exception {
     try {
+        ListDriveRequestModel requestModel = new ListDriveRequestModel();
         ListDriveRequest listDriveRequest = new ListDriveRequest();
         listDriveRequest.limit = 1;
         listDriveRequest.owner = userId;
-        ListDriveResponse listDriveResponse = client.listDrives(listDriveRequest, runtime);
+        requestModel.body = listDriveRequest;
+        ListDrivesModel listDriveResponse = client.listDrives(requestModel3, runtime);
 
         // 打印结果
-        System.out.println(new Gson().toJson(listDriveResponse));
+        System.out.println(new Gson().toJson(listDriveResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
@@ -1110,9 +1103,8 @@ public static void listDrive() throws Exception {
 
 - 返回结果
 
-```json
+```javascript
 {
-    "requestId":"871949D9-12A4-4220-B078-D6E937F90699",
     "items":[
         {
             "creator":"6c23c*************211",
@@ -1139,16 +1131,17 @@ public static void listDrive() throws Exception {
 
 - 以下代码用于查询Drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 查询 Drive
 public static void getDrive() throws Exception {
     try {
+        GetDriveRequestModel requestModel = new GetDriveRequestModel();
         GetDriveRequest getDriveRequest = new GetDriveRequest();
-        getDriveRequest.driveId = driveId;
-        GetDriveResponse getDriveResponse = client.getDrive(getDriveRequest, runtime);
+        getDriveRequest.driveId = "2801";
+        requestModel.body = getDriveRequest;
+        GetDriveModel getDriveResponse = client.getDrive(requestModel, runtime);
 
-        //打印结果
-        System.out.println(new Gson().toJson(getDriveResponse));
+        System.out.println(new Gson().toJson(getDriveResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
@@ -1156,15 +1149,14 @@ public static void getDrive() throws Exception {
     }
 }
 
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~JavaScript
 {
-    "requestId":"C50006A6-D23B-43AA-B634-3656CB23D542",
     "creator":"6c23c9*************f5211",
     "description":"test_drive",
     "domainId":"daily1405",
@@ -1178,23 +1170,25 @@ public static void getDrive() throws Exception {
     "totalSize":1000000,
     "usedSize":0
 }
-```
+~~~
 
 ### 列举drive
 
 - 以下代码用于更新Drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 列举 Drive 
 public static void listDrive() throws Exception {
     try {
+        ListDriveRequestModel requestModel = new ListDriveRequestModel();
         ListDriveRequest listDriveRequest = new ListDriveRequest();
         listDriveRequest.limit = 1;
         listDriveRequest.owner = userId;
-        ListDriveResponse listDriveResponse = client.listDrives(listDriveRequest, runtime);
+        requestModel.body = listDriveRequest;
+        ListDrivesModel listDriveResponse = client.listDrives(requestModel, runtime);
 
         // 打印结果
-        System.out.println(new Gson().toJson(listDriveResponse));
+        System.out.println(new Gson().toJson(listDriveResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
@@ -1202,15 +1196,14 @@ public static void listDrive() throws Exception {
     }
 }
 
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"51C9C618-25CE-487B-8A28-33827AF6DC99",
     "items":[
         {
             "creator":"",
@@ -1230,7 +1223,7 @@ public static void listDrive() throws Exception {
     "nextMarker":""
 }
 
-```
+~~~
 
 
 
@@ -1238,18 +1231,21 @@ public static void listDrive() throws Exception {
 
 - 以下代码用于更新Drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 更新 Drive
 public static void updateDrive() throws Exception {
     try {
+        UpdateDriveRequestModel requestModel = new UpdateDriveRequestModel();
         UpdateDriveRequest updateDriveRequest = new UpdateDriveRequest();
-        updateDriveRequest.driveId = driveId;
+        updateDriveRequest.driveId = "2801";
         updateDriveRequest.description = "changed_drive";
         updateDriveRequest.totalSize = 1000000L;
-        UpdateDriveResponse updateDriveResponse = client.updateDrive(updateDriveRequest, runtime);
+        requestModel.body = updateDriveRequest;
+        UpdateDriveModel updateDriveResponse = client.updateDrive(requestModel0, runtime);
+
 
         // 打印结果
-        System.out.println(new Gson().toJson(updateDriveResponse));
+        System.out.println(new Gson().toJson(updateDriveResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
@@ -1257,13 +1253,13 @@ public static void updateDrive() throws Exception {
     }
 }
 
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~JavaScript
 {
     "requestId":"D88BC954-0BE8-4282-BDF3-6F964FC113DF",
     "creator":"6c23c**************9f5211",
@@ -1279,7 +1275,7 @@ public static void updateDrive() throws Exception {
     "totalSize":1000000,
     "usedSize":0
 }
-```
+~~~
 
 
 
@@ -1287,13 +1283,16 @@ public static void updateDrive() throws Exception {
 
 - 以下代码用于创建Drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 删除 Drive
 public static void deleteDrive() throws Exception {
     try {
+        DeleteDriveRequestModel requestModel = new DeleteDriveRequestModel();
         DeleteDriveRequest deleteDriveRequest = new DeleteDriveRequest();
-        deleteDriveRequest.driveId = driveId;
-        client.deleteDrive(deleteDriveRequest, runtime);
+        deleteDriveRequest.driveId= "1";
+        requestModel.body = deleteDriveRequest;
+
+        client.deleteDrive(requestModel, runtime);
         // 此接口不返回body
     } catch (TeaException e) {
         System.out.println(e.getMessage());
@@ -1302,7 +1301,52 @@ public static void deleteDrive() throws Exception {
     }
 }
 
-```
+~~~
+
+### 列举Stores
+
+​	说明：当前接口只支持accessToken调用， 请使用Accesstoken初始化客户端
+
+- 以下代码用于列举Stores，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
+
+~~~java
+public static void listStores() throws Exception {
+    try {
+        AdminListStoresRequestModel requestModel = new AdminListStoresRequestModel();
+        AdminListStoresRequest listStoresRequest = new AdminListStoresRequest();
+        requestModel.body = listStoresRequest;
+
+        AdminListStoresModel listStoresResponse = client.adminListStores(requestModel, runtime);
+        System.out.println(new Gson().toJson(listStoresResponse.body));
+    } catch (TeaException e) {
+        System.out.println(e.getMessage());
+        System.out.println(e.getCode());
+        System.out.println(new Gson().toJson(e.getData()));
+    }
+}
+~~~
+
+- 返回结果
+
+~~~javascript
+{
+    "items":[
+        {
+            "accelerateEndpoint":"",
+            "basePath":"",
+            "bucket":"ccp-daily-test",
+            "customizedEndpoint":"",
+            "endpoint":"https://oss-cn-hangzhou.aliyuncs.com",
+            "internalEndpoint":"",
+            "ownership":"custom",
+            "policy":"",
+            "roleArn":"",
+            "storeId":"90fba27e9c40452d91d83b204aee1d9b",
+            "type":"oss"
+        }
+    ]
+}
+~~~
 
 
 
@@ -1312,7 +1356,7 @@ public static void deleteDrive() throws Exception {
 
 - 以下代码用于创建Share，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 格式化过期时间
 public static String getISOTime() {
     long currentTime = System.currentTimeMillis();
@@ -1331,18 +1375,19 @@ public static String getISOTime() {
 public static void createShare() throws Exception {
     try {
         String nowAsISO = getISOTime();
+        CreateShareRequestModel requestModel = new CreateShareRequestModel();
         CreateShareRequest createShareRequest = new CreateShareRequest();
         createShareRequest.shareFilePath = "/test_share/";
         createShareRequest.owner = userId;
         createShareRequest.shareName = "test_share";
-        createShareRequest.permissions = new String[]{"FILE.LIST"};
+        createShareRequest.permissions = new ArrayList<>(Arrays.asList("FILE.LIST"));
         createShareRequest.expiration = nowAsISO;
         createShareRequest.driveId = driveId;
-
-        CreateShareResponse createShareResponse = client.createShare(createShareRequest, runtime);
+        requestModel.body = createShareRequest;
+        CreateShareModel createShareResponse = client.createShare(requestModel, runtime);
 
         // 打印结果
-        System.out.println(new Gson().toJson(createShareResponse));
+        System.out.println(new Gson().toJson(createShareResponse.body));
 
     } catch (TeaException e) {
         System.out.println(e.getMessage());
@@ -1351,19 +1396,18 @@ public static void createShare() throws Exception {
     }
 }
 
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"CD01D212-D12A-4250-A773-8296E01B226A",
     "domainId":"daily1405",
     "shareId":"47057f7b-8182-4d2d-ba1a-09ede78782d7"
 }
-```
+~~~
 
 
 
@@ -1371,16 +1415,18 @@ public static void createShare() throws Exception {
 
 - 以下代码用于列举Share，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 列举 Share
 public static void listShare() throws Exception {
     try {
+        ListShareRequestModel requestModel = new ListShareRequestModel();
         ListShareRequest listShareRequest = new ListShareRequest();
         listShareRequest.owner = userId;
-        ListShareResponse listShareResponse = client.listShare(listShareRequest, runtime);
+        requestModel.body = listShareRequest;
+        ListShareModel listShareResponse = client.listShare(requestModel, runtime);
 
         // 打印结果
-        System.out.println(new Gson().toJson(listShareResponse));
+        System.out.println(new Gson().toJson(listShareResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
@@ -1388,15 +1434,14 @@ public static void listShare() throws Exception {
     }
 }
 
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"4A5EF007-CA9B-49E2-A2A9-68108E34F7F7",
     "items":[
         {
             "createdAt":"2019-10-28T06:22:21.163Z",
@@ -1419,7 +1464,7 @@ public static void listShare() throws Exception {
     ],
     "nextMarker":""
 }
-```
+~~~
 
 
 
@@ -1427,16 +1472,19 @@ public static void listShare() throws Exception {
 
 - 以下代码用于查询Share，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 查询Share
 public static void getShare() throws Exception {
     try {
+        GetShareRequestModel requestModel = new GetShareRequestModel();
         GetShareRequest getShareRequest = new GetShareRequest();
         getShareRequest.shareId = shareID;
-        GetShareResponse getShareResponse = client.getShare(getShareRequest, runtime);
+        requestModel.body = getShareRequest;
+        GetShareModel getShareResponse = client.getShare(requestModel, runtime);
+
 
         // 打印结果
-        System.out.println(new Gson().toJson(getShareResponse));
+        System.out.println(new Gson().toJson(getShareResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
@@ -1444,15 +1492,14 @@ public static void getShare() throws Exception {
     }
 }
 
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"3DC7F2B1-68D4-4B1D-BF12-3F3814C22278",
     "createdAt":"2019-10-28T06:22:21.163Z",
     "creator":"6c23*************9f5211",
     "description":"",
@@ -1470,7 +1517,7 @@ public static void getShare() throws Exception {
     "status":"enabled",
     "updatedAt":"2019-10-28T06:22:21.163Z"
 }
-```
+~~~
 
 
 
@@ -1478,17 +1525,19 @@ public static void getShare() throws Exception {
 
 - 以下代码用于更新Share，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 更新 Share
 public static void updateShare() throws Exception {
     try {
+        UpdateShareRequestModel requestModel = new UpdateShareRequestModel();
         UpdateShareRequest updateShareRequest = new UpdateShareRequest();
         updateShareRequest.shareId = shareID;
         updateShareRequest.description = "changed_share";
-        UpdateShareResponse updateShareResponse = client.updateShare(updateShareRequest, runtime);
+        requestModel.body = updateShareRequest;
+        UpdateShareModel updateShareResponse = client.updateShare(requestModel, runtime);
 
         // 打印结果
-        System.out.println(new Gson().toJson(updateShareResponse));
+        System.out.println(new Gson().toJson(updateShareResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
@@ -1497,15 +1546,14 @@ public static void updateShare() throws Exception {
 }
 
 
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"F693F9EB-863E-49AF-AE0D-AD158B3613D5",
     "createdAt":"2019-10-28T06:22:21.163Z",
     "creator":"6c23c98********************f5211",
     "description":"changed_share",
@@ -1523,7 +1571,7 @@ public static void updateShare() throws Exception {
     "status":"enabled",
     "updatedAt":"2019-10-28T06:22:21.163Z"
 }
-```
+~~~
 
 
 
@@ -1531,14 +1579,17 @@ public static void updateShare() throws Exception {
 
 - 以下代码用于删除Share，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 删除 Share
 
 public static void deleteShare() throws Exception {
     try {
+        DeleteShareRequestModel requestModel = new DeleteShareRequestModel();
         DeleteShareRequest deleteShareRequest = new DeleteShareRequest();
         deleteShareRequest.shareId = shareID;
-        client.deleteShare(deleteShareRequest,runtime);
+        requestModel.body = deleteShareRequest;
+        DeleteShareModel deleteShareResponses = client.deleteShare(requestModel, runtime);
+
         //此接口不返回body
     } catch (TeaException e) {
         System.out.println(e.getMessage());
@@ -1547,7 +1598,7 @@ public static void deleteShare() throws Exception {
     }
 }
 
-```
+~~~
 
 ## OSSPath File相关 API
 
@@ -1556,37 +1607,37 @@ public static void deleteShare() throws Exception {
 - 以下代码用于创建File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 - 说明： 此处创建File 还需要上传文件到OSS， 具体操作详见最佳实践。
 
-```java
+~~~java
 // 创建文件
 public static void createFile() throws Exception {
     try {
+        OSSCreateFileRequestModel requestModel =new OSSCreateFileRequestModel();
         OSSCreateFileRequest ossCreateFileRequest = new OSSCreateFileRequest();
         ossCreateFileRequest.type = "file";
         ossCreateFileRequest.name = "a.txt";
-        ossCreateFileRequest.driveId = driveId;
+        ossCreateFileRequest.driveId= "**";
         ossCreateFileRequest.parentFilePath = "/";
         ossCreateFileRequest.contentType = "text/plain";
-
-        OSSCreateFileResponse ossCreateFileResponse = client.createFile(ossCreateFileRequest, runtime);
+        requestModel.body = ossCreateFileRequest;
+        CreateFileModel ossCreateFileResponse = client.createFile(requestModel, runtime);
 
         // 打印结果
-        System.out.println(new Gson().toJson(ossCreateFileResponse));
+        System.out.println(new Gson().toJson(ossCreateFileResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 // 此处url省略部分，实际值详见接口调用返回的结果。
 {
-    "requestId":"E30F4EC3-0655-44DD-8A8A-8D71848CCC44",
     "domainId":"daily1405",
     "driveId":"1902",
     "filePath":"/a.txt",
@@ -1599,7 +1650,7 @@ public static void createFile() throws Exception {
     "type":"file",
     "uploadId":"872F52602EB343D0ADCE3E75D008FB16"
 }
-```
+~~~
 
 
 
@@ -1607,37 +1658,34 @@ public static void createFile() throws Exception {
 
 - 以下代码用于列举File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 列举文件
 public static void listFile() throws Exception {
     try {
-        OSSCreateFileRequest ossCreateFileRequest = new OSSCreateFileRequest();
-        ossCreateFileRequest.type = "file";
-        ossCreateFileRequest.name = "a.txt";
-        ossCreateFileRequest.driveId = driveId;
-        ossCreateFileRequest.parentFilePath = "/";
-        ossCreateFileRequest.contentType = "text/plain";
-
-        OSSCreateFileResponse ossCreateFileResponse = client.createFile(ossCreateFileRequest, runtime);
+        OSSListFileRequestModel requestModel = new OSSListFileRequestModel();
+        OSSListFileRequest ossListFileRequest = new OSSListFileRequest();
+        ossListFileRequest.driveId= "***";
+        ossListFileRequest.parentFilePath = folderPath;
+        requestModel.body = ossListFileRequest;
+        ListFileModel ossListFileResponse = client.listFile(requestModel, runtime);
 
         // 打印结果
-        System.out.println(new Gson().toJson(ossCreateFileResponse));
+        System.out.println(new Gson().toJson(ossListFileResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~JavaScript
 // 此处url省略部分，实际值详见接口调用返回的结果。
 {
-    "requestId":"67AF911A-F8F8-4FD4-994C-797642468AFF",
     "items":[
         {
             "contentType":"",
@@ -1657,7 +1705,7 @@ public static void listFile() throws Exception {
     ],
     "nextMarker":""
 }
-```
+~~~
 
 
 
@@ -1665,33 +1713,33 @@ public static void listFile() throws Exception {
 
 - 以下代码用于查询File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 查询File
 public static void getFile() throws Exception {
     try {
+        OSSGetFileRequestModel requestModel = new OSSGetFileRequestModel();
         OSSGetFileRequest ossGetFileRequest = new OSSGetFileRequest();
-        ossGetFileRequest.driveId = driveId;
+        ossGetFileRequest.driveId= "2801";
         ossGetFileRequest.filePath = filePath;
-
-        OSSGetFileResponse ossGetFileResponse = client.getFile(ossGetFileRequest, runtime);
+        requestModel.body = ossGetFileRequest;
+        GetFileModel ossGetFileResponse = client.getFile(requestModel, runtime);
 
         // 打印结果
-        System.out.println(new Gson().toJson(ossGetFileResponse));
+        System.out.println(new Gson().toJson(ossGetFileResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"0AC2633C-A0F1-402B-9CCD-EE98FAD573B7",
     "contentType":"text/plain",
     "domainId":"daily1405",
     "downloadUrl":"https://********.oss-cn-hangzhou.aliyuncs.***********8FB16",
@@ -1706,43 +1754,45 @@ public static void getFile() throws Exception {
     "updatedAt":"2019-10-28T06:22:23Z",
     "url":"https://********.oss-cn-hangzhou.aliyuncs.***********8FB16"
 }
-```
+~~~
 
 ### 移动File
 
 - 以下代码用于移动File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 移动 File
 public static void moveFile() throws Exception {
     try {
+        OSSMoveFileRequestModel requestModel = new OSSMoveFileRequestModel();
         OSSMoveFileRequest ossMoveFileRequest = new OSSMoveFileRequest();
-        ossMoveFileRequest.driveId = driveId;
+        ossMoveFileRequest.driveId= "***";
         ossMoveFileRequest.filePath = filePath;
         ossMoveFileRequest.toParentFilePath = folderPath;
-        OSSMoveFileResponse ossMoveFileResponse = client.moveFile(ossMoveFileRequest, runtime);
+        requestModel.body = ossMoveFileRequest;
+        MoveFileModel ossMoveFileResponse = client.moveFile(requestModel, runtime);
+
         // 打印结果
-        System.out.println(new Gson().toJson(ossMoveFileResponse));
+        System.out.println(new Gson().toJson(ossMoveFileResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"757C1547-9354-444B-92D2-127A83AEA470",
     "domainId":"daily1405",
     "driveId":"1902",
     "filePath":"/test_folder/a.txt"
 }
-```
+~~~
 
 
 
@@ -1750,38 +1800,39 @@ public static void moveFile() throws Exception {
 
 - 以下代码用于复制File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 复制 File
 public static void copyFile() throws Exception {
     try {
+        OSSCopyFileRequestModel requestModel = new OSSCopyFileRequestModel();
         OSSCopyFileRequest ossCopyFileRequest = new OSSCopyFileRequest();
         ossCopyFileRequest.filePath = movedFilePath;
-        ossCopyFileRequest.driveId = driveId;
+        ossCopyFileRequest.driveId= "***";
         ossCopyFileRequest.toParentFilePath = "/";
+        requestModel.body =ossCopyFileRequest;
+        CopyFileModel ossCopyFileResponse = client.copyFile(requestModel, runtime);
 
-        OSSCopyFileResponse ossCopyFileResponse = client.copyFile(ossCopyFileRequest, runtime);
         // 打印结果
-        System.out.println(new Gson().toJson(ossCopyFileResponse));
+        System.out.println(new Gson().toJson(ossCopyFileResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"24C7E91D-9715-4AE7-BDA1-4A082D7D3AA3",
     "domainId":"daily1405",
     "driveId":"1902",
     "filePath":"/a.txt"
 }
-```
+~~~
 
 
 
@@ -1789,36 +1840,38 @@ public static void copyFile() throws Exception {
 
 - 以下代码用于获取File上传地址，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 获取File上传地址
 public static void getFileUploadUrl() throws Exception {
     try {
+        OSSGetUploadUrlRequestModel requestModel = new OSSGetUploadUrlRequestModel();
         UploadPartInfo uploadPartInfo = new UploadPartInfo();
         uploadPartInfo.partNumber = 1L;
         OSSGetUploadUrlRequest ossGetUploadUrlRequest = new OSSGetUploadUrlRequest();
         ossGetUploadUrlRequest.driveId = driveId;
         ossGetUploadUrlRequest.filePath = filePath;
         ossGetUploadUrlRequest.uploadId = uploadId;
-        ossGetUploadUrlRequest.partInfoList = new UploadPartInfo[]{uploadPartInfo};
-        OSSGetUploadUrlResponse ossGetUploadUrlResponse = client.getUploadUrl(ossGetUploadUrlRequest, runtime);
+        ossGetUploadUrlRequest.partInfoList = new ArrayList<>(Arrays.asList(uploadPartInfo));
+        requestModel.body = ossGetUploadUrlRequest;
+        GetUploadUrlModel ossGetUploadUrlResponse = client.getUploadUrl(requestModel, runtime);
+
 
         // 打印结果
-        System.out.println(new Gson().toJson(ossGetUploadUrlResponse));
+        System.out.println(new Gson().toJson(ossGetUploadUrlResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"64062AF5-7ADF-4F7D-9878-9E2FA6AABE53",
     "createAt":"2019-10-28T06:22:22.231Z",
     "domainId":"daily1405",
     "driveId":"1902",
@@ -1831,7 +1884,7 @@ public static void getFileUploadUrl() throws Exception {
     ],
     "uploadId":"872F52602EB343D0ADCE3E75D008FB16"
 }
-```
+~~~
 
 
 
@@ -1839,39 +1892,40 @@ public static void getFileUploadUrl() throws Exception {
 
 - 以下代码用于获取File下载地址，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 获取File下载地址
 public static void getFileDownloadUrl() throws Exception {
     try {
+        OSSGetDownloadUrlRequestModel requestModel = new OSSGetDownloadUrlRequestModel();
         OSSGetDownloadUrlRequest ossGetDownloadUrlRequest = new OSSGetDownloadUrlRequest();
-        ossGetDownloadUrlRequest.driveId = driveId;
+        ossGetDownloadUrlRequest.driveId= "***";
         ossGetDownloadUrlRequest.filePath = filePath;
         ossGetDownloadUrlRequest.expireSec = 3600L;
-
-        OSSGetDownloadUrlResponse ossGetDownloadUrlResponse = client.getDownloadUrl(ossGetDownloadUrlRequest, runtime);
+        requestModel.body = ossGetDownloadUrlRequest;
+        GetDownloadUrlModel ossGetDownloadUrlResponse = client.getDownloadUrl(requestModel, runtime);
 
         // 打印结果
-        System.out.println(new Gson().toJson(ossGetDownloadUrlResponse));
+        System.out.println(new Gson().toJson(ossGetDownloadUrlResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
     "requestId":"6760BC8F-AA33-4862-AA26-0F8FA57EAF39",
     "expiration":"2019-10-28T07:22:24.044Z",
     "method":"GET",
     "url":"https://********.oss-cn-hangzhou.aliyuncs.***********8FB16"
 }
-```
+~~~
 
 
 
@@ -1880,37 +1934,38 @@ public static void getFileDownloadUrl() throws Exception {
 - 以下代码用于创建Complete File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 - 说明： 此处请求参数中的ETag是请求uploadUrl上传完成后从返回的Response Headers中获取的，详见最佳实践。
 
-```java
+~~~java
 // 合并File分片
 public static void completeFile() throws Exception {
     try {
+        OSSCompleteFileRequestModel requestModel = new OSSCompleteFileRequestModel();
         UploadPartInfo uploadPartInfo1 = new UploadPartInfo();
         uploadPartInfo1.etag = etag;
         uploadPartInfo1.partNumber = 1L;
         OSSCompleteFileRequest ossCompleteFileRequest = new OSSCompleteFileRequest();
-        ossCompleteFileRequest.driveId = driveId;
+        ossCompleteFileRequest.driveId= "***";
         ossCompleteFileRequest.filePath = filePath;
         ossCompleteFileRequest.uploadId = newUploadId;
-        ossCompleteFileRequest.partInfoList = new UploadPartInfo[]{uploadPartInfo1};
-        OSSCompleteFileResponse ossCompleteFileResponse = client.completeFile(ossCompleteFileRequest, runtime);
-
+        ossCompleteFileRequest.partInfoList =new ArrayList<>(Arrays.asList(uploadPartInfo1));
+        requestModel.body = ossCompleteFileRequest;
+        CompleteFileModel ossCompleteFileResponse = client.completeFile(requestModel, runtime);
+        
         // 打印结果
-        System.out.println(new Gson().toJson(ossCompleteFileResponse));
+        System.out.println(new Gson().toJson(ossCompleteFileResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"B05D6ABD-AF30-4E10-B1FA-4168941EE750",
     "contentType":"text/plain",
     "crc64Hash":"6668564720710875145",
     "domainId":"daily1405",
@@ -1925,7 +1980,7 @@ public static void completeFile() throws Exception {
     "uploadId":"872F52602EB343D0ADCE3E75D008FB16",
     "crc":"6668564720710875145"
 }
-```
+~~~
 
 
 
@@ -1933,15 +1988,17 @@ public static void completeFile() throws Exception {
 
 - 以下代码用于删除File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 删除 file
 public static void deleteFile() throws Exception {
     try {
-        OSSDeleteFileRequest ossDeleteFileRequest =  new OSSDeleteFileRequest();
-        ossDeleteFileRequest.driveId = driveId;
-        ossDeleteFileRequest.filePath = copiedFilePath;
+        OSSDeleteFileRequestModel requestModel = new OSSDeleteFileRequestModel();
+        OSSDeleteFileRequest ossDeleteFileRequest = new OSSDeleteFileRequest();
+        ossDeleteFileRequest.driveId= "***";
+        ossDeleteFileRequest.filePath = filePath;
+        requestModel.body = ossDeleteFileRequest;
 
-        client.deleteFile(ossDeleteFileRequest, runtime);
+        client.deleteFile(requestModel, runtime);
 
         // 此接口不返回body
     } catch (TeaException e) {
@@ -1950,34 +2007,33 @@ public static void deleteFile() throws Exception {
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~
 
 ### 列举Stores File
 
 - 以下代码用于列举Stores File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档.
 
-```java
+~~~java
 // 列举 Stores File
 public static void listStoreFiles() throws Exception {
     try {
         // list Stores
-        ListStorageRequest listStoresRequest = new ListStorageRequest();
-        listStoresRequest.domainId = "daily1405";
-        ListStorageResponse listStoresResponse = client.listStorage(listStoresRequest, runtime);
-        System.out.println(new Gson().toJson(listStoresResponse));
-        String storeId = listStoresResponse.items[0].storeId;
+        AdminListStoresRequestModel requestModel = new AdminListStoresRequestModel();
+        AdminListStoresRequest listStoresRequest = new AdminListStoresRequest();
+        requestModel.body = listStoresRequest;
+        AdminListStoresModel listStoresResponse = client.adminListStores(requestModel, runtime);
+        String storeId = listStoresResponse.body.items.get(0).storeId;
 
-        ListStorageFileRequest listStorageFileRequest = new ListStorageFileRequest();
-        listStorageFileRequest.storeId = storeId;
-        listStorageFileRequest.limit = 10L;
-		
         // list store_file
-        ListStorageFileResponse listStorageFileResponse = client.listStoragefile(listStorageFileRequest,runtime);
-
-       
+        ListStoreFileRequestModel requestModel = new ListStoreFileRequestModel();
+        ListStoreFileRequest listStorageFileRequest = new ListStoreFileRequest();
+        listStorageFileRequest.storeId = storeId;
+        listStorageFileRequest.limit = 2L;
+        requestModel.body = listStorageFileRequest;
+        ListStorefileModel listStorageFileResponse = client.listStorefile(requestModel, runtime);
 
         // 打印结果
-        System.out.println(new Gson().toJson(listStorageFileResponse));
+        System.out.println(new Gson().toJson(listStorageFileResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
@@ -1985,48 +2041,26 @@ public static void listStoreFiles() throws Exception {
     }
 }
 
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"DB0A660A-C4B6-4620-BF83-B6CFCA31162C",
     "items":[
         {
             "domainId":"",
-            "name":"***y",
+            "name":"5733dbd6**********5c0",
             "parentFilePath":"/",
-            "storeId":"90fba27e9c40452d91d83b204aee1d9b",
-            "type":"folder"
-        },
-        {
-            "domainId":"",
-            "name":"superadmin",
-            "parentFilePath":"/",
-            "storeId":"90fba27e9c40452d91d83b204aee1d9b",
-            "type":"folder"
-        },
-        {
-            "domainId":"",
-            "name":"test",
-            "parentFilePath":"/",
-            "storeId":"90fba27e9c40452d91d83b204aee1d9b",
-            "type":"folder"
-        },
-        {
-            "domainId":"",
-            "name":"test_drive",
-            "parentFilePath":"/",
-            "storeId":"90fba27e9c40452d91d83b204aee1d9b",
+            "storeId":"90fba2***********e1d9b",
             "type":"folder"
         }
     ],
-    "nextMarker":""
+    "nextMarker":"5733db************86e75c0/"
 }
-```
+~~~
 
 
 
@@ -2036,38 +2070,39 @@ public static void listStoreFiles() throws Exception {
 
 - 以下代码用于创建Drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 创建 Drive
 public static void createDrive() throws Exception {
     try {
+        CreateDriveRequestModel requestModel = new CreateDriveRequestModel();
         CreateDriveRequest createDriveRequest = new CreateDriveRequest();
         createDriveRequest.totalSize = 100000L;
         createDriveRequest.driveName = "test_drive";
         createDriveRequest.driveType = "normal";
-        createDriveRequest.owner =  userId ;
-        CreateDriveResponse createDriveResponse = client.createDrive(createDriveRequest, runtime);
+        createDriveRequest.owner = userId;
+        requestModel.body = createDriveRequest;
+        CreateDriveModel createDriveResponse = client.createDrive(requestModel, runtime);
 
         // 打印结果
-        System.out.println(new Gson().toJson(createDriveResponse));
+        System.out.println(new Gson().toJson(createDriveResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"6B556975-1A8D-4517-9227-D1CED662A24B",
     "domainId":"daily1404",
     "driveId":"603"
 }
-```
+~~~
 
 
 
@@ -2075,17 +2110,19 @@ public static void createDrive() throws Exception {
 
 - 以下代码用于列举drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 列举 Drive 
 public static void listDrive() throws Exception {
     try {
+        ListDriveRequestModel requestModel = new ListDriveRequestModel();
         ListDriveRequest listDriveRequest = new ListDriveRequest();
         listDriveRequest.limit = 1;
         listDriveRequest.owner = userId;
-        ListDriveResponse listDriveResponse = client.listDrives(listDriveRequest, runtime);
+        requestModel.body = listDriveRequest;
+        ListDrivesModel listDriveResponse = client.listDrives(requestModel, runtime);
 
         // 打印结果
-        System.out.println(new Gson().toJson(listDriveResponse));
+        System.out.println(new Gson().toJson(listDriveResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
@@ -2094,15 +2131,14 @@ public static void listDrive() throws Exception {
 }
 
 
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"51C9C618-25CE-487B-8A28-33827AF6DC99",
     "items":[
         {
             "creator":"",
@@ -2121,7 +2157,7 @@ public static void listDrive() throws Exception {
     ],
     "nextMarker":""
 }
-```
+~~~
 
 
 
@@ -2129,16 +2165,17 @@ public static void listDrive() throws Exception {
 
 - 以下代码用于查询drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 查询 Drive
 public static void getDrive() throws Exception {
     try {
+        GetDriveRequestModel requestModel = new GetDriveRequestModel();
         GetDriveRequest getDriveRequest = new GetDriveRequest();
         getDriveRequest.driveId = driveId;
-        GetDriveResponse getDriveResponse = client.getDrive(getDriveRequest, runtime);
-
+        requestModel.body = getDriveRequest;
+        GetDriveModel getDriveResponse = client.getDrive(requestModel, runtime);
         //打印结果
-        System.out.println(new Gson().toJson(getDriveResponse));
+        System.out.println(new Gson().toJson(getDriveResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
@@ -2146,15 +2183,14 @@ public static void getDrive() throws Exception {
     }
 }
 
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"2A361340-F298-4685-8C8B-B34C12EE2F41",
     "creator":"",
     "description":"",
     "domainId":"daily1404",
@@ -2168,7 +2204,7 @@ public static void getDrive() throws Exception {
     "totalSize":100000,
     "usedSize":0
 }
-```
+~~~
 
 
 
@@ -2176,18 +2212,20 @@ public static void getDrive() throws Exception {
 
 - 以下代码用于更新drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 更新 Drive
 public static void updateDrive() throws Exception {
     try {
+        UpdateDriveRequestModel requestModel = new UpdateDriveRequestModel();
         UpdateDriveRequest updateDriveRequest = new UpdateDriveRequest();
         updateDriveRequest.driveId = driveId;
         updateDriveRequest.description = "changed_drive";
         updateDriveRequest.totalSize = 1000000L;
-        UpdateDriveResponse updateDriveResponse = client.updateDrive(updateDriveRequest, runtime);
+        requestModel.body = updateDriveRequest;
+        UpdateDriveModel updateDriveResponse = client.updateDrive(requestModel, runtime);
 
         // 打印结果
-        System.out.println(new Gson().toJson(updateDriveResponse));
+        System.out.println(new Gson().toJson(updateDriveResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
@@ -2195,15 +2233,14 @@ public static void updateDrive() throws Exception {
     }
 }
 
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"501B210E-0D4C-46E9-9D35-F1E86074A1D8",
     "creator":"",
     "description":"changed_drive",
     "domainId":"daily1404",
@@ -2217,7 +2254,7 @@ public static void updateDrive() throws Exception {
     "totalSize":1000000,
     "usedSize":0
 }
-```
+~~~
 
 
 
@@ -2225,13 +2262,17 @@ public static void updateDrive() throws Exception {
 
 - 以下代码用于删除drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 删除 Drive
 public static void deleteDrive() throws Exception {
     try {
+        DeleteDriveRequestModel requestModel = new DeleteDriveRequestModel();
         DeleteDriveRequest deleteDriveRequest = new DeleteDriveRequest();
         deleteDriveRequest.driveId = driveId;
-        client.deleteDrive(deleteDriveRequest, runtime);
+        requestModel.body = deleteDriveRequest;
+
+        DeleteDriveModel deleteDriveResponse = client.deleteDrive(requestModel, runtime);
+
         // 此接口不返回body
     } catch (TeaException e) {
         System.out.println(e.getMessage());
@@ -2240,7 +2281,7 @@ public static void deleteDrive() throws Exception {
     }
 }
 
-```
+~~~
 
 
 
@@ -2250,36 +2291,36 @@ public static void deleteDrive() throws Exception {
 
 - 以下代码用于创建Drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 创建文件
 public static void createFile() throws Exception {
     try {
+        CCPCreateFileRequestModel requestModel = new CCPCreateFileRequestModel();
         CCPCreateFileRequest ccpCreateFileRequest = new CCPCreateFileRequest();
         ccpCreateFileRequest.type = "file";
         ccpCreateFileRequest.name = "a.txt";
         ccpCreateFileRequest.driveId = driveId;
         ccpCreateFileRequest.parentFileId = "root";
         ccpCreateFileRequest.contentType = "text/plain";
-
-        CCPCreateFileResponse ccpCreateFileResponse = client.createFile(ccpCreateFileRequest, runtime);
+        requestModel.body = ccpCreateFileRequest;
+        CreateFileModel ccpCreateFileResponse = client.createFile(requestModel, runtime);
 
         // 打印结果
-        System.out.println(new Gson().toJson(ccpCreateFileResponse));
+        System.out.println(new Gson().toJson(ccpCreateFileResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~JavaScript
 {
-    "requestId":"70BC9CC0-A4E9-49A1-9384-6C9CEF286981",
     "domainId":"daily1404",
     "driveId":"603",
     "fileId":"5db6a996aa1292d7563644f0bc4847107171ed7f",
@@ -2294,7 +2335,7 @@ public static void createFile() throws Exception {
     "type":"file",
     "uploadId":"DEB65A38FCCA410BAC6DD23A8A11F943"
 }
-```
+~~~
 
 
 
@@ -2302,35 +2343,34 @@ public static void createFile() throws Exception {
 
 - 以下代码用于列举File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 列举文件
 public static void listFile() throws Exception {
     try {
+        CCPListFileRequestModel requestModel = new CCPListFileRequestModel();
         CCPListFileRequest ccpListFileRequest = new CCPListFileRequest();
         ccpListFileRequest.driveId = driveId;
         ccpListFileRequest.parentFileId = folderId;
         ccpListFileRequest.limit = 1L;
-
-        CCPListFileResponse ccpListFileResponse = client.listFile(ccpListFileRequest, runtime);
-
-
+        requestModel.body = ccpListFileRequest;
+        ListFileModel ccpListFileResponse = client.listFile(requestModel, runtime);
+        
         // 打印结果
-        System.out.println(new Gson().toJson(ccpListFileResponse));;
+        System.out.println(new Gson().toJson(ccpListFileResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"98B303D7-711B-4E98-BAAE-A09B49A4168D",
     "items":[
         {
             "contentHash":"7C4A8D09CA3762AF61E59520943DC26494F8941B",
@@ -2355,7 +2395,7 @@ public static void listFile() throws Exception {
     ],
     "nextMarker":""
 }
-```
+~~~
 
 
 
@@ -2363,33 +2403,33 @@ public static void listFile() throws Exception {
 
 - 以下代码用于查询File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 查询File
 public static void getFile() throws Exception {
     try {
+        CCPGetFileRequestModel requestModel = new CCPGetFileRequestModel();
         CCPGetFileRequest ccpGetFileRequest = new CCPGetFileRequest();
         ccpGetFileRequest.driveId = driveId;
         ccpGetFileRequest.fileId = fileId;
+        requestModel.body = ccpGetFileRequest;
+        GetFileModel ccpGetFileResponse = client.getFile(requestModel, runtime);
 
-        CCPGetFileResponse ccpGetFileResponse = client.getFile(ccpGetFileRequest, runtime);
-        
         // 打印结果
-        System.out.println(new Gson().toJson(ccpGetFileResponse));
+        System.out.println(new Gson().toJson(ccpGetFileResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"C32B9339-C65E-4AB6-86C9-AC4F172A0C63",
     "contentHash":"7C4A8D09CA3762AF61E59520943DC26494F8941B",
     "contentHashName":"sha1",
     "contentType":"text/plain",
@@ -2411,7 +2451,7 @@ public static void getFile() throws Exception {
     "uploadId":"DEB65A38FCCA410BAC6DD23A8A11F943",
     "url":"https://*********.oss-cn-hangzhou.aliyuncs.com/*****F943"
 }
-```
+~~~
 
 
 
@@ -2419,38 +2459,40 @@ public static void getFile() throws Exception {
 
 - 以下代码用于移动File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 移动 File
 public static void moveFile() throws Exception {
     try {
+        CCPMoveFileRequestModel requestModel = new CCPMoveFileRequestModel();
         CCPMoveFileRequest ccpMoveFileRequest = new CCPMoveFileRequest();
         ccpMoveFileRequest.driveId = driveId;
         ccpMoveFileRequest.fileId = fileId;
         ccpMoveFileRequest.toParentFileId = folderId;
+        requestModel.body = ccpMoveFileRequest;
 
-        CCPMoveFileResponse ccpMoveFileResponse = client.moveFile(ccpMoveFileRequest, runtime);
+        MoveFileModel ccpMoveFileResponse = client.moveFile(requestModel, runtime);
+
         // 打印结果
-        System.out.println(new Gson().toJson(ccpMoveFileResponse));
+        System.out.println(new Gson().toJson(ccpMoveFileResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"B6E69EDE-D3C9-410E-B4D1-059355A38F34",
     "domainId":"daily1404",
     "driveId":"603",
     "fileId":"5db6a996aa1292d7563644f0bc4847107171ed7f"
 }
-```
+~~~
 
 
 
@@ -2458,38 +2500,39 @@ public static void moveFile() throws Exception {
 
 - 以下代码用于复制File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 复制 File
 public static void copyFile() throws Exception {
     try {
+        CCPCopyFileRequestModel requestModel = new CCPCopyFileRequestModel();
         CCPCopyFileRequest ccpCopyFileRequest = new CCPCopyFileRequest();
         ccpCopyFileRequest.fileId = fileId;
         ccpCopyFileRequest.driveId = driveId;
         ccpCopyFileRequest.toParentFileId = "root";
+        requestModel.body = ccpCopyFileRequest;
+        CopyFileModel ccpCopyFileResponse = client.copyFile(requestModel, runtime);
 
-        CCPCopyFileResponse ccpCopyFileResponse = client.copyFile(ccpCopyFileRequest, runtime);
         // 打印结果
-        System.out.println(new Gson().toJson(ccpCopyFileResponse));
+        System.out.println(new Gson().toJson(ccpCopyFileResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"F001CD18-8BD8-481E-B1F1-8B804709A865",
     "domainId":"daily1404",
     "driveId":"603",
     "fileId":"5db6a997ce31eb635f2e4f4c9163ec3bd10af459"
 }
-```
+~~~
 
 
 
@@ -2497,37 +2540,37 @@ public static void copyFile() throws Exception {
 
 - 以下代码用于获取File上传地址，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 获取File上传地址
 public static void getFileUploadUrl() throws Exception {
     try {
         UploadPartInfo uploadPartInfo = new UploadPartInfo();
         uploadPartInfo.partNumber = 1L;
+        CCPGetUploadUrlRequestModel requestModel = new CCPGetUploadUrlRequestModel();
         CCPGetUploadUrlRequest ccpGetUploadUrlRequest = new CCPGetUploadUrlRequest();
         ccpGetUploadUrlRequest.driveId = driveId;
         ccpGetUploadUrlRequest.fileId = fileId;
         ccpGetUploadUrlRequest.uploadId = uploadId;
-        ccpGetUploadUrlRequest.partInfoList = new UploadPartInfo[]{uploadPartInfo};
-
-        CCPGetUploadUrlResponse ccpGetUploadUrlResponse = client.getUploadUrl(ccpGetUploadUrlRequest, runtime);
+        ccpGetUploadUrlRequest.partInfoList = new ArrayList<>(Arrays.asList(uploadPartInfo));
+        requestModel.body = ccpGetUploadUrlRequest;
+        GetUploadUrlModel ccpGetUploadUrlResponse = client.getUploadUrl(requestModel, runtime);
 
         // 打印结果
-        System.out.println(new Gson().toJson(ccpGetUploadUrlResponse));
+        System.out.println(new Gson().toJson(ccpGetUploadUrlResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"8E80078C-0749-4C03-A3AB-F0274D652114",
     "createAt":"2019-10-28T08:40:54.519Z",
     "domainId":"daily1404",
     "driveId":"603",
@@ -2535,12 +2578,12 @@ public static void getFileUploadUrl() throws Exception {
     "partInfoList":[
         {
             "partNumber":1,
-            "uploadUrl":"https://ccp-daily1404-hz-1571887934.oss-cn-hangzhou.aliyuncs.com/5db6a996aa1292d7563644f0bc4847107171ed7f%2F5db6a996e8f9ecd76fae49d196a93eeaf7009b09?Expires=1572252114&OSSAccessKeyId=LTAIi5kx6X0mwR8k&Signature=TOMPiGXx0733JZZEzSCPoDMUk%2FE%3D&partNumber=1&uploadId=DEB65A38FCCA410BAC6DD23A8A11F943"
+            "uploadUrl":"url":"https://****.oss-cn-hangzhou.aliyuncs.com/****wZM%3D"
         }
     ],
     "uploadId":"DEB65A38FCCA410BAC6DD23A8A11F943"
 }
-```
+~~~
 
 
 
@@ -2548,40 +2591,39 @@ public static void getFileUploadUrl() throws Exception {
 
 - 以下代码用于获取File下载地，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 获取File下载地址
 public static void getFileDownloadUrl() throws Exception {
     try {
+        CCPGetDownloadUrlRequestModel requestModel = new CCPGetDownloadUrlRequestModel();
         CCPGetDownloadUrlRequest ccpGetDownloadUrlRequest = new CCPGetDownloadUrlRequest();
         ccpGetDownloadUrlRequest.driveId = driveId;
         ccpGetDownloadUrlRequest.fileId = fileId;
         ccpGetDownloadUrlRequest.expireSec = 3600L;
-
-        CCPGetDownloadUrlResponse ccpGetDownloadUrlResponse = client.getDownloadUrl(ccpGetDownloadUrlRequest, runtime);
-
+        requestModel.body = ccpGetDownloadUrlRequest;
+        GetDownloadUrlModel ccpGetDownloadUrlResponse = client.getDownloadUrl(requestModel, runtime);
 
         // 打印结果
-        System.out.println(new Gson().toJson(ccpGetDownloadUrlResponse));
+        System.out.println(new Gson().toJson(ccpGetDownloadUrlResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"29B59FA4-C6BD-44F6-809F-BF788F435145",
     "expiration":"2019-10-28T09:40:55.716Z",
     "method":"GET",
-    "url":"https://ccp-daily1404-hz-1571887934.oss-cn-hangzhou.aliyuncs.com/5db5910348946ee1835e4c139165301333e5f743%2F5db59103967263443aef47799253e5e63970d7ce?Expires=1572252955&OSSAccessKeyId=LTAIi5kx6X0mwR8k&Signature=urIb%2BP03nvZg0%2Birshzeow5u6ow%3D&response-content-disposition=attachment%3Bfilename%3Da.txt"
+    "url":"https://****.oss-cn-hangzhou.aliyuncs.com/****wZM%3D"
 }
-```
+~~~
 
 
 
@@ -2589,38 +2631,35 @@ public static void getFileDownloadUrl() throws Exception {
 
 - 以下代码用于Complete File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 合并File分片
 public static void completeFile() throws Exception {
     try {
-        UploadPartInfo uploadPartInfo1 = new UploadPartInfo();
-        uploadPartInfo1.etag = etag;
-        uploadPartInfo1.partNumber = 1L;
+        CCPCompleteFileRequestModel requestModel = new CCPCompleteFileRequestModel();
         CCPCompleteFileRequest ccpCompleteFileRequest = new CCPCompleteFileRequest();
         ccpCompleteFileRequest.driveId = driveId;
         ccpCompleteFileRequest.fileId = fileId;
         ccpCompleteFileRequest.uploadId = newUploadId;
-        ccpCompleteFileRequest.partInfoList = new UploadPartInfo[]{uploadPartInfo1};
-
-        CCPCompleteFileResponse ccpCompleteFileResponse = client.completeFile(ccpCompleteFileRequest, runtime);
+        ccpCompleteFileRequest.partInfoList = new ArrayList<>(Arrays.asList(uploadPartInfo1));
+        requestModel.body = ccpCompleteFileRequest;
+        CompleteFileModel ccpCompleteFileResponse = client.completeFile(requestModel, runtime);
 
         // 打印结果
-        System.out.println(new Gson().toJson(ccpCompleteFileResponse));
+        System.out.println(new Gson().toJson(ccpCompleteFileResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```
+~~~javascript
 {
-    "requestId":"6E4FCA06-8554-425A-8447-1A3826B064CA",
     "contentHash":"7C4A8D09CA3762AF61E59520943DC26494F8941B",
     "contentHashName":"sha1",
     "contentType":"text/plain",
@@ -2641,7 +2680,7 @@ public static void completeFile() throws Exception {
     "uploadId":"DEB65A38FCCA410BAC6DD23A8A11F943",
     "crc":""
 }
-```
+~~~
 
 
 
@@ -2649,35 +2688,35 @@ public static void completeFile() throws Exception {
 
 - 以下代码用于更新File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 更新 file
 public static void updateFile() throws Exception {
     try {
+        CCPUpdateFileMetaRequestModel requestModel = new CCPUpdateFileMetaRequestModel();
         CCPUpdateFileMetaRequest ccpUpdateFileMetaRequest = new CCPUpdateFileMetaRequest();
         ccpUpdateFileMetaRequest.fileId = fileId;
         ccpUpdateFileMetaRequest.description = "changed_file";
         ccpUpdateFileMetaRequest.driveId = driveId;
+        requestModel.body = ccpUpdateFileMetaRequest;
 
-        CCPUpdateFileMetaResponse ccpUpdateFileMetaResponse = client.updateFile(ccpUpdateFileMetaRequest, runtime);
-
+        UpdateFileModel ccpUpdateFileMetaResponse = client.updateFile(requestModel, runtime);
 
         // 打印结果
-        System.out.println(new Gson().toJson(ccpUpdateFileMetaResponse));
+        System.out.println(new Gson().toJson(ccpUpdateFileMetaResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~javascript
 {
-    "requestId":"C58CA3EC-A71B-4DEE-B319-C92E847C4702",
     "contentHash":"7C4A8D09CA3762AF61E59520943DC26494F8941B",
     "contentHashName":"sha1",
     "contentType":"text/plain",
@@ -2700,7 +2739,7 @@ public static void updateFile() throws Exception {
     "uploadId":"DEB65A38FCCA410BAC6DD23A8A11F943",
     "url":"https://****.oss-cn-hangzhou.aliyuncs.com/****wZM%3D"
 }
-```
+~~~
 
 
 
@@ -2708,34 +2747,35 @@ public static void updateFile() throws Exception {
 
 - 以下代码用于搜索File，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 搜索 file
 public static void searchFile() throws Exception {
     try {
+        CCPSearchFileRequestModel requestModel = new CCPSearchFileRequestModel();
         CCPSearchFileRequest ccpSearchFileRequest = new CCPSearchFileRequest();
         ccpSearchFileRequest.driveId = driveId;
-        ccpSearchFileRequest.limit = 10;
+        ccpSearchFileRequest.limit = 3;
         ccpSearchFileRequest.orderBy = "type DESC";
         ccpSearchFileRequest.query = "file_extension in [\"txt\"]";
-        CCPSearchFileResponse ccpSearchFileResponse = client.searchFile(ccpSearchFileRequest, runtime);
+        requestModel.body = ccpSearchFileRequest;
+        SearchFileModel ccpSearchFileResponse = client.searchFile(requestModel, runtime);
 
         // 打印结果
-        System.out.println(new Gson().toJson(ccpSearchFileResponse));
+        System.out.println(new Gson().toJson(ccpSearchFileResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
         System.out.println(new Gson().toJson(e.getData()));
     }   
 }
-```
+~~~
 
 
 
 - 返回结果
 
-```json
+~~~JavaScript
 {
-    "requestId":"E285FC30-6414-4843-8F09-707DC610DA0B",
     "items":[
         {
             "contentHash":"7C4A8D09CA3762AF61E59520943DC26494F8941B",
@@ -2763,31 +2803,177 @@ public static void searchFile() throws Exception {
     ],
     "nextMarker":""
 }
-```
+~~~
 
 
 
-删除File
+### 删除File
 
-- 以下代码用于创建Drive，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
+- 以下代码用于删除file，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
 
-```java
+~~~java
 // 删除 file
 public static void deleteFile() throws Exception {
     try {
-        CCPDeleteFileRequest ccpDeleteFileRequest1 = new CCPDeleteFileRequest();
-        ccpDeleteFileRequest1.driveId = driveId;
-        ccpDeleteFileRequest1.fileId = copiedFileId;
-
-        client.deleteFile(ccpDeleteFileRequest1, runtime);
-        // 此接口不返回body
+        CCPDeleteFileRequestModel requestModel = new CCPDeleteFileRequestModel();
+        CCPDeleteFileRequest ccpDeleteFileRequest = new CCPDeleteFileRequest();
+        ccpDeleteFileRequest.driveId = driveId;
+        ccpDeleteFileRequest.fileId = fileId;
+        requestModel.body = ccpDeleteFileRequest;
+        DeleteFileModel deleteFileResponse = client.deleteFile(requestModel, runtime);
+        
+        System.out.println(new Gson().toJson(deleteFileResponse.body));
     } catch (TeaException e) {
         System.out.println(e.getMessage());
         System.out.println(e.getCode());
         System.out.println(new Gson().toJson(e.getData()));
     }
 }
+~~~
+
+### 批量操作
+
+- 以下代码用于批量操作，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
+
+~~~java
+public void batch() throws Exception {
+    try {
+        CCPBatchRequestModel requestModel = new CCPBatchRequestModel();
+        CCPBatchRequest ccpBatchRequest = new CCPBatchRequest();
+        ccpBatchRequest.resource = "file";
+        BatchSubRequest batchSubRequest = new BatchSubRequest();
+        Map<String, Object> bodyMap = new HashMap<>();
+        Map<String, Object> headerMap = new HashMap<>();
+        bodyMap.put("drive_id", "1");
+        bodyMap.put("file_id", "5e7e292b58fe324cd****7fce0f1c");
+        bodyMap.put("description", "changed_file");
+        headerMap.put("authorization", "eyJhbGciOiJSUz******5cCI6IkpXVCJ9");
+        batchSubRequest.body = bodyMap;
+        batchSubRequest.url = "/file/update";
+        batchSubRequest.method = "POST";
+        batchSubRequest.headers = headerMap;
+        batchSubRequest.id = "uuid";
+        ccpBatchRequest.requests = new ArrayList<>(Arrays.asList(batchSubRequest));
+        requestModel.body = ccpBatchRequest;
+        OperationModel response = client.operation(requestModel, runtime);
+        System.out.println(new Gson().toJson(response.body));
+    } catch (TeaException e) {
+        System.out.println(e.getMessage());
+    }
+}
+~~~
+
+
+
+- 返回结果
+
+~~~javascript
+{
+    "responses":[
+        {
+            "status":200,
+            "body":{
+                "file_extension":"txt",
+                "updated_at":"2020-03-30T08:15:58.267Z",
+                "content_hash":"FAA12FD40AAC1F492082C90C2CD6C03B9ABDB826",
+                "domain_id":"hz22",
+                "size":36,
+                "category":"doc",
+                "content_hash_name":"sha1",
+                "download_url":"https://ccp-daily-default-c**n-han***Z8bG%2B9C4VII%3D",
+                "crc64_hash":"13138712399852734283",
+                "drive_id":"1",
+                "hidden":false,
+                "type":"file",
+                "parent_file_id":"root",
+                "status":"available",
+                "description":"changed_file",
+                "encrypt_mode":"none",
+                "file_id":"5e81aabdae****d9836b36",
+                "content_type":"application/oct-stream",
+                "name":"testDJw8oWE6ef9464f66e5034f69aafd57cb2879170b.txt",
+                "url":"https://ccp-daily-default-c**n-han***Z8bG%2B9C4VII%3D",
+                "created_at":"2020-03-30T08:15:57.361Z",
+                "upload_id":"DFD1DA39317F45EC8534FEA57AE420D1",
+                "starred":false
+            },
+            "id":"624830fa2c2347be8c0d8afc76faa04d"
+        }
+    ]
+}
+~~~
+
+
+
+### 获取file已经上传的分片
+
+- 以下代码用于获取file已经上传的分片，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
+
+~~~java
+public void listUploadedPart() throws Exception {
+    try {
+        CCPListUploadedPartRequestModel requestModel = new CCPListUploadedPartRequestModel();
+        CCPListUploadedPartRequest ccpListUploadedPartRequest = new CCPListUploadedPartRequest();
+        ccpListUploadedPartRequest.driveId = "1";
+        ccpListUploadedPartRequest.fileId = "****";
+        ccpListUploadedPartRequest.uploadId = "****";
+        requestModel.body = ccpListUploadedPartRequest;
+        ListUploadedPartsModel response = client.listUploadedParts(requestModel, runtime);
+        System.out.println(new Gson().toJson(response.body));
+    } catch (TeaException e) {
+        System.out.println(e.getMessage());
+    }
+}
+~~~
+
+
+
+- 返回结果
+
+```javascript
+{
+  "drive_id" : "1",
+  "file_id" : "5d5b846942cf94fa72324c14a4bda34e81da635d",
+  "limit" : 1,
+  "part_number_marker" : 1,
+  "upload_id" : "00668396C0814D818D90F0A92B04B355"
+}
 ```
+
+
+
+### 获取异步信息
+
+- 以下代码用于获取异步信息，此处的示例，目的是展示关键参数 ，其他参数请查看官方文档。
+
+```java
+public void getAsyncTask() throws Exception {
+    try {
+        CCPGetAsyncTaskRequestModel requestModel = new CCPGetAsyncTaskRequestModel();
+        CCPGetAsyncTaskRequest getAsyncTaskRequest = new CCPGetAsyncTaskRequest();
+        getAsyncTaskRequest.asyncTaskId = "***";
+        requestModel.body = getAsyncTaskRequest;
+        GetAsyncTaskInfoModel response = client.getAsyncTaskInfo(requestModel, runtime);
+        System.out.println(new Gson().toJson(response.headers));
+    } catch (TeaException e) {
+        System.out.println(e.getMessage());
+    }
+}
+```
+
+
+
+- 返回结果
+
+```javascript
+{
+  "async_task_id" : "000e89fb-cf8f-11e9-8ab4-b6e980803a3b",
+  "message" : "task is running",
+  "state" : "success"
+}
+```
+
+
 
 # 附
 
@@ -2805,15 +2991,14 @@ public static void deleteFile() throws Exception {
 
 ## CCPPath 上传文件
 
-```java
-import com.aliyun.ccp.ccpclient.models.*;
+~~~java
 import com.aliyun.ccp.ccpclient.Client;
+import com.aliyun.ccp.ccpclient.models.*;
 import com.aliyun.tea.TeaException;
 import com.google.gson.Gson;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+import okhttp3.*;
+
+import java.util.*;
 
 
 public class Demo {
@@ -2825,7 +3010,7 @@ public class Demo {
         createFile();
     }
 
-    public static  void createClient() throws IllegalAccessException {
+    public static  void createClient() throws Exception {
         Config config = new Config();
         config.domainId= "your domain id";
         config.protocol = "https";
@@ -2837,47 +3022,51 @@ public class Demo {
 
     public static  void createFile() throws Exception{
         try{
-            // create file
+            System.out.println("-------------create file----------------");
+            CCPCreateFileRequestModel requestModel = new CCPCreateFileRequestModel();
             CCPCreateFileRequest ccpCreateFileRequest = new CCPCreateFileRequest();
             ccpCreateFileRequest.type = "file";
             ccpCreateFileRequest.name = "a.txt";
             ccpCreateFileRequest.driveId = "1";
             ccpCreateFileRequest.parentFileId = "root";
             ccpCreateFileRequest.contentType = "text/plain";
-            CCPCreateFileResponse ccpCreateFileResponse = client.createFile(ccpCreateFileRequest, runtime);
+            requestModel.body = ccpCreateFileRequest;
+            CreateFileModel ccpCreateFileResponse = client.createFile(requestModel, runtime);
+            System.out.println(new Gson().toJson(ccpCreateFileResponse.body));
 
-            // get upload parameter
-            String uploadId = ccpCreateFileResponse.uploadId;
-            String fileId = ccpCreateFileResponse.fileId;
-            String uploadUrl = ccpCreateFileResponse.partInfoList[0].uploadUrl;
+            String uploadId = ccpCreateFileResponse.body.uploadId;
+            String fileId = ccpCreateFileResponse.body.fileId;
+            String uploadUrl = ccpCreateFileResponse.body.partInfoList.get(0).uploadUrl;
 
 
             // upload file
+            System.out.println("-------------upload file----------------");
             Request.Builder requestBuilder = new Request.Builder();
-            RequestBody body = RequestBody.create(null, "123456");
+            RequestBody body = RequestBody.create(MediaType.parse(""), "123456");
             requestBuilder.url(uploadUrl);
             requestBuilder.put(body);
+
             Request request = requestBuilder.build();
             OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
             Response response = okHttpClient.newCall(request).execute();
 
-            // get ETag
             String etag = response.headers().get("ETag");
+            System.out.println();
 
             // complete file
+            System.out.println("-------------complete file----------------");
             UploadPartInfo uploadPartInfo1 = new UploadPartInfo();
             uploadPartInfo1.etag = etag;
             uploadPartInfo1.partNumber = 1L;
+            CCPCompleteFileRequestModel requestModel1 = new CCPCompleteFileRequestModel();
             CCPCompleteFileRequest ccpCompleteFileRequest = new CCPCompleteFileRequest();
             ccpCompleteFileRequest.driveId = "1";
             ccpCompleteFileRequest.fileId = fileId;
             ccpCompleteFileRequest.uploadId = uploadId;
-            ccpCompleteFileRequest.partInfoList = new UploadPartInfo[]{uploadPartInfo1};
-
-            CCPCompleteFileResponse ccpCompleteFileResponse = client.completeFile(ccpCompleteFileRequest, runtime);
-
-            // print result
-            System.out.println(new Gson().toJson(ccpCompleteFileResponse));
+            ccpCompleteFileRequest.partInfoList = new ArrayList<>(Arrays.asList(uploadPartInfo1));
+            requestModel1.body = ccpCompleteFileRequest;
+            CompleteFileModel ccpCompleteFileResponse = client.completeFile(requestModel1, runtime);
+            System.out.println(new Gson().toJson(ccpCompleteFileResponse.body));
 
         }catch (TeaException e) {
             System.out.println(e.getMessage());
@@ -2886,4 +3075,5 @@ public class Demo {
         }
     }
 }
-```
+~~~
+
