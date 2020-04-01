@@ -8,15 +8,6 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
-    /**
-     * 绑定用户认证方式
-     * @tags account
-     * @error InvalidParameter The input parameter {parameter_name} is not valid.
-     * @error Forbidden User not authorized to operate on the specified APIs.
-     * @error NotFound The resource {resource_name} cannot be found. Please check.
-     * @error AlreadyExist {resource} has already exists. {extra_msg}
-     * @error InternalError The request has been failed due to some unknown error.
-     */
     public class CheckExistModel : TeaModel {
         [NameInMap("headers")]
         [Validation(Required=false)]

@@ -52,6 +52,10 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         [Validation(Required=false)]
         public string EncryptMode { get; set; }
 
+        [NameInMap("fields")]
+        [Validation(Required=false)]
+        public string Fields { get; set; }
+
         [NameInMap("order_direction")]
         [Validation(Required=false)]
         public string OrderDirection { get; set; }

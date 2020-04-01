@@ -72,6 +72,10 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         [Validation(Required=false)]
         public List<string> Labels { get; set; }
 
+        [NameInMap("last_updated_at")]
+        [Validation(Required=false)]
+        public string LastUpdatedAt { get; set; }
+
         [NameInMap("meta")]
         [Validation(Required=false)]
         public string Meta { get; set; }
@@ -83,6 +87,14 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         [NameInMap("pre_hash")]
         [Validation(Required=false)]
         public string PreHash { get; set; }
+
+        [NameInMap("streams_info")]
+        [Validation(Required=false)]
+        public Dictionary<string, object> StreamsInfo { get; set; }
+
+        [NameInMap("user_meta")]
+        [Validation(Required=false)]
+        public string UserMeta { get; set; }
 
     }
 

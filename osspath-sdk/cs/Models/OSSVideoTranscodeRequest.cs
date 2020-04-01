@@ -20,9 +20,21 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         [Validation(Required=true, MaxLength=1000)]
         public string FilePath { get; set; }
 
+        [NameInMap("hls_time")]
+        [Validation(Required=false)]
+        public long HlsTime { get; set; }
+
+        [NameInMap("remarks")]
+        [Validation(Required=false)]
+        public string Remarks { get; set; }
+
         [NameInMap("share_id")]
         [Validation(Required=false, Pattern="[0-9a-zA-Z-]+")]
         public string ShareId { get; set; }
+
+        [NameInMap("transcode")]
+        [Validation(Required=false)]
+        public bool? Transcode { get; set; }
 
     }
 
