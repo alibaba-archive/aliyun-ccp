@@ -8522,6 +8522,7 @@ type CCPCreateFileRequest struct {
 	ParentFileId    *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
 	PreHash         *string                `json:"pre_hash" xml:"pre_hash"`
 	StreamsInfo     map[string]interface{} `json:"streams_info" xml:"streams_info"`
+	UserMeta        *string                `json:"user_meta" xml:"user_meta"`
 }
 
 func (s CCPCreateFileRequest) String() string {
@@ -8629,6 +8630,11 @@ func (s *CCPCreateFileRequest) SetPreHash(v string) *CCPCreateFileRequest {
 
 func (s *CCPCreateFileRequest) SetStreamsInfo(v map[string]interface{}) *CCPCreateFileRequest {
 	s.StreamsInfo = v
+	return s
+}
+
+func (s *CCPCreateFileRequest) SetUserMeta(v string) *CCPCreateFileRequest {
+	s.UserMeta = &v
 	return s
 }
 
@@ -8856,6 +8862,7 @@ type CCPListFileByCustomIndexKeyRequest struct {
 	Category              *string `json:"category" xml:"category"`
 	CustomIndexKey        *string `json:"custom_index_key" xml:"custom_index_key"`
 	EncryptMode           *string `json:"encrypt_mode" xml:"encrypt_mode"`
+	Fields                *string `json:"fields" xml:"fields"`
 	OrderDirection        *string `json:"order_direction" xml:"order_direction"`
 	Status                *string `json:"status" xml:"status"`
 	Type                  *string `json:"type" xml:"type"`
@@ -8920,6 +8927,11 @@ func (s *CCPListFileByCustomIndexKeyRequest) SetEncryptMode(v string) *CCPListFi
 	return s
 }
 
+func (s *CCPListFileByCustomIndexKeyRequest) SetFields(v string) *CCPListFileByCustomIndexKeyRequest {
+	s.Fields = &v
+	return s
+}
+
 func (s *CCPListFileByCustomIndexKeyRequest) SetOrderDirection(v string) *CCPListFileByCustomIndexKeyRequest {
 	s.OrderDirection = &v
 	return s
@@ -8953,6 +8965,7 @@ type CCPListFileRequest struct {
 	Starred               *bool   `json:"Starred" xml:"Starred"`
 	All                   *bool   `json:"all" xml:"all"`
 	Category              *string `json:"category" xml:"category"`
+	Fields                *string `json:"fields" xml:"fields"`
 	OrderBy               *string `json:"order_by" xml:"order_by"`
 	OrderDirection        *string `json:"order_direction" xml:"order_direction"`
 	ParentFileId          *string `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
@@ -9011,6 +9024,11 @@ func (s *CCPListFileRequest) SetAll(v bool) *CCPListFileRequest {
 
 func (s *CCPListFileRequest) SetCategory(v string) *CCPListFileRequest {
 	s.Category = &v
+	return s
+}
+
+func (s *CCPListFileRequest) SetFields(v string) *CCPListFileRequest {
+	s.Fields = &v
 	return s
 }
 
@@ -9272,6 +9290,7 @@ type CCPUpdateFileMetaRequest struct {
 	Meta           *string   `json:"meta" xml:"meta"`
 	Name           *string   `json:"name" xml:"name" maxLength:"1024"`
 	Starred        *bool     `json:"starred" xml:"starred"`
+	UserMeta       *string   `json:"user_meta" xml:"user_meta"`
 }
 
 func (s CCPUpdateFileMetaRequest) String() string {
@@ -9329,6 +9348,11 @@ func (s *CCPUpdateFileMetaRequest) SetName(v string) *CCPUpdateFileMetaRequest {
 
 func (s *CCPUpdateFileMetaRequest) SetStarred(v bool) *CCPUpdateFileMetaRequest {
 	s.Starred = &v
+	return s
+}
+
+func (s *CCPUpdateFileMetaRequest) SetUserMeta(v string) *CCPUpdateFileMetaRequest {
+	s.UserMeta = &v
 	return s
 }
 
@@ -11058,11 +11082,12 @@ func (s *OSSVideoM3U8Request) SetSignToken(v string) *OSSVideoM3U8Request {
  * 启动视频转码请求
  */
 type OSSVideoTranscodeRequest struct {
-	DriveId  *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	FilePath *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
-	HlsTime  *int64  `json:"hls_time" xml:"hls_time"`
-	Remarks  *string `json:"remarks" xml:"remarks"`
-	ShareId  *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
+	DriveId   *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	FilePath  *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
+	HlsTime   *int64  `json:"hls_time" xml:"hls_time"`
+	Remarks   *string `json:"remarks" xml:"remarks"`
+	ShareId   *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
+	Transcode *bool   `json:"transcode" xml:"transcode"`
 }
 
 func (s OSSVideoTranscodeRequest) String() string {
@@ -11095,6 +11120,11 @@ func (s *OSSVideoTranscodeRequest) SetRemarks(v string) *OSSVideoTranscodeReques
 
 func (s *OSSVideoTranscodeRequest) SetShareId(v string) *OSSVideoTranscodeRequest {
 	s.ShareId = &v
+	return s
+}
+
+func (s *OSSVideoTranscodeRequest) SetTranscode(v bool) *OSSVideoTranscodeRequest {
+	s.Transcode = &v
 	return s
 }
 
@@ -18099,6 +18129,14 @@ func (client *Client) VideoTranscode(request *OSSVideoTranscodeRequestModel, run
 				_result = &VideoTranscodeModel{}
 				_err = tea.Convert(map[string]interface{}{
 					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if util.EqualNumber(response_.StatusCode, 204) {
+				_result = &VideoTranscodeModel{}
+				_err = tea.Convert(map[string]map[string]string{
 					"headers": response_.Headers,
 				}, &_result)
 				return _result, _err
