@@ -8309,68 +8309,6 @@ func (s *BaseListFileRequest) SetVideoThumbnailProcess(v string) *BaseListFileRe
 }
 
 /**
- *
- */
-type BaseMediaResponse struct {
-	AddressLine *string `json:"address_line" xml:"address_line"`
-	City        *string `json:"city" xml:"city"`
-	Country     *string `json:"country" xml:"country"`
-	District    *string `json:"district" xml:"district"`
-	Location    *string `json:"location" xml:"location"`
-	Province    *string `json:"province" xml:"province"`
-	Time        *string `json:"time" xml:"time"`
-	Township    *string `json:"township" xml:"township"`
-}
-
-func (s BaseMediaResponse) String() string {
-	return tea.Prettify(s)
-}
-
-func (s BaseMediaResponse) GoString() string {
-	return s.String()
-}
-
-func (s *BaseMediaResponse) SetAddressLine(v string) *BaseMediaResponse {
-	s.AddressLine = &v
-	return s
-}
-
-func (s *BaseMediaResponse) SetCity(v string) *BaseMediaResponse {
-	s.City = &v
-	return s
-}
-
-func (s *BaseMediaResponse) SetCountry(v string) *BaseMediaResponse {
-	s.Country = &v
-	return s
-}
-
-func (s *BaseMediaResponse) SetDistrict(v string) *BaseMediaResponse {
-	s.District = &v
-	return s
-}
-
-func (s *BaseMediaResponse) SetLocation(v string) *BaseMediaResponse {
-	s.Location = &v
-	return s
-}
-
-func (s *BaseMediaResponse) SetProvince(v string) *BaseMediaResponse {
-	s.Province = &v
-	return s
-}
-
-func (s *BaseMediaResponse) SetTime(v string) *BaseMediaResponse {
-	s.Time = &v
-	return s
-}
-
-func (s *BaseMediaResponse) SetTownship(v string) *BaseMediaResponse {
-	s.Township = &v
-	return s
-}
-
-/**
  * 文件移动请求
  */
 type BaseMoveFileRequest struct {
@@ -11018,10 +10956,9 @@ func (s *OSSMoveFileRequest) SetToParentFilePath(v string) *OSSMoveFileRequest {
  * 获取视频分辨率列表
  */
 type OSSVideoDefinitionRequest struct {
-	DriveId    *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	FilePath   *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
-	Resolution *string `json:"resolution" xml:"resolution"`
-	ShareId    *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
+	DriveId  *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	FilePath *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
+	ShareId  *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
 }
 
 func (s OSSVideoDefinitionRequest) String() string {
@@ -11039,11 +10976,6 @@ func (s *OSSVideoDefinitionRequest) SetDriveId(v string) *OSSVideoDefinitionRequ
 
 func (s *OSSVideoDefinitionRequest) SetFilePath(v string) *OSSVideoDefinitionRequest {
 	s.FilePath = &v
-	return s
-}
-
-func (s *OSSVideoDefinitionRequest) SetResolution(v string) *OSSVideoDefinitionRequest {
-	s.Resolution = &v
 	return s
 }
 
@@ -11123,26 +11055,6 @@ func (s *OSSVideoM3U8Request) SetSignToken(v string) *OSSVideoM3U8Request {
 }
 
 /**
- * 转码接口response
- */
-type OSSVideoResolutionResponse struct {
-	ResolutionList []*string `json:"resolution_list" xml:"resolution_list" type:"Repeated"`
-}
-
-func (s OSSVideoResolutionResponse) String() string {
-	return tea.Prettify(s)
-}
-
-func (s OSSVideoResolutionResponse) GoString() string {
-	return s.String()
-}
-
-func (s *OSSVideoResolutionResponse) SetResolutionList(v []*string) *OSSVideoResolutionResponse {
-	s.ResolutionList = v
-	return s
-}
-
-/**
  * 启动视频转码请求
  */
 type OSSVideoTranscodeRequest struct {
@@ -11192,7 +11104,6 @@ func (s *OSSVideoTranscodeRequest) SetShareId(v string) *OSSVideoTranscodeReques
 type OSSVideoTranscodeResponse struct {
 	DefinitionList []*string `json:"definition_list" xml:"definition_list" type:"Repeated"`
 	HlsTime        *int64    `json:"hls_time" xml:"hls_time"`
-	ResolutionList []*string `json:"resolution_list" xml:"resolution_list" type:"Repeated"`
 }
 
 func (s OSSVideoTranscodeResponse) String() string {
@@ -11210,11 +11121,6 @@ func (s *OSSVideoTranscodeResponse) SetDefinitionList(v []*string) *OSSVideoTran
 
 func (s *OSSVideoTranscodeResponse) SetHlsTime(v int64) *OSSVideoTranscodeResponse {
 	s.HlsTime = &v
-	return s
-}
-
-func (s *OSSVideoTranscodeResponse) SetResolutionList(v []*string) *OSSVideoTranscodeResponse {
-	s.ResolutionList = v
 	return s
 }
 
@@ -20037,7 +19943,6 @@ func (client *Client) GetPathname(nickname string, path string) (_result string)
 		return _result
 	}
 
-	_result = ""
 	_result = "/" + tea.ToString(nickname) + tea.ToString(path)
 	return _result
 }
@@ -20056,7 +19961,6 @@ func (client *Client) SetExpireTime(expireTime string) (_err error) {
 
 func (client *Client) GetExpireTime() (_result string) {
 	if util.IsUnset(client.AccessTokenCredential) {
-		_result = ""
 		return _result
 	}
 
@@ -20089,7 +19993,6 @@ func (client *Client) SetRefreshToken(token string) {
 
 func (client *Client) GetRefreshToken() (_result string) {
 	if util.IsUnset(client.AccessTokenCredential) {
-		_result = ""
 		return _result
 	}
 
@@ -20108,7 +20011,6 @@ func (client *Client) SetAccessToken(token string) {
 
 func (client *Client) GetAccessToken() (_result string, _err error) {
 	if util.IsUnset(client.AccessTokenCredential) {
-		_result = ""
 		return _result, _err
 	}
 
@@ -20123,7 +20025,6 @@ func (client *Client) GetAccessToken() (_result string, _err error) {
 
 func (client *Client) GetAccessKeyId() (_result string, _err error) {
 	if util.IsUnset(client.Credential) {
-		_result = ""
 		return _result, _err
 	}
 
@@ -20138,7 +20039,6 @@ func (client *Client) GetAccessKeyId() (_result string, _err error) {
 
 func (client *Client) GetAccessKeySecret() (_result string, _err error) {
 	if util.IsUnset(client.Credential) {
-		_result = ""
 		return _result, _err
 	}
 

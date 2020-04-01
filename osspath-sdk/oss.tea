@@ -1577,7 +1577,7 @@ model BaseCCPFileResponse {
   fileId?: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9]{1, 50}'),
   hidden?: boolean(name='hidden', description='Hidden
 type: boolean', enum='false, true', example=false),
-  imageMediaMetadata?: ImageMediaResponse(name='image_media_metadata', $ref='#/definitions/ImageMediaResponse'),
+  imageMediaMetadata?: ImageMediaResponse(name='image_media_metadata'),
   labels?: [ string ](name='labels', description='labels', example='label1:1, label2:2', items='{"type":"string"}'),
   meta?: string(name='meta', description='meta', example='file meta'),
   name: string(name='name', description='name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}'),
@@ -1694,7 +1694,7 @@ model CCPCompleteFileResponse {
   fileId?: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9]{1, 50}'),
   hidden?: boolean(name='hidden', description='Hidden
 type: boolean', enum='false, true', example=false),
-  imageMediaMetadata?: ImageMediaResponse(name='image_media_metadata', $ref='#/definitions/ImageMediaResponse'),
+  imageMediaMetadata?: ImageMediaResponse(name='image_media_metadata'),
   labels?: [ string ](name='labels', description='labels', example='label1:1, label2:2', items='{"type":"string"}'),
   meta?: string(name='meta', description='meta', example='file meta'),
   name?: string(name='name', description='name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}'),
@@ -1793,7 +1793,7 @@ model CCPGetFileResponse {
   fileId?: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9]{1, 50}'),
   hidden?: boolean(name='hidden', description='Hidden
 type: boolean', enum='false, true', example=false),
-  imageMediaMetadata?: ImageMediaResponse(name='image_media_metadata', $ref='#/definitions/ImageMediaResponse'),
+  imageMediaMetadata?: ImageMediaResponse(name='image_media_metadata'),
   labels?: [ string ](name='labels', description='labels', example='label1:1, label2:2', items='{"type":"string"}'),
   meta?: string(name='meta', description='meta', example='file meta'),
   name?: string(name='name', description='name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}'),
@@ -1876,7 +1876,7 @@ model CCPUpdateFileMetaResponse {
   fileId?: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9]{1, 50}'),
   hidden?: boolean(name='hidden', description='Hidden
 type: boolean', enum='false, true', example=false),
-  imageMediaMetadata?: ImageMediaResponse(name='image_media_metadata', $ref='#/definitions/ImageMediaResponse'),
+  imageMediaMetadata?: ImageMediaResponse(name='image_media_metadata'),
   labels?: [ string ](name='labels', description='labels', example='label1:1, label2:2', items='{"type":"string"}'),
   meta?: string(name='meta', description='meta', example='file meta'),
   name?: string(name='name', description='name', example='ccp.jpg', pattern='[a-zA-Z0-9.-]{1,1024}'),
@@ -1966,7 +1966,7 @@ model CreateDomainRequest {
   initDriveEnable?: boolean(name='init_drive_enable', description='开启自动初始化 Drive', example=true),
   initDriveSize?: long(name='init_drive_size', description='自动初始化 Drive 大小', example=1024, format='int64'),
   pathType: string(name='path_type', description='Domain 类型', example='CCPPath'),
-  publishedAppAccessStrategy?: AppAccessStrategy(name='published_app_access_strategy', $ref='#/definitions/AppAccessStrategy'),
+  publishedAppAccessStrategy?: AppAccessStrategy(name='published_app_access_strategy'),
   sharable?: boolean(name='sharable', description='开启分享', example=true),
   storeLevel?: string(name='store_level', description='存储级别', example='Standard'),
   storeRegionList: [ string ](name='store_region_list', description='存储 Region 列表', example='cn-hangzhou', items='{"type":"string"}'),
@@ -2481,7 +2481,7 @@ model RemoveStoreRequest {
  * 
  */
 model SetStoreCorsRequest {
-  corsRule: CorsRule(name='cors_rule', $ref='#/definitions/CorsRule'),
+  corsRule: CorsRule(name='cors_rule'),
   domainId: string(name='domain_id', description='domain ID', example='sz100'),
   storeId: string(name='store_id', description='store ID', example='cdjaksbwuiqbxuiassd'),
 }
@@ -2565,7 +2565,7 @@ model UpdateDomainRequest {
   initDriveEnable?: boolean(name='init_drive_enable', description='开启自动初始化 Drive', example=true),
   initDriveSize?: long(name='init_drive_size', description='自动初始化 Drive 大小', example=1024, format='int64'),
   initDriveStoreId?: string(name='init_drive_store_id', description='自动初始化 Drive 使用 Store ID', example='1'),
-  publishedAppAccessStrategy?: AppAccessStrategy(name='published_app_access_strategy', $ref='#/definitions/AppAccessStrategy'),
+  publishedAppAccessStrategy?: AppAccessStrategy(name='published_app_access_strategy'),
   sharable?: boolean(name='sharable', description='开启分享', example=true),
 }
 
@@ -2898,7 +2898,7 @@ model BaseDomainResponse {
   initDriveSize?: long(name='init_drive_size', description='自动初始化 Drive 大小', example=1024, format='int64'),
   initDriveStoreId?: string(name='init_drive_store_id', description='自动初始化 Drive 所用 Store ID', example='1'),
   pathType?: string(name='path_type', description='Domain 类型', example='CCPPath'),
-  publishedAppAccessStrategy?: AppAccessStrategy(name='published_app_access_strategy', $ref='#/definitions/AppAccessStrategy'),
+  publishedAppAccessStrategy?: AppAccessStrategy(name='published_app_access_strategy'),
   sharable?: boolean(name='sharable', description='是否开启了分享', example=true),
   storeLevel?: string(name='store_level', description='存储级别', example='Standard'),
   storeRegionList?: [ string ](name='store_region_list', description='存储 Region 列表', example='cn-hangzhou', items='{"type":"string"}'),
@@ -2934,7 +2934,7 @@ model CreateDomainResponse {
   initDriveSize?: long(name='init_drive_size', description='自动初始化 Drive 大小', example=1024, format='int64'),
   initDriveStoreId?: string(name='init_drive_store_id', description='自动初始化 Drive 所用 Store ID', example='1'),
   pathType?: string(name='path_type', description='Domain 类型', example='CCPPath'),
-  publishedAppAccessStrategy?: AppAccessStrategy(name='published_app_access_strategy', $ref='#/definitions/AppAccessStrategy'),
+  publishedAppAccessStrategy?: AppAccessStrategy(name='published_app_access_strategy'),
   sharable?: boolean(name='sharable', description='是否开启了分享', example=true),
   storeLevel?: string(name='store_level', description='存储级别', example='Standard'),
   storeRegionList?: [ string ](name='store_region_list', description='存储 Region 列表', example='cn-hangzhou', items='{"type":"string"}'),
@@ -2990,7 +2990,7 @@ model GetDomainResponse {
   initDriveSize?: long(name='init_drive_size', description='自动初始化 Drive 大小', example=1024, format='int64'),
   initDriveStoreId?: string(name='init_drive_store_id', description='自动初始化 Drive 所用 Store ID', example='1'),
   pathType?: string(name='path_type', description='Domain 类型', example='CCPPath'),
-  publishedAppAccessStrategy?: AppAccessStrategy(name='published_app_access_strategy', $ref='#/definitions/AppAccessStrategy'),
+  publishedAppAccessStrategy?: AppAccessStrategy(name='published_app_access_strategy'),
   sharable?: boolean(name='sharable', description='是否开启了分享', example=true),
   storeLevel?: string(name='store_level', description='存储级别', example='Standard'),
   storeRegionList?: [ string ](name='store_region_list', description='存储 Region 列表', example='cn-hangzhou', items='{"type":"string"}'),
@@ -3074,7 +3074,7 @@ model UpdateDomainResponse {
   initDriveSize?: long(name='init_drive_size', description='自动初始化 Drive 大小', example=1024, format='int64'),
   initDriveStoreId?: string(name='init_drive_store_id', description='自动初始化 Drive 所用 Store ID', example='1'),
   pathType?: string(name='path_type', description='Domain 类型', example='CCPPath'),
-  publishedAppAccessStrategy?: AppAccessStrategy(name='published_app_access_strategy', $ref='#/definitions/AppAccessStrategy'),
+  publishedAppAccessStrategy?: AppAccessStrategy(name='published_app_access_strategy'),
   sharable?: boolean(name='sharable', description='是否开启了分享', example=true),
   storeLevel?: string(name='store_level', description='存储级别', example='Standard'),
   storeRegionList?: [ string ](name='store_region_list', description='存储 Region 列表', example='cn-hangzhou', items='{"type":"string"}'),
@@ -5892,20 +5892,6 @@ type:string', example='video/snapshot,t_7000,f_jpg,w_800,h_600,m_fast'),
 }
 
 /**
- * 
- */
-model BaseMediaResponse {
-  addressLine?: string(name='address_line', description='address_line', example='北京市昌平区白各庄新村路'),
-  city?: string(name='city', description='city', example='杭州'),
-  country?: string(name='country', description='country', example='中国'),
-  district?: string(name='district', description='district', example='余杭区'),
-  location?: string(name='location', description='location', example='40.110333,116.349311'),
-  province?: string(name='province', description='province', example='浙江省'),
-  time?: string(name='time', description='time', format='date-time'),
-  township?: string(name='township', description='township', example='沙河镇'),
-}
-
-/**
  * 文件移动请求
  */
 model BaseMoveFileRequest {
@@ -6584,7 +6570,6 @@ type: boolean'),
 model OSSVideoDefinitionRequest {
   driveId?: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
   filePath: string(name='file_path', description='file_path', example='/a/b/c.mp4', maxLength=1000, minLength=1),
-  resolution?: string(name='resolution', $ref='#/definitions/Resolution'),
   shareId?: string(name='share_id', description='share_id', example='3d336314-63c8-4d96-bce0-17aefb6833b6', pattern='[0-9a-zA-Z-]+'),
 }
 
@@ -6608,13 +6593,6 @@ model OSSVideoM3U8Request {
 }
 
 /**
- * 转码接口response
- */
-model OSSVideoResolutionResponse {
-  resolutionList?: [ string ](name='resolution_list', description='resolution_list', example='', items='{"$ref":"#/definitions/Resolution"}'),
-}
-
-/**
  * 启动视频转码请求
  */
 model OSSVideoTranscodeRequest {
@@ -6631,7 +6609,6 @@ model OSSVideoTranscodeRequest {
 model OSSVideoTranscodeResponse {
   definitionList?: [ string ](name='definition_list', description='definition_list', example='', items='{"type":"string"}'),
   hlsTime?: long(name='hls_time', description='hls_time', example=10, format='int64'),
-  resolutionList?: [ string ](name='resolution_list', description='resolution_list', example='', items='{"$ref":"#/definitions/Resolution"}'),
 }
 
 /**

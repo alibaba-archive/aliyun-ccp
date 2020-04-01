@@ -248,13 +248,6 @@ func (s *CancelLinkModel) SetBody(v *AccountAccessTokenResponse) *CancelLinkMode
 	return s
 }
 
-/**
- * 取消绑定关系，生成新用户，返回访问令牌
- * @tags account
- * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type ConfirmLinkRequestModel struct {
 	Headers map[string]string   `json:"headers" xml:"headers"`
 	Body    *ConfirmLinkRequest `json:"body" xml:"body" require:"true"`
@@ -278,13 +271,6 @@ func (s *ConfirmLinkRequestModel) SetBody(v *ConfirmLinkRequest) *ConfirmLinkReq
 	return s
 }
 
-/**
- * 取消绑定关系，生成新用户，返回访问令牌
- * @tags account
- * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type ConfirmLinkModel struct {
 	Headers map[string]string           `json:"headers" xml:"headers"`
 	Body    *AccountAccessTokenResponse `json:"body" xml:"body" require:"true"`
@@ -308,14 +294,6 @@ func (s *ConfirmLinkModel) SetBody(v *AccountAccessTokenResponse) *ConfirmLinkMo
 	return s
 }
 
-/**
- * 确认绑定关系, 成功后返回访问令牌
- * @tags account
- * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type DefaultChangePasswordRequestModel struct {
 	Headers map[string]string             `json:"headers" xml:"headers"`
 	Body    *DefaultChangePasswordRequest `json:"body" xml:"body" require:"true"`
@@ -339,14 +317,6 @@ func (s *DefaultChangePasswordRequestModel) SetBody(v *DefaultChangePasswordRequ
 	return s
 }
 
-/**
- * 确认绑定关系, 成功后返回访问令牌
- * @tags account
- * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type ChangePasswordModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 }
@@ -364,13 +334,6 @@ func (s *ChangePasswordModel) SetHeaders(v map[string]string) *ChangePasswordMod
 	return s
 }
 
-/**
- * 修改手机登录密码，密码必须包含数字和字母，长度8-32个字符
- * @tags account
- * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type DefaultSetPasswordRequestModel struct {
 	Headers map[string]string          `json:"headers" xml:"headers"`
 	Body    *DefaultSetPasswordRequest `json:"body" xml:"body" require:"true"`
@@ -394,13 +357,6 @@ func (s *DefaultSetPasswordRequestModel) SetBody(v *DefaultSetPasswordRequest) *
 	return s
 }
 
-/**
- * 修改手机登录密码，密码必须包含数字和字母，长度8-32个字符
- * @tags account
- * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type SetPasswordModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 }
@@ -418,13 +374,6 @@ func (s *SetPasswordModel) SetHeaders(v map[string]string) *SetPasswordModel {
 	return s
 }
 
-/**
- * 设置手机登录密码，密码必须包含数字和字母，长度8-32个字符
- * @tags account
- * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type GetAccessTokenByLinkInfoRequestModel struct {
 	Headers map[string]string                `json:"headers" xml:"headers"`
 	Body    *GetAccessTokenByLinkInfoRequest `json:"body" xml:"body" require:"true"`
@@ -448,13 +397,6 @@ func (s *GetAccessTokenByLinkInfoRequestModel) SetBody(v *GetAccessTokenByLinkIn
 	return s
 }
 
-/**
- * 设置手机登录密码，密码必须包含数字和字母，长度8-32个字符
- * @tags account
- * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type GetAccessTokenByLinkInfoModel struct {
 	Headers map[string]string           `json:"headers" xml:"headers"`
 	Body    *AccountAccessTokenResponse `json:"body" xml:"body" require:"true"`
@@ -478,14 +420,6 @@ func (s *GetAccessTokenByLinkInfoModel) SetBody(v *AccountAccessTokenResponse) *
 	return s
 }
 
-/**
- * 管理员通过账号信息直接获取用户的访问令牌
- * @tags account
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type GetCaptchaRequestModel struct {
 	Headers map[string]string  `json:"headers" xml:"headers"`
 	Body    *GetCaptchaRequest `json:"body" xml:"body" require:"true"`
@@ -509,14 +443,6 @@ func (s *GetCaptchaRequestModel) SetBody(v *GetCaptchaRequest) *GetCaptchaReques
 	return s
 }
 
-/**
- * 管理员通过账号信息直接获取用户的访问令牌
- * @tags account
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type GetCaptchaModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 	Body    *Captcha          `json:"body" xml:"body" require:"true"`
@@ -540,13 +466,6 @@ func (s *GetCaptchaModel) SetBody(v *Captcha) *GetCaptchaModel {
 	return s
 }
 
-/**
- * 获取图片验证码，用于人机校验，默认不需要
- * @tags account
- * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type GetByLinkInfoRequestModel struct {
 	Headers map[string]string     `json:"headers" xml:"headers"`
 	Body    *GetByLinkInfoRequest `json:"body" xml:"body" require:"true"`
@@ -570,13 +489,6 @@ func (s *GetByLinkInfoRequestModel) SetBody(v *GetByLinkInfoRequest) *GetByLinkI
 	return s
 }
 
-/**
- * 获取图片验证码，用于人机校验，默认不需要
- * @tags account
- * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type GetLinkInfoModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 	Body    *LinkInfoResponse `json:"body" xml:"body" require:"true"`
@@ -600,14 +512,6 @@ func (s *GetLinkInfoModel) SetBody(v *LinkInfoResponse) *GetLinkInfoModel {
 	return s
 }
 
-/**
- * 获取用户认证方式详情
- * @tags account
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type GetLinkInfoByUserIDRequestModel struct {
 	Headers map[string]string           `json:"headers" xml:"headers"`
 	Body    *GetLinkInfoByUserIDRequest `json:"body" xml:"body" require:"true"`
@@ -631,14 +535,6 @@ func (s *GetLinkInfoByUserIDRequestModel) SetBody(v *GetLinkInfoByUserIDRequest)
 	return s
 }
 
-/**
- * 获取用户认证方式详情
- * @tags account
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type GetLinkInfoByUserIdModel struct {
 	Headers map[string]string     `json:"headers" xml:"headers"`
 	Body    *LinkInfoListResponse `json:"body" xml:"body" require:"true"`
@@ -662,13 +558,6 @@ func (s *GetLinkInfoByUserIdModel) SetBody(v *LinkInfoListResponse) *GetLinkInfo
 	return s
 }
 
-/**
- * 获取用户的所有绑定信息
- * @tags account
- * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type AccountLinkRequestModel struct {
 	Headers map[string]string   `json:"headers" xml:"headers"`
 	Body    *AccountLinkRequest `json:"body" xml:"body" require:"true"`
@@ -692,13 +581,6 @@ func (s *AccountLinkRequestModel) SetBody(v *AccountLinkRequest) *AccountLinkReq
 	return s
 }
 
-/**
- * 获取用户的所有绑定信息
- * @tags account
- * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type LinkModel struct {
 	Headers map[string]string           `json:"headers" xml:"headers"`
 	Body    *AccountAccessTokenResponse `json:"body" xml:"body" require:"true"`
@@ -722,15 +604,6 @@ func (s *LinkModel) SetBody(v *AccountAccessTokenResponse) *LinkModel {
 	return s
 }
 
-/**
- * 绑定用户认证方式
- * @tags account
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error AlreadyExist {resource} has already exists. {extra_msg}
- * @error InternalError The request has been failed due to some unknown error.
- */
 type MobileCheckExistRequestModel struct {
 	Headers map[string]string        `json:"headers" xml:"headers"`
 	Body    *MobileCheckExistRequest `json:"body" xml:"body" require:"true"`
@@ -754,15 +627,6 @@ func (s *MobileCheckExistRequestModel) SetBody(v *MobileCheckExistRequest) *Mobi
 	return s
 }
 
-/**
- * 绑定用户认证方式
- * @tags account
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error AlreadyExist {resource} has already exists. {extra_msg}
- * @error InternalError The request has been failed due to some unknown error.
- */
 type CheckExistModel struct {
 	Headers map[string]string         `json:"headers" xml:"headers"`
 	Body    *MobileCheckExistResponse `json:"body" xml:"body" require:"true"`
@@ -786,14 +650,6 @@ func (s *CheckExistModel) SetBody(v *MobileCheckExistResponse) *CheckExistModel 
 	return s
 }
 
-/**
- * 查询手机号是否已被注册
- * @tags account
- * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type MobileLoginRequestModel struct {
 	Headers map[string]string   `json:"headers" xml:"headers"`
 	Body    *MobileLoginRequest `json:"body" xml:"body" require:"true"`
@@ -817,14 +673,6 @@ func (s *MobileLoginRequestModel) SetBody(v *MobileLoginRequest) *MobileLoginReq
 	return s
 }
 
-/**
- * 查询手机号是否已被注册
- * @tags account
- * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type LoginModel struct {
 	Headers map[string]string           `json:"headers" xml:"headers"`
 	Body    *AccountAccessTokenResponse `json:"body" xml:"body" require:"true"`
@@ -848,14 +696,6 @@ func (s *LoginModel) SetBody(v *AccountAccessTokenResponse) *LoginModel {
 	return s
 }
 
-/**
- * 通过手机号+短信或密码登录，返回刷新令牌和访问令牌
- * @tags account
- * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type MobileRegisterRequestModel struct {
 	Headers map[string]string      `json:"headers" xml:"headers"`
 	Body    *MobileRegisterRequest `json:"body" xml:"body" require:"true"`
@@ -879,14 +719,6 @@ func (s *MobileRegisterRequestModel) SetBody(v *MobileRegisterRequest) *MobileRe
 	return s
 }
 
-/**
- * 通过手机号+短信或密码登录，返回刷新令牌和访问令牌
- * @tags account
- * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type RegisterModel struct {
 	Headers map[string]string           `json:"headers" xml:"headers"`
 	Body    *AccountAccessTokenResponse `json:"body" xml:"body" require:"true"`
@@ -910,14 +742,6 @@ func (s *RegisterModel) SetBody(v *AccountAccessTokenResponse) *RegisterModel {
 	return s
 }
 
-/**
- * 通过手机号+短信验证码注册账号
- * @tags account
- * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error AlreadyExist {resource} has already exists. {extra_msg}
- * @error InternalError The request has been failed due to some unknown error.
- */
 type MobileSendSmsCodeRequestModel struct {
 	Headers map[string]string         `json:"headers" xml:"headers"`
 	Body    *MobileSendSmsCodeRequest `json:"body" xml:"body" require:"true"`
@@ -941,14 +765,6 @@ func (s *MobileSendSmsCodeRequestModel) SetBody(v *MobileSendSmsCodeRequest) *Mo
 	return s
 }
 
-/**
- * 通过手机号+短信验证码注册账号
- * @tags account
- * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error AlreadyExist {resource} has already exists. {extra_msg}
- * @error InternalError The request has been failed due to some unknown error.
- */
 type MobileSendSmsCodeModel struct {
 	Headers map[string]string          `json:"headers" xml:"headers"`
 	Body    *MobileSendSmsCodeResponse `json:"body" xml:"body" require:"true"`
@@ -972,13 +788,6 @@ func (s *MobileSendSmsCodeModel) SetBody(v *MobileSendSmsCodeResponse) *MobileSe
 	return s
 }
 
-/**
- * 发送短信验证码，用于登录、注册、修改密码、绑定等
- * @tags account
- * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type TokenRequestModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 	Body    *TokenRequest     `json:"body" xml:"body" require:"true"`
@@ -1002,13 +811,6 @@ func (s *TokenRequestModel) SetBody(v *TokenRequest) *TokenRequestModel {
 	return s
 }
 
-/**
- * 发送短信验证码，用于登录、注册、修改密码、绑定等
- * @tags account
- * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
- * @error Forbidden User not authorized to operate on the specified APIs.
- * @error InternalError The request has been failed due to some unknown error.
- */
 type TokenModel struct {
 	Headers map[string]string           `json:"headers" xml:"headers"`
 	Body    *AccountAccessTokenResponse `json:"body" xml:"body" require:"true"`
@@ -5818,9 +5620,6 @@ func (s *UserAuthentication) SetUserID(v string) *UserAuthentication {
 	return s
 }
 
-/**
- *
- */
 type CCPGetAsyncTaskRequestModel struct {
 	Headers map[string]string       `json:"headers" xml:"headers"`
 	Body    *CCPGetAsyncTaskRequest `json:"body" xml:"body" require:"true"`
@@ -5844,9 +5643,6 @@ func (s *CCPGetAsyncTaskRequestModel) SetBody(v *CCPGetAsyncTaskRequest) *CCPGet
 	return s
 }
 
-/**
- *
- */
 type GetAsyncTaskInfoModel struct {
 	Headers map[string]string        `json:"headers" xml:"headers"`
 	Body    *CCPGetAsyncTaskResponse `json:"body" xml:"body" require:"true"`
@@ -5870,17 +5666,6 @@ func (s *GetAsyncTaskInfoModel) SetBody(v *CCPGetAsyncTaskResponse) *GetAsyncTas
 	return s
 }
 
-/**
- * 如果目录拷贝、目录删除不能在限定时间内完成，将访问一个异步任务id，
-通过此接口获取异步任务的信息，以确定任务是否执行成功。
- * @tags async_task
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-*/
 type CCPBatchRequestModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 	Body    *CCPBatchRequest  `json:"body" xml:"body" require:"true"`
@@ -5904,17 +5689,6 @@ func (s *CCPBatchRequestModel) SetBody(v *CCPBatchRequest) *CCPBatchRequestModel
 	return s
 }
 
-/**
- * 如果目录拷贝、目录删除不能在限定时间内完成，将访问一个异步任务id，
-通过此接口获取异步任务的信息，以确定任务是否执行成功。
- * @tags async_task
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-*/
 type OperationModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 	Body    *CCPBatchResponse `json:"body" xml:"body" require:"true"`
@@ -5938,16 +5712,6 @@ func (s *OperationModel) SetBody(v *CCPBatchResponse) *OperationModel {
 	return s
 }
 
-/**
- * 对多个原子操作封装成一个批处理请求，服务端并行处理并打包返回每个操作的执行结果。
-支持对文件和文件夹的移动、删除、修改，每个批处理请求最多包含100个原则操作。
- * @tags batch
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-*/
 type CreateDriveRequestModel struct {
 	Headers map[string]string   `json:"headers" xml:"headers"`
 	Body    *CreateDriveRequest `json:"body" xml:"body" require:"true"`
@@ -5971,16 +5735,6 @@ func (s *CreateDriveRequestModel) SetBody(v *CreateDriveRequest) *CreateDriveReq
 	return s
 }
 
-/**
- * 对多个原子操作封装成一个批处理请求，服务端并行处理并打包返回每个操作的执行结果。
-支持对文件和文件夹的移动、删除、修改，每个批处理请求最多包含100个原则操作。
- * @tags batch
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-*/
 type CreateDriveModel struct {
 	Headers map[string]string    `json:"headers" xml:"headers"`
 	Body    *CreateDriveResponse `json:"body" xml:"body" require:"true"`
@@ -6004,17 +5758,6 @@ func (s *CreateDriveModel) SetBody(v *CreateDriveResponse) *CreateDriveModel {
 	return s
 }
 
-/**
- * 支持normal和large两种drive，
-large类型的drive用于文件数多的场景，不支持list操作，
-当drive的文件数量大于1亿时，建议使用large类型。
- * @tags drive
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-*/
 type DeleteDriveRequestModel struct {
 	Headers map[string]string   `json:"headers" xml:"headers"`
 	Body    *DeleteDriveRequest `json:"body" xml:"body" require:"true"`
@@ -6038,17 +5781,6 @@ func (s *DeleteDriveRequestModel) SetBody(v *DeleteDriveRequest) *DeleteDriveReq
 	return s
 }
 
-/**
- * 支持normal和large两种drive，
-large类型的drive用于文件数多的场景，不支持list操作，
-当drive的文件数量大于1亿时，建议使用large类型。
- * @tags drive
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-*/
 type DeleteDriveModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 }
@@ -6066,15 +5798,6 @@ func (s *DeleteDriveModel) SetHeaders(v map[string]string) *DeleteDriveModel {
 	return s
 }
 
-/**
- * 删除指定drive_id对应的Drive
- * @tags drive
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type GetDriveRequestModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 	Body    *GetDriveRequest  `json:"body" xml:"body" require:"true"`
@@ -6098,15 +5821,6 @@ func (s *GetDriveRequestModel) SetBody(v *GetDriveRequest) *GetDriveRequestModel
 	return s
 }
 
-/**
- * 删除指定drive_id对应的Drive
- * @tags drive
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type GetDriveModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 	Body    *GetDriveResponse `json:"body" xml:"body" require:"true"`
@@ -6130,16 +5844,6 @@ func (s *GetDriveModel) SetBody(v *GetDriveResponse) *GetDriveModel {
 	return s
 }
 
-/**
- * 获取指定drive_id对应的Drive详细信息。
- * @tags drive
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type GetDefaultDriveRequestModel struct {
 	Headers map[string]string       `json:"headers" xml:"headers"`
 	Body    *GetDefaultDriveRequest `json:"body" xml:"body" require:"true"`
@@ -6163,16 +5867,6 @@ func (s *GetDefaultDriveRequestModel) SetBody(v *GetDefaultDriveRequest) *GetDef
 	return s
 }
 
-/**
- * 获取指定drive_id对应的Drive详细信息。
- * @tags drive
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type GetDefaultDriveModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 	Body    *GetDriveResponse `json:"body" xml:"body" require:"true"`
@@ -6196,17 +5890,6 @@ func (s *GetDefaultDriveModel) SetBody(v *GetDriveResponse) *GetDefaultDriveMode
 	return s
 }
 
-/**
- * 一个用户可拥有多个drive，在创建drive时通过参数指定是否为这个用户的默认drive，
-每个用户只能设置一个默认drive。
- * @tags drive
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-*/
 type ListDriveRequestModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 	Body    *ListDriveRequest `json:"body" xml:"body" require:"true"`
@@ -6230,17 +5913,6 @@ func (s *ListDriveRequestModel) SetBody(v *ListDriveRequest) *ListDriveRequestMo
 	return s
 }
 
-/**
- * 一个用户可拥有多个drive，在创建drive时通过参数指定是否为这个用户的默认drive，
-每个用户只能设置一个默认drive。
- * @tags drive
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-*/
 type ListDrivesModel struct {
 	Headers map[string]string  `json:"headers" xml:"headers"`
 	Body    *ListDriveResponse `json:"body" xml:"body" require:"true"`
@@ -6264,15 +5936,6 @@ func (s *ListDrivesModel) SetBody(v *ListDriveResponse) *ListDrivesModel {
 	return s
 }
 
-/**
- * 管理员列举指定用户的Drive
- * @tags drive
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type ListMyDriveRequestModel struct {
 	Headers map[string]string   `json:"headers" xml:"headers"`
 	Body    *ListMyDriveRequest `json:"body" xml:"body" require:"true"`
@@ -6296,15 +5959,6 @@ func (s *ListMyDriveRequestModel) SetBody(v *ListMyDriveRequest) *ListMyDriveReq
 	return s
 }
 
-/**
- * 管理员列举指定用户的Drive
- * @tags drive
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type ListMyDrivesModel struct {
 	Headers map[string]string  `json:"headers" xml:"headers"`
 	Body    *ListDriveResponse `json:"body" xml:"body" require:"true"`
@@ -6328,15 +5982,6 @@ func (s *ListMyDrivesModel) SetBody(v *ListDriveResponse) *ListMyDrivesModel {
 	return s
 }
 
-/**
- * 列举当前用户（访问令牌）的Drive
- * @tags drive
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type UpdateDriveRequestModel struct {
 	Headers map[string]string   `json:"headers" xml:"headers"`
 	Body    *UpdateDriveRequest `json:"body" xml:"body" require:"true"`
@@ -6360,15 +6005,6 @@ func (s *UpdateDriveRequestModel) SetBody(v *UpdateDriveRequest) *UpdateDriveReq
 	return s
 }
 
-/**
- * 列举当前用户（访问令牌）的Drive
- * @tags drive
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type UpdateDriveModel struct {
 	Headers map[string]string    `json:"headers" xml:"headers"`
 	Body    *UpdateDriveResponse `json:"body" xml:"body" require:"true"`
@@ -6392,16 +6028,6 @@ func (s *UpdateDriveModel) SetBody(v *UpdateDriveResponse) *UpdateDriveModel {
 	return s
 }
 
-/**
- * 更新指定drive_id的Drive信息
- * @tags drive
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type CCPCompleteFileRequestModel struct {
 	Headers map[string]string       `json:"headers" xml:"headers"`
 	Body    *CCPCompleteFileRequest `json:"body" xml:"body" require:"true"`
@@ -6425,16 +6051,6 @@ func (s *CCPCompleteFileRequestModel) SetBody(v *CCPCompleteFileRequest) *CCPCom
 	return s
 }
 
-/**
- * 更新指定drive_id的Drive信息
- * @tags drive
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type CompleteFileModel struct {
 	Headers map[string]string        `json:"headers" xml:"headers"`
 	Body    *CCPCompleteFileResponse `json:"body" xml:"body" require:"true"`
@@ -6458,16 +6074,6 @@ func (s *CompleteFileModel) SetBody(v *CCPCompleteFileResponse) *CompleteFileMod
 	return s
 }
 
-/**
- * 完成文件上传。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type CCPCopyFileRequestModel struct {
 	Headers map[string]string   `json:"headers" xml:"headers"`
 	Body    *CCPCopyFileRequest `json:"body" xml:"body" require:"true"`
@@ -6491,16 +6097,6 @@ func (s *CCPCopyFileRequestModel) SetBody(v *CCPCopyFileRequest) *CCPCopyFileReq
 	return s
 }
 
-/**
- * 完成文件上传。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type CopyFileModel struct {
 	Headers map[string]string    `json:"headers" xml:"headers"`
 	Body    *CCPCopyFileResponse `json:"body" xml:"body" require:"true"`
@@ -6524,16 +6120,6 @@ func (s *CopyFileModel) SetBody(v *CCPCopyFileResponse) *CopyFileModel {
 	return s
 }
 
-/**
- * 指定源文件或文件夹，拷贝到指定的文件夹。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type CCPCreateFileRequestModel struct {
 	Headers map[string]string     `json:"headers" xml:"headers"`
 	Body    *CCPCreateFileRequest `json:"body" xml:"body" require:"true"`
@@ -6557,16 +6143,6 @@ func (s *CCPCreateFileRequestModel) SetBody(v *CCPCreateFileRequest) *CCPCreateF
 	return s
 }
 
-/**
- * 指定源文件或文件夹，拷贝到指定的文件夹。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type CreateFileModel struct {
 	Headers map[string]string      `json:"headers" xml:"headers"`
 	Body    *CCPCreateFileResponse `json:"body" xml:"body" require:"true"`
@@ -6590,18 +6166,6 @@ func (s *CreateFileModel) SetBody(v *CCPCreateFileResponse) *CreateFileModel {
 	return s
 }
 
-/**
- * 在指定文件夹下创建文件或者文件夹，
-根文件夹用root表示，其他文件夹使用创建文件夹时返回的file_id。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error AlreadyExist {resource} has already exists. {extra_msg}
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-*/
 type CCPDeleteFileRequestModel struct {
 	Headers map[string]string     `json:"headers" xml:"headers"`
 	Body    *CCPDeleteFileRequest `json:"body" xml:"body" require:"true"`
@@ -6625,18 +6189,6 @@ func (s *CCPDeleteFileRequestModel) SetBody(v *CCPDeleteFileRequest) *CCPDeleteF
 	return s
 }
 
-/**
- * 在指定文件夹下创建文件或者文件夹，
-根文件夹用root表示，其他文件夹使用创建文件夹时返回的file_id。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error AlreadyExist {resource} has already exists. {extra_msg}
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-*/
 type DeleteFileModel struct {
 	Headers map[string]string      `json:"headers" xml:"headers"`
 	Body    *CCPDeleteFileResponse `json:"body" xml:"body" require:"true"`
@@ -6660,16 +6212,6 @@ func (s *DeleteFileModel) SetBody(v *CCPDeleteFileResponse) *DeleteFileModel {
 	return s
 }
 
-/**
- * 指定文件或文件夹ID，删除文件或者文件夹。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type DownloadFileQuery struct {
 	DriveID      *string `json:"DriveID" xml:"DriveID" require:"true"`
 	FileID       *string `json:"FileID" xml:"FileID" require:"true"`
@@ -6699,16 +6241,6 @@ func (s *DownloadFileQuery) SetImageProcess(v string) *DownloadFileQuery {
 	return s
 }
 
-/**
- * 指定文件或文件夹ID，删除文件或者文件夹。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type DownloadFileRequestModel struct {
 	Headers map[string]string  `json:"headers" xml:"headers"`
 	Query   *DownloadFileQuery `json:"query" xml:"query" require:"true"`
@@ -6732,16 +6264,6 @@ func (s *DownloadFileRequestModel) SetQuery(v *DownloadFileQuery) *DownloadFileR
 	return s
 }
 
-/**
- * 指定文件或文件夹ID，删除文件或者文件夹。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type DownloadFileModel struct {
 	Headers map[string]string         `json:"headers" xml:"headers"`
 	Body    *CCPGetDownloadUrlRequest `json:"body" xml:"body" require:"true"`
@@ -6765,16 +6287,6 @@ func (s *DownloadFileModel) SetBody(v *CCPGetDownloadUrlRequest) *DownloadFileMo
 	return s
 }
 
-/**
- * 指定文件ID，下载文件。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type CCPGetFileRequestModel struct {
 	Headers map[string]string  `json:"headers" xml:"headers"`
 	Body    *CCPGetFileRequest `json:"body" xml:"body" require:"true"`
@@ -6798,16 +6310,6 @@ func (s *CCPGetFileRequestModel) SetBody(v *CCPGetFileRequest) *CCPGetFileReques
 	return s
 }
 
-/**
- * 指定文件ID，下载文件。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type GetFileModel struct {
 	Headers map[string]string   `json:"headers" xml:"headers"`
 	Body    *CCPGetFileResponse `json:"body" xml:"body" require:"true"`
@@ -6831,16 +6333,6 @@ func (s *GetFileModel) SetBody(v *CCPGetFileResponse) *GetFileModel {
 	return s
 }
 
-/**
- * 获取指定文件或文件夹ID的信息。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type CCPGetDownloadUrlRequestModel struct {
 	Headers map[string]string         `json:"headers" xml:"headers"`
 	Body    *CCPGetDownloadUrlRequest `json:"body" xml:"body" require:"true"`
@@ -6864,16 +6356,6 @@ func (s *CCPGetDownloadUrlRequestModel) SetBody(v *CCPGetDownloadUrlRequest) *CC
 	return s
 }
 
-/**
- * 获取指定文件或文件夹ID的信息。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type GetDownloadUrlModel struct {
 	Headers map[string]string          `json:"headers" xml:"headers"`
 	Body    *CCPGetDownloadUrlResponse `json:"body" xml:"body" require:"true"`
@@ -6897,16 +6379,6 @@ func (s *GetDownloadUrlModel) SetBody(v *CCPGetDownloadUrlResponse) *GetDownload
 	return s
 }
 
-/**
- * 获取文件的下载地址，调用者可自己设置range头并发下载。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type CCPGetUploadUrlRequestModel struct {
 	Headers map[string]string       `json:"headers" xml:"headers"`
 	Body    *CCPGetUploadUrlRequest `json:"body" xml:"body" require:"true"`
@@ -6930,16 +6402,6 @@ func (s *CCPGetUploadUrlRequestModel) SetBody(v *CCPGetUploadUrlRequest) *CCPGet
 	return s
 }
 
-/**
- * 获取文件的下载地址，调用者可自己设置range头并发下载。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type GetUploadUrlModel struct {
 	Headers map[string]string        `json:"headers" xml:"headers"`
 	Body    *CCPGetUploadUrlResponse `json:"body" xml:"body" require:"true"`
@@ -6963,16 +6425,6 @@ func (s *GetUploadUrlModel) SetBody(v *CCPGetUploadUrlResponse) *GetUploadUrlMod
 	return s
 }
 
-/**
- * 可指定分片信息，一次获取多个分片的上传地址。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type CCPListFileRequestModel struct {
 	Headers map[string]string   `json:"headers" xml:"headers"`
 	Body    *CCPListFileRequest `json:"body" xml:"body" require:"true"`
@@ -6996,16 +6448,6 @@ func (s *CCPListFileRequestModel) SetBody(v *CCPListFileRequest) *CCPListFileReq
 	return s
 }
 
-/**
- * 可指定分片信息，一次获取多个分片的上传地址。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type ListFileModel struct {
 	Headers map[string]string    `json:"headers" xml:"headers"`
 	Body    *CCPListFileResponse `json:"body" xml:"body" require:"true"`
@@ -7029,16 +6471,6 @@ func (s *ListFileModel) SetBody(v *CCPListFileResponse) *ListFileModel {
 	return s
 }
 
-/**
- * 列举指定目录下的文件或文件夹。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type CCPListUploadedPartRequestModel struct {
 	Headers map[string]string           `json:"headers" xml:"headers"`
 	Body    *CCPListUploadedPartRequest `json:"body" xml:"body" require:"true"`
@@ -7062,16 +6494,6 @@ func (s *CCPListUploadedPartRequestModel) SetBody(v *CCPListUploadedPartRequest)
 	return s
 }
 
-/**
- * 列举指定目录下的文件或文件夹。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type ListUploadedPartsModel struct {
 	Headers map[string]string            `json:"headers" xml:"headers"`
 	Body    *CCPListUploadedPartResponse `json:"body" xml:"body" require:"true"`
@@ -7095,16 +6517,6 @@ func (s *ListUploadedPartsModel) SetBody(v *CCPListUploadedPartResponse) *ListUp
 	return s
 }
 
-/**
- * 列举upload_id对应的已上传分片。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type CCPMoveFileRequestModel struct {
 	Headers map[string]string   `json:"headers" xml:"headers"`
 	Body    *CCPMoveFileRequest `json:"body" xml:"body" require:"true"`
@@ -7128,16 +6540,6 @@ func (s *CCPMoveFileRequestModel) SetBody(v *CCPMoveFileRequest) *CCPMoveFileReq
 	return s
 }
 
-/**
- * 列举upload_id对应的已上传分片。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type MoveFileModel struct {
 	Headers map[string]string    `json:"headers" xml:"headers"`
 	Body    *CCPMoveFileResponse `json:"body" xml:"body" require:"true"`
@@ -7161,16 +6563,6 @@ func (s *MoveFileModel) SetBody(v *CCPMoveFileResponse) *MoveFileModel {
 	return s
 }
 
-/**
- * 指定源文件或文件夹，移动到指定的文件夹。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type CCPSearchFileRequestModel struct {
 	Headers map[string]string     `json:"headers" xml:"headers"`
 	Body    *CCPSearchFileRequest `json:"body" xml:"body" require:"true"`
@@ -7194,16 +6586,6 @@ func (s *CCPSearchFileRequestModel) SetBody(v *CCPSearchFileRequest) *CCPSearchF
 	return s
 }
 
-/**
- * 指定源文件或文件夹，移动到指定的文件夹。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type SearchFileModel struct {
 	Headers map[string]string      `json:"headers" xml:"headers"`
 	Body    *CCPSearchFileResponse `json:"body" xml:"body" require:"true"`
@@ -7227,16 +6609,6 @@ func (s *SearchFileModel) SetBody(v *CCPSearchFileResponse) *SearchFileModel {
 	return s
 }
 
-/**
- * 根据筛选条件，在指定drive下搜索文件。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type CCPUpdateFileMetaRequestModel struct {
 	Headers map[string]string         `json:"headers" xml:"headers"`
 	Body    *CCPUpdateFileMetaRequest `json:"body" xml:"body" require:"true"`
@@ -7260,16 +6632,6 @@ func (s *CCPUpdateFileMetaRequestModel) SetBody(v *CCPUpdateFileMetaRequest) *CC
 	return s
 }
 
-/**
- * 根据筛选条件，在指定drive下搜索文件。
- * @tags file
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type UpdateFileModel struct {
 	Headers map[string]string          `json:"headers" xml:"headers"`
 	Body    *CCPUpdateFileMetaResponse `json:"body" xml:"body" require:"true"`
@@ -10145,9 +9507,6 @@ func (s *UpdateShareRequest) SetStatus(v string) *UpdateShareRequest {
 	return s
 }
 
-/**
- * update share request
- */
 type CreateUserRequestModel struct {
 	Headers map[string]string  `json:"headers" xml:"headers"`
 	Body    *CreateUserRequest `json:"body" xml:"body" require:"true"`
@@ -10171,9 +9530,6 @@ func (s *CreateUserRequestModel) SetBody(v *CreateUserRequest) *CreateUserReques
 	return s
 }
 
-/**
- * update share request
- */
 type CreateUserModel struct {
 	Headers map[string]string   `json:"headers" xml:"headers"`
 	Body    *CreateUserResponse `json:"body" xml:"body" require:"true"`
@@ -10197,14 +9553,6 @@ func (s *CreateUserModel) SetBody(v *CreateUserResponse) *CreateUserModel {
 	return s
 }
 
-/**
- * 该接口将会创建用户， 只有管理员可以调用
- * @tags user
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type DeleteUserRequestModel struct {
 	Headers map[string]string  `json:"headers" xml:"headers"`
 	Body    *DeleteUserRequest `json:"body" xml:"body" require:"true"`
@@ -10228,14 +9576,6 @@ func (s *DeleteUserRequestModel) SetBody(v *DeleteUserRequest) *DeleteUserReques
 	return s
 }
 
-/**
- * 该接口将会创建用户， 只有管理员可以调用
- * @tags user
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type DeleteUserModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 }
@@ -10253,14 +9593,6 @@ func (s *DeleteUserModel) SetHeaders(v map[string]string) *DeleteUserModel {
 	return s
 }
 
-/**
- * 该接口将会删除用户
- * @tags user
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type GetUserRequestModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 	Body    *GetUserRequest   `json:"body" xml:"body" require:"true"`
@@ -10284,14 +9616,6 @@ func (s *GetUserRequestModel) SetBody(v *GetUserRequest) *GetUserRequestModel {
 	return s
 }
 
-/**
- * 该接口将会删除用户
- * @tags user
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type GetUserModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 	Body    *GetUserResponse  `json:"body" xml:"body" require:"true"`
@@ -10315,15 +9639,6 @@ func (s *GetUserModel) SetBody(v *GetUserResponse) *GetUserModel {
 	return s
 }
 
-/**
- * 该接口将会查看用户详细信息
- * @tags user
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type ListUserRequestModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 	Body    *ListUserRequest  `json:"body" xml:"body" require:"true"`
@@ -10347,15 +9662,6 @@ func (s *ListUserRequestModel) SetBody(v *ListUserRequest) *ListUserRequestModel
 	return s
 }
 
-/**
- * 该接口将会查看用户详细信息
- * @tags user
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type ListUsersModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 	Body    *ListUserResponse `json:"body" xml:"body" require:"true"`
@@ -10379,14 +9685,6 @@ func (s *ListUsersModel) SetBody(v *ListUserResponse) *ListUsersModel {
 	return s
 }
 
-/**
- * 该接口将会展示用户列表
- * @tags user
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type SearchUserRequestModel struct {
 	Headers map[string]string  `json:"headers" xml:"headers"`
 	Body    *SearchUserRequest `json:"body" xml:"body" require:"true"`
@@ -10410,14 +9708,6 @@ func (s *SearchUserRequestModel) SetBody(v *SearchUserRequest) *SearchUserReques
 	return s
 }
 
-/**
- * 该接口将会展示用户列表
- * @tags user
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type SearchUserModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 	Body    *ListUserResponse `json:"body" xml:"body" require:"true"`
@@ -10441,14 +9731,6 @@ func (s *SearchUserModel) SetBody(v *ListUserResponse) *SearchUserModel {
 	return s
 }
 
-/**
- * 该接口将会根据条件查询用户
- * @tags user
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type UpdateUserRequestModel struct {
 	Headers map[string]string  `json:"headers" xml:"headers"`
 	Body    *UpdateUserRequest `json:"body" xml:"body" require:"true"`
@@ -10472,14 +9754,6 @@ func (s *UpdateUserRequestModel) SetBody(v *UpdateUserRequest) *UpdateUserReques
 	return s
 }
 
-/**
- * 该接口将会根据条件查询用户
- * @tags user
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type UpdateUserModel struct {
 	Headers map[string]string   `json:"headers" xml:"headers"`
 	Body    *UpdateUserResponse `json:"body" xml:"body" require:"true"`
@@ -11169,9 +10443,6 @@ func (s *UpdateUserResponse) SetUserName(v string) *UpdateUserResponse {
 	return s
 }
 
-/**
- * Update user response
- */
 type GetImageCountRequestModel struct {
 	Headers map[string]string     `json:"headers" xml:"headers"`
 	Body    *GetImageCountRequest `json:"body" xml:"body" require:"true"`
@@ -11195,9 +10466,6 @@ func (s *GetImageCountRequestModel) SetBody(v *GetImageCountRequest) *GetImageCo
 	return s
 }
 
-/**
- * Update user response
- */
 type GetPhotoCountModel struct {
 	Headers map[string]string      `json:"headers" xml:"headers"`
 	Body    *GetImageCountResponse `json:"body" xml:"body" require:"true"`
@@ -11221,16 +10489,6 @@ func (s *GetPhotoCountModel) SetBody(v *GetImageCountResponse) *GetPhotoCountMod
 	return s
 }
 
-/**
- * 该接口将返回用户Drive下的云照片个数
- * @tags image
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type ListImageAddressGroupsRequestModel struct {
 	Headers map[string]string              `json:"headers" xml:"headers"`
 	Body    *ListImageAddressGroupsRequest `json:"body" xml:"body" require:"true"`
@@ -11254,16 +10512,6 @@ func (s *ListImageAddressGroupsRequestModel) SetBody(v *ListImageAddressGroupsRe
 	return s
 }
 
-/**
- * 该接口将返回用户Drive下的云照片个数
- * @tags image
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type ListAddressGroupsModel struct {
 	Headers map[string]string               `json:"headers" xml:"headers"`
 	Body    *ListImageAddressGroupsResponse `json:"body" xml:"body" require:"true"`
@@ -11287,16 +10535,6 @@ func (s *ListAddressGroupsModel) SetBody(v *ListImageAddressGroupsResponse) *Lis
 	return s
 }
 
-/**
- * 该接口将会展示用户图片的地点分组
- * @tags image
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type ListImageFaceGroupsRequestModel struct {
 	Headers map[string]string           `json:"headers" xml:"headers"`
 	Body    *ListImageFaceGroupsRequest `json:"body" xml:"body" require:"true"`
@@ -11320,16 +10558,6 @@ func (s *ListImageFaceGroupsRequestModel) SetBody(v *ListImageFaceGroupsRequest)
 	return s
 }
 
-/**
- * 该接口将会展示用户图片的地点分组
- * @tags image
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type ListFaceGroupsModel struct {
 	Headers map[string]string            `json:"headers" xml:"headers"`
 	Body    *ListImageFaceGroupsResponse `json:"body" xml:"body" require:"true"`
@@ -11353,16 +10581,6 @@ func (s *ListFaceGroupsModel) SetBody(v *ListImageFaceGroupsResponse) *ListFaceG
 	return s
 }
 
-/**
- * 该接口将会列举人脸分组
- * @tags image
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type ListImageTagsRequestModel struct {
 	Headers map[string]string     `json:"headers" xml:"headers"`
 	Body    *ListImageTagsRequest `json:"body" xml:"body" require:"true"`
@@ -11386,16 +10604,6 @@ func (s *ListImageTagsRequestModel) SetBody(v *ListImageTagsRequest) *ListImageT
 	return s
 }
 
-/**
- * 该接口将会列举人脸分组
- * @tags image
- * @error InvalidParameter The input parameter {parameter_name} is not valid.
- * @error AccessTokenInvalid AccessToken is invalid. {message}
- * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
- * @error NotFound The resource {resource_name} cannot be found. Please check.
- * @error InternalError The request has been failed due to some unknown error.
- * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
 type ListTagsModel struct {
 	Headers map[string]string      `json:"headers" xml:"headers"`
 	Body    *ListImageTagsResponse `json:"body" xml:"body" require:"true"`
@@ -11753,11 +10961,11 @@ type Client struct {
 
 func NewClient(config *Config) (*Client, error) {
 	client := new(Client)
-	err := client.init(config)
+	err := client.Init(config)
 	return client, err
 }
 
-func (client *Client) init(config *Config) (_err error) {
+func (client *Client) Init(config *Config) (_err error) {
 	if util.IsUnset(tea.ToMap(config)) {
 		_err = tea.NewSDKError(map[string]interface{}{
 			"name":    "ParameterMissing",
@@ -18747,23 +17955,16 @@ func (client *Client) ListTags(request *ListImageTagsRequestModel, runtime *Runt
 	return _resp, _err
 }
 
-/**
- * 展示标签集合
- */
 func (client *Client) GetPathname(nickname string, path string) (_result string) {
 	if util.Empty(nickname) {
 		_result = path
 		return _result
 	}
 
-	_result = ""
 	_result = "/" + tea.ToString(nickname) + tea.ToString(path)
 	return _result
 }
 
-/**
- * 展示标签集合
- */
 func (client *Client) SetExpireTime(expireTime string) (_err error) {
 	if util.IsUnset(client.AccessTokenCredential) {
 		return _err
@@ -18776,12 +17977,8 @@ func (client *Client) SetExpireTime(expireTime string) (_err error) {
 	return _err
 }
 
-/**
- * 展示标签集合
- */
 func (client *Client) GetExpireTime() (_result string) {
 	if util.IsUnset(client.AccessTokenCredential) {
-		_result = ""
 		return _result
 	}
 
@@ -18790,32 +17987,20 @@ func (client *Client) GetExpireTime() (_result string) {
 	return _result
 }
 
-/**
- * 展示标签集合
- */
 func (client *Client) SetUserAgent(userAgent string) {
 	client.UserAgent = userAgent
 }
 
-/**
- * 展示标签集合
- */
 func (client *Client) AppendUserAgent(userAgent string) {
 	client.UserAgent = tea.ToString(client.UserAgent) + " " + tea.ToString(userAgent)
 }
 
-/**
- * 展示标签集合
- */
 func (client *Client) GetUserAgent() (_result string) {
 	userAgent := util.GetUserAgent(client.UserAgent)
 	_result = userAgent
 	return _result
 }
 
-/**
- * 展示标签集合
- */
 func (client *Client) SetRefreshToken(token string) {
 	if util.IsUnset(client.AccessTokenCredential) {
 		return
@@ -18824,12 +18009,8 @@ func (client *Client) SetRefreshToken(token string) {
 	client.AccessTokenCredential.SetRefreshToken(token)
 }
 
-/**
- * 展示标签集合
- */
 func (client *Client) GetRefreshToken() (_result string) {
 	if util.IsUnset(client.AccessTokenCredential) {
-		_result = ""
 		return _result
 	}
 
@@ -18838,9 +18019,6 @@ func (client *Client) GetRefreshToken() (_result string) {
 	return _result
 }
 
-/**
- * 展示标签集合
- */
 func (client *Client) SetAccessToken(token string) {
 	if util.IsUnset(client.AccessTokenCredential) {
 		return
@@ -18849,12 +18027,8 @@ func (client *Client) SetAccessToken(token string) {
 	client.AccessTokenCredential.SetAccessToken(token)
 }
 
-/**
- * 展示标签集合
- */
 func (client *Client) GetAccessToken() (_result string, _err error) {
 	if util.IsUnset(client.AccessTokenCredential) {
-		_result = ""
 		return _result, _err
 	}
 
@@ -18867,12 +18041,8 @@ func (client *Client) GetAccessToken() (_result string, _err error) {
 	return _result, _err
 }
 
-/**
- * 展示标签集合
- */
 func (client *Client) GetAccessKeyId() (_result string, _err error) {
 	if util.IsUnset(client.Credential) {
-		_result = ""
 		return _result, _err
 	}
 
@@ -18885,12 +18055,8 @@ func (client *Client) GetAccessKeyId() (_result string, _err error) {
 	return _result, _err
 }
 
-/**
- * 展示标签集合
- */
 func (client *Client) GetAccessKeySecret() (_result string, _err error) {
 	if util.IsUnset(client.Credential) {
-		_result = ""
 		return _result, _err
 	}
 
