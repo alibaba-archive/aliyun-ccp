@@ -7,7 +7,8 @@
 		"go": "github.com/aliyun/aliyun-ccp/ccppath-sdk/go/client:v2.0.0",
 		"ts": "@alicloud/ccppath-sdk:1.2.0",
 		"java": "com.aliyun:ccp-client:2.1.3",
-		"csharp": "Aliyun.SDK.CCP.Client:2.0.2"
+		"csharp": "Aliyun.SDK.CCP.Client:2.0.2",
+		"php": "alibabacloud/ccp-sdk:^0.1.0"
 	},
 	"java": {
 		"package": "com.aliyun.ccp.ccpclient"
@@ -17,6 +18,18 @@
 	},
 	"swift5": {
 		"package": "AliyunCCPSDK"
+	},
+	"php": {
+		"package": "Aliyun.CCP.SDK",
+		"clientName": "CCP",
+		"packageInfo": {
+			"name": "alibabacloud/ccppath-sdk",
+			"desc": "Alibaba Cloud CCP SDK",
+			"github": "https://github.com/aliyun/aliyun-ccp",
+			"files": {
+				"LICENSE": "../LICENSE"
+			}
+		}
 	},
 	"libraries": {
 		"Util": "alibabacloud:Util:*",
