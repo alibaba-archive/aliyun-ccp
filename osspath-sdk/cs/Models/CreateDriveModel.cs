@@ -8,9 +8,6 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
-    /**
-     * create domain response
-     */
     public class CreateDriveModel : TeaModel {
         [NameInMap("headers")]
         [Validation(Required=false)]

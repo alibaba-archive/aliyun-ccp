@@ -8,9 +8,6 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.OSSClient.Models
 {
-    /**
-     * 
-     */
     public class AdminListStoresModel : TeaModel {
         [NameInMap("headers")]
         [Validation(Required=false)]

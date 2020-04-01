@@ -45,12 +45,16 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         public string Meta { get; set; }
 
         [NameInMap("name")]
-        [Validation(Required=false, Pattern=".{1,1000}")]
+        [Validation(Required=false, MaxLength=1024)]
         public string Name { get; set; }
 
         [NameInMap("starred")]
         [Validation(Required=false)]
         public bool? Starred { get; set; }
+
+        [NameInMap("user_meta")]
+        [Validation(Required=false)]
+        public string UserMeta { get; set; }
 
     }
 
