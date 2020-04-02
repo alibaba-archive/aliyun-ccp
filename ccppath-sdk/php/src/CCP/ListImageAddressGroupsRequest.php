@@ -55,7 +55,7 @@ class ListImageAddressGroupsRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->driveId, 'required', true);
+        Model::validateRequired('driveId', $this->driveId, true);
     }
 
     public function toMap()

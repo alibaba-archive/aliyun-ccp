@@ -40,9 +40,9 @@ class DefaultSetPasswordRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->appId, 'required', true);
-        Model::validateField($this->newPassword, 'required', true);
-        Model::validateField($this->state, 'required', true);
+        Model::validateRequired('appId', $this->appId, true);
+        Model::validateRequired('newPassword', $this->newPassword, true);
+        Model::validateRequired('state', $this->state, true);
     }
 
     public function toMap()

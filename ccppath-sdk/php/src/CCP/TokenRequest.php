@@ -40,9 +40,9 @@ class TokenRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->appId, 'required', true);
-        Model::validateField($this->grantType, 'required', true);
-        Model::validateField($this->refreshToken, 'required', true);
+        Model::validateRequired('appId', $this->appId, true);
+        Model::validateRequired('grantType', $this->grantType, true);
+        Model::validateRequired('refreshToken', $this->refreshToken, true);
     }
 
     public function toMap()

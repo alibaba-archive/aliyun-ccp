@@ -49,3 +49,11 @@ libraries/
 **/cs/**/bin/
 **/cs/**/obj/
 **/cs/**/.vs/
+
+#php
+vendor/
+.php_cs.cache
+composer.lock
+
+#scripts
+*.sh

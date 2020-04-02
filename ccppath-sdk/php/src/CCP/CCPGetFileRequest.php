@@ -73,12 +73,12 @@ class CCPGetFileRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->driveId, 'required', true);
-        Model::validateField($this->fileId, 'required', true);
-        Model::validateField($this->driveId, 'pattern', '[0-9]+');
-        Model::validateField($this->fileId, 'pattern', '[a-z0-9.-_]{1,50}');
-        Model::validateField($this->fileId, 'maxLength', 50);
-        Model::validateField($this->fileId, 'minLength', 40);
+        Model::validateRequired('driveId', $this->driveId, true);
+        Model::validateRequired('fileId', $this->fileId, true);
+        Model::validatePattern('driveId', $this->driveId, '[0-9]+');
+        Model::validatePattern('fileId', $this->fileId, '[a-z0-9.-_]{1,50}');
+        Model::validateMaxLength('fileId', $this->fileId, 50);
+        Model::validateMinLength('fileId', $this->fileId, 40);
     }
 
     public function toMap()

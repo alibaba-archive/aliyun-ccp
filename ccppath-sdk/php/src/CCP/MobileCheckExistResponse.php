@@ -31,8 +31,8 @@ class MobileCheckExistResponse extends Model
 
     public function validate()
     {
-        Model::validateField($this->isExist, 'required', true);
-        Model::validateField($this->phoneNumber, 'required', true);
+        Model::validateRequired('isExist', $this->isExist, true);
+        Model::validateRequired('phoneNumber', $this->phoneNumber, true);
     }
 
     public function toMap()

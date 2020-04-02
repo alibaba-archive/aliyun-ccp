@@ -49,8 +49,8 @@ class LoginByCodeRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->appId, 'required', true);
-        Model::validateField($this->type, 'required', true);
+        Model::validateRequired('appId', $this->appId, true);
+        Model::validateRequired('type', $this->type, true);
     }
 
     public function toMap()

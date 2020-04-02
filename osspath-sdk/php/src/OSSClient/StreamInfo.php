@@ -63,8 +63,8 @@ class StreamInfo extends Model
 
     public function validate()
     {
-        Model::validateField($this->contentMd5, 'required', true);
-        Model::validateField($this->size, 'required', true);
+        Model::validateRequired('contentMd5', $this->contentMd5, true);
+        Model::validateRequired('size', $this->size, true);
     }
 
     public function toMap()

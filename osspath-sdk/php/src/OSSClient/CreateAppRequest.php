@@ -78,14 +78,14 @@ class CreateAppRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->appName, 'required', true);
-        Model::validateField($this->logo, 'required', true);
-        Model::validateField($this->scope, 'required', true);
-        Model::validateField($this->type, 'required', true);
-        Model::validateField($this->appName, 'maxLength', 128);
-        Model::validateField($this->description, 'maxLength', 128);
-        Model::validateField($this->appName, 'minLength', 1);
-        Model::validateField($this->description, 'minLength', 0);
+        Model::validateRequired('appName', $this->appName, true);
+        Model::validateRequired('logo', $this->logo, true);
+        Model::validateRequired('scope', $this->scope, true);
+        Model::validateRequired('type', $this->type, true);
+        Model::validateMaxLength('appName', $this->appName, 128);
+        Model::validateMaxLength('description', $this->description, 128);
+        Model::validateMinLength('appName', $this->appName, 1);
+        Model::validateMinLength('description', $this->description, 0);
     }
 
     public function toMap()

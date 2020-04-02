@@ -73,12 +73,12 @@ class OSSListUploadedPartRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->driveId, 'pattern', '[0-9]+');
-        Model::validateField($this->limit, 'pattern', '[0-9]+');
-        Model::validateField($this->partNumberMarker, 'pattern', '[0-9]+');
-        Model::validateField($this->shareId, 'pattern', '[0-9a-zA-Z-]+');
-        Model::validateField($this->filePath, 'required', true);
-        Model::validateField($this->limit, 'required', true);
+        Model::validatePattern('driveId', $this->driveId, '[0-9]+');
+        Model::validatePattern('limit', $this->limit, '[0-9]+');
+        Model::validatePattern('partNumberMarker', $this->partNumberMarker, '[0-9]+');
+        Model::validatePattern('shareId', $this->shareId, '[0-9a-zA-Z-]+');
+        Model::validateRequired('filePath', $this->filePath, true);
+        Model::validateRequired('limit', $this->limit, true);
     }
 
     public function toMap()

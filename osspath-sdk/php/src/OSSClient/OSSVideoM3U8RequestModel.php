@@ -27,7 +27,7 @@ class OSSVideoM3U8RequestModel extends Model
 
     public function validate()
     {
-        Model::validateField($this->body, 'required', true);
+        Model::validateRequired('body', $this->body, true);
     }
 
     public function toMap()

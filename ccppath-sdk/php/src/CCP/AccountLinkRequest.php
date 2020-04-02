@@ -58,9 +58,9 @@ class AccountLinkRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->identity, 'required', true);
-        Model::validateField($this->type, 'required', true);
-        Model::validateField($this->userId, 'required', true);
+        Model::validateRequired('identity', $this->identity, true);
+        Model::validateRequired('type', $this->type, true);
+        Model::validateRequired('userId', $this->userId, true);
     }
 
     public function toMap()

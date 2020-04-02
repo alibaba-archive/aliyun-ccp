@@ -66,11 +66,11 @@ class BaseCreateFileRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->contentMd5, 'required', true);
-        Model::validateField($this->contentType, 'required', true);
-        Model::validateField($this->name, 'required', true);
-        Model::validateField($this->size, 'required', true);
-        Model::validateField($this->type, 'required', true);
+        Model::validateRequired('contentMd5', $this->contentMd5, true);
+        Model::validateRequired('contentType', $this->contentType, true);
+        Model::validateRequired('name', $this->name, true);
+        Model::validateRequired('size', $this->size, true);
+        Model::validateRequired('type', $this->type, true);
     }
 
     public function toMap()

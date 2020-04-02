@@ -25,7 +25,7 @@ class DeleteShareRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->shareId, 'required', true);
+        Model::validateRequired('shareId', $this->shareId, true);
     }
 
     public function toMap()

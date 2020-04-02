@@ -141,25 +141,25 @@ class GetAppResponse extends Model
 
     public function validate()
     {
-        Model::validateField($this->aliOwnerId, 'required', true);
-        Model::validateField($this->appId, 'required', true);
-        Model::validateField($this->appName, 'required', true);
-        Model::validateField($this->appSecret, 'required', true);
-        Model::validateField($this->createdAt, 'required', true);
-        Model::validateField($this->description, 'required', true);
-        Model::validateField($this->logo, 'required', true);
-        Model::validateField($this->provider, 'required', true);
-        Model::validateField($this->redirectUri, 'required', true);
-        Model::validateField($this->scope, 'required', true);
-        Model::validateField($this->screenshots, 'required', true);
-        Model::validateField($this->stage, 'required', true);
-        Model::validateField($this->type, 'required', true);
-        Model::validateField($this->updatedAt, 'required', true);
-        Model::validateField($this->appName, 'maxLength', 128);
-        Model::validateField($this->description, 'maxLength', 128);
-        Model::validateField($this->appName, 'minLength', 1);
-        Model::validateField($this->description, 'minLength', 0);
-        Model::validateField($this->appName, 'pattern', '[0-9a-zA-Z]+');
+        Model::validateRequired('aliOwnerId', $this->aliOwnerId, true);
+        Model::validateRequired('appId', $this->appId, true);
+        Model::validateRequired('appName', $this->appName, true);
+        Model::validateRequired('appSecret', $this->appSecret, true);
+        Model::validateRequired('createdAt', $this->createdAt, true);
+        Model::validateRequired('description', $this->description, true);
+        Model::validateRequired('logo', $this->logo, true);
+        Model::validateRequired('provider', $this->provider, true);
+        Model::validateRequired('redirectUri', $this->redirectUri, true);
+        Model::validateRequired('scope', $this->scope, true);
+        Model::validateRequired('screenshots', $this->screenshots, true);
+        Model::validateRequired('stage', $this->stage, true);
+        Model::validateRequired('type', $this->type, true);
+        Model::validateRequired('updatedAt', $this->updatedAt, true);
+        Model::validateMaxLength('appName', $this->appName, 128);
+        Model::validateMaxLength('description', $this->description, 128);
+        Model::validateMinLength('appName', $this->appName, 1);
+        Model::validateMinLength('description', $this->description, 0);
+        Model::validatePattern('appName', $this->appName, '[0-9a-zA-Z]+');
     }
 
     public function toMap()

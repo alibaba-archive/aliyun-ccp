@@ -52,9 +52,9 @@ class OSSDeleteFilesResponse extends Model
 
     public function validate()
     {
-        Model::validateField($this->domainId, 'pattern', '[a-z0-9A-Z]+');
-        Model::validateField($this->driveId, 'pattern', '[0-9]+');
-        Model::validateField($this->shareId, 'pattern', '[0-9]+');
+        Model::validatePattern('domainId', $this->domainId, '[a-z0-9A-Z]+');
+        Model::validatePattern('driveId', $this->driveId, '[0-9]+');
+        Model::validatePattern('shareId', $this->shareId, '[0-9]+');
     }
 
     public function toMap()

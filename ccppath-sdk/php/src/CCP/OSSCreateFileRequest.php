@@ -89,9 +89,9 @@ class OSSCreateFileRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->driveId, 'pattern', '[0-9]+');
-        Model::validateField($this->shareId, 'maxLength', 40);
-        Model::validateField($this->shareId, 'minLength', 50);
+        Model::validatePattern('driveId', $this->driveId, '[0-9]+');
+        Model::validateMaxLength('shareId', $this->shareId, 40);
+        Model::validateMinLength('shareId', $this->shareId, 50);
     }
 
     public function toMap()

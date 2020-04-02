@@ -25,7 +25,7 @@ class DeleteDomainRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->domainId, 'required', true);
+        Model::validateRequired('domainId', $this->domainId, true);
     }
 
     public function toMap()

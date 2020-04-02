@@ -240,9 +240,9 @@ class CreateDomainRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->domainName, 'required', true);
-        Model::validateField($this->pathType, 'required', true);
-        Model::validateField($this->storeRegionList, 'required', true);
+        Model::validateRequired('domainName', $this->domainName, true);
+        Model::validateRequired('pathType', $this->pathType, true);
+        Model::validateRequired('storeRegionList', $this->storeRegionList, true);
     }
 
     public function toMap()

@@ -52,11 +52,11 @@ class CCPDeleteFileResponse extends Model
 
     public function validate()
     {
-        Model::validateField($this->domainId, 'pattern', '[a-z0-9A-Z]+');
-        Model::validateField($this->driveId, 'pattern', '[0-9]+');
-        Model::validateField($this->fileId, 'pattern', '[a-z0-9]{1, 50}');
-        Model::validateField($this->fileId, 'maxLength', 50);
-        Model::validateField($this->fileId, 'minLength', 40);
+        Model::validatePattern('domainId', $this->domainId, '[a-z0-9A-Z]+');
+        Model::validatePattern('driveId', $this->driveId, '[0-9]+');
+        Model::validatePattern('fileId', $this->fileId, '[a-z0-9]{1, 50}');
+        Model::validateMaxLength('fileId', $this->fileId, 50);
+        Model::validateMinLength('fileId', $this->fileId, 40);
     }
 
     public function toMap()

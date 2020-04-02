@@ -22,7 +22,7 @@ class MobileSendSmsCodeResponse extends Model
 
     public function validate()
     {
-        Model::validateField($this->smsCodeId, 'required', true);
+        Model::validateRequired('smsCodeId', $this->smsCodeId, true);
     }
 
     public function toMap()

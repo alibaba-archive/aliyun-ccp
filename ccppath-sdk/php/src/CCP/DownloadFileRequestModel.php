@@ -27,7 +27,7 @@ class DownloadFileRequestModel extends Model
 
     public function validate()
     {
-        Model::validateField($this->query, 'required', true);
+        Model::validateRequired('query', $this->query, true);
     }
 
     public function toMap()

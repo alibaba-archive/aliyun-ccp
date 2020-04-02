@@ -110,12 +110,12 @@ class Store extends Model
 
     public function validate()
     {
-        Model::validateField($this->bucket, 'required', true);
-        Model::validateField($this->endpoint, 'required', true);
-        Model::validateField($this->ownership, 'required', true);
-        Model::validateField($this->policy, 'required', true);
-        Model::validateField($this->storeId, 'required', true);
-        Model::validateField($this->type, 'required', true);
+        Model::validateRequired('bucket', $this->bucket, true);
+        Model::validateRequired('endpoint', $this->endpoint, true);
+        Model::validateRequired('ownership', $this->ownership, true);
+        Model::validateRequired('policy', $this->policy, true);
+        Model::validateRequired('storeId', $this->storeId, true);
+        Model::validateRequired('type', $this->type, true);
     }
 
     public function toMap()

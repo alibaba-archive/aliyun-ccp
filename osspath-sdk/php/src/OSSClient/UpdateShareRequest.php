@@ -77,8 +77,8 @@ class UpdateShareRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->description, 'maxLength', 1024);
-        Model::validateField($this->shareId, 'required', true);
+        Model::validateMaxLength('description', $this->description, 1024);
+        Model::validateRequired('shareId', $this->shareId, true);
     }
 
     public function toMap()

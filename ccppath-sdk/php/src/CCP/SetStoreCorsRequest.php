@@ -36,9 +36,9 @@ class SetStoreCorsRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->corsRule, 'required', true);
-        Model::validateField($this->domainId, 'required', true);
-        Model::validateField($this->storeId, 'required', true);
+        Model::validateRequired('corsRule', $this->corsRule, true);
+        Model::validateRequired('domainId', $this->domainId, true);
+        Model::validateRequired('storeId', $this->storeId, true);
     }
 
     public function toMap()

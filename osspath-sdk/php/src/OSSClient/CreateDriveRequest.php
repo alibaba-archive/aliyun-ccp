@@ -108,8 +108,8 @@ class CreateDriveRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->driveName, 'required', true);
-        Model::validateField($this->owner, 'required', true);
+        Model::validateRequired('driveName', $this->driveName, true);
+        Model::validateRequired('owner', $this->owner, true);
     }
 
     public function toMap()

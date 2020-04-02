@@ -87,13 +87,13 @@ class ListFileRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->driveId, 'required', true);
-        Model::validateField($this->parentFileId, 'required', true);
-        Model::validateField($this->driveId, 'pattern', '[0-9]+');
-        Model::validateField($this->limit, 'pattern', '[0-9]{1,3}');
-        Model::validateField($this->parentFileId, 'pattern', '[a-z0-9.-_]{1,50}');
-        Model::validateField($this->parentFileId, 'maxLength', 50);
-        Model::validateField($this->parentFileId, 'minLength', 40);
+        Model::validateRequired('driveId', $this->driveId, true);
+        Model::validateRequired('parentFileId', $this->parentFileId, true);
+        Model::validatePattern('driveId', $this->driveId, '[0-9]+');
+        Model::validatePattern('limit', $this->limit, '[0-9]{1,3}');
+        Model::validatePattern('parentFileId', $this->parentFileId, '[a-z0-9.-_]{1,50}');
+        Model::validateMaxLength('parentFileId', $this->parentFileId, 50);
+        Model::validateMinLength('parentFileId', $this->parentFileId, 40);
     }
 
     public function toMap()

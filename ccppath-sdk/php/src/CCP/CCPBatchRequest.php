@@ -32,8 +32,8 @@ class CCPBatchRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->requests, 'required', true);
-        Model::validateField($this->resource, 'required', true);
+        Model::validateRequired('requests', $this->requests, true);
+        Model::validateRequired('resource', $this->resource, true);
     }
 
     public function toMap()
