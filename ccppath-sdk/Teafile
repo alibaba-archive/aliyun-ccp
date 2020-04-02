@@ -3,6 +3,12 @@
 	"name": "CCPPath",
 	"version": "1.0.2",
 	"main": "./ccp.tea",
+	"maintainers": [
+		{
+			"name": "Alibaba Cloud SDK",
+			"email": "sdk-team@alibabacloud.com"
+		}
+	],
 	"releases": {
 		"go": "github.com/aliyun/aliyun-ccp/ccppath-sdk/go/client:v2.0.0",
 		"ts": "@alicloud/ccppath-sdk:1.2.0",
