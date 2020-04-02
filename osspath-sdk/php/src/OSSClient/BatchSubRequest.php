@@ -58,9 +58,9 @@ class BatchSubRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->id, 'required', true);
-        Model::validateField($this->method, 'required', true);
-        Model::validateField($this->url, 'required', true);
+        Model::validateRequired('id', $this->id, true);
+        Model::validateRequired('method', $this->method, true);
+        Model::validateRequired('url', $this->url, true);
     }
 
     public function toMap()

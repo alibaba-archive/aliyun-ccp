@@ -208,14 +208,14 @@ class BaseOSSFileResponse extends Model
 
     public function validate()
     {
-        Model::validateField($this->domainId, 'pattern', '[a-z0-9A-Z]+');
-        Model::validateField($this->driveId, 'pattern', '[0-9]+');
-        Model::validateField($this->name, 'pattern', '[a-zA-Z0-9.-]{1,1024}');
-        Model::validateField($this->parentFilePath, 'pattern', '[a-z0-9]{1, 50}');
-        Model::validateField($this->shareId, 'pattern', '[0-9]+');
-        Model::validateField($this->name, 'required', true);
-        Model::validateField($this->parentFilePath, 'maxLength', 50);
-        Model::validateField($this->parentFilePath, 'minLength', 40);
+        Model::validatePattern('domainId', $this->domainId, '[a-z0-9A-Z]+');
+        Model::validatePattern('driveId', $this->driveId, '[0-9]+');
+        Model::validatePattern('name', $this->name, '[a-zA-Z0-9.-]{1,1024}');
+        Model::validatePattern('parentFilePath', $this->parentFilePath, '[a-z0-9]{1, 50}');
+        Model::validatePattern('shareId', $this->shareId, '[0-9]+');
+        Model::validateRequired('name', $this->name, true);
+        Model::validateMaxLength('parentFilePath', $this->parentFilePath, 50);
+        Model::validateMinLength('parentFilePath', $this->parentFilePath, 40);
     }
 
     public function toMap()

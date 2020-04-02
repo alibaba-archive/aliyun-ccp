@@ -52,9 +52,9 @@ class BaseGetUploadUrlRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->contentMd5, 'maxLength', 32);
-        Model::validateField($this->driveId, 'pattern', '[0-9]+');
-        Model::validateField($this->uploadId, 'required', true);
+        Model::validateMaxLength('contentMd5', $this->contentMd5, 32);
+        Model::validatePattern('driveId', $this->driveId, '[0-9]+');
+        Model::validateRequired('uploadId', $this->uploadId, true);
     }
 
     public function toMap()

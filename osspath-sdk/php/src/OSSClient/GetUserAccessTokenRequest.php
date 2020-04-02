@@ -34,7 +34,7 @@ class GetUserAccessTokenRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->userId, 'required', true);
+        Model::validateRequired('userId', $this->userId, true);
     }
 
     public function toMap()

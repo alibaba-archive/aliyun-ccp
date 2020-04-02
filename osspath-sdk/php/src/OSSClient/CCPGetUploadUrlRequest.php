@@ -61,11 +61,11 @@ class CCPGetUploadUrlRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->contentMd5, 'maxLength', 32);
-        Model::validateField($this->fileId, 'maxLength', 50);
-        Model::validateField($this->driveId, 'pattern', '[0-9]+');
-        Model::validateField($this->fileId, 'pattern', '[a-z0-9]{1,50}');
-        Model::validateField($this->fileId, 'minLength', 40);
+        Model::validateMaxLength('contentMd5', $this->contentMd5, 32);
+        Model::validateMaxLength('fileId', $this->fileId, 50);
+        Model::validatePattern('driveId', $this->driveId, '[0-9]+');
+        Model::validatePattern('fileId', $this->fileId, '[a-z0-9]{1,50}');
+        Model::validateMinLength('fileId', $this->fileId, 40);
     }
 
     public function toMap()

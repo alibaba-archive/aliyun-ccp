@@ -102,9 +102,9 @@ class CCPSearchFileRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->driveId, 'required', true);
-        Model::validateField($this->driveId, 'pattern', '[0-9]+');
-        Model::validateField($this->query, 'maxLength', 4096);
+        Model::validateRequired('driveId', $this->driveId, true);
+        Model::validatePattern('driveId', $this->driveId, '[0-9]+');
+        Model::validateMaxLength('query', $this->query, 4096);
     }
 
     public function toMap()

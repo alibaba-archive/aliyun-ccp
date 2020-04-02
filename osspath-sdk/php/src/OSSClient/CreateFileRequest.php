@@ -141,19 +141,19 @@ class CreateFileRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->contentMd5, 'maxLength', 32);
-        Model::validateField($this->description, 'maxLength', 0);
-        Model::validateField($this->parentFileId, 'maxLength', 50);
-        Model::validateField($this->contentType, 'required', true);
-        Model::validateField($this->driveId, 'required', true);
-        Model::validateField($this->name, 'required', true);
-        Model::validateField($this->parentFileId, 'required', true);
-        Model::validateField($this->size, 'required', true);
-        Model::validateField($this->type, 'required', true);
-        Model::validateField($this->description, 'minLength', 1024);
-        Model::validateField($this->parentFileId, 'minLength', 40);
-        Model::validateField($this->driveId, 'pattern', '[0-9]+');
-        Model::validateField($this->parentFileId, 'pattern', '[a-z0-9]{1,50}');
+        Model::validateMaxLength('contentMd5', $this->contentMd5, 32);
+        Model::validateMaxLength('description', $this->description, 0);
+        Model::validateMaxLength('parentFileId', $this->parentFileId, 50);
+        Model::validateRequired('contentType', $this->contentType, true);
+        Model::validateRequired('driveId', $this->driveId, true);
+        Model::validateRequired('name', $this->name, true);
+        Model::validateRequired('parentFileId', $this->parentFileId, true);
+        Model::validateRequired('size', $this->size, true);
+        Model::validateRequired('type', $this->type, true);
+        Model::validateMinLength('description', $this->description, 1024);
+        Model::validateMinLength('parentFileId', $this->parentFileId, 40);
+        Model::validatePattern('driveId', $this->driveId, '[0-9]+');
+        Model::validatePattern('parentFileId', $this->parentFileId, '[a-z0-9]{1,50}');
     }
 
     public function toMap()

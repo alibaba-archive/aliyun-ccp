@@ -70,9 +70,9 @@ class OSSGetUploadUrlRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->contentMd5, 'maxLength', 32);
-        Model::validateField($this->driveId, 'pattern', '[0-9]+');
-        Model::validateField($this->shareId, 'pattern', '[0-9a-zA-Z-]+');
+        Model::validateMaxLength('contentMd5', $this->contentMd5, 32);
+        Model::validatePattern('driveId', $this->driveId, '[0-9]+');
+        Model::validatePattern('shareId', $this->shareId, '[0-9a-zA-Z-]+');
     }
 
     public function toMap()

@@ -94,10 +94,10 @@ class CreateShareRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->driveId, 'required', true);
-        Model::validateField($this->owner, 'required', true);
-        Model::validateField($this->shareFilePath, 'required', true);
-        Model::validateField($this->driveId, 'pattern', '[0-9]+');
+        Model::validateRequired('driveId', $this->driveId, true);
+        Model::validateRequired('owner', $this->owner, true);
+        Model::validateRequired('shareFilePath', $this->shareFilePath, true);
+        Model::validatePattern('driveId', $this->driveId, '[0-9]+');
     }
 
     public function toMap()

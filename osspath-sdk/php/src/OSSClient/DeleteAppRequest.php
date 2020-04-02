@@ -22,7 +22,7 @@ class DeleteAppRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->appId, 'required', true);
+        Model::validateRequired('appId', $this->appId, true);
     }
 
     public function toMap()

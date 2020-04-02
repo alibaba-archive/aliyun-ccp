@@ -107,15 +107,15 @@ class CCPUpdateFileMetaRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->description, 'maxLength', 1024);
-        Model::validateField($this->fileId, 'maxLength', 50);
-        Model::validateField($this->name, 'maxLength', 1024);
-        Model::validateField($this->driveId, 'required', true);
-        Model::validateField($this->fileId, 'required', true);
-        Model::validateField($this->driveId, 'pattern', '[0-9]+');
-        Model::validateField($this->fileId, 'pattern', '[a-z0-9.-_]{1,50}');
-        Model::validateField($this->fileId, 'minLength', 40);
-        Model::validateField($this->name, 'minLength', 1);
+        Model::validateMaxLength('description', $this->description, 1024);
+        Model::validateMaxLength('fileId', $this->fileId, 50);
+        Model::validateMaxLength('name', $this->name, 1024);
+        Model::validateRequired('driveId', $this->driveId, true);
+        Model::validateRequired('fileId', $this->fileId, true);
+        Model::validatePattern('driveId', $this->driveId, '[0-9]+');
+        Model::validatePattern('fileId', $this->fileId, '[a-z0-9.-_]{1,50}');
+        Model::validateMinLength('fileId', $this->fileId, 40);
+        Model::validateMinLength('name', $this->name, 1);
     }
 
     public function toMap()

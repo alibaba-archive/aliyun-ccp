@@ -49,7 +49,7 @@ class UploadPartInfo extends Model
 
     public function validate()
     {
-        Model::validateField($this->partNumber, 'pattern', '[0-9]+');
+        Model::validatePattern('partNumber', $this->partNumber, '[0-9]+');
     }
 
     public function toMap()

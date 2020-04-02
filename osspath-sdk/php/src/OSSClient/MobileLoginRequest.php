@@ -88,8 +88,8 @@ class MobileLoginRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->appId, 'required', true);
-        Model::validateField($this->phoneNumber, 'required', true);
+        Model::validateRequired('appId', $this->appId, true);
+        Model::validateRequired('phoneNumber', $this->phoneNumber, true);
     }
 
     public function toMap()

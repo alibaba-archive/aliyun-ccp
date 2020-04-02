@@ -22,7 +22,7 @@ class CancelLinkRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->temporaryToken, 'required', true);
+        Model::validateRequired('temporaryToken', $this->temporaryToken, true);
     }
 
     public function toMap()

@@ -89,12 +89,12 @@ class OSSCopyFileRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->driveId, 'pattern', '[0-9]+');
-        Model::validateField($this->newName, 'pattern', '[a-zA-Z0-9.-]{1,1000}');
-        Model::validateField($this->shareId, 'pattern', '[0-9a-zA-Z-]+');
-        Model::validateField($this->toDriveId, 'pattern', '[0-9]+');
-        Model::validateField($this->toDriveId, 'required', true);
-        Model::validateField($this->toParentFilePath, 'required', true);
+        Model::validatePattern('driveId', $this->driveId, '[0-9]+');
+        Model::validatePattern('newName', $this->newName, '[a-zA-Z0-9.-]{1,1000}');
+        Model::validatePattern('shareId', $this->shareId, '[0-9a-zA-Z-]+');
+        Model::validatePattern('toDriveId', $this->toDriveId, '[0-9]+');
+        Model::validateRequired('toDriveId', $this->toDriveId, true);
+        Model::validateRequired('toParentFilePath', $this->toParentFilePath, true);
     }
 
     public function toMap()

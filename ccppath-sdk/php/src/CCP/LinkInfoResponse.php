@@ -76,13 +76,13 @@ class LinkInfoResponse extends Model
 
     public function validate()
     {
-        Model::validateField($this->authenticationType, 'required', true);
-        Model::validateField($this->createdAt, 'required', true);
-        Model::validateField($this->domainId, 'required', true);
-        Model::validateField($this->identity, 'required', true);
-        Model::validateField($this->lastLoginTime, 'required', true);
-        Model::validateField($this->status, 'required', true);
-        Model::validateField($this->userId, 'required', true);
+        Model::validateRequired('authenticationType', $this->authenticationType, true);
+        Model::validateRequired('createdAt', $this->createdAt, true);
+        Model::validateRequired('domainId', $this->domainId, true);
+        Model::validateRequired('identity', $this->identity, true);
+        Model::validateRequired('lastLoginTime', $this->lastLoginTime, true);
+        Model::validateRequired('status', $this->status, true);
+        Model::validateRequired('userId', $this->userId, true);
     }
 
     public function toMap()

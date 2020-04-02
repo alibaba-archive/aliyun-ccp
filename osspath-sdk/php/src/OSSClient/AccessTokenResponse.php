@@ -67,7 +67,7 @@ class AccessTokenResponse extends Model
 
     public function validate()
     {
-        Model::validateField($this->accessToken, 'required', true);
+        Model::validateRequired('accessToken', $this->accessToken, true);
     }
 
     public function toMap()

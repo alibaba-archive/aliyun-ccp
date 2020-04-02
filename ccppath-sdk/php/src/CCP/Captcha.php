@@ -40,9 +40,9 @@ class Captcha extends Model
 
     public function validate()
     {
-        Model::validateField($this->captcha, 'required', true);
-        Model::validateField($this->captchaFormat, 'required', true);
-        Model::validateField($this->captchaId, 'required', true);
+        Model::validateRequired('captcha', $this->captcha, true);
+        Model::validateRequired('captchaFormat', $this->captchaFormat, true);
+        Model::validateRequired('captchaId', $this->captchaId, true);
     }
 
     public function toMap()

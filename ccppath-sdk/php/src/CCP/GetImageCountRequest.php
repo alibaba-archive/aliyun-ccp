@@ -25,7 +25,7 @@ class GetImageCountRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->driveId, 'pattern', '[0-9]+');
+        Model::validatePattern('driveId', $this->driveId, '[0-9]+');
     }
 
     public function toMap()

@@ -249,16 +249,16 @@ class BaseCCPFileResponse extends Model
 
     public function validate()
     {
-        Model::validateField($this->domainId, 'pattern', '[a-z0-9A-Z]+');
-        Model::validateField($this->driveId, 'pattern', '[0-9]+');
-        Model::validateField($this->fileId, 'pattern', '[a-z0-9]{1, 50}');
-        Model::validateField($this->name, 'pattern', '[a-zA-Z0-9.-]{1,1024}');
-        Model::validateField($this->parentFileId, 'pattern', '[a-z0-9]{1, 50}');
-        Model::validateField($this->fileId, 'maxLength', 50);
-        Model::validateField($this->parentFileId, 'maxLength', 50);
-        Model::validateField($this->fileId, 'minLength', 40);
-        Model::validateField($this->parentFileId, 'minLength', 40);
-        Model::validateField($this->name, 'required', true);
+        Model::validatePattern('domainId', $this->domainId, '[a-z0-9A-Z]+');
+        Model::validatePattern('driveId', $this->driveId, '[0-9]+');
+        Model::validatePattern('fileId', $this->fileId, '[a-z0-9]{1, 50}');
+        Model::validatePattern('name', $this->name, '[a-zA-Z0-9.-]{1,1024}');
+        Model::validatePattern('parentFileId', $this->parentFileId, '[a-z0-9]{1, 50}');
+        Model::validateMaxLength('fileId', $this->fileId, 50);
+        Model::validateMaxLength('parentFileId', $this->parentFileId, 50);
+        Model::validateMinLength('fileId', $this->fileId, 40);
+        Model::validateMinLength('parentFileId', $this->parentFileId, 40);
+        Model::validateRequired('name', $this->name, true);
     }
 
     public function toMap()

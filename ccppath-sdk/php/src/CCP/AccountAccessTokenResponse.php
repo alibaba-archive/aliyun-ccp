@@ -139,8 +139,8 @@ class AccountAccessTokenResponse extends Model
 
     public function validate()
     {
-        Model::validateField($this->accessToken, 'required', true);
-        Model::validateField($this->needLink, 'required', true);
+        Model::validateRequired('accessToken', $this->accessToken, true);
+        Model::validateRequired('needLink', $this->needLink, true);
     }
 
     public function toMap()

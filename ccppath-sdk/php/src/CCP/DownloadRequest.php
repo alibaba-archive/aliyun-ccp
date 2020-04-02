@@ -46,12 +46,12 @@ class DownloadRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->DriveID, 'required', true);
-        Model::validateField($this->FileID, 'required', true);
-        Model::validateField($this->DriveID, 'pattern', '[0-9]+');
-        Model::validateField($this->FileID, 'pattern', '[a-z0-9.-_]{1,50}');
-        Model::validateField($this->FileID, 'maxLength', 50);
-        Model::validateField($this->FileID, 'minLength', 40);
+        Model::validateRequired('DriveID', $this->DriveID, true);
+        Model::validateRequired('FileID', $this->FileID, true);
+        Model::validatePattern('DriveID', $this->DriveID, '[0-9]+');
+        Model::validatePattern('FileID', $this->FileID, '[a-z0-9.-_]{1,50}');
+        Model::validateMaxLength('FileID', $this->FileID, 50);
+        Model::validateMinLength('FileID', $this->FileID, 40);
     }
 
     public function toMap()

@@ -31,8 +31,8 @@ class GetAccessTokenByLinkInfoRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->identity, 'required', true);
-        Model::validateField($this->type, 'required', true);
+        Model::validateRequired('identity', $this->identity, true);
+        Model::validateRequired('type', $this->type, true);
     }
 
     public function toMap()

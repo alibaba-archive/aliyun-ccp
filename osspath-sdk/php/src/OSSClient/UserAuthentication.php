@@ -85,14 +85,14 @@ class UserAuthentication extends Model
 
     public function validate()
     {
-        Model::validateField($this->AuthenticationType, 'required', true);
-        Model::validateField($this->CreatedAt, 'required', true);
-        Model::validateField($this->Detail, 'required', true);
-        Model::validateField($this->DomainID, 'required', true);
-        Model::validateField($this->Identity, 'required', true);
-        Model::validateField($this->LastLoginTime, 'required', true);
-        Model::validateField($this->Status, 'required', true);
-        Model::validateField($this->UserID, 'required', true);
+        Model::validateRequired('AuthenticationType', $this->AuthenticationType, true);
+        Model::validateRequired('CreatedAt', $this->CreatedAt, true);
+        Model::validateRequired('Detail', $this->Detail, true);
+        Model::validateRequired('DomainID', $this->DomainID, true);
+        Model::validateRequired('Identity', $this->Identity, true);
+        Model::validateRequired('LastLoginTime', $this->LastLoginTime, true);
+        Model::validateRequired('Status', $this->Status, true);
+        Model::validateRequired('UserID', $this->UserID, true);
     }
 
     public function toMap()

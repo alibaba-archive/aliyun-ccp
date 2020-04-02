@@ -79,9 +79,9 @@ class AddStoreRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->domainId, 'required', true);
-        Model::validateField($this->endpoint, 'required', true);
-        Model::validateField($this->type, 'required', true);
+        Model::validateRequired('domainId', $this->domainId, true);
+        Model::validateRequired('endpoint', $this->endpoint, true);
+        Model::validateRequired('type', $this->type, true);
     }
 
     public function toMap()

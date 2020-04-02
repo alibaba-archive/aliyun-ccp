@@ -31,7 +31,7 @@ class ListAppsResponse extends Model
 
     public function validate()
     {
-        Model::validateField($this->items, 'required', true);
+        Model::validateRequired('items', $this->items, true);
     }
 
     public function toMap()

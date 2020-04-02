@@ -49,10 +49,10 @@ class MobileRegisterRequest extends Model
 
     public function validate()
     {
-        Model::validateField($this->appId, 'required', true);
-        Model::validateField($this->phoneNumber, 'required', true);
-        Model::validateField($this->smsCode, 'required', true);
-        Model::validateField($this->smsCodeId, 'required', true);
+        Model::validateRequired('appId', $this->appId, true);
+        Model::validateRequired('phoneNumber', $this->phoneNumber, true);
+        Model::validateRequired('smsCode', $this->smsCode, true);
+        Model::validateRequired('smsCodeId', $this->smsCodeId, true);
     }
 
     public function toMap()

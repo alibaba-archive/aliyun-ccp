@@ -40,8 +40,8 @@ class DownloadFileQuery extends Model
 
     public function validate()
     {
-        Model::validateField($this->DriveID, 'required', true);
-        Model::validateField($this->FileID, 'required', true);
+        Model::validateRequired('DriveID', $this->DriveID, true);
+        Model::validateRequired('FileID', $this->FileID, true);
     }
 
     public function toMap()
