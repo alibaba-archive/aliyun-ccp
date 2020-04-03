@@ -215,7 +215,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -338,7 +338,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -460,7 +460,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -578,7 +578,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -697,7 +697,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -819,7 +819,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -942,7 +942,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -1064,7 +1064,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -1188,7 +1188,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -1311,7 +1311,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -1434,7 +1434,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -1557,7 +1557,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -1679,7 +1679,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -1801,7 +1801,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -1927,7 +1927,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -2052,7 +2052,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -2178,7 +2178,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -2302,7 +2302,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -2423,7 +2423,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -2549,7 +2549,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -2673,7 +2673,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -2797,7 +2797,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -2922,7 +2922,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -3047,7 +3047,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -3172,7 +3172,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -3308,7 +3308,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -3433,7 +3433,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -3563,7 +3563,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'GET';
@@ -3678,7 +3678,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -3803,7 +3803,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -3928,7 +3928,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -4053,7 +4053,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -4178,7 +4178,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -4303,7 +4303,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -4428,7 +4428,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -4554,7 +4554,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -4677,7 +4677,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -4800,7 +4800,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -4920,7 +4920,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -5043,7 +5043,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -5166,7 +5166,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -5290,7 +5290,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -5415,7 +5415,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -5540,7 +5540,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -5665,7 +5665,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -5790,7 +5790,7 @@ class CCP
                 $_request           = new Request();
                 $accesskeyId        = $this->getAccessKeyId();
                 $accessKeySecret    = $this->getAccessKeySecret();
-                $securityToken      = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
                 $accessToken        = $this->getAccessToken();
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'POST';
@@ -6013,5 +6013,19 @@ class CCP
         }
 
         return $this->_credential->getAccessKeySecret();
+    }
+
+    /**
+     * @throws \Exception
+     *
+     * @return string
+     */
+    public function getSecurityToken()
+    {
+        if (Utils::isUnset($this->_credential)) {
+            return '';
+        }
+
+        return $this->_credential->getSecurityToken();
     }
 }

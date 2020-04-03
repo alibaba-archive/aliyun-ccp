@@ -1,9 +1,14 @@
 {
   "name": "alibabacloud/ccppath-sdk",
-  "description": "Alibaba Cloud CCP SDK",
+  "description": "Alibaba Cloud CCP Path SDK Library for PHP",
   "type": "library",
   "license": "Apache-2.0",
-  "authors": [],
+  "authors": [
+    {
+      "name": "Alibaba Cloud SDK",
+      "email": "sdk-team@alibabacloud.com"
+    }
+  ],
   "require": {
     "php": ">5.5",
     "alibabacloud/tea-utils": "^0.2.0",

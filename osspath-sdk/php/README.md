@@ -2,14 +2,14 @@
 
 ![](https://aliyunsdk-pages.alicdn.com/icons/AlibabaCloud.svg)
 
-## Alibaba Cloud CCP OSS Client Library for PHP
+## Alibaba Cloud OSS Path SDK Library for PHP
 
 ## 安装
 
 ### Composer
 
 ```bash
-composer require alibabacloud/ccp-osspath-sdk
+composer require alibabacloud/osspath-sdk
 ```
 
 ## 问题
