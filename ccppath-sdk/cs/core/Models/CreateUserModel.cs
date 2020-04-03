@@ -8,9 +8,6 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
-    /**
-     * update share request
-     */
     public class CreateUserModel : TeaModel {
         [NameInMap("headers")]
         [Validation(Required=false)]
