@@ -11084,7 +11084,7 @@ func (client *Client) CancelLink(request *CancelLinkRequestModel, runtime *Runti
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -11234,7 +11234,7 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequestModel, runtime *Run
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -11383,7 +11383,7 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequestModel,
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -11525,7 +11525,7 @@ func (client *Client) SetPassword(request *DefaultSetPasswordRequestModel, runti
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -11668,7 +11668,7 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -11817,7 +11817,7 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequestModel, runtime *Runti
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -11967,7 +11967,7 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequestModel, runtime *R
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -12116,7 +12116,7 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequestMod
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -12267,7 +12267,7 @@ func (client *Client) Link(request *AccountLinkRequestModel, runtime *RuntimeOpt
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -12417,7 +12417,7 @@ func (client *Client) CheckExist(request *MobileCheckExistRequestModel, runtime 
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -12567,7 +12567,7 @@ func (client *Client) Login(request *MobileLoginRequestModel, runtime *RuntimeOp
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -12717,7 +12717,7 @@ func (client *Client) Register(request *MobileRegisterRequestModel, runtime *Run
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -12866,7 +12866,7 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequestModel, 
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -13015,7 +13015,7 @@ func (client *Client) Token(request *TokenRequestModel, runtime *RuntimeOptions)
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -13168,7 +13168,7 @@ func (client *Client) GetAsyncTaskInfo(request *CCPGetAsyncTaskRequestModel, run
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -13320,7 +13320,7 @@ func (client *Client) Operation(request *CCPBatchRequestModel, runtime *RuntimeO
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -13473,7 +13473,7 @@ func (client *Client) CreateDrive(request *CreateDriveRequestModel, runtime *Run
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -13624,7 +13624,7 @@ func (client *Client) DeleteDrive(request *DeleteDriveRequestModel, runtime *Run
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -13769,7 +13769,7 @@ func (client *Client) GetDrive(request *GetDriveRequestModel, runtime *RuntimeOp
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -13922,7 +13922,7 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequestModel, runt
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -14073,7 +14073,7 @@ func (client *Client) ListDrives(request *ListDriveRequestModel, runtime *Runtim
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -14224,7 +14224,7 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequestModel, runtime *Ru
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -14376,7 +14376,7 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequestModel, runtime *Run
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -14528,7 +14528,7 @@ func (client *Client) CompleteFile(request *CCPCompleteFileRequestModel, runtime
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -14680,7 +14680,7 @@ func (client *Client) CopyFile(request *CCPCopyFileRequestModel, runtime *Runtim
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -14849,7 +14849,7 @@ func (client *Client) CreateFile(request *CCPCreateFileRequestModel, runtime *Ru
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -15001,7 +15001,7 @@ func (client *Client) DeleteFile(request *CCPDeleteFileRequestModel, runtime *Ru
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -15161,7 +15161,7 @@ func (client *Client) DownloadFile(request *DownloadFileRequestModel, runtime *R
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -15297,7 +15297,7 @@ func (client *Client) GetFile(request *CCPGetFileRequestModel, runtime *RuntimeO
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -15449,7 +15449,7 @@ func (client *Client) GetDownloadUrl(request *CCPGetDownloadUrlRequestModel, run
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -15601,7 +15601,7 @@ func (client *Client) GetUploadUrl(request *CCPGetUploadUrlRequestModel, runtime
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -15753,7 +15753,7 @@ func (client *Client) ListFile(request *CCPListFileRequestModel, runtime *Runtim
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -15905,7 +15905,7 @@ func (client *Client) ListUploadedParts(request *CCPListUploadedPartRequestModel
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -16057,7 +16057,7 @@ func (client *Client) MoveFile(request *CCPMoveFileRequestModel, runtime *Runtim
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -16209,7 +16209,7 @@ func (client *Client) SearchFile(request *CCPSearchFileRequestModel, runtime *Ru
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -16362,7 +16362,7 @@ func (client *Client) UpdateFile(request *CCPUpdateFileMetaRequestModel, runtime
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -16512,7 +16512,7 @@ func (client *Client) CreateUser(request *CreateUserRequestModel, runtime *Runti
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -16662,7 +16662,7 @@ func (client *Client) DeleteUser(request *DeleteUserRequestModel, runtime *Runti
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -16806,7 +16806,7 @@ func (client *Client) GetUser(request *GetUserRequestModel, runtime *RuntimeOpti
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -16956,7 +16956,7 @@ func (client *Client) ListUsers(request *ListUserRequestModel, runtime *RuntimeO
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -17106,7 +17106,7 @@ func (client *Client) SearchUser(request *SearchUserRequestModel, runtime *Runti
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -17257,7 +17257,7 @@ func (client *Client) UpdateUser(request *UpdateUserRequestModel, runtime *Runti
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -17409,7 +17409,7 @@ func (client *Client) GetPhotoCount(request *GetImageCountRequestModel, runtime 
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -17561,7 +17561,7 @@ func (client *Client) ListAddressGroups(request *ListImageAddressGroupsRequestMo
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -17713,7 +17713,7 @@ func (client *Client) ListFaceGroups(request *ListImageFaceGroupsRequestModel, r
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -17865,7 +17865,7 @@ func (client *Client) ListTags(request *ListImageTagsRequestModel, runtime *Runt
 				return nil, _err
 			}
 
-			securityToken, _err := client.GetAccessKeySecret()
+			securityToken, _err := client.GetSecurityToken()
 			if _err != nil {
 				return nil, _err
 			}
@@ -18066,5 +18066,19 @@ func (client *Client) GetAccessKeySecret() (_result string, _err error) {
 	}
 
 	_result = secret
+	return _result, _err
+}
+
+func (client *Client) GetSecurityToken() (_result string, _err error) {
+	if util.IsUnset(client.Credential) {
+		return _result, _err
+	}
+
+	token, _err := client.Credential.GetSecurityToken()
+	if _err != nil {
+		return "", _err
+	}
+
+	_result = token
 	return _result, _err
 }

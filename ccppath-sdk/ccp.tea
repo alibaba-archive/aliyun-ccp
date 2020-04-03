@@ -116,7 +116,7 @@ model CancelLinkModel {
 api cancelLink(request: CancelLinkRequestModel, runtime: RuntimeOptions): CancelLinkModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -217,7 +217,7 @@ model ConfirmLinkModel {
 api confirmLink(request: ConfirmLinkRequestModel, runtime: RuntimeOptions): ConfirmLinkModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -316,7 +316,7 @@ model ChangePasswordModel {
 api changePassword(request: DefaultChangePasswordRequestModel, runtime: RuntimeOptions): ChangePasswordModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -412,7 +412,7 @@ model SetPasswordModel {
 api setPassword(request: DefaultSetPasswordRequestModel, runtime: RuntimeOptions): SetPasswordModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -510,7 +510,7 @@ model GetAccessTokenByLinkInfoModel {
 api getAccessTokenByLinkInfo(request: GetAccessTokenByLinkInfoRequestModel, runtime: RuntimeOptions): GetAccessTokenByLinkInfoModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -610,7 +610,7 @@ model GetCaptchaModel {
 api getCaptcha(request: GetCaptchaRequestModel, runtime: RuntimeOptions): GetCaptchaModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -711,7 +711,7 @@ model GetLinkInfoModel {
 api getLinkInfo(request: GetByLinkInfoRequestModel, runtime: RuntimeOptions): GetLinkInfoModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -811,7 +811,7 @@ model GetLinkInfoByUserIdModel {
 api getLinkInfoByUserId(request: GetLinkInfoByUserIDRequestModel, runtime: RuntimeOptions): GetLinkInfoByUserIdModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -913,7 +913,7 @@ model LinkModel {
 api link(request: AccountLinkRequestModel, runtime: RuntimeOptions): LinkModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -1014,7 +1014,7 @@ model CheckExistModel {
 api checkExist(request: MobileCheckExistRequestModel, runtime: RuntimeOptions): CheckExistModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -1115,7 +1115,7 @@ model LoginModel {
 api login(request: MobileLoginRequestModel, runtime: RuntimeOptions): LoginModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -1216,7 +1216,7 @@ model RegisterModel {
 api register(request: MobileRegisterRequestModel, runtime: RuntimeOptions): RegisterModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -1316,7 +1316,7 @@ model MobileSendSmsCodeModel {
 api mobileSendSmsCode(request: MobileSendSmsCodeRequestModel, runtime: RuntimeOptions): MobileSendSmsCodeModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -1416,7 +1416,7 @@ model TokenModel {
 api token(request: TokenRequestModel, runtime: RuntimeOptions): TokenModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -2655,7 +2655,7 @@ model GetAsyncTaskInfoModel {
 api getAsyncTaskInfo(request: CCPGetAsyncTaskRequestModel, runtime: RuntimeOptions): GetAsyncTaskInfoModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -2758,7 +2758,7 @@ model OperationModel {
 api operation(request: CCPBatchRequestModel, runtime: RuntimeOptions): OperationModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -2862,7 +2862,7 @@ large类型的drive用于文件数多的场景，不支持list操作，
 api createDrive(request: CreateDriveRequestModel, runtime: RuntimeOptions): CreateDriveModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -2963,7 +2963,7 @@ model DeleteDriveModel {
 api deleteDrive(request: DeleteDriveRequestModel, runtime: RuntimeOptions): DeleteDriveModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -3063,7 +3063,7 @@ model GetDriveModel {
 api getDrive(request: GetDriveRequestModel, runtime: RuntimeOptions): GetDriveModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -3167,7 +3167,7 @@ model GetDefaultDriveModel {
 api getDefaultDrive(request: GetDefaultDriveRequestModel, runtime: RuntimeOptions): GetDefaultDriveModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -3269,7 +3269,7 @@ model ListDrivesModel {
 api listDrives(request: ListDriveRequestModel, runtime: RuntimeOptions): ListDrivesModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -3371,7 +3371,7 @@ model ListMyDrivesModel {
 api listMyDrives(request: ListMyDriveRequestModel, runtime: RuntimeOptions): ListMyDrivesModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -3474,7 +3474,7 @@ model UpdateDriveModel {
 api updateDrive(request: UpdateDriveRequestModel, runtime: RuntimeOptions): UpdateDriveModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -3577,7 +3577,7 @@ model CompleteFileModel {
 api completeFile(request: CCPCompleteFileRequestModel, runtime: RuntimeOptions): CompleteFileModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -3680,7 +3680,7 @@ model CopyFileModel {
 api copyFile(request: CCPCopyFileRequestModel, runtime: RuntimeOptions): CopyFileModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -3794,7 +3794,7 @@ model CreateFileModel {
 api createFile(request: CCPCreateFileRequestModel, runtime: RuntimeOptions): CreateFileModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -3897,7 +3897,7 @@ model DeleteFileModel {
 api deleteFile(request: CCPDeleteFileRequestModel, runtime: RuntimeOptions): DeleteFileModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -4012,7 +4012,7 @@ model DownloadFileModel {
 api downloadFile(request: DownloadFileRequestModel, runtime: RuntimeOptions): DownloadFileModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'GET';
@@ -4105,7 +4105,7 @@ model GetFileModel {
 api getFile(request: CCPGetFileRequestModel, runtime: RuntimeOptions): GetFileModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -4208,7 +4208,7 @@ model GetDownloadUrlModel {
 api getDownloadUrl(request: CCPGetDownloadUrlRequestModel, runtime: RuntimeOptions): GetDownloadUrlModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -4311,7 +4311,7 @@ model GetUploadUrlModel {
 api getUploadUrl(request: CCPGetUploadUrlRequestModel, runtime: RuntimeOptions): GetUploadUrlModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -4414,7 +4414,7 @@ model ListFileModel {
 api listFile(request: CCPListFileRequestModel, runtime: RuntimeOptions): ListFileModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -4517,7 +4517,7 @@ model ListUploadedPartsModel {
 api listUploadedParts(request: CCPListUploadedPartRequestModel, runtime: RuntimeOptions): ListUploadedPartsModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -4620,7 +4620,7 @@ model MoveFileModel {
 api moveFile(request: CCPMoveFileRequestModel, runtime: RuntimeOptions): MoveFileModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -4723,7 +4723,7 @@ model SearchFileModel {
 api searchFile(request: CCPSearchFileRequestModel, runtime: RuntimeOptions): SearchFileModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -4827,7 +4827,7 @@ model UpdateFileModel {
 api updateFile(request: CCPUpdateFileMetaRequestModel, runtime: RuntimeOptions): UpdateFileModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -5656,7 +5656,7 @@ model CreateUserModel {
 api createUser(request: CreateUserRequestModel, runtime: RuntimeOptions): CreateUserModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -5756,7 +5756,7 @@ model DeleteUserModel {
 api deleteUser(request: DeleteUserRequestModel, runtime: RuntimeOptions): DeleteUserModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -5855,7 +5855,7 @@ model GetUserModel {
 api getUser(request: GetUserRequestModel, runtime: RuntimeOptions): GetUserModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -5956,7 +5956,7 @@ model ListUsersModel {
 api listUsers(request: ListUserRequestModel, runtime: RuntimeOptions): ListUsersModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -6057,7 +6057,7 @@ model SearchUserModel {
 api searchUser(request: SearchUserRequestModel, runtime: RuntimeOptions): SearchUserModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -6159,7 +6159,7 @@ model UpdateUserModel {
 api updateUser(request: UpdateUserRequestModel, runtime: RuntimeOptions): UpdateUserModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -6418,7 +6418,7 @@ model GetPhotoCountModel {
 api getPhotoCount(request: GetImageCountRequestModel, runtime: RuntimeOptions): GetPhotoCountModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -6521,7 +6521,7 @@ model ListAddressGroupsModel {
 api listAddressGroups(request: ListImageAddressGroupsRequestModel, runtime: RuntimeOptions): ListAddressGroupsModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -6624,7 +6624,7 @@ model ListFaceGroupsModel {
 api listFaceGroups(request: ListImageFaceGroupsRequestModel, runtime: RuntimeOptions): ListFaceGroupsModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -6727,7 +6727,7 @@ model ListTagsModel {
 api listTags(request: ListImageTagsRequestModel, runtime: RuntimeOptions): ListTagsModel  {
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
-  var securityToken = getAccessKeySecret();
+  var securityToken = getSecurityToken();
   var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
@@ -6982,6 +6982,14 @@ async function getAccessKeySecret(): string{
   }
   var secret = @credential.getAccessKeySecret();
   return secret;
+}
+
+async function getSecurityToken(): string{
+  if (Util.isUnset(@credential)) {
+    return '';
+  }
+  var token = @credential.getSecurityToken();
+  return token;
 }
 
 
