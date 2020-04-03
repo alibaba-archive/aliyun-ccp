@@ -8,14 +8,6 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
-    /**
-     * 通过手机号+短信验证码注册账号
-     * @tags account
-     * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
-     * @error Forbidden User not authorized to operate on the specified APIs.
-     * @error AlreadyExist {resource} has already exists. {extra_msg}
-     * @error InternalError The request has been failed due to some unknown error.
-     */
     public class MobileSendSmsCodeRequestModel : TeaModel {
         [NameInMap("headers")]
         [Validation(Required=false)]

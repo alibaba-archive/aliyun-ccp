@@ -133,7 +133,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -280,7 +280,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -428,7 +428,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -576,7 +576,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -723,7 +723,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -867,7 +867,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -1011,7 +1011,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -1155,7 +1155,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -1300,7 +1300,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -1448,7 +1448,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -1595,7 +1595,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -1742,7 +1742,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -1890,7 +1890,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -2038,7 +2038,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -2185,7 +2185,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -2332,7 +2332,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -2481,7 +2481,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -2630,7 +2630,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -2778,7 +2778,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -2926,7 +2926,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -3074,7 +3074,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -3222,7 +3222,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -3370,7 +3370,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -3518,7 +3518,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -3665,7 +3665,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -3812,7 +3812,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -3959,7 +3959,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -4106,7 +4106,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -4253,7 +4253,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -4400,7 +4400,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -4549,7 +4549,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -4698,7 +4698,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -4849,7 +4849,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -5000,7 +5000,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -5149,7 +5149,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -5295,7 +5295,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -5442,7 +5442,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -5592,7 +5592,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -5743,7 +5743,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -5894,7 +5894,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -6043,7 +6043,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -6192,7 +6192,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -6341,7 +6341,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -6490,7 +6490,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -6640,7 +6640,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -6790,7 +6790,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -6940,7 +6940,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -7090,7 +7090,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -7240,7 +7240,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -7390,7 +7390,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -7541,7 +7541,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -7692,7 +7692,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -7842,7 +7842,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -7989,7 +7989,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -8136,7 +8136,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -8286,7 +8286,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -8436,7 +8436,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -8586,7 +8586,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -8736,7 +8736,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -8886,7 +8886,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -9036,7 +9036,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -9186,7 +9186,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -9336,7 +9336,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -9486,7 +9486,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -9636,7 +9636,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -9786,7 +9786,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -9936,7 +9936,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -10086,7 +10086,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -10236,7 +10236,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -10386,7 +10386,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -10536,7 +10536,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -10685,7 +10685,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -10834,7 +10834,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -10991,7 +10991,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -11148,7 +11148,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -11298,7 +11298,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -11447,7 +11447,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -11593,7 +11593,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -11740,7 +11740,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -11890,7 +11890,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -12039,7 +12039,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -12188,7 +12188,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -12338,7 +12338,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -12488,7 +12488,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -12638,7 +12638,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -12788,7 +12788,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -12936,7 +12936,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -13084,7 +13084,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -13232,7 +13232,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -13377,7 +13377,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -13523,7 +13523,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -13672,7 +13672,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -13820,7 +13820,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -13968,7 +13968,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -14116,7 +14116,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -14264,7 +14264,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -14413,7 +14413,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -14562,7 +14562,7 @@ namespace Aliyun.SDK.CCP.OSSClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -14792,6 +14792,26 @@ namespace Aliyun.SDK.CCP.OSSClient
             }
             string secret = await this._credential.GetAccessKeySecretAsync();
             return secret;
+        }
+
+        public string GetSecurityToken()
+        {
+            if (AlibabaCloud.TeaUtil.Common.IsUnset(_credential))
+            {
+                return "";
+            }
+            string token = this._credential.GetSecurityToken();
+            return token;
+        }
+
+        public async Task<string> GetSecurityTokenAsync()
+        {
+            if (AlibabaCloud.TeaUtil.Common.IsUnset(_credential))
+            {
+                return "";
+            }
+            string token = await this._credential.GetSecurityTokenAsync();
+            return token;
         }
 
     }

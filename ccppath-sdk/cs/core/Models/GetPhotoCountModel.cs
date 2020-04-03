@@ -8,9 +8,6 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
-    /**
-     * Update user response
-     */
     public class GetPhotoCountModel : TeaModel {
         [NameInMap("headers")]
         [Validation(Required=false)]

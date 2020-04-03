@@ -7,6 +7,7 @@ using System.IO;
 using System.Threading.Tasks;
 
 using Tea;
+using Tea.Utils;
 
 using Aliyun.SDK.CCP.CCPClient.Models;
 
@@ -132,7 +133,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -180,17 +181,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -201,7 +202,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -279,7 +280,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -327,17 +328,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -348,7 +349,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -427,7 +428,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -475,17 +476,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -496,7 +497,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -575,7 +576,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -623,17 +624,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -644,7 +645,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -722,7 +723,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -767,17 +768,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -788,7 +789,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -866,7 +867,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -911,17 +912,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -932,7 +933,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -1010,7 +1011,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -1055,17 +1056,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -1076,7 +1077,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -1154,7 +1155,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -1199,17 +1200,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -1220,7 +1221,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -1299,7 +1300,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -1347,17 +1348,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -1368,7 +1369,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -1447,7 +1448,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -1495,17 +1496,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -1516,7 +1517,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -1594,7 +1595,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -1642,17 +1643,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -1663,7 +1664,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -1741,7 +1742,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -1789,17 +1790,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -1810,7 +1811,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -1889,7 +1890,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -1937,17 +1938,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -1958,7 +1959,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -2037,7 +2038,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -2085,17 +2086,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -2106,7 +2107,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -2184,7 +2185,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -2232,17 +2233,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -2253,7 +2254,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -2331,7 +2332,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -2379,17 +2380,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -2400,7 +2401,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -2480,7 +2481,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -2528,17 +2529,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -2549,7 +2550,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -2629,7 +2630,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -2677,17 +2678,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -2698,7 +2699,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -2777,7 +2778,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -2825,17 +2826,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -2846,7 +2847,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -2925,7 +2926,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -2973,17 +2974,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -2994,7 +2995,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -3073,7 +3074,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -3121,17 +3122,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -3142,7 +3143,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -3221,7 +3222,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -3269,17 +3270,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -3290,7 +3291,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -3369,7 +3370,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -3417,17 +3418,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -3438,7 +3439,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -3517,7 +3518,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -3565,17 +3566,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -3586,7 +3587,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -3664,7 +3665,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -3712,17 +3713,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -3733,7 +3734,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -3811,7 +3812,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -3859,17 +3860,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -3880,7 +3881,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -3958,7 +3959,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -4006,17 +4007,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -4027,7 +4028,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -4105,7 +4106,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -4153,17 +4154,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -4174,7 +4175,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -4256,7 +4257,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -4304,17 +4305,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -4325,7 +4326,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -4407,7 +4408,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -4455,17 +4456,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -4476,7 +4477,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -4557,7 +4558,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -4605,17 +4606,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -4626,7 +4627,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -4707,7 +4708,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -4755,17 +4756,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -4776,7 +4777,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -4858,7 +4859,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -4906,17 +4907,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -4927,7 +4928,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -5009,7 +5010,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -5057,17 +5058,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -5078,7 +5079,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -5158,7 +5159,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -5203,17 +5204,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -5224,7 +5225,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -5304,7 +5305,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -5349,17 +5350,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -5370,7 +5371,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -5451,7 +5452,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -5499,17 +5500,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -5520,7 +5521,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -5601,7 +5602,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -5649,17 +5650,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -5670,7 +5671,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -5752,7 +5753,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -5800,17 +5801,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -5821,7 +5822,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -5903,7 +5904,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -5951,17 +5952,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -5972,7 +5973,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -6052,7 +6053,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -6100,17 +6101,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -6121,7 +6122,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -6201,7 +6202,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -6249,17 +6250,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -6270,7 +6271,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -6350,7 +6351,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -6398,17 +6399,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -6419,7 +6420,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -6499,7 +6500,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -6547,17 +6548,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -6568,7 +6569,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -6649,7 +6650,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -6697,17 +6698,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -6718,7 +6719,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -6799,7 +6800,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -6847,17 +6848,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -6868,7 +6869,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -6949,7 +6950,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -6997,17 +6998,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -7018,7 +7019,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -7099,7 +7100,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -7147,17 +7148,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -7168,7 +7169,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -7249,7 +7250,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -7307,17 +7308,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -7328,7 +7329,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -7409,7 +7410,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -7467,17 +7468,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -7488,7 +7489,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -7571,7 +7572,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -7619,17 +7620,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -7640,7 +7641,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -7723,7 +7724,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -7771,17 +7772,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -7792,7 +7793,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -7873,7 +7874,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -7928,17 +7929,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -7949,7 +7950,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -8030,7 +8031,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -8085,17 +8086,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -8106,7 +8107,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -8187,7 +8188,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "GET";
@@ -8224,17 +8225,17 @@ namespace Aliyun.SDK.CCP.CCPClient
 
                     Dictionary<string, object> respMap = null;
                     object obj = null;
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -8245,7 +8246,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -8326,7 +8327,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "GET";
@@ -8363,17 +8364,17 @@ namespace Aliyun.SDK.CCP.CCPClient
 
                     Dictionary<string, object> respMap = null;
                     object obj = null;
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -8384,7 +8385,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -8465,7 +8466,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -8513,17 +8514,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -8534,7 +8535,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -8615,7 +8616,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -8663,17 +8664,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -8684,7 +8685,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -8765,7 +8766,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -8813,17 +8814,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -8834,7 +8835,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -8915,7 +8916,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -8963,17 +8964,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -8984,7 +8985,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -9065,7 +9066,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -9113,17 +9114,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -9134,7 +9135,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -9215,7 +9216,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -9263,17 +9264,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -9284,7 +9285,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -9365,7 +9366,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -9413,17 +9414,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -9434,7 +9435,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -9515,7 +9516,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -9563,17 +9564,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -9584,7 +9585,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -9665,7 +9666,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -9713,17 +9714,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -9734,7 +9735,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -9815,7 +9816,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -9863,17 +9864,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -9884,7 +9885,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -9965,7 +9966,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -10013,17 +10014,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -10034,7 +10035,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -10115,7 +10116,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -10163,17 +10164,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -10184,7 +10185,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -10265,7 +10266,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -10313,17 +10314,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -10334,7 +10335,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -10415,7 +10416,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -10463,17 +10464,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -10484,7 +10485,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -10566,7 +10567,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -10614,17 +10615,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -10635,7 +10636,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -10717,7 +10718,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -10765,17 +10766,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -10786,7 +10787,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -10865,7 +10866,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -10913,17 +10914,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -10934,7 +10935,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -11013,7 +11014,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -11061,17 +11062,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -11082,7 +11083,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -11161,7 +11162,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -11206,17 +11207,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -11227,7 +11228,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -11306,7 +11307,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -11351,17 +11352,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -11372,7 +11373,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -11452,7 +11453,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -11500,17 +11501,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -11521,7 +11522,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -11601,7 +11602,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -11649,17 +11650,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -11670,7 +11671,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -11749,7 +11750,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -11797,17 +11798,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -11818,7 +11819,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -11897,7 +11898,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -11945,17 +11946,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -11966,7 +11967,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -12045,7 +12046,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -12093,17 +12094,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -12114,7 +12115,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -12193,7 +12194,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -12241,17 +12242,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -12262,7 +12263,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -12342,7 +12343,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -12390,17 +12391,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -12411,7 +12412,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -12491,7 +12492,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -12539,17 +12540,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -12560,7 +12561,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -12641,7 +12642,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -12689,17 +12690,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -12710,7 +12711,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -12791,7 +12792,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -12839,17 +12840,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -12860,7 +12861,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -12941,7 +12942,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -12989,17 +12990,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -13010,7 +13011,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -13091,7 +13092,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -13139,17 +13140,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -13160,7 +13161,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -13241,7 +13242,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -13289,17 +13290,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -13310,7 +13311,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -13391,7 +13392,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -13439,17 +13440,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -13460,7 +13461,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -13541,7 +13542,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = GetAccessKeyId();
                     string accessKeySecret = GetAccessKeySecret();
-                    string securityToken = GetAccessKeySecret();
+                    string securityToken = GetSecurityToken();
                     string accessToken = GetAccessToken();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -13589,17 +13590,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -13610,7 +13611,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -13691,7 +13692,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                     TeaRequest request_ = new TeaRequest();
                     string accesskeyId = await GetAccessKeyIdAsync();
                     string accessKeySecret = await GetAccessKeySecretAsync();
-                    string securityToken = await GetAccessKeySecretAsync();
+                    string securityToken = await GetSecurityTokenAsync();
                     string accessToken = await GetAccessTokenAsync();
                     request_.Protocol = AlibabaCloud.TeaUtil.Common.DefaultString(_protocol, "https");
                     request_.Method = "POST";
@@ -13739,17 +13740,17 @@ namespace Aliyun.SDK.CCP.CCPClient
                             {"headers", response_.Headers},
                         });
                     }
-                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers["x-ca-error-message"]))
+                    if (!AlibabaCloud.TeaUtil.Common.Empty(response_.Headers.Get("x-ca-error-message")))
                     {
                         throw new TeaException(new Dictionary<string, object>
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
-                            {"message", response_.Headers["x-ca-error-message"]},
+                            {"message", response_.Headers.Get("x-ca-error-message")},
                         });
                     }
                     obj = AlibabaCloud.TeaUtil.Common.ReadAsJSON(response_.Body);
@@ -13760,7 +13761,7 @@ namespace Aliyun.SDK.CCP.CCPClient
                         {
                             {"data", new Dictionary<string, object>
                             {
-                                {"requestId", response_.Headers["x-ca-request-id"]},
+                                {"requestId", response_.Headers.Get("x-ca-request-id")},
                                 {"statusCode", response_.StatusCode},
                                 {"statusMessage", response_.StatusMessage},
                             }},
@@ -13782,9 +13783,6 @@ namespace Aliyun.SDK.CCP.CCPClient
             throw new TeaUnretryableException(_lastRequest, _lastException);
         }
 
-        /**
-         * 展示标签集合
-         */
         public string GetPathname(string nickname, string path)
         {
             if (AlibabaCloud.TeaUtil.Common.Empty(nickname))
@@ -13794,9 +13792,6 @@ namespace Aliyun.SDK.CCP.CCPClient
             return "/" + nickname + path;
         }
 
-        /**
-         * 展示标签集合
-         */
         public void SetExpireTime(string expireTime)
         {
             if (AlibabaCloud.TeaUtil.Common.IsUnset(_accessTokenCredential))
@@ -13806,9 +13801,6 @@ namespace Aliyun.SDK.CCP.CCPClient
             this._accessTokenCredential.SetExpireTime(expireTime);
         }
 
-        /**
-         * 展示标签集合
-         */
         public async Task SetExpireTimeAsync(string expireTime)
         {
             if (AlibabaCloud.TeaUtil.Common.IsUnset(_accessTokenCredential))
@@ -13818,9 +13810,6 @@ namespace Aliyun.SDK.CCP.CCPClient
             await this._accessTokenCredential.SetExpireTimeAsync(expireTime);
         }
 
-        /**
-         * 展示标签集合
-         */
         public string GetExpireTime()
         {
             if (AlibabaCloud.TeaUtil.Common.IsUnset(_accessTokenCredential))
@@ -13831,34 +13820,22 @@ namespace Aliyun.SDK.CCP.CCPClient
             return expireTime;
         }
 
-        /**
-         * 展示标签集合
-         */
         public void SetUserAgent(string userAgent)
         {
             this._userAgent = userAgent;
         }
 
-        /**
-         * 展示标签集合
-         */
         public void AppendUserAgent(string userAgent)
         {
             this._userAgent = _userAgent + " " + userAgent;
         }
 
-        /**
-         * 展示标签集合
-         */
         public string GetUserAgent()
         {
             string userAgent = AlibabaCloud.TeaUtil.Common.GetUserAgent(_userAgent);
             return userAgent;
         }
 
-        /**
-         * 展示标签集合
-         */
         public void SetRefreshToken(string token)
         {
             if (AlibabaCloud.TeaUtil.Common.IsUnset(_accessTokenCredential))
@@ -13868,9 +13845,6 @@ namespace Aliyun.SDK.CCP.CCPClient
             this._accessTokenCredential.SetRefreshToken(token);
         }
 
-        /**
-         * 展示标签集合
-         */
         public string GetRefreshToken()
         {
             if (AlibabaCloud.TeaUtil.Common.IsUnset(_accessTokenCredential))
@@ -13881,9 +13855,6 @@ namespace Aliyun.SDK.CCP.CCPClient
             return token;
         }
 
-        /**
-         * 展示标签集合
-         */
         public void SetAccessToken(string token)
         {
             if (AlibabaCloud.TeaUtil.Common.IsUnset(_accessTokenCredential))
@@ -13893,9 +13864,6 @@ namespace Aliyun.SDK.CCP.CCPClient
             this._accessTokenCredential.SetAccessToken(token);
         }
 
-        /**
-         * 展示标签集合
-         */
         public string GetAccessToken()
         {
             if (AlibabaCloud.TeaUtil.Common.IsUnset(_accessTokenCredential))
@@ -13906,9 +13874,6 @@ namespace Aliyun.SDK.CCP.CCPClient
             return token;
         }
 
-        /**
-         * 展示标签集合
-         */
         public async Task<string> GetAccessTokenAsync()
         {
             if (AlibabaCloud.TeaUtil.Common.IsUnset(_accessTokenCredential))
@@ -13919,9 +13884,6 @@ namespace Aliyun.SDK.CCP.CCPClient
             return token;
         }
 
-        /**
-         * 展示标签集合
-         */
         public string GetAccessKeyId()
         {
             if (AlibabaCloud.TeaUtil.Common.IsUnset(_credential))
@@ -13932,9 +13894,6 @@ namespace Aliyun.SDK.CCP.CCPClient
             return accessKeyId;
         }
 
-        /**
-         * 展示标签集合
-         */
         public async Task<string> GetAccessKeyIdAsync()
         {
             if (AlibabaCloud.TeaUtil.Common.IsUnset(_credential))
@@ -13945,9 +13904,6 @@ namespace Aliyun.SDK.CCP.CCPClient
             return accessKeyId;
         }
 
-        /**
-         * 展示标签集合
-         */
         public string GetAccessKeySecret()
         {
             if (AlibabaCloud.TeaUtil.Common.IsUnset(_credential))
@@ -13958,9 +13914,6 @@ namespace Aliyun.SDK.CCP.CCPClient
             return secret;
         }
 
-        /**
-         * 展示标签集合
-         */
         public async Task<string> GetAccessKeySecretAsync()
         {
             if (AlibabaCloud.TeaUtil.Common.IsUnset(_credential))
@@ -13969,6 +13922,26 @@ namespace Aliyun.SDK.CCP.CCPClient
             }
             string secret = await this._credential.GetAccessKeySecretAsync();
             return secret;
+        }
+
+        public string GetSecurityToken()
+        {
+            if (AlibabaCloud.TeaUtil.Common.IsUnset(_credential))
+            {
+                return "";
+            }
+            string token = this._credential.GetSecurityToken();
+            return token;
+        }
+
+        public async Task<string> GetSecurityTokenAsync()
+        {
+            if (AlibabaCloud.TeaUtil.Common.IsUnset(_credential))
+            {
+                return "";
+            }
+            string token = await this._credential.GetSecurityTokenAsync();
+            return token;
         }
 
     }

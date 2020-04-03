@@ -8,13 +8,6 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
-    /**
-     * 获取用户的所有绑定信息
-     * @tags account
-     * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
-     * @error Forbidden User not authorized to operate on the specified APIs.
-     * @error InternalError The request has been failed due to some unknown error.
-     */
     public class LinkModel : TeaModel {
         [NameInMap("headers")]
         [Validation(Required=false)]

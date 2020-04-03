@@ -8,9 +8,6 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
-    /**
-     * 
-     */
     public class GetAsyncTaskInfoModel : TeaModel {
         [NameInMap("headers")]
         [Validation(Required=false)]
