@@ -1,6 +1,6 @@
 {
-  "name": "alibabacloud/ccp-osspath-sdk",
-  "description": "Alibaba Cloud CCP OSS Client Library for PHP",
+  "name": "alibabacloud/osspath-sdk",
+  "description": "Alibaba Cloud OSS Path SDK Library for PHP",
   "type": "library",
   "license": "Apache-2.0",
   "authors": [],
@@ -12,7 +12,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Aliyun\\CCP\\OSSClient\\": "src"
+      "Aliyun\\CCP\\SDK\\": "src"
     }
   },
   "scripts": {

@@ -27,10 +27,10 @@
 	},
 	"php": {
 		"package": "Aliyun.CCP.SDK",
-		"clientName": "CCP",
+		"clientName": "CCPPath",
 		"packageInfo": {
 			"name": "alibabacloud/ccppath-sdk",
-			"desc": "Alibaba Cloud CCP SDK",
+			"desc": "Alibaba Cloud CCP Path SDK Library for PHP",
 			"github": "https://github.com/aliyun/aliyun-ccp",
 			"files": {
 				"LICENSE": "../LICENSE"

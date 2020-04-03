@@ -2,7 +2,7 @@ English | [简体中文](README-CN.md)
 
 ![](https://aliyunsdk-pages.alicdn.com/icons/AlibabaCloud.svg)
 
-## Alibaba Cloud CCP SDK
+## Alibaba Cloud CCP Path SDK Library for PHP
 
 ## Installation
 
