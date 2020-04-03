@@ -1,14 +1,10 @@
 package com.aliyun.ccp.ccpclient;
 
 import com.aliyun.ccp.ccpclient.models.*;
-import com.aliyun.tea.TeaException;
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 public class ClientTest {
 
@@ -19,8 +15,8 @@ public class ClientTest {
         Config config = new Config();
         config.domainId = "sz16";
         config.protocol = "http";
-        config.accessKeyId = System.getenv("accessKeyId");
-        config.accessKeySecret = System.getenv("accessKeySecret");
+        config.accessKeyId = System.getenv("RAMAccessKeyId");
+        config.accessKeySecret = System.getenv("RAMAccessKeySecret");
         client = new Client(config);
     }
 

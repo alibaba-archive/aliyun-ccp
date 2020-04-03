@@ -102,7 +102,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -219,7 +219,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -336,7 +336,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -450,7 +450,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -564,7 +564,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -681,7 +681,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -798,7 +798,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -915,7 +915,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -1032,7 +1032,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -1149,7 +1149,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -1266,7 +1266,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -1383,7 +1383,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -1500,7 +1500,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -1617,7 +1617,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -1734,7 +1734,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -1851,7 +1851,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -1968,7 +1968,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -2085,7 +2085,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -2199,7 +2199,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -2316,7 +2316,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -2433,7 +2433,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -2550,7 +2550,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -2667,7 +2667,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -2784,7 +2784,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -2901,7 +2901,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -3018,7 +3018,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -3135,7 +3135,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -3249,7 +3249,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -3366,7 +3366,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -3483,7 +3483,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -3600,7 +3600,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -3717,7 +3717,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -3834,7 +3834,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -3951,7 +3951,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -4068,7 +4068,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -4185,7 +4185,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -4301,7 +4301,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -4424,7 +4424,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -4541,7 +4541,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -4655,7 +4655,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -4772,7 +4772,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -4889,7 +4889,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -5006,7 +5006,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -5123,7 +5123,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -5240,7 +5240,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -5354,7 +5354,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -5471,7 +5471,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -5588,7 +5588,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -5705,7 +5705,7 @@ public class Client {
                 TeaRequest request_ = new TeaRequest();
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
-                String securityToken = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
                 String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
@@ -5870,5 +5870,14 @@ public class Client {
 
         String secret = _credential.getAccessKeySecret();
         return secret;
+    }
+
+    public String getSecurityToken() throws Exception {
+        if (com.aliyun.teautil.Common.isUnset(_credential)) {
+            return "";
+        }
+
+        String token = _credential.getSecurityToken();
+        return token;
     }
 }
