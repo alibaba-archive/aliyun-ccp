@@ -7,7 +7,7 @@
 		"go": "github.com/aliyun/aliyun-ccp/mgmt-sdk/go/client:v1.0.0",
 		"ts": "@alicloud/ccp-mgmt-sdk:1.0.0",
 		"csharp": "Aliyun.SDK.CCP.MGMT.Client:1.0.0",
-		"java": "com.aliyun:ccp-mgmt-client:1.0.0",
+		"java": "com.aliyun:ccp-mgmt-client:0.0.1",
 		"php": "alibabacloud/ccp-mgmt-sdk:^0.1.0"
 	},
 	"java": {
