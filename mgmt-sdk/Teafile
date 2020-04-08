@@ -1,0 +1,37 @@
+{
+	"scope": "alibabacloud",
+	"name": "MGMT",
+	"version": "1.0.0",
+	"main": "./mgmt.tea",
+	"releases": {
+		"go": "github.com/aliyun/aliyun-ccp/mgmt-sdk/go/client:v1.0.0",
+		"ts": "@alicloud/ccp-mgmt-sdk:1.0.0",
+		"csharp": "Aliyun.SDK.CCP.MGMT.Client:1.0.0",
+		"java": "com.aliyun:ccp-mgmt-client:1.0.0",
+		"php": "alibabacloud/ccp-mgmt-sdk:^0.1.0"
+	},
+	"java": {
+		"package": "com.aliyun.ccp.mgmtclient"
+	},
+	"csharp": {
+		"namespace": "Aliyun.SDK.CCP.MGMTClient"
+	},
+	"php": {
+		"package": "Aliyun.CCP.MGMTClient",
+		"clientName": "MGMTClient",
+		"packageInfo": {
+			"name": "alibabacloud/ccp-mgmt-sdk",
+			"desc": "Alibaba Cloud CCP MGMT Client Library for PHP",
+			"github": "https://github.com/aliyun/aliyun-ccp",
+			"files": {
+				"LICENSE": "../LICENSE"
+			}
+		}
+	},
+	"libraries": {
+		"Util": "alibabacloud:Util:*",
+		"ROAUtil": "alibabacloud:ROAUtil:*",
+		"Credential": "alibabacloud:Credential:*",
+		"AccessTokenCredential": "alibabacloud:AccessTokenCredential:*"
+	}
+}
