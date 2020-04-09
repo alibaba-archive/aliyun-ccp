@@ -1,7 +1,7 @@
 {
 	"scope": "alibabacloud",
 	"name": "MGMT",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"main": "./mgmt.tea",
 	"releases": {
 		"go": "github.com/aliyun/aliyun-ccp/mgmt-sdk/go/client:v1.0.0",
@@ -31,7 +31,6 @@
 	"libraries": {
 		"Util": "alibabacloud:Util:*",
 		"ROAUtil": "alibabacloud:ROAUtil:*",
-		"Credential": "alibabacloud:Credential:*",
-		"AccessTokenCredential": "alibabacloud:AccessTokenCredential:*"
+		"Credential": "alibabacloud:Credential:*"
 	}
 }

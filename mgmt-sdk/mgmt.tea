@@ -4,16 +4,12 @@
 import Util;
 import ROAUtil;
 import Credential;
-import AccessTokenCredential;
-
-type @domainId = string
 type @region = string
 type @endpoint = string
 type @protocol = string
 type @nickname = string
 type @userAgent = string
 type @credential = Credential
-type @accessTokenCredential = AccessTokenCredential
 
 model RuntimeOptions {
   autoretry?: boolean(description='whether to try again', name='autoretry'),
@@ -35,17 +31,11 @@ model RuntimeOptions {
 model Config {
   endpoint?: string,
   region?: string,
-  domainId: string,
   protocol?: string,
   type?: string,
   securityToken?: string,
   accessKeyId?: string,
   accessKeySecret?: string,
-  clientId?: string,
-  refreshToken?: string,
-  clientSecret?: string,
-  accessToken?: string,
-  expireTime?: string,
   nickname?: string,
   userAgent?: string,
 }
@@ -58,27 +48,12 @@ init(config: Config){
       message = "'config' can not be unset"
     };
   }
-
-  if (Util.empty(config.domainId)) {
+  if (Util.empty(config.region)) {
     throw {
       name = "ParameterMissing",
-      message = "'config.domainId' can not be empty"
+      message = '\'config.region\' can not be empty'
     };
   }
-  
-  if (!Util.empty(config.accessToken) || !Util.empty(config.refreshToken)) {
-    var accessConfig = new AccessTokenCredential.Config{
-      accessToken =  config.accessToken,
-      endpoint = config.endpoint,
-      domainId =  config.domainId,
-      clientId = config.clientId,
-      refreshToken = config.refreshToken,
-      clientSecret =  config.clientSecret,
-      expireTime = config.expireTime,
-    };
-    @accessTokenCredential = new AccessTokenCredential(accessConfig);
-  }
-
   if (!Util.empty(config.accessKeyId)) {
     if (Util.empty(config.type)) {
       config.type = 'access_key';
@@ -92,12 +67,11 @@ init(config: Config){
     @credential = new Credential(credentialConfig);
   }
   @endpoint = config.endpoint;
-  @region = config.region;
   @protocol = config.protocol;
-  @domainId = config.domainId;
   @userAgent = config.userAgent;
   @nickname = config.nickname;
-  }
+  @region = config.region;
+}
 
 model CreateDomainRequestModel {
   headers?: map[string]string(description='headers', name='headers'),
@@ -121,7 +95,6 @@ api createDomain(request: CreateDomainRequestModel, runtime: RuntimeOptions): Cr
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getSecurityToken();
-  var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/domain/create`);
@@ -132,9 +105,7 @@ api createDomain(request: CreateDomainRequestModel, runtime: RuntimeOptions): Cr
     ...request.headers
   };
 
-  if (!Util.empty(accessToken)) {
-    __request.headers.authorization = `Bearer ${accessToken}`;
-  } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+  if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
     if (!Util.empty(securityToken)) {
       __request.headers.x-acs-security-token = securityToken;
     }
@@ -222,7 +193,6 @@ api deleteDomain(request: DeleteDomainRequestModel, runtime: RuntimeOptions): De
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getSecurityToken();
-  var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/domain/delete`);
@@ -233,9 +203,7 @@ api deleteDomain(request: DeleteDomainRequestModel, runtime: RuntimeOptions): De
     ...request.headers
   };
 
-  if (!Util.empty(accessToken)) {
-    __request.headers.authorization = `Bearer ${accessToken}`;
-  } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+  if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
     if (!Util.empty(securityToken)) {
       __request.headers.x-acs-security-token = securityToken;
     }
@@ -321,7 +289,6 @@ api getDomain(request: GetDomainRequestModel, runtime: RuntimeOptions): GetDomai
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getSecurityToken();
-  var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/domain/get`);
@@ -332,9 +299,7 @@ api getDomain(request: GetDomainRequestModel, runtime: RuntimeOptions): GetDomai
     ...request.headers
   };
 
-  if (!Util.empty(accessToken)) {
-    __request.headers.authorization = `Bearer ${accessToken}`;
-  } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+  if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
     if (!Util.empty(securityToken)) {
       __request.headers.x-acs-security-token = securityToken;
     }
@@ -422,7 +387,6 @@ api listDomain(request: ListDomainsRequestModel, runtime: RuntimeOptions): ListD
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getSecurityToken();
-  var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/domain/list`);
@@ -433,9 +397,7 @@ api listDomain(request: ListDomainsRequestModel, runtime: RuntimeOptions): ListD
     ...request.headers
   };
 
-  if (!Util.empty(accessToken)) {
-    __request.headers.authorization = `Bearer ${accessToken}`;
-  } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+  if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
     if (!Util.empty(securityToken)) {
       __request.headers.x-acs-security-token = securityToken;
     }
@@ -524,7 +486,6 @@ api updateDomain(request: UpdateDomainRequestModel, runtime: RuntimeOptions): Up
   var accesskeyId = getAccessKeyId();
   var accessKeySecret = getAccessKeySecret();
   var securityToken = getSecurityToken();
-  var accessToken = getAccessToken();
   __request.protocol = Util.defaultString(@protocol, 'https');
   __request.method = 'POST';
   __request.pathname = getPathname(@nickname, `/v2/domain/update`);
@@ -535,9 +496,7 @@ api updateDomain(request: UpdateDomainRequestModel, runtime: RuntimeOptions): Up
     ...request.headers
   };
 
-  if (!Util.empty(accessToken)) {
-    __request.headers.authorization = `Bearer ${accessToken}`;
-  } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+  if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
     if (!Util.empty(securityToken)) {
       __request.headers.x-acs-security-token = securityToken;
     }
@@ -1094,21 +1053,6 @@ function getPathname(nickname: string, path: string): string {
   return `/${nickname}${path}`;
 }
 
-async function setExpireTime(expireTime: string): void{
-  if (Util.isUnset(@accessTokenCredential)) {
-    return;
-  }
-  @accessTokenCredential.setExpireTime(expireTime);
-}
-
-function getExpireTime(): string{
-  if (Util.isUnset(@accessTokenCredential)) {
-    return '';
-  }
-  var expireTime = @accessTokenCredential.getExpireTime();
-  return expireTime;
-}
-
 function setUserAgent(userAgent: string): void {
   @userAgent = userAgent;
 }
@@ -1120,36 +1064,6 @@ function appendUserAgent(userAgent: string): void {
 function getUserAgent(): string {
   var userAgent =  Util.getUserAgent(@userAgent);
   return userAgent;
-}
-
-function setRefreshToken(token: string): void{
-  if (Util.isUnset(@accessTokenCredential)) {
-    return;
-  }
-  @accessTokenCredential.setRefreshToken(token);
-}
-
-function getRefreshToken(): string{
-  if (Util.isUnset(@accessTokenCredential)) {
-    return '';
-  }
-  var token = @accessTokenCredential.getRefreshToken();
-  return token;
-}
-
-function setAccessToken(token: string): void{
-  if (Util.isUnset(@accessTokenCredential)) {
-    return;
-  }
-  @accessTokenCredential.setAccessToken(token);
-}
-
-async function getAccessToken(): string{
-  if (Util.isUnset(@accessTokenCredential)) {
-    return '';
-  }
-  var token = @accessTokenCredential.getAccessToken();
-  return token;
 }
 
 async function getAccessKeyId(): string{
