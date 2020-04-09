@@ -10,10 +10,6 @@ public class Config extends TeaModel {
     @NameInMap("region")
     public String region;
 
-    @NameInMap("domainId")
-    @Validation(required = true)
-    public String domainId;
-
     @NameInMap("protocol")
     public String protocol;
 
@@ -28,21 +24,6 @@ public class Config extends TeaModel {
 
     @NameInMap("accessKeySecret")
     public String accessKeySecret;
-
-    @NameInMap("clientId")
-    public String clientId;
-
-    @NameInMap("refreshToken")
-    public String refreshToken;
-
-    @NameInMap("clientSecret")
-    public String clientSecret;
-
-    @NameInMap("accessToken")
-    public String accessToken;
-
-    @NameInMap("expireTime")
-    public String expireTime;
 
     @NameInMap("nickname")
     public String nickname;

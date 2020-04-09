@@ -6,14 +6,12 @@ import com.aliyun.ccp.mgmtclient.models.*;
 
 public class Client {
 
-    public String _domainId;
     public String _region;
     public String _endpoint;
     public String _protocol;
     public String _nickname;
     public String _userAgent;
     public com.aliyun.credentials.Client _credential;
-    public com.aliyun.ccpcredentials.Client _accessTokenCredential;
     public Client(Config config) throws Exception {
         if (com.aliyun.teautil.Common.isUnset(TeaModel.buildMap(config))) {
             throw new TeaException(TeaConverter.buildMap(
@@ -22,24 +20,11 @@ public class Client {
             ));
         }
 
-        if (com.aliyun.teautil.Common.empty(config.domainId)) {
+        if (com.aliyun.teautil.Common.empty(config.region)) {
             throw new TeaException(TeaConverter.buildMap(
                 new TeaPair("name", "ParameterMissing"),
-                new TeaPair("message", "'config.domainId' can not be empty")
+                new TeaPair("message", "'config.region' can not be empty")
             ));
-        }
-
-        if (!com.aliyun.teautil.Common.empty(config.accessToken) || !com.aliyun.teautil.Common.empty(config.refreshToken)) {
-            com.aliyun.ccpcredentials.models.Config accessConfig = com.aliyun.ccpcredentials.models.Config.build(TeaConverter.buildMap(
-                new TeaPair("accessToken", config.accessToken),
-                new TeaPair("endpoint", config.endpoint),
-                new TeaPair("domainId", config.domainId),
-                new TeaPair("clientId", config.clientId),
-                new TeaPair("refreshToken", config.refreshToken),
-                new TeaPair("clientSecret", config.clientSecret),
-                new TeaPair("expireTime", config.expireTime)
-            ));
-            this._accessTokenCredential = new com.aliyun.ccpcredentials.Client(accessConfig);
         }
 
         if (!com.aliyun.teautil.Common.empty(config.accessKeyId)) {
@@ -57,11 +42,10 @@ public class Client {
         }
 
         this._endpoint = config.endpoint;
-        this._region = config.region;
         this._protocol = config.protocol;
-        this._domainId = config.domainId;
         this._userAgent = config.userAgent;
         this._nickname = config.nickname;
+        this._region = config.region;
     }
 
     public CreateDomainModel createDomain(CreateDomainRequestModel request, RuntimeOptions runtime) throws Exception {
@@ -105,7 +89,6 @@ public class Client {
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
                 String securityToken = this.getSecurityToken();
-                String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/domain/create");
@@ -117,9 +100,7 @@ public class Client {
                     ),
                     request.headers
                 );
-                if (!com.aliyun.teautil.Common.empty(accessToken)) {
-                    request_.headers.put("authorization", "Bearer " + accessToken + "");
-                } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
+                if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
                     if (!com.aliyun.teautil.Common.empty(securityToken)) {
                         request_.headers.put("x-acs-security-token", securityToken);
                     }
@@ -222,7 +203,6 @@ public class Client {
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
                 String securityToken = this.getSecurityToken();
-                String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/domain/delete");
@@ -234,9 +214,7 @@ public class Client {
                     ),
                     request.headers
                 );
-                if (!com.aliyun.teautil.Common.empty(accessToken)) {
-                    request_.headers.put("authorization", "Bearer " + accessToken + "");
-                } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
+                if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
                     if (!com.aliyun.teautil.Common.empty(securityToken)) {
                         request_.headers.put("x-acs-security-token", securityToken);
                     }
@@ -336,7 +314,6 @@ public class Client {
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
                 String securityToken = this.getSecurityToken();
-                String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/domain/get");
@@ -348,9 +325,7 @@ public class Client {
                     ),
                     request.headers
                 );
-                if (!com.aliyun.teautil.Common.empty(accessToken)) {
-                    request_.headers.put("authorization", "Bearer " + accessToken + "");
-                } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
+                if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
                     if (!com.aliyun.teautil.Common.empty(securityToken)) {
                         request_.headers.put("x-acs-security-token", securityToken);
                     }
@@ -453,7 +428,6 @@ public class Client {
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
                 String securityToken = this.getSecurityToken();
-                String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/domain/list");
@@ -465,9 +439,7 @@ public class Client {
                     ),
                     request.headers
                 );
-                if (!com.aliyun.teautil.Common.empty(accessToken)) {
-                    request_.headers.put("authorization", "Bearer " + accessToken + "");
-                } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
+                if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
                     if (!com.aliyun.teautil.Common.empty(securityToken)) {
                         request_.headers.put("x-acs-security-token", securityToken);
                     }
@@ -570,7 +542,6 @@ public class Client {
                 String accesskeyId = this.getAccessKeyId();
                 String accessKeySecret = this.getAccessKeySecret();
                 String securityToken = this.getSecurityToken();
-                String accessToken = this.getAccessToken();
                 request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
                 request_.method = "POST";
                 request_.pathname = this.getPathname(_nickname, "/v2/domain/update");
@@ -582,9 +553,7 @@ public class Client {
                     ),
                     request.headers
                 );
-                if (!com.aliyun.teautil.Common.empty(accessToken)) {
-                    request_.headers.put("authorization", "Bearer " + accessToken + "");
-                } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
+                if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
                     if (!com.aliyun.teautil.Common.empty(securityToken)) {
                         request_.headers.put("x-acs-security-token", securityToken);
                     }
@@ -654,23 +623,6 @@ public class Client {
         return "/" + nickname + "" + path + "";
     }
 
-    public void setExpireTime(String expireTime) throws Exception {
-        if (com.aliyun.teautil.Common.isUnset(_accessTokenCredential)) {
-            return ;
-        }
-
-        _accessTokenCredential.setExpireTime(expireTime);
-    }
-
-    public String getExpireTime() throws Exception {
-        if (com.aliyun.teautil.Common.isUnset(_accessTokenCredential)) {
-            return "";
-        }
-
-        String expireTime = _accessTokenCredential.getExpireTime();
-        return expireTime;
-    }
-
     public void setUserAgent(String userAgent) throws Exception {
         this._userAgent = userAgent;
     }
@@ -682,40 +634,6 @@ public class Client {
     public String getUserAgent() throws Exception {
         String userAgent = com.aliyun.teautil.Common.getUserAgent(_userAgent);
         return userAgent;
-    }
-
-    public void setRefreshToken(String token) throws Exception {
-        if (com.aliyun.teautil.Common.isUnset(_accessTokenCredential)) {
-            return ;
-        }
-
-        _accessTokenCredential.setRefreshToken(token);
-    }
-
-    public String getRefreshToken() throws Exception {
-        if (com.aliyun.teautil.Common.isUnset(_accessTokenCredential)) {
-            return "";
-        }
-
-        String token = _accessTokenCredential.getRefreshToken();
-        return token;
-    }
-
-    public void setAccessToken(String token) throws Exception {
-        if (com.aliyun.teautil.Common.isUnset(_accessTokenCredential)) {
-            return ;
-        }
-
-        _accessTokenCredential.setAccessToken(token);
-    }
-
-    public String getAccessToken() throws Exception {
-        if (com.aliyun.teautil.Common.isUnset(_accessTokenCredential)) {
-            return "";
-        }
-
-        String token = _accessTokenCredential.getAccessToken();
-        return token;
     }
 
     public String getAccessKeyId() throws Exception {

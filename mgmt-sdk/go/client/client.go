@@ -6,7 +6,6 @@ package client
 
 import (
 	"github.com/alibabacloud-go/tea/tea"
-	accesstokencredential "github.com/aliyun/aliyun-ccp/credential/golang/service"
 	credential "github.com/aliyun/credentials-go/credentials"
 	roautil "github.com/aliyun/tea-roa-util/golang/service"
 	util "github.com/aliyun/tea-util/golang/service"
@@ -110,17 +109,11 @@ func (s *RuntimeOptions) SetSocks5NetWork(v string) *RuntimeOptions {
 type Config struct {
 	Endpoint        *string `json:"endpoint" xml:"endpoint"`
 	Region          *string `json:"region" xml:"region"`
-	DomainId        *string `json:"domainId" xml:"domainId" require:"true"`
 	Protocol        *string `json:"protocol" xml:"protocol"`
 	Type            *string `json:"type" xml:"type"`
 	SecurityToken   *string `json:"securityToken" xml:"securityToken"`
 	AccessKeyId     *string `json:"accessKeyId" xml:"accessKeyId"`
 	AccessKeySecret *string `json:"accessKeySecret" xml:"accessKeySecret"`
-	ClientId        *string `json:"clientId" xml:"clientId"`
-	RefreshToken    *string `json:"refreshToken" xml:"refreshToken"`
-	ClientSecret    *string `json:"clientSecret" xml:"clientSecret"`
-	AccessToken     *string `json:"accessToken" xml:"accessToken"`
-	ExpireTime      *string `json:"expireTime" xml:"expireTime"`
 	Nickname        *string `json:"nickname" xml:"nickname"`
 	UserAgent       *string `json:"userAgent" xml:"userAgent"`
 }
@@ -140,11 +133,6 @@ func (s *Config) SetEndpoint(v string) *Config {
 
 func (s *Config) SetRegion(v string) *Config {
 	s.Region = &v
-	return s
-}
-
-func (s *Config) SetDomainId(v string) *Config {
-	s.DomainId = &v
 	return s
 }
 
@@ -170,31 +158,6 @@ func (s *Config) SetAccessKeyId(v string) *Config {
 
 func (s *Config) SetAccessKeySecret(v string) *Config {
 	s.AccessKeySecret = &v
-	return s
-}
-
-func (s *Config) SetClientId(v string) *Config {
-	s.ClientId = &v
-	return s
-}
-
-func (s *Config) SetRefreshToken(v string) *Config {
-	s.RefreshToken = &v
-	return s
-}
-
-func (s *Config) SetClientSecret(v string) *Config {
-	s.ClientSecret = &v
-	return s
-}
-
-func (s *Config) SetAccessToken(v string) *Config {
-	s.AccessToken = &v
-	return s
-}
-
-func (s *Config) SetExpireTime(v string) *Config {
-	s.ExpireTime = &v
 	return s
 }
 
@@ -2589,14 +2552,12 @@ func (s *UserAuthentication) SetExtra(v string) *UserAuthentication {
 }
 
 type Client struct {
-	DomainId              string
-	Region                string
-	Endpoint              string
-	Protocol              string
-	Nickname              string
-	UserAgent             string
-	Credential            credential.Credential
-	AccessTokenCredential *accesstokencredential.AccessTokenCredential
+	Region     string
+	Endpoint   string
+	Protocol   string
+	Nickname   string
+	UserAgent  string
+	Credential credential.Credential
 }
 
 func NewClient(config *Config) (*Client, error) {
@@ -2614,29 +2575,12 @@ func (client *Client) Init(config *Config) (_err error) {
 		return _err
 	}
 
-	if util.Empty(tea.StringValue(config.DomainId)) {
+	if util.Empty(tea.StringValue(config.Region)) {
 		_err = tea.NewSDKError(map[string]interface{}{
 			"name":    "ParameterMissing",
-			"message": "'config.domainId' can not be empty",
+			"message": "'config.region' can not be empty",
 		})
 		return _err
-	}
-
-	if !util.Empty(tea.StringValue(config.AccessToken)) || !util.Empty(tea.StringValue(config.RefreshToken)) {
-		accessConfig := &accesstokencredential.Config{
-			AccessToken:  config.AccessToken,
-			Endpoint:     config.Endpoint,
-			DomainId:     config.DomainId,
-			ClientId:     config.ClientId,
-			RefreshToken: config.RefreshToken,
-			ClientSecret: config.ClientSecret,
-			ExpireTime:   config.ExpireTime,
-		}
-		client.AccessTokenCredential, _err = accesstokencredential.NewAccessTokenCredential(accessConfig)
-		if _err != nil {
-			return _err
-		}
-
 	}
 
 	if !util.Empty(tea.StringValue(config.AccessKeyId)) {
@@ -2658,11 +2602,10 @@ func (client *Client) Init(config *Config) (_err error) {
 	}
 
 	client.Endpoint = tea.StringValue(config.Endpoint)
-	client.Region = tea.StringValue(config.Region)
 	client.Protocol = tea.StringValue(config.Protocol)
-	client.DomainId = tea.StringValue(config.DomainId)
 	client.UserAgent = tea.StringValue(config.UserAgent)
 	client.Nickname = tea.StringValue(config.Nickname)
+	client.Region = tea.StringValue(config.Region)
 	return nil
 }
 
@@ -2731,11 +2674,6 @@ func (client *Client) CreateDomain(request *CreateDomainRequestModel, runtime *R
 				return nil, _err
 			}
 
-			accessToken, _err := client.GetAccessToken()
-			if _err != nil {
-				return nil, _err
-			}
-
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/domain/create")
@@ -2744,9 +2682,7 @@ func (client *Client) CreateDomain(request *CreateDomainRequestModel, runtime *R
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.Region)+".admin.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}, request.Headers)
-			if !util.Empty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+			if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
 				if !util.Empty(securityToken) {
 					request_.Headers["x-acs-security-token"] = securityToken
 				}
@@ -2882,11 +2818,6 @@ func (client *Client) DeleteDomain(request *DeleteDomainRequestModel, runtime *R
 				return nil, _err
 			}
 
-			accessToken, _err := client.GetAccessToken()
-			if _err != nil {
-				return nil, _err
-			}
-
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/domain/delete")
@@ -2895,9 +2826,7 @@ func (client *Client) DeleteDomain(request *DeleteDomainRequestModel, runtime *R
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.Region)+".admin.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}, request.Headers)
-			if !util.Empty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+			if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
 				if !util.Empty(securityToken) {
 					request_.Headers["x-acs-security-token"] = securityToken
 				}
@@ -3026,11 +2955,6 @@ func (client *Client) GetDomain(request *GetDomainRequestModel, runtime *Runtime
 				return nil, _err
 			}
 
-			accessToken, _err := client.GetAccessToken()
-			if _err != nil {
-				return nil, _err
-			}
-
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/domain/get")
@@ -3039,9 +2963,7 @@ func (client *Client) GetDomain(request *GetDomainRequestModel, runtime *Runtime
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.Region)+".admin.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}, request.Headers)
-			if !util.Empty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+			if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
 				if !util.Empty(securityToken) {
 					request_.Headers["x-acs-security-token"] = securityToken
 				}
@@ -3176,11 +3098,6 @@ func (client *Client) ListDomain(request *ListDomainsRequestModel, runtime *Runt
 				return nil, _err
 			}
 
-			accessToken, _err := client.GetAccessToken()
-			if _err != nil {
-				return nil, _err
-			}
-
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/domain/list")
@@ -3189,9 +3106,7 @@ func (client *Client) ListDomain(request *ListDomainsRequestModel, runtime *Runt
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.Region)+".admin.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}, request.Headers)
-			if !util.Empty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+			if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
 				if !util.Empty(securityToken) {
 					request_.Headers["x-acs-security-token"] = securityToken
 				}
@@ -3327,11 +3242,6 @@ func (client *Client) UpdateDomain(request *UpdateDomainRequestModel, runtime *R
 				return nil, _err
 			}
 
-			accessToken, _err := client.GetAccessToken()
-			if _err != nil {
-				return nil, _err
-			}
-
 			request_.Protocol = util.DefaultString(client.Protocol, "https")
 			request_.Method = "POST"
 			request_.Pathname = client.GetPathname(client.Nickname, "/v2/domain/update")
@@ -3340,9 +3250,7 @@ func (client *Client) UpdateDomain(request *UpdateDomainRequestModel, runtime *R
 				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.Region)+".admin.alicloudccp.com"),
 				"content-type": "application/json; charset=utf-8",
 			}, request.Headers)
-			if !util.Empty(accessToken) {
-				request_.Headers["authorization"] = "Bearer " + tea.ToString(accessToken)
-			} else if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+			if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
 				if !util.Empty(securityToken) {
 					request_.Headers["x-acs-security-token"] = securityToken
 				}
@@ -3422,28 +3330,6 @@ func (client *Client) GetPathname(nickname string, path string) (_result string)
 	return _result
 }
 
-func (client *Client) SetExpireTime(expireTime string) (_err error) {
-	if util.IsUnset(client.AccessTokenCredential) {
-		return _err
-	}
-
-	_err = client.AccessTokenCredential.SetExpireTime(expireTime)
-	if _err != nil {
-		return
-	}
-	return _err
-}
-
-func (client *Client) GetExpireTime() (_result string) {
-	if util.IsUnset(client.AccessTokenCredential) {
-		return _result
-	}
-
-	expireTime := client.AccessTokenCredential.GetExpireTime()
-	_result = expireTime
-	return _result
-}
-
 func (client *Client) SetUserAgent(userAgent string) {
 	client.UserAgent = userAgent
 }
@@ -3456,46 +3342,6 @@ func (client *Client) GetUserAgent() (_result string) {
 	userAgent := util.GetUserAgent(client.UserAgent)
 	_result = userAgent
 	return _result
-}
-
-func (client *Client) SetRefreshToken(token string) {
-	if util.IsUnset(client.AccessTokenCredential) {
-		return
-	}
-
-	client.AccessTokenCredential.SetRefreshToken(token)
-}
-
-func (client *Client) GetRefreshToken() (_result string) {
-	if util.IsUnset(client.AccessTokenCredential) {
-		return _result
-	}
-
-	token := client.AccessTokenCredential.GetRefreshToken()
-	_result = token
-	return _result
-}
-
-func (client *Client) SetAccessToken(token string) {
-	if util.IsUnset(client.AccessTokenCredential) {
-		return
-	}
-
-	client.AccessTokenCredential.SetAccessToken(token)
-}
-
-func (client *Client) GetAccessToken() (_result string, _err error) {
-	if util.IsUnset(client.AccessTokenCredential) {
-		return _result, _err
-	}
-
-	token, _err := client.AccessTokenCredential.GetAccessToken()
-	if _err != nil {
-		return "", _err
-	}
-
-	_result = token
-	return _result, _err
 }
 
 func (client *Client) GetAccessKeyId() (_result string, _err error) {
