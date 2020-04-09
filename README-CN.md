@@ -10,11 +10,13 @@
 ### Java
 - [ccppath-sdk](./ccppath-sdk/java/README-CN.md)
 - [osspath-sdk](./osspath-sdk/java/README-CN.md)
+- [mgmt-sdk](./mgmt-sdk/java/README-CN.md)
 - [more demo](docs/java-sdk-demo.md)
 
 ### Go
 - [ccppath-sdk](./ccppath-sdk/go/README-CN.md)
 - [osspath-sdk](./osspath-sdk/go/README-CN.md)
+- [mgmt-sdk](./mgmt-sdk/go/README-CN.md)
 
 ### .Net
 - [ccppath-sdk](./ccppath-sdk/cs/README-CN.md)
