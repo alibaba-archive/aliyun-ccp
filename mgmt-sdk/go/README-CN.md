@@ -2,7 +2,7 @@
 
 ![](https://aliyunsdk-pages.alicdn.com/icons/AlibabaCloud.svg)
 
-## Alibaba Cloud OSSPath SDK for Go
+## Alibaba Cloud MGMT SDK for Go
 
 ## 要求
 - 您需要确保本地安装的 go 环境版本大于 1.12.0.
@@ -21,7 +21,7 @@
 每个版本的详细更改记录在[发行说明](./../../ChangeLog-Go.txt)中。
 
 ## 相关
-* [最新源码](https://github.com/aliyun/aliyun-ccp/tree/master/osspath-sdk/go)
+* [最新源码](https://github.com/aliyun/aliyun-ccp/tree/master/mgmt-sdk/go)
 
 ## 许可证
 [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0)

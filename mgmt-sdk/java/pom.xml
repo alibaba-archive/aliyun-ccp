@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.aliyun</groupId>
-    <artifactId>mgmt-client</artifactId>
+    <artifactId>ccp-mgmt-client</artifactId>
     <version>0.0.1</version>
     <packaging>jar</packaging>
-    <name>mgmt-client</name>
-    <description>Aliyun MGMT Client for Java
+    <name>ccp-mgmt-client</name>
+    <description>Aliyun CCP MGMT Client for Java
 
     Copyright (C) Alibaba Cloud Computing
     All rights reserved.
@@ -65,11 +65,6 @@
             <groupId>com.aliyun</groupId>
             <artifactId>credentials-java</artifactId>
             <version>0.1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>com.aliyun</groupId>
-            <artifactId>ccp-credentials</artifactId>
-            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
