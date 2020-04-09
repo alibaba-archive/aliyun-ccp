@@ -58,8 +58,13 @@
         </dependency>
         <dependency>
             <groupId>com.aliyun</groupId>
-            <artifactId>tea-roa</artifactId>
-            <version>0.0.1</version>
+            <artifactId>tea-util</artifactId>
+            <version>0.1.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>roa-util</artifactId>
+            <version>0.0.2</version>
         </dependency>
         <dependency>
             <groupId>com.aliyun</groupId>
