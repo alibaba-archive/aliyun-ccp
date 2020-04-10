@@ -110,16 +110,16 @@ func (s *RuntimeOptions) SetSocks5NetWork(v string) *RuntimeOptions {
 type Config struct {
 	Endpoint        *string `json:"endpoint" xml:"endpoint"`
 	DomainId        *string `json:"domainId" xml:"domainId" require:"true"`
-	Protocol        *string `json:"protocol" xml:"protocol"`
-	Type            *string `json:"type" xml:"type"`
-	SecurityToken   *string `json:"securityToken" xml:"securityToken"`
-	AccessKeyId     *string `json:"accessKeyId" xml:"accessKeyId"`
-	AccessKeySecret *string `json:"accessKeySecret" xml:"accessKeySecret"`
 	ClientId        *string `json:"clientId" xml:"clientId"`
 	RefreshToken    *string `json:"refreshToken" xml:"refreshToken"`
 	ClientSecret    *string `json:"clientSecret" xml:"clientSecret"`
 	AccessToken     *string `json:"accessToken" xml:"accessToken"`
 	ExpireTime      *string `json:"expireTime" xml:"expireTime"`
+	Protocol        *string `json:"protocol" xml:"protocol"`
+	Type            *string `json:"type" xml:"type"`
+	SecurityToken   *string `json:"securityToken" xml:"securityToken"`
+	AccessKeyId     *string `json:"accessKeyId" xml:"accessKeyId"`
+	AccessKeySecret *string `json:"accessKeySecret" xml:"accessKeySecret"`
 	Nickname        *string `json:"nickname" xml:"nickname"`
 	UserAgent       *string `json:"userAgent" xml:"userAgent"`
 }
@@ -139,31 +139,6 @@ func (s *Config) SetEndpoint(v string) *Config {
 
 func (s *Config) SetDomainId(v string) *Config {
 	s.DomainId = &v
-	return s
-}
-
-func (s *Config) SetProtocol(v string) *Config {
-	s.Protocol = &v
-	return s
-}
-
-func (s *Config) SetType(v string) *Config {
-	s.Type = &v
-	return s
-}
-
-func (s *Config) SetSecurityToken(v string) *Config {
-	s.SecurityToken = &v
-	return s
-}
-
-func (s *Config) SetAccessKeyId(v string) *Config {
-	s.AccessKeyId = &v
-	return s
-}
-
-func (s *Config) SetAccessKeySecret(v string) *Config {
-	s.AccessKeySecret = &v
 	return s
 }
 
@@ -189,6 +164,31 @@ func (s *Config) SetAccessToken(v string) *Config {
 
 func (s *Config) SetExpireTime(v string) *Config {
 	s.ExpireTime = &v
+	return s
+}
+
+func (s *Config) SetProtocol(v string) *Config {
+	s.Protocol = &v
+	return s
+}
+
+func (s *Config) SetType(v string) *Config {
+	s.Type = &v
+	return s
+}
+
+func (s *Config) SetSecurityToken(v string) *Config {
+	s.SecurityToken = &v
+	return s
+}
+
+func (s *Config) SetAccessKeyId(v string) *Config {
+	s.AccessKeyId = &v
+	return s
+}
+
+func (s *Config) SetAccessKeySecret(v string) *Config {
+	s.AccessKeySecret = &v
 	return s
 }
 
@@ -11133,6 +11133,7 @@ func (s *OSSVideoTranscodeRequest) SetTranscode(v bool) *OSSVideoTranscodeReques
  */
 type OSSVideoTranscodeResponse struct {
 	DefinitionList []*string `json:"definition_list" xml:"definition_list" type:"Repeated"`
+	Duration       *int64    `json:"duration" xml:"duration"`
 	HlsTime        *int64    `json:"hls_time" xml:"hls_time"`
 }
 
@@ -11146,6 +11147,11 @@ func (s OSSVideoTranscodeResponse) GoString() string {
 
 func (s *OSSVideoTranscodeResponse) SetDefinitionList(v []*string) *OSSVideoTranscodeResponse {
 	s.DefinitionList = v
+	return s
+}
+
+func (s *OSSVideoTranscodeResponse) SetDuration(v int64) *OSSVideoTranscodeResponse {
+	s.Duration = &v
 	return s
 }
 
@@ -12538,12 +12544,12 @@ func (s *UpdateUserResponse) SetUserName(v string) *UpdateUserResponse {
 
 type Client struct {
 	DomainId              string
+	AccessTokenCredential *accesstokencredential.AccessTokenCredential
 	Endpoint              string
 	Protocol              string
 	Nickname              string
 	UserAgent             string
 	Credential            credential.Credential
-	AccessTokenCredential *accesstokencredential.AccessTokenCredential
 }
 
 func NewClient(config *Config) (*Client, error) {
@@ -12606,9 +12612,9 @@ func (client *Client) Init(config *Config) (_err error) {
 
 	client.Endpoint = tea.StringValue(config.Endpoint)
 	client.Protocol = tea.StringValue(config.Protocol)
-	client.DomainId = tea.StringValue(config.DomainId)
 	client.UserAgent = tea.StringValue(config.UserAgent)
 	client.Nickname = tea.StringValue(config.Nickname)
+	client.DomainId = tea.StringValue(config.DomainId)
 	return nil
 }
 
@@ -20007,20 +20013,6 @@ func (client *Client) GetExpireTime() (_result string) {
 	return _result
 }
 
-func (client *Client) SetUserAgent(userAgent string) {
-	client.UserAgent = userAgent
-}
-
-func (client *Client) AppendUserAgent(userAgent string) {
-	client.UserAgent = tea.ToString(client.UserAgent) + " " + tea.ToString(userAgent)
-}
-
-func (client *Client) GetUserAgent() (_result string) {
-	userAgent := util.GetUserAgent(client.UserAgent)
-	_result = userAgent
-	return _result
-}
-
 func (client *Client) SetRefreshToken(token string) {
 	if util.IsUnset(client.AccessTokenCredential) {
 		return
@@ -20059,6 +20051,20 @@ func (client *Client) GetAccessToken() (_result string, _err error) {
 
 	_result = token
 	return _result, _err
+}
+
+func (client *Client) SetUserAgent(userAgent string) {
+	client.UserAgent = userAgent
+}
+
+func (client *Client) AppendUserAgent(userAgent string) {
+	client.UserAgent = tea.ToString(client.UserAgent) + " " + tea.ToString(userAgent)
+}
+
+func (client *Client) GetUserAgent() (_result string) {
+	userAgent := util.GetUserAgent(client.UserAgent)
+	_result = userAgent
+	return _result
 }
 
 func (client *Client) GetAccessKeyId() (_result string, _err error) {
