@@ -10,6 +10,9 @@ public class OSSVideoTranscodeResponse extends TeaModel {
     @NameInMap("definition_list")
     public java.util.List<String> definitionList;
 
+    @NameInMap("duration")
+    public Long duration;
+
     @NameInMap("hls_time")
     public Long hlsTime;
 
