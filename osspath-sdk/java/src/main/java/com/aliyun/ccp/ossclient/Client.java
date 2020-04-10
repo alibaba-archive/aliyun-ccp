@@ -7,12 +7,12 @@ import com.aliyun.ccp.ossclient.models.*;
 public class Client {
 
     public String _domainId;
+    public com.aliyun.ccpcredentials.Client _accessTokenCredential;
     public String _endpoint;
     public String _protocol;
     public String _nickname;
     public String _userAgent;
     public com.aliyun.credentials.Client _credential;
-    public com.aliyun.ccpcredentials.Client _accessTokenCredential;
     public Client(Config config) throws Exception {
         if (com.aliyun.teautil.Common.isUnset(TeaModel.buildMap(config))) {
             throw new TeaException(TeaConverter.buildMap(
@@ -57,9 +57,9 @@ public class Client {
 
         this._endpoint = config.endpoint;
         this._protocol = config.protocol;
-        this._domainId = config.domainId;
         this._userAgent = config.userAgent;
         this._nickname = config.nickname;
+        this._domainId = config.domainId;
     }
 
     public CancelLinkModel cancelLink(CancelLinkRequestModel request, RuntimeOptions runtime) throws Exception {
@@ -5807,19 +5807,6 @@ public class Client {
         return expireTime;
     }
 
-    public void setUserAgent(String userAgent) throws Exception {
-        this._userAgent = userAgent;
-    }
-
-    public void appendUserAgent(String userAgent) throws Exception {
-        this._userAgent = "" + _userAgent + " " + userAgent + "";
-    }
-
-    public String getUserAgent() throws Exception {
-        String userAgent = com.aliyun.teautil.Common.getUserAgent(_userAgent);
-        return userAgent;
-    }
-
     public void setRefreshToken(String token) throws Exception {
         if (com.aliyun.teautil.Common.isUnset(_accessTokenCredential)) {
             return ;
@@ -5852,6 +5839,19 @@ public class Client {
 
         String token = _accessTokenCredential.getAccessToken();
         return token;
+    }
+
+    public void setUserAgent(String userAgent) throws Exception {
+        this._userAgent = userAgent;
+    }
+
+    public void appendUserAgent(String userAgent) throws Exception {
+        this._userAgent = "" + _userAgent + " " + userAgent + "";
+    }
+
+    public String getUserAgent() throws Exception {
+        String userAgent = com.aliyun.teautil.Common.getUserAgent(_userAgent);
+        return userAgent;
     }
 
     public String getAccessKeyId() throws Exception {
