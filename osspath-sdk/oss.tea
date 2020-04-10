@@ -7,12 +7,12 @@ import Credential;
 import AccessTokenCredential;
 
 type @domainId = string
+type @accessTokenCredential = AccessTokenCredential
 type @endpoint = string
 type @protocol = string
 type @nickname = string
 type @userAgent = string
 type @credential = Credential
-type @accessTokenCredential = AccessTokenCredential
 
 model RuntimeOptions {
   autoretry?: boolean(description='whether to try again', name='autoretry'),
@@ -34,16 +34,16 @@ model RuntimeOptions {
 model Config {
   endpoint?: string,
   domainId: string,
-  protocol?: string,
-  type?: string,
-  securityToken?: string,
-  accessKeyId?: string,
-  accessKeySecret?: string,
   clientId?: string,
   refreshToken?: string,
   clientSecret?: string,
   accessToken?: string,
   expireTime?: string,
+  protocol?: string,
+  type?: string,
+  securityToken?: string,
+  accessKeyId?: string,
+  accessKeySecret?: string,
   nickname?: string,
   userAgent?: string,
 }
@@ -56,11 +56,10 @@ init(config: Config){
       message = "'config' can not be unset"
     };
   }
-
   if (Util.empty(config.domainId)) {
     throw {
       name = "ParameterMissing",
-      message = "'config.domainId' can not be empty"
+      message = '\'config.domainId\' can not be empty'
     };
   }
   
@@ -76,7 +75,6 @@ init(config: Config){
     };
     @accessTokenCredential = new AccessTokenCredential(accessConfig);
   }
-
   if (!Util.empty(config.accessKeyId)) {
     if (Util.empty(config.type)) {
       config.type = 'access_key';
@@ -91,10 +89,10 @@ init(config: Config){
   }
   @endpoint = config.endpoint;
   @protocol = config.protocol;
-  @domainId = config.domainId;
   @userAgent = config.userAgent;
   @nickname = config.nickname;
-  }
+  @domainId = config.domainId;
+}
 
 model CancelLinkRequestModel {
   headers?: map[string]string(description='headers', name='headers'),
@@ -6619,6 +6617,7 @@ model OSSVideoTranscodeRequest {
  */
 model OSSVideoTranscodeResponse {
   definitionList?: [ string ](name='definition_list', description='definition_list', example='', items='{"type":"string"}'),
+  duration?: long(name='duration', description='duration', example=100, format='int64'),
   hlsTime?: long(name='hls_time', description='hls_time', example=10, format='int64'),
 }
 
@@ -7520,19 +7519,6 @@ function getExpireTime(): string{
   return expireTime;
 }
 
-function setUserAgent(userAgent: string): void {
-  @userAgent = userAgent;
-}
-
-function appendUserAgent(userAgent: string): void {
-  @userAgent = `${@userAgent} ${userAgent}`;
-}
-
-function getUserAgent(): string {
-  var userAgent =  Util.getUserAgent(@userAgent);
-  return userAgent;
-}
-
 function setRefreshToken(token: string): void{
   if (Util.isUnset(@accessTokenCredential)) {
     return;
@@ -7561,6 +7547,19 @@ async function getAccessToken(): string{
   }
   var token = @accessTokenCredential.getAccessToken();
   return token;
+}
+
+function setUserAgent(userAgent: string): void {
+  @userAgent = userAgent;
+}
+
+function appendUserAgent(userAgent: string): void {
+  @userAgent = `${@userAgent} ${userAgent}`;
+}
+
+function getUserAgent(): string {
+  var userAgent =  Util.getUserAgent(@userAgent);
+  return userAgent;
 }
 
 async function getAccessKeyId(): string{
