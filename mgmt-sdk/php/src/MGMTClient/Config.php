@@ -2,22 +2,14 @@
 
 // This file is auto-generated, don't edit it. Thanks.
 
-namespace Aliyun\CCP\SDK\OSSPath;
+namespace Aliyun\CCP\MGMTClient\MGMTClient;
 
 use AlibabaCloud\Tea\Model;
 
 class Config extends Model
 {
     public $endpoint;
-    /**
-     * @var string
-     */
-    public $domainId;
-    public $clientId;
-    public $refreshToken;
-    public $clientSecret;
-    public $accessToken;
-    public $expireTime;
+    public $region;
     public $protocol;
     public $type;
     public $securityToken;
@@ -28,19 +20,13 @@ class Config extends Model
 
     public function validate()
     {
-        Model::validateRequired('domainId', $this->domainId, true);
     }
 
     public function toMap()
     {
         $res                    = [];
         $res['endpoint']        = $this->endpoint;
-        $res['domainId']        = $this->domainId;
-        $res['clientId']        = $this->clientId;
-        $res['refreshToken']    = $this->refreshToken;
-        $res['clientSecret']    = $this->clientSecret;
-        $res['accessToken']     = $this->accessToken;
-        $res['expireTime']      = $this->expireTime;
+        $res['region']          = $this->region;
         $res['protocol']        = $this->protocol;
         $res['type']            = $this->type;
         $res['securityToken']   = $this->securityToken;
@@ -63,23 +49,8 @@ class Config extends Model
         if (isset($map['endpoint'])) {
             $model->endpoint = $map['endpoint'];
         }
-        if (isset($map['domainId'])) {
-            $model->domainId = $map['domainId'];
-        }
-        if (isset($map['clientId'])) {
-            $model->clientId = $map['clientId'];
-        }
-        if (isset($map['refreshToken'])) {
-            $model->refreshToken = $map['refreshToken'];
-        }
-        if (isset($map['clientSecret'])) {
-            $model->clientSecret = $map['clientSecret'];
-        }
-        if (isset($map['accessToken'])) {
-            $model->accessToken = $map['accessToken'];
-        }
-        if (isset($map['expireTime'])) {
-            $model->expireTime = $map['expireTime'];
+        if (isset($map['region'])) {
+            $model->region = $map['region'];
         }
         if (isset($map['protocol'])) {
             $model->protocol = $map['protocol'];
