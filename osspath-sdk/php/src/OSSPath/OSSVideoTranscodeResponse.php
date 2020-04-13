@@ -20,6 +20,14 @@ class OSSVideoTranscodeResponse extends Model
      */
     public $definitionList;
     /**
+     * @description duration
+     *
+     * @example 100
+     *
+     * @var int
+     */
+    public $duration;
+    /**
      * @description hls_time
      *
      * @example 10
@@ -29,6 +37,7 @@ class OSSVideoTranscodeResponse extends Model
     public $hlsTime;
     protected $_name = [
         'definitionList' => 'definition_list',
+        'duration'       => 'duration',
         'hlsTime'        => 'hls_time',
     ];
 
@@ -43,6 +52,7 @@ class OSSVideoTranscodeResponse extends Model
         if (null !== $this->definitionList) {
             $res['definition_list'] = $this->definitionList;
         }
+        $res['duration'] = $this->duration;
         $res['hls_time'] = $this->hlsTime;
 
         return $res;
@@ -61,6 +71,9 @@ class OSSVideoTranscodeResponse extends Model
                 $model->definitionList = [];
                 $model->definitionList = $map['definition_list'];
             }
+        }
+        if (isset($map['duration'])) {
+            $model->duration = $map['duration'];
         }
         if (isset($map['hls_time'])) {
             $model->hlsTime = $map['hls_time'];

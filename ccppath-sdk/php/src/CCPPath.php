@@ -125,13 +125,13 @@ class CCPPath
                 'message' => "'config' can not be unset",
             ]);
         }
-        if (Utils::_empty($config->domainId)) {
+        if (Utils::empty_($config->domainId)) {
             throw new TeaError([
                 'name'    => 'ParameterMissing',
                 'message' => "'config.domainId' can not be empty",
             ]);
         }
-        if (!Utils::_empty($config->accessToken) || !Utils::_empty($config->refreshToken)) {
+        if (!Utils::empty_($config->accessToken) || !Utils::empty_($config->refreshToken)) {
             $accessConfig = new Config([
                 'accessToken'  => $config->accessToken,
                 'endpoint'     => $config->endpoint,
@@ -143,8 +143,8 @@ class CCPPath
             ]);
             $this->_accessTokenCredential = new AccessTokenCredential($accessConfig);
         }
-        if (!Utils::_empty($config->accessKeyId)) {
-            if (Utils::_empty($config->type)) {
+        if (!Utils::empty_($config->accessKeyId)) {
+            if (Utils::empty_($config->type)) {
                 $config->type = 'access_key';
             }
             $credentialConfig = new \AlibabaCloud\Credentials\Credential\Config([
@@ -199,9 +199,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -225,10 +226,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.auth.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -252,7 +253,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new CancelLinkModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -273,7 +274,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -281,7 +284,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -322,9 +325,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -348,10 +352,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.auth.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -375,7 +379,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new ConfirmLinkModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -396,7 +400,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -404,7 +410,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -444,9 +450,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -470,10 +477,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.auth.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -493,7 +500,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new ChangePasswordModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -514,7 +521,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -522,7 +531,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -562,9 +571,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -588,10 +598,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.auth.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -611,7 +621,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new SetPasswordModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -632,7 +642,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -640,7 +652,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -681,9 +693,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -707,10 +720,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.auth.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -734,7 +747,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new GetAccessTokenByLinkInfoModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -755,7 +768,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -763,7 +778,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -803,9 +818,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -829,10 +845,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.auth.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -856,7 +872,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new GetCaptchaModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -877,7 +893,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -885,7 +903,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -926,9 +944,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -952,10 +971,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.auth.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -979,7 +998,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new GetLinkInfoModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -1000,7 +1019,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -1008,7 +1029,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -1048,9 +1069,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -1074,10 +1096,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.auth.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -1101,7 +1123,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new GetLinkInfoByUserIdModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -1122,7 +1144,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -1130,7 +1154,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -1172,9 +1196,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -1198,10 +1223,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.auth.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -1225,7 +1250,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new LinkModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -1246,7 +1271,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -1254,7 +1281,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -1295,9 +1322,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -1321,10 +1349,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.auth.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -1348,7 +1376,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new CheckExistModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -1369,7 +1397,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -1377,7 +1407,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -1418,9 +1448,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -1444,10 +1475,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.auth.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -1471,7 +1502,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new LoginModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -1492,7 +1523,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -1500,7 +1533,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -1541,9 +1574,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -1567,10 +1601,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.auth.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -1594,7 +1628,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new RegisterModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -1615,7 +1649,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -1623,7 +1659,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -1663,9 +1699,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -1689,10 +1726,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.auth.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -1716,7 +1753,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new MobileSendSmsCodeModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -1737,7 +1774,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -1745,7 +1784,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -1785,9 +1824,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -1811,10 +1851,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.auth.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -1838,7 +1878,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new TokenModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -1859,7 +1899,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -1867,7 +1909,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -1911,9 +1953,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -1937,10 +1980,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -1964,7 +2007,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new GetAsyncTaskInfoModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -1985,7 +2028,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -1993,7 +2038,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -2036,9 +2081,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -2062,10 +2108,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -2089,7 +2135,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new OperationModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -2110,7 +2156,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -2118,7 +2166,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -2162,9 +2210,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -2188,10 +2237,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -2215,7 +2264,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new CreateDriveModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -2236,7 +2285,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -2244,7 +2295,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -2286,9 +2337,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -2312,10 +2364,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -2335,7 +2387,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new DeleteDriveModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -2356,7 +2408,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -2364,7 +2418,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -2407,9 +2461,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -2433,10 +2488,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -2460,7 +2515,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new GetDriveModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -2481,7 +2536,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -2489,7 +2546,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -2533,9 +2590,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -2559,10 +2617,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -2586,7 +2644,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new GetDefaultDriveModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -2607,7 +2665,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -2615,7 +2675,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -2657,9 +2717,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -2683,10 +2744,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -2710,7 +2771,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new ListDrivesModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -2731,7 +2792,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -2739,7 +2802,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -2781,9 +2844,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -2807,10 +2871,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -2834,7 +2898,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new ListMyDrivesModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -2855,7 +2919,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -2863,7 +2929,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -2906,9 +2972,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -2932,10 +2999,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -2959,7 +3026,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new UpdateDriveModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -2980,7 +3047,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -2988,7 +3057,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -3031,9 +3100,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -3057,10 +3127,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -3084,7 +3154,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new CompleteFileModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -3105,7 +3175,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -3113,7 +3185,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -3156,9 +3228,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -3182,10 +3255,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -3218,7 +3291,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new CopyFileModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -3239,7 +3312,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -3247,7 +3322,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -3292,9 +3367,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -3318,10 +3394,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -3345,7 +3421,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new CreateFileModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -3366,7 +3442,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -3374,7 +3452,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -3417,9 +3495,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -3443,10 +3522,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -3475,7 +3554,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new DeleteFileModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -3496,7 +3575,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -3504,7 +3585,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -3547,9 +3628,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -3573,10 +3655,10 @@ class CCPPath
                     'user-agent' => $this->getUserAgent(),
                     'host'       => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -3590,7 +3672,7 @@ class CCPPath
                 $_response    = Tea::send($_request, $_runtime);
                 $respMap      = null;
                 $obj          = null;
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -3611,7 +3693,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -3619,7 +3703,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -3662,9 +3746,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -3688,10 +3773,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -3715,7 +3800,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new GetFileModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -3736,7 +3821,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -3744,7 +3831,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -3787,9 +3874,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -3813,10 +3901,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -3840,7 +3928,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new GetDownloadUrlModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -3861,7 +3949,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -3869,7 +3959,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -3912,9 +4002,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -3938,10 +4029,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -3965,7 +4056,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new GetUploadUrlModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -3986,7 +4077,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -3994,7 +4087,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -4037,9 +4130,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -4063,10 +4157,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -4090,7 +4184,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new ListFileModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -4111,7 +4205,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -4119,7 +4215,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -4162,9 +4258,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -4188,10 +4285,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -4215,7 +4312,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new ListUploadedPartsModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -4236,7 +4333,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -4244,7 +4343,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -4287,9 +4386,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -4313,10 +4413,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -4340,7 +4440,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new MoveFileModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -4361,7 +4461,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -4369,7 +4471,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -4412,9 +4514,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -4438,10 +4541,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -4465,7 +4568,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new SearchFileModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -4486,7 +4589,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -4494,7 +4599,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -4538,9 +4643,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -4564,10 +4670,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -4591,7 +4697,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new UpdateFileModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -4612,7 +4718,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -4620,7 +4728,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -4661,9 +4769,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -4687,10 +4796,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -4714,7 +4823,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new CreateUserModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -4735,7 +4844,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -4743,7 +4854,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -4784,9 +4895,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -4810,10 +4922,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -4833,7 +4945,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new DeleteUserModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -4854,7 +4966,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -4862,7 +4976,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -4904,9 +5018,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -4930,10 +5045,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -4957,7 +5072,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new GetUserModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -4978,7 +5093,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -4986,7 +5103,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -5027,9 +5144,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -5053,10 +5171,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -5080,7 +5198,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new ListUsersModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -5101,7 +5219,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -5109,7 +5229,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -5150,9 +5270,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -5176,10 +5297,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -5203,7 +5324,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new SearchUserModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -5224,7 +5345,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -5232,7 +5355,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -5274,9 +5397,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -5300,10 +5424,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -5327,7 +5451,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new UpdateUserModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -5348,7 +5472,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -5356,7 +5482,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -5399,9 +5525,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -5425,10 +5552,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -5452,7 +5579,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new GetPhotoCountModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -5473,7 +5600,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -5481,7 +5610,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -5524,9 +5653,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -5550,10 +5680,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -5577,7 +5707,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new ListAddressGroupsModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -5598,7 +5728,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -5606,7 +5738,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -5649,9 +5781,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -5675,10 +5808,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -5702,7 +5835,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new ListFaceGroupsModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -5723,7 +5856,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -5731,7 +5866,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -5774,9 +5909,10 @@ class CCPPath
             ],
             'ignoreSSL' => $runtime->ignoreSSL,
         ];
-        $_lastRequest = null;
-        $_now         = time();
-        $_retryTimes  = 0;
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
         while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
             if ($_retryTimes > 0) {
                 $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
@@ -5800,10 +5936,10 @@ class CCPPath
                     'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
                     'content-type' => 'application/json; charset=utf-8',
                 ], $request->headers);
-                if (!Utils::_empty($accessToken)) {
+                if (!Utils::empty_($accessToken)) {
                     $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
-                } elseif (!Utils::_empty($accesskeyId) && !Utils::_empty($accessKeySecret)) {
-                    if (!Utils::_empty($securityToken)) {
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
                         $_request->headers['x-acs-security-token'] = $securityToken;
                     }
                     $_request->headers['date']                    = Utils::getDateUTCString();
@@ -5827,7 +5963,7 @@ class CCPPath
                         'headers' => $_response->headers,
                     ], new ListTagsModel());
                 }
-                if (!Utils::_empty($_response->headers['x-ca-error-message'])) {
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
                         'data' => [
                             'requestId'     => $_response->headers['x-ca-request-id'],
@@ -5848,7 +5984,9 @@ class CCPPath
                     ],
                 ], $respMap));
             } catch (\Exception $e) {
-                if (Tea::isRetryable($_runtime['retry'], $_retryTimes)) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
                     continue;
                 }
 
@@ -5856,7 +5994,7 @@ class CCPPath
             }
         }
 
-        throw new TeaUnableRetryError($_lastRequest);
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
     }
 
     /**
@@ -5869,7 +6007,7 @@ class CCPPath
      */
     public function getPathname($nickname, $path)
     {
-        if (Utils::_empty($nickname)) {
+        if (Utils::empty_($nickname)) {
             return $path;
         }
 
