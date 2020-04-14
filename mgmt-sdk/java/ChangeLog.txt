@@ -1,2 +1,5 @@
+2020-04-14 Version: 0.0.2
+1. Release 0.0.2
+
 2020-04-08 Version: 0.0.1
 1. Release 0.0.1
