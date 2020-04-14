@@ -4,7 +4,7 @@ package com.aliyun.ccp.mgmtclient.models;
 import com.aliyun.tea.*;
 
 /**
- * list cors rule request
+ * 
  */
 public class SetCorsRuleListRequest extends TeaModel {
     @NameInMap("cors_rule_list")

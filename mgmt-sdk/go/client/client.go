@@ -171,6 +171,414 @@ func (s *Config) SetUserAgent(v string) *Config {
 	return s
 }
 
+type CreateAppRequestModel struct {
+	Headers map[string]string `json:"headers" xml:"headers"`
+	Body    *CreateAppRequest `json:"body" xml:"body" require:"true"`
+}
+
+func (s CreateAppRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CreateAppRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *CreateAppRequestModel) SetHeaders(v map[string]string) *CreateAppRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *CreateAppRequestModel) SetBody(v *CreateAppRequest) *CreateAppRequestModel {
+	s.Body = v
+	return s
+}
+
+type CreateAppModel struct {
+	Headers map[string]string `json:"headers" xml:"headers"`
+	Body    *GetAppResponse   `json:"body" xml:"body" require:"true"`
+}
+
+func (s CreateAppModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CreateAppModel) GoString() string {
+	return s.String()
+}
+
+func (s *CreateAppModel) SetHeaders(v map[string]string) *CreateAppModel {
+	s.Headers = v
+	return s
+}
+
+func (s *CreateAppModel) SetBody(v *GetAppResponse) *CreateAppModel {
+	s.Body = v
+	return s
+}
+
+type DeleteAppRequestModel struct {
+	Headers map[string]string `json:"headers" xml:"headers"`
+	Body    *DeleteAppRequest `json:"body" xml:"body" require:"true"`
+}
+
+func (s DeleteAppRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s DeleteAppRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *DeleteAppRequestModel) SetHeaders(v map[string]string) *DeleteAppRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *DeleteAppRequestModel) SetBody(v *DeleteAppRequest) *DeleteAppRequestModel {
+	s.Body = v
+	return s
+}
+
+type DeleteAppModel struct {
+	Headers map[string]string `json:"headers" xml:"headers"`
+}
+
+func (s DeleteAppModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s DeleteAppModel) GoString() string {
+	return s.String()
+}
+
+func (s *DeleteAppModel) SetHeaders(v map[string]string) *DeleteAppModel {
+	s.Headers = v
+	return s
+}
+
+type GetAppRequestModel struct {
+	Headers map[string]string `json:"headers" xml:"headers"`
+	Body    *GetAppRequest    `json:"body" xml:"body" require:"true"`
+}
+
+func (s GetAppRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetAppRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *GetAppRequestModel) SetHeaders(v map[string]string) *GetAppRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *GetAppRequestModel) SetBody(v *GetAppRequest) *GetAppRequestModel {
+	s.Body = v
+	return s
+}
+
+type GetAppModel struct {
+	Headers map[string]string `json:"headers" xml:"headers"`
+	Body    *GetAppResponse   `json:"body" xml:"body" require:"true"`
+}
+
+func (s GetAppModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetAppModel) GoString() string {
+	return s.String()
+}
+
+func (s *GetAppModel) SetHeaders(v map[string]string) *GetAppModel {
+	s.Headers = v
+	return s
+}
+
+func (s *GetAppModel) SetBody(v *GetAppResponse) *GetAppModel {
+	s.Body = v
+	return s
+}
+
+type GetPublicKeyRequestModel struct {
+	Headers map[string]string       `json:"headers" xml:"headers"`
+	Body    *GetAppPublicKeyRequest `json:"body" xml:"body" require:"true"`
+}
+
+func (s GetPublicKeyRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetPublicKeyRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *GetPublicKeyRequestModel) SetHeaders(v map[string]string) *GetPublicKeyRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *GetPublicKeyRequestModel) SetBody(v *GetAppPublicKeyRequest) *GetPublicKeyRequestModel {
+	s.Body = v
+	return s
+}
+
+type GetPublicKeyModel struct {
+	Headers map[string]string        `json:"headers" xml:"headers"`
+	Body    *GetAppPublicKeyResponse `json:"body" xml:"body" require:"true"`
+}
+
+func (s GetPublicKeyModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetPublicKeyModel) GoString() string {
+	return s.String()
+}
+
+func (s *GetPublicKeyModel) SetHeaders(v map[string]string) *GetPublicKeyModel {
+	s.Headers = v
+	return s
+}
+
+func (s *GetPublicKeyModel) SetBody(v *GetAppPublicKeyResponse) *GetPublicKeyModel {
+	s.Body = v
+	return s
+}
+
+type ListAppRequestModel struct {
+	Headers map[string]string `json:"headers" xml:"headers"`
+	Body    *ListAppsRequest  `json:"body" xml:"body" require:"true"`
+}
+
+func (s ListAppRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListAppRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *ListAppRequestModel) SetHeaders(v map[string]string) *ListAppRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *ListAppRequestModel) SetBody(v *ListAppsRequest) *ListAppRequestModel {
+	s.Body = v
+	return s
+}
+
+type ListAppModel struct {
+	Headers map[string]string `json:"headers" xml:"headers"`
+	Body    *ListAppsResponse `json:"body" xml:"body" require:"true"`
+}
+
+func (s ListAppModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListAppModel) GoString() string {
+	return s.String()
+}
+
+func (s *ListAppModel) SetHeaders(v map[string]string) *ListAppModel {
+	s.Headers = v
+	return s
+}
+
+func (s *ListAppModel) SetBody(v *ListAppsResponse) *ListAppModel {
+	s.Body = v
+	return s
+}
+
+type ListPublishedAppRequestModel struct {
+	Headers map[string]string `json:"headers" xml:"headers"`
+	Body    *ListAppsRequest  `json:"body" xml:"body" require:"true"`
+}
+
+func (s ListPublishedAppRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListPublishedAppRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *ListPublishedAppRequestModel) SetHeaders(v map[string]string) *ListPublishedAppRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *ListPublishedAppRequestModel) SetBody(v *ListAppsRequest) *ListPublishedAppRequestModel {
+	s.Body = v
+	return s
+}
+
+type ListPublishedAppModel struct {
+	Headers map[string]string `json:"headers" xml:"headers"`
+	Body    *ListAppsResponse `json:"body" xml:"body" require:"true"`
+}
+
+func (s ListPublishedAppModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListPublishedAppModel) GoString() string {
+	return s.String()
+}
+
+func (s *ListPublishedAppModel) SetHeaders(v map[string]string) *ListPublishedAppModel {
+	s.Headers = v
+	return s
+}
+
+func (s *ListPublishedAppModel) SetBody(v *ListAppsResponse) *ListPublishedAppModel {
+	s.Body = v
+	return s
+}
+
+type SetPublicKeyRequestModel struct {
+	Headers map[string]string       `json:"headers" xml:"headers"`
+	Body    *GetAppPublicKeyRequest `json:"body" xml:"body" require:"true"`
+}
+
+func (s SetPublicKeyRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s SetPublicKeyRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *SetPublicKeyRequestModel) SetHeaders(v map[string]string) *SetPublicKeyRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *SetPublicKeyRequestModel) SetBody(v *GetAppPublicKeyRequest) *SetPublicKeyRequestModel {
+	s.Body = v
+	return s
+}
+
+type SetPublicKeyModel struct {
+	Headers map[string]string        `json:"headers" xml:"headers"`
+	Body    *GetAppPublicKeyResponse `json:"body" xml:"body" require:"true"`
+}
+
+func (s SetPublicKeyModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s SetPublicKeyModel) GoString() string {
+	return s.String()
+}
+
+func (s *SetPublicKeyModel) SetHeaders(v map[string]string) *SetPublicKeyModel {
+	s.Headers = v
+	return s
+}
+
+func (s *SetPublicKeyModel) SetBody(v *GetAppPublicKeyResponse) *SetPublicKeyModel {
+	s.Body = v
+	return s
+}
+
+type UpdateAppRequestModel struct {
+	Headers map[string]string `json:"headers" xml:"headers"`
+	Body    *UpdateAppRequest `json:"body" xml:"body" require:"true"`
+}
+
+func (s UpdateAppRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s UpdateAppRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *UpdateAppRequestModel) SetHeaders(v map[string]string) *UpdateAppRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *UpdateAppRequestModel) SetBody(v *UpdateAppRequest) *UpdateAppRequestModel {
+	s.Body = v
+	return s
+}
+
+type UpdateAppModel struct {
+	Headers map[string]string `json:"headers" xml:"headers"`
+	Body    *GetAppResponse   `json:"body" xml:"body" require:"true"`
+}
+
+func (s UpdateAppModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s UpdateAppModel) GoString() string {
+	return s.String()
+}
+
+func (s *UpdateAppModel) SetHeaders(v map[string]string) *UpdateAppModel {
+	s.Headers = v
+	return s
+}
+
+func (s *UpdateAppModel) SetBody(v *GetAppResponse) *UpdateAppModel {
+	s.Body = v
+	return s
+}
+
+type AddStoreRequestModel struct {
+	Headers map[string]string `json:"headers" xml:"headers"`
+	Body    *AddStoreRequest  `json:"body" xml:"body" require:"true"`
+}
+
+func (s AddStoreRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s AddStoreRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *AddStoreRequestModel) SetHeaders(v map[string]string) *AddStoreRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *AddStoreRequestModel) SetBody(v *AddStoreRequest) *AddStoreRequestModel {
+	s.Body = v
+	return s
+}
+
+type AddStoreModel struct {
+	Headers map[string]string `json:"headers" xml:"headers"`
+	Body    *AddStoreResponse `json:"body" xml:"body" require:"true"`
+}
+
+func (s AddStoreModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s AddStoreModel) GoString() string {
+	return s.String()
+}
+
+func (s *AddStoreModel) SetHeaders(v map[string]string) *AddStoreModel {
+	s.Headers = v
+	return s
+}
+
+func (s *AddStoreModel) SetBody(v *AddStoreResponse) *AddStoreModel {
+	s.Body = v
+	return s
+}
+
 type CreateDomainRequestModel struct {
 	Headers map[string]string    `json:"headers" xml:"headers"`
 	Body    *CreateDomainRequest `json:"body" xml:"body" require:"true"`
@@ -303,25 +711,71 @@ func (s *GetDomainModel) SetBody(v *GetDomainResponse) *GetDomainModel {
 	return s
 }
 
-type ListDomainsRequestModel struct {
-	Headers map[string]string   `json:"headers" xml:"headers"`
-	Body    *ListDomainsRequest `json:"body" xml:"body" require:"true"`
+type GetCorsRuleListRequestModel struct {
+	Headers map[string]string       `json:"headers" xml:"headers"`
+	Body    *GetCorsRuleListRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s ListDomainsRequestModel) String() string {
+func (s GetCorsRuleListRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s ListDomainsRequestModel) GoString() string {
+func (s GetCorsRuleListRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *ListDomainsRequestModel) SetHeaders(v map[string]string) *ListDomainsRequestModel {
+func (s *GetCorsRuleListRequestModel) SetHeaders(v map[string]string) *GetCorsRuleListRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *ListDomainsRequestModel) SetBody(v *ListDomainsRequest) *ListDomainsRequestModel {
+func (s *GetCorsRuleListRequestModel) SetBody(v *GetCorsRuleListRequest) *GetCorsRuleListRequestModel {
+	s.Body = v
+	return s
+}
+
+type GetCorsRuleListModel struct {
+	Headers map[string]string           `json:"headers" xml:"headers"`
+	Body    *ListDomainCORSRuleResponse `json:"body" xml:"body" require:"true"`
+}
+
+func (s GetCorsRuleListModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetCorsRuleListModel) GoString() string {
+	return s.String()
+}
+
+func (s *GetCorsRuleListModel) SetHeaders(v map[string]string) *GetCorsRuleListModel {
+	s.Headers = v
+	return s
+}
+
+func (s *GetCorsRuleListModel) SetBody(v *ListDomainCORSRuleResponse) *GetCorsRuleListModel {
+	s.Body = v
+	return s
+}
+
+type ListDomainRequestModel struct {
+	Headers map[string]string   `json:"headers" xml:"headers"`
+	Body    *ListDomainsRequest `json:"body" xml:"body" require:"true"`
+}
+
+func (s ListDomainRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListDomainRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *ListDomainRequestModel) SetHeaders(v map[string]string) *ListDomainRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *ListDomainRequestModel) SetBody(v *ListDomainsRequest) *ListDomainRequestModel {
 	s.Body = v
 	return s
 }
@@ -345,6 +799,138 @@ func (s *ListDomainModel) SetHeaders(v map[string]string) *ListDomainModel {
 }
 
 func (s *ListDomainModel) SetBody(v *ListDomainsResponse) *ListDomainModel {
+	s.Body = v
+	return s
+}
+
+type ListStoresRequestModel struct {
+	Headers map[string]string  `json:"headers" xml:"headers"`
+	Body    *ListStoresRequest `json:"body" xml:"body" require:"true"`
+}
+
+func (s ListStoresRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListStoresRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *ListStoresRequestModel) SetHeaders(v map[string]string) *ListStoresRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *ListStoresRequestModel) SetBody(v *ListStoresRequest) *ListStoresRequestModel {
+	s.Body = v
+	return s
+}
+
+type ListStoresModel struct {
+	Headers map[string]string   `json:"headers" xml:"headers"`
+	Body    *ListStoresResponse `json:"body" xml:"body" require:"true"`
+}
+
+func (s ListStoresModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListStoresModel) GoString() string {
+	return s.String()
+}
+
+func (s *ListStoresModel) SetHeaders(v map[string]string) *ListStoresModel {
+	s.Headers = v
+	return s
+}
+
+func (s *ListStoresModel) SetBody(v *ListStoresResponse) *ListStoresModel {
+	s.Body = v
+	return s
+}
+
+type RemoveStoreRequestModel struct {
+	Headers map[string]string   `json:"headers" xml:"headers"`
+	Body    *RemoveStoreRequest `json:"body" xml:"body" require:"true"`
+}
+
+func (s RemoveStoreRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s RemoveStoreRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *RemoveStoreRequestModel) SetHeaders(v map[string]string) *RemoveStoreRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *RemoveStoreRequestModel) SetBody(v *RemoveStoreRequest) *RemoveStoreRequestModel {
+	s.Body = v
+	return s
+}
+
+type RemoveStoreModel struct {
+	Headers map[string]string `json:"headers" xml:"headers"`
+}
+
+func (s RemoveStoreModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s RemoveStoreModel) GoString() string {
+	return s.String()
+}
+
+func (s *RemoveStoreModel) SetHeaders(v map[string]string) *RemoveStoreModel {
+	s.Headers = v
+	return s
+}
+
+type SetCorsRuleListRequestModel struct {
+	Headers map[string]string       `json:"headers" xml:"headers"`
+	Body    *SetCorsRuleListRequest `json:"body" xml:"body" require:"true"`
+}
+
+func (s SetCorsRuleListRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s SetCorsRuleListRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *SetCorsRuleListRequestModel) SetHeaders(v map[string]string) *SetCorsRuleListRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *SetCorsRuleListRequestModel) SetBody(v *SetCorsRuleListRequest) *SetCorsRuleListRequestModel {
+	s.Body = v
+	return s
+}
+
+type SetCorsRuleListModel struct {
+	Headers map[string]string           `json:"headers" xml:"headers"`
+	Body    *ListDomainCORSRuleResponse `json:"body" xml:"body" require:"true"`
+}
+
+func (s SetCorsRuleListModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s SetCorsRuleListModel) GoString() string {
+	return s.String()
+}
+
+func (s *SetCorsRuleListModel) SetHeaders(v map[string]string) *SetCorsRuleListModel {
+	s.Headers = v
+	return s
+}
+
+func (s *SetCorsRuleListModel) SetBody(v *ListDomainCORSRuleResponse) *SetCorsRuleListModel {
 	s.Body = v
 	return s
 }
@@ -1964,7 +2550,7 @@ func (s *SetAppPublicKeyRequest) SetPublicKey(v string) *SetAppPublicKeyRequest 
 }
 
 /**
- * list cors rule request
+ *
  */
 type SetCorsRuleListRequest struct {
 	CorsRuleList []*CorsRule `json:"cors_rule_list" xml:"cors_rule_list" require:"true" type:"Repeated"`
@@ -2610,6 +3196,1280 @@ func (client *Client) Init(config *Config) (_err error) {
 }
 
 /**
+ * 创建App
+ * @tags app
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error Forbidden User not authorized to operate on the specified APIs.
+ * @error InternalError The request has been failed due to some unknown error.
+ */
+func (client *Client) CreateApp(request *CreateAppRequestModel, runtime *RuntimeOptions) (_result *CreateAppModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+		},
+		"backoff": map[string]interface{}{
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &CreateAppModel{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*CreateAppModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
+			request_.Method = "POST"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/app/create")
+			request_.Headers = tea.Merge(map[string]string{
+				"user-agent":   client.GetUserAgent(),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.Region)+".admin.alicloudccp.com"),
+				"content-type": "application/json; charset=utf-8",
+			}, request.Headers)
+			if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+			}
+
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request.Body)))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			respMap := make(map[string]interface{})
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return nil, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &CreateAppModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    response_.StatusCode,
+						"statusMessage": response_.StatusMessage,
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return nil, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    response_.StatusCode,
+					"statusMessage": response_.StatusMessage,
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 删除App
+ * @tags app
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error Forbidden User not authorized to operate on the specified APIs.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ */
+func (client *Client) DeleteApp(request *DeleteAppRequestModel, runtime *RuntimeOptions) (_result *DeleteAppModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+		},
+		"backoff": map[string]interface{}{
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &DeleteAppModel{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*DeleteAppModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
+			request_.Method = "POST"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/app/delete")
+			request_.Headers = tea.Merge(map[string]string{
+				"user-agent":   client.GetUserAgent(),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.Region)+".admin.alicloudccp.com"),
+				"content-type": "application/json; charset=utf-8",
+			}, request.Headers)
+			if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+			}
+
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request.Body)))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			respMap := make(map[string]interface{})
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 204) {
+				_result = &DeleteAppModel{}
+				_err = tea.Convert(map[string]map[string]string{
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    response_.StatusCode,
+						"statusMessage": response_.StatusMessage,
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return nil, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    response_.StatusCode,
+					"statusMessage": response_.StatusMessage,
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 查询App
+ * @tags app
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error Forbidden User not authorized to operate on the specified APIs.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ */
+func (client *Client) GetApp(request *GetAppRequestModel, runtime *RuntimeOptions) (_result *GetAppModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+		},
+		"backoff": map[string]interface{}{
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &GetAppModel{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*GetAppModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
+			request_.Method = "POST"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/app/get")
+			request_.Headers = tea.Merge(map[string]string{
+				"user-agent":   client.GetUserAgent(),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.Region)+".admin.alicloudccp.com"),
+				"content-type": "application/json; charset=utf-8",
+			}, request.Headers)
+			if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+			}
+
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request.Body)))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			respMap := make(map[string]interface{})
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return nil, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &GetAppModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    response_.StatusCode,
+						"statusMessage": response_.StatusMessage,
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return nil, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    response_.StatusCode,
+					"statusMessage": response_.StatusMessage,
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 查询App设置的公钥
+ * @tags app
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error Forbidden User not authorized to operate on the specified APIs.
+ * @error InternalError The request has been failed due to some unknown error.
+ */
+func (client *Client) GetPublicKey(request *GetPublicKeyRequestModel, runtime *RuntimeOptions) (_result *GetPublicKeyModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+		},
+		"backoff": map[string]interface{}{
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &GetPublicKeyModel{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*GetPublicKeyModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
+			request_.Method = "POST"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/app/get_public_key")
+			request_.Headers = tea.Merge(map[string]string{
+				"user-agent":   client.GetUserAgent(),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.Region)+".admin.alicloudccp.com"),
+				"content-type": "application/json; charset=utf-8",
+			}, request.Headers)
+			if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+			}
+
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request.Body)))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			respMap := make(map[string]interface{})
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return nil, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &GetPublicKeyModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    response_.StatusCode,
+						"statusMessage": response_.StatusMessage,
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return nil, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    response_.StatusCode,
+					"statusMessage": response_.StatusMessage,
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 查询App列表
+ * @tags app
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error Forbidden User not authorized to operate on the specified APIs.
+ * @error InternalError The request has been failed due to some unknown error.
+ */
+func (client *Client) ListApp(request *ListAppRequestModel, runtime *RuntimeOptions) (_result *ListAppModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+		},
+		"backoff": map[string]interface{}{
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &ListAppModel{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*ListAppModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
+			request_.Method = "POST"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/app/list")
+			request_.Headers = tea.Merge(map[string]string{
+				"user-agent":   client.GetUserAgent(),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.Region)+".admin.alicloudccp.com"),
+				"content-type": "application/json; charset=utf-8",
+			}, request.Headers)
+			if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+			}
+
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request.Body)))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			respMap := make(map[string]interface{})
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return nil, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &ListAppModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    response_.StatusCode,
+						"statusMessage": response_.StatusMessage,
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return nil, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    response_.StatusCode,
+					"statusMessage": response_.StatusMessage,
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 查询已发布的App列表
+ * @tags app
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error Forbidden User not authorized to operate on the specified APIs.
+ * @error InternalError The request has been failed due to some unknown error.
+ */
+func (client *Client) ListPublishedApp(request *ListPublishedAppRequestModel, runtime *RuntimeOptions) (_result *ListPublishedAppModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+		},
+		"backoff": map[string]interface{}{
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &ListPublishedAppModel{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*ListPublishedAppModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
+			request_.Method = "POST"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/app/list_published")
+			request_.Headers = tea.Merge(map[string]string{
+				"user-agent":   client.GetUserAgent(),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.Region)+".admin.alicloudccp.com"),
+				"content-type": "application/json; charset=utf-8",
+			}, request.Headers)
+			if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+			}
+
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request.Body)))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			respMap := make(map[string]interface{})
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return nil, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &ListPublishedAppModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    response_.StatusCode,
+						"statusMessage": response_.StatusMessage,
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return nil, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    response_.StatusCode,
+					"statusMessage": response_.StatusMessage,
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 设置App公钥
+ * @tags app
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error Forbidden User not authorized to operate on the specified APIs.
+ * @error InternalError The request has been failed due to some unknown error.
+ */
+func (client *Client) SetPublicKey(request *SetPublicKeyRequestModel, runtime *RuntimeOptions) (_result *SetPublicKeyModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+		},
+		"backoff": map[string]interface{}{
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &SetPublicKeyModel{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*SetPublicKeyModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
+			request_.Method = "POST"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/app/set_public_key")
+			request_.Headers = tea.Merge(map[string]string{
+				"user-agent":   client.GetUserAgent(),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.Region)+".admin.alicloudccp.com"),
+				"content-type": "application/json; charset=utf-8",
+			}, request.Headers)
+			if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+			}
+
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request.Body)))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			respMap := make(map[string]interface{})
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return nil, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &SetPublicKeyModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    response_.StatusCode,
+						"statusMessage": response_.StatusMessage,
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return nil, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    response_.StatusCode,
+					"statusMessage": response_.StatusMessage,
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 修改App
+ * @tags app
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error Forbidden User not authorized to operate on the specified APIs.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ */
+func (client *Client) UpdateApp(request *UpdateAppRequestModel, runtime *RuntimeOptions) (_result *UpdateAppModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+		},
+		"backoff": map[string]interface{}{
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &UpdateAppModel{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*UpdateAppModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
+			request_.Method = "POST"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/app/update")
+			request_.Headers = tea.Merge(map[string]string{
+				"user-agent":   client.GetUserAgent(),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.Region)+".admin.alicloudccp.com"),
+				"content-type": "application/json; charset=utf-8",
+			}, request.Headers)
+			if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+			}
+
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request.Body)))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			respMap := make(map[string]interface{})
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return nil, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &UpdateAppModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    response_.StatusCode,
+						"statusMessage": response_.StatusMessage,
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return nil, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    response_.StatusCode,
+					"statusMessage": response_.StatusMessage,
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 添加Store
+ * @tags domain
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error Forbidden User not authorized to operate on the specified APIs.
+ * @error InternalError The request has been failed due to some unknown error.
+ */
+func (client *Client) AddStore(request *AddStoreRequestModel, runtime *RuntimeOptions) (_result *AddStoreModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+		},
+		"backoff": map[string]interface{}{
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &AddStoreModel{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*AddStoreModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
+			request_.Method = "POST"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/domain/add_store")
+			request_.Headers = tea.Merge(map[string]string{
+				"user-agent":   client.GetUserAgent(),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.Region)+".admin.alicloudccp.com"),
+				"content-type": "application/json; charset=utf-8",
+			}, request.Headers)
+			if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+			}
+
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request.Body)))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			respMap := make(map[string]interface{})
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return nil, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &AddStoreModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    response_.StatusCode,
+						"statusMessage": response_.StatusMessage,
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return nil, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    response_.StatusCode,
+					"statusMessage": response_.StatusMessage,
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
  * 创建 Domain
  * @tags domain
  * @error InvalidParameter The input parameter {parameter_name} is not valid.
@@ -3034,6 +4894,149 @@ func (client *Client) GetDomain(request *GetDomainRequestModel, runtime *Runtime
 }
 
 /**
+ * 获取 domain 跨域规则列表
+ * @tags domain
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error Forbidden User not authorized to operate on the specified APIs.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ */
+func (client *Client) GetCorsRuleList(request *GetCorsRuleListRequestModel, runtime *RuntimeOptions) (_result *GetCorsRuleListModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+		},
+		"backoff": map[string]interface{}{
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &GetCorsRuleListModel{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*GetCorsRuleListModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
+			request_.Method = "POST"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/domain/get_cors_rules")
+			request_.Headers = tea.Merge(map[string]string{
+				"user-agent":   client.GetUserAgent(),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.Region)+".admin.alicloudccp.com"),
+				"content-type": "application/json; charset=utf-8",
+			}, request.Headers)
+			if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+			}
+
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request.Body)))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			respMap := make(map[string]interface{})
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return nil, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &GetCorsRuleListModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    response_.StatusCode,
+						"statusMessage": response_.StatusMessage,
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return nil, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    response_.StatusCode,
+					"statusMessage": response_.StatusMessage,
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
  * 列举 Domain
  * @tags domain
  * @error InvalidParameter The input parameter {parameter_name} is not valid.
@@ -3041,7 +5044,7 @@ func (client *Client) GetDomain(request *GetDomainRequestModel, runtime *Runtime
  * @error InternalError The request has been failed due to some unknown error.
  * @error undefined undefined
  */
-func (client *Client) ListDomain(request *ListDomainsRequestModel, runtime *RuntimeOptions) (_result *ListDomainModel, _err error) {
+func (client *Client) ListDomain(request *ListDomainRequestModel, runtime *RuntimeOptions) (_result *ListDomainModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -3134,6 +5137,426 @@ func (client *Client) ListDomain(request *ListDomainsRequestModel, runtime *Runt
 
 				respMap = util.AssertAsMap(obj)
 				_result = &ListDomainModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    response_.StatusCode,
+						"statusMessage": response_.StatusMessage,
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return nil, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    response_.StatusCode,
+					"statusMessage": response_.StatusMessage,
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 查询Store列表
+ * @tags domain
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error Forbidden User not authorized to operate on the specified APIs.
+ * @error InternalError The request has been failed due to some unknown error.
+ */
+func (client *Client) ListStores(request *ListStoresRequestModel, runtime *RuntimeOptions) (_result *ListStoresModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+		},
+		"backoff": map[string]interface{}{
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &ListStoresModel{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*ListStoresModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
+			request_.Method = "POST"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/domain/list_stores")
+			request_.Headers = tea.Merge(map[string]string{
+				"user-agent":   client.GetUserAgent(),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.Region)+".admin.alicloudccp.com"),
+				"content-type": "application/json; charset=utf-8",
+			}, request.Headers)
+			if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+			}
+
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request.Body)))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			respMap := make(map[string]interface{})
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return nil, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &ListStoresModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    response_.StatusCode,
+						"statusMessage": response_.StatusMessage,
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return nil, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    response_.StatusCode,
+					"statusMessage": response_.StatusMessage,
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 移除Store
+ * @tags domain
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error Forbidden User not authorized to operate on the specified APIs.
+ * @error InternalError The request has been failed due to some unknown error.
+ */
+func (client *Client) RemoveStore(request *RemoveStoreRequestModel, runtime *RuntimeOptions) (_result *RemoveStoreModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+		},
+		"backoff": map[string]interface{}{
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &RemoveStoreModel{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*RemoveStoreModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
+			request_.Method = "POST"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/domain/remove_store")
+			request_.Headers = tea.Merge(map[string]string{
+				"user-agent":   client.GetUserAgent(),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.Region)+".admin.alicloudccp.com"),
+				"content-type": "application/json; charset=utf-8",
+			}, request.Headers)
+			if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+			}
+
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request.Body)))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			respMap := make(map[string]interface{})
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 204) {
+				_result = &RemoveStoreModel{}
+				_err = tea.Convert(map[string]map[string]string{
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !util.Empty(response_.Headers["x-ca-error-message"]) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    response_.StatusCode,
+						"statusMessage": response_.StatusMessage,
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return nil, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    response_.StatusCode,
+					"statusMessage": response_.StatusMessage,
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 增加 domain 跨域规则
+ * @tags domain
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error Forbidden User not authorized to operate on the specified APIs.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ */
+func (client *Client) SetCorsRuleList(request *SetCorsRuleListRequestModel, runtime *RuntimeOptions) (_result *SetCorsRuleListModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": util.DefaultNumber(tea.IntValue(runtime.MaxAttempts), 3),
+		},
+		"backoff": map[string]interface{}{
+			"policy": util.DefaultString(tea.StringValue(runtime.BackoffPolicy), "no"),
+			"period": util.DefaultNumber(tea.IntValue(runtime.BackoffPeriod), 1),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &SetCorsRuleListModel{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*SetCorsRuleListModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, "https")
+			request_.Method = "POST"
+			request_.Pathname = client.GetPathname(client.Nickname, "/v2/domain/set_cors_rules")
+			request_.Headers = tea.Merge(map[string]string{
+				"user-agent":   client.GetUserAgent(),
+				"host":         util.DefaultString(client.Endpoint, tea.ToString(client.Region)+".admin.alicloudccp.com"),
+				"content-type": "application/json; charset=utf-8",
+			}, request.Headers)
+			if !util.Empty(accesskeyId) && !util.Empty(accessKeySecret) {
+				if !util.Empty(securityToken) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(accesskeyId) + ":" + tea.ToString(roautil.GetSignature(stringToSign, accessKeySecret))
+			}
+
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request.Body)))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			respMap := make(map[string]interface{})
+			obj := interface{}(nil)
+			if util.EqualNumber(response_.StatusCode, 200) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return nil, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &SetCorsRuleListModel{}
 				_err = tea.Convert(map[string]interface{}{
 					"body":    respMap,
 					"headers": response_.Headers,
