@@ -20,13 +20,6 @@ public class Client {
             ));
         }
 
-        if (com.aliyun.teautil.Common.empty(config.region)) {
-            throw new TeaException(TeaConverter.buildMap(
-                new TeaPair("name", "ParameterMissing"),
-                new TeaPair("message", "'config.region' can not be empty")
-            ));
-        }
-
         if (!com.aliyun.teautil.Common.empty(config.accessKeyId)) {
             if (com.aliyun.teautil.Common.empty(config.type)) {
                 config.type = "access_key";

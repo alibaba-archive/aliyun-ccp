@@ -3161,14 +3161,6 @@ func (client *Client) Init(config *Config) (_err error) {
 		return _err
 	}
 
-	if util.Empty(tea.StringValue(config.Region)) {
-		_err = tea.NewSDKError(map[string]interface{}{
-			"name":    "ParameterMissing",
-			"message": "'config.region' can not be empty",
-		})
-		return _err
-	}
-
 	if !util.Empty(tea.StringValue(config.AccessKeyId)) {
 		if util.Empty(tea.StringValue(config.Type)) {
 			config.Type = tea.String("access_key")
