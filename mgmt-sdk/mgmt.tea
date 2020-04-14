@@ -48,12 +48,6 @@ init(config: Config){
       message = "'config' can not be unset"
     };
   }
-  if (Util.empty(config.region)) {
-    throw {
-      name = "ParameterMissing",
-      message = '\'config.region\' can not be empty'
-    };
-  }
   if (!Util.empty(config.accessKeyId)) {
     if (Util.empty(config.type)) {
       config.type = 'access_key';
