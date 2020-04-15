@@ -17,7 +17,7 @@ $ go mod tidy
 [Opening an Issue](https://github.com/aliyun/aliyun-ccp/issues/new), Issues not conforming to the guidelines may be closed immediately.
 
 ## Changelog
-Detailed changes for each release are documented in the [release notes](./../../ChangeLog-Go.txt).
+Detailed changes for each release are documented in the [release notes](./ChangeLog.txt).
 
 ## References
 * [Latest Release](https://github.com/aliyun/aliyun-ccp/tree/master/osspath-sdk/go)

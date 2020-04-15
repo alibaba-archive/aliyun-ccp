@@ -1,7 +1,7 @@
 English | [简体中文](README-CN.md)
 ![](https://aliyunsdk-pages.alicdn.com/icons/AlibabaCloud.svg)
 
-## Alibaba Cloud CCPPath SDK for Go
+## Alibaba Cloud CCP Credentials for Go
 
 ## Requirements
 - It's necessary for you to make sure your system have installed a Go environment which is new than 1.12.0.
@@ -20,7 +20,7 @@ $ go mod tidy
 Detailed changes for each release are documented in the [release notes](./ChangeLog.txt).
 
 ## References
-* [Latest Release](https://github.com/aliyun/aliyun-ccp/tree/master/ccppath-sdk/go)
+* [Latest Release](https://github.com/aliyun/aliyun-ccp)
 
 ## License
 [Apache-2.0](http://www.apache.org/licenses/LICENSE-2.0)

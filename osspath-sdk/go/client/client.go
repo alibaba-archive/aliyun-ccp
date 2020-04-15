@@ -5,11 +5,11 @@
 package client
 
 import (
+	accesstokencredential "github.com/alibabacloud-go/ccp-credentials/service"
+	roautil "github.com/alibabacloud-go/tea-roa-utils/service"
+	util "github.com/alibabacloud-go/tea-utils/service"
 	"github.com/alibabacloud-go/tea/tea"
-	accesstokencredential "github.com/aliyun/aliyun-ccp/credential/golang/service"
 	credential "github.com/aliyun/credentials-go/credentials"
-	roautil "github.com/aliyun/tea-roa-util/golang/service"
-	util "github.com/aliyun/tea-util/golang/service"
 )
 
 type RuntimeOptions struct {
@@ -19996,10 +19996,7 @@ func (client *Client) SetExpireTime(expireTime string) (_err error) {
 		return _err
 	}
 
-	_err = client.AccessTokenCredential.SetExpireTime(expireTime)
-	if _err != nil {
-		return
-	}
+	client.AccessTokenCredential.SetExpireTime(expireTime)
 	return _err
 }
 
