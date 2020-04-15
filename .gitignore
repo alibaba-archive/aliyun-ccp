@@ -57,3 +57,6 @@ composer.lock
 
 #scripts
 *.sh
+
+#python
+**/python/**/__pycache__/
