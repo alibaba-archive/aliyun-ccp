@@ -2639,10 +2639,11 @@ package main
 
 import (
 	"fmt"
-	"github.com/aliyun/aliyun-ccp/ccppath-sdk/go/client"
 	"net/http"
 	"os"
 	"strings"
+
+	"github.com/alibabacloud-go/ccppath-sdk/client"
 )
 
 var clientConf = new(client.Config).
