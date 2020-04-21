@@ -62,41 +62,41 @@ func NewAccessTokenCredential(config *Config) (a *AccessTokenCredential, err err
 	a.ClientSecret = config.ClientSecret
 	a.DomainId = config.DomainId
 	if config.ExpireTime != nil {
-		err = a.SetExpireTime(tea.StringValue(config.ExpireTime))
+		err = a.SetExpireTime(config.ExpireTime)
 	}
 	return a, err
 }
 
-func (a *AccessTokenCredential) SetExpireTime(expireTime string) error {
-	expiretime, err := time.Parse(time.RFC3339, expireTime)
+func (a *AccessTokenCredential) SetExpireTime(expireTime *string) error {
+	expiretime, err := time.Parse(time.RFC3339, tea.StringValue(expireTime))
 	if err != nil {
 		return err
 	}
 	unix := expiretime.Unix()
 	a.ExpireTime = &unix
-	a.ExpireTimeRaw = &expireTime
+	a.ExpireTimeRaw = expireTime
 	return nil
 }
 
-func (a *AccessTokenCredential) GetExpireTime() string {
-	return tea.StringValue(a.ExpireTimeRaw)
+func (a *AccessTokenCredential) GetExpireTime() *string {
+	return a.ExpireTimeRaw
 }
 
-func (a *AccessTokenCredential) SetRefreshToken(token string) {
-	a.RefreshToken = &token
+func (a *AccessTokenCredential) SetRefreshToken(token *string) {
+	a.RefreshToken = token
 }
 
-func (a *AccessTokenCredential) GetRefreshToken() string {
-	return tea.StringValue(a.RefreshToken)
+func (a *AccessTokenCredential) GetRefreshToken() *string {
+	return a.RefreshToken
 }
 
-func (a *AccessTokenCredential) SetAccessToken(token string) {
-	a.AccessToken = &token
+func (a *AccessTokenCredential) SetAccessToken(token *string) {
+	a.AccessToken = token
 }
 
-func (a *AccessTokenCredential) GetAccessToken() (string, error) {
+func (a *AccessTokenCredential) GetAccessToken() (*string, error) {
 	if a == nil {
-		return "", nil
+		return tea.String(""), nil
 	}
 
 	mutex.Lock()
@@ -110,13 +110,13 @@ func (a *AccessTokenCredential) GetAccessToken() (string, error) {
 			a.ExpireTime = &expireTime
 			a.ExpireTimeRaw = &expireTimeRaw
 			mutex.Unlock()
-			return accessToken, nil
+			return tea.String(accessToken), nil
 		}
 		mutex.Unlock()
-		return "", err
+		return tea.String(""), err
 	} else {
 		mutex.Unlock()
-		return tea.StringValue(a.AccessToken), nil
+		return a.AccessToken, nil
 	}
 
 }
@@ -135,9 +135,9 @@ func getRFC2616Date() string {
 
 func refreshAccessToken(endpoint, domainId, refreshToken, clientId, clientSecret string) (string, string, string, int64, error) {
 	request := tea.NewRequest()
-	request.Protocol = "http"
-	request.Method = "POST"
-	request.Pathname = "/v2/oauth/token"
+	request.Protocol = tea.String("http")
+	request.Method = tea.String("POST")
+	request.Pathname = tea.String("/v2/oauth/token")
 	request.Headers = map[string]string{
 		"date":                    getRFC2616Date(),
 		"content-type":            "application/x-www-form-urlencoded",
@@ -163,7 +163,7 @@ func refreshAccessToken(endpoint, domainId, refreshToken, clientId, clientSecret
 		return "", "", "", 0, err
 	}
 
-	if response.StatusCode != 200 {
+	if tea.IntValue(response.StatusCode) != 200 {
 		err = errors.New(string(body))
 		RefreshFailCallbackFn(err)
 		return "", "", "", 0, err
