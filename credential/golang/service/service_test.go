@@ -16,25 +16,25 @@ var a *AccessTokenCredential
 
 func Test_Init(t *testing.T) {
 	a = new(AccessTokenCredential)
-	err := a.SetExpireTime("2006-01-T15:04:05Z")
+	err := a.SetExpireTime(tea.String("2006-01-T15:04:05Z"))
 	utils.AssertContains(t, err.Error(), `parsing time "2006-01-T15:04:05Z" as "2006-01-02T15:04:05Z07:00"`)
 
 	expiretime := a.GetExpireTime()
-	utils.AssertEqual(t, expiretime, "")
+	utils.AssertEqual(t, tea.StringValue(expiretime), "")
 
-	err = a.SetExpireTime("2006-01-02T15:04:05Z")
+	err = a.SetExpireTime(tea.String("2006-01-02T15:04:05Z"))
 	utils.AssertNil(t, err)
 	expiretime = a.GetExpireTime()
-	utils.AssertContains(t, expiretime, "2006-01-02T")
+	utils.AssertContains(t, tea.StringValue(expiretime), "2006-01-02T")
 
 	refreshtoken := a.GetRefreshToken()
-	utils.AssertEqual(t, refreshtoken, "")
+	utils.AssertEqual(t, tea.StringValue(refreshtoken), "")
 
-	a.SetRefreshToken("refreshtoken")
+	a.SetRefreshToken(tea.String("refreshtoken"))
 	refreshtoken = a.GetRefreshToken()
-	utils.AssertEqual(t, refreshtoken, "refreshtoken")
+	utils.AssertEqual(t, tea.StringValue(refreshtoken), "refreshtoken")
 
-	a.SetAccessToken("accesstoken")
+	a.SetAccessToken(tea.String("accesstoken"))
 	utils.AssertEqual(t, *a.AccessToken, "accesstoken")
 }
 
@@ -65,7 +65,7 @@ func Test_RefreshTokenWithConcurrent(t *testing.T) {
 		go func() {
 			accesstoken, err := a.GetAccessToken()
 			utils.AssertNil(t, err)
-			utils.AssertEqual(t, "access_token", accesstoken)
+			utils.AssertEqual(t, "access_token", tea.StringValue(accesstoken))
 			wg.Done()
 		}()
 	}
@@ -100,7 +100,7 @@ func Test_GetAccessToken(t *testing.T) {
 	}
 	accesstoken, err := a.GetAccessToken()
 	utils.AssertEqual(t, err.Error(), `parsing time "2006-01-T15:04:05Z" as "2006-01-02T15:04:05Z07:00": cannot parse "T15:04:05Z" as "02"`)
-	utils.AssertEqual(t, accesstoken, "")
+	utils.AssertEqual(t, tea.StringValue(accesstoken), "")
 	utils.AssertEqual(t, err1.Error(), `parsing time "2006-01-T15:04:05Z" as "2006-01-02T15:04:05Z07:00": cannot parse "T15:04:05Z" as "02"`)
 
 	hookdo = func(resp *tea.Response, err error) (*tea.Response, error) {
@@ -114,22 +114,22 @@ func Test_GetAccessToken(t *testing.T) {
 	}
 	accesstoken, err = a.GetAccessToken()
 	utils.AssertNil(t, err)
-	utils.AssertEqual(t, accesstoken, "access_token")
+	utils.AssertEqual(t, tea.StringValue(accesstoken), "access_token")
 
 	a.ExpireTime = nil
 	accesstoken, err = a.GetAccessToken()
 	utils.AssertNil(t, err)
-	utils.AssertEqual(t, accesstoken, "access_token")
+	utils.AssertEqual(t, tea.StringValue(accesstoken), "access_token")
 
 	a.AccessToken = nil
 	accesstoken, err = a.GetAccessToken()
 	utils.AssertNil(t, err)
-	utils.AssertEqual(t, accesstoken, "")
+	utils.AssertEqual(t, tea.StringValue(accesstoken), "")
 
 	a = nil
 	accesstoken, err = a.GetAccessToken()
 	utils.AssertNil(t, err)
-	utils.AssertEqual(t, accesstoken, "")
+	utils.AssertEqual(t, tea.StringValue(accesstoken), "")
 }
 
 func Test_refreshAccessToken(t *testing.T) {
