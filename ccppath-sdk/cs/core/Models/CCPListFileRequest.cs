@@ -48,6 +48,10 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         [Validation(Required=false)]
         public string Category { get; set; }
 
+        [NameInMap("fields")]
+        [Validation(Required=false)]
+        public string Fields { get; set; }
+
         [NameInMap("order_by")]
         [Validation(Required=false)]
         public string OrderBy { get; set; }

@@ -15,13 +15,13 @@ namespace Aliyun.SDK.CCP.OSSClient
 {
     public class Client 
     {
-        private string _domainId;
-        private string _endpoint;
-        private string _protocol;
-        private string _nickname;
-        private string _userAgent;
-        private Aliyun.Credentials.Client _credential;
-        private AlibabaCloud.AccessTokenCredential.Client _accessTokenCredential;
+        protected string _domainId;
+        protected AlibabaCloud.AccessTokenCredential.Client _accessTokenCredential;
+        protected string _endpoint;
+        protected string _protocol;
+        protected string _nickname;
+        protected string _userAgent;
+        protected Aliyun.Credentials.Client _credential;
 
         public Client(Config config)
         {
@@ -72,9 +72,9 @@ namespace Aliyun.SDK.CCP.OSSClient
             }
             this._endpoint = config.Endpoint;
             this._protocol = config.Protocol;
-            this._domainId = config.DomainId;
             this._userAgent = config.UserAgent;
             this._nickname = config.Nickname;
+            this._domainId = config.DomainId;
         }
 
         /**
@@ -14677,7 +14677,7 @@ namespace Aliyun.SDK.CCP.OSSClient
             {
                 return ;
             }
-            await this._accessTokenCredential.SetExpireTimeAsync(expireTime);
+            this._accessTokenCredential.SetExpireTime(expireTime);
         }
 
         public string GetExpireTime()
@@ -14688,22 +14688,6 @@ namespace Aliyun.SDK.CCP.OSSClient
             }
             string expireTime = this._accessTokenCredential.GetExpireTime();
             return expireTime;
-        }
-
-        public void SetUserAgent(string userAgent)
-        {
-            this._userAgent = userAgent;
-        }
-
-        public void AppendUserAgent(string userAgent)
-        {
-            this._userAgent = _userAgent + " " + userAgent;
-        }
-
-        public string GetUserAgent()
-        {
-            string userAgent = AlibabaCloud.TeaUtil.Common.GetUserAgent(_userAgent);
-            return userAgent;
         }
 
         public void SetRefreshToken(string token)
@@ -14752,6 +14736,22 @@ namespace Aliyun.SDK.CCP.OSSClient
             }
             string token = await this._accessTokenCredential.GetAccessTokenAsync();
             return token;
+        }
+
+        public void SetUserAgent(string userAgent)
+        {
+            this._userAgent = userAgent;
+        }
+
+        public void AppendUserAgent(string userAgent)
+        {
+            this._userAgent = _userAgent + " " + userAgent;
+        }
+
+        public string GetUserAgent()
+        {
+            string userAgent = AlibabaCloud.TeaUtil.Common.GetUserAgent(_userAgent);
+            return userAgent;
         }
 
         public string GetAccessKeyId()

@@ -14,28 +14,8 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         public string Endpoint { get; set; }
 
         [NameInMap("domainId")]
-        [Validation(Required=true)]
+        [Validation(Required=false)]
         public string DomainId { get; set; }
-
-        [NameInMap("protocol")]
-        [Validation(Required=false)]
-        public string Protocol { get; set; }
-
-        [NameInMap("type")]
-        [Validation(Required=false)]
-        public string Type { get; set; }
-
-        [NameInMap("securityToken")]
-        [Validation(Required=false)]
-        public string SecurityToken { get; set; }
-
-        [NameInMap("accessKeyId")]
-        [Validation(Required=false)]
-        public string AccessKeyId { get; set; }
-
-        [NameInMap("accessKeySecret")]
-        [Validation(Required=false)]
-        public string AccessKeySecret { get; set; }
 
         [NameInMap("clientId")]
         [Validation(Required=false)]
@@ -56,6 +36,26 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         [NameInMap("expireTime")]
         [Validation(Required=false)]
         public string ExpireTime { get; set; }
+
+        [NameInMap("protocol")]
+        [Validation(Required=false)]
+        public string Protocol { get; set; }
+
+        [NameInMap("type")]
+        [Validation(Required=false)]
+        public string Type { get; set; }
+
+        [NameInMap("securityToken")]
+        [Validation(Required=false)]
+        public string SecurityToken { get; set; }
+
+        [NameInMap("accessKeyId")]
+        [Validation(Required=false)]
+        public string AccessKeyId { get; set; }
+
+        [NameInMap("accessKeySecret")]
+        [Validation(Required=false)]
+        public string AccessKeySecret { get; set; }
 
         [NameInMap("nickname")]
         [Validation(Required=false)]

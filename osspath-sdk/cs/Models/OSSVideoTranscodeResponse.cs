@@ -16,6 +16,10 @@ namespace Aliyun.SDK.CCP.OSSClient.Models
         [Validation(Required=false)]
         public List<string> DefinitionList { get; set; }
 
+        [NameInMap("duration")]
+        [Validation(Required=false)]
+        public long Duration { get; set; }
+
         [NameInMap("hls_time")]
         [Validation(Required=false)]
         public long HlsTime { get; set; }

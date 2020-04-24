@@ -25,7 +25,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         public string FileId { get; set; }
 
         [NameInMap("file_name")]
-        [Validation(Required=false, Pattern=".{1,1000}")]
+        [Validation(Required=false, MaxLength=1024)]
         public string FileName { get; set; }
 
     }

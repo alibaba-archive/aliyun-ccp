@@ -7,7 +7,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PackageReleaseNotes></PackageReleaseNotes>
     <AssemblyName>Aliyun.SDK.CCP.Client</AssemblyName>
-    <Version>2.0.3</Version>
+    <Version>2.0.4</Version>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <LangVersion>5</LangVersion>
   </PropertyGroup>
@@ -37,8 +37,8 @@
 
   <ItemGroup>
     <PackageReference Include="AlibabaCloud.AccessTokenCredential" Version="0.0.1" />
-    <PackageReference Include="AlibabaCloud.ROAUtil" Version="0.0.2" />
-    <PackageReference Include="AlibabaCloud.TeaUtil" Version="0.1.1" />
+    <PackageReference Include="AlibabaCloud.ROAUtil" Version="0.0.3" />
+    <PackageReference Include="AlibabaCloud.TeaUtil" Version="0.1.2" />
     <PackageReference Include="Aliyun.Credentials" Version="1.2.1" />
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.0-preview.2">
       <PrivateAssets>all</PrivateAssets>

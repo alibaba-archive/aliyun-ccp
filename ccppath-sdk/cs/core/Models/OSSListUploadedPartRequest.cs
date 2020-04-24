@@ -29,7 +29,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         public long PartNumberMarker { get; set; }
 
         [NameInMap("share_id")]
-        [Validation(Required=false, Pattern="[0-9a-zA-z-]+")]
+        [Validation(Required=false, Pattern="[0-9a-zA-Z-]+")]
         public string ShareId { get; set; }
 
         [NameInMap("upload_id")]

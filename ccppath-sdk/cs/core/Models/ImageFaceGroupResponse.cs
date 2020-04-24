@@ -32,6 +32,10 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         [Validation(Required=false)]
         public string GroupName { get; set; }
 
+        [NameInMap("image_count")]
+        [Validation(Required=false)]
+        public long ImageCount { get; set; }
+
         [NameInMap("updated_at")]
         [Validation(Required=false)]
         public string UpdatedAt { get; set; }

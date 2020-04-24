@@ -1,3 +1,6 @@
+### 2020-04-24 Version 2.0.4
+* ReCodegen CCP for CSharp
+
 ### 2020-04-03 Version 2.0.3
 * ReCodegen CCP for CSharp
 
