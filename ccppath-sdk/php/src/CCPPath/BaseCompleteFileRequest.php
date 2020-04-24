@@ -41,7 +41,6 @@ class BaseCompleteFileRequest extends Model
 
     public function validate()
     {
-        Model::validateRequired('driveId', $this->driveId, true);
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
     }
 

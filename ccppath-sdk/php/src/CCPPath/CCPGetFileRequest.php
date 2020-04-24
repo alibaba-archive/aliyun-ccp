@@ -21,6 +21,15 @@ class CCPGetFileRequest extends Model
     public $driveId;
 
     /**
+     * @description fields
+     *
+     * @example *
+     *
+     * @var string
+     */
+    public $fields;
+
+    /**
      * @description file_id
      *
      * @example 5d5b846942cf94fa72324c14a4bda34e81da635d
@@ -66,6 +75,7 @@ class CCPGetFileRequest extends Model
     public $videoThumbnailProcess;
     protected $_name = [
         'driveId'               => 'drive_id',
+        'fields'                => 'fields',
         'fileId'                => 'file_id',
         'imageThumbnailProcess' => 'image_thumbnail_process',
         'imageUrlProcess'       => 'image_url_process',
@@ -73,6 +83,7 @@ class CCPGetFileRequest extends Model
         'videoThumbnailProcess' => 'video_thumbnail_process',
     ];
     protected $_default = [
+        'fields'       => '*',
         'urlExpireSec' => 900,
     ];
 
@@ -90,6 +101,7 @@ class CCPGetFileRequest extends Model
     {
         $res                            = [];
         $res['drive_id']                = $this->driveId;
+        $res['fields']                  = $this->fields;
         $res['file_id']                 = $this->fileId;
         $res['image_thumbnail_process'] = $this->imageThumbnailProcess;
         $res['image_url_process']       = $this->imageUrlProcess;
@@ -109,6 +121,9 @@ class CCPGetFileRequest extends Model
         $model = new self();
         if (isset($map['drive_id'])) {
             $model->driveId = $map['drive_id'];
+        }
+        if (isset($map['fields'])) {
+            $model->fields = $map['fields'];
         }
         if (isset($map['file_id'])) {
             $model->fileId = $map['file_id'];

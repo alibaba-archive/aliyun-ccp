@@ -54,6 +54,15 @@ class ImageFaceGroupResponse extends Model
     public $groupName;
 
     /**
+     * @description 照片个数
+     *
+     * @example 2
+     *
+     * @var int
+     */
+    public $imageCount;
+
+    /**
      * @description 人脸分组修改时间
      *
      * @example 2019-02-20T09:35:51.057Z
@@ -67,6 +76,7 @@ class ImageFaceGroupResponse extends Model
         'groupCoverUrl' => 'group_cover_url',
         'groupId'       => 'group_id',
         'groupName'     => 'group_name',
+        'imageCount'    => 'image_count',
         'updatedAt'     => 'updated_at',
     ];
 
@@ -82,6 +92,7 @@ class ImageFaceGroupResponse extends Model
         $res['group_cover_url'] = $this->groupCoverUrl;
         $res['group_id']        = $this->groupId;
         $res['group_name']      = $this->groupName;
+        $res['image_count']     = $this->imageCount;
         $res['updated_at']      = $this->updatedAt;
 
         return $res;
@@ -109,6 +120,9 @@ class ImageFaceGroupResponse extends Model
         }
         if (isset($map['group_name'])) {
             $model->groupName = $map['group_name'];
+        }
+        if (isset($map['image_count'])) {
+            $model->imageCount = $map['image_count'];
         }
         if (isset($map['updated_at'])) {
             $model->updatedAt = $map['updated_at'];

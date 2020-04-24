@@ -12,40 +12,31 @@ use AlibabaCloud\Tea\RoaUtils\RoaUtils;
 use AlibabaCloud\Tea\Tea;
 use AlibabaCloud\Tea\Utils\Utils;
 use Aliyun\CCP\Credentials\CCPCredentials;
-use Aliyun\CCP\SDK\CCPPath\AccountLinkRequestModel;
+use Aliyun\CCP\SDK\CCPPath\BatchOperationModel;
+use Aliyun\CCP\SDK\CCPPath\BatchOperationRequestModel;
 use Aliyun\CCP\SDK\CCPPath\CancelLinkModel;
 use Aliyun\CCP\SDK\CCPPath\CancelLinkRequestModel;
-use Aliyun\CCP\SDK\CCPPath\CCPBatchRequestModel;
-use Aliyun\CCP\SDK\CCPPath\CCPCompleteFileRequestModel;
-use Aliyun\CCP\SDK\CCPPath\CCPCopyFileRequestModel;
-use Aliyun\CCP\SDK\CCPPath\CCPCreateFileRequestModel;
-use Aliyun\CCP\SDK\CCPPath\CCPDeleteFileRequestModel;
-use Aliyun\CCP\SDK\CCPPath\CCPGetAsyncTaskRequestModel;
-use Aliyun\CCP\SDK\CCPPath\CCPGetDownloadUrlRequestModel;
-use Aliyun\CCP\SDK\CCPPath\CCPGetFileRequestModel;
-use Aliyun\CCP\SDK\CCPPath\CCPGetUploadUrlRequestModel;
-use Aliyun\CCP\SDK\CCPPath\CCPListFileRequestModel;
-use Aliyun\CCP\SDK\CCPPath\CCPListUploadedPartRequestModel;
-use Aliyun\CCP\SDK\CCPPath\CCPMoveFileRequestModel;
-use Aliyun\CCP\SDK\CCPPath\CCPSearchFileRequestModel;
-use Aliyun\CCP\SDK\CCPPath\CCPUpdateFileMetaRequestModel;
 use Aliyun\CCP\SDK\CCPPath\ChangePasswordModel;
+use Aliyun\CCP\SDK\CCPPath\ChangePasswordRequestModel;
 use Aliyun\CCP\SDK\CCPPath\CheckExistModel;
+use Aliyun\CCP\SDK\CCPPath\CheckExistRequestModel;
 use Aliyun\CCP\SDK\CCPPath\CompleteFileModel;
+use Aliyun\CCP\SDK\CCPPath\CompleteFileRequestModel;
 use Aliyun\CCP\SDK\CCPPath\Config;
 use Aliyun\CCP\SDK\CCPPath\ConfirmLinkModel;
 use Aliyun\CCP\SDK\CCPPath\ConfirmLinkRequestModel;
 use Aliyun\CCP\SDK\CCPPath\CopyFileModel;
+use Aliyun\CCP\SDK\CCPPath\CopyFileRequestModel;
 use Aliyun\CCP\SDK\CCPPath\CreateDriveModel;
 use Aliyun\CCP\SDK\CCPPath\CreateDriveRequestModel;
 use Aliyun\CCP\SDK\CCPPath\CreateFileModel;
+use Aliyun\CCP\SDK\CCPPath\CreateFileRequestModel;
 use Aliyun\CCP\SDK\CCPPath\CreateUserModel;
 use Aliyun\CCP\SDK\CCPPath\CreateUserRequestModel;
-use Aliyun\CCP\SDK\CCPPath\DefaultChangePasswordRequestModel;
-use Aliyun\CCP\SDK\CCPPath\DefaultSetPasswordRequestModel;
 use Aliyun\CCP\SDK\CCPPath\DeleteDriveModel;
 use Aliyun\CCP\SDK\CCPPath\DeleteDriveRequestModel;
 use Aliyun\CCP\SDK\CCPPath\DeleteFileModel;
+use Aliyun\CCP\SDK\CCPPath\DeleteFileRequestModel;
 use Aliyun\CCP\SDK\CCPPath\DeleteUserModel;
 use Aliyun\CCP\SDK\CCPPath\DeleteUserRequestModel;
 use Aliyun\CCP\SDK\CCPPath\DownloadFileModel;
@@ -53,63 +44,88 @@ use Aliyun\CCP\SDK\CCPPath\DownloadFileRequestModel;
 use Aliyun\CCP\SDK\CCPPath\GetAccessTokenByLinkInfoModel;
 use Aliyun\CCP\SDK\CCPPath\GetAccessTokenByLinkInfoRequestModel;
 use Aliyun\CCP\SDK\CCPPath\GetAsyncTaskInfoModel;
-use Aliyun\CCP\SDK\CCPPath\GetByLinkInfoRequestModel;
+use Aliyun\CCP\SDK\CCPPath\GetAsyncTaskInfoRequestModel;
 use Aliyun\CCP\SDK\CCPPath\GetCaptchaModel;
 use Aliyun\CCP\SDK\CCPPath\GetCaptchaRequestModel;
 use Aliyun\CCP\SDK\CCPPath\GetDefaultDriveModel;
 use Aliyun\CCP\SDK\CCPPath\GetDefaultDriveRequestModel;
 use Aliyun\CCP\SDK\CCPPath\GetDownloadUrlModel;
+use Aliyun\CCP\SDK\CCPPath\GetDownloadUrlRequestModel;
 use Aliyun\CCP\SDK\CCPPath\GetDriveModel;
 use Aliyun\CCP\SDK\CCPPath\GetDriveRequestModel;
+use Aliyun\CCP\SDK\CCPPath\GetFileByPathModel;
+use Aliyun\CCP\SDK\CCPPath\GetFileByPathRequestModel;
 use Aliyun\CCP\SDK\CCPPath\GetFileModel;
-use Aliyun\CCP\SDK\CCPPath\GetImageCountRequestModel;
+use Aliyun\CCP\SDK\CCPPath\GetFileRequestModel;
+use Aliyun\CCP\SDK\CCPPath\GetLastCursorModel;
+use Aliyun\CCP\SDK\CCPPath\GetLastCursorRequestModel;
 use Aliyun\CCP\SDK\CCPPath\GetLinkInfoByUserIdModel;
-use Aliyun\CCP\SDK\CCPPath\GetLinkInfoByUserIDRequestModel;
+use Aliyun\CCP\SDK\CCPPath\GetLinkInfoByUserIdRequestModel;
 use Aliyun\CCP\SDK\CCPPath\GetLinkInfoModel;
+use Aliyun\CCP\SDK\CCPPath\GetLinkInfoRequestModel;
 use Aliyun\CCP\SDK\CCPPath\GetPhotoCountModel;
+use Aliyun\CCP\SDK\CCPPath\GetPhotoCountRequestModel;
 use Aliyun\CCP\SDK\CCPPath\GetUploadUrlModel;
+use Aliyun\CCP\SDK\CCPPath\GetUploadUrlRequestModel;
 use Aliyun\CCP\SDK\CCPPath\GetUserModel;
 use Aliyun\CCP\SDK\CCPPath\GetUserRequestModel;
 use Aliyun\CCP\SDK\CCPPath\LinkModel;
+use Aliyun\CCP\SDK\CCPPath\LinkRequestModel;
 use Aliyun\CCP\SDK\CCPPath\ListAddressGroupsModel;
-use Aliyun\CCP\SDK\CCPPath\ListDriveRequestModel;
+use Aliyun\CCP\SDK\CCPPath\ListAddressGroupsRequestModel;
 use Aliyun\CCP\SDK\CCPPath\ListDrivesModel;
+use Aliyun\CCP\SDK\CCPPath\ListDrivesRequestModel;
 use Aliyun\CCP\SDK\CCPPath\ListFaceGroupsModel;
+use Aliyun\CCP\SDK\CCPPath\ListFaceGroupsRequestModel;
+use Aliyun\CCP\SDK\CCPPath\ListFileByCustomIndexKeyModel;
+use Aliyun\CCP\SDK\CCPPath\ListFileByCustomIndexKeyRequestModel;
+use Aliyun\CCP\SDK\CCPPath\ListFileDeltaModel;
+use Aliyun\CCP\SDK\CCPPath\ListFileDeltaRequestModel;
 use Aliyun\CCP\SDK\CCPPath\ListFileModel;
-use Aliyun\CCP\SDK\CCPPath\ListImageAddressGroupsRequestModel;
-use Aliyun\CCP\SDK\CCPPath\ListImageFaceGroupsRequestModel;
-use Aliyun\CCP\SDK\CCPPath\ListImageTagsRequestModel;
-use Aliyun\CCP\SDK\CCPPath\ListMyDriveRequestModel;
+use Aliyun\CCP\SDK\CCPPath\ListFileRequestModel;
 use Aliyun\CCP\SDK\CCPPath\ListMyDrivesModel;
+use Aliyun\CCP\SDK\CCPPath\ListMyDrivesRequestModel;
 use Aliyun\CCP\SDK\CCPPath\ListTagsModel;
+use Aliyun\CCP\SDK\CCPPath\ListTagsRequestModel;
 use Aliyun\CCP\SDK\CCPPath\ListUploadedPartsModel;
-use Aliyun\CCP\SDK\CCPPath\ListUserRequestModel;
+use Aliyun\CCP\SDK\CCPPath\ListUploadedPartsRequestModel;
 use Aliyun\CCP\SDK\CCPPath\ListUsersModel;
+use Aliyun\CCP\SDK\CCPPath\ListUsersRequestModel;
 use Aliyun\CCP\SDK\CCPPath\LoginModel;
-use Aliyun\CCP\SDK\CCPPath\MobileCheckExistRequestModel;
-use Aliyun\CCP\SDK\CCPPath\MobileLoginRequestModel;
-use Aliyun\CCP\SDK\CCPPath\MobileRegisterRequestModel;
+use Aliyun\CCP\SDK\CCPPath\LoginRequestModel;
 use Aliyun\CCP\SDK\CCPPath\MobileSendSmsCodeModel;
 use Aliyun\CCP\SDK\CCPPath\MobileSendSmsCodeRequestModel;
 use Aliyun\CCP\SDK\CCPPath\MoveFileModel;
-use Aliyun\CCP\SDK\CCPPath\OperationModel;
+use Aliyun\CCP\SDK\CCPPath\MoveFileRequestModel;
 use Aliyun\CCP\SDK\CCPPath\RegisterModel;
+use Aliyun\CCP\SDK\CCPPath\RegisterRequestModel;
 use Aliyun\CCP\SDK\CCPPath\RuntimeOptions;
+use Aliyun\CCP\SDK\CCPPath\ScanFileMetaModel;
+use Aliyun\CCP\SDK\CCPPath\ScanFileMetaRequestModel;
+use Aliyun\CCP\SDK\CCPPath\SearchAddressGroupsModel;
+use Aliyun\CCP\SDK\CCPPath\SearchAddressGroupsRequestModel;
 use Aliyun\CCP\SDK\CCPPath\SearchFileModel;
+use Aliyun\CCP\SDK\CCPPath\SearchFileRequestModel;
 use Aliyun\CCP\SDK\CCPPath\SearchUserModel;
 use Aliyun\CCP\SDK\CCPPath\SearchUserRequestModel;
 use Aliyun\CCP\SDK\CCPPath\SetPasswordModel;
+use Aliyun\CCP\SDK\CCPPath\SetPasswordRequestModel;
 use Aliyun\CCP\SDK\CCPPath\TokenModel;
 use Aliyun\CCP\SDK\CCPPath\TokenRequestModel;
 use Aliyun\CCP\SDK\CCPPath\UpdateDriveModel;
 use Aliyun\CCP\SDK\CCPPath\UpdateDriveRequestModel;
+use Aliyun\CCP\SDK\CCPPath\UpdateFacegroupInfoModel;
+use Aliyun\CCP\SDK\CCPPath\UpdateFacegroupInfoRequestModel;
 use Aliyun\CCP\SDK\CCPPath\UpdateFileModel;
+use Aliyun\CCP\SDK\CCPPath\UpdateFileRequestModel;
 use Aliyun\CCP\SDK\CCPPath\UpdateUserModel;
 use Aliyun\CCP\SDK\CCPPath\UpdateUserRequestModel;
 
 class CCPPath
 {
     private $_domainId;
+
+    private $_accessTokenCredential;
 
     private $_endpoint;
 
@@ -121,20 +137,12 @@ class CCPPath
 
     private $_credential;
 
-    private $_accessTokenCredential;
-
     public function __construct(Config $config)
     {
         if (Utils::isUnset($config)) {
             throw new TeaError([
                 'name'    => 'ParameterMissing',
                 'message' => "'config' can not be unset",
-            ]);
-        }
-        if (Utils::empty_($config->domainId)) {
-            throw new TeaError([
-                'name'    => 'ParameterMissing',
-                'message' => "'config.domainId' can not be empty",
             ]);
         }
         if (!Utils::empty_($config->accessToken) || !Utils::empty_($config->refreshToken)) {
@@ -163,9 +171,9 @@ class CCPPath
         }
         $this->_endpoint  = $config->endpoint;
         $this->_protocol  = $config->protocol;
-        $this->_domainId  = $config->domainId;
         $this->_userAgent = $config->userAgent;
         $this->_nickname  = $config->nickname;
+        $this->_domainId  = $config->domainId;
     }
 
     /**
@@ -431,7 +439,7 @@ class CCPPath
      *
      * @return ChangePasswordModel
      */
-    public function changePassword(DefaultChangePasswordRequestModel $request, RuntimeOptions $runtime)
+    public function changePassword(ChangePasswordRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -552,7 +560,7 @@ class CCPPath
      *
      * @return SetPasswordModel
      */
-    public function setPassword(DefaultSetPasswordRequestModel $request, RuntimeOptions $runtime)
+    public function setPassword(SetPasswordRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -925,7 +933,7 @@ class CCPPath
      *
      * @return GetLinkInfoModel
      */
-    public function getLinkInfo(GetByLinkInfoRequestModel $request, RuntimeOptions $runtime)
+    public function getLinkInfo(GetLinkInfoRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -1050,7 +1058,7 @@ class CCPPath
      *
      * @return GetLinkInfoByUserIdModel
      */
-    public function getLinkInfoByUserId(GetLinkInfoByUserIDRequestModel $request, RuntimeOptions $runtime)
+    public function getLinkInfoByUserId(GetLinkInfoByUserIdRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -1177,7 +1185,7 @@ class CCPPath
      *
      * @return LinkModel
      */
-    public function link(AccountLinkRequestModel $request, RuntimeOptions $runtime)
+    public function link(LinkRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -1303,7 +1311,7 @@ class CCPPath
      *
      * @return CheckExistModel
      */
-    public function checkExist(MobileCheckExistRequestModel $request, RuntimeOptions $runtime)
+    public function checkExist(CheckExistRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -1429,7 +1437,7 @@ class CCPPath
      *
      * @return LoginModel
      */
-    public function login(MobileLoginRequestModel $request, RuntimeOptions $runtime)
+    public function login(LoginRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -1555,7 +1563,7 @@ class CCPPath
      *
      * @return RegisterModel
      */
-    public function register(MobileRegisterRequestModel $request, RuntimeOptions $runtime)
+    public function register(RegisterRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -1934,7 +1942,7 @@ class CCPPath
      *
      * @return GetAsyncTaskInfoModel
      */
-    public function getAsyncTaskInfo(CCPGetAsyncTaskRequestModel $request, RuntimeOptions $runtime)
+    public function getAsyncTaskInfo(GetAsyncTaskInfoRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -2060,9 +2068,9 @@ class CCPPath
      *
      * @throws \Exception
      *
-     * @return OperationModel
+     * @return BatchOperationModel
      */
-    public function operation(CCPBatchRequestModel $request, RuntimeOptions $runtime)
+    public function batchOperation(BatchOperationRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -2136,7 +2144,7 @@ class CCPPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return OperationModel::fromMap([
+                    return BatchOperationModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
                     ]);
@@ -2698,7 +2706,7 @@ class CCPPath
      *
      * @return ListDrivesModel
      */
-    public function listDrives(ListDriveRequestModel $request, RuntimeOptions $runtime)
+    public function listDrives(ListDrivesRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -2825,7 +2833,7 @@ class CCPPath
      *
      * @return ListMyDrivesModel
      */
-    public function listMyDrives(ListMyDriveRequestModel $request, RuntimeOptions $runtime)
+    public function listMyDrives(ListMyDrivesRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -3081,7 +3089,7 @@ class CCPPath
      *
      * @return CompleteFileModel
      */
-    public function completeFile(CCPCompleteFileRequestModel $request, RuntimeOptions $runtime)
+    public function completeFile(CompleteFileRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -3209,7 +3217,7 @@ class CCPPath
      *
      * @return CopyFileModel
      */
-    public function copyFile(CCPCopyFileRequestModel $request, RuntimeOptions $runtime)
+    public function copyFile(CopyFileRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -3348,7 +3356,7 @@ class CCPPath
      *
      * @return CreateFileModel
      */
-    public function createFile(CCPCreateFileRequestModel $request, RuntimeOptions $runtime)
+    public function createFile(CreateFileRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -3476,7 +3484,7 @@ class CCPPath
      *
      * @return DeleteFileModel
      */
-    public function deleteFile(CCPDeleteFileRequestModel $request, RuntimeOptions $runtime)
+    public function deleteFile(DeleteFileRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -3727,7 +3735,7 @@ class CCPPath
      *
      * @return GetFileModel
      */
-    public function getFile(CCPGetFileRequestModel $request, RuntimeOptions $runtime)
+    public function getFile(GetFileRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -3841,6 +3849,134 @@ class CCPPath
     }
 
     /**
+     * 根据路径获取指定文件或文件夹的信息。
+     *
+     * @tags file
+     * @error InvalidParameter The input parameter {parameter_name} is not valid.
+     * @error AccessTokenInvalid AccessToken is invalid. {message}
+     * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
+     * @error InternalError The request has been failed due to some unknown error.
+     * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+     *
+     * @throws \Exception
+     *
+     * @return GetFileByPathModel
+     */
+    public function getFileByPath(GetFileByPathRequestModel $request, RuntimeOptions $runtime)
+    {
+        $request->validate();
+        $runtime->validate();
+        $_runtime = [
+            'timeouted'      => 'retry',
+            'readTimeout'    => $runtime->readTimeout,
+            'connectTimeout' => $runtime->connectTimeout,
+            'localAddr'      => $runtime->localAddr,
+            'httpProxy'      => $runtime->httpProxy,
+            'httpsProxy'     => $runtime->httpsProxy,
+            'noProxy'        => $runtime->noProxy,
+            'maxIdleConns'   => $runtime->maxIdleConns,
+            'socks5Proxy'    => $runtime->socks5Proxy,
+            'socks5NetWork'  => $runtime->socks5NetWork,
+            'retry'          => [
+                'retryable'   => $runtime->autoretry,
+                'maxAttempts' => Utils::defaultNumber($runtime->maxAttempts, 3),
+            ],
+            'backoff' => [
+                'policy' => Utils::defaultString($runtime->backoffPolicy, 'no'),
+                'period' => Utils::defaultNumber($runtime->backoffPeriod, 1),
+            ],
+            'ignoreSSL' => $runtime->ignoreSSL,
+        ];
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
+        while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
+            if ($_retryTimes > 0) {
+                $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
+                if ($_backoffTime > 0) {
+                    Tea::sleep($_backoffTime);
+                }
+            }
+            $_retryTimes = $_retryTimes + 1;
+
+            try {
+                $_request           = new Request();
+                $accesskeyId        = $this->getAccessKeyId();
+                $accessKeySecret    = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
+                $accessToken        = $this->getAccessToken();
+                $_request->protocol = Utils::defaultString($this->_protocol, 'https');
+                $_request->method   = 'POST';
+                $_request->pathname = $this->getPathname($this->_nickname, '/v2/file/get_by_path');
+                $_request->headers  = Tea::merge([
+                    'user-agent'   => $this->getUserAgent(),
+                    'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
+                    'content-type' => 'application/json; charset=utf-8',
+                ], $request->headers);
+                if (!Utils::empty_($accessToken)) {
+                    $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
+                        $_request->headers['x-acs-security-token'] = $securityToken;
+                    }
+                    $_request->headers['date']                    = Utils::getDateUTCString();
+                    $_request->headers['accept']                  = 'application/json';
+                    $_request->headers['x-acs-signature-method']  = 'HMAC-SHA1';
+                    $_request->headers['x-acs-signature-version'] = '1.0';
+                    $stringToSign                                 = RoaUtils::getStringToSign($_request);
+                    $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
+                }
+                $_request->body = Utils::toJSONString($request->body);
+                $_lastRequest   = $_request;
+                $_response      = Tea::send($_request, $_runtime);
+                $respMap        = null;
+                $obj            = null;
+                if (Utils::equalNumber($_response->statusCode, 200)) {
+                    $obj     = Utils::readAsJSON($_response->body);
+                    $respMap = Utils::assertAsMap($obj);
+
+                    return GetFileByPathModel::fromMap([
+                        'body'    => $respMap,
+                        'headers' => $_response->headers,
+                    ]);
+                }
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
+                    throw new TeaError([
+                        'data' => [
+                            'requestId'     => $_response->headers['x-ca-request-id'],
+                            'statusCode'    => $_response->statusCode,
+                            'statusMessage' => $_response->statusMessage,
+                        ],
+                        'message' => $_response->headers['x-ca-error-message'],
+                    ]);
+                }
+                $obj     = Utils::readAsJSON($_response->body);
+                $respMap = Utils::assertAsMap($obj);
+
+                throw new TeaError(Tea::merge([
+                    'data' => [
+                        'requestId'     => $_response->headers['x-ca-request-id'],
+                        'statusCode'    => $_response->statusCode,
+                        'statusMessage' => $_response->statusMessage,
+                    ],
+                ], $respMap));
+            } catch (\Exception $e) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
+                    continue;
+                }
+
+                throw $e;
+            }
+        }
+
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
+    }
+
+    /**
      * 获取文件的下载地址，调用者可自己设置range头并发下载。
      *
      * @tags file
@@ -3855,7 +3991,7 @@ class CCPPath
      *
      * @return GetDownloadUrlModel
      */
-    public function getDownloadUrl(CCPGetDownloadUrlRequestModel $request, RuntimeOptions $runtime)
+    public function getDownloadUrl(GetDownloadUrlRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -3969,6 +4105,134 @@ class CCPPath
     }
 
     /**
+     * 获取drive内，增量数据最新的游标.
+     *
+     * @tags file_delta
+     * @error InvalidParameter The input parameter {parameter_name} is not valid.
+     * @error AccessTokenInvalid AccessToken is invalid. {message}
+     * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
+     * @error InternalError The request has been failed due to some unknown error.
+     * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+     *
+     * @throws \Exception
+     *
+     * @return GetLastCursorModel
+     */
+    public function getLastCursor(GetLastCursorRequestModel $request, RuntimeOptions $runtime)
+    {
+        $request->validate();
+        $runtime->validate();
+        $_runtime = [
+            'timeouted'      => 'retry',
+            'readTimeout'    => $runtime->readTimeout,
+            'connectTimeout' => $runtime->connectTimeout,
+            'localAddr'      => $runtime->localAddr,
+            'httpProxy'      => $runtime->httpProxy,
+            'httpsProxy'     => $runtime->httpsProxy,
+            'noProxy'        => $runtime->noProxy,
+            'maxIdleConns'   => $runtime->maxIdleConns,
+            'socks5Proxy'    => $runtime->socks5Proxy,
+            'socks5NetWork'  => $runtime->socks5NetWork,
+            'retry'          => [
+                'retryable'   => $runtime->autoretry,
+                'maxAttempts' => Utils::defaultNumber($runtime->maxAttempts, 3),
+            ],
+            'backoff' => [
+                'policy' => Utils::defaultString($runtime->backoffPolicy, 'no'),
+                'period' => Utils::defaultNumber($runtime->backoffPeriod, 1),
+            ],
+            'ignoreSSL' => $runtime->ignoreSSL,
+        ];
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
+        while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
+            if ($_retryTimes > 0) {
+                $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
+                if ($_backoffTime > 0) {
+                    Tea::sleep($_backoffTime);
+                }
+            }
+            $_retryTimes = $_retryTimes + 1;
+
+            try {
+                $_request           = new Request();
+                $accesskeyId        = $this->getAccessKeyId();
+                $accessKeySecret    = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
+                $accessToken        = $this->getAccessToken();
+                $_request->protocol = Utils::defaultString($this->_protocol, 'https');
+                $_request->method   = 'POST';
+                $_request->pathname = $this->getPathname($this->_nickname, '/v2/file/get_last_cursor');
+                $_request->headers  = Tea::merge([
+                    'user-agent'   => $this->getUserAgent(),
+                    'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
+                    'content-type' => 'application/json; charset=utf-8',
+                ], $request->headers);
+                if (!Utils::empty_($accessToken)) {
+                    $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
+                        $_request->headers['x-acs-security-token'] = $securityToken;
+                    }
+                    $_request->headers['date']                    = Utils::getDateUTCString();
+                    $_request->headers['accept']                  = 'application/json';
+                    $_request->headers['x-acs-signature-method']  = 'HMAC-SHA1';
+                    $_request->headers['x-acs-signature-version'] = '1.0';
+                    $stringToSign                                 = RoaUtils::getStringToSign($_request);
+                    $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
+                }
+                $_request->body = Utils::toJSONString($request->body);
+                $_lastRequest   = $_request;
+                $_response      = Tea::send($_request, $_runtime);
+                $respMap        = null;
+                $obj            = null;
+                if (Utils::equalNumber($_response->statusCode, 200)) {
+                    $obj     = Utils::readAsJSON($_response->body);
+                    $respMap = Utils::assertAsMap($obj);
+
+                    return GetLastCursorModel::fromMap([
+                        'body'    => $respMap,
+                        'headers' => $_response->headers,
+                    ]);
+                }
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
+                    throw new TeaError([
+                        'data' => [
+                            'requestId'     => $_response->headers['x-ca-request-id'],
+                            'statusCode'    => $_response->statusCode,
+                            'statusMessage' => $_response->statusMessage,
+                        ],
+                        'message' => $_response->headers['x-ca-error-message'],
+                    ]);
+                }
+                $obj     = Utils::readAsJSON($_response->body);
+                $respMap = Utils::assertAsMap($obj);
+
+                throw new TeaError(Tea::merge([
+                    'data' => [
+                        'requestId'     => $_response->headers['x-ca-request-id'],
+                        'statusCode'    => $_response->statusCode,
+                        'statusMessage' => $_response->statusMessage,
+                    ],
+                ], $respMap));
+            } catch (\Exception $e) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
+                    continue;
+                }
+
+                throw $e;
+            }
+        }
+
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
+    }
+
+    /**
      * 可指定分片信息，一次获取多个分片的上传地址。
      *
      * @tags file
@@ -3983,7 +4247,7 @@ class CCPPath
      *
      * @return GetUploadUrlModel
      */
-    public function getUploadUrl(CCPGetUploadUrlRequestModel $request, RuntimeOptions $runtime)
+    public function getUploadUrl(GetUploadUrlRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -4111,7 +4375,7 @@ class CCPPath
      *
      * @return ListFileModel
      */
-    public function listFile(CCPListFileRequestModel $request, RuntimeOptions $runtime)
+    public function listFile(ListFileRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -4225,6 +4489,262 @@ class CCPPath
     }
 
     /**
+     * 根据自定义同步索引键列举文件或文件夹。
+     *
+     * @tags file
+     * @error InvalidParameter The input parameter {parameter_name} is not valid.
+     * @error AccessTokenInvalid AccessToken is invalid. {message}
+     * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
+     * @error InternalError The request has been failed due to some unknown error.
+     * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+     *
+     * @throws \Exception
+     *
+     * @return ListFileByCustomIndexKeyModel
+     */
+    public function listFileByCustomIndexKey(ListFileByCustomIndexKeyRequestModel $request, RuntimeOptions $runtime)
+    {
+        $request->validate();
+        $runtime->validate();
+        $_runtime = [
+            'timeouted'      => 'retry',
+            'readTimeout'    => $runtime->readTimeout,
+            'connectTimeout' => $runtime->connectTimeout,
+            'localAddr'      => $runtime->localAddr,
+            'httpProxy'      => $runtime->httpProxy,
+            'httpsProxy'     => $runtime->httpsProxy,
+            'noProxy'        => $runtime->noProxy,
+            'maxIdleConns'   => $runtime->maxIdleConns,
+            'socks5Proxy'    => $runtime->socks5Proxy,
+            'socks5NetWork'  => $runtime->socks5NetWork,
+            'retry'          => [
+                'retryable'   => $runtime->autoretry,
+                'maxAttempts' => Utils::defaultNumber($runtime->maxAttempts, 3),
+            ],
+            'backoff' => [
+                'policy' => Utils::defaultString($runtime->backoffPolicy, 'no'),
+                'period' => Utils::defaultNumber($runtime->backoffPeriod, 1),
+            ],
+            'ignoreSSL' => $runtime->ignoreSSL,
+        ];
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
+        while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
+            if ($_retryTimes > 0) {
+                $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
+                if ($_backoffTime > 0) {
+                    Tea::sleep($_backoffTime);
+                }
+            }
+            $_retryTimes = $_retryTimes + 1;
+
+            try {
+                $_request           = new Request();
+                $accesskeyId        = $this->getAccessKeyId();
+                $accessKeySecret    = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
+                $accessToken        = $this->getAccessToken();
+                $_request->protocol = Utils::defaultString($this->_protocol, 'https');
+                $_request->method   = 'POST';
+                $_request->pathname = $this->getPathname($this->_nickname, '/v2/file/list_by_custom_index_key');
+                $_request->headers  = Tea::merge([
+                    'user-agent'   => $this->getUserAgent(),
+                    'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
+                    'content-type' => 'application/json; charset=utf-8',
+                ], $request->headers);
+                if (!Utils::empty_($accessToken)) {
+                    $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
+                        $_request->headers['x-acs-security-token'] = $securityToken;
+                    }
+                    $_request->headers['date']                    = Utils::getDateUTCString();
+                    $_request->headers['accept']                  = 'application/json';
+                    $_request->headers['x-acs-signature-method']  = 'HMAC-SHA1';
+                    $_request->headers['x-acs-signature-version'] = '1.0';
+                    $stringToSign                                 = RoaUtils::getStringToSign($_request);
+                    $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
+                }
+                $_request->body = Utils::toJSONString($request->body);
+                $_lastRequest   = $_request;
+                $_response      = Tea::send($_request, $_runtime);
+                $respMap        = null;
+                $obj            = null;
+                if (Utils::equalNumber($_response->statusCode, 200)) {
+                    $obj     = Utils::readAsJSON($_response->body);
+                    $respMap = Utils::assertAsMap($obj);
+
+                    return ListFileByCustomIndexKeyModel::fromMap([
+                        'body'    => $respMap,
+                        'headers' => $_response->headers,
+                    ]);
+                }
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
+                    throw new TeaError([
+                        'data' => [
+                            'requestId'     => $_response->headers['x-ca-request-id'],
+                            'statusCode'    => $_response->statusCode,
+                            'statusMessage' => $_response->statusMessage,
+                        ],
+                        'message' => $_response->headers['x-ca-error-message'],
+                    ]);
+                }
+                $obj     = Utils::readAsJSON($_response->body);
+                $respMap = Utils::assertAsMap($obj);
+
+                throw new TeaError(Tea::merge([
+                    'data' => [
+                        'requestId'     => $_response->headers['x-ca-request-id'],
+                        'statusCode'    => $_response->statusCode,
+                        'statusMessage' => $_response->statusMessage,
+                    ],
+                ], $respMap));
+            } catch (\Exception $e) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
+                    continue;
+                }
+
+                throw $e;
+            }
+        }
+
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
+    }
+
+    /**
+     * 获取drive内，增量数据列表.
+     *
+     * @tags file_delta
+     * @error InvalidParameter The input parameter {parameter_name} is not valid.
+     * @error AccessTokenInvalid AccessToken is invalid. {message}
+     * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
+     * @error InternalError The request has been failed due to some unknown error.
+     * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+     *
+     * @throws \Exception
+     *
+     * @return ListFileDeltaModel
+     */
+    public function listFileDelta(ListFileDeltaRequestModel $request, RuntimeOptions $runtime)
+    {
+        $request->validate();
+        $runtime->validate();
+        $_runtime = [
+            'timeouted'      => 'retry',
+            'readTimeout'    => $runtime->readTimeout,
+            'connectTimeout' => $runtime->connectTimeout,
+            'localAddr'      => $runtime->localAddr,
+            'httpProxy'      => $runtime->httpProxy,
+            'httpsProxy'     => $runtime->httpsProxy,
+            'noProxy'        => $runtime->noProxy,
+            'maxIdleConns'   => $runtime->maxIdleConns,
+            'socks5Proxy'    => $runtime->socks5Proxy,
+            'socks5NetWork'  => $runtime->socks5NetWork,
+            'retry'          => [
+                'retryable'   => $runtime->autoretry,
+                'maxAttempts' => Utils::defaultNumber($runtime->maxAttempts, 3),
+            ],
+            'backoff' => [
+                'policy' => Utils::defaultString($runtime->backoffPolicy, 'no'),
+                'period' => Utils::defaultNumber($runtime->backoffPeriod, 1),
+            ],
+            'ignoreSSL' => $runtime->ignoreSSL,
+        ];
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
+        while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
+            if ($_retryTimes > 0) {
+                $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
+                if ($_backoffTime > 0) {
+                    Tea::sleep($_backoffTime);
+                }
+            }
+            $_retryTimes = $_retryTimes + 1;
+
+            try {
+                $_request           = new Request();
+                $accesskeyId        = $this->getAccessKeyId();
+                $accessKeySecret    = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
+                $accessToken        = $this->getAccessToken();
+                $_request->protocol = Utils::defaultString($this->_protocol, 'https');
+                $_request->method   = 'POST';
+                $_request->pathname = $this->getPathname($this->_nickname, '/v2/file/list_delta');
+                $_request->headers  = Tea::merge([
+                    'user-agent'   => $this->getUserAgent(),
+                    'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
+                    'content-type' => 'application/json; charset=utf-8',
+                ], $request->headers);
+                if (!Utils::empty_($accessToken)) {
+                    $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
+                        $_request->headers['x-acs-security-token'] = $securityToken;
+                    }
+                    $_request->headers['date']                    = Utils::getDateUTCString();
+                    $_request->headers['accept']                  = 'application/json';
+                    $_request->headers['x-acs-signature-method']  = 'HMAC-SHA1';
+                    $_request->headers['x-acs-signature-version'] = '1.0';
+                    $stringToSign                                 = RoaUtils::getStringToSign($_request);
+                    $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
+                }
+                $_request->body = Utils::toJSONString($request->body);
+                $_lastRequest   = $_request;
+                $_response      = Tea::send($_request, $_runtime);
+                $respMap        = null;
+                $obj            = null;
+                if (Utils::equalNumber($_response->statusCode, 200)) {
+                    $obj     = Utils::readAsJSON($_response->body);
+                    $respMap = Utils::assertAsMap($obj);
+
+                    return ListFileDeltaModel::fromMap([
+                        'body'    => $respMap,
+                        'headers' => $_response->headers,
+                    ]);
+                }
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
+                    throw new TeaError([
+                        'data' => [
+                            'requestId'     => $_response->headers['x-ca-request-id'],
+                            'statusCode'    => $_response->statusCode,
+                            'statusMessage' => $_response->statusMessage,
+                        ],
+                        'message' => $_response->headers['x-ca-error-message'],
+                    ]);
+                }
+                $obj     = Utils::readAsJSON($_response->body);
+                $respMap = Utils::assertAsMap($obj);
+
+                throw new TeaError(Tea::merge([
+                    'data' => [
+                        'requestId'     => $_response->headers['x-ca-request-id'],
+                        'statusCode'    => $_response->statusCode,
+                        'statusMessage' => $_response->statusMessage,
+                    ],
+                ], $respMap));
+            } catch (\Exception $e) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
+                    continue;
+                }
+
+                throw $e;
+            }
+        }
+
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
+    }
+
+    /**
      * 列举upload_id对应的已上传分片。
      *
      * @tags file
@@ -4239,7 +4759,7 @@ class CCPPath
      *
      * @return ListUploadedPartsModel
      */
-    public function listUploadedParts(CCPListUploadedPartRequestModel $request, RuntimeOptions $runtime)
+    public function listUploadedParts(ListUploadedPartsRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -4367,7 +4887,7 @@ class CCPPath
      *
      * @return MoveFileModel
      */
-    public function moveFile(CCPMoveFileRequestModel $request, RuntimeOptions $runtime)
+    public function moveFile(MoveFileRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -4481,6 +5001,134 @@ class CCPPath
     }
 
     /**
+     * 在指定drive下全量获取文件元信息。
+     *
+     * @tags file
+     * @error InvalidParameter The input parameter {parameter_name} is not valid.
+     * @error AccessTokenInvalid AccessToken is invalid. {message}
+     * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
+     * @error InternalError The request has been failed due to some unknown error.
+     * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+     *
+     * @throws \Exception
+     *
+     * @return ScanFileMetaModel
+     */
+    public function scanFileMeta(ScanFileMetaRequestModel $request, RuntimeOptions $runtime)
+    {
+        $request->validate();
+        $runtime->validate();
+        $_runtime = [
+            'timeouted'      => 'retry',
+            'readTimeout'    => $runtime->readTimeout,
+            'connectTimeout' => $runtime->connectTimeout,
+            'localAddr'      => $runtime->localAddr,
+            'httpProxy'      => $runtime->httpProxy,
+            'httpsProxy'     => $runtime->httpsProxy,
+            'noProxy'        => $runtime->noProxy,
+            'maxIdleConns'   => $runtime->maxIdleConns,
+            'socks5Proxy'    => $runtime->socks5Proxy,
+            'socks5NetWork'  => $runtime->socks5NetWork,
+            'retry'          => [
+                'retryable'   => $runtime->autoretry,
+                'maxAttempts' => Utils::defaultNumber($runtime->maxAttempts, 3),
+            ],
+            'backoff' => [
+                'policy' => Utils::defaultString($runtime->backoffPolicy, 'no'),
+                'period' => Utils::defaultNumber($runtime->backoffPeriod, 1),
+            ],
+            'ignoreSSL' => $runtime->ignoreSSL,
+        ];
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
+        while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
+            if ($_retryTimes > 0) {
+                $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
+                if ($_backoffTime > 0) {
+                    Tea::sleep($_backoffTime);
+                }
+            }
+            $_retryTimes = $_retryTimes + 1;
+
+            try {
+                $_request           = new Request();
+                $accesskeyId        = $this->getAccessKeyId();
+                $accessKeySecret    = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
+                $accessToken        = $this->getAccessToken();
+                $_request->protocol = Utils::defaultString($this->_protocol, 'https');
+                $_request->method   = 'POST';
+                $_request->pathname = $this->getPathname($this->_nickname, '/v2/file/scan');
+                $_request->headers  = Tea::merge([
+                    'user-agent'   => $this->getUserAgent(),
+                    'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
+                    'content-type' => 'application/json; charset=utf-8',
+                ], $request->headers);
+                if (!Utils::empty_($accessToken)) {
+                    $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
+                        $_request->headers['x-acs-security-token'] = $securityToken;
+                    }
+                    $_request->headers['date']                    = Utils::getDateUTCString();
+                    $_request->headers['accept']                  = 'application/json';
+                    $_request->headers['x-acs-signature-method']  = 'HMAC-SHA1';
+                    $_request->headers['x-acs-signature-version'] = '1.0';
+                    $stringToSign                                 = RoaUtils::getStringToSign($_request);
+                    $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
+                }
+                $_request->body = Utils::toJSONString($request->body);
+                $_lastRequest   = $_request;
+                $_response      = Tea::send($_request, $_runtime);
+                $respMap        = null;
+                $obj            = null;
+                if (Utils::equalNumber($_response->statusCode, 200)) {
+                    $obj     = Utils::readAsJSON($_response->body);
+                    $respMap = Utils::assertAsMap($obj);
+
+                    return ScanFileMetaModel::fromMap([
+                        'body'    => $respMap,
+                        'headers' => $_response->headers,
+                    ]);
+                }
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
+                    throw new TeaError([
+                        'data' => [
+                            'requestId'     => $_response->headers['x-ca-request-id'],
+                            'statusCode'    => $_response->statusCode,
+                            'statusMessage' => $_response->statusMessage,
+                        ],
+                        'message' => $_response->headers['x-ca-error-message'],
+                    ]);
+                }
+                $obj     = Utils::readAsJSON($_response->body);
+                $respMap = Utils::assertAsMap($obj);
+
+                throw new TeaError(Tea::merge([
+                    'data' => [
+                        'requestId'     => $_response->headers['x-ca-request-id'],
+                        'statusCode'    => $_response->statusCode,
+                        'statusMessage' => $_response->statusMessage,
+                    ],
+                ], $respMap));
+            } catch (\Exception $e) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
+                    continue;
+                }
+
+                throw $e;
+            }
+        }
+
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
+    }
+
+    /**
      * 根据筛选条件，在指定drive下搜索文件。
      *
      * @tags file
@@ -4495,7 +5143,7 @@ class CCPPath
      *
      * @return SearchFileModel
      */
-    public function searchFile(CCPSearchFileRequestModel $request, RuntimeOptions $runtime)
+    public function searchFile(SearchFileRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -4624,7 +5272,7 @@ class CCPPath
      *
      * @return UpdateFileModel
      */
-    public function updateFile(CCPUpdateFileMetaRequestModel $request, RuntimeOptions $runtime)
+    public function updateFile(UpdateFileRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -5125,7 +5773,7 @@ class CCPPath
      *
      * @return ListUsersModel
      */
-    public function listUsers(ListUserRequestModel $request, RuntimeOptions $runtime)
+    public function listUsers(ListUsersRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -5506,7 +6154,7 @@ class CCPPath
      *
      * @return GetPhotoCountModel
      */
-    public function getPhotoCount(GetImageCountRequestModel $request, RuntimeOptions $runtime)
+    public function getPhotoCount(GetPhotoCountRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -5634,7 +6282,7 @@ class CCPPath
      *
      * @return ListAddressGroupsModel
      */
-    public function listAddressGroups(ListImageAddressGroupsRequestModel $request, RuntimeOptions $runtime)
+    public function listAddressGroups(ListAddressGroupsRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -5762,7 +6410,7 @@ class CCPPath
      *
      * @return ListFaceGroupsModel
      */
-    public function listFaceGroups(ListImageFaceGroupsRequestModel $request, RuntimeOptions $runtime)
+    public function listFaceGroups(ListFaceGroupsRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -5890,7 +6538,7 @@ class CCPPath
      *
      * @return ListTagsModel
      */
-    public function listTags(ListImageTagsRequestModel $request, RuntimeOptions $runtime)
+    public function listTags(ListTagsRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -6004,6 +6652,262 @@ class CCPPath
     }
 
     /**
+     * 该接口将会展示用户图片的地点分组.
+     *
+     * @tags image
+     * @error InvalidParameter The input parameter {parameter_name} is not valid.
+     * @error AccessTokenInvalid AccessToken is invalid. {message}
+     * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
+     * @error InternalError The request has been failed due to some unknown error.
+     * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+     *
+     * @throws \Exception
+     *
+     * @return SearchAddressGroupsModel
+     */
+    public function searchAddressGroups(SearchAddressGroupsRequestModel $request, RuntimeOptions $runtime)
+    {
+        $request->validate();
+        $runtime->validate();
+        $_runtime = [
+            'timeouted'      => 'retry',
+            'readTimeout'    => $runtime->readTimeout,
+            'connectTimeout' => $runtime->connectTimeout,
+            'localAddr'      => $runtime->localAddr,
+            'httpProxy'      => $runtime->httpProxy,
+            'httpsProxy'     => $runtime->httpsProxy,
+            'noProxy'        => $runtime->noProxy,
+            'maxIdleConns'   => $runtime->maxIdleConns,
+            'socks5Proxy'    => $runtime->socks5Proxy,
+            'socks5NetWork'  => $runtime->socks5NetWork,
+            'retry'          => [
+                'retryable'   => $runtime->autoretry,
+                'maxAttempts' => Utils::defaultNumber($runtime->maxAttempts, 3),
+            ],
+            'backoff' => [
+                'policy' => Utils::defaultString($runtime->backoffPolicy, 'no'),
+                'period' => Utils::defaultNumber($runtime->backoffPeriod, 1),
+            ],
+            'ignoreSSL' => $runtime->ignoreSSL,
+        ];
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
+        while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
+            if ($_retryTimes > 0) {
+                $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
+                if ($_backoffTime > 0) {
+                    Tea::sleep($_backoffTime);
+                }
+            }
+            $_retryTimes = $_retryTimes + 1;
+
+            try {
+                $_request           = new Request();
+                $accesskeyId        = $this->getAccessKeyId();
+                $accessKeySecret    = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
+                $accessToken        = $this->getAccessToken();
+                $_request->protocol = Utils::defaultString($this->_protocol, 'https');
+                $_request->method   = 'POST';
+                $_request->pathname = $this->getPathname($this->_nickname, '/v2/image/search_address_groups');
+                $_request->headers  = Tea::merge([
+                    'user-agent'   => $this->getUserAgent(),
+                    'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
+                    'content-type' => 'application/json; charset=utf-8',
+                ], $request->headers);
+                if (!Utils::empty_($accessToken)) {
+                    $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
+                        $_request->headers['x-acs-security-token'] = $securityToken;
+                    }
+                    $_request->headers['date']                    = Utils::getDateUTCString();
+                    $_request->headers['accept']                  = 'application/json';
+                    $_request->headers['x-acs-signature-method']  = 'HMAC-SHA1';
+                    $_request->headers['x-acs-signature-version'] = '1.0';
+                    $stringToSign                                 = RoaUtils::getStringToSign($_request);
+                    $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
+                }
+                $_request->body = Utils::toJSONString($request->body);
+                $_lastRequest   = $_request;
+                $_response      = Tea::send($_request, $_runtime);
+                $respMap        = null;
+                $obj            = null;
+                if (Utils::equalNumber($_response->statusCode, 200)) {
+                    $obj     = Utils::readAsJSON($_response->body);
+                    $respMap = Utils::assertAsMap($obj);
+
+                    return SearchAddressGroupsModel::fromMap([
+                        'body'    => $respMap,
+                        'headers' => $_response->headers,
+                    ]);
+                }
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
+                    throw new TeaError([
+                        'data' => [
+                            'requestId'     => $_response->headers['x-ca-request-id'],
+                            'statusCode'    => $_response->statusCode,
+                            'statusMessage' => $_response->statusMessage,
+                        ],
+                        'message' => $_response->headers['x-ca-error-message'],
+                    ]);
+                }
+                $obj     = Utils::readAsJSON($_response->body);
+                $respMap = Utils::assertAsMap($obj);
+
+                throw new TeaError(Tea::merge([
+                    'data' => [
+                        'requestId'     => $_response->headers['x-ca-request-id'],
+                        'statusCode'    => $_response->statusCode,
+                        'statusMessage' => $_response->statusMessage,
+                    ],
+                ], $respMap));
+            } catch (\Exception $e) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
+                    continue;
+                }
+
+                throw $e;
+            }
+        }
+
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
+    }
+
+    /**
+     * 该接口将会更新人脸分组信息.
+     *
+     * @tags image
+     * @error InvalidParameter The input parameter {parameter_name} is not valid.
+     * @error AccessTokenInvalid AccessToken is invalid. {message}
+     * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
+     * @error InternalError The request has been failed due to some unknown error.
+     * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+     *
+     * @throws \Exception
+     *
+     * @return UpdateFacegroupInfoModel
+     */
+    public function updateFacegroupInfo(UpdateFacegroupInfoRequestModel $request, RuntimeOptions $runtime)
+    {
+        $request->validate();
+        $runtime->validate();
+        $_runtime = [
+            'timeouted'      => 'retry',
+            'readTimeout'    => $runtime->readTimeout,
+            'connectTimeout' => $runtime->connectTimeout,
+            'localAddr'      => $runtime->localAddr,
+            'httpProxy'      => $runtime->httpProxy,
+            'httpsProxy'     => $runtime->httpsProxy,
+            'noProxy'        => $runtime->noProxy,
+            'maxIdleConns'   => $runtime->maxIdleConns,
+            'socks5Proxy'    => $runtime->socks5Proxy,
+            'socks5NetWork'  => $runtime->socks5NetWork,
+            'retry'          => [
+                'retryable'   => $runtime->autoretry,
+                'maxAttempts' => Utils::defaultNumber($runtime->maxAttempts, 3),
+            ],
+            'backoff' => [
+                'policy' => Utils::defaultString($runtime->backoffPolicy, 'no'),
+                'period' => Utils::defaultNumber($runtime->backoffPeriod, 1),
+            ],
+            'ignoreSSL' => $runtime->ignoreSSL,
+        ];
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
+        while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
+            if ($_retryTimes > 0) {
+                $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
+                if ($_backoffTime > 0) {
+                    Tea::sleep($_backoffTime);
+                }
+            }
+            $_retryTimes = $_retryTimes + 1;
+
+            try {
+                $_request           = new Request();
+                $accesskeyId        = $this->getAccessKeyId();
+                $accessKeySecret    = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
+                $accessToken        = $this->getAccessToken();
+                $_request->protocol = Utils::defaultString($this->_protocol, 'https');
+                $_request->method   = 'POST';
+                $_request->pathname = $this->getPathname($this->_nickname, '/v2/image/update_facegroup_info');
+                $_request->headers  = Tea::merge([
+                    'user-agent'   => $this->getUserAgent(),
+                    'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
+                    'content-type' => 'application/json; charset=utf-8',
+                ], $request->headers);
+                if (!Utils::empty_($accessToken)) {
+                    $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
+                        $_request->headers['x-acs-security-token'] = $securityToken;
+                    }
+                    $_request->headers['date']                    = Utils::getDateUTCString();
+                    $_request->headers['accept']                  = 'application/json';
+                    $_request->headers['x-acs-signature-method']  = 'HMAC-SHA1';
+                    $_request->headers['x-acs-signature-version'] = '1.0';
+                    $stringToSign                                 = RoaUtils::getStringToSign($_request);
+                    $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
+                }
+                $_request->body = Utils::toJSONString($request->body);
+                $_lastRequest   = $_request;
+                $_response      = Tea::send($_request, $_runtime);
+                $respMap        = null;
+                $obj            = null;
+                if (Utils::equalNumber($_response->statusCode, 200)) {
+                    $obj     = Utils::readAsJSON($_response->body);
+                    $respMap = Utils::assertAsMap($obj);
+
+                    return UpdateFacegroupInfoModel::fromMap([
+                        'body'    => $respMap,
+                        'headers' => $_response->headers,
+                    ]);
+                }
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
+                    throw new TeaError([
+                        'data' => [
+                            'requestId'     => $_response->headers['x-ca-request-id'],
+                            'statusCode'    => $_response->statusCode,
+                            'statusMessage' => $_response->statusMessage,
+                        ],
+                        'message' => $_response->headers['x-ca-error-message'],
+                    ]);
+                }
+                $obj     = Utils::readAsJSON($_response->body);
+                $respMap = Utils::assertAsMap($obj);
+
+                throw new TeaError(Tea::merge([
+                    'data' => [
+                        'requestId'     => $_response->headers['x-ca-request-id'],
+                        'statusCode'    => $_response->statusCode,
+                        'statusMessage' => $_response->statusMessage,
+                    ],
+                ], $respMap));
+            } catch (\Exception $e) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
+                    continue;
+                }
+
+                throw $e;
+            }
+        }
+
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
+    }
+
+    /**
      * @param string $nickname
      * @param string $path
      *
@@ -6045,36 +6949,6 @@ class CCPPath
         }
 
         return $this->_accessTokenCredential->getExpireTime();
-    }
-
-    /**
-     * @param string $userAgent
-     *
-     * @throws \Exception
-     */
-    public function setUserAgent($userAgent)
-    {
-        $this->_userAgent = $userAgent;
-    }
-
-    /**
-     * @param string $userAgent
-     *
-     * @throws \Exception
-     */
-    public function appendUserAgent($userAgent)
-    {
-        $this->_userAgent = '' . $this->_userAgent . ' ' . $userAgent . '';
-    }
-
-    /**
-     * @throws \Exception
-     *
-     * @return string
-     */
-    public function getUserAgent()
-    {
-        return Utils::getUserAgent($this->_userAgent);
     }
 
     /**
@@ -6129,6 +7003,36 @@ class CCPPath
         }
 
         return $this->_accessTokenCredential->getAccessToken();
+    }
+
+    /**
+     * @param string $userAgent
+     *
+     * @throws \Exception
+     */
+    public function setUserAgent($userAgent)
+    {
+        $this->_userAgent = $userAgent;
+    }
+
+    /**
+     * @param string $userAgent
+     *
+     * @throws \Exception
+     */
+    public function appendUserAgent($userAgent)
+    {
+        $this->_userAgent = '' . $this->_userAgent . ' ' . $userAgent . '';
+    }
+
+    /**
+     * @throws \Exception
+     *
+     * @return string
+     */
+    public function getUserAgent()
+    {
+        return Utils::getUserAgent($this->_userAgent);
     }
 
     /**

@@ -76,10 +76,9 @@ class OSSMoveFileRequest extends Model
 
     public function validate()
     {
-        Model::validateRequired('driveId', $this->driveId, true);
-        Model::validateRequired('newName', $this->newName, true);
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
-        Model::validatePattern('shareId', $this->shareId, '[0-9a-zA-z-]+');
+        Model::validatePattern('shareId', $this->shareId, '[0-9a-zA-Z-]+');
+        Model::validateRequired('newName', $this->newName, true);
     }
 
     public function toMap()

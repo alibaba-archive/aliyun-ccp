@@ -83,7 +83,6 @@ class CCPCopyFileRequest extends Model
         Model::validateRequired('toParentFileId', $this->toParentFileId, true);
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
         Model::validatePattern('fileId', $this->fileId, '[a-z0-9.-_]{1,50}');
-        Model::validatePattern('newName', $this->newName, '.{1,1000}');
         Model::validatePattern('toDriveId', $this->toDriveId, '[0-9]+');
         Model::validatePattern('toParentFileId', $this->toParentFileId, '[a-z0-9.-_]{1,50}');
         Model::validateMaxLength('fileId', $this->fileId, 50);

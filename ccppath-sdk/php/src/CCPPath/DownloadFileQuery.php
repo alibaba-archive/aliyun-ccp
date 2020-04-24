@@ -27,17 +27,27 @@ class DownloadFileQuery extends Model
     public $FileID;
 
     /**
-     * @description image process
+     * @description image_thumbnail_process
      *
-     * @example image/resize,w_200
+     * @example image/resize,m_fill,h_128,w_128,limit_0
      *
      * @var string
      */
-    public $ImageProcess;
+    public $ImageThumbnailProcess;
+
+    /**
+     * @description video_thumbnail_process
+     * type:string
+     * @example video/snapshot,t_7000,f_jpg,w_800,h_600,m_fast
+     *
+     * @var string
+     */
+    public $VideoThumbnailProcess;
     protected $_name = [
-        'DriveID'      => 'DriveID',
-        'FileID'       => 'FileID',
-        'ImageProcess' => 'ImageProcess',
+        'DriveID'               => 'DriveID',
+        'FileID'                => 'FileID',
+        'ImageThumbnailProcess' => 'ImageThumbnailProcess',
+        'VideoThumbnailProcess' => 'VideoThumbnailProcess',
     ];
 
     public function validate()
@@ -48,10 +58,11 @@ class DownloadFileQuery extends Model
 
     public function toMap()
     {
-        $res                 = [];
-        $res['DriveID']      = $this->DriveID;
-        $res['FileID']       = $this->FileID;
-        $res['ImageProcess'] = $this->ImageProcess;
+        $res                          = [];
+        $res['DriveID']               = $this->DriveID;
+        $res['FileID']                = $this->FileID;
+        $res['ImageThumbnailProcess'] = $this->ImageThumbnailProcess;
+        $res['VideoThumbnailProcess'] = $this->VideoThumbnailProcess;
 
         return $res;
     }
@@ -70,8 +81,11 @@ class DownloadFileQuery extends Model
         if (isset($map['FileID'])) {
             $model->FileID = $map['FileID'];
         }
-        if (isset($map['ImageProcess'])) {
-            $model->ImageProcess = $map['ImageProcess'];
+        if (isset($map['ImageThumbnailProcess'])) {
+            $model->ImageThumbnailProcess = $map['ImageThumbnailProcess'];
+        }
+        if (isset($map['VideoThumbnailProcess'])) {
+            $model->VideoThumbnailProcess = $map['VideoThumbnailProcess'];
         }
 
         return $model;
