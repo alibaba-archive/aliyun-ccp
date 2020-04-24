@@ -22,7 +22,7 @@ public class OSSGetFileRequest extends TeaModel {
     public String imageUrlProcess;
 
     @NameInMap("share_id")
-    @Validation(pattern = "[0-9a-zA-z-]+")
+    @Validation(pattern = "[0-9a-zA-Z-]+")
     public String shareId;
 
     @NameInMap("url_expire_sec")

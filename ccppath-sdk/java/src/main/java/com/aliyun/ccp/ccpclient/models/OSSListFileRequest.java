@@ -29,7 +29,7 @@ public class OSSListFileRequest extends TeaModel {
     public String parentFilePath;
 
     @NameInMap("share_id")
-    @Validation(pattern = "[0-9]+")
+    @Validation(pattern = "[0-9a-zA-Z-]+")
     public String shareId;
 
     @NameInMap("url_expire_sec")

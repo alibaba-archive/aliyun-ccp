@@ -12,7 +12,6 @@ public class BaseMoveFileRequest extends TeaModel {
     public String driveId;
 
     @NameInMap("new_name")
-    @Validation(pattern = ".{1,1000}")
     public String newName;
 
     @NameInMap("overwrite")

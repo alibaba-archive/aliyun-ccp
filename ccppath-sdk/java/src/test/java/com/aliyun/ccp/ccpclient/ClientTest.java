@@ -22,7 +22,7 @@ public class ClientTest {
 
     @Test
     public void listDrives() throws Exception {
-        ListDriveRequestModel requestModel = new ListDriveRequestModel();
+        ListDrivesRequestModel requestModel = new ListDrivesRequestModel();
         ListDriveRequest request = new ListDriveRequest();
         requestModel.body = request;
         RuntimeOptions runtime = new RuntimeOptions();

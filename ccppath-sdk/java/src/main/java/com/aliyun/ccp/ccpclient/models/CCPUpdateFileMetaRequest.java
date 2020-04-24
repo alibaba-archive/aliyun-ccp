@@ -34,11 +34,13 @@ public class CCPUpdateFileMetaRequest extends TeaModel {
     public String meta;
 
     @NameInMap("name")
-    @Validation(pattern = ".{1,1000}")
     public String name;
 
     @NameInMap("starred")
     public Boolean starred;
+
+    @NameInMap("user_meta")
+    public String userMeta;
 
     public static CCPUpdateFileMetaRequest build(java.util.Map<String, ?> map) throws Exception {
         CCPUpdateFileMetaRequest self = new CCPUpdateFileMetaRequest();

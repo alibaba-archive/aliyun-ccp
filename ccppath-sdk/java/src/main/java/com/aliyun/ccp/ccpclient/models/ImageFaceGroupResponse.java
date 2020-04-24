@@ -22,6 +22,9 @@ public class ImageFaceGroupResponse extends TeaModel {
     @NameInMap("group_name")
     public String groupName;
 
+    @NameInMap("image_count")
+    public Long imageCount;
+
     @NameInMap("updated_at")
     public String updatedAt;
 
