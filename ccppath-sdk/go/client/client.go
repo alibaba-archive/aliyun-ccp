@@ -109,17 +109,17 @@ func (s *RuntimeOptions) SetSocks5NetWork(v string) *RuntimeOptions {
 
 type Config struct {
 	Endpoint        *string `json:"endpoint" xml:"endpoint"`
-	DomainId        *string `json:"domainId" xml:"domainId" require:"true"`
-	Protocol        *string `json:"protocol" xml:"protocol"`
-	Type            *string `json:"type" xml:"type"`
-	SecurityToken   *string `json:"securityToken" xml:"securityToken"`
-	AccessKeyId     *string `json:"accessKeyId" xml:"accessKeyId"`
-	AccessKeySecret *string `json:"accessKeySecret" xml:"accessKeySecret"`
+	DomainId        *string `json:"domainId" xml:"domainId"`
 	ClientId        *string `json:"clientId" xml:"clientId"`
 	RefreshToken    *string `json:"refreshToken" xml:"refreshToken"`
 	ClientSecret    *string `json:"clientSecret" xml:"clientSecret"`
 	AccessToken     *string `json:"accessToken" xml:"accessToken"`
 	ExpireTime      *string `json:"expireTime" xml:"expireTime"`
+	Protocol        *string `json:"protocol" xml:"protocol"`
+	Type            *string `json:"type" xml:"type"`
+	SecurityToken   *string `json:"securityToken" xml:"securityToken"`
+	AccessKeyId     *string `json:"accessKeyId" xml:"accessKeyId"`
+	AccessKeySecret *string `json:"accessKeySecret" xml:"accessKeySecret"`
 	Nickname        *string `json:"nickname" xml:"nickname"`
 	UserAgent       *string `json:"userAgent" xml:"userAgent"`
 }
@@ -139,31 +139,6 @@ func (s *Config) SetEndpoint(v string) *Config {
 
 func (s *Config) SetDomainId(v string) *Config {
 	s.DomainId = &v
-	return s
-}
-
-func (s *Config) SetProtocol(v string) *Config {
-	s.Protocol = &v
-	return s
-}
-
-func (s *Config) SetType(v string) *Config {
-	s.Type = &v
-	return s
-}
-
-func (s *Config) SetSecurityToken(v string) *Config {
-	s.SecurityToken = &v
-	return s
-}
-
-func (s *Config) SetAccessKeyId(v string) *Config {
-	s.AccessKeyId = &v
-	return s
-}
-
-func (s *Config) SetAccessKeySecret(v string) *Config {
-	s.AccessKeySecret = &v
 	return s
 }
 
@@ -189,6 +164,31 @@ func (s *Config) SetAccessToken(v string) *Config {
 
 func (s *Config) SetExpireTime(v string) *Config {
 	s.ExpireTime = &v
+	return s
+}
+
+func (s *Config) SetProtocol(v string) *Config {
+	s.Protocol = &v
+	return s
+}
+
+func (s *Config) SetType(v string) *Config {
+	s.Type = &v
+	return s
+}
+
+func (s *Config) SetSecurityToken(v string) *Config {
+	s.SecurityToken = &v
+	return s
+}
+
+func (s *Config) SetAccessKeyId(v string) *Config {
+	s.AccessKeyId = &v
+	return s
+}
+
+func (s *Config) SetAccessKeySecret(v string) *Config {
+	s.AccessKeySecret = &v
 	return s
 }
 
@@ -294,25 +294,25 @@ func (s *ConfirmLinkModel) SetBody(v *AccountAccessTokenResponse) *ConfirmLinkMo
 	return s
 }
 
-type DefaultChangePasswordRequestModel struct {
+type ChangePasswordRequestModel struct {
 	Headers map[string]string             `json:"headers" xml:"headers"`
 	Body    *DefaultChangePasswordRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s DefaultChangePasswordRequestModel) String() string {
+func (s ChangePasswordRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s DefaultChangePasswordRequestModel) GoString() string {
+func (s ChangePasswordRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *DefaultChangePasswordRequestModel) SetHeaders(v map[string]string) *DefaultChangePasswordRequestModel {
+func (s *ChangePasswordRequestModel) SetHeaders(v map[string]string) *ChangePasswordRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *DefaultChangePasswordRequestModel) SetBody(v *DefaultChangePasswordRequest) *DefaultChangePasswordRequestModel {
+func (s *ChangePasswordRequestModel) SetBody(v *DefaultChangePasswordRequest) *ChangePasswordRequestModel {
 	s.Body = v
 	return s
 }
@@ -334,25 +334,25 @@ func (s *ChangePasswordModel) SetHeaders(v map[string]string) *ChangePasswordMod
 	return s
 }
 
-type DefaultSetPasswordRequestModel struct {
+type SetPasswordRequestModel struct {
 	Headers map[string]string          `json:"headers" xml:"headers"`
 	Body    *DefaultSetPasswordRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s DefaultSetPasswordRequestModel) String() string {
+func (s SetPasswordRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s DefaultSetPasswordRequestModel) GoString() string {
+func (s SetPasswordRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *DefaultSetPasswordRequestModel) SetHeaders(v map[string]string) *DefaultSetPasswordRequestModel {
+func (s *SetPasswordRequestModel) SetHeaders(v map[string]string) *SetPasswordRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *DefaultSetPasswordRequestModel) SetBody(v *DefaultSetPasswordRequest) *DefaultSetPasswordRequestModel {
+func (s *SetPasswordRequestModel) SetBody(v *DefaultSetPasswordRequest) *SetPasswordRequestModel {
 	s.Body = v
 	return s
 }
@@ -466,25 +466,25 @@ func (s *GetCaptchaModel) SetBody(v *Captcha) *GetCaptchaModel {
 	return s
 }
 
-type GetByLinkInfoRequestModel struct {
+type GetLinkInfoRequestModel struct {
 	Headers map[string]string     `json:"headers" xml:"headers"`
 	Body    *GetByLinkInfoRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s GetByLinkInfoRequestModel) String() string {
+func (s GetLinkInfoRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s GetByLinkInfoRequestModel) GoString() string {
+func (s GetLinkInfoRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *GetByLinkInfoRequestModel) SetHeaders(v map[string]string) *GetByLinkInfoRequestModel {
+func (s *GetLinkInfoRequestModel) SetHeaders(v map[string]string) *GetLinkInfoRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *GetByLinkInfoRequestModel) SetBody(v *GetByLinkInfoRequest) *GetByLinkInfoRequestModel {
+func (s *GetLinkInfoRequestModel) SetBody(v *GetByLinkInfoRequest) *GetLinkInfoRequestModel {
 	s.Body = v
 	return s
 }
@@ -512,25 +512,25 @@ func (s *GetLinkInfoModel) SetBody(v *LinkInfoResponse) *GetLinkInfoModel {
 	return s
 }
 
-type GetLinkInfoByUserIDRequestModel struct {
+type GetLinkInfoByUserIdRequestModel struct {
 	Headers map[string]string           `json:"headers" xml:"headers"`
 	Body    *GetLinkInfoByUserIDRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s GetLinkInfoByUserIDRequestModel) String() string {
+func (s GetLinkInfoByUserIdRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s GetLinkInfoByUserIDRequestModel) GoString() string {
+func (s GetLinkInfoByUserIdRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *GetLinkInfoByUserIDRequestModel) SetHeaders(v map[string]string) *GetLinkInfoByUserIDRequestModel {
+func (s *GetLinkInfoByUserIdRequestModel) SetHeaders(v map[string]string) *GetLinkInfoByUserIdRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *GetLinkInfoByUserIDRequestModel) SetBody(v *GetLinkInfoByUserIDRequest) *GetLinkInfoByUserIDRequestModel {
+func (s *GetLinkInfoByUserIdRequestModel) SetBody(v *GetLinkInfoByUserIDRequest) *GetLinkInfoByUserIdRequestModel {
 	s.Body = v
 	return s
 }
@@ -558,25 +558,25 @@ func (s *GetLinkInfoByUserIdModel) SetBody(v *LinkInfoListResponse) *GetLinkInfo
 	return s
 }
 
-type AccountLinkRequestModel struct {
+type LinkRequestModel struct {
 	Headers map[string]string   `json:"headers" xml:"headers"`
 	Body    *AccountLinkRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s AccountLinkRequestModel) String() string {
+func (s LinkRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s AccountLinkRequestModel) GoString() string {
+func (s LinkRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *AccountLinkRequestModel) SetHeaders(v map[string]string) *AccountLinkRequestModel {
+func (s *LinkRequestModel) SetHeaders(v map[string]string) *LinkRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *AccountLinkRequestModel) SetBody(v *AccountLinkRequest) *AccountLinkRequestModel {
+func (s *LinkRequestModel) SetBody(v *AccountLinkRequest) *LinkRequestModel {
 	s.Body = v
 	return s
 }
@@ -604,25 +604,25 @@ func (s *LinkModel) SetBody(v *AccountAccessTokenResponse) *LinkModel {
 	return s
 }
 
-type MobileCheckExistRequestModel struct {
+type CheckExistRequestModel struct {
 	Headers map[string]string        `json:"headers" xml:"headers"`
 	Body    *MobileCheckExistRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s MobileCheckExistRequestModel) String() string {
+func (s CheckExistRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s MobileCheckExistRequestModel) GoString() string {
+func (s CheckExistRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *MobileCheckExistRequestModel) SetHeaders(v map[string]string) *MobileCheckExistRequestModel {
+func (s *CheckExistRequestModel) SetHeaders(v map[string]string) *CheckExistRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *MobileCheckExistRequestModel) SetBody(v *MobileCheckExistRequest) *MobileCheckExistRequestModel {
+func (s *CheckExistRequestModel) SetBody(v *MobileCheckExistRequest) *CheckExistRequestModel {
 	s.Body = v
 	return s
 }
@@ -650,25 +650,25 @@ func (s *CheckExistModel) SetBody(v *MobileCheckExistResponse) *CheckExistModel 
 	return s
 }
 
-type MobileLoginRequestModel struct {
+type LoginRequestModel struct {
 	Headers map[string]string   `json:"headers" xml:"headers"`
 	Body    *MobileLoginRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s MobileLoginRequestModel) String() string {
+func (s LoginRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s MobileLoginRequestModel) GoString() string {
+func (s LoginRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *MobileLoginRequestModel) SetHeaders(v map[string]string) *MobileLoginRequestModel {
+func (s *LoginRequestModel) SetHeaders(v map[string]string) *LoginRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *MobileLoginRequestModel) SetBody(v *MobileLoginRequest) *MobileLoginRequestModel {
+func (s *LoginRequestModel) SetBody(v *MobileLoginRequest) *LoginRequestModel {
 	s.Body = v
 	return s
 }
@@ -696,25 +696,25 @@ func (s *LoginModel) SetBody(v *AccountAccessTokenResponse) *LoginModel {
 	return s
 }
 
-type MobileRegisterRequestModel struct {
+type RegisterRequestModel struct {
 	Headers map[string]string      `json:"headers" xml:"headers"`
 	Body    *MobileRegisterRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s MobileRegisterRequestModel) String() string {
+func (s RegisterRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s MobileRegisterRequestModel) GoString() string {
+func (s RegisterRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *MobileRegisterRequestModel) SetHeaders(v map[string]string) *MobileRegisterRequestModel {
+func (s *RegisterRequestModel) SetHeaders(v map[string]string) *RegisterRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *MobileRegisterRequestModel) SetBody(v *MobileRegisterRequest) *MobileRegisterRequestModel {
+func (s *RegisterRequestModel) SetBody(v *MobileRegisterRequest) *RegisterRequestModel {
 	s.Body = v
 	return s
 }
@@ -5620,25 +5620,25 @@ func (s *UserAuthentication) SetUserID(v string) *UserAuthentication {
 	return s
 }
 
-type CCPGetAsyncTaskRequestModel struct {
+type GetAsyncTaskInfoRequestModel struct {
 	Headers map[string]string       `json:"headers" xml:"headers"`
 	Body    *CCPGetAsyncTaskRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s CCPGetAsyncTaskRequestModel) String() string {
+func (s GetAsyncTaskInfoRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s CCPGetAsyncTaskRequestModel) GoString() string {
+func (s GetAsyncTaskInfoRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *CCPGetAsyncTaskRequestModel) SetHeaders(v map[string]string) *CCPGetAsyncTaskRequestModel {
+func (s *GetAsyncTaskInfoRequestModel) SetHeaders(v map[string]string) *GetAsyncTaskInfoRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *CCPGetAsyncTaskRequestModel) SetBody(v *CCPGetAsyncTaskRequest) *CCPGetAsyncTaskRequestModel {
+func (s *GetAsyncTaskInfoRequestModel) SetBody(v *CCPGetAsyncTaskRequest) *GetAsyncTaskInfoRequestModel {
 	s.Body = v
 	return s
 }
@@ -5666,48 +5666,48 @@ func (s *GetAsyncTaskInfoModel) SetBody(v *CCPGetAsyncTaskResponse) *GetAsyncTas
 	return s
 }
 
-type CCPBatchRequestModel struct {
+type BatchOperationRequestModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 	Body    *CCPBatchRequest  `json:"body" xml:"body" require:"true"`
 }
 
-func (s CCPBatchRequestModel) String() string {
+func (s BatchOperationRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s CCPBatchRequestModel) GoString() string {
+func (s BatchOperationRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *CCPBatchRequestModel) SetHeaders(v map[string]string) *CCPBatchRequestModel {
+func (s *BatchOperationRequestModel) SetHeaders(v map[string]string) *BatchOperationRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *CCPBatchRequestModel) SetBody(v *CCPBatchRequest) *CCPBatchRequestModel {
+func (s *BatchOperationRequestModel) SetBody(v *CCPBatchRequest) *BatchOperationRequestModel {
 	s.Body = v
 	return s
 }
 
-type OperationModel struct {
+type BatchOperationModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 	Body    *CCPBatchResponse `json:"body" xml:"body" require:"true"`
 }
 
-func (s OperationModel) String() string {
+func (s BatchOperationModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s OperationModel) GoString() string {
+func (s BatchOperationModel) GoString() string {
 	return s.String()
 }
 
-func (s *OperationModel) SetHeaders(v map[string]string) *OperationModel {
+func (s *BatchOperationModel) SetHeaders(v map[string]string) *BatchOperationModel {
 	s.Headers = v
 	return s
 }
 
-func (s *OperationModel) SetBody(v *CCPBatchResponse) *OperationModel {
+func (s *BatchOperationModel) SetBody(v *CCPBatchResponse) *BatchOperationModel {
 	s.Body = v
 	return s
 }
@@ -5890,25 +5890,25 @@ func (s *GetDefaultDriveModel) SetBody(v *GetDriveResponse) *GetDefaultDriveMode
 	return s
 }
 
-type ListDriveRequestModel struct {
+type ListDrivesRequestModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 	Body    *ListDriveRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s ListDriveRequestModel) String() string {
+func (s ListDrivesRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s ListDriveRequestModel) GoString() string {
+func (s ListDrivesRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *ListDriveRequestModel) SetHeaders(v map[string]string) *ListDriveRequestModel {
+func (s *ListDrivesRequestModel) SetHeaders(v map[string]string) *ListDrivesRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *ListDriveRequestModel) SetBody(v *ListDriveRequest) *ListDriveRequestModel {
+func (s *ListDrivesRequestModel) SetBody(v *ListDriveRequest) *ListDrivesRequestModel {
 	s.Body = v
 	return s
 }
@@ -5936,25 +5936,25 @@ func (s *ListDrivesModel) SetBody(v *ListDriveResponse) *ListDrivesModel {
 	return s
 }
 
-type ListMyDriveRequestModel struct {
+type ListMyDrivesRequestModel struct {
 	Headers map[string]string   `json:"headers" xml:"headers"`
 	Body    *ListMyDriveRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s ListMyDriveRequestModel) String() string {
+func (s ListMyDrivesRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s ListMyDriveRequestModel) GoString() string {
+func (s ListMyDrivesRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *ListMyDriveRequestModel) SetHeaders(v map[string]string) *ListMyDriveRequestModel {
+func (s *ListMyDrivesRequestModel) SetHeaders(v map[string]string) *ListMyDrivesRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *ListMyDriveRequestModel) SetBody(v *ListMyDriveRequest) *ListMyDriveRequestModel {
+func (s *ListMyDrivesRequestModel) SetBody(v *ListMyDriveRequest) *ListMyDrivesRequestModel {
 	s.Body = v
 	return s
 }
@@ -6028,25 +6028,25 @@ func (s *UpdateDriveModel) SetBody(v *UpdateDriveResponse) *UpdateDriveModel {
 	return s
 }
 
-type CCPCompleteFileRequestModel struct {
+type CompleteFileRequestModel struct {
 	Headers map[string]string       `json:"headers" xml:"headers"`
 	Body    *CCPCompleteFileRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s CCPCompleteFileRequestModel) String() string {
+func (s CompleteFileRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s CCPCompleteFileRequestModel) GoString() string {
+func (s CompleteFileRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *CCPCompleteFileRequestModel) SetHeaders(v map[string]string) *CCPCompleteFileRequestModel {
+func (s *CompleteFileRequestModel) SetHeaders(v map[string]string) *CompleteFileRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *CCPCompleteFileRequestModel) SetBody(v *CCPCompleteFileRequest) *CCPCompleteFileRequestModel {
+func (s *CompleteFileRequestModel) SetBody(v *CCPCompleteFileRequest) *CompleteFileRequestModel {
 	s.Body = v
 	return s
 }
@@ -6074,25 +6074,25 @@ func (s *CompleteFileModel) SetBody(v *CCPCompleteFileResponse) *CompleteFileMod
 	return s
 }
 
-type CCPCopyFileRequestModel struct {
+type CopyFileRequestModel struct {
 	Headers map[string]string   `json:"headers" xml:"headers"`
 	Body    *CCPCopyFileRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s CCPCopyFileRequestModel) String() string {
+func (s CopyFileRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s CCPCopyFileRequestModel) GoString() string {
+func (s CopyFileRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *CCPCopyFileRequestModel) SetHeaders(v map[string]string) *CCPCopyFileRequestModel {
+func (s *CopyFileRequestModel) SetHeaders(v map[string]string) *CopyFileRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *CCPCopyFileRequestModel) SetBody(v *CCPCopyFileRequest) *CCPCopyFileRequestModel {
+func (s *CopyFileRequestModel) SetBody(v *CCPCopyFileRequest) *CopyFileRequestModel {
 	s.Body = v
 	return s
 }
@@ -6120,25 +6120,25 @@ func (s *CopyFileModel) SetBody(v *CCPCopyFileResponse) *CopyFileModel {
 	return s
 }
 
-type CCPCreateFileRequestModel struct {
+type CreateFileRequestModel struct {
 	Headers map[string]string     `json:"headers" xml:"headers"`
 	Body    *CCPCreateFileRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s CCPCreateFileRequestModel) String() string {
+func (s CreateFileRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s CCPCreateFileRequestModel) GoString() string {
+func (s CreateFileRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *CCPCreateFileRequestModel) SetHeaders(v map[string]string) *CCPCreateFileRequestModel {
+func (s *CreateFileRequestModel) SetHeaders(v map[string]string) *CreateFileRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *CCPCreateFileRequestModel) SetBody(v *CCPCreateFileRequest) *CCPCreateFileRequestModel {
+func (s *CreateFileRequestModel) SetBody(v *CCPCreateFileRequest) *CreateFileRequestModel {
 	s.Body = v
 	return s
 }
@@ -6166,25 +6166,25 @@ func (s *CreateFileModel) SetBody(v *CCPCreateFileResponse) *CreateFileModel {
 	return s
 }
 
-type CCPDeleteFileRequestModel struct {
+type DeleteFileRequestModel struct {
 	Headers map[string]string     `json:"headers" xml:"headers"`
 	Body    *CCPDeleteFileRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s CCPDeleteFileRequestModel) String() string {
+func (s DeleteFileRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s CCPDeleteFileRequestModel) GoString() string {
+func (s DeleteFileRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *CCPDeleteFileRequestModel) SetHeaders(v map[string]string) *CCPDeleteFileRequestModel {
+func (s *DeleteFileRequestModel) SetHeaders(v map[string]string) *DeleteFileRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *CCPDeleteFileRequestModel) SetBody(v *CCPDeleteFileRequest) *CCPDeleteFileRequestModel {
+func (s *DeleteFileRequestModel) SetBody(v *CCPDeleteFileRequest) *DeleteFileRequestModel {
 	s.Body = v
 	return s
 }
@@ -6213,9 +6213,10 @@ func (s *DeleteFileModel) SetBody(v *CCPDeleteFileResponse) *DeleteFileModel {
 }
 
 type DownloadFileQuery struct {
-	DriveID      *string `json:"DriveID" xml:"DriveID" require:"true"`
-	FileID       *string `json:"FileID" xml:"FileID" require:"true"`
-	ImageProcess *string `json:"ImageProcess" xml:"ImageProcess"`
+	DriveID               *string `json:"DriveID" xml:"DriveID" require:"true"`
+	FileID                *string `json:"FileID" xml:"FileID" require:"true"`
+	ImageThumbnailProcess *string `json:"ImageThumbnailProcess" xml:"ImageThumbnailProcess"`
+	VideoThumbnailProcess *string `json:"VideoThumbnailProcess" xml:"VideoThumbnailProcess"`
 }
 
 func (s DownloadFileQuery) String() string {
@@ -6236,8 +6237,13 @@ func (s *DownloadFileQuery) SetFileID(v string) *DownloadFileQuery {
 	return s
 }
 
-func (s *DownloadFileQuery) SetImageProcess(v string) *DownloadFileQuery {
-	s.ImageProcess = &v
+func (s *DownloadFileQuery) SetImageThumbnailProcess(v string) *DownloadFileQuery {
+	s.ImageThumbnailProcess = &v
+	return s
+}
+
+func (s *DownloadFileQuery) SetVideoThumbnailProcess(v string) *DownloadFileQuery {
+	s.VideoThumbnailProcess = &v
 	return s
 }
 
@@ -6287,25 +6293,25 @@ func (s *DownloadFileModel) SetBody(v *CCPGetDownloadUrlRequest) *DownloadFileMo
 	return s
 }
 
-type CCPGetFileRequestModel struct {
+type GetFileRequestModel struct {
 	Headers map[string]string  `json:"headers" xml:"headers"`
 	Body    *CCPGetFileRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s CCPGetFileRequestModel) String() string {
+func (s GetFileRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s CCPGetFileRequestModel) GoString() string {
+func (s GetFileRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *CCPGetFileRequestModel) SetHeaders(v map[string]string) *CCPGetFileRequestModel {
+func (s *GetFileRequestModel) SetHeaders(v map[string]string) *GetFileRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *CCPGetFileRequestModel) SetBody(v *CCPGetFileRequest) *CCPGetFileRequestModel {
+func (s *GetFileRequestModel) SetBody(v *CCPGetFileRequest) *GetFileRequestModel {
 	s.Body = v
 	return s
 }
@@ -6333,25 +6339,71 @@ func (s *GetFileModel) SetBody(v *CCPGetFileResponse) *GetFileModel {
 	return s
 }
 
-type CCPGetDownloadUrlRequestModel struct {
-	Headers map[string]string         `json:"headers" xml:"headers"`
-	Body    *CCPGetDownloadUrlRequest `json:"body" xml:"body" require:"true"`
+type GetFileByPathRequestModel struct {
+	Headers map[string]string        `json:"headers" xml:"headers"`
+	Body    *CCPGetFileByPathRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s CCPGetDownloadUrlRequestModel) String() string {
+func (s GetFileByPathRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s CCPGetDownloadUrlRequestModel) GoString() string {
+func (s GetFileByPathRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *CCPGetDownloadUrlRequestModel) SetHeaders(v map[string]string) *CCPGetDownloadUrlRequestModel {
+func (s *GetFileByPathRequestModel) SetHeaders(v map[string]string) *GetFileByPathRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *CCPGetDownloadUrlRequestModel) SetBody(v *CCPGetDownloadUrlRequest) *CCPGetDownloadUrlRequestModel {
+func (s *GetFileByPathRequestModel) SetBody(v *CCPGetFileByPathRequest) *GetFileByPathRequestModel {
+	s.Body = v
+	return s
+}
+
+type GetFileByPathModel struct {
+	Headers map[string]string         `json:"headers" xml:"headers"`
+	Body    *CCPGetFileByPathResponse `json:"body" xml:"body" require:"true"`
+}
+
+func (s GetFileByPathModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetFileByPathModel) GoString() string {
+	return s.String()
+}
+
+func (s *GetFileByPathModel) SetHeaders(v map[string]string) *GetFileByPathModel {
+	s.Headers = v
+	return s
+}
+
+func (s *GetFileByPathModel) SetBody(v *CCPGetFileByPathResponse) *GetFileByPathModel {
+	s.Body = v
+	return s
+}
+
+type GetDownloadUrlRequestModel struct {
+	Headers map[string]string         `json:"headers" xml:"headers"`
+	Body    *CCPGetDownloadUrlRequest `json:"body" xml:"body" require:"true"`
+}
+
+func (s GetDownloadUrlRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetDownloadUrlRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *GetDownloadUrlRequestModel) SetHeaders(v map[string]string) *GetDownloadUrlRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *GetDownloadUrlRequestModel) SetBody(v *CCPGetDownloadUrlRequest) *GetDownloadUrlRequestModel {
 	s.Body = v
 	return s
 }
@@ -6379,25 +6431,71 @@ func (s *GetDownloadUrlModel) SetBody(v *CCPGetDownloadUrlResponse) *GetDownload
 	return s
 }
 
-type CCPGetUploadUrlRequestModel struct {
-	Headers map[string]string       `json:"headers" xml:"headers"`
-	Body    *CCPGetUploadUrlRequest `json:"body" xml:"body" require:"true"`
+type GetLastCursorRequestModel struct {
+	Headers map[string]string     `json:"headers" xml:"headers"`
+	Body    *GetLastCursorRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s CCPGetUploadUrlRequestModel) String() string {
+func (s GetLastCursorRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s CCPGetUploadUrlRequestModel) GoString() string {
+func (s GetLastCursorRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *CCPGetUploadUrlRequestModel) SetHeaders(v map[string]string) *CCPGetUploadUrlRequestModel {
+func (s *GetLastCursorRequestModel) SetHeaders(v map[string]string) *GetLastCursorRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *CCPGetUploadUrlRequestModel) SetBody(v *CCPGetUploadUrlRequest) *CCPGetUploadUrlRequestModel {
+func (s *GetLastCursorRequestModel) SetBody(v *GetLastCursorRequest) *GetLastCursorRequestModel {
+	s.Body = v
+	return s
+}
+
+type GetLastCursorModel struct {
+	Headers map[string]string      `json:"headers" xml:"headers"`
+	Body    *GetLastCursorResponse `json:"body" xml:"body" require:"true"`
+}
+
+func (s GetLastCursorModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetLastCursorModel) GoString() string {
+	return s.String()
+}
+
+func (s *GetLastCursorModel) SetHeaders(v map[string]string) *GetLastCursorModel {
+	s.Headers = v
+	return s
+}
+
+func (s *GetLastCursorModel) SetBody(v *GetLastCursorResponse) *GetLastCursorModel {
+	s.Body = v
+	return s
+}
+
+type GetUploadUrlRequestModel struct {
+	Headers map[string]string       `json:"headers" xml:"headers"`
+	Body    *CCPGetUploadUrlRequest `json:"body" xml:"body" require:"true"`
+}
+
+func (s GetUploadUrlRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetUploadUrlRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *GetUploadUrlRequestModel) SetHeaders(v map[string]string) *GetUploadUrlRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *GetUploadUrlRequestModel) SetBody(v *CCPGetUploadUrlRequest) *GetUploadUrlRequestModel {
 	s.Body = v
 	return s
 }
@@ -6425,25 +6523,25 @@ func (s *GetUploadUrlModel) SetBody(v *CCPGetUploadUrlResponse) *GetUploadUrlMod
 	return s
 }
 
-type CCPListFileRequestModel struct {
+type ListFileRequestModel struct {
 	Headers map[string]string   `json:"headers" xml:"headers"`
 	Body    *CCPListFileRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s CCPListFileRequestModel) String() string {
+func (s ListFileRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s CCPListFileRequestModel) GoString() string {
+func (s ListFileRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *CCPListFileRequestModel) SetHeaders(v map[string]string) *CCPListFileRequestModel {
+func (s *ListFileRequestModel) SetHeaders(v map[string]string) *ListFileRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *CCPListFileRequestModel) SetBody(v *CCPListFileRequest) *CCPListFileRequestModel {
+func (s *ListFileRequestModel) SetBody(v *CCPListFileRequest) *ListFileRequestModel {
 	s.Body = v
 	return s
 }
@@ -6471,25 +6569,117 @@ func (s *ListFileModel) SetBody(v *CCPListFileResponse) *ListFileModel {
 	return s
 }
 
-type CCPListUploadedPartRequestModel struct {
-	Headers map[string]string           `json:"headers" xml:"headers"`
-	Body    *CCPListUploadedPartRequest `json:"body" xml:"body" require:"true"`
+type ListFileByCustomIndexKeyRequestModel struct {
+	Headers map[string]string                   `json:"headers" xml:"headers"`
+	Body    *CCPListFileByCustomIndexKeyRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s CCPListUploadedPartRequestModel) String() string {
+func (s ListFileByCustomIndexKeyRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s CCPListUploadedPartRequestModel) GoString() string {
+func (s ListFileByCustomIndexKeyRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *CCPListUploadedPartRequestModel) SetHeaders(v map[string]string) *CCPListUploadedPartRequestModel {
+func (s *ListFileByCustomIndexKeyRequestModel) SetHeaders(v map[string]string) *ListFileByCustomIndexKeyRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *CCPListUploadedPartRequestModel) SetBody(v *CCPListUploadedPartRequest) *CCPListUploadedPartRequestModel {
+func (s *ListFileByCustomIndexKeyRequestModel) SetBody(v *CCPListFileByCustomIndexKeyRequest) *ListFileByCustomIndexKeyRequestModel {
+	s.Body = v
+	return s
+}
+
+type ListFileByCustomIndexKeyModel struct {
+	Headers map[string]string    `json:"headers" xml:"headers"`
+	Body    *CCPListFileResponse `json:"body" xml:"body" require:"true"`
+}
+
+func (s ListFileByCustomIndexKeyModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListFileByCustomIndexKeyModel) GoString() string {
+	return s.String()
+}
+
+func (s *ListFileByCustomIndexKeyModel) SetHeaders(v map[string]string) *ListFileByCustomIndexKeyModel {
+	s.Headers = v
+	return s
+}
+
+func (s *ListFileByCustomIndexKeyModel) SetBody(v *CCPListFileResponse) *ListFileByCustomIndexKeyModel {
+	s.Body = v
+	return s
+}
+
+type ListFileDeltaRequestModel struct {
+	Headers map[string]string     `json:"headers" xml:"headers"`
+	Body    *ListFileDeltaRequest `json:"body" xml:"body" require:"true"`
+}
+
+func (s ListFileDeltaRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListFileDeltaRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *ListFileDeltaRequestModel) SetHeaders(v map[string]string) *ListFileDeltaRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *ListFileDeltaRequestModel) SetBody(v *ListFileDeltaRequest) *ListFileDeltaRequestModel {
+	s.Body = v
+	return s
+}
+
+type ListFileDeltaModel struct {
+	Headers map[string]string      `json:"headers" xml:"headers"`
+	Body    *ListFileDeltaResponse `json:"body" xml:"body" require:"true"`
+}
+
+func (s ListFileDeltaModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListFileDeltaModel) GoString() string {
+	return s.String()
+}
+
+func (s *ListFileDeltaModel) SetHeaders(v map[string]string) *ListFileDeltaModel {
+	s.Headers = v
+	return s
+}
+
+func (s *ListFileDeltaModel) SetBody(v *ListFileDeltaResponse) *ListFileDeltaModel {
+	s.Body = v
+	return s
+}
+
+type ListUploadedPartsRequestModel struct {
+	Headers map[string]string           `json:"headers" xml:"headers"`
+	Body    *CCPListUploadedPartRequest `json:"body" xml:"body" require:"true"`
+}
+
+func (s ListUploadedPartsRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListUploadedPartsRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *ListUploadedPartsRequestModel) SetHeaders(v map[string]string) *ListUploadedPartsRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *ListUploadedPartsRequestModel) SetBody(v *CCPListUploadedPartRequest) *ListUploadedPartsRequestModel {
 	s.Body = v
 	return s
 }
@@ -6517,25 +6707,25 @@ func (s *ListUploadedPartsModel) SetBody(v *CCPListUploadedPartResponse) *ListUp
 	return s
 }
 
-type CCPMoveFileRequestModel struct {
+type MoveFileRequestModel struct {
 	Headers map[string]string   `json:"headers" xml:"headers"`
 	Body    *CCPMoveFileRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s CCPMoveFileRequestModel) String() string {
+func (s MoveFileRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s CCPMoveFileRequestModel) GoString() string {
+func (s MoveFileRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *CCPMoveFileRequestModel) SetHeaders(v map[string]string) *CCPMoveFileRequestModel {
+func (s *MoveFileRequestModel) SetHeaders(v map[string]string) *MoveFileRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *CCPMoveFileRequestModel) SetBody(v *CCPMoveFileRequest) *CCPMoveFileRequestModel {
+func (s *MoveFileRequestModel) SetBody(v *CCPMoveFileRequest) *MoveFileRequestModel {
 	s.Body = v
 	return s
 }
@@ -6563,25 +6753,71 @@ func (s *MoveFileModel) SetBody(v *CCPMoveFileResponse) *MoveFileModel {
 	return s
 }
 
-type CCPSearchFileRequestModel struct {
-	Headers map[string]string     `json:"headers" xml:"headers"`
-	Body    *CCPSearchFileRequest `json:"body" xml:"body" require:"true"`
+type ScanFileMetaRequestModel struct {
+	Headers map[string]string       `json:"headers" xml:"headers"`
+	Body    *CCPScanFileMetaRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s CCPSearchFileRequestModel) String() string {
+func (s ScanFileMetaRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s CCPSearchFileRequestModel) GoString() string {
+func (s ScanFileMetaRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *CCPSearchFileRequestModel) SetHeaders(v map[string]string) *CCPSearchFileRequestModel {
+func (s *ScanFileMetaRequestModel) SetHeaders(v map[string]string) *ScanFileMetaRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *CCPSearchFileRequestModel) SetBody(v *CCPSearchFileRequest) *CCPSearchFileRequestModel {
+func (s *ScanFileMetaRequestModel) SetBody(v *CCPScanFileMetaRequest) *ScanFileMetaRequestModel {
+	s.Body = v
+	return s
+}
+
+type ScanFileMetaModel struct {
+	Headers map[string]string        `json:"headers" xml:"headers"`
+	Body    *CCPScanFileMetaResponse `json:"body" xml:"body" require:"true"`
+}
+
+func (s ScanFileMetaModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ScanFileMetaModel) GoString() string {
+	return s.String()
+}
+
+func (s *ScanFileMetaModel) SetHeaders(v map[string]string) *ScanFileMetaModel {
+	s.Headers = v
+	return s
+}
+
+func (s *ScanFileMetaModel) SetBody(v *CCPScanFileMetaResponse) *ScanFileMetaModel {
+	s.Body = v
+	return s
+}
+
+type SearchFileRequestModel struct {
+	Headers map[string]string     `json:"headers" xml:"headers"`
+	Body    *CCPSearchFileRequest `json:"body" xml:"body" require:"true"`
+}
+
+func (s SearchFileRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s SearchFileRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *SearchFileRequestModel) SetHeaders(v map[string]string) *SearchFileRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *SearchFileRequestModel) SetBody(v *CCPSearchFileRequest) *SearchFileRequestModel {
 	s.Body = v
 	return s
 }
@@ -6609,25 +6845,25 @@ func (s *SearchFileModel) SetBody(v *CCPSearchFileResponse) *SearchFileModel {
 	return s
 }
 
-type CCPUpdateFileMetaRequestModel struct {
+type UpdateFileRequestModel struct {
 	Headers map[string]string         `json:"headers" xml:"headers"`
 	Body    *CCPUpdateFileMetaRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s CCPUpdateFileMetaRequestModel) String() string {
+func (s UpdateFileRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s CCPUpdateFileMetaRequestModel) GoString() string {
+func (s UpdateFileRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *CCPUpdateFileMetaRequestModel) SetHeaders(v map[string]string) *CCPUpdateFileMetaRequestModel {
+func (s *UpdateFileRequestModel) SetHeaders(v map[string]string) *UpdateFileRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *CCPUpdateFileMetaRequestModel) SetBody(v *CCPUpdateFileMetaRequest) *CCPUpdateFileMetaRequestModel {
+func (s *UpdateFileRequestModel) SetBody(v *CCPUpdateFileMetaRequest) *UpdateFileRequestModel {
 	s.Body = v
 	return s
 }
@@ -6659,7 +6895,7 @@ func (s *UpdateFileModel) SetBody(v *CCPUpdateFileMetaResponse) *UpdateFileModel
  * complete file request
  */
 type BaseCompleteFileRequest struct {
-	DriveId      *string           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	DriveId      *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	UploadId     *string           `json:"upload_id" xml:"upload_id"`
 }
@@ -6742,7 +6978,7 @@ func (s *BaseCreateFileRequest) SetType(v string) *BaseCreateFileRequest {
  */
 type BaseGetUploadUrlRequest struct {
 	ContentMd5   *string           `json:"content_md5" xml:"content_md5" maxLength:"32"`
-	DriveId      *string           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	DriveId      *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	UploadId     *string           `json:"upload_id" xml:"upload_id" require:"true"`
 }
@@ -6830,7 +7066,7 @@ func (s *BaseListFileRequest) SetVideoThumbnailProcess(v string) *BaseListFileRe
  */
 type BaseMoveFileRequest struct {
 	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	NewName   *string `json:"new_name" xml:"new_name" pattern:".{1,1000}"`
+	NewName   *string `json:"new_name" xml:"new_name"`
 	Overwrite *bool   `json:"overwrite" xml:"overwrite"`
 }
 
@@ -6972,7 +7208,7 @@ type CCPCopyFileRequest struct {
 	AutoRename     *bool   `json:"auto_rename" xml:"auto_rename"`
 	DriveId        *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	FileId         *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	NewName        *string `json:"new_name" xml:"new_name" pattern:".{1,1000}"`
+	NewName        *string `json:"new_name" xml:"new_name"`
 	ToDriveId      *string `json:"to_drive_id" xml:"to_drive_id" pattern:"[0-9]+"`
 	ToParentFileId *string `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 }
@@ -7019,24 +7255,28 @@ func (s *CCPCopyFileRequest) SetToParentFileId(v string) *CCPCopyFileRequest {
  * 创建文件
  */
 type CCPCreateFileRequest struct {
-	ContentMd5      *string           `json:"content_md5" xml:"content_md5"`
-	ContentType     *string           `json:"content_type" xml:"content_type"`
-	Name            *string           `json:"name" xml:"name"`
-	PartInfoList    []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	Size            *int64            `json:"size" xml:"size"`
-	Type            *string           `json:"type" xml:"type"`
-	AutoRename      *bool             `json:"auto_rename" xml:"auto_rename"`
-	ContentHash     *string           `json:"content_hash" xml:"content_hash"`
-	ContentHashName *string           `json:"content_hash_name" xml:"content_hash_name"`
-	Description     *string           `json:"description" xml:"description" maxLength:"0"`
-	DriveId         *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	EncryptMode     *string           `json:"encrypt_mode" xml:"encrypt_mode"`
-	FileId          *string           `json:"file_id" xml:"file_id"`
-	Hidden          *bool             `json:"hidden" xml:"hidden"`
-	Labels          []*string         `json:"labels" xml:"labels" type:"Repeated"`
-	Meta            *string           `json:"meta" xml:"meta"`
-	ParentFileId    *string           `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
-	PreHash         *string           `json:"pre_hash" xml:"pre_hash"`
+	ContentMd5      *string                `json:"content_md5" xml:"content_md5"`
+	ContentType     *string                `json:"content_type" xml:"content_type"`
+	Name            *string                `json:"name" xml:"name"`
+	PartInfoList    []*UploadPartInfo      `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
+	Size            *int64                 `json:"size" xml:"size"`
+	Type            *string                `json:"type" xml:"type"`
+	AutoRename      *bool                  `json:"auto_rename" xml:"auto_rename"`
+	CheckNameMode   *string                `json:"check_name_mode" xml:"check_name_mode"`
+	ContentHash     *string                `json:"content_hash" xml:"content_hash"`
+	ContentHashName *string                `json:"content_hash_name" xml:"content_hash_name"`
+	Description     *string                `json:"description" xml:"description" maxLength:"0"`
+	DriveId         *string                `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	EncryptMode     *string                `json:"encrypt_mode" xml:"encrypt_mode"`
+	FileId          *string                `json:"file_id" xml:"file_id"`
+	Hidden          *bool                  `json:"hidden" xml:"hidden"`
+	Labels          []*string              `json:"labels" xml:"labels" type:"Repeated"`
+	LastUpdatedAt   *string                `json:"last_updated_at" xml:"last_updated_at"`
+	Meta            *string                `json:"meta" xml:"meta"`
+	ParentFileId    *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	PreHash         *string                `json:"pre_hash" xml:"pre_hash"`
+	StreamsInfo     map[string]interface{} `json:"streams_info" xml:"streams_info"`
+	UserMeta        *string                `json:"user_meta" xml:"user_meta"`
 }
 
 func (s CCPCreateFileRequest) String() string {
@@ -7082,6 +7322,11 @@ func (s *CCPCreateFileRequest) SetAutoRename(v bool) *CCPCreateFileRequest {
 	return s
 }
 
+func (s *CCPCreateFileRequest) SetCheckNameMode(v string) *CCPCreateFileRequest {
+	s.CheckNameMode = &v
+	return s
+}
+
 func (s *CCPCreateFileRequest) SetContentHash(v string) *CCPCreateFileRequest {
 	s.ContentHash = &v
 	return s
@@ -7122,6 +7367,11 @@ func (s *CCPCreateFileRequest) SetLabels(v []*string) *CCPCreateFileRequest {
 	return s
 }
 
+func (s *CCPCreateFileRequest) SetLastUpdatedAt(v string) *CCPCreateFileRequest {
+	s.LastUpdatedAt = &v
+	return s
+}
+
 func (s *CCPCreateFileRequest) SetMeta(v string) *CCPCreateFileRequest {
 	s.Meta = &v
 	return s
@@ -7134,6 +7384,16 @@ func (s *CCPCreateFileRequest) SetParentFileId(v string) *CCPCreateFileRequest {
 
 func (s *CCPCreateFileRequest) SetPreHash(v string) *CCPCreateFileRequest {
 	s.PreHash = &v
+	return s
+}
+
+func (s *CCPCreateFileRequest) SetStreamsInfo(v map[string]interface{}) *CCPCreateFileRequest {
+	s.StreamsInfo = v
+	return s
+}
+
+func (s *CCPCreateFileRequest) SetUserMeta(v string) *CCPCreateFileRequest {
+	s.UserMeta = &v
 	return s
 }
 
@@ -7222,7 +7482,7 @@ type CCPGetDownloadUrlRequest struct {
 	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
 	FileId    *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	FileName  *string `json:"file_name" xml:"file_name" pattern:".{1,1000}"`
+	FileName  *string `json:"file_name" xml:"file_name" maxLength:"1024"`
 }
 
 func (s CCPGetDownloadUrlRequest) String() string {
@@ -7254,10 +7514,273 @@ func (s *CCPGetDownloadUrlRequest) SetFileName(v string) *CCPGetDownloadUrlReque
 }
 
 /**
+ * 根据路径获取 File 接口 body
+ */
+type CCPGetFileByPathRequest struct {
+	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	Fields                *string `json:"fields" xml:"fields"`
+	FileId                *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	FilePath              *string `json:"file_path" xml:"file_path"`
+	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
+	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
+	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec"`
+	VideoThumbnailProcess *string `json:"video_thumbnail_process" xml:"video_thumbnail_process"`
+}
+
+func (s CCPGetFileByPathRequest) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPGetFileByPathRequest) GoString() string {
+	return s.String()
+}
+
+func (s *CCPGetFileByPathRequest) SetDriveId(v string) *CCPGetFileByPathRequest {
+	s.DriveId = &v
+	return s
+}
+
+func (s *CCPGetFileByPathRequest) SetFields(v string) *CCPGetFileByPathRequest {
+	s.Fields = &v
+	return s
+}
+
+func (s *CCPGetFileByPathRequest) SetFileId(v string) *CCPGetFileByPathRequest {
+	s.FileId = &v
+	return s
+}
+
+func (s *CCPGetFileByPathRequest) SetFilePath(v string) *CCPGetFileByPathRequest {
+	s.FilePath = &v
+	return s
+}
+
+func (s *CCPGetFileByPathRequest) SetImageThumbnailProcess(v string) *CCPGetFileByPathRequest {
+	s.ImageThumbnailProcess = &v
+	return s
+}
+
+func (s *CCPGetFileByPathRequest) SetImageUrlProcess(v string) *CCPGetFileByPathRequest {
+	s.ImageUrlProcess = &v
+	return s
+}
+
+func (s *CCPGetFileByPathRequest) SetUrlExpireSec(v int64) *CCPGetFileByPathRequest {
+	s.UrlExpireSec = &v
+	return s
+}
+
+func (s *CCPGetFileByPathRequest) SetVideoThumbnailProcess(v string) *CCPGetFileByPathRequest {
+	s.VideoThumbnailProcess = &v
+	return s
+}
+
+/**
+ * 根据路径获取文件元数据response
+ */
+type CCPGetFileByPathResponse struct {
+	Category           *string                `json:"category" xml:"category"`
+	ContentHash        *string                `json:"content_hash" xml:"content_hash"`
+	ContentHashName    *string                `json:"content_hash_name" xml:"content_hash_name"`
+	ContentType        *string                `json:"content_type" xml:"content_type"`
+	Crc64Hash          *string                `json:"crc64_hash" xml:"crc64_hash"`
+	CreatedAt          *string                `json:"created_at" xml:"created_at"`
+	Description        *string                `json:"description" xml:"description"`
+	DomainId           *string                `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
+	DownloadUrl        *string                `json:"download_url" xml:"download_url"`
+	DriveId            *string                `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	EncryptMode        *string                `json:"encrypt_mode" xml:"encrypt_mode"`
+	FileExtension      *string                `json:"file_extension" xml:"file_extension"`
+	FileId             *string                `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	Hidden             *bool                  `json:"hidden" xml:"hidden"`
+	ImageMediaMetadata *ImageMediaResponse    `json:"image_media_metadata" xml:"image_media_metadata"`
+	Labels             []*string              `json:"labels" xml:"labels" type:"Repeated"`
+	Meta               *string                `json:"meta" xml:"meta"`
+	Name               *string                `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	ParentFileId       *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	Size               *int64                 `json:"size" xml:"size"`
+	Starred            *bool                  `json:"starred" xml:"starred"`
+	Status             *string                `json:"status" xml:"status"`
+	StreamsUrlInfo     map[string]interface{} `json:"streams_url_info" xml:"streams_url_info"`
+	Thumbnail          *string                `json:"thumbnail" xml:"thumbnail"`
+	TrashedAt          *string                `json:"trashed_at" xml:"trashed_at"`
+	Type               *string                `json:"type" xml:"type"`
+	UpdatedAt          *string                `json:"updated_at" xml:"updated_at"`
+	UploadId           *string                `json:"upload_id" xml:"upload_id"`
+	Url                *string                `json:"url" xml:"url"`
+	UserMeta           *string                `json:"user_meta" xml:"user_meta"`
+	VideoMediaMetadata *VideoMediaResponse    `json:"video_media_metadata" xml:"video_media_metadata"`
+}
+
+func (s CCPGetFileByPathResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPGetFileByPathResponse) GoString() string {
+	return s.String()
+}
+
+func (s *CCPGetFileByPathResponse) SetCategory(v string) *CCPGetFileByPathResponse {
+	s.Category = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetContentHash(v string) *CCPGetFileByPathResponse {
+	s.ContentHash = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetContentHashName(v string) *CCPGetFileByPathResponse {
+	s.ContentHashName = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetContentType(v string) *CCPGetFileByPathResponse {
+	s.ContentType = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetCrc64Hash(v string) *CCPGetFileByPathResponse {
+	s.Crc64Hash = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetCreatedAt(v string) *CCPGetFileByPathResponse {
+	s.CreatedAt = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetDescription(v string) *CCPGetFileByPathResponse {
+	s.Description = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetDomainId(v string) *CCPGetFileByPathResponse {
+	s.DomainId = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetDownloadUrl(v string) *CCPGetFileByPathResponse {
+	s.DownloadUrl = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetDriveId(v string) *CCPGetFileByPathResponse {
+	s.DriveId = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetEncryptMode(v string) *CCPGetFileByPathResponse {
+	s.EncryptMode = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetFileExtension(v string) *CCPGetFileByPathResponse {
+	s.FileExtension = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetFileId(v string) *CCPGetFileByPathResponse {
+	s.FileId = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetHidden(v bool) *CCPGetFileByPathResponse {
+	s.Hidden = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetImageMediaMetadata(v *ImageMediaResponse) *CCPGetFileByPathResponse {
+	s.ImageMediaMetadata = v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetLabels(v []*string) *CCPGetFileByPathResponse {
+	s.Labels = v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetMeta(v string) *CCPGetFileByPathResponse {
+	s.Meta = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetName(v string) *CCPGetFileByPathResponse {
+	s.Name = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetParentFileId(v string) *CCPGetFileByPathResponse {
+	s.ParentFileId = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetSize(v int64) *CCPGetFileByPathResponse {
+	s.Size = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetStarred(v bool) *CCPGetFileByPathResponse {
+	s.Starred = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetStatus(v string) *CCPGetFileByPathResponse {
+	s.Status = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetStreamsUrlInfo(v map[string]interface{}) *CCPGetFileByPathResponse {
+	s.StreamsUrlInfo = v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetThumbnail(v string) *CCPGetFileByPathResponse {
+	s.Thumbnail = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetTrashedAt(v string) *CCPGetFileByPathResponse {
+	s.TrashedAt = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetType(v string) *CCPGetFileByPathResponse {
+	s.Type = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetUpdatedAt(v string) *CCPGetFileByPathResponse {
+	s.UpdatedAt = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetUploadId(v string) *CCPGetFileByPathResponse {
+	s.UploadId = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetUrl(v string) *CCPGetFileByPathResponse {
+	s.Url = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetUserMeta(v string) *CCPGetFileByPathResponse {
+	s.UserMeta = &v
+	return s
+}
+
+func (s *CCPGetFileByPathResponse) SetVideoMediaMetadata(v *VideoMediaResponse) *CCPGetFileByPathResponse {
+	s.VideoMediaMetadata = v
+	return s
+}
+
+/**
  * 获取文件元数据
  */
 type CCPGetFileRequest struct {
 	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	Fields                *string `json:"fields" xml:"fields"`
 	FileId                *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
@@ -7275,6 +7798,11 @@ func (s CCPGetFileRequest) GoString() string {
 
 func (s *CCPGetFileRequest) SetDriveId(v string) *CCPGetFileRequest {
 	s.DriveId = &v
+	return s
+}
+
+func (s *CCPGetFileRequest) SetFields(v string) *CCPGetFileRequest {
+	s.Fields = &v
 	return s
 }
 
@@ -7350,6 +7878,110 @@ func (s *CCPGetUploadUrlRequest) SetFileId(v string) *CCPGetUploadUrlRequest {
 /**
  * 列举文件
  */
+type CCPListFileByCustomIndexKeyRequest struct {
+	DriveId               *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
+	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
+	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1,3}"`
+	Marker                *string `json:"marker" xml:"marker"`
+	VideoThumbnailProcess *string `json:"video_thumbnail_process" xml:"video_thumbnail_process"`
+	Starred               *bool   `json:"Starred" xml:"Starred"`
+	Category              *string `json:"category" xml:"category"`
+	CustomIndexKey        *string `json:"custom_index_key" xml:"custom_index_key"`
+	EncryptMode           *string `json:"encrypt_mode" xml:"encrypt_mode"`
+	Fields                *string `json:"fields" xml:"fields"`
+	OrderDirection        *string `json:"order_direction" xml:"order_direction"`
+	Status                *string `json:"status" xml:"status"`
+	Type                  *string `json:"type" xml:"type"`
+	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec"`
+}
+
+func (s CCPListFileByCustomIndexKeyRequest) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPListFileByCustomIndexKeyRequest) GoString() string {
+	return s.String()
+}
+
+func (s *CCPListFileByCustomIndexKeyRequest) SetDriveId(v string) *CCPListFileByCustomIndexKeyRequest {
+	s.DriveId = &v
+	return s
+}
+
+func (s *CCPListFileByCustomIndexKeyRequest) SetImageThumbnailProcess(v string) *CCPListFileByCustomIndexKeyRequest {
+	s.ImageThumbnailProcess = &v
+	return s
+}
+
+func (s *CCPListFileByCustomIndexKeyRequest) SetImageUrlProcess(v string) *CCPListFileByCustomIndexKeyRequest {
+	s.ImageUrlProcess = &v
+	return s
+}
+
+func (s *CCPListFileByCustomIndexKeyRequest) SetLimit(v int64) *CCPListFileByCustomIndexKeyRequest {
+	s.Limit = &v
+	return s
+}
+
+func (s *CCPListFileByCustomIndexKeyRequest) SetMarker(v string) *CCPListFileByCustomIndexKeyRequest {
+	s.Marker = &v
+	return s
+}
+
+func (s *CCPListFileByCustomIndexKeyRequest) SetVideoThumbnailProcess(v string) *CCPListFileByCustomIndexKeyRequest {
+	s.VideoThumbnailProcess = &v
+	return s
+}
+
+func (s *CCPListFileByCustomIndexKeyRequest) SetStarred(v bool) *CCPListFileByCustomIndexKeyRequest {
+	s.Starred = &v
+	return s
+}
+
+func (s *CCPListFileByCustomIndexKeyRequest) SetCategory(v string) *CCPListFileByCustomIndexKeyRequest {
+	s.Category = &v
+	return s
+}
+
+func (s *CCPListFileByCustomIndexKeyRequest) SetCustomIndexKey(v string) *CCPListFileByCustomIndexKeyRequest {
+	s.CustomIndexKey = &v
+	return s
+}
+
+func (s *CCPListFileByCustomIndexKeyRequest) SetEncryptMode(v string) *CCPListFileByCustomIndexKeyRequest {
+	s.EncryptMode = &v
+	return s
+}
+
+func (s *CCPListFileByCustomIndexKeyRequest) SetFields(v string) *CCPListFileByCustomIndexKeyRequest {
+	s.Fields = &v
+	return s
+}
+
+func (s *CCPListFileByCustomIndexKeyRequest) SetOrderDirection(v string) *CCPListFileByCustomIndexKeyRequest {
+	s.OrderDirection = &v
+	return s
+}
+
+func (s *CCPListFileByCustomIndexKeyRequest) SetStatus(v string) *CCPListFileByCustomIndexKeyRequest {
+	s.Status = &v
+	return s
+}
+
+func (s *CCPListFileByCustomIndexKeyRequest) SetType(v string) *CCPListFileByCustomIndexKeyRequest {
+	s.Type = &v
+	return s
+}
+
+func (s *CCPListFileByCustomIndexKeyRequest) SetUrlExpireSec(v int64) *CCPListFileByCustomIndexKeyRequest {
+	s.UrlExpireSec = &v
+	return s
+}
+
+/**
+ * 列举文件
+ */
 type CCPListFileRequest struct {
 	DriveId               *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
@@ -7360,6 +7992,7 @@ type CCPListFileRequest struct {
 	Starred               *bool   `json:"Starred" xml:"Starred"`
 	All                   *bool   `json:"all" xml:"all"`
 	Category              *string `json:"category" xml:"category"`
+	Fields                *string `json:"fields" xml:"fields"`
 	OrderBy               *string `json:"order_by" xml:"order_by"`
 	OrderDirection        *string `json:"order_direction" xml:"order_direction"`
 	ParentFileId          *string `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
@@ -7418,6 +8051,11 @@ func (s *CCPListFileRequest) SetAll(v bool) *CCPListFileRequest {
 
 func (s *CCPListFileRequest) SetCategory(v string) *CCPListFileRequest {
 	s.Category = &v
+	return s
+}
+
+func (s *CCPListFileRequest) SetFields(v string) *CCPListFileRequest {
+	s.Fields = &v
 	return s
 }
 
@@ -7500,7 +8138,7 @@ func (s *CCPListUploadedPartRequest) SetUploadId(v string) *CCPListUploadedPartR
  */
 type CCPMoveFileRequest struct {
 	DriveId        *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	NewName        *string `json:"new_name" xml:"new_name" pattern:".{1,1000}"`
+	NewName        *string `json:"new_name" xml:"new_name"`
 	Overwrite      *bool   `json:"overwrite" xml:"overwrite"`
 	FileId         *string `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	ToParentFileId *string `json:"to_parent_file_id" xml:"to_parent_file_id" maxLength:"50"`
@@ -7536,6 +8174,70 @@ func (s *CCPMoveFileRequest) SetFileId(v string) *CCPMoveFileRequest {
 
 func (s *CCPMoveFileRequest) SetToParentFileId(v string) *CCPMoveFileRequest {
 	s.ToParentFileId = &v
+	return s
+}
+
+/**
+ * 全量获取file元信息的请求body
+ */
+type CCPScanFileMetaRequest struct {
+	Category *string `json:"category" xml:"category"`
+	DriveId  *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	Limit    *int    `json:"limit" xml:"limit"`
+	Marker   *string `json:"marker" xml:"marker"`
+}
+
+func (s CCPScanFileMetaRequest) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPScanFileMetaRequest) GoString() string {
+	return s.String()
+}
+
+func (s *CCPScanFileMetaRequest) SetCategory(v string) *CCPScanFileMetaRequest {
+	s.Category = &v
+	return s
+}
+
+func (s *CCPScanFileMetaRequest) SetDriveId(v string) *CCPScanFileMetaRequest {
+	s.DriveId = &v
+	return s
+}
+
+func (s *CCPScanFileMetaRequest) SetLimit(v int) *CCPScanFileMetaRequest {
+	s.Limit = &v
+	return s
+}
+
+func (s *CCPScanFileMetaRequest) SetMarker(v string) *CCPScanFileMetaRequest {
+	s.Marker = &v
+	return s
+}
+
+/**
+ * scan file meta response
+ */
+type CCPScanFileMetaResponse struct {
+	Items      []*BaseCCPFileResponse `json:"items" xml:"items" type:"Repeated"`
+	NextMarker *string                `json:"next_marker" xml:"next_marker"`
+}
+
+func (s CCPScanFileMetaResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPScanFileMetaResponse) GoString() string {
+	return s.String()
+}
+
+func (s *CCPScanFileMetaResponse) SetItems(v []*BaseCCPFileResponse) *CCPScanFileMetaResponse {
+	s.Items = v
+	return s
+}
+
+func (s *CCPScanFileMetaResponse) SetNextMarker(v string) *CCPScanFileMetaResponse {
+	s.NextMarker = &v
 	return s
 }
 
@@ -7619,8 +8321,9 @@ type CCPUpdateFileMetaRequest struct {
 	Hidden         *bool     `json:"hidden" xml:"hidden"`
 	Labels         []*string `json:"labels" xml:"labels" type:"Repeated"`
 	Meta           *string   `json:"meta" xml:"meta"`
-	Name           *string   `json:"name" xml:"name" pattern:".{1,1000}"`
+	Name           *string   `json:"name" xml:"name" maxLength:"1024"`
 	Starred        *bool     `json:"starred" xml:"starred"`
+	UserMeta       *string   `json:"user_meta" xml:"user_meta"`
 }
 
 func (s CCPUpdateFileMetaRequest) String() string {
@@ -7681,6 +8384,11 @@ func (s *CCPUpdateFileMetaRequest) SetStarred(v bool) *CCPUpdateFileMetaRequest 
 	return s
 }
 
+func (s *CCPUpdateFileMetaRequest) SetUserMeta(v string) *CCPUpdateFileMetaRequest {
+	s.UserMeta = &v
+	return s
+}
+
 /**
  * complete file request
  */
@@ -7732,7 +8440,7 @@ func (s *CompleteFileRequest) SetUploadId(v string) *CompleteFileRequest {
 }
 
 /**
- * 文件移动请求
+ * copy file request
  */
 type CopyFileRequest struct {
 	DriveId          *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
@@ -7741,8 +8449,10 @@ type CopyFileRequest struct {
 	NewName          *string `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	Overwrite        *bool   `json:"overwrite" xml:"overwrite"`
 	ShareId          *string `json:"share_id" xml:"share_id"`
+	ToDriveId        *string `json:"to_drive_id" xml:"to_drive_id" require:"true" pattern:"[0-9]+"`
 	ToParentFileId   *string `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
 	ToParentFilePath *string `json:"to_parent_file_path" xml:"to_parent_file_path"`
+	ToShareId        *string `json:"to_share_id" xml:"to_share_id"`
 }
 
 func (s CopyFileRequest) String() string {
@@ -7783,6 +8493,11 @@ func (s *CopyFileRequest) SetShareId(v string) *CopyFileRequest {
 	return s
 }
 
+func (s *CopyFileRequest) SetToDriveId(v string) *CopyFileRequest {
+	s.ToDriveId = &v
+	return s
+}
+
 func (s *CopyFileRequest) SetToParentFileId(v string) *CopyFileRequest {
 	s.ToParentFileId = &v
 	return s
@@ -7790,6 +8505,11 @@ func (s *CopyFileRequest) SetToParentFileId(v string) *CopyFileRequest {
 
 func (s *CopyFileRequest) SetToParentFilePath(v string) *CopyFileRequest {
 	s.ToParentFilePath = &v
+	return s
+}
+
+func (s *CopyFileRequest) SetToShareId(v string) *CopyFileRequest {
+	s.ToShareId = &v
 	return s
 }
 
@@ -8174,6 +8894,44 @@ func (s *DownloadRequest) SetShareID(v string) *DownloadRequest {
 }
 
 /**
+ * the file op info
+ */
+type FileDeltaResponse struct {
+	CurrentCategory *string              `json:"current_category" xml:"current_category"`
+	File            *BaseCCPFileResponse `json:"file" xml:"file"`
+	FileId          *string              `json:"file_id" xml:"file_id"`
+	Op              *string              `json:"op" xml:"op"`
+}
+
+func (s FileDeltaResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s FileDeltaResponse) GoString() string {
+	return s.String()
+}
+
+func (s *FileDeltaResponse) SetCurrentCategory(v string) *FileDeltaResponse {
+	s.CurrentCategory = &v
+	return s
+}
+
+func (s *FileDeltaResponse) SetFile(v *BaseCCPFileResponse) *FileDeltaResponse {
+	s.File = v
+	return s
+}
+
+func (s *FileDeltaResponse) SetFileId(v string) *FileDeltaResponse {
+	s.FileId = &v
+	return s
+}
+
+func (s *FileDeltaResponse) SetOp(v string) *FileDeltaResponse {
+	s.Op = &v
+	return s
+}
+
+/**
  * 获取异步人去信息
  */
 type GetAsyncTaskRequest struct {
@@ -8334,6 +9092,46 @@ func (s *GetFileRequest) SetShareId(v string) *GetFileRequest {
 }
 
 /**
+ * 获取最新游标
+ */
+type GetLastCursorRequest struct {
+	DriveId *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+}
+
+func (s GetLastCursorRequest) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetLastCursorRequest) GoString() string {
+	return s.String()
+}
+
+func (s *GetLastCursorRequest) SetDriveId(v string) *GetLastCursorRequest {
+	s.DriveId = &v
+	return s
+}
+
+/**
+ * get last file op cursor response
+ */
+type GetLastCursorResponse struct {
+	Cursor *string `json:"cursor" xml:"cursor"`
+}
+
+func (s GetLastCursorResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetLastCursorResponse) GoString() string {
+	return s.String()
+}
+
+func (s *GetLastCursorResponse) SetCursor(v string) *GetLastCursorResponse {
+	s.Cursor = &v
+	return s
+}
+
+/**
  * get share request
  */
 type GetShareRequest struct {
@@ -8438,6 +9236,70 @@ func (s *ListDriveRequest) SetMarker(v string) *ListDriveRequest {
 
 func (s *ListDriveRequest) SetOwner(v string) *ListDriveRequest {
 	s.Owner = &v
+	return s
+}
+
+/**
+ * 获取增量文件操作记录
+ */
+type ListFileDeltaRequest struct {
+	Cursor  *string `json:"cursor" xml:"cursor"`
+	DriveId *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	Limit   *int    `json:"limit" xml:"limit"`
+}
+
+func (s ListFileDeltaRequest) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListFileDeltaRequest) GoString() string {
+	return s.String()
+}
+
+func (s *ListFileDeltaRequest) SetCursor(v string) *ListFileDeltaRequest {
+	s.Cursor = &v
+	return s
+}
+
+func (s *ListFileDeltaRequest) SetDriveId(v string) *ListFileDeltaRequest {
+	s.DriveId = &v
+	return s
+}
+
+func (s *ListFileDeltaRequest) SetLimit(v int) *ListFileDeltaRequest {
+	s.Limit = &v
+	return s
+}
+
+/**
+ * list file op response
+ */
+type ListFileDeltaResponse struct {
+	Cursor  *string              `json:"cursor" xml:"cursor"`
+	HasMore *bool                `json:"has_more" xml:"has_more"`
+	Items   []*FileDeltaResponse `json:"items" xml:"items" type:"Repeated"`
+}
+
+func (s ListFileDeltaResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListFileDeltaResponse) GoString() string {
+	return s.String()
+}
+
+func (s *ListFileDeltaResponse) SetCursor(v string) *ListFileDeltaResponse {
+	s.Cursor = &v
+	return s
+}
+
+func (s *ListFileDeltaResponse) SetHasMore(v bool) *ListFileDeltaResponse {
+	s.HasMore = &v
+	return s
+}
+
+func (s *ListFileDeltaResponse) SetItems(v []*FileDeltaResponse) *ListFileDeltaResponse {
+	s.Items = v
 	return s
 }
 
@@ -8707,7 +9569,7 @@ type OSSCopyFileRequest struct {
 	FilePath         *string `json:"file_path" xml:"file_path"`
 	NewName          *string `json:"new_name" xml:"new_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	Overwrite        *bool   `json:"overwrite" xml:"overwrite"`
-	ShareId          *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
+	ShareId          *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
 	ToDriveId        *string `json:"to_drive_id" xml:"to_drive_id" require:"true" pattern:"[0-9]+"`
 	ToParentFilePath *string `json:"to_parent_file_path" xml:"to_parent_file_path" require:"true"`
 	ToShareId        *string `json:"to_share_id" xml:"to_share_id"`
@@ -8773,7 +9635,7 @@ type OSSCreateFileRequest struct {
 	Type           *string           `json:"type" xml:"type"`
 	DriveId        *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	ParentFilePath *string           `json:"parent_file_path" xml:"parent_file_path"`
-	ShareId        *string           `json:"share_id" xml:"share_id" maxLength:"40"`
+	ShareId        *string           `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
 }
 
 func (s OSSCreateFileRequest) String() string {
@@ -8836,7 +9698,7 @@ type OSSDeleteFileRequest struct {
 	DriveId     *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	FilePath    *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
 	Permanently *bool   `json:"permanently" xml:"permanently"`
-	ShareId     *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
+	ShareId     *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
 }
 
 func (s OSSDeleteFileRequest) String() string {
@@ -8875,7 +9737,7 @@ type OSSGetDownloadUrlRequest struct {
 	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
 	FileName  *string `json:"file_name" xml:"file_name"`
 	FilePath  *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
-	ShareId   *string `json:"share_id" xml:"share_id" pattern:"[0-9a-z-]+"`
+	ShareId   *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
 }
 
 func (s OSSGetDownloadUrlRequest) String() string {
@@ -8919,7 +9781,7 @@ type OSSGetFileRequest struct {
 	FilePath              *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
-	ShareId               *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
+	ShareId               *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
 	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec"`
 }
 
@@ -8969,7 +9831,7 @@ type OSSGetSecureUrlRequest struct {
 	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
 	FilePath  *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
 	SecureIp  *string `json:"secure_ip" xml:"secure_ip"`
-	ShareId   *string `json:"share_id" xml:"share_id" pattern:"[0-9a-z-]+"`
+	ShareId   *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
 }
 
 func (s OSSGetSecureUrlRequest) String() string {
@@ -9040,7 +9902,7 @@ type OSSGetUploadUrlRequest struct {
 	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	UploadId     *string           `json:"upload_id" xml:"upload_id"`
 	FilePath     *string           `json:"file_path" xml:"file_path"`
-	ShareId      *string           `json:"share_id" xml:"share_id" pattern:"[0-9]+"`
+	ShareId      *string           `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
 }
 
 func (s OSSGetUploadUrlRequest) String() string {
@@ -9091,7 +9953,7 @@ type OSSListFileRequest struct {
 	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1,3}"`
 	Marker                *string `json:"marker" xml:"marker"`
 	ParentFilePath        *string `json:"parent_file_path" xml:"parent_file_path" require:"true"`
-	ShareId               *string `json:"share_id" xml:"share_id" pattern:"[0-9]+"`
+	ShareId               *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
 	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec"`
 	VideoThumbnailProcess *string `json:"video_thumbnail_process" xml:"video_thumbnail_process"`
 }
@@ -9157,7 +10019,7 @@ type OSSListUploadedPartRequest struct {
 	FilePath         *string `json:"file_path" xml:"file_path" require:"true"`
 	Limit            *int64  `json:"limit" xml:"limit" require:"true" pattern:"[0-9]+"`
 	PartNumberMarker *int64  `json:"part_number_marker" xml:"part_number_marker" pattern:"[0-9]+"`
-	ShareId          *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
+	ShareId          *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
 	UploadId         *string `json:"upload_id" xml:"upload_id"`
 }
 
@@ -9203,11 +10065,11 @@ func (s *OSSListUploadedPartRequest) SetUploadId(v string) *OSSListUploadedPartR
  * 文件移动请求
  */
 type OSSMoveFileRequest struct {
-	DriveId          *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	DriveId          *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	FilePath         *string `json:"file_path" xml:"file_path"`
 	NewName          *string `json:"new_name" xml:"new_name" require:"true"`
 	Overwrite        *bool   `json:"overwrite" xml:"overwrite"`
-	ShareId          *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-z-]+"`
+	ShareId          *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
 	ToParentFilePath *string `json:"to_parent_file_path" xml:"to_parent_file_path"`
 }
 
@@ -9250,6 +10112,190 @@ func (s *OSSMoveFileRequest) SetToParentFilePath(v string) *OSSMoveFileRequest {
 }
 
 /**
+ * 获取视频分辨率列表
+ */
+type OSSVideoDefinitionRequest struct {
+	DriveId  *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	FilePath *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
+	ShareId  *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
+}
+
+func (s OSSVideoDefinitionRequest) String() string {
+	return tea.Prettify(s)
+}
+
+func (s OSSVideoDefinitionRequest) GoString() string {
+	return s.String()
+}
+
+func (s *OSSVideoDefinitionRequest) SetDriveId(v string) *OSSVideoDefinitionRequest {
+	s.DriveId = &v
+	return s
+}
+
+func (s *OSSVideoDefinitionRequest) SetFilePath(v string) *OSSVideoDefinitionRequest {
+	s.FilePath = &v
+	return s
+}
+
+func (s *OSSVideoDefinitionRequest) SetShareId(v string) *OSSVideoDefinitionRequest {
+	s.ShareId = &v
+	return s
+}
+
+/**
+ * 转码接口response
+ */
+type OSSVideoDefinitionResponse struct {
+	DefinitionList []*string `json:"definition_list" xml:"definition_list" type:"Repeated"`
+}
+
+func (s OSSVideoDefinitionResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s OSSVideoDefinitionResponse) GoString() string {
+	return s.String()
+}
+
+func (s *OSSVideoDefinitionResponse) SetDefinitionList(v []*string) *OSSVideoDefinitionResponse {
+	s.DefinitionList = v
+	return s
+}
+
+/**
+ * 获取视频的m3u8文件
+ */
+type OSSVideoM3U8Request struct {
+	Definition *string `json:"definition" xml:"definition"`
+	DriveId    *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	ExpireSec  *int64  `json:"expire_sec" xml:"expire_sec"`
+	FilePath   *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
+	ShareId    *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
+	SignToken  *string `json:"sign_token" xml:"sign_token" require:"true"`
+}
+
+func (s OSSVideoM3U8Request) String() string {
+	return tea.Prettify(s)
+}
+
+func (s OSSVideoM3U8Request) GoString() string {
+	return s.String()
+}
+
+func (s *OSSVideoM3U8Request) SetDefinition(v string) *OSSVideoM3U8Request {
+	s.Definition = &v
+	return s
+}
+
+func (s *OSSVideoM3U8Request) SetDriveId(v string) *OSSVideoM3U8Request {
+	s.DriveId = &v
+	return s
+}
+
+func (s *OSSVideoM3U8Request) SetExpireSec(v int64) *OSSVideoM3U8Request {
+	s.ExpireSec = &v
+	return s
+}
+
+func (s *OSSVideoM3U8Request) SetFilePath(v string) *OSSVideoM3U8Request {
+	s.FilePath = &v
+	return s
+}
+
+func (s *OSSVideoM3U8Request) SetShareId(v string) *OSSVideoM3U8Request {
+	s.ShareId = &v
+	return s
+}
+
+func (s *OSSVideoM3U8Request) SetSignToken(v string) *OSSVideoM3U8Request {
+	s.SignToken = &v
+	return s
+}
+
+/**
+ * 启动视频转码请求
+ */
+type OSSVideoTranscodeRequest struct {
+	DriveId   *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	FilePath  *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
+	HlsTime   *int64  `json:"hls_time" xml:"hls_time"`
+	Remarks   *string `json:"remarks" xml:"remarks"`
+	ShareId   *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
+	Transcode *bool   `json:"transcode" xml:"transcode"`
+}
+
+func (s OSSVideoTranscodeRequest) String() string {
+	return tea.Prettify(s)
+}
+
+func (s OSSVideoTranscodeRequest) GoString() string {
+	return s.String()
+}
+
+func (s *OSSVideoTranscodeRequest) SetDriveId(v string) *OSSVideoTranscodeRequest {
+	s.DriveId = &v
+	return s
+}
+
+func (s *OSSVideoTranscodeRequest) SetFilePath(v string) *OSSVideoTranscodeRequest {
+	s.FilePath = &v
+	return s
+}
+
+func (s *OSSVideoTranscodeRequest) SetHlsTime(v int64) *OSSVideoTranscodeRequest {
+	s.HlsTime = &v
+	return s
+}
+
+func (s *OSSVideoTranscodeRequest) SetRemarks(v string) *OSSVideoTranscodeRequest {
+	s.Remarks = &v
+	return s
+}
+
+func (s *OSSVideoTranscodeRequest) SetShareId(v string) *OSSVideoTranscodeRequest {
+	s.ShareId = &v
+	return s
+}
+
+func (s *OSSVideoTranscodeRequest) SetTranscode(v bool) *OSSVideoTranscodeRequest {
+	s.Transcode = &v
+	return s
+}
+
+/**
+ * 转码接口response
+ */
+type OSSVideoTranscodeResponse struct {
+	DefinitionList []*string `json:"definition_list" xml:"definition_list" type:"Repeated"`
+	Duration       *int64    `json:"duration" xml:"duration"`
+	HlsTime        *int64    `json:"hls_time" xml:"hls_time"`
+}
+
+func (s OSSVideoTranscodeResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s OSSVideoTranscodeResponse) GoString() string {
+	return s.String()
+}
+
+func (s *OSSVideoTranscodeResponse) SetDefinitionList(v []*string) *OSSVideoTranscodeResponse {
+	s.DefinitionList = v
+	return s
+}
+
+func (s *OSSVideoTranscodeResponse) SetDuration(v int64) *OSSVideoTranscodeResponse {
+	s.Duration = &v
+	return s
+}
+
+func (s *OSSVideoTranscodeResponse) SetHlsTime(v int64) *OSSVideoTranscodeResponse {
+	s.HlsTime = &v
+	return s
+}
+
+/**
  *
  */
 type SharePermissionPolicy struct {
@@ -9284,6 +10330,174 @@ func (s *SharePermissionPolicy) SetPermissionList(v []*string) *SharePermissionP
 
 func (s *SharePermissionPolicy) SetPermissionType(v string) *SharePermissionPolicy {
 	s.PermissionType = &v
+	return s
+}
+
+/**
+ *
+ */
+type Store struct {
+	AccelerateEndpoint *string `json:"accelerate_endpoint" xml:"accelerate_endpoint"`
+	BasePath           *string `json:"base_path" xml:"base_path"`
+	Bucket             *string `json:"bucket" xml:"bucket" require:"true"`
+	CustomizedEndpoint *string `json:"customized_endpoint" xml:"customized_endpoint"`
+	Endpoint           *string `json:"endpoint" xml:"endpoint" require:"true"`
+	InternalEndpoint   *string `json:"internal_endpoint" xml:"internal_endpoint"`
+	Ownership          *string `json:"ownership" xml:"ownership" require:"true"`
+	Policy             *string `json:"policy" xml:"policy" require:"true"`
+	RoleArn            *string `json:"role_arn" xml:"role_arn"`
+	StoreId            *string `json:"store_id" xml:"store_id" require:"true"`
+	Type               *string `json:"type" xml:"type" require:"true"`
+}
+
+func (s Store) String() string {
+	return tea.Prettify(s)
+}
+
+func (s Store) GoString() string {
+	return s.String()
+}
+
+func (s *Store) SetAccelerateEndpoint(v string) *Store {
+	s.AccelerateEndpoint = &v
+	return s
+}
+
+func (s *Store) SetBasePath(v string) *Store {
+	s.BasePath = &v
+	return s
+}
+
+func (s *Store) SetBucket(v string) *Store {
+	s.Bucket = &v
+	return s
+}
+
+func (s *Store) SetCustomizedEndpoint(v string) *Store {
+	s.CustomizedEndpoint = &v
+	return s
+}
+
+func (s *Store) SetEndpoint(v string) *Store {
+	s.Endpoint = &v
+	return s
+}
+
+func (s *Store) SetInternalEndpoint(v string) *Store {
+	s.InternalEndpoint = &v
+	return s
+}
+
+func (s *Store) SetOwnership(v string) *Store {
+	s.Ownership = &v
+	return s
+}
+
+func (s *Store) SetPolicy(v string) *Store {
+	s.Policy = &v
+	return s
+}
+
+func (s *Store) SetRoleArn(v string) *Store {
+	s.RoleArn = &v
+	return s
+}
+
+func (s *Store) SetStoreId(v string) *Store {
+	s.StoreId = &v
+	return s
+}
+
+func (s *Store) SetType(v string) *Store {
+	s.Type = &v
+	return s
+}
+
+/**
+ *
+ */
+type StreamInfo struct {
+	ContentHash     *string           `json:"content_hash" xml:"content_hash"`
+	ContentHashName *string           `json:"content_hash_name" xml:"content_hash_name"`
+	ContentMd5      *string           `json:"content_md5" xml:"content_md5" require:"true"`
+	PartInfoList    []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
+	PreHash         *string           `json:"pre_hash" xml:"pre_hash"`
+	Size            *int64            `json:"size" xml:"size" require:"true"`
+}
+
+func (s StreamInfo) String() string {
+	return tea.Prettify(s)
+}
+
+func (s StreamInfo) GoString() string {
+	return s.String()
+}
+
+func (s *StreamInfo) SetContentHash(v string) *StreamInfo {
+	s.ContentHash = &v
+	return s
+}
+
+func (s *StreamInfo) SetContentHashName(v string) *StreamInfo {
+	s.ContentHashName = &v
+	return s
+}
+
+func (s *StreamInfo) SetContentMd5(v string) *StreamInfo {
+	s.ContentMd5 = &v
+	return s
+}
+
+func (s *StreamInfo) SetPartInfoList(v []*UploadPartInfo) *StreamInfo {
+	s.PartInfoList = v
+	return s
+}
+
+func (s *StreamInfo) SetPreHash(v string) *StreamInfo {
+	s.PreHash = &v
+	return s
+}
+
+func (s *StreamInfo) SetSize(v int64) *StreamInfo {
+	s.Size = &v
+	return s
+}
+
+/**
+ *
+ */
+type StreamUploadInfo struct {
+	PartInfoList   []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
+	PreRapidUpload *bool             `json:"pre_rapid_upload" xml:"pre_rapid_upload"`
+	RapidUpload    *bool             `json:"rapid_upload" xml:"rapid_upload"`
+	UploadId       *string           `json:"upload_id" xml:"upload_id"`
+}
+
+func (s StreamUploadInfo) String() string {
+	return tea.Prettify(s)
+}
+
+func (s StreamUploadInfo) GoString() string {
+	return s.String()
+}
+
+func (s *StreamUploadInfo) SetPartInfoList(v []*UploadPartInfo) *StreamUploadInfo {
+	s.PartInfoList = v
+	return s
+}
+
+func (s *StreamUploadInfo) SetPreRapidUpload(v bool) *StreamUploadInfo {
+	s.PreRapidUpload = &v
+	return s
+}
+
+func (s *StreamUploadInfo) SetRapidUpload(v bool) *StreamUploadInfo {
+	s.RapidUpload = &v
+	return s
+}
+
+func (s *StreamUploadInfo) SetUploadId(v string) *StreamUploadInfo {
+	s.UploadId = &v
 	return s
 }
 
@@ -9507,6 +10721,106 @@ func (s *UpdateShareRequest) SetStatus(v string) *UpdateShareRequest {
 	return s
 }
 
+/**
+ *
+ */
+type UrlInfo struct {
+	DownloadUrl *string `json:"download_url" xml:"download_url"`
+	Thumbnail   *string `json:"thumbnail" xml:"thumbnail"`
+	Url         *string `json:"url" xml:"url"`
+}
+
+func (s UrlInfo) String() string {
+	return tea.Prettify(s)
+}
+
+func (s UrlInfo) GoString() string {
+	return s.String()
+}
+
+func (s *UrlInfo) SetDownloadUrl(v string) *UrlInfo {
+	s.DownloadUrl = &v
+	return s
+}
+
+func (s *UrlInfo) SetThumbnail(v string) *UrlInfo {
+	s.Thumbnail = &v
+	return s
+}
+
+func (s *UrlInfo) SetUrl(v string) *UrlInfo {
+	s.Url = &v
+	return s
+}
+
+/**
+ *
+ */
+type VideoMediaResponse struct {
+	AddressLine *string `json:"address_line" xml:"address_line"`
+	City        *string `json:"city" xml:"city"`
+	Country     *string `json:"country" xml:"country"`
+	District    *string `json:"district" xml:"district"`
+	Duration    *string `json:"duration" xml:"duration"`
+	Location    *string `json:"location" xml:"location"`
+	Province    *string `json:"province" xml:"province"`
+	Time        *string `json:"time" xml:"time"`
+	Township    *string `json:"township" xml:"township"`
+}
+
+func (s VideoMediaResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s VideoMediaResponse) GoString() string {
+	return s.String()
+}
+
+func (s *VideoMediaResponse) SetAddressLine(v string) *VideoMediaResponse {
+	s.AddressLine = &v
+	return s
+}
+
+func (s *VideoMediaResponse) SetCity(v string) *VideoMediaResponse {
+	s.City = &v
+	return s
+}
+
+func (s *VideoMediaResponse) SetCountry(v string) *VideoMediaResponse {
+	s.Country = &v
+	return s
+}
+
+func (s *VideoMediaResponse) SetDistrict(v string) *VideoMediaResponse {
+	s.District = &v
+	return s
+}
+
+func (s *VideoMediaResponse) SetDuration(v string) *VideoMediaResponse {
+	s.Duration = &v
+	return s
+}
+
+func (s *VideoMediaResponse) SetLocation(v string) *VideoMediaResponse {
+	s.Location = &v
+	return s
+}
+
+func (s *VideoMediaResponse) SetProvince(v string) *VideoMediaResponse {
+	s.Province = &v
+	return s
+}
+
+func (s *VideoMediaResponse) SetTime(v string) *VideoMediaResponse {
+	s.Time = &v
+	return s
+}
+
+func (s *VideoMediaResponse) SetTownship(v string) *VideoMediaResponse {
+	s.Township = &v
+	return s
+}
+
 type CreateUserRequestModel struct {
 	Headers map[string]string  `json:"headers" xml:"headers"`
 	Body    *CreateUserRequest `json:"body" xml:"body" require:"true"`
@@ -9639,25 +10953,25 @@ func (s *GetUserModel) SetBody(v *GetUserResponse) *GetUserModel {
 	return s
 }
 
-type ListUserRequestModel struct {
+type ListUsersRequestModel struct {
 	Headers map[string]string `json:"headers" xml:"headers"`
 	Body    *ListUserRequest  `json:"body" xml:"body" require:"true"`
 }
 
-func (s ListUserRequestModel) String() string {
+func (s ListUsersRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s ListUserRequestModel) GoString() string {
+func (s ListUsersRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *ListUserRequestModel) SetHeaders(v map[string]string) *ListUserRequestModel {
+func (s *ListUsersRequestModel) SetHeaders(v map[string]string) *ListUsersRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *ListUserRequestModel) SetBody(v *ListUserRequest) *ListUserRequestModel {
+func (s *ListUsersRequestModel) SetBody(v *ListUserRequest) *ListUsersRequestModel {
 	s.Body = v
 	return s
 }
@@ -10443,25 +11757,25 @@ func (s *UpdateUserResponse) SetUserName(v string) *UpdateUserResponse {
 	return s
 }
 
-type GetImageCountRequestModel struct {
+type GetPhotoCountRequestModel struct {
 	Headers map[string]string     `json:"headers" xml:"headers"`
 	Body    *GetImageCountRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s GetImageCountRequestModel) String() string {
+func (s GetPhotoCountRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s GetImageCountRequestModel) GoString() string {
+func (s GetPhotoCountRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *GetImageCountRequestModel) SetHeaders(v map[string]string) *GetImageCountRequestModel {
+func (s *GetPhotoCountRequestModel) SetHeaders(v map[string]string) *GetPhotoCountRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *GetImageCountRequestModel) SetBody(v *GetImageCountRequest) *GetImageCountRequestModel {
+func (s *GetPhotoCountRequestModel) SetBody(v *GetImageCountRequest) *GetPhotoCountRequestModel {
 	s.Body = v
 	return s
 }
@@ -10489,25 +11803,25 @@ func (s *GetPhotoCountModel) SetBody(v *GetImageCountResponse) *GetPhotoCountMod
 	return s
 }
 
-type ListImageAddressGroupsRequestModel struct {
+type ListAddressGroupsRequestModel struct {
 	Headers map[string]string              `json:"headers" xml:"headers"`
 	Body    *ListImageAddressGroupsRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s ListImageAddressGroupsRequestModel) String() string {
+func (s ListAddressGroupsRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s ListImageAddressGroupsRequestModel) GoString() string {
+func (s ListAddressGroupsRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *ListImageAddressGroupsRequestModel) SetHeaders(v map[string]string) *ListImageAddressGroupsRequestModel {
+func (s *ListAddressGroupsRequestModel) SetHeaders(v map[string]string) *ListAddressGroupsRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *ListImageAddressGroupsRequestModel) SetBody(v *ListImageAddressGroupsRequest) *ListImageAddressGroupsRequestModel {
+func (s *ListAddressGroupsRequestModel) SetBody(v *ListImageAddressGroupsRequest) *ListAddressGroupsRequestModel {
 	s.Body = v
 	return s
 }
@@ -10535,25 +11849,25 @@ func (s *ListAddressGroupsModel) SetBody(v *ListImageAddressGroupsResponse) *Lis
 	return s
 }
 
-type ListImageFaceGroupsRequestModel struct {
+type ListFaceGroupsRequestModel struct {
 	Headers map[string]string           `json:"headers" xml:"headers"`
 	Body    *ListImageFaceGroupsRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s ListImageFaceGroupsRequestModel) String() string {
+func (s ListFaceGroupsRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s ListImageFaceGroupsRequestModel) GoString() string {
+func (s ListFaceGroupsRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *ListImageFaceGroupsRequestModel) SetHeaders(v map[string]string) *ListImageFaceGroupsRequestModel {
+func (s *ListFaceGroupsRequestModel) SetHeaders(v map[string]string) *ListFaceGroupsRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *ListImageFaceGroupsRequestModel) SetBody(v *ListImageFaceGroupsRequest) *ListImageFaceGroupsRequestModel {
+func (s *ListFaceGroupsRequestModel) SetBody(v *ListImageFaceGroupsRequest) *ListFaceGroupsRequestModel {
 	s.Body = v
 	return s
 }
@@ -10581,25 +11895,25 @@ func (s *ListFaceGroupsModel) SetBody(v *ListImageFaceGroupsResponse) *ListFaceG
 	return s
 }
 
-type ListImageTagsRequestModel struct {
+type ListTagsRequestModel struct {
 	Headers map[string]string     `json:"headers" xml:"headers"`
 	Body    *ListImageTagsRequest `json:"body" xml:"body" require:"true"`
 }
 
-func (s ListImageTagsRequestModel) String() string {
+func (s ListTagsRequestModel) String() string {
 	return tea.Prettify(s)
 }
 
-func (s ListImageTagsRequestModel) GoString() string {
+func (s ListTagsRequestModel) GoString() string {
 	return s.String()
 }
 
-func (s *ListImageTagsRequestModel) SetHeaders(v map[string]string) *ListImageTagsRequestModel {
+func (s *ListTagsRequestModel) SetHeaders(v map[string]string) *ListTagsRequestModel {
 	s.Headers = v
 	return s
 }
 
-func (s *ListImageTagsRequestModel) SetBody(v *ListImageTagsRequest) *ListImageTagsRequestModel {
+func (s *ListTagsRequestModel) SetBody(v *ListImageTagsRequest) *ListTagsRequestModel {
 	s.Body = v
 	return s
 }
@@ -10627,11 +11941,147 @@ func (s *ListTagsModel) SetBody(v *ListImageTagsResponse) *ListTagsModel {
 	return s
 }
 
+type SearchAddressGroupsRequestModel struct {
+	Headers map[string]string                `json:"headers" xml:"headers"`
+	Body    *SearchImageAddressGroupsRequest `json:"body" xml:"body" require:"true"`
+}
+
+func (s SearchAddressGroupsRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s SearchAddressGroupsRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *SearchAddressGroupsRequestModel) SetHeaders(v map[string]string) *SearchAddressGroupsRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *SearchAddressGroupsRequestModel) SetBody(v *SearchImageAddressGroupsRequest) *SearchAddressGroupsRequestModel {
+	s.Body = v
+	return s
+}
+
+type SearchAddressGroupsModel struct {
+	Headers map[string]string                 `json:"headers" xml:"headers"`
+	Body    *SearchImageAddressGroupsResponse `json:"body" xml:"body" require:"true"`
+}
+
+func (s SearchAddressGroupsModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s SearchAddressGroupsModel) GoString() string {
+	return s.String()
+}
+
+func (s *SearchAddressGroupsModel) SetHeaders(v map[string]string) *SearchAddressGroupsModel {
+	s.Headers = v
+	return s
+}
+
+func (s *SearchAddressGroupsModel) SetBody(v *SearchImageAddressGroupsResponse) *SearchAddressGroupsModel {
+	s.Body = v
+	return s
+}
+
+type UpdateFacegroupInfoRequestModel struct {
+	Headers map[string]string           `json:"headers" xml:"headers"`
+	Body    *UpdateFaceGroupInfoRequest `json:"body" xml:"body" require:"true"`
+}
+
+func (s UpdateFacegroupInfoRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s UpdateFacegroupInfoRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *UpdateFacegroupInfoRequestModel) SetHeaders(v map[string]string) *UpdateFacegroupInfoRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *UpdateFacegroupInfoRequestModel) SetBody(v *UpdateFaceGroupInfoRequest) *UpdateFacegroupInfoRequestModel {
+	s.Body = v
+	return s
+}
+
+type UpdateFacegroupInfoModel struct {
+	Headers map[string]string            `json:"headers" xml:"headers"`
+	Body    *UpdateFaceGroupInfoResponse `json:"body" xml:"body" require:"true"`
+}
+
+func (s UpdateFacegroupInfoModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s UpdateFacegroupInfoModel) GoString() string {
+	return s.String()
+}
+
+func (s *UpdateFacegroupInfoModel) SetHeaders(v map[string]string) *UpdateFacegroupInfoModel {
+	s.Headers = v
+	return s
+}
+
+func (s *UpdateFacegroupInfoModel) SetBody(v *UpdateFaceGroupInfoResponse) *UpdateFacegroupInfoModel {
+	s.Body = v
+	return s
+}
+
+/**
+ *
+ */
+type Address struct {
+	City     *string `json:"city" xml:"city"`
+	Country  *string `json:"country" xml:"country"`
+	District *string `json:"district" xml:"district"`
+	Province *string `json:"province" xml:"province"`
+	Township *string `json:"township" xml:"township"`
+}
+
+func (s Address) String() string {
+	return tea.Prettify(s)
+}
+
+func (s Address) GoString() string {
+	return s.String()
+}
+
+func (s *Address) SetCity(v string) *Address {
+	s.City = &v
+	return s
+}
+
+func (s *Address) SetCountry(v string) *Address {
+	s.Country = &v
+	return s
+}
+
+func (s *Address) SetDistrict(v string) *Address {
+	s.District = &v
+	return s
+}
+
+func (s *Address) SetProvince(v string) *Address {
+	s.Province = &v
+	return s
+}
+
+func (s *Address) SetTownship(v string) *Address {
+	s.Township = &v
+	return s
+}
+
 /**
  * Get photo count request
  */
 type GetImageCountRequest struct {
-	DriveId *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	DriveId *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 }
 
 func (s GetImageCountRequest) String() string {
@@ -10671,9 +12121,11 @@ func (s *GetImageCountResponse) SetImageCount(v int64) *GetImageCountResponse {
  *
  */
 type ImageAddressResponse struct {
-	Count    *int64  `json:"count" xml:"count"`
-	CoverUrl *string `json:"cover_url" xml:"cover_url"`
-	Name     *string `json:"name" xml:"name"`
+	AddressDetail *Address `json:"address_detail" xml:"address_detail"`
+	Count         *int64   `json:"count" xml:"count"`
+	CoverUrl      *string  `json:"cover_url" xml:"cover_url"`
+	Location      *string  `json:"location" xml:"location"`
+	Name          *string  `json:"name" xml:"name"`
 }
 
 func (s ImageAddressResponse) String() string {
@@ -10684,6 +12136,11 @@ func (s ImageAddressResponse) GoString() string {
 	return s.String()
 }
 
+func (s *ImageAddressResponse) SetAddressDetail(v *Address) *ImageAddressResponse {
+	s.AddressDetail = v
+	return s
+}
+
 func (s *ImageAddressResponse) SetCount(v int64) *ImageAddressResponse {
 	s.Count = &v
 	return s
@@ -10691,6 +12148,11 @@ func (s *ImageAddressResponse) SetCount(v int64) *ImageAddressResponse {
 
 func (s *ImageAddressResponse) SetCoverUrl(v string) *ImageAddressResponse {
 	s.CoverUrl = &v
+	return s
+}
+
+func (s *ImageAddressResponse) SetLocation(v string) *ImageAddressResponse {
+	s.Location = &v
 	return s
 }
 
@@ -10708,6 +12170,7 @@ type ImageFaceGroupResponse struct {
 	GroupCoverUrl *string `json:"group_cover_url" xml:"group_cover_url"`
 	GroupId       *string `json:"group_id" xml:"group_id"`
 	GroupName     *string `json:"group_name" xml:"group_name"`
+	ImageCount    *int64  `json:"image_count" xml:"image_count"`
 	UpdatedAt     *string `json:"updated_at" xml:"updated_at"`
 }
 
@@ -10741,6 +12204,11 @@ func (s *ImageFaceGroupResponse) SetGroupId(v string) *ImageFaceGroupResponse {
 
 func (s *ImageFaceGroupResponse) SetGroupName(v string) *ImageFaceGroupResponse {
 	s.GroupName = &v
+	return s
+}
+
+func (s *ImageFaceGroupResponse) SetImageCount(v int64) *ImageFaceGroupResponse {
+	s.ImageCount = &v
 	return s
 }
 
@@ -10820,7 +12288,7 @@ func (s *ListImageAddressGroupsRequest) SetMarker(v string) *ListImageAddressGro
 }
 
 /**
- * 展示标签集合
+ * 展示地点分组集合
  */
 type ListImageAddressGroupsResponse struct {
 	Items      []*ImageAddressResponse `json:"items" xml:"items" type:"Repeated"`
@@ -10949,14 +12417,142 @@ func (s *ListImageTagsResponse) SetTags(v []*ImageTagResponse) *ListImageTagsRes
 	return s
 }
 
+/**
+ * Search image address groups request
+ */
+type SearchImageAddressGroupsRequest struct {
+	AddressLevel          *string   `json:"address_level" xml:"address_level"`
+	AddressNames          []*string `json:"address_names" xml:"address_names" type:"Repeated"`
+	BrGeoPoint            *string   `json:"br_geo_point" xml:"br_geo_point"`
+	DriveId               *string   `json:"drive_id" xml:"drive_id" require:"true"`
+	ImageThumbnailProcess *string   `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
+	TlGeoPoint            *string   `json:"tl_geo_point" xml:"tl_geo_point"`
+}
+
+func (s SearchImageAddressGroupsRequest) String() string {
+	return tea.Prettify(s)
+}
+
+func (s SearchImageAddressGroupsRequest) GoString() string {
+	return s.String()
+}
+
+func (s *SearchImageAddressGroupsRequest) SetAddressLevel(v string) *SearchImageAddressGroupsRequest {
+	s.AddressLevel = &v
+	return s
+}
+
+func (s *SearchImageAddressGroupsRequest) SetAddressNames(v []*string) *SearchImageAddressGroupsRequest {
+	s.AddressNames = v
+	return s
+}
+
+func (s *SearchImageAddressGroupsRequest) SetBrGeoPoint(v string) *SearchImageAddressGroupsRequest {
+	s.BrGeoPoint = &v
+	return s
+}
+
+func (s *SearchImageAddressGroupsRequest) SetDriveId(v string) *SearchImageAddressGroupsRequest {
+	s.DriveId = &v
+	return s
+}
+
+func (s *SearchImageAddressGroupsRequest) SetImageThumbnailProcess(v string) *SearchImageAddressGroupsRequest {
+	s.ImageThumbnailProcess = &v
+	return s
+}
+
+func (s *SearchImageAddressGroupsRequest) SetTlGeoPoint(v string) *SearchImageAddressGroupsRequest {
+	s.TlGeoPoint = &v
+	return s
+}
+
+/**
+ * 展示地点分组列表
+ */
+type SearchImageAddressGroupsResponse struct {
+	Items []*ImageAddressResponse `json:"items" xml:"items" type:"Repeated"`
+}
+
+func (s SearchImageAddressGroupsResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s SearchImageAddressGroupsResponse) GoString() string {
+	return s.String()
+}
+
+func (s *SearchImageAddressGroupsResponse) SetItems(v []*ImageAddressResponse) *SearchImageAddressGroupsResponse {
+	s.Items = v
+	return s
+}
+
+/**
+ * Update face group info request
+ */
+type UpdateFaceGroupInfoRequest struct {
+	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	GroupId   *string `json:"group_id" xml:"group_id" require:"true"`
+	GroupName *string `json:"group_name" xml:"group_name"`
+}
+
+func (s UpdateFaceGroupInfoRequest) String() string {
+	return tea.Prettify(s)
+}
+
+func (s UpdateFaceGroupInfoRequest) GoString() string {
+	return s.String()
+}
+
+func (s *UpdateFaceGroupInfoRequest) SetDriveId(v string) *UpdateFaceGroupInfoRequest {
+	s.DriveId = &v
+	return s
+}
+
+func (s *UpdateFaceGroupInfoRequest) SetGroupId(v string) *UpdateFaceGroupInfoRequest {
+	s.GroupId = &v
+	return s
+}
+
+func (s *UpdateFaceGroupInfoRequest) SetGroupName(v string) *UpdateFaceGroupInfoRequest {
+	s.GroupName = &v
+	return s
+}
+
+/**
+ * 更新人脸分组信息结果
+ */
+type UpdateFaceGroupInfoResponse struct {
+	DriveId *string `json:"drive_id" xml:"drive_id"`
+	GroupId *string `json:"group_id" xml:"group_id"`
+}
+
+func (s UpdateFaceGroupInfoResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s UpdateFaceGroupInfoResponse) GoString() string {
+	return s.String()
+}
+
+func (s *UpdateFaceGroupInfoResponse) SetDriveId(v string) *UpdateFaceGroupInfoResponse {
+	s.DriveId = &v
+	return s
+}
+
+func (s *UpdateFaceGroupInfoResponse) SetGroupId(v string) *UpdateFaceGroupInfoResponse {
+	s.GroupId = &v
+	return s
+}
+
 type Client struct {
 	DomainId              *string
+	AccessTokenCredential *accesstokencredential.AccessTokenCredential
 	Endpoint              *string
 	Protocol              *string
 	Nickname              *string
 	UserAgent             *string
 	Credential            credential.Credential
-	AccessTokenCredential *accesstokencredential.AccessTokenCredential
 }
 
 func NewClient(config *Config) (*Client, error) {
@@ -10970,14 +12566,6 @@ func (client *Client) Init(config *Config) (_err error) {
 		_err = tea.NewSDKError(map[string]interface{}{
 			"name":    "ParameterMissing",
 			"message": "'config' can not be unset",
-		})
-		return _err
-	}
-
-	if tea.BoolValue(util.Empty(config.DomainId)) {
-		_err = tea.NewSDKError(map[string]interface{}{
-			"name":    "ParameterMissing",
-			"message": "'config.domainId' can not be empty",
 		})
 		return _err
 	}
@@ -11019,9 +12607,9 @@ func (client *Client) Init(config *Config) (_err error) {
 
 	client.Endpoint = config.Endpoint
 	client.Protocol = config.Protocol
-	client.DomainId = config.DomainId
 	client.UserAgent = config.UserAgent
 	client.Nickname = config.Nickname
+	client.DomainId = config.DomainId
 	return nil
 }
 
@@ -11122,8 +12710,8 @@ func (client *Client) CancelLink(request *CancelLinkRequestModel, runtime *Runti
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -11272,8 +12860,8 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequestModel, runtime *Run
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -11331,7 +12919,7 @@ func (client *Client) ConfirmLink(request *ConfirmLinkRequestModel, runtime *Run
  * @error Forbidden User not authorized to operate on the specified APIs.
  * @error InternalError The request has been failed due to some unknown error.
  */
-func (client *Client) ChangePassword(request *DefaultChangePasswordRequestModel, runtime *RuntimeOptions) (_result *ChangePasswordModel, _err error) {
+func (client *Client) ChangePassword(request *ChangePasswordRequestModel, runtime *RuntimeOptions) (_result *ChangePasswordModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -11421,8 +13009,8 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequestModel,
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(204))) {
 				_result = &ChangePasswordModel{}
 				_err = tea.Convert(map[string]map[string]string{
@@ -11473,7 +13061,7 @@ func (client *Client) ChangePassword(request *DefaultChangePasswordRequestModel,
  * @error Forbidden User not authorized to operate on the specified APIs.
  * @error InternalError The request has been failed due to some unknown error.
  */
-func (client *Client) SetPassword(request *DefaultSetPasswordRequestModel, runtime *RuntimeOptions) (_result *SetPasswordModel, _err error) {
+func (client *Client) SetPassword(request *SetPasswordRequestModel, runtime *RuntimeOptions) (_result *SetPasswordModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -11563,8 +13151,8 @@ func (client *Client) SetPassword(request *DefaultSetPasswordRequestModel, runti
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(204))) {
 				_result = &SetPasswordModel{}
 				_err = tea.Convert(map[string]map[string]string{
@@ -11706,8 +13294,8 @@ func (client *Client) GetAccessTokenByLinkInfo(request *GetAccessTokenByLinkInfo
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -11855,8 +13443,8 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequestModel, runtime *Runti
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -11915,7 +13503,7 @@ func (client *Client) GetCaptcha(request *GetCaptchaRequestModel, runtime *Runti
  * @error NotFound The resource {resource_name} cannot be found. Please check.
  * @error InternalError The request has been failed due to some unknown error.
  */
-func (client *Client) GetLinkInfo(request *GetByLinkInfoRequestModel, runtime *RuntimeOptions) (_result *GetLinkInfoModel, _err error) {
+func (client *Client) GetLinkInfo(request *GetLinkInfoRequestModel, runtime *RuntimeOptions) (_result *GetLinkInfoModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -12005,8 +13593,8 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequestModel, runtime *R
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -12064,7 +13652,7 @@ func (client *Client) GetLinkInfo(request *GetByLinkInfoRequestModel, runtime *R
  * @error Forbidden User not authorized to operate on the specified APIs.
  * @error InternalError The request has been failed due to some unknown error.
  */
-func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequestModel, runtime *RuntimeOptions) (_result *GetLinkInfoByUserIdModel, _err error) {
+func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIdRequestModel, runtime *RuntimeOptions) (_result *GetLinkInfoByUserIdModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -12154,8 +13742,8 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequestMod
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -12215,7 +13803,7 @@ func (client *Client) GetLinkInfoByUserId(request *GetLinkInfoByUserIDRequestMod
  * @error AlreadyExist {resource} has already exists. {extra_msg}
  * @error InternalError The request has been failed due to some unknown error.
  */
-func (client *Client) Link(request *AccountLinkRequestModel, runtime *RuntimeOptions) (_result *LinkModel, _err error) {
+func (client *Client) Link(request *LinkRequestModel, runtime *RuntimeOptions) (_result *LinkModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -12305,8 +13893,8 @@ func (client *Client) Link(request *AccountLinkRequestModel, runtime *RuntimeOpt
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -12365,7 +13953,7 @@ func (client *Client) Link(request *AccountLinkRequestModel, runtime *RuntimeOpt
  * @error NotFound The resource {resource_name} cannot be found. Please check.
  * @error InternalError The request has been failed due to some unknown error.
  */
-func (client *Client) CheckExist(request *MobileCheckExistRequestModel, runtime *RuntimeOptions) (_result *CheckExistModel, _err error) {
+func (client *Client) CheckExist(request *CheckExistRequestModel, runtime *RuntimeOptions) (_result *CheckExistModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -12455,8 +14043,8 @@ func (client *Client) CheckExist(request *MobileCheckExistRequestModel, runtime 
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -12515,7 +14103,7 @@ func (client *Client) CheckExist(request *MobileCheckExistRequestModel, runtime 
  * @error NotFound The resource {resource_name} cannot be found. Please check.
  * @error InternalError The request has been failed due to some unknown error.
  */
-func (client *Client) Login(request *MobileLoginRequestModel, runtime *RuntimeOptions) (_result *LoginModel, _err error) {
+func (client *Client) Login(request *LoginRequestModel, runtime *RuntimeOptions) (_result *LoginModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -12605,8 +14193,8 @@ func (client *Client) Login(request *MobileLoginRequestModel, runtime *RuntimeOp
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -12665,7 +14253,7 @@ func (client *Client) Login(request *MobileLoginRequestModel, runtime *RuntimeOp
  * @error AlreadyExist {resource} has already exists. {extra_msg}
  * @error InternalError The request has been failed due to some unknown error.
  */
-func (client *Client) Register(request *MobileRegisterRequestModel, runtime *RuntimeOptions) (_result *RegisterModel, _err error) {
+func (client *Client) Register(request *RegisterRequestModel, runtime *RuntimeOptions) (_result *RegisterModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -12755,8 +14343,8 @@ func (client *Client) Register(request *MobileRegisterRequestModel, runtime *Run
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -12904,8 +14492,8 @@ func (client *Client) MobileSendSmsCode(request *MobileSendSmsCodeRequestModel, 
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -13053,8 +14641,8 @@ func (client *Client) Token(request *TokenRequestModel, runtime *RuntimeOptions)
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -13116,7 +14704,7 @@ func (client *Client) Token(request *TokenRequestModel, runtime *RuntimeOptions)
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
 */
-func (client *Client) GetAsyncTaskInfo(request *CCPGetAsyncTaskRequestModel, runtime *RuntimeOptions) (_result *GetAsyncTaskInfoModel, _err error) {
+func (client *Client) GetAsyncTaskInfo(request *GetAsyncTaskInfoRequestModel, runtime *RuntimeOptions) (_result *GetAsyncTaskInfoModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -13206,8 +14794,8 @@ func (client *Client) GetAsyncTaskInfo(request *CCPGetAsyncTaskRequestModel, run
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -13268,7 +14856,7 @@ func (client *Client) GetAsyncTaskInfo(request *CCPGetAsyncTaskRequestModel, run
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
 */
-func (client *Client) Operation(request *CCPBatchRequestModel, runtime *RuntimeOptions) (_result *OperationModel, _err error) {
+func (client *Client) BatchOperation(request *BatchOperationRequestModel, runtime *RuntimeOptions) (_result *BatchOperationModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -13299,7 +14887,7 @@ func (client *Client) Operation(request *CCPBatchRequestModel, runtime *RuntimeO
 		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
 	}
 
-	_resp := &OperationModel{}
+	_resp := &BatchOperationModel{}
 	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
 		if _retryTimes > 0 {
 			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
@@ -13308,7 +14896,7 @@ func (client *Client) Operation(request *CCPBatchRequestModel, runtime *RuntimeO
 			}
 		}
 
-		_resp, _err = func() (*OperationModel, error) {
+		_resp, _err = func() (*BatchOperationModel, error) {
 			request_ := tea.NewRequest()
 			accesskeyId, _err := client.GetAccessKeyId()
 			if _err != nil {
@@ -13358,8 +14946,8 @@ func (client *Client) Operation(request *CCPBatchRequestModel, runtime *RuntimeO
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -13367,7 +14955,7 @@ func (client *Client) Operation(request *CCPBatchRequestModel, runtime *RuntimeO
 				}
 
 				respMap = util.AssertAsMap(obj)
-				_result = &OperationModel{}
+				_result = &BatchOperationModel{}
 				_err = tea.Convert(map[string]interface{}{
 					"body":    respMap,
 					"headers": response_.Headers,
@@ -13511,8 +15099,8 @@ func (client *Client) CreateDrive(request *CreateDriveRequestModel, runtime *Run
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(201))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -13662,8 +15250,8 @@ func (client *Client) DeleteDrive(request *DeleteDriveRequestModel, runtime *Run
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(204))) {
 				_result = &DeleteDriveModel{}
 				_err = tea.Convert(map[string]map[string]string{
@@ -13807,8 +15395,8 @@ func (client *Client) GetDrive(request *GetDriveRequestModel, runtime *RuntimeOp
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -13960,8 +15548,8 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequestModel, runt
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -14021,7 +15609,7 @@ func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequestModel, runt
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-func (client *Client) ListDrives(request *ListDriveRequestModel, runtime *RuntimeOptions) (_result *ListDrivesModel, _err error) {
+func (client *Client) ListDrives(request *ListDrivesRequestModel, runtime *RuntimeOptions) (_result *ListDrivesModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -14111,8 +15699,8 @@ func (client *Client) ListDrives(request *ListDriveRequestModel, runtime *Runtim
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -14172,7 +15760,7 @@ func (client *Client) ListDrives(request *ListDriveRequestModel, runtime *Runtim
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-func (client *Client) ListMyDrives(request *ListMyDriveRequestModel, runtime *RuntimeOptions) (_result *ListMyDrivesModel, _err error) {
+func (client *Client) ListMyDrives(request *ListMyDrivesRequestModel, runtime *RuntimeOptions) (_result *ListMyDrivesModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -14262,8 +15850,8 @@ func (client *Client) ListMyDrives(request *ListMyDriveRequestModel, runtime *Ru
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -14414,8 +16002,8 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequestModel, runtime *Run
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -14476,7 +16064,7 @@ func (client *Client) UpdateDrive(request *UpdateDriveRequestModel, runtime *Run
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-func (client *Client) CompleteFile(request *CCPCompleteFileRequestModel, runtime *RuntimeOptions) (_result *CompleteFileModel, _err error) {
+func (client *Client) CompleteFile(request *CompleteFileRequestModel, runtime *RuntimeOptions) (_result *CompleteFileModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -14566,8 +16154,8 @@ func (client *Client) CompleteFile(request *CCPCompleteFileRequestModel, runtime
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -14628,7 +16216,7 @@ func (client *Client) CompleteFile(request *CCPCompleteFileRequestModel, runtime
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-func (client *Client) CopyFile(request *CCPCopyFileRequestModel, runtime *RuntimeOptions) (_result *CopyFileModel, _err error) {
+func (client *Client) CopyFile(request *CopyFileRequestModel, runtime *RuntimeOptions) (_result *CopyFileModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -14718,8 +16306,8 @@ func (client *Client) CopyFile(request *CCPCopyFileRequestModel, runtime *Runtim
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(201))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -14797,7 +16385,7 @@ func (client *Client) CopyFile(request *CCPCopyFileRequestModel, runtime *Runtim
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
 */
-func (client *Client) CreateFile(request *CCPCreateFileRequestModel, runtime *RuntimeOptions) (_result *CreateFileModel, _err error) {
+func (client *Client) CreateFile(request *CreateFileRequestModel, runtime *RuntimeOptions) (_result *CreateFileModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -14887,8 +16475,8 @@ func (client *Client) CreateFile(request *CCPCreateFileRequestModel, runtime *Ru
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(201))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -14949,7 +16537,7 @@ func (client *Client) CreateFile(request *CCPCreateFileRequestModel, runtime *Ru
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-func (client *Client) DeleteFile(request *CCPDeleteFileRequestModel, runtime *RuntimeOptions) (_result *DeleteFileModel, _err error) {
+func (client *Client) DeleteFile(request *DeleteFileRequestModel, runtime *RuntimeOptions) (_result *DeleteFileModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -15039,8 +16627,8 @@ func (client *Client) DeleteFile(request *CCPDeleteFileRequestModel, runtime *Ru
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(202))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -15198,8 +16786,8 @@ func (client *Client) DownloadFile(request *DownloadFileRequestModel, runtime *R
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if !tea.BoolValue(util.Empty(tea.String(response_.Headers["x-ca-error-message"]))) {
 				_err = tea.NewSDKError(map[string]interface{}{
 					"data": map[string]interface{}{
@@ -15245,7 +16833,7 @@ func (client *Client) DownloadFile(request *DownloadFileRequestModel, runtime *R
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-func (client *Client) GetFile(request *CCPGetFileRequestModel, runtime *RuntimeOptions) (_result *GetFileModel, _err error) {
+func (client *Client) GetFile(request *GetFileRequestModel, runtime *RuntimeOptions) (_result *GetFileModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -15335,8 +16923,8 @@ func (client *Client) GetFile(request *CCPGetFileRequestModel, runtime *RuntimeO
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -15345,6 +16933,158 @@ func (client *Client) GetFile(request *CCPGetFileRequestModel, runtime *RuntimeO
 
 				respMap = util.AssertAsMap(obj)
 				_result = &GetFileModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !tea.BoolValue(util.Empty(tea.String(response_.Headers["x-ca-error-message"]))) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    tea.IntValue(response_.StatusCode),
+						"statusMessage": tea.StringValue(response_.StatusMessage),
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return nil, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    tea.IntValue(response_.StatusCode),
+					"statusMessage": tea.StringValue(response_.StatusMessage),
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 根据路径获取指定文件或文件夹的信息。
+ * @tags file
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
+ * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+ */
+func (client *Client) GetFileByPath(request *GetFileByPathRequestModel, runtime *RuntimeOptions) (_result *GetFileByPathModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": tea.IntValue(util.DefaultNumber(runtime.MaxAttempts, tea.Int(3))),
+		},
+		"backoff": map[string]interface{}{
+			"policy": tea.StringValue(util.DefaultString(runtime.BackoffPolicy, tea.String("no"))),
+			"period": tea.IntValue(util.DefaultNumber(runtime.BackoffPeriod, tea.Int(1))),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &GetFileByPathModel{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*GetFileByPathModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, tea.String("https"))
+			request_.Method = tea.String("POST")
+			request_.Pathname = client.GetPathname(client.Nickname, tea.String("/v2/file/get_by_path"))
+			request_.Headers = tea.Merge(map[string]string{
+				"user-agent":   tea.StringValue(client.GetUserAgent()),
+				"host":         tea.StringValue(util.DefaultString(client.Endpoint, tea.String(tea.ToString(tea.StringValue(client.DomainId))+".api.alicloudccp.com"))),
+				"content-type": "application/json; charset=utf-8",
+			}, request.Headers)
+			if !tea.BoolValue(util.Empty(accessToken)) {
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(tea.StringValue(accessToken))
+			} else if !tea.BoolValue(util.Empty(accesskeyId)) && !tea.BoolValue(util.Empty(accessKeySecret)) {
+				if !tea.BoolValue(util.Empty(securityToken)) {
+					request_.Headers["x-acs-security-token"] = tea.StringValue(securityToken)
+				}
+
+				request_.Headers["date"] = tea.StringValue(util.GetDateUTCString())
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(tea.StringValue(accesskeyId)) + ":" + tea.ToString(tea.StringValue(roautil.GetSignature(stringToSign, accessKeySecret)))
+			}
+
+			request_.Body = tea.ToReader(tea.StringValue(util.ToJSONString(tea.ToMap(request.Body))))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			var respMap map[string]interface{}
+			var obj interface{}
+			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return nil, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &GetFileByPathModel{}
 				_err = tea.Convert(map[string]interface{}{
 					"body":    respMap,
 					"headers": response_.Headers,
@@ -15397,7 +17137,7 @@ func (client *Client) GetFile(request *CCPGetFileRequestModel, runtime *RuntimeO
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-func (client *Client) GetDownloadUrl(request *CCPGetDownloadUrlRequestModel, runtime *RuntimeOptions) (_result *GetDownloadUrlModel, _err error) {
+func (client *Client) GetDownloadUrl(request *GetDownloadUrlRequestModel, runtime *RuntimeOptions) (_result *GetDownloadUrlModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -15487,8 +17227,8 @@ func (client *Client) GetDownloadUrl(request *CCPGetDownloadUrlRequestModel, run
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -15497,6 +17237,158 @@ func (client *Client) GetDownloadUrl(request *CCPGetDownloadUrlRequestModel, run
 
 				respMap = util.AssertAsMap(obj)
 				_result = &GetDownloadUrlModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !tea.BoolValue(util.Empty(tea.String(response_.Headers["x-ca-error-message"]))) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    tea.IntValue(response_.StatusCode),
+						"statusMessage": tea.StringValue(response_.StatusMessage),
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return nil, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    tea.IntValue(response_.StatusCode),
+					"statusMessage": tea.StringValue(response_.StatusMessage),
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 获取drive内，增量数据最新的游标
+ * @tags file_delta
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
+ * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+ */
+func (client *Client) GetLastCursor(request *GetLastCursorRequestModel, runtime *RuntimeOptions) (_result *GetLastCursorModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": tea.IntValue(util.DefaultNumber(runtime.MaxAttempts, tea.Int(3))),
+		},
+		"backoff": map[string]interface{}{
+			"policy": tea.StringValue(util.DefaultString(runtime.BackoffPolicy, tea.String("no"))),
+			"period": tea.IntValue(util.DefaultNumber(runtime.BackoffPeriod, tea.Int(1))),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &GetLastCursorModel{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*GetLastCursorModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, tea.String("https"))
+			request_.Method = tea.String("POST")
+			request_.Pathname = client.GetPathname(client.Nickname, tea.String("/v2/file/get_last_cursor"))
+			request_.Headers = tea.Merge(map[string]string{
+				"user-agent":   tea.StringValue(client.GetUserAgent()),
+				"host":         tea.StringValue(util.DefaultString(client.Endpoint, tea.String(tea.ToString(tea.StringValue(client.DomainId))+".api.alicloudccp.com"))),
+				"content-type": "application/json; charset=utf-8",
+			}, request.Headers)
+			if !tea.BoolValue(util.Empty(accessToken)) {
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(tea.StringValue(accessToken))
+			} else if !tea.BoolValue(util.Empty(accesskeyId)) && !tea.BoolValue(util.Empty(accessKeySecret)) {
+				if !tea.BoolValue(util.Empty(securityToken)) {
+					request_.Headers["x-acs-security-token"] = tea.StringValue(securityToken)
+				}
+
+				request_.Headers["date"] = tea.StringValue(util.GetDateUTCString())
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(tea.StringValue(accesskeyId)) + ":" + tea.ToString(tea.StringValue(roautil.GetSignature(stringToSign, accessKeySecret)))
+			}
+
+			request_.Body = tea.ToReader(tea.StringValue(util.ToJSONString(tea.ToMap(request.Body))))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			var respMap map[string]interface{}
+			var obj interface{}
+			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return nil, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &GetLastCursorModel{}
 				_err = tea.Convert(map[string]interface{}{
 					"body":    respMap,
 					"headers": response_.Headers,
@@ -15549,7 +17441,7 @@ func (client *Client) GetDownloadUrl(request *CCPGetDownloadUrlRequestModel, run
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-func (client *Client) GetUploadUrl(request *CCPGetUploadUrlRequestModel, runtime *RuntimeOptions) (_result *GetUploadUrlModel, _err error) {
+func (client *Client) GetUploadUrl(request *GetUploadUrlRequestModel, runtime *RuntimeOptions) (_result *GetUploadUrlModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -15639,8 +17531,8 @@ func (client *Client) GetUploadUrl(request *CCPGetUploadUrlRequestModel, runtime
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -15701,7 +17593,7 @@ func (client *Client) GetUploadUrl(request *CCPGetUploadUrlRequestModel, runtime
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-func (client *Client) ListFile(request *CCPListFileRequestModel, runtime *RuntimeOptions) (_result *ListFileModel, _err error) {
+func (client *Client) ListFile(request *ListFileRequestModel, runtime *RuntimeOptions) (_result *ListFileModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -15791,8 +17683,8 @@ func (client *Client) ListFile(request *CCPListFileRequestModel, runtime *Runtim
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -15801,6 +17693,310 @@ func (client *Client) ListFile(request *CCPListFileRequestModel, runtime *Runtim
 
 				respMap = util.AssertAsMap(obj)
 				_result = &ListFileModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !tea.BoolValue(util.Empty(tea.String(response_.Headers["x-ca-error-message"]))) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    tea.IntValue(response_.StatusCode),
+						"statusMessage": tea.StringValue(response_.StatusMessage),
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return nil, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    tea.IntValue(response_.StatusCode),
+					"statusMessage": tea.StringValue(response_.StatusMessage),
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 根据自定义同步索引键列举文件或文件夹。
+ * @tags file
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
+ * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+ */
+func (client *Client) ListFileByCustomIndexKey(request *ListFileByCustomIndexKeyRequestModel, runtime *RuntimeOptions) (_result *ListFileByCustomIndexKeyModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": tea.IntValue(util.DefaultNumber(runtime.MaxAttempts, tea.Int(3))),
+		},
+		"backoff": map[string]interface{}{
+			"policy": tea.StringValue(util.DefaultString(runtime.BackoffPolicy, tea.String("no"))),
+			"period": tea.IntValue(util.DefaultNumber(runtime.BackoffPeriod, tea.Int(1))),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &ListFileByCustomIndexKeyModel{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*ListFileByCustomIndexKeyModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, tea.String("https"))
+			request_.Method = tea.String("POST")
+			request_.Pathname = client.GetPathname(client.Nickname, tea.String("/v2/file/list_by_custom_index_key"))
+			request_.Headers = tea.Merge(map[string]string{
+				"user-agent":   tea.StringValue(client.GetUserAgent()),
+				"host":         tea.StringValue(util.DefaultString(client.Endpoint, tea.String(tea.ToString(tea.StringValue(client.DomainId))+".api.alicloudccp.com"))),
+				"content-type": "application/json; charset=utf-8",
+			}, request.Headers)
+			if !tea.BoolValue(util.Empty(accessToken)) {
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(tea.StringValue(accessToken))
+			} else if !tea.BoolValue(util.Empty(accesskeyId)) && !tea.BoolValue(util.Empty(accessKeySecret)) {
+				if !tea.BoolValue(util.Empty(securityToken)) {
+					request_.Headers["x-acs-security-token"] = tea.StringValue(securityToken)
+				}
+
+				request_.Headers["date"] = tea.StringValue(util.GetDateUTCString())
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(tea.StringValue(accesskeyId)) + ":" + tea.ToString(tea.StringValue(roautil.GetSignature(stringToSign, accessKeySecret)))
+			}
+
+			request_.Body = tea.ToReader(tea.StringValue(util.ToJSONString(tea.ToMap(request.Body))))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			var respMap map[string]interface{}
+			var obj interface{}
+			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return nil, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &ListFileByCustomIndexKeyModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !tea.BoolValue(util.Empty(tea.String(response_.Headers["x-ca-error-message"]))) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    tea.IntValue(response_.StatusCode),
+						"statusMessage": tea.StringValue(response_.StatusMessage),
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return nil, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    tea.IntValue(response_.StatusCode),
+					"statusMessage": tea.StringValue(response_.StatusMessage),
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 获取drive内，增量数据列表
+ * @tags file_delta
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
+ * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+ */
+func (client *Client) ListFileDelta(request *ListFileDeltaRequestModel, runtime *RuntimeOptions) (_result *ListFileDeltaModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": tea.IntValue(util.DefaultNumber(runtime.MaxAttempts, tea.Int(3))),
+		},
+		"backoff": map[string]interface{}{
+			"policy": tea.StringValue(util.DefaultString(runtime.BackoffPolicy, tea.String("no"))),
+			"period": tea.IntValue(util.DefaultNumber(runtime.BackoffPeriod, tea.Int(1))),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &ListFileDeltaModel{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*ListFileDeltaModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, tea.String("https"))
+			request_.Method = tea.String("POST")
+			request_.Pathname = client.GetPathname(client.Nickname, tea.String("/v2/file/list_delta"))
+			request_.Headers = tea.Merge(map[string]string{
+				"user-agent":   tea.StringValue(client.GetUserAgent()),
+				"host":         tea.StringValue(util.DefaultString(client.Endpoint, tea.String(tea.ToString(tea.StringValue(client.DomainId))+".api.alicloudccp.com"))),
+				"content-type": "application/json; charset=utf-8",
+			}, request.Headers)
+			if !tea.BoolValue(util.Empty(accessToken)) {
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(tea.StringValue(accessToken))
+			} else if !tea.BoolValue(util.Empty(accesskeyId)) && !tea.BoolValue(util.Empty(accessKeySecret)) {
+				if !tea.BoolValue(util.Empty(securityToken)) {
+					request_.Headers["x-acs-security-token"] = tea.StringValue(securityToken)
+				}
+
+				request_.Headers["date"] = tea.StringValue(util.GetDateUTCString())
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(tea.StringValue(accesskeyId)) + ":" + tea.ToString(tea.StringValue(roautil.GetSignature(stringToSign, accessKeySecret)))
+			}
+
+			request_.Body = tea.ToReader(tea.StringValue(util.ToJSONString(tea.ToMap(request.Body))))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			var respMap map[string]interface{}
+			var obj interface{}
+			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return nil, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &ListFileDeltaModel{}
 				_err = tea.Convert(map[string]interface{}{
 					"body":    respMap,
 					"headers": response_.Headers,
@@ -15853,7 +18049,7 @@ func (client *Client) ListFile(request *CCPListFileRequestModel, runtime *Runtim
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-func (client *Client) ListUploadedParts(request *CCPListUploadedPartRequestModel, runtime *RuntimeOptions) (_result *ListUploadedPartsModel, _err error) {
+func (client *Client) ListUploadedParts(request *ListUploadedPartsRequestModel, runtime *RuntimeOptions) (_result *ListUploadedPartsModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -15943,8 +18139,8 @@ func (client *Client) ListUploadedParts(request *CCPListUploadedPartRequestModel
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -16005,7 +18201,7 @@ func (client *Client) ListUploadedParts(request *CCPListUploadedPartRequestModel
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-func (client *Client) MoveFile(request *CCPMoveFileRequestModel, runtime *RuntimeOptions) (_result *MoveFileModel, _err error) {
+func (client *Client) MoveFile(request *MoveFileRequestModel, runtime *RuntimeOptions) (_result *MoveFileModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -16095,8 +18291,8 @@ func (client *Client) MoveFile(request *CCPMoveFileRequestModel, runtime *Runtim
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -16105,6 +18301,158 @@ func (client *Client) MoveFile(request *CCPMoveFileRequestModel, runtime *Runtim
 
 				respMap = util.AssertAsMap(obj)
 				_result = &MoveFileModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !tea.BoolValue(util.Empty(tea.String(response_.Headers["x-ca-error-message"]))) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    tea.IntValue(response_.StatusCode),
+						"statusMessage": tea.StringValue(response_.StatusMessage),
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return nil, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    tea.IntValue(response_.StatusCode),
+					"statusMessage": tea.StringValue(response_.StatusMessage),
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 在指定drive下全量获取文件元信息。
+ * @tags file
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
+ * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+ */
+func (client *Client) ScanFileMeta(request *ScanFileMetaRequestModel, runtime *RuntimeOptions) (_result *ScanFileMetaModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": tea.IntValue(util.DefaultNumber(runtime.MaxAttempts, tea.Int(3))),
+		},
+		"backoff": map[string]interface{}{
+			"policy": tea.StringValue(util.DefaultString(runtime.BackoffPolicy, tea.String("no"))),
+			"period": tea.IntValue(util.DefaultNumber(runtime.BackoffPeriod, tea.Int(1))),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &ScanFileMetaModel{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*ScanFileMetaModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, tea.String("https"))
+			request_.Method = tea.String("POST")
+			request_.Pathname = client.GetPathname(client.Nickname, tea.String("/v2/file/scan"))
+			request_.Headers = tea.Merge(map[string]string{
+				"user-agent":   tea.StringValue(client.GetUserAgent()),
+				"host":         tea.StringValue(util.DefaultString(client.Endpoint, tea.String(tea.ToString(tea.StringValue(client.DomainId))+".api.alicloudccp.com"))),
+				"content-type": "application/json; charset=utf-8",
+			}, request.Headers)
+			if !tea.BoolValue(util.Empty(accessToken)) {
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(tea.StringValue(accessToken))
+			} else if !tea.BoolValue(util.Empty(accesskeyId)) && !tea.BoolValue(util.Empty(accessKeySecret)) {
+				if !tea.BoolValue(util.Empty(securityToken)) {
+					request_.Headers["x-acs-security-token"] = tea.StringValue(securityToken)
+				}
+
+				request_.Headers["date"] = tea.StringValue(util.GetDateUTCString())
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(tea.StringValue(accesskeyId)) + ":" + tea.ToString(tea.StringValue(roautil.GetSignature(stringToSign, accessKeySecret)))
+			}
+
+			request_.Body = tea.ToReader(tea.StringValue(util.ToJSONString(tea.ToMap(request.Body))))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			var respMap map[string]interface{}
+			var obj interface{}
+			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return nil, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &ScanFileMetaModel{}
 				_err = tea.Convert(map[string]interface{}{
 					"body":    respMap,
 					"headers": response_.Headers,
@@ -16157,7 +18505,7 @@ func (client *Client) MoveFile(request *CCPMoveFileRequestModel, runtime *Runtim
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-func (client *Client) SearchFile(request *CCPSearchFileRequestModel, runtime *RuntimeOptions) (_result *SearchFileModel, _err error) {
+func (client *Client) SearchFile(request *SearchFileRequestModel, runtime *RuntimeOptions) (_result *SearchFileModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -16247,8 +18595,8 @@ func (client *Client) SearchFile(request *CCPSearchFileRequestModel, runtime *Ru
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -16310,7 +18658,7 @@ func (client *Client) SearchFile(request *CCPSearchFileRequestModel, runtime *Ru
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-func (client *Client) UpdateFile(request *CCPUpdateFileMetaRequestModel, runtime *RuntimeOptions) (_result *UpdateFileModel, _err error) {
+func (client *Client) UpdateFile(request *UpdateFileRequestModel, runtime *RuntimeOptions) (_result *UpdateFileModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -16400,8 +18748,8 @@ func (client *Client) UpdateFile(request *CCPUpdateFileMetaRequestModel, runtime
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -16550,8 +18898,8 @@ func (client *Client) CreateUser(request *CreateUserRequestModel, runtime *Runti
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(201))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -16700,8 +19048,8 @@ func (client *Client) DeleteUser(request *DeleteUserRequestModel, runtime *Runti
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(204))) {
 				_result = &DeleteUserModel{}
 				_err = tea.Convert(map[string]map[string]string{
@@ -16844,8 +19192,8 @@ func (client *Client) GetUser(request *GetUserRequestModel, runtime *RuntimeOpti
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -16904,7 +19252,7 @@ func (client *Client) GetUser(request *GetUserRequestModel, runtime *RuntimeOpti
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-func (client *Client) ListUsers(request *ListUserRequestModel, runtime *RuntimeOptions) (_result *ListUsersModel, _err error) {
+func (client *Client) ListUsers(request *ListUsersRequestModel, runtime *RuntimeOptions) (_result *ListUsersModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -16994,8 +19342,8 @@ func (client *Client) ListUsers(request *ListUserRequestModel, runtime *RuntimeO
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -17144,8 +19492,8 @@ func (client *Client) SearchUser(request *SearchUserRequestModel, runtime *Runti
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -17295,8 +19643,8 @@ func (client *Client) UpdateUser(request *UpdateUserRequestModel, runtime *Runti
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -17357,7 +19705,7 @@ func (client *Client) UpdateUser(request *UpdateUserRequestModel, runtime *Runti
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-func (client *Client) GetPhotoCount(request *GetImageCountRequestModel, runtime *RuntimeOptions) (_result *GetPhotoCountModel, _err error) {
+func (client *Client) GetPhotoCount(request *GetPhotoCountRequestModel, runtime *RuntimeOptions) (_result *GetPhotoCountModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -17447,8 +19795,8 @@ func (client *Client) GetPhotoCount(request *GetImageCountRequestModel, runtime 
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -17509,7 +19857,7 @@ func (client *Client) GetPhotoCount(request *GetImageCountRequestModel, runtime 
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-func (client *Client) ListAddressGroups(request *ListImageAddressGroupsRequestModel, runtime *RuntimeOptions) (_result *ListAddressGroupsModel, _err error) {
+func (client *Client) ListAddressGroups(request *ListAddressGroupsRequestModel, runtime *RuntimeOptions) (_result *ListAddressGroupsModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -17599,8 +19947,8 @@ func (client *Client) ListAddressGroups(request *ListImageAddressGroupsRequestMo
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -17661,7 +20009,7 @@ func (client *Client) ListAddressGroups(request *ListImageAddressGroupsRequestMo
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-func (client *Client) ListFaceGroups(request *ListImageFaceGroupsRequestModel, runtime *RuntimeOptions) (_result *ListFaceGroupsModel, _err error) {
+func (client *Client) ListFaceGroups(request *ListFaceGroupsRequestModel, runtime *RuntimeOptions) (_result *ListFaceGroupsModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -17751,8 +20099,8 @@ func (client *Client) ListFaceGroups(request *ListImageFaceGroupsRequestModel, r
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -17813,7 +20161,7 @@ func (client *Client) ListFaceGroups(request *ListImageFaceGroupsRequestModel, r
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
  */
-func (client *Client) ListTags(request *ListImageTagsRequestModel, runtime *RuntimeOptions) (_result *ListTagsModel, _err error) {
+func (client *Client) ListTags(request *ListTagsRequestModel, runtime *RuntimeOptions) (_result *ListTagsModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
 		return nil, _err
@@ -17903,8 +20251,8 @@ func (client *Client) ListTags(request *ListImageTagsRequestModel, runtime *Runt
 			if _err != nil {
 				return nil, _err
 			}
-			respMap := make(map[string]interface{})
-			obj := interface{}(nil)
+			var respMap map[string]interface{}
+			var obj interface{}
 			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
 				obj, _err = util.ReadAsJSON(response_.Body)
 				if _err != nil {
@@ -17913,6 +20261,310 @@ func (client *Client) ListTags(request *ListImageTagsRequestModel, runtime *Runt
 
 				respMap = util.AssertAsMap(obj)
 				_result = &ListTagsModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !tea.BoolValue(util.Empty(tea.String(response_.Headers["x-ca-error-message"]))) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    tea.IntValue(response_.StatusCode),
+						"statusMessage": tea.StringValue(response_.StatusMessage),
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return nil, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    tea.IntValue(response_.StatusCode),
+					"statusMessage": tea.StringValue(response_.StatusMessage),
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 该接口将会展示用户图片的地点分组
+ * @tags image
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
+ * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+ */
+func (client *Client) SearchAddressGroups(request *SearchAddressGroupsRequestModel, runtime *RuntimeOptions) (_result *SearchAddressGroupsModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": tea.IntValue(util.DefaultNumber(runtime.MaxAttempts, tea.Int(3))),
+		},
+		"backoff": map[string]interface{}{
+			"policy": tea.StringValue(util.DefaultString(runtime.BackoffPolicy, tea.String("no"))),
+			"period": tea.IntValue(util.DefaultNumber(runtime.BackoffPeriod, tea.Int(1))),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &SearchAddressGroupsModel{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*SearchAddressGroupsModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, tea.String("https"))
+			request_.Method = tea.String("POST")
+			request_.Pathname = client.GetPathname(client.Nickname, tea.String("/v2/image/search_address_groups"))
+			request_.Headers = tea.Merge(map[string]string{
+				"user-agent":   tea.StringValue(client.GetUserAgent()),
+				"host":         tea.StringValue(util.DefaultString(client.Endpoint, tea.String(tea.ToString(tea.StringValue(client.DomainId))+".api.alicloudccp.com"))),
+				"content-type": "application/json; charset=utf-8",
+			}, request.Headers)
+			if !tea.BoolValue(util.Empty(accessToken)) {
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(tea.StringValue(accessToken))
+			} else if !tea.BoolValue(util.Empty(accesskeyId)) && !tea.BoolValue(util.Empty(accessKeySecret)) {
+				if !tea.BoolValue(util.Empty(securityToken)) {
+					request_.Headers["x-acs-security-token"] = tea.StringValue(securityToken)
+				}
+
+				request_.Headers["date"] = tea.StringValue(util.GetDateUTCString())
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(tea.StringValue(accesskeyId)) + ":" + tea.ToString(tea.StringValue(roautil.GetSignature(stringToSign, accessKeySecret)))
+			}
+
+			request_.Body = tea.ToReader(tea.StringValue(util.ToJSONString(tea.ToMap(request.Body))))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			var respMap map[string]interface{}
+			var obj interface{}
+			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return nil, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &SearchAddressGroupsModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !tea.BoolValue(util.Empty(tea.String(response_.Headers["x-ca-error-message"]))) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     response_.Headers["x-ca-request-id"],
+						"statusCode":    tea.IntValue(response_.StatusCode),
+						"statusMessage": tea.StringValue(response_.StatusMessage),
+					},
+					"message": response_.Headers["x-ca-error-message"],
+				})
+				return nil, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return nil, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     response_.Headers["x-ca-request-id"],
+					"statusCode":    tea.IntValue(response_.StatusCode),
+					"statusMessage": tea.StringValue(response_.StatusMessage),
+				},
+			}, respMap))
+			return nil, _err
+		}()
+		if !tea.Retryable(_err) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 该接口将会更新人脸分组信息
+ * @tags image
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
+ * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+ */
+func (client *Client) UpdateFacegroupInfo(request *UpdateFacegroupInfoRequestModel, runtime *RuntimeOptions) (_result *UpdateFacegroupInfoModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return nil, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return nil, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": tea.IntValue(util.DefaultNumber(runtime.MaxAttempts, tea.Int(3))),
+		},
+		"backoff": map[string]interface{}{
+			"policy": tea.StringValue(util.DefaultString(runtime.BackoffPolicy, tea.String("no"))),
+			"period": tea.IntValue(util.DefaultNumber(runtime.BackoffPeriod, tea.Int(1))),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &UpdateFacegroupInfoModel{}
+	for _retryTimes := 0; tea.AllowRetry(_runtime["retry"], _retryTimes); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], _retryTimes)
+			if _backoffTime > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*UpdateFacegroupInfoModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return nil, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return nil, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, tea.String("https"))
+			request_.Method = tea.String("POST")
+			request_.Pathname = client.GetPathname(client.Nickname, tea.String("/v2/image/update_facegroup_info"))
+			request_.Headers = tea.Merge(map[string]string{
+				"user-agent":   tea.StringValue(client.GetUserAgent()),
+				"host":         tea.StringValue(util.DefaultString(client.Endpoint, tea.String(tea.ToString(tea.StringValue(client.DomainId))+".api.alicloudccp.com"))),
+				"content-type": "application/json; charset=utf-8",
+			}, request.Headers)
+			if !tea.BoolValue(util.Empty(accessToken)) {
+				request_.Headers["authorization"] = "Bearer " + tea.ToString(tea.StringValue(accessToken))
+			} else if !tea.BoolValue(util.Empty(accesskeyId)) && !tea.BoolValue(util.Empty(accessKeySecret)) {
+				if !tea.BoolValue(util.Empty(securityToken)) {
+					request_.Headers["x-acs-security-token"] = tea.StringValue(securityToken)
+				}
+
+				request_.Headers["date"] = tea.StringValue(util.GetDateUTCString())
+				request_.Headers["accept"] = "application/json"
+				request_.Headers["x-acs-signature-method"] = "HMAC-SHA1"
+				request_.Headers["x-acs-signature-version"] = "1.0"
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = "acs " + tea.ToString(tea.StringValue(accesskeyId)) + ":" + tea.ToString(tea.StringValue(roautil.GetSignature(stringToSign, accessKeySecret)))
+			}
+
+			request_.Body = tea.ToReader(tea.StringValue(util.ToJSONString(tea.ToMap(request.Body))))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return nil, _err
+			}
+			var respMap map[string]interface{}
+			var obj interface{}
+			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return nil, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &UpdateFacegroupInfoModel{}
 				_err = tea.Convert(map[string]interface{}{
 					"body":    respMap,
 					"headers": response_.Headers,
@@ -17984,20 +20636,6 @@ func (client *Client) GetExpireTime() (_result *string) {
 	return _result
 }
 
-func (client *Client) SetUserAgent(userAgent *string) {
-	client.UserAgent = userAgent
-}
-
-func (client *Client) AppendUserAgent(userAgent *string) {
-	client.UserAgent = tea.String(tea.ToString(tea.StringValue(client.UserAgent)) + " " + tea.ToString(tea.StringValue(userAgent)))
-}
-
-func (client *Client) GetUserAgent() (_result *string) {
-	userAgent := util.GetUserAgent(client.UserAgent)
-	_result = userAgent
-	return _result
-}
-
 func (client *Client) SetRefreshToken(token *string) {
 	if tea.BoolValue(util.IsUnset(client.AccessTokenCredential)) {
 		return
@@ -18036,6 +20674,20 @@ func (client *Client) GetAccessToken() (_result *string, _err error) {
 
 	_result = token
 	return _result, _err
+}
+
+func (client *Client) SetUserAgent(userAgent *string) {
+	client.UserAgent = userAgent
+}
+
+func (client *Client) AppendUserAgent(userAgent *string) {
+	client.UserAgent = tea.String(tea.ToString(tea.StringValue(client.UserAgent)) + " " + tea.ToString(tea.StringValue(userAgent)))
+}
+
+func (client *Client) GetUserAgent() (_result *string) {
+	userAgent := util.GetUserAgent(client.UserAgent)
+	_result = userAgent
+	return _result
 }
 
 func (client *Client) GetAccessKeyId() (_result *string, _err error) {
