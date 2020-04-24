@@ -20,13 +20,13 @@
 CCP Path 
 
 ~~~go
-go get  github.com/aliyun/aliyun-ccp/ccppath-sdk/go
+go get  github.com/alibabacloud-go/ccppath-sdk/ccppath-sdk
 ~~~
 
 OSS Path
 
 ~~~go
-go get  github.com/aliyun/aliyun-ccp/osspath-sdk/go
+go get  github.com/alibabacloud-go/ccppath-sdk/osspath-sdk
 ~~~
 
 # 初始化Client
