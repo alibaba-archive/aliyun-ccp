@@ -19,6 +19,7 @@ class OSSVideoM3U8Request extends Model
      * @var string
      */
     public $definition;
+
     /**
      * @description drive_id
      *
@@ -27,6 +28,7 @@ class OSSVideoM3U8Request extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description expire_sec
      *
@@ -35,6 +37,7 @@ class OSSVideoM3U8Request extends Model
      * @var int
      */
     public $expireSec;
+
     /**
      * @description file_path
      *
@@ -43,6 +46,7 @@ class OSSVideoM3U8Request extends Model
      * @var string
      */
     public $filePath;
+
     /**
      * @description share_id
      *
@@ -51,6 +55,7 @@ class OSSVideoM3U8Request extends Model
      * @var string
      */
     public $shareId;
+
     /**
      * @description sign_token
      *

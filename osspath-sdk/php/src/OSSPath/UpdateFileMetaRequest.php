@@ -17,6 +17,7 @@ class UpdateFileMetaRequest extends Model
      * @var string
      */
     public $description;
+
     /**
      * @description drive_id
      *
@@ -25,24 +26,28 @@ class UpdateFileMetaRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_id
      *
      * @var string
      */
     public $fileId;
+
     /**
      * @description hidden
      * type: boolean
      * @var bool
      */
     public $hidden;
+
     /**
      * @description meta
      *
      * @var string
      */
     public $meta;
+
     /**
      * @description name
      *
@@ -51,16 +56,19 @@ class UpdateFileMetaRequest extends Model
      * @var string
      */
     public $name;
+
     /**
      * @var string
      */
     public $shareId;
+
     /**
      * @description starred
      * type: boolean
      * @var bool
      */
     public $starred;
+
     /**
      * @description tags
      *

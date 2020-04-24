@@ -19,6 +19,7 @@ class BaseListFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description image_thumbnail_process
      *
@@ -27,6 +28,7 @@ class BaseListFileRequest extends Model
      * @var string
      */
     public $imageThumbnailProcess;
+
     /**
      * @description image_url_process
      *
@@ -35,6 +37,7 @@ class BaseListFileRequest extends Model
      * @var string
      */
     public $imageUrlProcess;
+
     /**
      * @description limit
      *
@@ -43,6 +46,7 @@ class BaseListFileRequest extends Model
      * @var int
      */
     public $limit;
+
     /**
      * @description marker
      *
@@ -51,6 +55,7 @@ class BaseListFileRequest extends Model
      * @var string
      */
     public $marker;
+
     /**
      * @description video_thumbnail_process
      * type:string

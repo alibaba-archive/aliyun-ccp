@@ -16,6 +16,7 @@ class CorsRule extends Model
      * @var array
      */
     public $allowedHeader;
+
     /**
      * @description AllowedMethod
      *
@@ -24,6 +25,7 @@ class CorsRule extends Model
      * @var array
      */
     public $allowedMethod;
+
     /**
      * @description AllowedOrigin
      *
@@ -32,6 +34,7 @@ class CorsRule extends Model
      * @var array
      */
     public $allowedOrigin;
+
     /**
      * @description ExposeHeader
      *
@@ -40,6 +43,7 @@ class CorsRule extends Model
      * @var array
      */
     public $exposeHeader;
+
     /**
      * @description MaxAgeSeconds
      *

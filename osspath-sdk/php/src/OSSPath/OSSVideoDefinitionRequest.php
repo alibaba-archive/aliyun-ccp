@@ -19,6 +19,7 @@ class OSSVideoDefinitionRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_path
      *
@@ -27,6 +28,7 @@ class OSSVideoDefinitionRequest extends Model
      * @var string
      */
     public $filePath;
+
     /**
      * @description share_id
      *

@@ -16,6 +16,7 @@ class UrlInfo extends Model
      * @var string
      */
     public $downloadUrl;
+
     /**
      * @description thumbnail
      *
@@ -24,6 +25,7 @@ class UrlInfo extends Model
      * @var string
      */
     public $thumbnail;
+
     /**
      * @description url
      *

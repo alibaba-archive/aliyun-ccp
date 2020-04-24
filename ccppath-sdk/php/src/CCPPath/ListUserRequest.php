@@ -19,6 +19,7 @@ class ListUserRequest extends Model
      * @var int
      */
     public $limit;
+
     /**
      * @description 翻页标记
      *

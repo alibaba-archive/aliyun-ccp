@@ -19,6 +19,7 @@ class BaseDriveResponse extends Model
      * @var string
      */
     public $creator;
+
     /**
      * @description Drive 备注信息
      *
@@ -27,6 +28,7 @@ class BaseDriveResponse extends Model
      * @var string
      */
     public $description;
+
     /**
      * @description Domain ID
      *
@@ -35,6 +37,7 @@ class BaseDriveResponse extends Model
      * @var string
      */
     public $domainId;
+
     /**
      * @description Drive ID
      *
@@ -43,6 +46,7 @@ class BaseDriveResponse extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description Drive 名称
      *
@@ -51,6 +55,7 @@ class BaseDriveResponse extends Model
      * @var string
      */
     public $driveName;
+
     /**
      * @description Drive 类型
      *
@@ -59,6 +64,7 @@ class BaseDriveResponse extends Model
      * @var string
      */
     public $driveType;
+
     /**
      * @description Drive 所有者
      *
@@ -67,6 +73,7 @@ class BaseDriveResponse extends Model
      * @var string
      */
     public $owner;
+
     /**
      * @description Drive存储基于store的相对路径，domain的PathType为OSSPath时返回
      *
@@ -75,6 +82,7 @@ class BaseDriveResponse extends Model
      * @var string
      */
     public $relativePath;
+
     /**
      * @description Drive 状态
      *
@@ -83,6 +91,7 @@ class BaseDriveResponse extends Model
      * @var string
      */
     public $status;
+
     /**
      * @description 存储 ID, domain的PathType为OSSPath时返回
      *
@@ -91,6 +100,7 @@ class BaseDriveResponse extends Model
      * @var string
      */
     public $storeId;
+
     /**
      * @description Drive 空间总量
      *
@@ -99,6 +109,7 @@ class BaseDriveResponse extends Model
      * @var int
      */
     public $totalSize;
+
     /**
      * @description Drive 空间已使用量
      *

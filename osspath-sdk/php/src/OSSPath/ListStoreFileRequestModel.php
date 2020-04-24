@@ -14,6 +14,7 @@ class ListStoreFileRequestModel extends Model
      * @var array
      */
     public $headers;
+
     /**
      * @description body
      *

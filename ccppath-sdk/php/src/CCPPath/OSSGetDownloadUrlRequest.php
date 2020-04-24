@@ -19,6 +19,7 @@ class OSSGetDownloadUrlRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description expire_sec
      *
@@ -27,6 +28,7 @@ class OSSGetDownloadUrlRequest extends Model
      * @var int
      */
     public $expireSec;
+
     /**
      * @description file_name
      *
@@ -35,6 +37,7 @@ class OSSGetDownloadUrlRequest extends Model
      * @var string
      */
     public $fileName;
+
     /**
      * @description file_path
      *
@@ -43,6 +46,7 @@ class OSSGetDownloadUrlRequest extends Model
      * @var string
      */
     public $filePath;
+
     /**
      * @description share_id
      *

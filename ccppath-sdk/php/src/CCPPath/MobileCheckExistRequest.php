@@ -16,6 +16,7 @@ class MobileCheckExistRequest extends Model
      * @var string
      */
     public $appId;
+
     /**
      * @description 待查询的手机号
      *

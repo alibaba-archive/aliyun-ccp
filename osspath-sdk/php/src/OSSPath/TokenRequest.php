@@ -16,6 +16,7 @@ class TokenRequest extends Model
      * @var string
      */
     public $appId;
+
     /**
      * @description 只能填refresh_token
      *
@@ -24,6 +25,7 @@ class TokenRequest extends Model
      * @var string
      */
     public $grantType;
+
     /**
      * @description refresh token, 登录时返回的
      *

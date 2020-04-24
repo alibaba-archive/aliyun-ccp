@@ -16,6 +16,7 @@ class DefaultSetPasswordRequest extends Model
      * @var string
      */
     public $appId;
+
     /**
      * @description 新密码，必须包含数字和字母，长度8-32个字符
      *
@@ -24,6 +25,7 @@ class DefaultSetPasswordRequest extends Model
      * @var string
      */
     public $newPassword;
+
     /**
      * @description 临时操作权限码
      *

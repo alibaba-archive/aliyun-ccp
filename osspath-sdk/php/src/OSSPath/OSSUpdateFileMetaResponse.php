@@ -19,6 +19,7 @@ class OSSUpdateFileMetaResponse extends Model
      * @var string
      */
     public $contentHash;
+
     /**
      * @description content_hash_name
      *
@@ -27,6 +28,7 @@ class OSSUpdateFileMetaResponse extends Model
      * @var string
      */
     public $contentHashName;
+
     /**
      * @description content_type
      *
@@ -35,12 +37,14 @@ class OSSUpdateFileMetaResponse extends Model
      * @var string
      */
     public $contentType;
+
     /**
      * @description crc64_hash
      *
      * @var string
      */
     public $crc64Hash;
+
     /**
      * @description created_at
      *
@@ -49,6 +53,7 @@ class OSSUpdateFileMetaResponse extends Model
      * @var string
      */
     public $createdAt;
+
     /**
      * @description description
      *
@@ -57,6 +62,7 @@ class OSSUpdateFileMetaResponse extends Model
      * @var string
      */
     public $description;
+
     /**
      * @description domain_id
      *
@@ -65,6 +71,7 @@ class OSSUpdateFileMetaResponse extends Model
      * @var string
      */
     public $domainId;
+
     /**
      * @description download_url
      *
@@ -73,6 +80,7 @@ class OSSUpdateFileMetaResponse extends Model
      * @var string
      */
     public $downloadUrl;
+
     /**
      * @description drive_id
      *
@@ -81,6 +89,7 @@ class OSSUpdateFileMetaResponse extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_extension
      *
@@ -89,6 +98,7 @@ class OSSUpdateFileMetaResponse extends Model
      * @var string
      */
     public $fileExtension;
+
     /**
      * @description file_path
      *
@@ -97,6 +107,7 @@ class OSSUpdateFileMetaResponse extends Model
      * @var string
      */
     public $filePath;
+
     /**
      * @description name
      *
@@ -105,6 +116,7 @@ class OSSUpdateFileMetaResponse extends Model
      * @var string
      */
     public $name;
+
     /**
      * @description parent_file_id
      *
@@ -113,6 +125,7 @@ class OSSUpdateFileMetaResponse extends Model
      * @var string
      */
     public $parentFilePath;
+
     /**
      * @description share_id
      *
@@ -121,6 +134,7 @@ class OSSUpdateFileMetaResponse extends Model
      * @var string
      */
     public $shareId;
+
     /**
      * @description Size
      *
@@ -129,6 +143,7 @@ class OSSUpdateFileMetaResponse extends Model
      * @var int
      */
     public $size;
+
     /**
      * @description status
      *
@@ -137,6 +152,7 @@ class OSSUpdateFileMetaResponse extends Model
      * @var string
      */
     public $status;
+
     /**
      * @description thumbnail
      *
@@ -145,12 +161,14 @@ class OSSUpdateFileMetaResponse extends Model
      * @var string
      */
     public $thumbnail;
+
     /**
      * @description trashed_at
      *
      * @var string
      */
     public $trashedAt;
+
     /**
      * @description type
      *
@@ -159,12 +177,14 @@ class OSSUpdateFileMetaResponse extends Model
      * @var string
      */
     public $type;
+
     /**
      * @description updated_at
      *
      * @var string
      */
     public $updatedAt;
+
     /**
      * @description upload_id
      *
@@ -173,6 +193,7 @@ class OSSUpdateFileMetaResponse extends Model
      * @var string
      */
     public $uploadId;
+
     /**
      * @description url
      *

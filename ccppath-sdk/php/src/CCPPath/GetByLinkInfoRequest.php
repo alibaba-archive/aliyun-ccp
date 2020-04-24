@@ -16,6 +16,7 @@ class GetByLinkInfoRequest extends Model
      * @var string
      */
     public $identity;
+
     /**
      * @description 认证类型
      *

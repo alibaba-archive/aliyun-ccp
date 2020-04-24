@@ -19,6 +19,7 @@ class OSSListUploadedPartRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_path
      *
@@ -27,6 +28,7 @@ class OSSListUploadedPartRequest extends Model
      * @var string
      */
     public $filePath;
+
     /**
      * @description limit
      *
@@ -35,6 +37,7 @@ class OSSListUploadedPartRequest extends Model
      * @var int
      */
     public $limit;
+
     /**
      * @description part_number_marker
      *
@@ -43,6 +46,7 @@ class OSSListUploadedPartRequest extends Model
      * @var int
      */
     public $partNumberMarker;
+
     /**
      * @description share_id
      *
@@ -51,6 +55,7 @@ class OSSListUploadedPartRequest extends Model
      * @var string
      */
     public $shareId;
+
     /**
      * @description upload_id
      *

@@ -15,6 +15,7 @@ class ListImageFaceGroupsResponse extends Model
      * @var array
      */
     public $items;
+
     /**
      * @var string
      */

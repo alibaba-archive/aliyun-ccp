@@ -9,21 +9,34 @@ use AlibabaCloud\Tea\Model;
 class Config extends Model
 {
     public $endpoint;
+
     /**
      * @var string
      */
     public $domainId;
+
     public $clientId;
+
     public $refreshToken;
+
     public $clientSecret;
+
     public $accessToken;
+
     public $expireTime;
+
     public $protocol;
+
     public $type;
+
     public $securityToken;
+
     public $accessKeyId;
+
     public $accessKeySecret;
+
     public $nickname;
+
     public $userAgent;
 
     public function validate()

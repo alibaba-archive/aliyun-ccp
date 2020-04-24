@@ -16,6 +16,7 @@ class UpdateAppRequest extends Model
      * @var string
      */
     public $appId;
+
     /**
      * @description App名称
      *
@@ -24,6 +25,7 @@ class UpdateAppRequest extends Model
      * @var string
      */
     public $appName;
+
     /**
      * @description App描述
      *
@@ -32,6 +34,7 @@ class UpdateAppRequest extends Model
      * @var string
      */
     public $description;
+
     /**
      * @description 是否是domain私有App
      *
@@ -40,6 +43,7 @@ class UpdateAppRequest extends Model
      * @var bool
      */
     public $isThirdParty;
+
     /**
      * @description App图标
      *
@@ -48,6 +52,7 @@ class UpdateAppRequest extends Model
      * @var string
      */
     public $logo;
+
     /**
      * @description App回调地址
      *
@@ -56,12 +61,14 @@ class UpdateAppRequest extends Model
      * @var string
      */
     public $redirectUri;
+
     /**
      * @description App权限列表
      *
      * @var array
      */
     public $scope;
+
     /**
      * @description App类型
      *

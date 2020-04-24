@@ -19,6 +19,7 @@ class CreateUserRequest extends Model
      * @var string
      */
     public $avatar;
+
     /**
      * @description 描述信息
      *
@@ -27,6 +28,7 @@ class CreateUserRequest extends Model
      * @var string
      */
     public $description;
+
     /**
      * @description 邮箱
      *
@@ -35,6 +37,7 @@ class CreateUserRequest extends Model
      * @var string
      */
     public $email;
+
     /**
      * @description 昵称
      *
@@ -43,6 +46,7 @@ class CreateUserRequest extends Model
      * @var string
      */
     public $nickName;
+
     /**
      * @description 电话号码
      *
@@ -51,6 +55,7 @@ class CreateUserRequest extends Model
      * @var string
      */
     public $phone;
+
     /**
      * @description 角色
      *
@@ -59,6 +64,7 @@ class CreateUserRequest extends Model
      * @var string
      */
     public $role;
+
     /**
      * @description 状态
      *
@@ -67,6 +73,7 @@ class CreateUserRequest extends Model
      * @var string
      */
     public $status;
+
     /**
      * @description 用户 ID
      *
@@ -75,6 +82,7 @@ class CreateUserRequest extends Model
      * @var string
      */
     public $userId;
+
     /**
      * @description 用户名称
      *

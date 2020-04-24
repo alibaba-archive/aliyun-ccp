@@ -16,6 +16,7 @@ class VideoMediaResponse extends Model
      * @var string
      */
     public $addressLine;
+
     /**
      * @description city
      *
@@ -24,6 +25,7 @@ class VideoMediaResponse extends Model
      * @var string
      */
     public $city;
+
     /**
      * @description country
      *
@@ -32,6 +34,7 @@ class VideoMediaResponse extends Model
      * @var string
      */
     public $country;
+
     /**
      * @description district
      *
@@ -40,6 +43,7 @@ class VideoMediaResponse extends Model
      * @var string
      */
     public $district;
+
     /**
      * @description duration 单位 秒
      *
@@ -48,6 +52,7 @@ class VideoMediaResponse extends Model
      * @var string
      */
     public $duration;
+
     /**
      * @description location
      *
@@ -56,6 +61,7 @@ class VideoMediaResponse extends Model
      * @var string
      */
     public $location;
+
     /**
      * @description province
      *
@@ -64,12 +70,14 @@ class VideoMediaResponse extends Model
      * @var string
      */
     public $province;
+
     /**
      * @description time
      *
      * @var string
      */
     public $time;
+
     /**
      * @description township
      *

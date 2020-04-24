@@ -16,6 +16,7 @@ class Captcha extends Model
      * @var string
      */
     public $captcha;
+
     /**
      * @description 图片格式
      *
@@ -24,6 +25,7 @@ class Captcha extends Model
      * @var string
      */
     public $captchaFormat;
+
     /**
      * @description 图片验证码ID
      *

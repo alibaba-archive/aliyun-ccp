@@ -12,18 +12,22 @@ class StoreFile extends Model
      * @var string
      */
     public $domainId;
+
     /**
      * @var string
      */
     public $name;
+
     /**
      * @var string
      */
     public $parentFilePath;
+
     /**
      * @var string
      */
     public $storeId;
+
     /**
      * @var string
      */

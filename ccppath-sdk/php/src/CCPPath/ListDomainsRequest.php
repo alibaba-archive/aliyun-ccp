@@ -19,6 +19,7 @@ class ListDomainsRequest extends Model
      * @var int
      */
     public $limit;
+
     /**
      * @description 查询游标
      *

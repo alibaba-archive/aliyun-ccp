@@ -16,6 +16,7 @@ class AccountAccessTokenResponse extends Model
      * @var string
      */
     public $accessToken;
+
     /**
      * @description 当前用户头像
      *
@@ -24,6 +25,7 @@ class AccountAccessTokenResponse extends Model
      * @var string
      */
     public $avatar;
+
     /**
      * @description Default Drive ID
      *
@@ -32,6 +34,7 @@ class AccountAccessTokenResponse extends Model
      * @var string
      */
     public $defaultDriveId;
+
     /**
      * @description 当前用户已存在的登录方式
      *
@@ -40,6 +43,7 @@ class AccountAccessTokenResponse extends Model
      * @var array
      */
     public $existLink;
+
     /**
      * @description accessToken过期时间，ISO时间
      *
@@ -48,6 +52,7 @@ class AccountAccessTokenResponse extends Model
      * @var string
      */
     public $expireTime;
+
     /**
      * @description accessToken过期时间，单位秒
      *
@@ -56,6 +61,7 @@ class AccountAccessTokenResponse extends Model
      * @var int
      */
     public $expiresIn;
+
     /**
      * @description 是否需要绑定
      *
@@ -64,6 +70,7 @@ class AccountAccessTokenResponse extends Model
      * @var bool
      */
     public $needLink;
+
     /**
      * @description 当前用户昵称
      *
@@ -72,6 +79,7 @@ class AccountAccessTokenResponse extends Model
      * @var string
      */
     public $nickName;
+
     /**
      * @description 用于刷新accessToken
      *
@@ -80,6 +88,7 @@ class AccountAccessTokenResponse extends Model
      * @var string
      */
     public $refreshToken;
+
     /**
      * @description 当前用户角色
      *
@@ -88,6 +97,7 @@ class AccountAccessTokenResponse extends Model
      * @var string
      */
     public $role;
+
     /**
      * @description 临时权限，用于登录成功后设置密码
      *
@@ -96,6 +106,7 @@ class AccountAccessTokenResponse extends Model
      * @var string
      */
     public $state;
+
     /**
      * @description accessToken类型，Bearer
      *
@@ -104,6 +115,7 @@ class AccountAccessTokenResponse extends Model
      * @var string
      */
     public $tokenType;
+
     /**
      * @description 当前用户ID
      *
@@ -112,6 +124,7 @@ class AccountAccessTokenResponse extends Model
      * @var string
      */
     public $userId;
+
     /**
      * @description 当前用户名
      *

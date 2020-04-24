@@ -16,6 +16,7 @@ class AccountLinkRequest extends Model
      * @var string
      */
     public $detail;
+
     /**
      * @description 唯一身份标识
      *
@@ -24,6 +25,7 @@ class AccountLinkRequest extends Model
      * @var string
      */
     public $identity;
+
     /**
      * @description 状态
      *
@@ -32,6 +34,7 @@ class AccountLinkRequest extends Model
      * @var string
      */
     public $status;
+
     /**
      * @description 认证类型
      *
@@ -40,6 +43,7 @@ class AccountLinkRequest extends Model
      * @var string
      */
     public $type;
+
     /**
      * @description 绑定的user_id
      *

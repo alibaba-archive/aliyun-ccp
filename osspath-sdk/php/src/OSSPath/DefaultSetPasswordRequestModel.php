@@ -14,6 +14,7 @@ class DefaultSetPasswordRequestModel extends Model
      * @var array
      */
     public $headers;
+
     /**
      * @description body
      *

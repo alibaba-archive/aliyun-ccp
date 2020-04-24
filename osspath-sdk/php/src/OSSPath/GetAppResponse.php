@@ -16,6 +16,7 @@ class GetAppResponse extends Model
      * @var string
      */
     public $aliOwnerId;
+
     /**
      * @description App ID
      *
@@ -24,6 +25,7 @@ class GetAppResponse extends Model
      * @var string
      */
     public $appId;
+
     /**
      * @description App名称
      *
@@ -32,6 +34,7 @@ class GetAppResponse extends Model
      * @var string
      */
     public $appName;
+
     /**
      * @description App 秘钥
      *
@@ -40,6 +43,7 @@ class GetAppResponse extends Model
      * @var string
      */
     public $appSecret;
+
     /**
      * @description App 创建时间
      *
@@ -48,6 +52,7 @@ class GetAppResponse extends Model
      * @var string
      */
     public $createdAt;
+
     /**
      * @description App描述
      *
@@ -56,6 +61,7 @@ class GetAppResponse extends Model
      * @var string
      */
     public $description;
+
     /**
      * @description App图标
      *
@@ -64,6 +70,7 @@ class GetAppResponse extends Model
      * @var string
      */
     public $logo;
+
     /**
      * @description App 提供方
      *
@@ -72,6 +79,7 @@ class GetAppResponse extends Model
      * @var string
      */
     public $provider;
+
     /**
      * @description App回调地址
      *
@@ -80,12 +88,14 @@ class GetAppResponse extends Model
      * @var string
      */
     public $redirectUri;
+
     /**
      * @description App权限列表
      *
      * @var array
      */
     public $scope;
+
     /**
      * @description App 屏幕截图
      *
@@ -94,6 +104,7 @@ class GetAppResponse extends Model
      * @var array
      */
     public $screenshots;
+
     /**
      * @description App 当前阶段
      *
@@ -102,6 +113,7 @@ class GetAppResponse extends Model
      * @var string
      */
     public $stage;
+
     /**
      * @description App类型
      *
@@ -110,6 +122,7 @@ class GetAppResponse extends Model
      * @var string
      */
     public $type;
+
     /**
      * @description App 修改时间
      *

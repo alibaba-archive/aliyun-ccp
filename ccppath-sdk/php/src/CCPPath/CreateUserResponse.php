@@ -19,6 +19,7 @@ class CreateUserResponse extends Model
      * @var string
      */
     public $avatar;
+
     /**
      * @description 用户创建时间
      *
@@ -27,6 +28,7 @@ class CreateUserResponse extends Model
      * @var int
      */
     public $createdAt;
+
     /**
      * @description 默认 Drive ID
      *
@@ -35,6 +37,7 @@ class CreateUserResponse extends Model
      * @var string
      */
     public $defaultDriveId;
+
     /**
      * @description 用户备注信息
      *
@@ -43,6 +46,7 @@ class CreateUserResponse extends Model
      * @var string
      */
     public $description;
+
     /**
      * @description Domain ID
      *
@@ -51,6 +55,7 @@ class CreateUserResponse extends Model
      * @var string
      */
     public $domainId;
+
     /**
      * @description 邮箱
      *
@@ -59,6 +64,7 @@ class CreateUserResponse extends Model
      * @var string
      */
     public $email;
+
     /**
      * @description 昵称
      *
@@ -67,6 +73,7 @@ class CreateUserResponse extends Model
      * @var string
      */
     public $nickName;
+
     /**
      * @description 电话
      *
@@ -75,6 +82,7 @@ class CreateUserResponse extends Model
      * @var string
      */
     public $phone;
+
     /**
      * @description 角色
      *
@@ -83,6 +91,7 @@ class CreateUserResponse extends Model
      * @var string
      */
     public $role;
+
     /**
      * @description 用户状态
      *
@@ -91,6 +100,7 @@ class CreateUserResponse extends Model
      * @var string
      */
     public $status;
+
     /**
      * @description 用户修改时间
      *
@@ -99,6 +109,7 @@ class CreateUserResponse extends Model
      * @var int
      */
     public $updatedAt;
+
     /**
      * @description 用户 ID
      *
@@ -107,6 +118,7 @@ class CreateUserResponse extends Model
      * @var string
      */
     public $userId;
+
     /**
      * @description 用户名称
      *

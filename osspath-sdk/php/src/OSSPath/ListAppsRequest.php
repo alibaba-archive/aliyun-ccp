@@ -16,6 +16,7 @@ class ListAppsRequest extends Model
      * @var int
      */
     public $limit;
+
     /**
      * @description 下次查询游标
      *

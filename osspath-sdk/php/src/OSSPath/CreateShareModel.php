@@ -14,6 +14,7 @@ class CreateShareModel extends Model
      * @var array
      */
     public $headers;
+
     /**
      * @description body
      *

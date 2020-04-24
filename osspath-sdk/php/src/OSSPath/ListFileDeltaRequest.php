@@ -19,6 +19,7 @@ class ListFileDeltaRequest extends Model
      * @var string
      */
     public $cursor;
+
     /**
      * @description drive_id
      *
@@ -27,6 +28,7 @@ class ListFileDeltaRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description limit
      * default 100

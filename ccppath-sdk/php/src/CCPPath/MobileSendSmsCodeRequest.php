@@ -16,6 +16,7 @@ class MobileSendSmsCodeRequest extends Model
      * @var string
      */
     public $appId;
+
     /**
      * @description 图片验证码ID
      *
@@ -24,6 +25,7 @@ class MobileSendSmsCodeRequest extends Model
      * @var string
      */
     public $captchaId;
+
     /**
      * @description 用户输入的验证码值
      *
@@ -32,6 +34,7 @@ class MobileSendSmsCodeRequest extends Model
      * @var string
      */
     public $captchaText;
+
     /**
      * @description 待发送验证短信的手机号
      *
@@ -40,6 +43,7 @@ class MobileSendSmsCodeRequest extends Model
      * @var string
      */
     public $phoneNumber;
+
     /**
      * @description 验证码用途
      *

@@ -19,6 +19,7 @@ class OSSCopyFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_path
      *
@@ -27,6 +28,7 @@ class OSSCopyFileRequest extends Model
      * @var string
      */
     public $filePath;
+
     /**
      * @description new_name
      *
@@ -35,12 +37,14 @@ class OSSCopyFileRequest extends Model
      * @var string
      */
     public $newName;
+
     /**
      * @description overwrite
      * type: boolean
      * @var bool
      */
     public $overwrite;
+
     /**
      * @description share_id
      *
@@ -49,6 +53,7 @@ class OSSCopyFileRequest extends Model
      * @var string
      */
     public $shareId;
+
     /**
      * @description to_drive_id
      *
@@ -57,6 +62,7 @@ class OSSCopyFileRequest extends Model
      * @var string
      */
     public $toDriveId;
+
     /**
      * @description to_parent_file_path
      *
@@ -65,6 +71,7 @@ class OSSCopyFileRequest extends Model
      * @var string
      */
     public $toParentFilePath;
+
     /**
      * @description share_id
      *

@@ -19,16 +19,19 @@ class CopyFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_id
      *
      * @var string
      */
     public $fileId;
+
     /**
      * @var string
      */
     public $filePath;
+
     /**
      * @description new_name
      *
@@ -37,22 +40,26 @@ class CopyFileRequest extends Model
      * @var string
      */
     public $newName;
+
     /**
      * @description overwrite
      * type: boolean
      * @var bool
      */
     public $overwrite;
+
     /**
      * @var string
      */
     public $shareId;
+
     /**
      * @description to_parent_file_id
      *
      * @var string
      */
     public $toParentFileId;
+
     /**
      * @var string
      */

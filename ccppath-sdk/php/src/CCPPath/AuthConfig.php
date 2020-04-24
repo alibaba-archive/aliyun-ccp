@@ -12,18 +12,22 @@ class AuthConfig extends Model
      * @var string
      */
     public $appId;
+
     /**
      * @var string
      */
     public $appSecret;
+
     /**
      * @var bool
      */
     public $enable;
+
     /**
      * @var string
      */
     public $endpoint;
+
     /**
      * @var string
      */

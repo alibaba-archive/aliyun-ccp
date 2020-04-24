@@ -19,12 +19,14 @@ class OSSDeleteFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_path
      *
      * @var string
      */
     public $filePath;
+
     /**
      * @description permanently
      * type: false
@@ -33,6 +35,7 @@ class OSSDeleteFileRequest extends Model
      * @var bool
      */
     public $permanently;
+
     /**
      * @description share_id
      *

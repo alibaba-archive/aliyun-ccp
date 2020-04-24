@@ -19,6 +19,7 @@ class CCPListUploadedPartRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_id
      *
@@ -27,6 +28,7 @@ class CCPListUploadedPartRequest extends Model
      * @var string
      */
     public $fileId;
+
     /**
      * @description limit
      *
@@ -35,6 +37,7 @@ class CCPListUploadedPartRequest extends Model
      * @var int
      */
     public $limit;
+
     /**
      * @description part_number_marker
      *
@@ -43,6 +46,7 @@ class CCPListUploadedPartRequest extends Model
      * @var int
      */
     public $partNumberMarker;
+
     /**
      * @description upload_id
      *

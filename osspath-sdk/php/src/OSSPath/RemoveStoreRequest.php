@@ -16,6 +16,7 @@ class RemoveStoreRequest extends Model
      * @var string
      */
     public $domainId;
+
     /**
      * @description store ID
      *

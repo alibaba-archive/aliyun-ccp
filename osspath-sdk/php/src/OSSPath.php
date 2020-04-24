@@ -7,11 +7,11 @@ namespace Aliyun\CCP\SDK;
 use AlibabaCloud\Credentials\Credential;
 use AlibabaCloud\Tea\Exception\TeaError;
 use AlibabaCloud\Tea\Exception\TeaUnableRetryError;
-use AlibabaCloud\Tea\Model;
 use AlibabaCloud\Tea\Request;
 use AlibabaCloud\Tea\RoaUtils\RoaUtils;
 use AlibabaCloud\Tea\Tea;
 use AlibabaCloud\Tea\Utils\Utils;
+use Aliyun\CCP\Credentials\CCPCredentials;
 use Aliyun\CCP\SDK\OSSPath\AccountLinkRequestModel;
 use Aliyun\CCP\SDK\OSSPath\AdminListStoresModel;
 use Aliyun\CCP\SDK\OSSPath\AdminListStoresRequestModel;
@@ -116,11 +116,17 @@ use Aliyun\CCP\SDK\OSSPath\VideoTranscodeModel;
 class OSSPath
 {
     private $_domainId;
+
     private $_accessTokenCredential;
+
     private $_endpoint;
+
     private $_protocol;
+
     private $_nickname;
+
     private $_userAgent;
+
     private $_credential;
 
     public function __construct(Config $config)
@@ -138,7 +144,7 @@ class OSSPath
             ]);
         }
         if (!Utils::empty_($config->accessToken) || !Utils::empty_($config->refreshToken)) {
-            $accessConfig = new Config([
+            $accessConfig = new \Aliyun\CCP\Credentials\CCPCredentials\Config([
                 'accessToken'  => $config->accessToken,
                 'endpoint'     => $config->endpoint,
                 'domainId'     => $config->domainId,
@@ -147,7 +153,7 @@ class OSSPath
                 'clientSecret' => $config->clientSecret,
                 'expireTime'   => $config->expireTime,
             ]);
-            $this->_accessTokenCredential = new AccessTokenCredential($accessConfig);
+            $this->_accessTokenCredential = new CCPCredentials($accessConfig);
         }
         if (!Utils::empty_($config->accessKeyId)) {
             if (Utils::empty_($config->type)) {
@@ -254,10 +260,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return CancelLinkModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new CancelLinkModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -380,10 +386,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return ConfirmLinkModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new ConfirmLinkModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -502,9 +508,9 @@ class OSSPath
                 $respMap        = null;
                 $obj            = null;
                 if (Utils::equalNumber($_response->statusCode, 204)) {
-                    return Model::toModel([
+                    return ChangePasswordModel::fromMap([
                         'headers' => $_response->headers,
-                    ], new ChangePasswordModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -623,9 +629,9 @@ class OSSPath
                 $respMap        = null;
                 $obj            = null;
                 if (Utils::equalNumber($_response->statusCode, 204)) {
-                    return Model::toModel([
+                    return SetPasswordModel::fromMap([
                         'headers' => $_response->headers,
-                    ], new SetPasswordModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -748,10 +754,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return GetAccessTokenByLinkInfoModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new GetAccessTokenByLinkInfoModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -873,10 +879,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return GetCaptchaModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new GetCaptchaModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -999,10 +1005,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return GetLinkInfoModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new GetLinkInfoModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -1124,10 +1130,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return GetLinkInfoByUserIdModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new GetLinkInfoByUserIdModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -1251,10 +1257,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return LinkModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new LinkModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -1377,10 +1383,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return CheckExistModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new CheckExistModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -1503,10 +1509,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return LoginModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new LoginModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -1629,10 +1635,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return RegisterModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new RegisterModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -1754,10 +1760,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return MobileSendSmsCodeModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new MobileSendSmsCodeModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -1879,10 +1885,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return TokenModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new TokenModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -2004,10 +2010,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return AdminListStoresModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new AdminListStoresModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -2131,10 +2137,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return GetUserAccessTokenModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new GetUserAccessTokenModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -2260,10 +2266,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return CreateDriveModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new CreateDriveModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -2384,9 +2390,9 @@ class OSSPath
                 $respMap        = null;
                 $obj            = null;
                 if (Utils::equalNumber($_response->statusCode, 204)) {
-                    return Model::toModel([
+                    return DeleteDriveModel::fromMap([
                         'headers' => $_response->headers,
-                    ], new DeleteDriveModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -2511,10 +2517,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return GetDriveModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new GetDriveModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -2640,10 +2646,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return GetDefaultDriveModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new GetDefaultDriveModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -2767,10 +2773,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return ListDrivesModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new ListDrivesModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -2894,10 +2900,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return ListMyDrivesModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new ListMyDrivesModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -3022,10 +3028,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return UpdateDriveModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new UpdateDriveModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -3150,10 +3156,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return CompleteFileModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new CompleteFileModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -3278,10 +3284,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return CopyFileModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new CopyFileModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -3407,10 +3413,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return CreateFileModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new CreateFileModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -3532,9 +3538,9 @@ class OSSPath
                 $respMap        = null;
                 $obj            = null;
                 if (Utils::equalNumber($_response->statusCode, 204)) {
-                    return Model::toModel([
+                    return DeleteFileModel::fromMap([
                         'headers' => $_response->headers,
-                    ], new DeleteFileModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -3659,10 +3665,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return GetFileModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new GetFileModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -3787,10 +3793,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return GetDownloadUrlModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new GetDownloadUrlModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -3915,10 +3921,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return GetSecureUrlModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new GetSecureUrlModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -4043,10 +4049,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return GetUploadUrlModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new GetUploadUrlModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -4171,10 +4177,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return ListFileModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new ListFileModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -4299,10 +4305,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return ListUploadedPartsModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new ListUploadedPartsModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -4427,10 +4433,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return MoveFileModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new MoveFileModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -4555,10 +4561,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return VideoDefinitionModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new VideoDefinitionModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -4682,10 +4688,10 @@ class OSSPath
                 if (Utils::equalNumber($_response->statusCode, 200)) {
                     $byt = Utils::readAsBytes($_response->body);
 
-                    return Model::toModel([
+                    return VideoM3u8Model::fromMap([
                         'body'    => $byt,
                         'headers' => $_response->headers,
-                    ], new VideoM3u8Model());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -4810,15 +4816,15 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return VideoTranscodeModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new VideoTranscodeModel());
+                    ]);
                 }
                 if (Utils::equalNumber($_response->statusCode, 204)) {
-                    return Model::toModel([
+                    return VideoTranscodeModel::fromMap([
                         'headers' => $_response->headers,
-                    ], new VideoTranscodeModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -4943,10 +4949,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return CreateShareModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new CreateShareModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -5067,9 +5073,9 @@ class OSSPath
                 $respMap        = null;
                 $obj            = null;
                 if (Utils::equalNumber($_response->statusCode, 204)) {
-                    return Model::toModel([
+                    return DeleteShareModel::fromMap([
                         'headers' => $_response->headers,
-                    ], new DeleteShareModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -5194,10 +5200,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return GetShareModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new GetShareModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -5321,10 +5327,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return ListShareModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new ListShareModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -5449,10 +5455,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return UpdateShareModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new UpdateShareModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -5577,10 +5583,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return ListStorefileModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new ListStorefileModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -5703,10 +5709,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return CreateUserModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new CreateUserModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -5826,9 +5832,9 @@ class OSSPath
                 $respMap        = null;
                 $obj            = null;
                 if (Utils::equalNumber($_response->statusCode, 204)) {
-                    return Model::toModel([
+                    return DeleteUserModel::fromMap([
                         'headers' => $_response->headers,
-                    ], new DeleteUserModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -5952,10 +5958,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return GetUserModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new GetUserModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -6078,10 +6084,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return ListUsersModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new ListUsersModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -6204,10 +6210,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return SearchUserModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new SearchUserModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([
@@ -6331,10 +6337,10 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return Model::toModel([
+                    return UpdateUserModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
-                    ], new UpdateUserModel());
+                    ]);
                 }
                 if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
                     throw new TeaError([

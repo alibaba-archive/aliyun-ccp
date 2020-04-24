@@ -14,6 +14,7 @@ class OSSVideoM3U8RequestModel extends Model
      * @var array
      */
     public $headers;
+
     /**
      * @description body
      *

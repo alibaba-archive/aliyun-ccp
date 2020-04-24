@@ -16,6 +16,7 @@ class BatchSubRequest extends Model
      * @var object
      */
     public $body;
+
     /**
      * @description headers 请求头，表示body传入数据的类型
      *
@@ -24,6 +25,7 @@ class BatchSubRequest extends Model
      * @var object
      */
     public $headers;
+
     /**
      * @description id 用于request 和 response关联， 不允许重复
      *
@@ -32,6 +34,7 @@ class BatchSubRequest extends Model
      * @var string
      */
     public $id;
+
     /**
      * @description method
      *
@@ -40,6 +43,7 @@ class BatchSubRequest extends Model
      * @var string
      */
     public $method;
+
     /**
      * @description url 子请求的api path路径， 可参考对于子请求文档
      *

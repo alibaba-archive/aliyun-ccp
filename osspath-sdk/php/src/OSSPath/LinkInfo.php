@@ -16,6 +16,7 @@ class LinkInfo extends Model
      * @var string
      */
     public $identity;
+
     /**
      * @description 当前用户已存在的登录方式
      *

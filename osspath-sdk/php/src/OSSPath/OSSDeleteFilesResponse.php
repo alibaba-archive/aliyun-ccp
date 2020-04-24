@@ -19,6 +19,7 @@ class OSSDeleteFilesResponse extends Model
      * @var array
      */
     public $deletedFileIdList;
+
     /**
      * @description domain_id
      *
@@ -27,6 +28,7 @@ class OSSDeleteFilesResponse extends Model
      * @var string
      */
     public $domainId;
+
     /**
      * @description drive_id
      *
@@ -35,6 +37,7 @@ class OSSDeleteFilesResponse extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description share_id
      *

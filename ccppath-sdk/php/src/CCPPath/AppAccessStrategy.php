@@ -12,6 +12,7 @@ class AppAccessStrategy extends Model
      * @var string
      */
     public $effect;
+
     /**
      * @var array
      */

@@ -19,6 +19,7 @@ class UpdateShareRequest extends Model
      * @var string
      */
     public $description;
+
     /**
      * @description expiration
      *
@@ -27,6 +28,7 @@ class UpdateShareRequest extends Model
      * @var string
      */
     public $expiration;
+
     /**
      * @description permissions
      *
@@ -35,6 +37,7 @@ class UpdateShareRequest extends Model
      * @var array
      */
     public $permissions;
+
     /**
      * @description share_id
      *
@@ -43,6 +46,7 @@ class UpdateShareRequest extends Model
      * @var string
      */
     public $shareId;
+
     /**
      * @description share_name
      *
@@ -51,12 +55,14 @@ class UpdateShareRequest extends Model
      * @var string
      */
     public $shareName;
+
     /**
      * @description share_policy
      *
      * @var array
      */
     public $sharePolicy;
+
     /**
      * @description status
      *

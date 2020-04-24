@@ -14,6 +14,7 @@ class GetByLinkInfoRequestModel extends Model
      * @var array
      */
     public $headers;
+
     /**
      * @description body
      *

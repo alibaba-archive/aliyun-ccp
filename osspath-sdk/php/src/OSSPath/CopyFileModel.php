@@ -14,6 +14,7 @@ class CopyFileModel extends Model
      * @var array
      */
     public $headers;
+
     /**
      * @description body
      *

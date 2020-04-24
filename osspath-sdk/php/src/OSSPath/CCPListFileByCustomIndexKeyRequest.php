@@ -19,6 +19,7 @@ class CCPListFileByCustomIndexKeyRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description image_thumbnail_process
      *
@@ -27,6 +28,7 @@ class CCPListFileByCustomIndexKeyRequest extends Model
      * @var string
      */
     public $imageThumbnailProcess;
+
     /**
      * @description image_url_process
      *
@@ -35,6 +37,7 @@ class CCPListFileByCustomIndexKeyRequest extends Model
      * @var string
      */
     public $imageUrlProcess;
+
     /**
      * @description limit
      *
@@ -43,6 +46,7 @@ class CCPListFileByCustomIndexKeyRequest extends Model
      * @var int
      */
     public $limit;
+
     /**
      * @description marker
      *
@@ -51,6 +55,7 @@ class CCPListFileByCustomIndexKeyRequest extends Model
      * @var string
      */
     public $marker;
+
     /**
      * @description video_thumbnail_process
      * type:string
@@ -59,6 +64,7 @@ class CCPListFileByCustomIndexKeyRequest extends Model
      * @var string
      */
     public $videoThumbnailProcess;
+
     /**
      * @description starred
      *
@@ -67,6 +73,7 @@ class CCPListFileByCustomIndexKeyRequest extends Model
      * @var bool
      */
     public $Starred;
+
     /**
      * @description category
      *
@@ -75,18 +82,21 @@ class CCPListFileByCustomIndexKeyRequest extends Model
      * @var string
      */
     public $category;
+
     /**
      * @description custom_index_key
      *
      * @var string
      */
     public $customIndexKey;
+
     /**
      * @description encrypt_mode
      *
      * @var string
      */
     public $encryptMode;
+
     /**
      * @description fields
      *
@@ -95,6 +105,7 @@ class CCPListFileByCustomIndexKeyRequest extends Model
      * @var string
      */
     public $fields;
+
     /**
      * @description order_direction
      *
@@ -103,6 +114,7 @@ class CCPListFileByCustomIndexKeyRequest extends Model
      * @var string
      */
     public $orderDirection;
+
     /**
      * @description status
      *
@@ -111,6 +123,7 @@ class CCPListFileByCustomIndexKeyRequest extends Model
      * @var string
      */
     public $status;
+
     /**
      * @description type
      *
@@ -119,6 +132,7 @@ class CCPListFileByCustomIndexKeyRequest extends Model
      * @var string
      */
     public $type;
+
     /**
      * @description url_expire_sec
      *

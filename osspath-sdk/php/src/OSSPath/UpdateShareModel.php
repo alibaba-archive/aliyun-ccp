@@ -14,6 +14,7 @@ class UpdateShareModel extends Model
      * @var array
      */
     public $headers;
+
     /**
      * @description body
      *

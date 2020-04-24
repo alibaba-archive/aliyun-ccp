@@ -19,20 +19,24 @@ class DeleteFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_id
      *
      * @var string
      */
     public $fileId;
+
     /**
      * @var string
      */
     public $filePath;
+
     /**
      * @var bool
      */
     public $permanently;
+
     /**
      * @var string
      */

@@ -19,6 +19,7 @@ class CreateShareRequest extends Model
      * @var string
      */
     public $description;
+
     /**
      * @description drive_id
      *
@@ -27,6 +28,7 @@ class CreateShareRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description expiration
      *
@@ -35,6 +37,7 @@ class CreateShareRequest extends Model
      * @var string
      */
     public $expiration;
+
     /**
      * @description creator
      *
@@ -43,6 +46,7 @@ class CreateShareRequest extends Model
      * @var string
      */
     public $owner;
+
     /**
      * @description permissions
      *
@@ -51,12 +55,14 @@ class CreateShareRequest extends Model
      * @var array
      */
     public $permissions;
+
     /**
      * @description share_file_path
      *
      * @var string
      */
     public $shareFilePath;
+
     /**
      * @description share_name
      *
@@ -65,6 +71,7 @@ class CreateShareRequest extends Model
      * @var string
      */
     public $shareName;
+
     /**
      * @description share create policy
      *
@@ -72,6 +79,7 @@ class CreateShareRequest extends Model
      * @var array
      */
     public $sharePolicy;
+
     /**
      * @description status
      *

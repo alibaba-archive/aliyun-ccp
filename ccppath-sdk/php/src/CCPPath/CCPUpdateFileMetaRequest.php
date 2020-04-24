@@ -15,6 +15,7 @@ class CCPUpdateFileMetaRequest extends Model
      * @var string
      */
     public $customIndexKey;
+
     /**
      * @description description
      * type: string
@@ -23,6 +24,7 @@ class CCPUpdateFileMetaRequest extends Model
      * @var string
      */
     public $description;
+
     /**
      * @description drive_id
      *
@@ -31,10 +33,12 @@ class CCPUpdateFileMetaRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @var string
      */
     public $encryptMode;
+
     /**
      * @description file_id
      *
@@ -43,6 +47,7 @@ class CCPUpdateFileMetaRequest extends Model
      * @var string
      */
     public $fileId;
+
     /**
      * @description hidden
      * type: boolean
@@ -51,6 +56,7 @@ class CCPUpdateFileMetaRequest extends Model
      * @var bool
      */
     public $hidden;
+
     /**
      * @description labels
      *
@@ -59,6 +65,7 @@ class CCPUpdateFileMetaRequest extends Model
      * @var array
      */
     public $labels;
+
     /**
      * @description meta
      *
@@ -67,6 +74,7 @@ class CCPUpdateFileMetaRequest extends Model
      * @var string
      */
     public $meta;
+
     /**
      * @description name
      *
@@ -75,6 +83,7 @@ class CCPUpdateFileMetaRequest extends Model
      * @var string
      */
     public $name;
+
     /**
      * @description starred
      * type: boolean

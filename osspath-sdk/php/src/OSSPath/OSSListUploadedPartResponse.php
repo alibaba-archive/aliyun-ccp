@@ -19,6 +19,7 @@ class OSSListUploadedPartResponse extends Model
      * @var string
      */
     public $filePath;
+
     /**
      * @description next_part_number_marker
      *
@@ -27,6 +28,7 @@ class OSSListUploadedPartResponse extends Model
      * @var string
      */
     public $nextPartNumberMarker;
+
     /**
      * @description upload_id
      *
@@ -35,6 +37,7 @@ class OSSListUploadedPartResponse extends Model
      * @var string
      */
     public $uploadId;
+
     /**
      * @description uploaded_parts
      *

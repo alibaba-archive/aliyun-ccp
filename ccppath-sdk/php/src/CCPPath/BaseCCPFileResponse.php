@@ -19,6 +19,7 @@ class BaseCCPFileResponse extends Model
      * @var string
      */
     public $category;
+
     /**
      * @description Content Hash
      *
@@ -27,6 +28,7 @@ class BaseCCPFileResponse extends Model
      * @var string
      */
     public $contentHash;
+
     /**
      * @description content_hash_name
      *
@@ -35,6 +37,7 @@ class BaseCCPFileResponse extends Model
      * @var string
      */
     public $contentHashName;
+
     /**
      * @description content_type
      *
@@ -43,12 +46,14 @@ class BaseCCPFileResponse extends Model
      * @var string
      */
     public $contentType;
+
     /**
      * @description crc64_hash
      *
      * @var string
      */
     public $crc64Hash;
+
     /**
      * @description created_at
      *
@@ -57,6 +62,7 @@ class BaseCCPFileResponse extends Model
      * @var string
      */
     public $createdAt;
+
     /**
      * @description description
      *
@@ -65,6 +71,7 @@ class BaseCCPFileResponse extends Model
      * @var string
      */
     public $description;
+
     /**
      * @description DomainID
      *
@@ -73,6 +80,7 @@ class BaseCCPFileResponse extends Model
      * @var string
      */
     public $domainId;
+
     /**
      * @description download_url
      *
@@ -81,6 +89,7 @@ class BaseCCPFileResponse extends Model
      * @var string
      */
     public $downloadUrl;
+
     /**
      * @description drive_id
      *
@@ -89,6 +98,7 @@ class BaseCCPFileResponse extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_extension
      *
@@ -97,6 +107,7 @@ class BaseCCPFileResponse extends Model
      * @var string
      */
     public $fileExtension;
+
     /**
      * @description file_id
      *
@@ -105,6 +116,7 @@ class BaseCCPFileResponse extends Model
      * @var string
      */
     public $fileId;
+
     /**
      * @description Hidden
      * type: boolean
@@ -113,10 +125,12 @@ class BaseCCPFileResponse extends Model
      * @var bool
      */
     public $hidden;
+
     /**
      * @var ImageMediaResponse
      */
     public $imageMediaMetadata;
+
     /**
      * @description labels
      *
@@ -125,6 +139,7 @@ class BaseCCPFileResponse extends Model
      * @var array
      */
     public $labels;
+
     /**
      * @description meta
      *
@@ -133,6 +148,7 @@ class BaseCCPFileResponse extends Model
      * @var string
      */
     public $meta;
+
     /**
      * @description name
      *
@@ -141,6 +157,7 @@ class BaseCCPFileResponse extends Model
      * @var string
      */
     public $name;
+
     /**
      * @description parent_file_id
      *
@@ -149,6 +166,7 @@ class BaseCCPFileResponse extends Model
      * @var string
      */
     public $parentFileId;
+
     /**
      * @description Size
      *
@@ -157,6 +175,7 @@ class BaseCCPFileResponse extends Model
      * @var int
      */
     public $size;
+
     /**
      * @description starred
      * type: boolean
@@ -165,6 +184,7 @@ class BaseCCPFileResponse extends Model
      * @var bool
      */
     public $starred;
+
     /**
      * @description status
      *
@@ -173,6 +193,7 @@ class BaseCCPFileResponse extends Model
      * @var string
      */
     public $status;
+
     /**
      * @description thumbnail
      *
@@ -181,12 +202,14 @@ class BaseCCPFileResponse extends Model
      * @var string
      */
     public $thumbnail;
+
     /**
      * @description trashed_at
      *
      * @var string
      */
     public $trashedAt;
+
     /**
      * @description type
      *
@@ -195,12 +218,14 @@ class BaseCCPFileResponse extends Model
      * @var string
      */
     public $type;
+
     /**
      * @description updated_at
      *
      * @var string
      */
     public $updatedAt;
+
     /**
      * @description upload_id
      *
@@ -209,6 +234,7 @@ class BaseCCPFileResponse extends Model
      * @var string
      */
     public $uploadId;
+
     /**
      * @description url
      *

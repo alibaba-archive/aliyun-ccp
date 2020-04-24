@@ -16,6 +16,7 @@ class MobileCheckExistResponse extends Model
      * @var bool
      */
     public $isExist;
+
     /**
      * @description 待查询的手机号
      *

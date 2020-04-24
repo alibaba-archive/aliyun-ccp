@@ -19,6 +19,7 @@ class ListDomainsResponse extends Model
      * @var array
      */
     public $items;
+
     /**
      * @description 下次分页查询游标
      *

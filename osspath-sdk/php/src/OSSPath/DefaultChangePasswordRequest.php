@@ -16,6 +16,7 @@ class DefaultChangePasswordRequest extends Model
      * @var string
      */
     public $appId;
+
     /**
      * @description 新密码，必须包含数字和字母，长度8-32个字符
      *
@@ -24,6 +25,7 @@ class DefaultChangePasswordRequest extends Model
      * @var string
      */
     public $newPassword;
+
     /**
      * @description 手机号
      *
@@ -32,6 +34,7 @@ class DefaultChangePasswordRequest extends Model
      * @var string
      */
     public $phoneNumber;
+
     /**
      * @description 短信验证码内容
      *
@@ -40,6 +43,7 @@ class DefaultChangePasswordRequest extends Model
      * @var string
      */
     public $smsCode;
+
     /**
      * @description 短信验证码ID
      *

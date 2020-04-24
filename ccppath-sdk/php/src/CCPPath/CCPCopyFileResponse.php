@@ -19,6 +19,7 @@ class CCPCopyFileResponse extends Model
      * @var string
      */
     public $asyncTaskId;
+
     /**
      * @description DomainID
      *
@@ -27,6 +28,7 @@ class CCPCopyFileResponse extends Model
      * @var string
      */
     public $domainId;
+
     /**
      * @description drive_id
      *
@@ -35,6 +37,7 @@ class CCPCopyFileResponse extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_id
      *

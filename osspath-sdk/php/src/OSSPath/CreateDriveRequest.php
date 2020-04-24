@@ -19,6 +19,7 @@ class CreateDriveRequest extends Model
      * @var bool
      */
     public $default;
+
     /**
      * @description 描述信息
      *
@@ -27,6 +28,7 @@ class CreateDriveRequest extends Model
      * @var string
      */
     public $description;
+
     /**
      * @description Drive 名称
      *
@@ -35,6 +37,7 @@ class CreateDriveRequest extends Model
      * @var string
      */
     public $driveName;
+
     /**
      * @description Drive类型
      *
@@ -43,10 +46,12 @@ class CreateDriveRequest extends Model
      * @var string
      */
     public $driveType;
+
     /**
      * @var string
      */
     public $encryptMode;
+
     /**
      * @description 所属者
      *
@@ -55,6 +60,7 @@ class CreateDriveRequest extends Model
      * @var string
      */
     public $owner;
+
     /**
      * @description domain的PathType为OSSPath时必选。 Drive存储基于store的相对路径
      *
@@ -63,6 +69,7 @@ class CreateDriveRequest extends Model
      * @var string
      */
     public $relativePath;
+
     /**
      * @description 状态
      *
@@ -71,6 +78,7 @@ class CreateDriveRequest extends Model
      * @var string
      */
     public $status;
+
     /**
      * @description StoreID , domain的PathType为OSSPath时必选
      *
@@ -79,6 +87,7 @@ class CreateDriveRequest extends Model
      * @var string
      */
     public $storeId;
+
     /**
      * @description 总大小,单位Byte [如果设置 -1 代表不限制]
      *

@@ -15,6 +15,7 @@ class ListUserResponse extends Model
      * @var array
      */
     public $items;
+
     /**
      * @description 翻页标记
      *

@@ -14,6 +14,7 @@ class MoveFileModel extends Model
      * @var array
      */
     public $headers;
+
     /**
      * @description body
      *

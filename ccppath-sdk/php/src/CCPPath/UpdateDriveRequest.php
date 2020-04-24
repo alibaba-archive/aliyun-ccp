@@ -19,6 +19,7 @@ class UpdateDriveRequest extends Model
      * @var string
      */
     public $description;
+
     /**
      * @description Drive ID
      *
@@ -27,6 +28,7 @@ class UpdateDriveRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description Drive 名称
      *
@@ -35,6 +37,7 @@ class UpdateDriveRequest extends Model
      * @var string
      */
     public $driveName;
+
     /**
      * @description 授权访问加密数据
      *
@@ -43,6 +46,7 @@ class UpdateDriveRequest extends Model
      * @var bool
      */
     public $encryptDataAccess;
+
     /**
      * @description 加密模式
      *
@@ -51,6 +55,7 @@ class UpdateDriveRequest extends Model
      * @var string
      */
     public $encryptMode;
+
     /**
      * @description 状态
      *
@@ -59,6 +64,7 @@ class UpdateDriveRequest extends Model
      * @var string
      */
     public $status;
+
     /**
      * @description 总大小,单位Byte [如果设置 -1 代表不限制]
      *

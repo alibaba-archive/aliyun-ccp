@@ -12,14 +12,17 @@ class SharePermissionPolicy extends Model
      * @var string
      */
     public $filePath;
+
     /**
      * @var bool
      */
     public $permissionInheritable;
+
     /**
      * @var array
      */
     public $permissionList;
+
     /**
      * @var string
      */

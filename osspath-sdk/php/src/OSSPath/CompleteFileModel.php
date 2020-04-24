@@ -14,6 +14,7 @@ class CompleteFileModel extends Model
      * @var array
      */
     public $headers;
+
     /**
      * @description body
      *

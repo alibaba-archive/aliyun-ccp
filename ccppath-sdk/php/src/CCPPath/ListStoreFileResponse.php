@@ -19,6 +19,7 @@ class ListStoreFileResponse extends Model
      * @var array
      */
     public $items;
+
     /**
      * @var string
      */

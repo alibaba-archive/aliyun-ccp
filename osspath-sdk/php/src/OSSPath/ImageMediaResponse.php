@@ -16,12 +16,14 @@ class ImageMediaResponse extends Model
      * @var int
      */
     public $height;
+
     /**
      * @description time
      *
      * @var string
      */
     public $time;
+
     /**
      * @description width
      *

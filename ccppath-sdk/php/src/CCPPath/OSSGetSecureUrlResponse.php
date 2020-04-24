@@ -19,6 +19,7 @@ class OSSGetSecureUrlResponse extends Model
      * @var string
      */
     public $expiration;
+
     /**
      * @description url
      *

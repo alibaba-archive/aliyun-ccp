@@ -19,6 +19,7 @@ class OSSCreateFileResponse extends Model
      * @var string
      */
     public $domainId;
+
     /**
      * @description drive_id
      *
@@ -27,6 +28,7 @@ class OSSCreateFileResponse extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_path
      *
@@ -35,6 +37,7 @@ class OSSCreateFileResponse extends Model
      * @var string
      */
     public $filePath;
+
     /**
      * @description part_info_list
      *
@@ -43,6 +46,7 @@ class OSSCreateFileResponse extends Model
      * @var array
      */
     public $partInfoList;
+
     /**
      * @description share_id
      *
@@ -51,6 +55,7 @@ class OSSCreateFileResponse extends Model
      * @var string
      */
     public $shareId;
+
     /**
      * @description type
      *
@@ -59,6 +64,7 @@ class OSSCreateFileResponse extends Model
      * @var string
      */
     public $type;
+
     /**
      * @description upload_id
      *

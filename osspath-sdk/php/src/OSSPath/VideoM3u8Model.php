@@ -14,6 +14,7 @@ class VideoM3u8Model extends Model
      * @var array
      */
     public $headers;
+
     /**
      * @description body
      *

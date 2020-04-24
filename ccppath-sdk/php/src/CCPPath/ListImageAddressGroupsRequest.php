@@ -19,6 +19,7 @@ class ListImageAddressGroupsRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description image_thumbnail_process
      * type:string
@@ -27,6 +28,7 @@ class ListImageAddressGroupsRequest extends Model
      * @var string
      */
     public $imageThumbnailProcess;
+
     /**
      * @description 每页大小限制
      *
@@ -35,6 +37,7 @@ class ListImageAddressGroupsRequest extends Model
      * @var int
      */
     public $limit;
+
     /**
      * @description 翻页标记
      *
