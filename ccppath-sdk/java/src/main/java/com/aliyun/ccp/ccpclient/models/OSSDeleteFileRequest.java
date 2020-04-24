@@ -19,7 +19,7 @@ public class OSSDeleteFileRequest extends TeaModel {
     public Boolean permanently;
 
     @NameInMap("share_id")
-    @Validation(pattern = "[0-9a-zA-z-]+")
+    @Validation(pattern = "[0-9a-zA-Z-]+")
     public String shareId;
 
     public static OSSDeleteFileRequest build(java.util.Map<String, ?> map) throws Exception {

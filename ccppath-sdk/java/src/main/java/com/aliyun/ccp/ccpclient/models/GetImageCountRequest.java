@@ -8,7 +8,7 @@ import com.aliyun.tea.*;
  */
 public class GetImageCountRequest extends TeaModel {
     @NameInMap("drive_id")
-    @Validation(pattern = "[0-9]+")
+    @Validation(required = true, pattern = "[0-9]+")
     public String driveId;
 
     public static GetImageCountRequest build(java.util.Map<String, ?> map) throws Exception {

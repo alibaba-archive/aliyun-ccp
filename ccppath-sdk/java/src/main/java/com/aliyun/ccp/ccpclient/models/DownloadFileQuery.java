@@ -12,8 +12,11 @@ public class DownloadFileQuery extends TeaModel {
     @Validation(required = true)
     public String FileID;
 
-    @NameInMap("ImageProcess")
-    public String ImageProcess;
+    @NameInMap("ImageThumbnailProcess")
+    public String ImageThumbnailProcess;
+
+    @NameInMap("VideoThumbnailProcess")
+    public String VideoThumbnailProcess;
 
     public static DownloadFileQuery build(java.util.Map<String, ?> map) throws Exception {
         DownloadFileQuery self = new DownloadFileQuery();

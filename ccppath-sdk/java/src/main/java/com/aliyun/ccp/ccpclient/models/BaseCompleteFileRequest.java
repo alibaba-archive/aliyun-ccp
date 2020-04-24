@@ -8,7 +8,7 @@ import com.aliyun.tea.*;
  */
 public class BaseCompleteFileRequest extends TeaModel {
     @NameInMap("drive_id")
-    @Validation(required = true, pattern = "[0-9]+")
+    @Validation(pattern = "[0-9]+")
     public String driveId;
 
     @NameInMap("part_info_list")

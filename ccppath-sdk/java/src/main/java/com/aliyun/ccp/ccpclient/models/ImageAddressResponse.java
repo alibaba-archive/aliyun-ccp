@@ -7,11 +7,17 @@ import com.aliyun.tea.*;
  * 
  */
 public class ImageAddressResponse extends TeaModel {
+    @NameInMap("address_detail")
+    public Address addressDetail;
+
     @NameInMap("count")
     public Long count;
 
     @NameInMap("cover_url")
     public String coverUrl;
+
+    @NameInMap("location")
+    public String location;
 
     @NameInMap("name")
     public String name;

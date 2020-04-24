@@ -4,7 +4,7 @@ package com.aliyun.ccp.ccpclient.models;
 import com.aliyun.tea.*;
 
 /**
- * 展示标签集合
+ * 展示地点分组集合
  */
 public class ListImageAddressGroupsResponse extends TeaModel {
     @NameInMap("items")
