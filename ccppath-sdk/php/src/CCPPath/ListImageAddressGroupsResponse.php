@@ -7,7 +7,7 @@ namespace Aliyun\CCP\SDK\CCPPath;
 use AlibabaCloud\Tea\Model;
 
 /**
- * 展示标签集合.
+ * 展示地点分组集合.
  */
 class ListImageAddressGroupsResponse extends Model
 {

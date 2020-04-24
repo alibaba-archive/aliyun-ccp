@@ -98,7 +98,7 @@ class OSSCopyFileRequest extends Model
     {
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
         Model::validatePattern('newName', $this->newName, '[a-zA-Z0-9.-]{1,1000}');
-        Model::validatePattern('shareId', $this->shareId, '[0-9a-zA-z-]+');
+        Model::validatePattern('shareId', $this->shareId, '[0-9a-zA-Z-]+');
         Model::validatePattern('toDriveId', $this->toDriveId, '[0-9]+');
         Model::validateRequired('toDriveId', $this->toDriveId, true);
         Model::validateRequired('toParentFilePath', $this->toParentFilePath, true);

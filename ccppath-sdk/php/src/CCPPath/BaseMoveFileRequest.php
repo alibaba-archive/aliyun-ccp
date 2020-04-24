@@ -50,7 +50,6 @@ class BaseMoveFileRequest extends Model
     {
         Model::validateRequired('driveId', $this->driveId, true);
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
-        Model::validatePattern('newName', $this->newName, '.{1,1000}');
     }
 
     public function toMap()

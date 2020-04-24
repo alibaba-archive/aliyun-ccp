@@ -67,10 +67,6 @@ class CCPUpdateFileMetaRequest extends Model
     public $labels;
 
     /**
-     * @description meta
-     *
-     * @example meta test
-     *
      * @var string
      */
     public $meta;
@@ -92,6 +88,15 @@ class CCPUpdateFileMetaRequest extends Model
      * @var bool
      */
     public $starred;
+
+    /**
+     * @description user_meta
+     *
+     * @example user_meta
+     *
+     * @var string
+     */
+    public $userMeta;
     protected $_name = [
         'customIndexKey' => 'custom_index_key',
         'description'    => 'description',
@@ -103,6 +108,7 @@ class CCPUpdateFileMetaRequest extends Model
         'meta'           => 'meta',
         'name'           => 'name',
         'starred'        => 'starred',
+        'userMeta'       => 'user_meta',
     ];
     protected $_default = [
         'hidden'  => 'false',
@@ -113,12 +119,13 @@ class CCPUpdateFileMetaRequest extends Model
     {
         Model::validateMaxLength('description', $this->description, 1024);
         Model::validateMaxLength('fileId', $this->fileId, 50);
+        Model::validateMaxLength('name', $this->name, 1024);
         Model::validateRequired('driveId', $this->driveId, true);
         Model::validateRequired('fileId', $this->fileId, true);
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
         Model::validatePattern('fileId', $this->fileId, '[a-z0-9.-_]{1,50}');
-        Model::validatePattern('name', $this->name, '.{1,1000}');
         Model::validateMinLength('fileId', $this->fileId, 40);
+        Model::validateMinLength('name', $this->name, 1);
     }
 
     public function toMap()
@@ -134,9 +141,10 @@ class CCPUpdateFileMetaRequest extends Model
         if (null !== $this->labels) {
             $res['labels'] = $this->labels;
         }
-        $res['meta']    = $this->meta;
-        $res['name']    = $this->name;
-        $res['starred'] = $this->starred;
+        $res['meta']      = $this->meta;
+        $res['name']      = $this->name;
+        $res['starred']   = $this->starred;
+        $res['user_meta'] = $this->userMeta;
 
         return $res;
     }
@@ -181,6 +189,9 @@ class CCPUpdateFileMetaRequest extends Model
         }
         if (isset($map['starred'])) {
             $model->starred = $map['starred'];
+        }
+        if (isset($map['user_meta'])) {
+            $model->userMeta = $map['user_meta'];
         }
 
         return $model;

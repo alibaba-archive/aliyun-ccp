@@ -7,7 +7,7 @@ namespace Aliyun\CCP\SDK\CCPPath;
 use AlibabaCloud\Tea\Model;
 
 /**
- * 文件移动请求
+ * copy file request.
  */
 class CopyFileRequest extends Model
 {
@@ -54,6 +54,15 @@ class CopyFileRequest extends Model
     public $shareId;
 
     /**
+     * @description to_drive_id
+     *
+     * @example 1
+     *
+     * @var string
+     */
+    public $toDriveId;
+
+    /**
      * @description to_parent_file_id
      *
      * @var string
@@ -64,6 +73,11 @@ class CopyFileRequest extends Model
      * @var string
      */
     public $toParentFilePath;
+
+    /**
+     * @var string
+     */
+    public $toShareId;
     protected $_name = [
         'driveId'          => 'drive_id',
         'fileId'           => 'file_id',
@@ -71,8 +85,10 @@ class CopyFileRequest extends Model
         'newName'          => 'new_name',
         'overwrite'        => 'overwrite',
         'shareId'          => 'share_id',
+        'toDriveId'        => 'to_drive_id',
         'toParentFileId'   => 'to_parent_file_id',
         'toParentFilePath' => 'to_parent_file_path',
+        'toShareId'        => 'to_share_id',
     ];
     protected $_default = [
         'overwrite' => 'false',
@@ -83,10 +99,12 @@ class CopyFileRequest extends Model
         Model::validateRequired('driveId', $this->driveId, true);
         Model::validateRequired('fileId', $this->fileId, true);
         Model::validateRequired('newName', $this->newName, true);
+        Model::validateRequired('toDriveId', $this->toDriveId, true);
         Model::validateRequired('toParentFileId', $this->toParentFileId, true);
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
         Model::validatePattern('fileId', $this->fileId, '[a-z0-9.-_]{1,50}');
         Model::validatePattern('newName', $this->newName, '[a-zA-Z0-9.-]{1,1000}');
+        Model::validatePattern('toDriveId', $this->toDriveId, '[0-9]+');
         Model::validatePattern('toParentFileId', $this->toParentFileId, '[a-z0-9.-_]{1,50}');
         Model::validateMaxLength('fileId', $this->fileId, 50);
         Model::validateMaxLength('toParentFileId', $this->toParentFileId, 50);
@@ -103,8 +121,10 @@ class CopyFileRequest extends Model
         $res['new_name']            = $this->newName;
         $res['overwrite']           = $this->overwrite;
         $res['share_id']            = $this->shareId;
+        $res['to_drive_id']         = $this->toDriveId;
         $res['to_parent_file_id']   = $this->toParentFileId;
         $res['to_parent_file_path'] = $this->toParentFilePath;
+        $res['to_share_id']         = $this->toShareId;
 
         return $res;
     }
@@ -135,11 +155,17 @@ class CopyFileRequest extends Model
         if (isset($map['share_id'])) {
             $model->shareId = $map['share_id'];
         }
+        if (isset($map['to_drive_id'])) {
+            $model->toDriveId = $map['to_drive_id'];
+        }
         if (isset($map['to_parent_file_id'])) {
             $model->toParentFileId = $map['to_parent_file_id'];
         }
         if (isset($map['to_parent_file_path'])) {
             $model->toParentFilePath = $map['to_parent_file_path'];
+        }
+        if (isset($map['to_share_id'])) {
+            $model->toShareId = $map['to_share_id'];
         }
 
         return $model;

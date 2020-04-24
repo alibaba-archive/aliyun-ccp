@@ -66,7 +66,7 @@ class OSSListFileRequest extends Model
     public $parentFilePath;
 
     /**
-     * @description drive_id
+     * @description share_id
      *
      * @example 1
      *
@@ -111,7 +111,7 @@ class OSSListFileRequest extends Model
     {
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
         Model::validatePattern('limit', $this->limit, '[0-9]{1,3}');
-        Model::validatePattern('shareId', $this->shareId, '[0-9]+');
+        Model::validatePattern('shareId', $this->shareId, '[0-9a-zA-Z-]+');
         Model::validateRequired('parentFilePath', $this->parentFilePath, true);
     }
 

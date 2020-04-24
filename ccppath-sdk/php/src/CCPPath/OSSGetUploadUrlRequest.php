@@ -77,7 +77,7 @@ class OSSGetUploadUrlRequest extends Model
     {
         Model::validateMaxLength('contentMd5', $this->contentMd5, 32);
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
-        Model::validatePattern('shareId', $this->shareId, '[0-9]+');
+        Model::validatePattern('shareId', $this->shareId, '[0-9a-zA-Z-]+');
     }
 
     public function toMap()

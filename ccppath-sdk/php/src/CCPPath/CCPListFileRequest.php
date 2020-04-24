@@ -93,6 +93,15 @@ class CCPListFileRequest extends Model
     public $category;
 
     /**
+     * @description fields
+     *
+     * @example *
+     *
+     * @var string
+     */
+    public $fields;
+
+    /**
      * @description order_by
      *
      * @example name
@@ -155,6 +164,7 @@ class CCPListFileRequest extends Model
         'Starred'               => 'Starred',
         'all'                   => 'all',
         'category'              => 'category',
+        'fields'                => 'fields',
         'orderBy'               => 'order_by',
         'orderDirection'        => 'order_direction',
         'parentFileId'          => 'parent_file_id',
@@ -190,6 +200,7 @@ class CCPListFileRequest extends Model
         $res['Starred']                 = $this->Starred;
         $res['all']                     = $this->all;
         $res['category']                = $this->category;
+        $res['fields']                  = $this->fields;
         $res['order_by']                = $this->orderBy;
         $res['order_direction']         = $this->orderDirection;
         $res['parent_file_id']          = $this->parentFileId;
@@ -234,6 +245,9 @@ class CCPListFileRequest extends Model
         }
         if (isset($map['category'])) {
             $model->category = $map['category'];
+        }
+        if (isset($map['fields'])) {
+            $model->fields = $map['fields'];
         }
         if (isset($map['order_by'])) {
             $model->orderBy = $map['order_by'];

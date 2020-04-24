@@ -62,11 +62,16 @@ class CCPCreateFileRequest extends Model
     public $type;
 
     /**
-     * @description auto_rename
-     *
      * @var bool
      */
     public $autoRename;
+
+    /**
+     * @description check_name_mode
+     *
+     * @var string
+     */
+    public $checkNameMode;
 
     /**
      * @description content_hash
@@ -137,10 +142,15 @@ class CCPCreateFileRequest extends Model
     public $labels;
 
     /**
-     * @description meta
+     * @description last_updated_at
      *
-     * @example meta test
+     * @example 2019-08-20T06:51:27.292Z
      *
+     * @var string
+     */
+    public $lastUpdatedAt;
+
+    /**
      * @var string
      */
     public $meta;
@@ -162,6 +172,22 @@ class CCPCreateFileRequest extends Model
      * @var string
      */
     public $preHash;
+
+    /**
+     * @description streams_info
+     *
+     * @var object
+     */
+    public $streamsInfo;
+
+    /**
+     * @description user_meta
+     *
+     * @example user_meta
+     *
+     * @var string
+     */
+    public $userMeta;
     protected $_name = [
         'contentMd5'      => 'content_md5',
         'contentType'     => 'content_type',
@@ -170,6 +196,7 @@ class CCPCreateFileRequest extends Model
         'size'            => 'size',
         'type'            => 'type',
         'autoRename'      => 'auto_rename',
+        'checkNameMode'   => 'check_name_mode',
         'contentHash'     => 'content_hash',
         'contentHashName' => 'content_hash_name',
         'description'     => 'description',
@@ -178,12 +205,15 @@ class CCPCreateFileRequest extends Model
         'fileId'          => 'file_id',
         'hidden'          => 'hidden',
         'labels'          => 'labels',
+        'lastUpdatedAt'   => 'last_updated_at',
         'meta'            => 'meta',
         'parentFileId'    => 'parent_file_id',
         'preHash'         => 'pre_hash',
+        'streamsInfo'     => 'streams_info',
+        'userMeta'        => 'user_meta',
     ];
     protected $_default = [
-        'autoRename' => 'false',
+        'checkNameMode' => 'ignore',
     ];
 
     public function validate()
@@ -212,6 +242,7 @@ class CCPCreateFileRequest extends Model
         $res['size']              = $this->size;
         $res['type']              = $this->type;
         $res['auto_rename']       = $this->autoRename;
+        $res['check_name_mode']   = $this->checkNameMode;
         $res['content_hash']      = $this->contentHash;
         $res['content_hash_name'] = $this->contentHashName;
         $res['description']       = $this->description;
@@ -223,9 +254,12 @@ class CCPCreateFileRequest extends Model
         if (null !== $this->labels) {
             $res['labels'] = $this->labels;
         }
-        $res['meta']           = $this->meta;
-        $res['parent_file_id'] = $this->parentFileId;
-        $res['pre_hash']       = $this->preHash;
+        $res['last_updated_at'] = $this->lastUpdatedAt;
+        $res['meta']            = $this->meta;
+        $res['parent_file_id']  = $this->parentFileId;
+        $res['pre_hash']        = $this->preHash;
+        $res['streams_info']    = $this->streamsInfo;
+        $res['user_meta']       = $this->userMeta;
 
         return $res;
     }
@@ -265,6 +299,9 @@ class CCPCreateFileRequest extends Model
         if (isset($map['auto_rename'])) {
             $model->autoRename = $map['auto_rename'];
         }
+        if (isset($map['check_name_mode'])) {
+            $model->checkNameMode = $map['check_name_mode'];
+        }
         if (isset($map['content_hash'])) {
             $model->contentHash = $map['content_hash'];
         }
@@ -292,6 +329,9 @@ class CCPCreateFileRequest extends Model
                 $model->labels = $map['labels'];
             }
         }
+        if (isset($map['last_updated_at'])) {
+            $model->lastUpdatedAt = $map['last_updated_at'];
+        }
         if (isset($map['meta'])) {
             $model->meta = $map['meta'];
         }
@@ -300,6 +340,12 @@ class CCPCreateFileRequest extends Model
         }
         if (isset($map['pre_hash'])) {
             $model->preHash = $map['pre_hash'];
+        }
+        if (isset($map['streams_info'])) {
+            $model->streamsInfo = $map['streams_info'];
+        }
+        if (isset($map['user_meta'])) {
+            $model->userMeta = $map['user_meta'];
         }
 
         return $model;
