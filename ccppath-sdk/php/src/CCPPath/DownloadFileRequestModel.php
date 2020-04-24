@@ -14,6 +14,7 @@ class DownloadFileRequestModel extends Model
      * @var array
      */
     public $headers;
+
     /**
      * @description query
      *

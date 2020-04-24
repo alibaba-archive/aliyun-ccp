@@ -14,6 +14,7 @@ class CancelLinkModel extends Model
      * @var array
      */
     public $headers;
+
     /**
      * @description body
      *

@@ -19,6 +19,7 @@ class UpdateDomainRequest extends Model
      * @var string
      */
     public $authAlipayAppId;
+
     /**
      * @description 启用支付宝认证
      *
@@ -27,6 +28,7 @@ class UpdateDomainRequest extends Model
      * @var bool
      */
     public $authAlipayEnbale;
+
     /**
      * @description 支付宝 App Secret
      *
@@ -35,10 +37,12 @@ class UpdateDomainRequest extends Model
      * @var string
      */
     public $authAlipayPrivateKey;
+
     /**
      * @var object
      */
     public $authConfig;
+
     /**
      * @description 钉钉 App Id
      *
@@ -47,6 +51,7 @@ class UpdateDomainRequest extends Model
      * @var string
      */
     public $authDingdingAppId;
+
     /**
      * @description 钉钉 App Secret
      *
@@ -55,6 +60,7 @@ class UpdateDomainRequest extends Model
      * @var string
      */
     public $authDingdingAppSecret;
+
     /**
      * @description 启用钉钉认证
      *
@@ -63,10 +69,12 @@ class UpdateDomainRequest extends Model
      * @var bool
      */
     public $authDingdingEnable;
+
     /**
      * @var bool
      */
     public $authEndpointEnable;
+
     /**
      * @description RAM App Id
      *
@@ -75,6 +83,7 @@ class UpdateDomainRequest extends Model
      * @var string
      */
     public $authRamAppId;
+
     /**
      * @description RAM App Secret
      *
@@ -83,6 +92,7 @@ class UpdateDomainRequest extends Model
      * @var string
      */
     public $authRamAppSecret;
+
     /**
      * @description 启用 RAM 认证
      *
@@ -91,6 +101,7 @@ class UpdateDomainRequest extends Model
      * @var bool
      */
     public $authRamEnable;
+
     /**
      * @description 数据 Hash 算法
      *
@@ -99,6 +110,7 @@ class UpdateDomainRequest extends Model
      * @var string
      */
     public $dataHashName;
+
     /**
      * @description Domain 描述
      *
@@ -107,6 +119,7 @@ class UpdateDomainRequest extends Model
      * @var string
      */
     public $description;
+
     /**
      * @description Domain ID
      *
@@ -115,6 +128,7 @@ class UpdateDomainRequest extends Model
      * @var string
      */
     public $domainId;
+
     /**
      * @description Domain 名称
      *
@@ -123,6 +137,7 @@ class UpdateDomainRequest extends Model
      * @var string
      */
     public $domainName;
+
     /**
      * @description 事件通知 MNS 匹配文件名
      *
@@ -131,6 +146,7 @@ class UpdateDomainRequest extends Model
      * @var string
      */
     public $eventFilenameMatches;
+
     /**
      * @description 事件通知 MNS Endpoint
      *
@@ -139,6 +155,7 @@ class UpdateDomainRequest extends Model
      * @var string
      */
     public $eventMnsEndpoint;
+
     /**
      * @description 事件通知 MNS Topic
      *
@@ -147,6 +164,7 @@ class UpdateDomainRequest extends Model
      * @var string
      */
     public $eventMnsTopic;
+
     /**
      * @description 事件名列表
      *
@@ -155,12 +173,14 @@ class UpdateDomainRequest extends Model
      * @var array
      */
     public $eventNames;
+
     /**
      * @description 事件通知 Role Arn
      *
      * @var string
      */
     public $eventRoleArn;
+
     /**
      * @description 开启自动初始化 Drive
      *
@@ -169,6 +189,7 @@ class UpdateDomainRequest extends Model
      * @var bool
      */
     public $initDriveEnable;
+
     /**
      * @description 自动初始化 Drive 大小
      *
@@ -177,6 +198,7 @@ class UpdateDomainRequest extends Model
      * @var int
      */
     public $initDriveSize;
+
     /**
      * @description 自动初始化 Drive 使用 Store ID
      *
@@ -185,10 +207,12 @@ class UpdateDomainRequest extends Model
      * @var string
      */
     public $initDriveStoreId;
+
     /**
      * @var AppAccessStrategy
      */
     public $publishedAppAccessStrategy;
+
     /**
      * @description 开启分享
      *

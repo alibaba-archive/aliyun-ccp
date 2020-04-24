@@ -19,18 +19,21 @@ class ListStoreFileRequest extends Model
      * @var int
      */
     public $limit;
+
     /**
      * @description marker
      *
      * @var string
      */
     public $marker;
+
     /**
      * @description parent_file_path
      *
      * @var string
      */
     public $parentFilePath;
+
     /**
      * @description store_id
      *
@@ -39,6 +42,7 @@ class ListStoreFileRequest extends Model
      * @var string
      */
     public $storeId;
+
     /**
      * @description type
      *

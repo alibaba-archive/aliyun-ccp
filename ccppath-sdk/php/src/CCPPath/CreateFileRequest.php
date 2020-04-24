@@ -17,6 +17,7 @@ class CreateFileRequest extends Model
      * @var string
      */
     public $contentHash;
+
     /**
      * @description ContentHashName
      *
@@ -25,24 +26,28 @@ class CreateFileRequest extends Model
      * @var string
      */
     public $contentHashName;
+
     /**
      * @description ContentMd5
      *
      * @var string
      */
     public $contentMd5;
+
     /**
      * @description ContentType
      *
      * @var string
      */
     public $contentType;
+
     /**
      * @description Description
      *
      * @var string
      */
     public $description;
+
     /**
      * @description DriveID
      *
@@ -51,18 +56,21 @@ class CreateFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description Hidden
      *
      * @var bool
      */
     public $hidden;
+
     /**
      * @description Meta
      *
      * @var string
      */
     public $meta;
+
     /**
      * @description name
      *
@@ -71,48 +79,56 @@ class CreateFileRequest extends Model
      * @var string
      */
     public $name;
+
     /**
      * @description parent_file_id
      *
      * @var string
      */
     public $parentFileId;
+
     /**
      * @description ParentFilePath
      *
      * @var string
      */
     public $parentFilePath;
+
     /**
      * @description part_info_list
      *
      * @var array
      */
     public $partInfoList;
+
     /**
      * @description pre_hash
      *
      * @var string
      */
     public $preHash;
+
     /**
      * @description ShareID
      *
      * @var string
      */
     public $shareId;
+
     /**
      * @description Size
      *
      * @var int
      */
     public $size;
+
     /**
      * @description tags
      *
      * @var object
      */
     public $tags;
+
     /**
      * @description Type
      *

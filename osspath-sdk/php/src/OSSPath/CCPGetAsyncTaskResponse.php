@@ -19,6 +19,7 @@ class CCPGetAsyncTaskResponse extends Model
      * @var string
      */
     public $asyncTaskId;
+
     /**
      * @description message
      *
@@ -27,6 +28,7 @@ class CCPGetAsyncTaskResponse extends Model
      * @var string
      */
     public $message;
+
     /**
      * @description state
      *

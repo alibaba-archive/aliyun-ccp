@@ -19,6 +19,7 @@ class OSSGetDownloadUrlResponse extends Model
      * @var string
      */
     public $expiration;
+
     /**
      * @description method
      *
@@ -27,6 +28,7 @@ class OSSGetDownloadUrlResponse extends Model
      * @var string
      */
     public $method;
+
     /**
      * @description url
      *

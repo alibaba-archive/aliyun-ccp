@@ -19,6 +19,7 @@ class CreateDriveResponse extends Model
      * @var string
      */
     public $domainId;
+
     /**
      * @description Drive ID
      *

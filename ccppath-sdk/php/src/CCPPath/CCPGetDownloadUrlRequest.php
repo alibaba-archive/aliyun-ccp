@@ -19,6 +19,7 @@ class CCPGetDownloadUrlRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description expire_sec
      *
@@ -27,12 +28,14 @@ class CCPGetDownloadUrlRequest extends Model
      * @var int
      */
     public $expireSec;
+
     /**
      * @description file_id
      *
      * @var string
      */
     public $fileId;
+
     /**
      * @description file_name
      *

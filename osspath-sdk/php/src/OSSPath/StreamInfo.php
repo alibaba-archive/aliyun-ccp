@@ -16,6 +16,7 @@ class StreamInfo extends Model
      * @var string
      */
     public $contentHash;
+
     /**
      * @description content_hash_name
      *
@@ -24,6 +25,7 @@ class StreamInfo extends Model
      * @var string
      */
     public $contentHashName;
+
     /**
      * @description ContentMd5
      *
@@ -32,12 +34,14 @@ class StreamInfo extends Model
      * @var string
      */
     public $contentMd5;
+
     /**
      * @description part_info_list
      *
      * @var array
      */
     public $partInfoList;
+
     /**
      * @description pre_hash
      *
@@ -46,6 +50,7 @@ class StreamInfo extends Model
      * @var string
      */
     public $preHash;
+
     /**
      * @description Size
      *

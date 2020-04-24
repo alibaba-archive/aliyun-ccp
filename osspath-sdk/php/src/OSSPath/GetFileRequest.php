@@ -19,16 +19,19 @@ class GetFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_id
      *
      * @var string
      */
     public $fileId;
+
     /**
      * @var string
      */
     public $filePath;
+
     /**
      * @description image_thumbnail_process
      * type:string
@@ -37,6 +40,7 @@ class GetFileRequest extends Model
      * @var string
      */
     public $imageThumbnailProcess;
+
     /**
      * @description image_thumbnail_process
      * type:string
@@ -45,6 +49,7 @@ class GetFileRequest extends Model
      * @var string
      */
     public $imageUrlProcess;
+
     /**
      * @var string
      */

@@ -19,6 +19,7 @@ class SearchUserRequest extends Model
      * @var string
      */
     public $email;
+
     /**
      * @description 每页大小限制
      *
@@ -27,6 +28,7 @@ class SearchUserRequest extends Model
      * @var int
      */
     public $limit;
+
     /**
      * @description 翻页标记
      *
@@ -35,6 +37,7 @@ class SearchUserRequest extends Model
      * @var string
      */
     public $marker;
+
     /**
      * @description 昵称
      *
@@ -43,6 +46,7 @@ class SearchUserRequest extends Model
      * @var string
      */
     public $nickName;
+
     /**
      * @description 电话号码
      *
@@ -51,6 +55,7 @@ class SearchUserRequest extends Model
      * @var string
      */
     public $phone;
+
     /**
      * @description 角色
      *
@@ -59,6 +64,7 @@ class SearchUserRequest extends Model
      * @var string
      */
     public $role;
+
     /**
      * @description 状态
      *
@@ -67,6 +73,7 @@ class SearchUserRequest extends Model
      * @var string
      */
     public $status;
+
     /**
      * @description 用户名
      *

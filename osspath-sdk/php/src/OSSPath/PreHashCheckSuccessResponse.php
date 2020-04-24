@@ -17,18 +17,21 @@ class PreHashCheckSuccessResponse extends Model
      * @var string
      */
     public $code;
+
     /**
      * @description file_name
      *
      * @var string
      */
     public $fileName;
+
     /**
      * @description message
      *
      * @var string
      */
     public $message;
+
     /**
      * @description parent_file_id
      *
@@ -37,6 +40,7 @@ class PreHashCheckSuccessResponse extends Model
      * @var string
      */
     public $parentFileId;
+
     /**
      * @description pre_hash
      *

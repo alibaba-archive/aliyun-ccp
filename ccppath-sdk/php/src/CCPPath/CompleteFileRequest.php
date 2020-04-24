@@ -19,26 +19,31 @@ class CompleteFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_id
      *
      * @var string
      */
     public $fileId;
+
     /**
      * @var string
      */
     public $filePath;
+
     /**
      * @description part_info_list
      *
      * @var array
      */
     public $partInfoList;
+
     /**
      * @var string
      */
     public $shareId;
+
     /**
      * @description upload_id
      *

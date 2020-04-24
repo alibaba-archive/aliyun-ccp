@@ -19,6 +19,7 @@ class BaseCreateFileRequest extends Model
      * @var string
      */
     public $contentMd5;
+
     /**
      * @description ContentType
      *
@@ -27,6 +28,7 @@ class BaseCreateFileRequest extends Model
      * @var string
      */
     public $contentType;
+
     /**
      * @description Name
      *
@@ -35,18 +37,21 @@ class BaseCreateFileRequest extends Model
      * @var string
      */
     public $name;
+
     /**
      * @description part_info_list
      *
      * @var array
      */
     public $partInfoList;
+
     /**
      * @description Size
      *
      * @var int
      */
     public $size;
+
     /**
      * @description Type
      *

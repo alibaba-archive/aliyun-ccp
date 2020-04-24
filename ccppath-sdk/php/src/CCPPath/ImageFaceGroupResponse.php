@@ -16,6 +16,7 @@ class ImageFaceGroupResponse extends Model
      * @var string
      */
     public $createdAt;
+
     /**
      * @description 人脸个数
      *
@@ -24,6 +25,7 @@ class ImageFaceGroupResponse extends Model
      * @var int
      */
     public $faceCount;
+
     /**
      * @description 人脸分组封面头像地址
      *
@@ -32,6 +34,7 @@ class ImageFaceGroupResponse extends Model
      * @var string
      */
     public $groupCoverUrl;
+
     /**
      * @description 人脸分组 ID
      *
@@ -40,6 +43,7 @@ class ImageFaceGroupResponse extends Model
      * @var string
      */
     public $groupId;
+
     /**
      * @description 人脸分组名称
      *
@@ -48,6 +52,7 @@ class ImageFaceGroupResponse extends Model
      * @var string
      */
     public $groupName;
+
     /**
      * @description 人脸分组修改时间
      *

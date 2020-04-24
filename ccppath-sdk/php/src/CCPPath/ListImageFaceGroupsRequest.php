@@ -19,6 +19,7 @@ class ListImageFaceGroupsRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description 每页大小限制
      *
@@ -27,6 +28,7 @@ class ListImageFaceGroupsRequest extends Model
      * @var int
      */
     public $limit;
+
     /**
      * @description 翻页标记
      *

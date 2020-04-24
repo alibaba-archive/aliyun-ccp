@@ -19,6 +19,7 @@ class OSSGetUploadUrlResponse extends Model
      * @var string
      */
     public $createAt;
+
     /**
      * @description domain_id
      *
@@ -27,6 +28,7 @@ class OSSGetUploadUrlResponse extends Model
      * @var string
      */
     public $domainId;
+
     /**
      * @description drive_id
      *
@@ -35,6 +37,7 @@ class OSSGetUploadUrlResponse extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_path
      *
@@ -43,6 +46,7 @@ class OSSGetUploadUrlResponse extends Model
      * @var string
      */
     public $filePath;
+
     /**
      * @description part_info_list
      *
@@ -51,6 +55,7 @@ class OSSGetUploadUrlResponse extends Model
      * @var array
      */
     public $partInfoList;
+
     /**
      * @description upload_id
      *

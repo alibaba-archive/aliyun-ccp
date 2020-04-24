@@ -17,6 +17,7 @@ class ListFileRequest extends Model
      * @var bool
      */
     public $all;
+
     /**
      * @description drive_id
      *
@@ -25,44 +26,52 @@ class ListFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description image_thumbnail_process
      *
      * @var string
      */
     public $imageThumbnailProcess;
+
     /**
      * @description image_url_process
      *
      * @var string
      */
     public $imageUrlProcess;
+
     /**
      * @description limit
      *
      * @var int
      */
     public $limit;
+
     /**
      * @description marker
      *
      * @var string
      */
     public $marker;
+
     /**
      * @description ParentFileID
      *
      * @var string
      */
     public $parentFileId;
+
     /**
      * @var string
      */
     public $parentFilePath;
+
     /**
      * @var string
      */
     public $shareId;
+
     /**
      * @description status
      *

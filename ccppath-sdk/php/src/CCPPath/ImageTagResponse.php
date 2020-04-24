@@ -16,6 +16,7 @@ class ImageTagResponse extends Model
      * @var int
      */
     public $count;
+
     /**
      * @description 聚类标签封面图片地址
      *
@@ -24,6 +25,7 @@ class ImageTagResponse extends Model
      * @var string
      */
     public $coverUrl;
+
     /**
      * @description 聚类标签名称
      *

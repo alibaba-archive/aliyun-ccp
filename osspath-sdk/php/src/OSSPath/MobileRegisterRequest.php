@@ -16,6 +16,7 @@ class MobileRegisterRequest extends Model
      * @var string
      */
     public $appId;
+
     /**
      * @description 待查询的手机号
      *
@@ -24,6 +25,7 @@ class MobileRegisterRequest extends Model
      * @var string
      */
     public $phoneNumber;
+
     /**
      * @description 短信验证码内容
      *
@@ -32,6 +34,7 @@ class MobileRegisterRequest extends Model
      * @var string
      */
     public $smsCode;
+
     /**
      * @description 短信验证码ID
      *

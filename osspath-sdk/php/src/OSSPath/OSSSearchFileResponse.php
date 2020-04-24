@@ -19,6 +19,7 @@ class OSSSearchFileResponse extends Model
      * @var array
      */
     public $items;
+
     /**
      * @description next_marker
      *

@@ -19,6 +19,7 @@ class CreateDomainRequest extends Model
      * @var string
      */
     public $authAlipayAppId;
+
     /**
      * @description 启用支付宝认证
      *
@@ -27,6 +28,7 @@ class CreateDomainRequest extends Model
      * @var bool
      */
     public $authAlipayEnbale;
+
     /**
      * @description 支付宝 App Secret
      *
@@ -35,6 +37,7 @@ class CreateDomainRequest extends Model
      * @var string
      */
     public $authAlipayPrivateKey;
+
     /**
      * @description 登录相关信息
      *
@@ -43,6 +46,7 @@ class CreateDomainRequest extends Model
      * @var object
      */
     public $authConfig;
+
     /**
      * @description 钉钉 App Id
      *
@@ -51,6 +55,7 @@ class CreateDomainRequest extends Model
      * @var string
      */
     public $authDingdingAppId;
+
     /**
      * @description 钉钉 App Secret
      *
@@ -59,6 +64,7 @@ class CreateDomainRequest extends Model
      * @var string
      */
     public $authDingdingAppSecret;
+
     /**
      * @description 启用钉钉认证
      *
@@ -67,10 +73,12 @@ class CreateDomainRequest extends Model
      * @var bool
      */
     public $authDingdingEnable;
+
     /**
      * @var bool
      */
     public $authEndpointEnable;
+
     /**
      * @description RAM App Id
      *
@@ -79,6 +87,7 @@ class CreateDomainRequest extends Model
      * @var string
      */
     public $authRamAppId;
+
     /**
      * @description RAM App Secret
      *
@@ -87,6 +96,7 @@ class CreateDomainRequest extends Model
      * @var string
      */
     public $authRamAppSecret;
+
     /**
      * @description 启用 RAM 认证
      *
@@ -95,6 +105,7 @@ class CreateDomainRequest extends Model
      * @var bool
      */
     public $authRamEnable;
+
     /**
      * @description 数据 Hash 算法
      *
@@ -103,6 +114,7 @@ class CreateDomainRequest extends Model
      * @var string
      */
     public $dataHashName;
+
     /**
      * @description Domain 描述
      *
@@ -111,6 +123,7 @@ class CreateDomainRequest extends Model
      * @var string
      */
     public $description;
+
     /**
      * @description Domain 名称
      *
@@ -119,6 +132,7 @@ class CreateDomainRequest extends Model
      * @var string
      */
     public $domainName;
+
     /**
      * @description 事件通知 MNS 匹配文件名
      *
@@ -127,6 +141,7 @@ class CreateDomainRequest extends Model
      * @var string
      */
     public $eventFilenameMatches;
+
     /**
      * @description 事件通知 MNS Endpoint
      *
@@ -135,6 +150,7 @@ class CreateDomainRequest extends Model
      * @var string
      */
     public $eventMnsEndpoint;
+
     /**
      * @description 事件通知 MNS Topic
      *
@@ -143,6 +159,7 @@ class CreateDomainRequest extends Model
      * @var string
      */
     public $eventMnsTopic;
+
     /**
      * @description 事件名列表
      *
@@ -151,12 +168,14 @@ class CreateDomainRequest extends Model
      * @var array
      */
     public $eventNames;
+
     /**
      * @description 事件通知 Role Arn
      *
      * @var string
      */
     public $eventRoleArn;
+
     /**
      * @description 开启自动初始化 Drive
      *
@@ -165,6 +184,7 @@ class CreateDomainRequest extends Model
      * @var bool
      */
     public $initDriveEnable;
+
     /**
      * @description 自动初始化 Drive 大小
      *
@@ -173,6 +193,7 @@ class CreateDomainRequest extends Model
      * @var int
      */
     public $initDriveSize;
+
     /**
      * @description Domain 类型
      *
@@ -181,10 +202,12 @@ class CreateDomainRequest extends Model
      * @var string
      */
     public $pathType;
+
     /**
      * @var AppAccessStrategy
      */
     public $publishedAppAccessStrategy;
+
     /**
      * @description 开启分享
      *
@@ -193,6 +216,7 @@ class CreateDomainRequest extends Model
      * @var bool
      */
     public $sharable;
+
     /**
      * @description 存储级别
      *
@@ -201,6 +225,7 @@ class CreateDomainRequest extends Model
      * @var string
      */
     public $storeLevel;
+
     /**
      * @description 存储 Region 列表
      *

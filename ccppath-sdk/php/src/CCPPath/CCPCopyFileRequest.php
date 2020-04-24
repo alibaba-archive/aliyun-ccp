@@ -19,6 +19,7 @@ class CCPCopyFileRequest extends Model
      * @var bool
      */
     public $autoRename;
+
     /**
      * @description drive_id
      *
@@ -27,6 +28,7 @@ class CCPCopyFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_id
      *
@@ -35,6 +37,7 @@ class CCPCopyFileRequest extends Model
      * @var string
      */
     public $fileId;
+
     /**
      * @description new_name
      *
@@ -43,6 +46,7 @@ class CCPCopyFileRequest extends Model
      * @var string
      */
     public $newName;
+
     /**
      * @description to_drive_id
      *
@@ -51,6 +55,7 @@ class CCPCopyFileRequest extends Model
      * @var string
      */
     public $toDriveId;
+
     /**
      * @description to_parent_file_id
      *

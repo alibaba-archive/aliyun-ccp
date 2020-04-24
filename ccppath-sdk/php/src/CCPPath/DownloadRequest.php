@@ -19,12 +19,14 @@ class DownloadRequest extends Model
      * @var string
      */
     public $DriveID;
+
     /**
      * @description file_id
      *
      * @var string
      */
     public $FileID;
+
     /**
      * @description image_process
      *
@@ -33,6 +35,7 @@ class DownloadRequest extends Model
      * @var string
      */
     public $ImageProcess;
+
     /**
      * @var string
      */

@@ -16,6 +16,7 @@ class MobileLoginRequest extends Model
      * @var string
      */
     public $appId;
+
     /**
      * @description 是否自动注册用户，使用密码登录此参数不生效
      *
@@ -24,6 +25,7 @@ class MobileLoginRequest extends Model
      * @var bool
      */
     public $autoRegister;
+
     /**
      * @description 图片验证码ID, 密码登录需要此参数
      *
@@ -32,6 +34,7 @@ class MobileLoginRequest extends Model
      * @var string
      */
     public $captchaId;
+
     /**
      * @description 用户输入的验证码值, 密码登录需要此参数
      *
@@ -40,6 +43,7 @@ class MobileLoginRequest extends Model
      * @var string
      */
     public $captchaText;
+
     /**
      * @description 登录密码, 传入此参数则忽略短信验证码，不传此参数则默认使用短信登录。
      *
@@ -48,6 +52,7 @@ class MobileLoginRequest extends Model
      * @var string
      */
     public $password;
+
     /**
      * @description 待查询的手机号
      *
@@ -56,6 +61,7 @@ class MobileLoginRequest extends Model
      * @var string
      */
     public $phoneNumber;
+
     /**
      * @description 短信验证码内容，使用密码登录此参数不生效
      *
@@ -64,6 +70,7 @@ class MobileLoginRequest extends Model
      * @var string
      */
     public $smsCode;
+
     /**
      * @description 短信验证码ID，使用密码登录此参数不生效
      *

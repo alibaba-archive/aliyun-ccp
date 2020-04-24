@@ -14,6 +14,7 @@ class GetSecureUrlModel extends Model
      * @var array
      */
     public $headers;
+
     /**
      * @description body
      *

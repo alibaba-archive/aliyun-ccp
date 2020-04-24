@@ -19,22 +19,26 @@ class OSSCompleteFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description part_info_list
      *
      * @var array
      */
     public $partInfoList;
+
     /**
      * @description upload_id
      *
      * @var string
      */
     public $uploadId;
+
     /**
      * @var string
      */
     public $filePath;
+
     /**
      * @var string
      */

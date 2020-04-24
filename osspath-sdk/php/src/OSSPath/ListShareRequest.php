@@ -19,12 +19,14 @@ class ListShareRequest extends Model
      * @var string
      */
     public $creator;
+
     /**
      * @example 1
      *
      * @var string
      */
     public $driveId;
+
     /**
      * @description limit
      *
@@ -33,12 +35,14 @@ class ListShareRequest extends Model
      * @var int
      */
     public $limit;
+
     /**
      * @description marker
      *
      * @var string
      */
     public $marker;
+
     /**
      * @description Owner
      *
@@ -47,6 +51,7 @@ class ListShareRequest extends Model
      * @var string
      */
     public $owner;
+
     /**
      * @description share_file_path
      *

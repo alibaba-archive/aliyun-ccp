@@ -19,6 +19,7 @@ class UpdateShareResponse extends Model
      * @var string
      */
     public $createdAt;
+
     /**
      * @description creator
      *
@@ -27,6 +28,7 @@ class UpdateShareResponse extends Model
      * @var string
      */
     public $creator;
+
     /**
      * @description description
      *
@@ -35,6 +37,7 @@ class UpdateShareResponse extends Model
      * @var string
      */
     public $description;
+
     /**
      * @description domain_id
      *
@@ -43,6 +46,7 @@ class UpdateShareResponse extends Model
      * @var string
      */
     public $domainId;
+
     /**
      * @description drive_id
      *
@@ -51,6 +55,7 @@ class UpdateShareResponse extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description expiration
      *
@@ -59,6 +64,7 @@ class UpdateShareResponse extends Model
      * @var string
      */
     public $expiration;
+
     /**
      * @description expired
      *
@@ -67,6 +73,7 @@ class UpdateShareResponse extends Model
      * @var bool
      */
     public $expired;
+
     /**
      * @description owner
      *
@@ -75,6 +82,7 @@ class UpdateShareResponse extends Model
      * @var string
      */
     public $owner;
+
     /**
      * @description permissions
      *
@@ -83,6 +91,7 @@ class UpdateShareResponse extends Model
      * @var array
      */
     public $permissions;
+
     /**
      * @description share_path
      *
@@ -91,6 +100,7 @@ class UpdateShareResponse extends Model
      * @var string
      */
     public $shareFilePath;
+
     /**
      * @description share_id
      *
@@ -99,6 +109,7 @@ class UpdateShareResponse extends Model
      * @var string
      */
     public $shareId;
+
     /**
      * @description share_name
      *
@@ -107,6 +118,7 @@ class UpdateShareResponse extends Model
      * @var string
      */
     public $shareName;
+
     /**
      * @description status
      *
@@ -115,6 +127,7 @@ class UpdateShareResponse extends Model
      * @var string
      */
     public $status;
+
     /**
      * @description updated_at
      *

@@ -19,6 +19,7 @@ class CCPMoveFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description new_name
      *
@@ -27,6 +28,7 @@ class CCPMoveFileRequest extends Model
      * @var string
      */
     public $newName;
+
     /**
      * @description overwrite
      * type: boolean
@@ -35,6 +37,7 @@ class CCPMoveFileRequest extends Model
      * @var bool
      */
     public $overwrite;
+
     /**
      * @description file_id
      *
@@ -43,6 +46,7 @@ class CCPMoveFileRequest extends Model
      * @var string
      */
     public $fileId;
+
     /**
      * @description to_parent_file_id
      *

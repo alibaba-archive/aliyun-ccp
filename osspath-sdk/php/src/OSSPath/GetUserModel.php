@@ -14,6 +14,7 @@ class GetUserModel extends Model
      * @var array
      */
     public $headers;
+
     /**
      * @description body
      *

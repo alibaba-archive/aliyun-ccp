@@ -19,6 +19,7 @@ class CCPGetUploadUrlRequest extends Model
      * @var string
      */
     public $contentMd5;
+
     /**
      * @description drive_id
      *
@@ -27,6 +28,7 @@ class CCPGetUploadUrlRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description upload_part_list
      *
@@ -35,6 +37,7 @@ class CCPGetUploadUrlRequest extends Model
      * @var array
      */
     public $partInfoList;
+
     /**
      * @description upload_id
      *
@@ -43,6 +46,7 @@ class CCPGetUploadUrlRequest extends Model
      * @var string
      */
     public $uploadId;
+
     /**
      * @description file_id
      *

@@ -19,6 +19,7 @@ class CCPScanFileMetaRequest extends Model
      * @var string
      */
     public $category;
+
     /**
      * @description drive_id
      *
@@ -27,6 +28,7 @@ class CCPScanFileMetaRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description marker
      *

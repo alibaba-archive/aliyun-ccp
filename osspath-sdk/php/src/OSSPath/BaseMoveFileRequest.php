@@ -19,6 +19,7 @@ class BaseMoveFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description new_name
      *
@@ -27,6 +28,7 @@ class BaseMoveFileRequest extends Model
      * @var string
      */
     public $newName;
+
     /**
      * @description overwrite
      * type: boolean

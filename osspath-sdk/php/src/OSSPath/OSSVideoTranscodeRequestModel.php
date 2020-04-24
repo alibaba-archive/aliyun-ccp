@@ -14,6 +14,7 @@ class OSSVideoTranscodeRequestModel extends Model
      * @var array
      */
     public $headers;
+
     /**
      * @description body
      *

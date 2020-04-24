@@ -16,6 +16,7 @@ class StreamUploadInfo extends Model
      * @var array
      */
     public $partInfoList;
+
     /**
      * @description pre_rapid_upload
      * type: boolean
@@ -24,6 +25,7 @@ class StreamUploadInfo extends Model
      * @var bool
      */
     public $preRapidUpload;
+
     /**
      * @description rapid_upload
      * type: boolean
@@ -32,6 +34,7 @@ class StreamUploadInfo extends Model
      * @var bool
      */
     public $rapidUpload;
+
     /**
      * @description upload_id
      *

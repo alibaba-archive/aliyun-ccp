@@ -19,6 +19,7 @@ class OSSVideoTranscodeResponse extends Model
      * @var array
      */
     public $definitionList;
+
     /**
      * @description duration
      *
@@ -27,6 +28,7 @@ class OSSVideoTranscodeResponse extends Model
      * @var int
      */
     public $duration;
+
     /**
      * @description hls_time
      *

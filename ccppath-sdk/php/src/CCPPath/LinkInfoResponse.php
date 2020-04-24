@@ -16,6 +16,7 @@ class LinkInfoResponse extends Model
      * @var string
      */
     public $authenticationType;
+
     /**
      * @description 创建时间
      *
@@ -24,6 +25,7 @@ class LinkInfoResponse extends Model
      * @var int
      */
     public $createdAt;
+
     /**
      * @description Domain ID
      *
@@ -32,6 +34,7 @@ class LinkInfoResponse extends Model
      * @var string
      */
     public $domainId;
+
     /**
      * @description 唯一身份标识
      *
@@ -40,6 +43,7 @@ class LinkInfoResponse extends Model
      * @var string
      */
     public $identity;
+
     /**
      * @description 最后登录时间
      *
@@ -48,6 +52,7 @@ class LinkInfoResponse extends Model
      * @var int
      */
     public $lastLoginTime;
+
     /**
      * @description 状态
      *
@@ -56,6 +61,7 @@ class LinkInfoResponse extends Model
      * @var string
      */
     public $status;
+
     /**
      * @description 用户ID
      *

@@ -19,12 +19,14 @@ class BaseCompleteFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description part_info_list
      *
      * @var array
      */
     public $partInfoList;
+
     /**
      * @description upload_id
      *

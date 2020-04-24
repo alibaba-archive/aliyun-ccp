@@ -16,6 +16,7 @@ class AddStoreRequest extends Model
      * @var string
      */
     public $basePath;
+
     /**
      * @description bucket名称
      *
@@ -24,6 +25,7 @@ class AddStoreRequest extends Model
      * @var string
      */
     public $bucket;
+
     /**
      * @description domain ID
      *
@@ -32,6 +34,7 @@ class AddStoreRequest extends Model
      * @var string
      */
     public $domainId;
+
     /**
      * @description 存储访问地址
      *
@@ -40,6 +43,7 @@ class AddStoreRequest extends Model
      * @var string
      */
     public $endpoint;
+
     /**
      * @description 存储归属，system表示系统提供，custom表示使用自己的存储
      *
@@ -48,6 +52,7 @@ class AddStoreRequest extends Model
      * @var string
      */
     public $ownership;
+
     /**
      * @description 访问Bucket的角色ARN
      *
@@ -56,6 +61,7 @@ class AddStoreRequest extends Model
      * @var string
      */
     public $roleArn;
+
     /**
      * @description 存储类型，当前只支持oss
      *

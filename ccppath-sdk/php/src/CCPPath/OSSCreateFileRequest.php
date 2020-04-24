@@ -19,6 +19,7 @@ class OSSCreateFileRequest extends Model
      * @var string
      */
     public $contentMd5;
+
     /**
      * @description ContentType
      *
@@ -27,6 +28,7 @@ class OSSCreateFileRequest extends Model
      * @var string
      */
     public $contentType;
+
     /**
      * @description Name
      *
@@ -35,18 +37,21 @@ class OSSCreateFileRequest extends Model
      * @var string
      */
     public $name;
+
     /**
      * @description part_info_list
      *
      * @var array
      */
     public $partInfoList;
+
     /**
      * @description Size
      *
      * @var int
      */
     public $size;
+
     /**
      * @description Type
      *
@@ -55,6 +60,7 @@ class OSSCreateFileRequest extends Model
      * @var string
      */
     public $type;
+
     /**
      * @description drive_id
      *
@@ -63,12 +69,14 @@ class OSSCreateFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description parent_file_path
      *
      * @var string
      */
     public $parentFilePath;
+
     /**
      * @description share_id
      *

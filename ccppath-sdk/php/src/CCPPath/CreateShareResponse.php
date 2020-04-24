@@ -19,6 +19,7 @@ class CreateShareResponse extends Model
      * @var string
      */
     public $domainId;
+
     /**
      * @description share_id
      *

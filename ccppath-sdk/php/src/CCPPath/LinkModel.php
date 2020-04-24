@@ -14,6 +14,7 @@ class LinkModel extends Model
      * @var array
      */
     public $headers;
+
     /**
      * @description body
      *

@@ -19,6 +19,7 @@ class OSSMoveFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_path
      *
@@ -27,6 +28,7 @@ class OSSMoveFileRequest extends Model
      * @var string
      */
     public $filePath;
+
     /**
      * @description new_name
      *
@@ -35,12 +37,14 @@ class OSSMoveFileRequest extends Model
      * @var string
      */
     public $newName;
+
     /**
      * @description overwrite
      * type: boolean
      * @var bool
      */
     public $overwrite;
+
     /**
      * @description share_id
      *
@@ -49,6 +53,7 @@ class OSSMoveFileRequest extends Model
      * @var string
      */
     public $shareId;
+
     /**
      * @description file_path
      *

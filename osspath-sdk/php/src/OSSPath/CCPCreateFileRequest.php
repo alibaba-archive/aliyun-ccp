@@ -19,6 +19,7 @@ class CCPCreateFileRequest extends Model
      * @var string
      */
     public $contentMd5;
+
     /**
      * @description ContentType
      *
@@ -27,6 +28,7 @@ class CCPCreateFileRequest extends Model
      * @var string
      */
     public $contentType;
+
     /**
      * @description Name
      *
@@ -35,18 +37,21 @@ class CCPCreateFileRequest extends Model
      * @var string
      */
     public $name;
+
     /**
      * @description part_info_list
      *
      * @var array
      */
     public $partInfoList;
+
     /**
      * @description Size
      *
      * @var int
      */
     public $size;
+
     /**
      * @description Type
      *
@@ -55,12 +60,14 @@ class CCPCreateFileRequest extends Model
      * @var string
      */
     public $type;
+
     /**
      * @description auto_rename
      *
      * @var bool
      */
     public $autoRename;
+
     /**
      * @description content_hash
      *
@@ -69,6 +76,7 @@ class CCPCreateFileRequest extends Model
      * @var string
      */
     public $contentHash;
+
     /**
      * @description content_hash_name
      *
@@ -77,6 +85,7 @@ class CCPCreateFileRequest extends Model
      * @var string
      */
     public $contentHashName;
+
     /**
      * @description description
      *
@@ -85,6 +94,7 @@ class CCPCreateFileRequest extends Model
      * @var string
      */
     public $description;
+
     /**
      * @description drive_id
      *
@@ -93,18 +103,21 @@ class CCPCreateFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description encrypt_mode
      *
      * @var string
      */
     public $encryptMode;
+
     /**
      * @description file_id
      *
      * @var string
      */
     public $fileId;
+
     /**
      * @description hidden
      *
@@ -113,6 +126,7 @@ class CCPCreateFileRequest extends Model
      * @var bool
      */
     public $hidden;
+
     /**
      * @description labels
      *
@@ -121,6 +135,7 @@ class CCPCreateFileRequest extends Model
      * @var array
      */
     public $labels;
+
     /**
      * @description last_updated_at
      *
@@ -129,10 +144,12 @@ class CCPCreateFileRequest extends Model
      * @var string
      */
     public $lastUpdatedAt;
+
     /**
      * @var string
      */
     public $meta;
+
     /**
      * @description parent_file_id
      *
@@ -141,6 +158,7 @@ class CCPCreateFileRequest extends Model
      * @var string
      */
     public $parentFileId;
+
     /**
      * @description pre_hash
      *
@@ -149,12 +167,14 @@ class CCPCreateFileRequest extends Model
      * @var string
      */
     public $preHash;
+
     /**
      * @description streams_info
      *
      * @var object
      */
     public $streamsInfo;
+
     /**
      * @description user_meta
      *

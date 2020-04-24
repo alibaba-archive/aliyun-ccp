@@ -19,12 +19,14 @@ class OSSGetFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_id
      *
      * @var string
      */
     public $filePath;
+
     /**
      * @description image_thumbnail_process
      * type:string
@@ -33,6 +35,7 @@ class OSSGetFileRequest extends Model
      * @var string
      */
     public $imageThumbnailProcess;
+
     /**
      * @description image_thumbnail_process
      * type:string
@@ -41,6 +44,7 @@ class OSSGetFileRequest extends Model
      * @var string
      */
     public $imageUrlProcess;
+
     /**
      * @description share_id
      *
@@ -49,6 +53,7 @@ class OSSGetFileRequest extends Model
      * @var string
      */
     public $shareId;
+
     /**
      * @description url_expire_sec
      *

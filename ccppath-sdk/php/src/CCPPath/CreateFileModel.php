@@ -14,6 +14,7 @@ class CreateFileModel extends Model
      * @var array
      */
     public $headers;
+
     /**
      * @description body
      *

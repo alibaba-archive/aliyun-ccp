@@ -19,6 +19,7 @@ class OSSListFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description image_thumbnail_process
      *
@@ -27,6 +28,7 @@ class OSSListFileRequest extends Model
      * @var string
      */
     public $imageThumbnailProcess;
+
     /**
      * @description image_url_process
      *
@@ -35,6 +37,7 @@ class OSSListFileRequest extends Model
      * @var string
      */
     public $imageUrlProcess;
+
     /**
      * @description limit
      *
@@ -43,6 +46,7 @@ class OSSListFileRequest extends Model
      * @var int
      */
     public $limit;
+
     /**
      * @description marker
      *
@@ -51,6 +55,7 @@ class OSSListFileRequest extends Model
      * @var string
      */
     public $marker;
+
     /**
      * @description ParentFilePath
      *
@@ -59,6 +64,7 @@ class OSSListFileRequest extends Model
      * @var string
      */
     public $parentFilePath;
+
     /**
      * @description share_id
      *
@@ -67,6 +73,7 @@ class OSSListFileRequest extends Model
      * @var string
      */
     public $shareId;
+
     /**
      * @description url_expire_sec
      *
@@ -75,6 +82,7 @@ class OSSListFileRequest extends Model
      * @var int
      */
     public $urlExpireSec;
+
     /**
      * @description video_thumbnail_process
      * type:string

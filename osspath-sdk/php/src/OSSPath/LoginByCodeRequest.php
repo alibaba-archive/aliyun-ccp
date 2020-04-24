@@ -16,6 +16,7 @@ class LoginByCodeRequest extends Model
      * @var string
      */
     public $accessToken;
+
     /**
      * @description App ID, 当前访问的App
      *
@@ -24,6 +25,7 @@ class LoginByCodeRequest extends Model
      * @var string
      */
     public $appId;
+
     /**
      * @description 鉴权后返回的AuthCode，支付宝登录需要此字段
      *
@@ -32,6 +34,7 @@ class LoginByCodeRequest extends Model
      * @var string
      */
     public $authCode;
+
     /**
      * @description 鉴权类型，淘宝、支付宝
      *

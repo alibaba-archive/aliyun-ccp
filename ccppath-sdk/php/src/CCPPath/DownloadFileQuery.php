@@ -16,6 +16,7 @@ class DownloadFileQuery extends Model
      * @var string
      */
     public $DriveID;
+
     /**
      * @description file id
      *
@@ -24,6 +25,7 @@ class DownloadFileQuery extends Model
      * @var string
      */
     public $FileID;
+
     /**
      * @description image process
      *

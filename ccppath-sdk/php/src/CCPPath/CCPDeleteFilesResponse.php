@@ -19,6 +19,7 @@ class CCPDeleteFilesResponse extends Model
      * @var array
      */
     public $deletedFileIdList;
+
     /**
      * @description domain_id
      *
@@ -27,6 +28,7 @@ class CCPDeleteFilesResponse extends Model
      * @var string
      */
     public $domainId;
+
     /**
      * @description drive_id
      *

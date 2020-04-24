@@ -16,6 +16,7 @@ class UploadPartInfo extends Model
      * @var string
      */
     public $etag;
+
     /**
      * @description PartNumber
      *
@@ -24,6 +25,7 @@ class UploadPartInfo extends Model
      * @var int
      */
     public $partNumber;
+
     /**
      * @description PartSize：
      *
@@ -32,6 +34,7 @@ class UploadPartInfo extends Model
      * @var int
      */
     public $partSize;
+
     /**
      * @description upload_url
      *

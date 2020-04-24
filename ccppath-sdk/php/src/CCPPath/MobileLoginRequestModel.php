@@ -14,6 +14,7 @@ class MobileLoginRequestModel extends Model
      * @var array
      */
     public $headers;
+
     /**
      * @description body
      *

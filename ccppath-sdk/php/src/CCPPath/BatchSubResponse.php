@@ -16,6 +16,7 @@ class BatchSubResponse extends Model
      * @var object
      */
     public $body;
+
     /**
      * @description id 请求带过来的id, 可以跟 request 进行关联
      *
@@ -24,6 +25,7 @@ class BatchSubResponse extends Model
      * @var string
      */
     public $id;
+
     /**
      * @description status 子请求的返回状态码，可参考对于子请求文档
      *

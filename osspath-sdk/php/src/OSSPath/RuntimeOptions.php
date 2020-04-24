@@ -14,78 +14,91 @@ class RuntimeOptions extends Model
      * @var bool
      */
     public $autoretry;
+
     /**
      * @description ignore SSL validation
      *
      * @var bool
      */
     public $ignoreSSL;
+
     /**
      * @description maximum number of retries
      *
      * @var int
      */
     public $maxAttempts;
+
     /**
      * @description backoff policy
      *
      * @var string
      */
     public $backoffPolicy;
+
     /**
      * @description backoff period
      *
      * @var int
      */
     public $backoffPeriod;
+
     /**
      * @description read timeout
      *
      * @var int
      */
     public $readTimeout;
+
     /**
      * @description connect timeout
      *
      * @var int
      */
     public $connectTimeout;
+
     /**
      * @description http proxy url
      *
      * @var string
      */
     public $httpProxy;
+
     /**
      * @description https Proxy url
      *
      * @var string
      */
     public $httpsProxy;
+
     /**
      * @description agent blacklist
      *
      * @var string
      */
     public $noProxy;
+
     /**
      * @description maximum number of connections
      *
      * @var int
      */
     public $maxIdleConns;
+
     /**
      * @description local addr
      *
      * @var string
      */
     public $localAddr;
+
     /**
      * @description SOCKS5 proxy
      *
      * @var string
      */
     public $socks5Proxy;
+
     /**
      * @description SOCKS5 netWork
      *

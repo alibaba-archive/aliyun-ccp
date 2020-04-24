@@ -16,6 +16,7 @@ class AccessTokenResponse extends Model
      * @var string
      */
     public $accessToken;
+
     /**
      * @description accessToken过期时间，ISO时间
      *
@@ -24,6 +25,7 @@ class AccessTokenResponse extends Model
      * @var string
      */
     public $expireTime;
+
     /**
      * @description 用于刷新accessToken
      *
@@ -32,6 +34,7 @@ class AccessTokenResponse extends Model
      * @var string
      */
     public $refreshToken;
+
     /**
      * @description 当前用户角色
      *
@@ -40,6 +43,7 @@ class AccessTokenResponse extends Model
      * @var string
      */
     public $role;
+
     /**
      * @description accessToken类型，Bearer
      *
@@ -48,6 +52,7 @@ class AccessTokenResponse extends Model
      * @var string
      */
     public $tokenType;
+
     /**
      * @description 当前用户ID
      *

@@ -19,6 +19,7 @@ class GetDownloadUrlRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description expire_sec
      *
@@ -27,12 +28,14 @@ class GetDownloadUrlRequest extends Model
      * @var int
      */
     public $expireSec;
+
     /**
      * @description file_id
      *
      * @var string
      */
     public $fileId;
+
     /**
      * @description file_name
      *
@@ -41,10 +44,12 @@ class GetDownloadUrlRequest extends Model
      * @var string
      */
     public $fileName;
+
     /**
      * @var string
      */
     public $filePath;
+
     /**
      * @var string
      */

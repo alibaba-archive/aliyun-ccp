@@ -15,6 +15,7 @@ class ListImageAddressGroupsResponse extends Model
      * @var array
      */
     public $items;
+
     /**
      * @var string
      */

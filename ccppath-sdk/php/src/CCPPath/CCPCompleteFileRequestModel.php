@@ -14,6 +14,7 @@ class CCPCompleteFileRequestModel extends Model
      * @var array
      */
     public $headers;
+
     /**
      * @description body
      *

@@ -12,6 +12,7 @@ class SetStoreCorsRequest extends Model
      * @var CorsRule
      */
     public $corsRule;
+
     /**
      * @description domain ID
      *
@@ -20,6 +21,7 @@ class SetStoreCorsRequest extends Model
      * @var string
      */
     public $domainId;
+
     /**
      * @description store ID
      *

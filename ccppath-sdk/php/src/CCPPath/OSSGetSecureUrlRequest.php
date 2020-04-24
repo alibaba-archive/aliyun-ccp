@@ -19,6 +19,7 @@ class OSSGetSecureUrlRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description expire_sec 单位秒
      *
@@ -27,6 +28,7 @@ class OSSGetSecureUrlRequest extends Model
      * @var int
      */
     public $expireSec;
+
     /**
      * @description file_path
      *
@@ -35,6 +37,7 @@ class OSSGetSecureUrlRequest extends Model
      * @var string
      */
     public $filePath;
+
     /**
      * @description secure_ip
      *
@@ -43,6 +46,7 @@ class OSSGetSecureUrlRequest extends Model
      * @var string
      */
     public $secureIp;
+
     /**
      * @description share_id
      *

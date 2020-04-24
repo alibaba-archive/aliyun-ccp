@@ -16,6 +16,7 @@ class UserAuthentication extends Model
      * @var string
      */
     public $AuthenticationType;
+
     /**
      * @description 创建时间
      *
@@ -24,6 +25,7 @@ class UserAuthentication extends Model
      * @var int
      */
     public $CreatedAt;
+
     /**
      * @description 详情
      *
@@ -32,6 +34,7 @@ class UserAuthentication extends Model
      * @var string
      */
     public $Detail;
+
     /**
      * @description Domain ID
      *
@@ -40,6 +43,7 @@ class UserAuthentication extends Model
      * @var string
      */
     public $DomainID;
+
     /**
      * @description 唯一身份标识
      *
@@ -48,6 +52,7 @@ class UserAuthentication extends Model
      * @var string
      */
     public $Identity;
+
     /**
      * @description 最后登录时间
      *
@@ -56,6 +61,7 @@ class UserAuthentication extends Model
      * @var int
      */
     public $LastLoginTime;
+
     /**
      * @description 状态
      *
@@ -64,6 +70,7 @@ class UserAuthentication extends Model
      * @var string
      */
     public $Status;
+
     /**
      * @description 用户ID
      *

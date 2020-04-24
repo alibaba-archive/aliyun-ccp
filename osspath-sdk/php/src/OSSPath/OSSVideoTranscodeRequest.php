@@ -19,6 +19,7 @@ class OSSVideoTranscodeRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_path
      *
@@ -27,6 +28,7 @@ class OSSVideoTranscodeRequest extends Model
      * @var string
      */
     public $filePath;
+
     /**
      * @description hls_time
      *
@@ -35,6 +37,7 @@ class OSSVideoTranscodeRequest extends Model
      * @var int
      */
     public $hlsTime;
+
     /**
      * @description remarks
      *
@@ -43,6 +46,7 @@ class OSSVideoTranscodeRequest extends Model
      * @var string
      */
     public $remarks;
+
     /**
      * @description share_id
      *
@@ -51,6 +55,7 @@ class OSSVideoTranscodeRequest extends Model
      * @var string
      */
     public $shareId;
+
     /**
      * @description transcode
      *

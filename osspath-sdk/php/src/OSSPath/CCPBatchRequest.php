@@ -17,6 +17,7 @@ class CCPBatchRequest extends Model
      * @var array
      */
     public $requests;
+
     /**
      * @description 支持的资源类型
      *

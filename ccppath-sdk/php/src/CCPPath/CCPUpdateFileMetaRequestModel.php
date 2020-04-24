@@ -14,6 +14,7 @@ class CCPUpdateFileMetaRequestModel extends Model
      * @var array
      */
     public $headers;
+
     /**
      * @description body
      *

@@ -19,6 +19,7 @@ class CCPCreateFileResponse extends Model
      * @var string
      */
     public $domainId;
+
     /**
      * @description drive_id
      *
@@ -27,6 +28,7 @@ class CCPCreateFileResponse extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_id
      *
@@ -35,6 +37,7 @@ class CCPCreateFileResponse extends Model
      * @var string
      */
     public $fileId;
+
     /**
      * @description parent_file_id
      *
@@ -43,6 +46,7 @@ class CCPCreateFileResponse extends Model
      * @var string
      */
     public $parentFileId;
+
     /**
      * @description part_info_list
      *
@@ -51,6 +55,7 @@ class CCPCreateFileResponse extends Model
      * @var array
      */
     public $partInfoList;
+
     /**
      * @description rapid_upload
      * type: boolean
@@ -59,6 +64,7 @@ class CCPCreateFileResponse extends Model
      * @var bool
      */
     public $rapidUpload;
+
     /**
      * @description type
      *
@@ -67,6 +73,7 @@ class CCPCreateFileResponse extends Model
      * @var string
      */
     public $type;
+
     /**
      * @description upload_id
      *

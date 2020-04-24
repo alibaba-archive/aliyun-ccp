@@ -17,6 +17,7 @@ class GetUploadUrlRequest extends Model
      * @var string
      */
     public $contentMd5;
+
     /**
      * @description drive_id
      *
@@ -25,26 +26,31 @@ class GetUploadUrlRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_id
      *
      * @var string
      */
     public $fileId;
+
     /**
      * @var string
      */
     public $filePath;
+
     /**
      * @description upload_part_list
      *
      * @var array
      */
     public $partInfoList;
+
     /**
      * @var string
      */
     public $shareId;
+
     /**
      * @description upload_id
      *

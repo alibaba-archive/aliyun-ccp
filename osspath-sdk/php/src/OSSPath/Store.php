@@ -16,6 +16,7 @@ class Store extends Model
      * @var string
      */
     public $accelerateEndpoint;
+
     /**
      * @description 存储公共前缀
      *
@@ -24,6 +25,7 @@ class Store extends Model
      * @var string
      */
     public $basePath;
+
     /**
      * @description bucket名称
      *
@@ -32,6 +34,7 @@ class Store extends Model
      * @var string
      */
     public $bucket;
+
     /**
      * @description 用户自定义绑定存储地址
      *
@@ -40,6 +43,7 @@ class Store extends Model
      * @var string
      */
     public $customizedEndpoint;
+
     /**
      * @description 存储访问地址
      *
@@ -48,6 +52,7 @@ class Store extends Model
      * @var string
      */
     public $endpoint;
+
     /**
      * @description 内网存储地址
      *
@@ -56,6 +61,7 @@ class Store extends Model
      * @var string
      */
     public $internalEndpoint;
+
     /**
      * @description 存储归属，system表示系统提供，custom表示使用自己的存储
      *
@@ -64,12 +70,14 @@ class Store extends Model
      * @var string
      */
     public $ownership;
+
     /**
      * @description Policy授权,system类型store会将bucket权限授予当前云账号
      *
      * @var string
      */
     public $policy;
+
     /**
      * @description 访问Bucket的角色ARN
      *
@@ -78,6 +86,7 @@ class Store extends Model
      * @var string
      */
     public $roleArn;
+
     /**
      * @description store ID
      *
@@ -86,6 +95,7 @@ class Store extends Model
      * @var string
      */
     public $storeId;
+
     /**
      * @description 存储类型，当前只支持oss
      *

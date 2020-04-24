@@ -16,6 +16,7 @@ class ListAppsResponse extends Model
      * @var array
      */
     public $items;
+
     /**
      * @description App 分批查询游标
      *

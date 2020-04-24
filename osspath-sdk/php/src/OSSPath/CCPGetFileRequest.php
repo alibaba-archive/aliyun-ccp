@@ -19,6 +19,7 @@ class CCPGetFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_id
      *
@@ -27,6 +28,7 @@ class CCPGetFileRequest extends Model
      * @var string
      */
     public $fileId;
+
     /**
      * @description image_thumbnail_process
      * type:string
@@ -35,6 +37,7 @@ class CCPGetFileRequest extends Model
      * @var string
      */
     public $imageThumbnailProcess;
+
     /**
      * @description image_thumbnail_process
      * type:string
@@ -43,6 +46,7 @@ class CCPGetFileRequest extends Model
      * @var string
      */
     public $imageUrlProcess;
+
     /**
      * @description url_expire_sec
      *
@@ -51,6 +55,7 @@ class CCPGetFileRequest extends Model
      * @var int
      */
     public $urlExpireSec;
+
     /**
      * @description video_thumbnail_process
      * type:string

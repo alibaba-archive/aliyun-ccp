@@ -16,6 +16,7 @@ class GetUserAccessTokenRequest extends Model
      * @var string
      */
     public $role;
+
     /**
      * @description 用户 ID
      *

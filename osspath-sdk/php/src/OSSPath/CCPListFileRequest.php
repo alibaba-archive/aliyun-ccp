@@ -19,6 +19,7 @@ class CCPListFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description image_thumbnail_process
      *
@@ -27,6 +28,7 @@ class CCPListFileRequest extends Model
      * @var string
      */
     public $imageThumbnailProcess;
+
     /**
      * @description image_url_process
      *
@@ -35,6 +37,7 @@ class CCPListFileRequest extends Model
      * @var string
      */
     public $imageUrlProcess;
+
     /**
      * @description limit
      *
@@ -43,6 +46,7 @@ class CCPListFileRequest extends Model
      * @var int
      */
     public $limit;
+
     /**
      * @description marker
      *
@@ -51,6 +55,7 @@ class CCPListFileRequest extends Model
      * @var string
      */
     public $marker;
+
     /**
      * @description video_thumbnail_process
      * type:string
@@ -59,6 +64,7 @@ class CCPListFileRequest extends Model
      * @var string
      */
     public $videoThumbnailProcess;
+
     /**
      * @description starred
      *
@@ -67,6 +73,7 @@ class CCPListFileRequest extends Model
      * @var bool
      */
     public $Starred;
+
     /**
      * @description all
      *
@@ -75,6 +82,7 @@ class CCPListFileRequest extends Model
      * @var bool
      */
     public $all;
+
     /**
      * @description category
      *
@@ -83,6 +91,7 @@ class CCPListFileRequest extends Model
      * @var string
      */
     public $category;
+
     /**
      * @description fields
      *
@@ -91,6 +100,7 @@ class CCPListFileRequest extends Model
      * @var string
      */
     public $fields;
+
     /**
      * @description order_by
      *
@@ -99,6 +109,7 @@ class CCPListFileRequest extends Model
      * @var string
      */
     public $orderBy;
+
     /**
      * @description order_direction
      *
@@ -107,6 +118,7 @@ class CCPListFileRequest extends Model
      * @var string
      */
     public $orderDirection;
+
     /**
      * @description ParentFileID
      *
@@ -115,6 +127,7 @@ class CCPListFileRequest extends Model
      * @var string
      */
     public $parentFileId;
+
     /**
      * @description status
      *
@@ -123,6 +136,7 @@ class CCPListFileRequest extends Model
      * @var string
      */
     public $status;
+
     /**
      * @description type
      *
@@ -131,6 +145,7 @@ class CCPListFileRequest extends Model
      * @var string
      */
     public $type;
+
     /**
      * @description url_expire_sec
      *

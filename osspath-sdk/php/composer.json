@@ -8,7 +8,8 @@
     "php": ">5.5",
     "alibabacloud/tea-utils": "^0.2.0",
     "alibabacloud/tea-roa-utils": "^0.1.1",
-    "alibabacloud/credentials": "^1.1"
+    "alibabacloud/credentials": "^1.1",
+    "alibabacloud/ccp-credentials": "^0.1.0"
   },
   "autoload": {
     "psr-4": {

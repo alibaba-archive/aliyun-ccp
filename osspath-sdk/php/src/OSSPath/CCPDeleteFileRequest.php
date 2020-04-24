@@ -19,6 +19,7 @@ class CCPDeleteFileRequest extends Model
      * @var string
      */
     public $driveId;
+
     /**
      * @description file_id
      *
@@ -27,6 +28,7 @@ class CCPDeleteFileRequest extends Model
      * @var string
      */
     public $fileId;
+
     /**
      * @description permanently
      * type: false

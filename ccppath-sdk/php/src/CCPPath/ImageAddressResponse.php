@@ -16,6 +16,7 @@ class ImageAddressResponse extends Model
      * @var int
      */
     public $count;
+
     /**
      * @description 聚类地点封面图片地址
      *
@@ -24,6 +25,7 @@ class ImageAddressResponse extends Model
      * @var string
      */
     public $coverUrl;
+
     /**
      * @description 聚类地点名称
      *

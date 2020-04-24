@@ -14,6 +14,7 @@ class GetLinkInfoByUserIDRequestModel extends Model
      * @var array
      */
     public $headers;
+
     /**
      * @description body
      *
