@@ -8,7 +8,7 @@ using Tea;
 
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
-    public class GetLinkInfoByUserIDRequestModel : TeaModel {
+    public class GetLinkInfoByUserIdRequestModel : TeaModel {
         [NameInMap("headers")]
         [Validation(Required=false)]
         public Dictionary<string, string> Headers { get; set; }

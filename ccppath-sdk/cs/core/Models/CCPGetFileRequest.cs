@@ -16,6 +16,10 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         [Validation(Required=true, Pattern="[0-9]+")]
         public string DriveId { get; set; }
 
+        [NameInMap("fields")]
+        [Validation(Required=false)]
+        public string Fields { get; set; }
+
         [NameInMap("file_id")]
         [Validation(Required=true, MaxLength=50, Pattern="[a-z0-9.-_]{1,50}")]
         public string FileId { get; set; }

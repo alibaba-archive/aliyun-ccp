@@ -13,7 +13,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
      */
     public class OSSMoveFileRequest : TeaModel {
         [NameInMap("drive_id")]
-        [Validation(Required=true, Pattern="[0-9]+")]
+        [Validation(Required=false, Pattern="[0-9]+")]
         public string DriveId { get; set; }
 
         [NameInMap("file_path")]
@@ -29,7 +29,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         public bool? Overwrite { get; set; }
 
         [NameInMap("share_id")]
-        [Validation(Required=false, Pattern="[0-9a-zA-z-]+")]
+        [Validation(Required=false, Pattern="[0-9a-zA-Z-]+")]
         public string ShareId { get; set; }
 
         [NameInMap("to_parent_file_path")]

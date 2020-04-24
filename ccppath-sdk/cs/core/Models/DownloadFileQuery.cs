@@ -17,9 +17,13 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         [Validation(Required=true)]
         public string FileID { get; set; }
 
-        [NameInMap("ImageProcess")]
+        [NameInMap("ImageThumbnailProcess")]
         [Validation(Required=false)]
-        public string ImageProcess { get; set; }
+        public string ImageThumbnailProcess { get; set; }
+
+        [NameInMap("VideoThumbnailProcess")]
+        [Validation(Required=false)]
+        public string VideoThumbnailProcess { get; set; }
 
     }
 

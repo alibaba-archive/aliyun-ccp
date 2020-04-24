@@ -9,7 +9,7 @@ using Tea;
 namespace Aliyun.SDK.CCP.CCPClient.Models
 {
     /**
-     * 展示标签集合
+     * 展示地点分组集合
      */
     public class ListImageAddressGroupsResponse : TeaModel {
         [NameInMap("items")]

@@ -33,7 +33,7 @@ namespace Aliyun.SDK.CCP.CCPClient.Models
         public string FilePath { get; set; }
 
         [NameInMap("share_id")]
-        [Validation(Required=false, Pattern="[0-9]+")]
+        [Validation(Required=false, Pattern="[0-9a-zA-Z-]+")]
         public string ShareId { get; set; }
 
     }
