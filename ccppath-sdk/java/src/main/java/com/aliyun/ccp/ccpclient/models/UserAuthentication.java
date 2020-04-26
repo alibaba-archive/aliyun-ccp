@@ -39,6 +39,9 @@ public class UserAuthentication extends TeaModel {
     @Validation(required = true)
     public String UserID;
 
+    @NameInMap("extra")
+    public String extra;
+
     public static UserAuthentication build(java.util.Map<String, ?> map) throws Exception {
         UserAuthentication self = new UserAuthentication();
         return TeaModel.build(map, self);

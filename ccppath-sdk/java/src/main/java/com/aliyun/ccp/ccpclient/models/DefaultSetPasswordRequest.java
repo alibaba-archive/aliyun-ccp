@@ -11,6 +11,10 @@ public class DefaultSetPasswordRequest extends TeaModel {
     @Validation(required = true)
     public String appId;
 
+    @NameInMap("encrypted_key")
+    @Validation(required = true)
+    public String encryptedKey;
+
     @NameInMap("new_password")
     @Validation(required = true)
     public String newPassword;

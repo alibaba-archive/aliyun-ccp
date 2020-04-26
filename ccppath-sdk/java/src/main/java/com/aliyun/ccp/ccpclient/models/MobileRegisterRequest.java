@@ -15,6 +15,9 @@ public class MobileRegisterRequest extends TeaModel {
     @Validation(required = true)
     public String phoneNumber;
 
+    @NameInMap("phone_region")
+    public String phoneRegion;
+
     @NameInMap("sms_code")
     @Validation(required = true)
     public String smsCode;

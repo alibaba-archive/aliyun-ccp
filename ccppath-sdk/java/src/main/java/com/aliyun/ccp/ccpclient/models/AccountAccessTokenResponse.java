@@ -14,6 +14,12 @@ public class AccountAccessTokenResponse extends TeaModel {
     @NameInMap("avatar")
     public String avatar;
 
+    @NameInMap("data_pin_saved")
+    public Boolean dataPinSaved;
+
+    @NameInMap("data_pin_setup")
+    public Boolean dataPinSetup;
+
     @NameInMap("default_drive_id")
     public String defaultDriveId;
 
@@ -25,6 +31,9 @@ public class AccountAccessTokenResponse extends TeaModel {
 
     @NameInMap("expires_in")
     public Long expiresIn;
+
+    @NameInMap("is_first_login")
+    public Boolean isFirstLogin;
 
     @NameInMap("need_link")
     @Validation(required = true)
@@ -44,6 +53,9 @@ public class AccountAccessTokenResponse extends TeaModel {
 
     @NameInMap("token_type")
     public String tokenType;
+
+    @NameInMap("user_data")
+    public java.util.Map<String, Object> userData;
 
     @NameInMap("user_id")
     public String userId;

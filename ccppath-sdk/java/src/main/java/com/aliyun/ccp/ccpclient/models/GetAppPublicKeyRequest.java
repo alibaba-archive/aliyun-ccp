@@ -6,13 +6,12 @@ import com.aliyun.tea.*;
 /**
  * 
  */
-public class GetAppRequest extends TeaModel {
+public class GetAppPublicKeyRequest extends TeaModel {
     @NameInMap("app_id")
-    @Validation(required = true)
     public String appId;
 
-    public static GetAppRequest build(java.util.Map<String, ?> map) throws Exception {
-        GetAppRequest self = new GetAppRequest();
+    public static GetAppPublicKeyRequest build(java.util.Map<String, ?> map) throws Exception {
+        GetAppPublicKeyRequest self = new GetAppPublicKeyRequest();
         return TeaModel.build(map, self);
     }
 

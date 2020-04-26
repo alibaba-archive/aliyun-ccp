@@ -13,6 +13,12 @@ public class CCPGetDownloadUrlResponse extends TeaModel {
     @NameInMap("method")
     public String method;
 
+    @NameInMap("size")
+    public Long size;
+
+    @NameInMap("streams_url")
+    public java.util.Map<String, Object> streamsUrl;
+
     @NameInMap("url")
     public String url;
 

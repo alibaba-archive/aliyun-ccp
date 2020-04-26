@@ -19,6 +19,9 @@ public class LinkInfoResponse extends TeaModel {
     @Validation(required = true)
     public String domainId;
 
+    @NameInMap("extra")
+    public String extra;
+
     @NameInMap("identity")
     @Validation(required = true)
     public String identity;

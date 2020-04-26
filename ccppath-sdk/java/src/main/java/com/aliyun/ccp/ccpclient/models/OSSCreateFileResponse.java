@@ -8,7 +8,7 @@ import com.aliyun.tea.*;
  */
 public class OSSCreateFileResponse extends TeaModel {
     @NameInMap("domain_id")
-    @Validation(pattern = "[a-z0-9]{1, 50}")
+    @Validation(pattern = "[a-z0-9]{1,50}")
     public String domainId;
 
     @NameInMap("drive_id")

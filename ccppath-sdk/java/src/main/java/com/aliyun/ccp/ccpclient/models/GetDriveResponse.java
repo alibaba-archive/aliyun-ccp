@@ -25,6 +25,12 @@ public class GetDriveResponse extends TeaModel {
     @NameInMap("drive_type")
     public String driveType;
 
+    @NameInMap("encrypt_data_access")
+    public Boolean encryptDataAccess;
+
+    @NameInMap("encrypt_mode")
+    public String encryptMode;
+
     @NameInMap("owner")
     public String owner;
 
