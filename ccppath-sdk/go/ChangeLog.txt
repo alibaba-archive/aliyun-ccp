@@ -1,3 +1,6 @@
+2020-04-26 Version: v1.0.2
+- Update APIs.
+
 2020-04-24 Version: v1.0.1
 - Update APIs.
 
