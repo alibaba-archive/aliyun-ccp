@@ -6,32 +6,24 @@ namespace Aliyun\CCP\SDK\CCPPath;
 
 use AlibabaCloud\Tea\Model;
 
-/**
- * get domain request.
- */
-class GetDomainRequest extends Model
+class InnerUserCodeAuthorizeRequest extends Model
 {
     /**
-     * @description Domain ID
-     *
-     * @example sz111
-     *
      * @var string
      */
-    public $domainId;
+    public $UserCode;
     protected $_name = [
-        'domainId' => 'domain_id',
+        'UserCode' => 'UserCode',
     ];
 
     public function validate()
     {
-        Model::validateRequired('domainId', $this->domainId, true);
     }
 
     public function toMap()
     {
-        $res              = [];
-        $res['domain_id'] = $this->domainId;
+        $res             = [];
+        $res['UserCode'] = $this->UserCode;
 
         return $res;
     }
@@ -39,13 +31,13 @@ class GetDomainRequest extends Model
     /**
      * @param array $map
      *
-     * @return GetDomainRequest
+     * @return InnerUserCodeAuthorizeRequest
      */
     public static function fromMap($map = [])
     {
         $model = new self();
-        if (isset($map['domain_id'])) {
-            $model->domainId = $map['domain_id'];
+        if (isset($map['UserCode'])) {
+            $model->UserCode = $map['UserCode'];
         }
 
         return $model;

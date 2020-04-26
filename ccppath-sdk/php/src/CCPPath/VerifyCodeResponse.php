@@ -6,32 +6,29 @@ namespace Aliyun\CCP\SDK\CCPPath;
 
 use AlibabaCloud\Tea\Model;
 
-/**
- * delete domain request.
- */
-class DeleteDomainRequest extends Model
+class VerifyCodeResponse extends Model
 {
     /**
-     * @description Domain ID
+     * @description 修改密码的临时授权码
      *
-     * @example sz111
+     * @example csjanwia
      *
      * @var string
      */
-    public $domainId;
+    public $state;
     protected $_name = [
-        'domainId' => 'domain_id',
+        'state' => 'state',
     ];
 
     public function validate()
     {
-        Model::validateRequired('domainId', $this->domainId, true);
+        Model::validateRequired('state', $this->state, true);
     }
 
     public function toMap()
     {
-        $res              = [];
-        $res['domain_id'] = $this->domainId;
+        $res          = [];
+        $res['state'] = $this->state;
 
         return $res;
     }
@@ -39,13 +36,13 @@ class DeleteDomainRequest extends Model
     /**
      * @param array $map
      *
-     * @return DeleteDomainRequest
+     * @return VerifyCodeResponse
      */
     public static function fromMap($map = [])
     {
         $model = new self();
-        if (isset($map['domain_id'])) {
-            $model->domainId = $map['domain_id'];
+        if (isset($map['state'])) {
+            $model->state = $map['state'];
         }
 
         return $model;

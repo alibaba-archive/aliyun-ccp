@@ -27,6 +27,15 @@ class MobileRegisterRequest extends Model
     public $phoneNumber;
 
     /**
+     * @description 国家编号，默认86，不需要填+号，直接填数字
+     *
+     * @example 86
+     *
+     * @var string
+     */
+    public $phoneRegion;
+
+    /**
      * @description 短信验证码内容
      *
      * @example 1234
@@ -46,6 +55,7 @@ class MobileRegisterRequest extends Model
     protected $_name = [
         'appId'       => 'app_id',
         'phoneNumber' => 'phone_number',
+        'phoneRegion' => 'phone_region',
         'smsCode'     => 'sms_code',
         'smsCodeId'   => 'sms_code_id',
     ];
@@ -63,6 +73,7 @@ class MobileRegisterRequest extends Model
         $res                 = [];
         $res['app_id']       = $this->appId;
         $res['phone_number'] = $this->phoneNumber;
+        $res['phone_region'] = $this->phoneRegion;
         $res['sms_code']     = $this->smsCode;
         $res['sms_code_id']  = $this->smsCodeId;
 
@@ -82,6 +93,9 @@ class MobileRegisterRequest extends Model
         }
         if (isset($map['phone_number'])) {
             $model->phoneNumber = $map['phone_number'];
+        }
+        if (isset($map['phone_region'])) {
+            $model->phoneRegion = $map['phone_region'];
         }
         if (isset($map['sms_code'])) {
             $model->smsCode = $map['sms_code'];

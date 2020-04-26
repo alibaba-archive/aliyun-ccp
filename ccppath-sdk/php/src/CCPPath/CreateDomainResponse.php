@@ -7,9 +7,9 @@ namespace Aliyun\CCP\SDK\CCPPath;
 use AlibabaCloud\Tea\Model;
 
 /**
- * create domain request.
+ * create domain response.
  */
-class CreateDomainRequest extends Model
+class CreateDomainResponse extends Model
 {
     /**
      * @description 支付宝 App Id
@@ -21,13 +21,13 @@ class CreateDomainRequest extends Model
     public $authAlipayAppId;
 
     /**
-     * @description 启用支付宝认证
+     * @description 是否开启了支付宝认证
      *
      * @example true
      *
      * @var bool
      */
-    public $authAlipayEnbale;
+    public $authAlipayEnable;
 
     /**
      * @description 支付宝 App Secret
@@ -66,7 +66,7 @@ class CreateDomainRequest extends Model
     public $authDingdingAppSecret;
 
     /**
-     * @description 启用钉钉认证
+     * @description 是否开启了钉钉认证
      *
      * @example true
      *
@@ -98,13 +98,22 @@ class CreateDomainRequest extends Model
     public $authRamAppSecret;
 
     /**
-     * @description 启用 RAM 认证
+     * @description 是否开启了 RAM 认证
      *
      * @example true
      *
      * @var bool
      */
     public $authRamEnable;
+
+    /**
+     * @description Domain 创建时间
+     *
+     * @example "2019-08-31T12:58:31.137Z"
+     *
+     * @var string
+     */
+    public $createdAt;
 
     /**
      * @description 数据 Hash 算法
@@ -125,9 +134,18 @@ class CreateDomainRequest extends Model
     public $description;
 
     /**
-     * @description Domain 名称
+     * @description Domain ID
      *
-     * @example test_domain
+     * @example sz111
+     *
+     * @var string
+     */
+    public $domainId;
+
+    /**
+     * @description Domain 描述
+     *
+     * @example my test domain
      *
      * @var string
      */
@@ -177,7 +195,7 @@ class CreateDomainRequest extends Model
     public $eventRoleArn;
 
     /**
-     * @description 开启自动初始化 Drive
+     * @description 是否开启了自动初始化 Drive
      *
      * @example true
      *
@@ -195,6 +213,15 @@ class CreateDomainRequest extends Model
     public $initDriveSize;
 
     /**
+     * @description 自动初始化 Drive 所用 Store ID
+     *
+     * @example 1
+     *
+     * @var string
+     */
+    public $initDriveStoreId;
+
+    /**
      * @description Domain 类型
      *
      * @example CCPPath
@@ -209,7 +236,7 @@ class CreateDomainRequest extends Model
     public $publishedAppAccessStrategy;
 
     /**
-     * @description 开启分享
+     * @description 是否开启了分享
      *
      * @example true
      *
@@ -234,9 +261,18 @@ class CreateDomainRequest extends Model
      * @var array
      */
     public $storeRegionList;
+
+    /**
+     * @description Domain 更新时间
+     *
+     * @example "2019-08-31T12:58:31.137Z"
+     *
+     * @var string
+     */
+    public $updatedAt;
     protected $_name = [
         'authAlipayAppId'            => 'auth_alipay_app_id',
-        'authAlipayEnbale'           => 'auth_alipay_enbale',
+        'authAlipayEnable'           => 'auth_alipay_enable',
         'authAlipayPrivateKey'       => 'auth_alipay_private_key',
         'authConfig'                 => 'auth_config',
         'authDingdingAppId'          => 'auth_dingding_app_id',
@@ -246,8 +282,10 @@ class CreateDomainRequest extends Model
         'authRamAppId'               => 'auth_ram_app_id',
         'authRamAppSecret'           => 'auth_ram_app_secret',
         'authRamEnable'              => 'auth_ram_enable',
+        'createdAt'                  => 'created_at',
         'dataHashName'               => 'data_hash_name',
         'description'                => 'description',
+        'domainId'                   => 'domain_id',
         'domainName'                 => 'domain_name',
         'eventFilenameMatches'       => 'event_filename_matches',
         'eventMnsEndpoint'           => 'event_mns_endpoint',
@@ -256,25 +294,24 @@ class CreateDomainRequest extends Model
         'eventRoleArn'               => 'event_role_arn',
         'initDriveEnable'            => 'init_drive_enable',
         'initDriveSize'              => 'init_drive_size',
+        'initDriveStoreId'           => 'init_drive_store_id',
         'pathType'                   => 'path_type',
         'publishedAppAccessStrategy' => 'published_app_access_strategy',
         'sharable'                   => 'sharable',
         'storeLevel'                 => 'store_level',
         'storeRegionList'            => 'store_region_list',
+        'updatedAt'                  => 'updated_at',
     ];
 
     public function validate()
     {
-        Model::validateRequired('domainName', $this->domainName, true);
-        Model::validateRequired('pathType', $this->pathType, true);
-        Model::validateRequired('storeRegionList', $this->storeRegionList, true);
     }
 
     public function toMap()
     {
         $res                             = [];
         $res['auth_alipay_app_id']       = $this->authAlipayAppId;
-        $res['auth_alipay_enbale']       = $this->authAlipayEnbale;
+        $res['auth_alipay_enable']       = $this->authAlipayEnable;
         $res['auth_alipay_private_key']  = $this->authAlipayPrivateKey;
         $res['auth_config']              = $this->authConfig;
         $res['auth_dingding_app_id']     = $this->authDingdingAppId;
@@ -284,8 +321,10 @@ class CreateDomainRequest extends Model
         $res['auth_ram_app_id']          = $this->authRamAppId;
         $res['auth_ram_app_secret']      = $this->authRamAppSecret;
         $res['auth_ram_enable']          = $this->authRamEnable;
+        $res['created_at']               = $this->createdAt;
         $res['data_hash_name']           = $this->dataHashName;
         $res['description']              = $this->description;
+        $res['domain_id']                = $this->domainId;
         $res['domain_name']              = $this->domainName;
         $res['event_filename_matches']   = $this->eventFilenameMatches;
         $res['event_mns_endpoint']       = $this->eventMnsEndpoint;
@@ -297,6 +336,7 @@ class CreateDomainRequest extends Model
         $res['event_role_arn']                = $this->eventRoleArn;
         $res['init_drive_enable']             = $this->initDriveEnable;
         $res['init_drive_size']               = $this->initDriveSize;
+        $res['init_drive_store_id']           = $this->initDriveStoreId;
         $res['path_type']                     = $this->pathType;
         $res['published_app_access_strategy'] = null !== $this->publishedAppAccessStrategy ? $this->publishedAppAccessStrategy->toMap() : null;
         $res['sharable']                      = $this->sharable;
@@ -305,6 +345,7 @@ class CreateDomainRequest extends Model
         if (null !== $this->storeRegionList) {
             $res['store_region_list'] = $this->storeRegionList;
         }
+        $res['updated_at'] = $this->updatedAt;
 
         return $res;
     }
@@ -312,7 +353,7 @@ class CreateDomainRequest extends Model
     /**
      * @param array $map
      *
-     * @return CreateDomainRequest
+     * @return CreateDomainResponse
      */
     public static function fromMap($map = [])
     {
@@ -320,8 +361,8 @@ class CreateDomainRequest extends Model
         if (isset($map['auth_alipay_app_id'])) {
             $model->authAlipayAppId = $map['auth_alipay_app_id'];
         }
-        if (isset($map['auth_alipay_enbale'])) {
-            $model->authAlipayEnbale = $map['auth_alipay_enbale'];
+        if (isset($map['auth_alipay_enable'])) {
+            $model->authAlipayEnable = $map['auth_alipay_enable'];
         }
         if (isset($map['auth_alipay_private_key'])) {
             $model->authAlipayPrivateKey = $map['auth_alipay_private_key'];
@@ -350,11 +391,17 @@ class CreateDomainRequest extends Model
         if (isset($map['auth_ram_enable'])) {
             $model->authRamEnable = $map['auth_ram_enable'];
         }
+        if (isset($map['created_at'])) {
+            $model->createdAt = $map['created_at'];
+        }
         if (isset($map['data_hash_name'])) {
             $model->dataHashName = $map['data_hash_name'];
         }
         if (isset($map['description'])) {
             $model->description = $map['description'];
+        }
+        if (isset($map['domain_id'])) {
+            $model->domainId = $map['domain_id'];
         }
         if (isset($map['domain_name'])) {
             $model->domainName = $map['domain_name'];
@@ -383,6 +430,9 @@ class CreateDomainRequest extends Model
         if (isset($map['init_drive_size'])) {
             $model->initDriveSize = $map['init_drive_size'];
         }
+        if (isset($map['init_drive_store_id'])) {
+            $model->initDriveStoreId = $map['init_drive_store_id'];
+        }
         if (isset($map['path_type'])) {
             $model->pathType = $map['path_type'];
         }
@@ -400,6 +450,9 @@ class CreateDomainRequest extends Model
                 $model->storeRegionList = [];
                 $model->storeRegionList = $map['store_region_list'];
             }
+        }
+        if (isset($map['updated_at'])) {
+            $model->updatedAt = $map['updated_at'];
         }
 
         return $model;

@@ -21,6 +21,11 @@ class AuthConfig extends Model
     /**
      * @var bool
      */
+    public $callbackSecurity;
+
+    /**
+     * @var bool
+     */
     public $enable;
 
     /**
@@ -33,11 +38,12 @@ class AuthConfig extends Model
      */
     public $enterpriseId;
     protected $_name = [
-        'appId'        => 'app_id',
-        'appSecret'    => 'app_secret',
-        'enable'       => 'enable',
-        'endpoint'     => 'endpoint',
-        'enterpriseId' => 'enterprise_id',
+        'appId'            => 'app_id',
+        'appSecret'        => 'app_secret',
+        'callbackSecurity' => 'callback_security',
+        'enable'           => 'enable',
+        'endpoint'         => 'endpoint',
+        'enterpriseId'     => 'enterprise_id',
     ];
 
     public function validate()
@@ -46,12 +52,13 @@ class AuthConfig extends Model
 
     public function toMap()
     {
-        $res                  = [];
-        $res['app_id']        = $this->appId;
-        $res['app_secret']    = $this->appSecret;
-        $res['enable']        = $this->enable;
-        $res['endpoint']      = $this->endpoint;
-        $res['enterprise_id'] = $this->enterpriseId;
+        $res                      = [];
+        $res['app_id']            = $this->appId;
+        $res['app_secret']        = $this->appSecret;
+        $res['callback_security'] = $this->callbackSecurity;
+        $res['enable']            = $this->enable;
+        $res['endpoint']          = $this->endpoint;
+        $res['enterprise_id']     = $this->enterpriseId;
 
         return $res;
     }
@@ -69,6 +76,9 @@ class AuthConfig extends Model
         }
         if (isset($map['app_secret'])) {
             $model->appSecret = $map['app_secret'];
+        }
+        if (isset($map['callback_security'])) {
+            $model->callbackSecurity = $map['callback_security'];
         }
         if (isset($map['enable'])) {
             $model->enable = $map['enable'];

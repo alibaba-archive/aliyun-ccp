@@ -60,7 +60,7 @@ class PreHashCheckSuccessResponse extends Model
         Model::validateRequired('parentFileId', $this->parentFileId, true);
         Model::validateMaxLength('parentFileId', $this->parentFileId, 50);
         Model::validateMinLength('parentFileId', $this->parentFileId, 40);
-        Model::validatePattern('parentFileId', $this->parentFileId, '[a-z0-9]{1, 50}');
+        Model::validatePattern('parentFileId', $this->parentFileId, '[a-z0-9]{1,50}');
     }
 
     public function toMap()

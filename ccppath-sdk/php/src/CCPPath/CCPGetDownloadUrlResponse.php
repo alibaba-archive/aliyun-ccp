@@ -30,6 +30,22 @@ class CCPGetDownloadUrlResponse extends Model
     public $method;
 
     /**
+     * @description size
+     *
+     * @example 102400
+     *
+     * @var int
+     */
+    public $size;
+
+    /**
+     * @description streams url info
+     *
+     * @var object
+     */
+    public $streamsUrl;
+
+    /**
      * @description url
      *
      * @example https://ccp.data.aliyuncs.com/hz22%2F5d79219b0aa9a7c995a94a96993ba3205cd91c5a%2F5d79219bf3261a5d38744da0834ed489b677a27a?Expires=xxxOSSAccessKeyId=xxx&Signature=xxx&response-content-disposition=attachment%3Bfilename%3DtBiZAoJPC2c8b13450eda4292b7f5f8010618e078.txt
@@ -40,6 +56,8 @@ class CCPGetDownloadUrlResponse extends Model
     protected $_name = [
         'expiration' => 'expiration',
         'method'     => 'method',
+        'size'       => 'size',
+        'streamsUrl' => 'streams_url',
         'url'        => 'url',
     ];
 
@@ -49,10 +67,12 @@ class CCPGetDownloadUrlResponse extends Model
 
     public function toMap()
     {
-        $res               = [];
-        $res['expiration'] = $this->expiration;
-        $res['method']     = $this->method;
-        $res['url']        = $this->url;
+        $res                = [];
+        $res['expiration']  = $this->expiration;
+        $res['method']      = $this->method;
+        $res['size']        = $this->size;
+        $res['streams_url'] = $this->streamsUrl;
+        $res['url']         = $this->url;
 
         return $res;
     }
@@ -70,6 +90,12 @@ class CCPGetDownloadUrlResponse extends Model
         }
         if (isset($map['method'])) {
             $model->method = $map['method'];
+        }
+        if (isset($map['size'])) {
+            $model->size = $map['size'];
+        }
+        if (isset($map['streams_url'])) {
+            $model->streamsUrl = $map['streams_url'];
         }
         if (isset($map['url'])) {
             $model->url = $map['url'];

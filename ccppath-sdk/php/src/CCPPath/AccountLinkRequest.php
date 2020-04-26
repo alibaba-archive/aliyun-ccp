@@ -18,6 +18,15 @@ class AccountLinkRequest extends Model
     public $detail;
 
     /**
+     * @description 额外的信息，比如type为mobile时，此字段为国家编号，不填默认86
+     *
+     * @example 1
+     *
+     * @var string
+     */
+    public $extra;
+
+    /**
      * @description 唯一身份标识
      *
      * @example 15208333333
@@ -54,6 +63,7 @@ class AccountLinkRequest extends Model
     public $userId;
     protected $_name = [
         'detail'   => 'detail',
+        'extra'    => 'extra',
         'identity' => 'identity',
         'status'   => 'status',
         'type'     => 'type',
@@ -71,6 +81,7 @@ class AccountLinkRequest extends Model
     {
         $res             = [];
         $res['detail']   = $this->detail;
+        $res['extra']    = $this->extra;
         $res['identity'] = $this->identity;
         $res['status']   = $this->status;
         $res['type']     = $this->type;
@@ -89,6 +100,9 @@ class AccountLinkRequest extends Model
         $model = new self();
         if (isset($map['detail'])) {
             $model->detail = $map['detail'];
+        }
+        if (isset($map['extra'])) {
+            $model->extra = $map['extra'];
         }
         if (isset($map['identity'])) {
             $model->identity = $map['identity'];

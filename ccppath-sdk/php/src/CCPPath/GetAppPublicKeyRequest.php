@@ -6,29 +6,28 @@ namespace Aliyun\CCP\SDK\CCPPath;
 
 use AlibabaCloud\Tea\Model;
 
-class ListStoresRequest extends Model
+class GetAppPublicKeyRequest extends Model
 {
     /**
-     * @description domain ID
+     * @description App ID
      *
-     * @example sz100
+     * @example CNMrhxwPJHAReExa
      *
      * @var string
      */
-    public $domainId;
+    public $appId;
     protected $_name = [
-        'domainId' => 'domain_id',
+        'appId' => 'app_id',
     ];
 
     public function validate()
     {
-        Model::validateRequired('domainId', $this->domainId, true);
     }
 
     public function toMap()
     {
-        $res              = [];
-        $res['domain_id'] = $this->domainId;
+        $res           = [];
+        $res['app_id'] = $this->appId;
 
         return $res;
     }
@@ -36,13 +35,13 @@ class ListStoresRequest extends Model
     /**
      * @param array $map
      *
-     * @return ListStoresRequest
+     * @return GetAppPublicKeyRequest
      */
     public static function fromMap($map = [])
     {
         $model = new self();
-        if (isset($map['domain_id'])) {
-            $model->domainId = $map['domain_id'];
+        if (isset($map['app_id'])) {
+            $model->appId = $map['app_id'];
         }
 
         return $model;
