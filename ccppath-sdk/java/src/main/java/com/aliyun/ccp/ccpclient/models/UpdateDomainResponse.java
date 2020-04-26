@@ -4,14 +4,14 @@ package com.aliyun.ccp.ccpclient.models;
 import com.aliyun.tea.*;
 
 /**
- * update domain request
+ * create domain response
  */
-public class UpdateDomainRequest extends TeaModel {
+public class UpdateDomainResponse extends TeaModel {
     @NameInMap("auth_alipay_app_id")
     public String authAlipayAppId;
 
-    @NameInMap("auth_alipay_enbale")
-    public Boolean authAlipayEnbale;
+    @NameInMap("auth_alipay_enable")
+    public Boolean authAlipayEnable;
 
     @NameInMap("auth_alipay_private_key")
     public String authAlipayPrivateKey;
@@ -40,6 +40,9 @@ public class UpdateDomainRequest extends TeaModel {
     @NameInMap("auth_ram_enable")
     public Boolean authRamEnable;
 
+    @NameInMap("created_at")
+    public String createdAt;
+
     @NameInMap("data_hash_name")
     public String dataHashName;
 
@@ -47,7 +50,6 @@ public class UpdateDomainRequest extends TeaModel {
     public String description;
 
     @NameInMap("domain_id")
-    @Validation(required = true)
     public String domainId;
 
     @NameInMap("domain_name")
@@ -77,14 +79,26 @@ public class UpdateDomainRequest extends TeaModel {
     @NameInMap("init_drive_store_id")
     public String initDriveStoreId;
 
+    @NameInMap("path_type")
+    public String pathType;
+
     @NameInMap("published_app_access_strategy")
     public AppAccessStrategy publishedAppAccessStrategy;
 
     @NameInMap("sharable")
     public Boolean sharable;
 
-    public static UpdateDomainRequest build(java.util.Map<String, ?> map) throws Exception {
-        UpdateDomainRequest self = new UpdateDomainRequest();
+    @NameInMap("store_level")
+    public String storeLevel;
+
+    @NameInMap("store_region_list")
+    public java.util.List<String> storeRegionList;
+
+    @NameInMap("updated_at")
+    public String updatedAt;
+
+    public static UpdateDomainResponse build(java.util.Map<String, ?> map) throws Exception {
+        UpdateDomainResponse self = new UpdateDomainResponse();
         return TeaModel.build(map, self);
     }
 

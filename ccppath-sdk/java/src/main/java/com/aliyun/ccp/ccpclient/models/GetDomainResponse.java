@@ -4,14 +4,14 @@ package com.aliyun.ccp.ccpclient.models;
 import com.aliyun.tea.*;
 
 /**
- * create domain request
+ * get domain response
  */
-public class CreateDomainRequest extends TeaModel {
+public class GetDomainResponse extends TeaModel {
     @NameInMap("auth_alipay_app_id")
     public String authAlipayAppId;
 
-    @NameInMap("auth_alipay_enbale")
-    public Boolean authAlipayEnbale;
+    @NameInMap("auth_alipay_enable")
+    public Boolean authAlipayEnable;
 
     @NameInMap("auth_alipay_private_key")
     public String authAlipayPrivateKey;
@@ -40,14 +40,19 @@ public class CreateDomainRequest extends TeaModel {
     @NameInMap("auth_ram_enable")
     public Boolean authRamEnable;
 
+    @NameInMap("created_at")
+    public String createdAt;
+
     @NameInMap("data_hash_name")
     public String dataHashName;
 
     @NameInMap("description")
     public String description;
 
+    @NameInMap("domain_id")
+    public String domainId;
+
     @NameInMap("domain_name")
-    @Validation(required = true)
     public String domainName;
 
     @NameInMap("event_filename_matches")
@@ -71,8 +76,10 @@ public class CreateDomainRequest extends TeaModel {
     @NameInMap("init_drive_size")
     public Long initDriveSize;
 
+    @NameInMap("init_drive_store_id")
+    public String initDriveStoreId;
+
     @NameInMap("path_type")
-    @Validation(required = true)
     public String pathType;
 
     @NameInMap("published_app_access_strategy")
@@ -85,11 +92,13 @@ public class CreateDomainRequest extends TeaModel {
     public String storeLevel;
 
     @NameInMap("store_region_list")
-    @Validation(required = true)
     public java.util.List<String> storeRegionList;
 
-    public static CreateDomainRequest build(java.util.Map<String, ?> map) throws Exception {
-        CreateDomainRequest self = new CreateDomainRequest();
+    @NameInMap("updated_at")
+    public String updatedAt;
+
+    public static GetDomainResponse build(java.util.Map<String, ?> map) throws Exception {
+        GetDomainResponse self = new GetDomainResponse();
         return TeaModel.build(map, self);
     }
 

@@ -19,7 +19,7 @@ public class CCPGetUploadUrlResponse extends TeaModel {
     public String driveId;
 
     @NameInMap("file_id")
-    @Validation(pattern = "[a-z0-9]{1, 50}")
+    @Validation(pattern = "[a-z0-9]{1,50}")
     public String fileId;
 
     @NameInMap("part_info_list")

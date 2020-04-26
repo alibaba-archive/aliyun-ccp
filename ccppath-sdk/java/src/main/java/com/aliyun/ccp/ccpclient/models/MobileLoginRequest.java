@@ -20,12 +20,18 @@ public class MobileLoginRequest extends TeaModel {
     @NameInMap("captcha_text")
     public String captchaText;
 
+    @NameInMap("encrypted_key")
+    public String encryptedKey;
+
     @NameInMap("password")
     public String password;
 
     @NameInMap("phone_number")
     @Validation(required = true)
     public String phoneNumber;
+
+    @NameInMap("phone_region")
+    public String phoneRegion;
 
     @NameInMap("sms_code")
     public String smsCode;

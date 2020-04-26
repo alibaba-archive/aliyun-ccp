@@ -10,6 +10,9 @@ public class AccountLinkRequest extends TeaModel {
     @NameInMap("detail")
     public String detail;
 
+    @NameInMap("extra")
+    public String extra;
+
     @NameInMap("identity")
     @Validation(required = true)
     public String identity;

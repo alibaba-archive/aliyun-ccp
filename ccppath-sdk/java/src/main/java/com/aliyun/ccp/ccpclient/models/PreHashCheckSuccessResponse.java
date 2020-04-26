@@ -17,7 +17,7 @@ public class PreHashCheckSuccessResponse extends TeaModel {
     public String message;
 
     @NameInMap("parent_file_id")
-    @Validation(required = true, pattern = "[a-z0-9]{1, 50}")
+    @Validation(required = true, pattern = "[a-z0-9]{1,50}")
     public String parentFileId;
 
     @NameInMap("pre_hash")
