@@ -7,9 +7,9 @@ namespace Aliyun\CCP\SDK\CCPPath;
 use AlibabaCloud\Tea\Model;
 
 /**
- * update domain request.
+ * base domain response.
  */
-class UpdateDomainRequest extends Model
+class BaseDomainResponse extends Model
 {
     /**
      * @description 支付宝 App Id
@@ -21,13 +21,13 @@ class UpdateDomainRequest extends Model
     public $authAlipayAppId;
 
     /**
-     * @description 启用支付宝认证
+     * @description 是否开启了支付宝认证
      *
      * @example true
      *
      * @var bool
      */
-    public $authAlipayEnbale;
+    public $authAlipayEnable;
 
     /**
      * @description 支付宝 App Secret
@@ -39,6 +39,10 @@ class UpdateDomainRequest extends Model
     public $authAlipayPrivateKey;
 
     /**
+     * @description 登录相关信息
+     *
+     * @example {}
+     *
      * @var object
      */
     public $authConfig;
@@ -62,7 +66,7 @@ class UpdateDomainRequest extends Model
     public $authDingdingAppSecret;
 
     /**
-     * @description 启用钉钉认证
+     * @description 是否开启了钉钉认证
      *
      * @example true
      *
@@ -94,13 +98,22 @@ class UpdateDomainRequest extends Model
     public $authRamAppSecret;
 
     /**
-     * @description 启用 RAM 认证
+     * @description 是否开启了 RAM 认证
      *
      * @example true
      *
      * @var bool
      */
     public $authRamEnable;
+
+    /**
+     * @description Domain 创建时间
+     *
+     * @example "2019-08-31T12:58:31.137Z"
+     *
+     * @var string
+     */
+    public $createdAt;
 
     /**
      * @description 数据 Hash 算法
@@ -130,9 +143,9 @@ class UpdateDomainRequest extends Model
     public $domainId;
 
     /**
-     * @description Domain 名称
+     * @description Domain 描述
      *
-     * @example test_domain
+     * @example my test domain
      *
      * @var string
      */
@@ -182,7 +195,7 @@ class UpdateDomainRequest extends Model
     public $eventRoleArn;
 
     /**
-     * @description 开启自动初始化 Drive
+     * @description 是否开启了自动初始化 Drive
      *
      * @example true
      *
@@ -200,7 +213,7 @@ class UpdateDomainRequest extends Model
     public $initDriveSize;
 
     /**
-     * @description 自动初始化 Drive 使用 Store ID
+     * @description 自动初始化 Drive 所用 Store ID
      *
      * @example 1
      *
@@ -209,21 +222,57 @@ class UpdateDomainRequest extends Model
     public $initDriveStoreId;
 
     /**
+     * @description Domain 类型
+     *
+     * @example CCPPath
+     *
+     * @var string
+     */
+    public $pathType;
+
+    /**
      * @var AppAccessStrategy
      */
     public $publishedAppAccessStrategy;
 
     /**
-     * @description 开启分享
+     * @description 是否开启了分享
      *
      * @example true
      *
      * @var bool
      */
     public $sharable;
+
+    /**
+     * @description 存储级别
+     *
+     * @example Standard
+     *
+     * @var string
+     */
+    public $storeLevel;
+
+    /**
+     * @description 存储 Region 列表
+     *
+     * @example cn-hangzhou
+     *
+     * @var array
+     */
+    public $storeRegionList;
+
+    /**
+     * @description Domain 更新时间
+     *
+     * @example "2019-08-31T12:58:31.137Z"
+     *
+     * @var string
+     */
+    public $updatedAt;
     protected $_name = [
         'authAlipayAppId'            => 'auth_alipay_app_id',
-        'authAlipayEnbale'           => 'auth_alipay_enbale',
+        'authAlipayEnable'           => 'auth_alipay_enable',
         'authAlipayPrivateKey'       => 'auth_alipay_private_key',
         'authConfig'                 => 'auth_config',
         'authDingdingAppId'          => 'auth_dingding_app_id',
@@ -233,6 +282,7 @@ class UpdateDomainRequest extends Model
         'authRamAppId'               => 'auth_ram_app_id',
         'authRamAppSecret'           => 'auth_ram_app_secret',
         'authRamEnable'              => 'auth_ram_enable',
+        'createdAt'                  => 'created_at',
         'dataHashName'               => 'data_hash_name',
         'description'                => 'description',
         'domainId'                   => 'domain_id',
@@ -245,20 +295,23 @@ class UpdateDomainRequest extends Model
         'initDriveEnable'            => 'init_drive_enable',
         'initDriveSize'              => 'init_drive_size',
         'initDriveStoreId'           => 'init_drive_store_id',
+        'pathType'                   => 'path_type',
         'publishedAppAccessStrategy' => 'published_app_access_strategy',
         'sharable'                   => 'sharable',
+        'storeLevel'                 => 'store_level',
+        'storeRegionList'            => 'store_region_list',
+        'updatedAt'                  => 'updated_at',
     ];
 
     public function validate()
     {
-        Model::validateRequired('domainId', $this->domainId, true);
     }
 
     public function toMap()
     {
         $res                             = [];
         $res['auth_alipay_app_id']       = $this->authAlipayAppId;
-        $res['auth_alipay_enbale']       = $this->authAlipayEnbale;
+        $res['auth_alipay_enable']       = $this->authAlipayEnable;
         $res['auth_alipay_private_key']  = $this->authAlipayPrivateKey;
         $res['auth_config']              = $this->authConfig;
         $res['auth_dingding_app_id']     = $this->authDingdingAppId;
@@ -268,6 +321,7 @@ class UpdateDomainRequest extends Model
         $res['auth_ram_app_id']          = $this->authRamAppId;
         $res['auth_ram_app_secret']      = $this->authRamAppSecret;
         $res['auth_ram_enable']          = $this->authRamEnable;
+        $res['created_at']               = $this->createdAt;
         $res['data_hash_name']           = $this->dataHashName;
         $res['description']              = $this->description;
         $res['domain_id']                = $this->domainId;
@@ -283,8 +337,15 @@ class UpdateDomainRequest extends Model
         $res['init_drive_enable']             = $this->initDriveEnable;
         $res['init_drive_size']               = $this->initDriveSize;
         $res['init_drive_store_id']           = $this->initDriveStoreId;
+        $res['path_type']                     = $this->pathType;
         $res['published_app_access_strategy'] = null !== $this->publishedAppAccessStrategy ? $this->publishedAppAccessStrategy->toMap() : null;
         $res['sharable']                      = $this->sharable;
+        $res['store_level']                   = $this->storeLevel;
+        $res['store_region_list']             = [];
+        if (null !== $this->storeRegionList) {
+            $res['store_region_list'] = $this->storeRegionList;
+        }
+        $res['updated_at'] = $this->updatedAt;
 
         return $res;
     }
@@ -292,7 +353,7 @@ class UpdateDomainRequest extends Model
     /**
      * @param array $map
      *
-     * @return UpdateDomainRequest
+     * @return BaseDomainResponse
      */
     public static function fromMap($map = [])
     {
@@ -300,8 +361,8 @@ class UpdateDomainRequest extends Model
         if (isset($map['auth_alipay_app_id'])) {
             $model->authAlipayAppId = $map['auth_alipay_app_id'];
         }
-        if (isset($map['auth_alipay_enbale'])) {
-            $model->authAlipayEnbale = $map['auth_alipay_enbale'];
+        if (isset($map['auth_alipay_enable'])) {
+            $model->authAlipayEnable = $map['auth_alipay_enable'];
         }
         if (isset($map['auth_alipay_private_key'])) {
             $model->authAlipayPrivateKey = $map['auth_alipay_private_key'];
@@ -329,6 +390,9 @@ class UpdateDomainRequest extends Model
         }
         if (isset($map['auth_ram_enable'])) {
             $model->authRamEnable = $map['auth_ram_enable'];
+        }
+        if (isset($map['created_at'])) {
+            $model->createdAt = $map['created_at'];
         }
         if (isset($map['data_hash_name'])) {
             $model->dataHashName = $map['data_hash_name'];
@@ -369,11 +433,26 @@ class UpdateDomainRequest extends Model
         if (isset($map['init_drive_store_id'])) {
             $model->initDriveStoreId = $map['init_drive_store_id'];
         }
+        if (isset($map['path_type'])) {
+            $model->pathType = $map['path_type'];
+        }
         if (isset($map['published_app_access_strategy'])) {
             $model->publishedAppAccessStrategy = AppAccessStrategy::fromMap($map['published_app_access_strategy']);
         }
         if (isset($map['sharable'])) {
             $model->sharable = $map['sharable'];
+        }
+        if (isset($map['store_level'])) {
+            $model->storeLevel = $map['store_level'];
+        }
+        if (isset($map['store_region_list'])) {
+            if (!empty($map['store_region_list'])) {
+                $model->storeRegionList = [];
+                $model->storeRegionList = $map['store_region_list'];
+            }
+        }
+        if (isset($map['updated_at'])) {
+            $model->updatedAt = $map['updated_at'];
         }
 
         return $model;

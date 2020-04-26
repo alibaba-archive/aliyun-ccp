@@ -36,6 +36,15 @@ class LinkInfoResponse extends Model
     public $domainId;
 
     /**
+     * @description 额外的信息，比如type为mobile时，此字段为国家编号，不填默认86
+     *
+     * @example 1
+     *
+     * @var string
+     */
+    public $extra;
+
+    /**
      * @description 唯一身份标识
      *
      * @example 15208345000
@@ -74,6 +83,7 @@ class LinkInfoResponse extends Model
         'authenticationType' => 'authentication_type',
         'createdAt'          => 'created_at',
         'domainId'           => 'domain_id',
+        'extra'              => 'extra',
         'identity'           => 'identity',
         'lastLoginTime'      => 'last_login_time',
         'status'             => 'status',
@@ -97,6 +107,7 @@ class LinkInfoResponse extends Model
         $res['authentication_type'] = $this->authenticationType;
         $res['created_at']          = $this->createdAt;
         $res['domain_id']           = $this->domainId;
+        $res['extra']               = $this->extra;
         $res['identity']            = $this->identity;
         $res['last_login_time']     = $this->lastLoginTime;
         $res['status']              = $this->status;
@@ -121,6 +132,9 @@ class LinkInfoResponse extends Model
         }
         if (isset($map['domain_id'])) {
             $model->domainId = $map['domain_id'];
+        }
+        if (isset($map['extra'])) {
+            $model->extra = $map['extra'];
         }
         if (isset($map['identity'])) {
             $model->identity = $map['identity'];

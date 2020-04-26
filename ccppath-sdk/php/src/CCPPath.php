@@ -12,6 +12,12 @@ use AlibabaCloud\Tea\RoaUtils\RoaUtils;
 use AlibabaCloud\Tea\Tea;
 use AlibabaCloud\Tea\Utils\Utils;
 use Aliyun\CCP\Credentials\CCPCredentials;
+use Aliyun\CCP\SDK\CCPPath\AccountRevokeModel;
+use Aliyun\CCP\SDK\CCPPath\AccountRevokeRequestModel;
+use Aliyun\CCP\SDK\CCPPath\AccountTokenModel;
+use Aliyun\CCP\SDK\CCPPath\AccountTokenRequestModel;
+use Aliyun\CCP\SDK\CCPPath\AdminListStoresModel;
+use Aliyun\CCP\SDK\CCPPath\AdminListStoresRequestModel;
 use Aliyun\CCP\SDK\CCPPath\BatchOperationModel;
 use Aliyun\CCP\SDK\CCPPath\BatchOperationRequestModel;
 use Aliyun\CCP\SDK\CCPPath\CancelLinkModel;
@@ -65,8 +71,12 @@ use Aliyun\CCP\SDK\CCPPath\GetLinkInfoModel;
 use Aliyun\CCP\SDK\CCPPath\GetLinkInfoRequestModel;
 use Aliyun\CCP\SDK\CCPPath\GetPhotoCountModel;
 use Aliyun\CCP\SDK\CCPPath\GetPhotoCountRequestModel;
+use Aliyun\CCP\SDK\CCPPath\GetPublicKeyModel;
+use Aliyun\CCP\SDK\CCPPath\GetPublicKeyRequestModel;
 use Aliyun\CCP\SDK\CCPPath\GetUploadUrlModel;
 use Aliyun\CCP\SDK\CCPPath\GetUploadUrlRequestModel;
+use Aliyun\CCP\SDK\CCPPath\GetUserAccessTokenModel;
+use Aliyun\CCP\SDK\CCPPath\GetUserAccessTokenRequestModel;
 use Aliyun\CCP\SDK\CCPPath\GetUserModel;
 use Aliyun\CCP\SDK\CCPPath\GetUserRequestModel;
 use Aliyun\CCP\SDK\CCPPath\LinkModel;
@@ -110,8 +120,6 @@ use Aliyun\CCP\SDK\CCPPath\SearchUserModel;
 use Aliyun\CCP\SDK\CCPPath\SearchUserRequestModel;
 use Aliyun\CCP\SDK\CCPPath\SetPasswordModel;
 use Aliyun\CCP\SDK\CCPPath\SetPasswordRequestModel;
-use Aliyun\CCP\SDK\CCPPath\TokenModel;
-use Aliyun\CCP\SDK\CCPPath\TokenRequestModel;
 use Aliyun\CCP\SDK\CCPPath\UpdateDriveModel;
 use Aliyun\CCP\SDK\CCPPath\UpdateDriveRequestModel;
 use Aliyun\CCP\SDK\CCPPath\UpdateFacegroupInfoModel;
@@ -120,6 +128,8 @@ use Aliyun\CCP\SDK\CCPPath\UpdateFileModel;
 use Aliyun\CCP\SDK\CCPPath\UpdateFileRequestModel;
 use Aliyun\CCP\SDK\CCPPath\UpdateUserModel;
 use Aliyun\CCP\SDK\CCPPath\UpdateUserRequestModel;
+use Aliyun\CCP\SDK\CCPPath\VerifyCodeModel;
+use Aliyun\CCP\SDK\CCPPath\VerifyCodeRequestModel;
 
 class CCPPath
 {
@@ -306,6 +316,7 @@ class CCPPath
      *
      * @tags account
      * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+     * @error AccessTokenInvalid AccessToken is invalid. {message}
      * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
      * @error NotFound The resource {resource_name} cannot be found. Please check.
      * @error InternalError The request has been failed due to some unknown error.
@@ -428,11 +439,12 @@ class CCPPath
     }
 
     /**
-     * 修改手机登录密码，密码必须包含数字和字母，长度8-32个字符.
+     * 修改手机登录密码，密码必须包含数字和字母，长度8-20个字符.
      *
      * @tags account
      * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
      * @error Forbidden User not authorized to operate on the specified APIs.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
      * @error InternalError The request has been failed due to some unknown error.
      *
      * @throws \Exception
@@ -509,8 +521,12 @@ class CCPPath
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
                 $obj            = null;
-                if (Utils::equalNumber($_response->statusCode, 204)) {
+                if (Utils::equalNumber($_response->statusCode, 200)) {
+                    $obj     = Utils::readAsJSON($_response->body);
+                    $respMap = Utils::assertAsMap($obj);
+
                     return ChangePasswordModel::fromMap([
+                        'body'    => $respMap,
                         'headers' => $_response->headers,
                     ]);
                 }
@@ -549,11 +565,12 @@ class CCPPath
     }
 
     /**
-     * 设置手机登录密码，密码必须包含数字和字母，长度8-32个字符.
+     * 设置手机登录密码，密码必须包含数字和字母，长度8-20个字符.
      *
      * @tags account
      * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
      * @error Forbidden User not authorized to operate on the specified APIs.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
      * @error InternalError The request has been failed due to some unknown error.
      *
      * @throws \Exception
@@ -632,6 +649,132 @@ class CCPPath
                 $obj            = null;
                 if (Utils::equalNumber($_response->statusCode, 204)) {
                     return SetPasswordModel::fromMap([
+                        'headers' => $_response->headers,
+                    ]);
+                }
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
+                    throw new TeaError([
+                        'data' => [
+                            'requestId'     => $_response->headers['x-ca-request-id'],
+                            'statusCode'    => $_response->statusCode,
+                            'statusMessage' => $_response->statusMessage,
+                        ],
+                        'message' => $_response->headers['x-ca-error-message'],
+                    ]);
+                }
+                $obj     = Utils::readAsJSON($_response->body);
+                $respMap = Utils::assertAsMap($obj);
+
+                throw new TeaError(Tea::merge([
+                    'data' => [
+                        'requestId'     => $_response->headers['x-ca-request-id'],
+                        'statusCode'    => $_response->statusCode,
+                        'statusMessage' => $_response->statusMessage,
+                    ],
+                ], $respMap));
+            } catch (\Exception $e) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
+                    continue;
+                }
+
+                throw $e;
+            }
+        }
+
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
+    }
+
+    /**
+     * 校验手机短信验证码，用于重置密码时校验手机，通过校验后返回state，可通过state重新设置密码
+     *
+     * @tags account
+     * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+     * @error Forbidden User not authorized to operate on the specified APIs.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
+     * @error InternalError The request has been failed due to some unknown error.
+     *
+     * @throws \Exception
+     *
+     * @return VerifyCodeModel
+     */
+    public function verifyCode(VerifyCodeRequestModel $request, RuntimeOptions $runtime)
+    {
+        $request->validate();
+        $runtime->validate();
+        $_runtime = [
+            'timeouted'      => 'retry',
+            'readTimeout'    => $runtime->readTimeout,
+            'connectTimeout' => $runtime->connectTimeout,
+            'localAddr'      => $runtime->localAddr,
+            'httpProxy'      => $runtime->httpProxy,
+            'httpsProxy'     => $runtime->httpsProxy,
+            'noProxy'        => $runtime->noProxy,
+            'maxIdleConns'   => $runtime->maxIdleConns,
+            'socks5Proxy'    => $runtime->socks5Proxy,
+            'socks5NetWork'  => $runtime->socks5NetWork,
+            'retry'          => [
+                'retryable'   => $runtime->autoretry,
+                'maxAttempts' => Utils::defaultNumber($runtime->maxAttempts, 3),
+            ],
+            'backoff' => [
+                'policy' => Utils::defaultString($runtime->backoffPolicy, 'no'),
+                'period' => Utils::defaultNumber($runtime->backoffPeriod, 1),
+            ],
+            'ignoreSSL' => $runtime->ignoreSSL,
+        ];
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
+        while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
+            if ($_retryTimes > 0) {
+                $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
+                if ($_backoffTime > 0) {
+                    Tea::sleep($_backoffTime);
+                }
+            }
+            $_retryTimes = $_retryTimes + 1;
+
+            try {
+                $_request           = new Request();
+                $accesskeyId        = $this->getAccessKeyId();
+                $accessKeySecret    = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
+                $accessToken        = $this->getAccessToken();
+                $_request->protocol = Utils::defaultString($this->_protocol, 'https');
+                $_request->method   = 'POST';
+                $_request->pathname = $this->getPathname($this->_nickname, '/v2/account/default/verify_code');
+                $_request->headers  = Tea::merge([
+                    'user-agent'   => $this->getUserAgent(),
+                    'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.auth.alicloudccp.com'),
+                    'content-type' => 'application/json; charset=utf-8',
+                ], $request->headers);
+                if (!Utils::empty_($accessToken)) {
+                    $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
+                        $_request->headers['x-acs-security-token'] = $securityToken;
+                    }
+                    $_request->headers['date']                    = Utils::getDateUTCString();
+                    $_request->headers['accept']                  = 'application/json';
+                    $_request->headers['x-acs-signature-method']  = 'HMAC-SHA1';
+                    $_request->headers['x-acs-signature-version'] = '1.0';
+                    $stringToSign                                 = RoaUtils::getStringToSign($_request);
+                    $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
+                }
+                $_request->body = Utils::toJSONString($request->body);
+                $_lastRequest   = $_request;
+                $_response      = Tea::send($_request, $_runtime);
+                $respMap        = null;
+                $obj            = null;
+                if (Utils::equalNumber($_response->statusCode, 200)) {
+                    $obj     = Utils::readAsJSON($_response->body);
+                    $respMap = Utils::assertAsMap($obj);
+
+                    return VerifyCodeModel::fromMap([
+                        'body'    => $respMap,
                         'headers' => $_response->headers,
                     ]);
                 }
@@ -801,6 +944,7 @@ class CCPPath
      * @tags account
      * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
      * @error Forbidden User not authorized to operate on the specified APIs.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
      * @error InternalError The request has been failed due to some unknown error.
      *
      * @throws \Exception
@@ -1133,6 +1277,132 @@ class CCPPath
                     $respMap = Utils::assertAsMap($obj);
 
                     return GetLinkInfoByUserIdModel::fromMap([
+                        'body'    => $respMap,
+                        'headers' => $_response->headers,
+                    ]);
+                }
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
+                    throw new TeaError([
+                        'data' => [
+                            'requestId'     => $_response->headers['x-ca-request-id'],
+                            'statusCode'    => $_response->statusCode,
+                            'statusMessage' => $_response->statusMessage,
+                        ],
+                        'message' => $_response->headers['x-ca-error-message'],
+                    ]);
+                }
+                $obj     = Utils::readAsJSON($_response->body);
+                $respMap = Utils::assertAsMap($obj);
+
+                throw new TeaError(Tea::merge([
+                    'data' => [
+                        'requestId'     => $_response->headers['x-ca-request-id'],
+                        'statusCode'    => $_response->statusCode,
+                        'statusMessage' => $_response->statusMessage,
+                    ],
+                ], $respMap));
+            } catch (\Exception $e) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
+                    continue;
+                }
+
+                throw $e;
+            }
+        }
+
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
+    }
+
+    /**
+     * 获取公钥，用于加密对称密钥.
+     *
+     * @tags account
+     * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+     * @error Forbidden User not authorized to operate on the specified APIs.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
+     * @error InternalError The request has been failed due to some unknown error.
+     *
+     * @throws \Exception
+     *
+     * @return GetPublicKeyModel
+     */
+    public function getPublicKey(GetPublicKeyRequestModel $request, RuntimeOptions $runtime)
+    {
+        $request->validate();
+        $runtime->validate();
+        $_runtime = [
+            'timeouted'      => 'retry',
+            'readTimeout'    => $runtime->readTimeout,
+            'connectTimeout' => $runtime->connectTimeout,
+            'localAddr'      => $runtime->localAddr,
+            'httpProxy'      => $runtime->httpProxy,
+            'httpsProxy'     => $runtime->httpsProxy,
+            'noProxy'        => $runtime->noProxy,
+            'maxIdleConns'   => $runtime->maxIdleConns,
+            'socks5Proxy'    => $runtime->socks5Proxy,
+            'socks5NetWork'  => $runtime->socks5NetWork,
+            'retry'          => [
+                'retryable'   => $runtime->autoretry,
+                'maxAttempts' => Utils::defaultNumber($runtime->maxAttempts, 3),
+            ],
+            'backoff' => [
+                'policy' => Utils::defaultString($runtime->backoffPolicy, 'no'),
+                'period' => Utils::defaultNumber($runtime->backoffPeriod, 1),
+            ],
+            'ignoreSSL' => $runtime->ignoreSSL,
+        ];
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
+        while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
+            if ($_retryTimes > 0) {
+                $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
+                if ($_backoffTime > 0) {
+                    Tea::sleep($_backoffTime);
+                }
+            }
+            $_retryTimes = $_retryTimes + 1;
+
+            try {
+                $_request           = new Request();
+                $accesskeyId        = $this->getAccessKeyId();
+                $accessKeySecret    = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
+                $accessToken        = $this->getAccessToken();
+                $_request->protocol = Utils::defaultString($this->_protocol, 'https');
+                $_request->method   = 'POST';
+                $_request->pathname = $this->getPathname($this->_nickname, '/v2/account/get_public_key');
+                $_request->headers  = Tea::merge([
+                    'user-agent'   => $this->getUserAgent(),
+                    'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.auth.alicloudccp.com'),
+                    'content-type' => 'application/json; charset=utf-8',
+                ], $request->headers);
+                if (!Utils::empty_($accessToken)) {
+                    $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
+                        $_request->headers['x-acs-security-token'] = $securityToken;
+                    }
+                    $_request->headers['date']                    = Utils::getDateUTCString();
+                    $_request->headers['accept']                  = 'application/json';
+                    $_request->headers['x-acs-signature-method']  = 'HMAC-SHA1';
+                    $_request->headers['x-acs-signature-version'] = '1.0';
+                    $stringToSign                                 = RoaUtils::getStringToSign($_request);
+                    $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
+                }
+                $_request->body = Utils::toJSONString($request->body);
+                $_lastRequest   = $_request;
+                $_response      = Tea::send($_request, $_runtime);
+                $respMap        = null;
+                $obj            = null;
+                if (Utils::equalNumber($_response->statusCode, 200)) {
+                    $obj     = Utils::readAsJSON($_response->body);
+                    $respMap = Utils::assertAsMap($obj);
+
+                    return GetPublicKeyModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
                     ]);
@@ -1556,6 +1826,7 @@ class CCPPath
      * @tags account
      * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
      * @error Forbidden User not authorized to operate on the specified APIs.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
      * @error AlreadyExist {resource} has already exists. {extra_msg}
      * @error InternalError The request has been failed due to some unknown error.
      *
@@ -1682,6 +1953,7 @@ class CCPPath
      * @tags account
      * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
      * @error Forbidden User not authorized to operate on the specified APIs.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
      * @error InternalError The request has been failed due to some unknown error.
      *
      * @throws \Exception
@@ -1802,18 +2074,141 @@ class CCPPath
     }
 
     /**
+     * 用户退出登录.
+     *
+     * @tags account
+     * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+     * @error Forbidden User not authorized to operate on the specified APIs.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
+     * @error InternalError The request has been failed due to some unknown error.
+     *
+     * @throws \Exception
+     *
+     * @return AccountRevokeModel
+     */
+    public function accountRevoke(AccountRevokeRequestModel $request, RuntimeOptions $runtime)
+    {
+        $request->validate();
+        $runtime->validate();
+        $_runtime = [
+            'timeouted'      => 'retry',
+            'readTimeout'    => $runtime->readTimeout,
+            'connectTimeout' => $runtime->connectTimeout,
+            'localAddr'      => $runtime->localAddr,
+            'httpProxy'      => $runtime->httpProxy,
+            'httpsProxy'     => $runtime->httpsProxy,
+            'noProxy'        => $runtime->noProxy,
+            'maxIdleConns'   => $runtime->maxIdleConns,
+            'socks5Proxy'    => $runtime->socks5Proxy,
+            'socks5NetWork'  => $runtime->socks5NetWork,
+            'retry'          => [
+                'retryable'   => $runtime->autoretry,
+                'maxAttempts' => Utils::defaultNumber($runtime->maxAttempts, 3),
+            ],
+            'backoff' => [
+                'policy' => Utils::defaultString($runtime->backoffPolicy, 'no'),
+                'period' => Utils::defaultNumber($runtime->backoffPeriod, 1),
+            ],
+            'ignoreSSL' => $runtime->ignoreSSL,
+        ];
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
+        while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
+            if ($_retryTimes > 0) {
+                $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
+                if ($_backoffTime > 0) {
+                    Tea::sleep($_backoffTime);
+                }
+            }
+            $_retryTimes = $_retryTimes + 1;
+
+            try {
+                $_request           = new Request();
+                $accesskeyId        = $this->getAccessKeyId();
+                $accessKeySecret    = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
+                $accessToken        = $this->getAccessToken();
+                $_request->protocol = Utils::defaultString($this->_protocol, 'https');
+                $_request->method   = 'POST';
+                $_request->pathname = $this->getPathname($this->_nickname, '/v2/account/revoke');
+                $_request->headers  = Tea::merge([
+                    'user-agent'   => $this->getUserAgent(),
+                    'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.auth.alicloudccp.com'),
+                    'content-type' => 'application/json; charset=utf-8',
+                ], $request->headers);
+                if (!Utils::empty_($accessToken)) {
+                    $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
+                        $_request->headers['x-acs-security-token'] = $securityToken;
+                    }
+                    $_request->headers['date']                    = Utils::getDateUTCString();
+                    $_request->headers['accept']                  = 'application/json';
+                    $_request->headers['x-acs-signature-method']  = 'HMAC-SHA1';
+                    $_request->headers['x-acs-signature-version'] = '1.0';
+                    $stringToSign                                 = RoaUtils::getStringToSign($_request);
+                    $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
+                }
+                $_request->body = Utils::toJSONString($request->body);
+                $_lastRequest   = $_request;
+                $_response      = Tea::send($_request, $_runtime);
+                $respMap        = null;
+                $obj            = null;
+                if (Utils::equalNumber($_response->statusCode, 204)) {
+                    return AccountRevokeModel::fromMap([
+                        'headers' => $_response->headers,
+                    ]);
+                }
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
+                    throw new TeaError([
+                        'data' => [
+                            'requestId'     => $_response->headers['x-ca-request-id'],
+                            'statusCode'    => $_response->statusCode,
+                            'statusMessage' => $_response->statusMessage,
+                        ],
+                        'message' => $_response->headers['x-ca-error-message'],
+                    ]);
+                }
+                $obj     = Utils::readAsJSON($_response->body);
+                $respMap = Utils::assertAsMap($obj);
+
+                throw new TeaError(Tea::merge([
+                    'data' => [
+                        'requestId'     => $_response->headers['x-ca-request-id'],
+                        'statusCode'    => $_response->statusCode,
+                        'statusMessage' => $_response->statusMessage,
+                    ],
+                ], $respMap));
+            } catch (\Exception $e) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
+                    continue;
+                }
+
+                throw $e;
+            }
+        }
+
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
+    }
+
+    /**
      * 用户通过刷新令牌（refresh_token）获取访问令牌（access_token）.
      *
      * @tags account
      * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
      * @error Forbidden User not authorized to operate on the specified APIs.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
      * @error InternalError The request has been failed due to some unknown error.
      *
      * @throws \Exception
      *
-     * @return TokenModel
+     * @return AccountTokenModel
      */
-    public function token(TokenRequestModel $request, RuntimeOptions $runtime)
+    public function accountToken(AccountTokenRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -1887,7 +2282,259 @@ class CCPPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return TokenModel::fromMap([
+                    return AccountTokenModel::fromMap([
+                        'body'    => $respMap,
+                        'headers' => $_response->headers,
+                    ]);
+                }
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
+                    throw new TeaError([
+                        'data' => [
+                            'requestId'     => $_response->headers['x-ca-request-id'],
+                            'statusCode'    => $_response->statusCode,
+                            'statusMessage' => $_response->statusMessage,
+                        ],
+                        'message' => $_response->headers['x-ca-error-message'],
+                    ]);
+                }
+                $obj     = Utils::readAsJSON($_response->body);
+                $respMap = Utils::assertAsMap($obj);
+
+                throw new TeaError(Tea::merge([
+                    'data' => [
+                        'requestId'     => $_response->headers['x-ca-request-id'],
+                        'statusCode'    => $_response->statusCode,
+                        'statusMessage' => $_response->statusMessage,
+                    ],
+                ], $respMap));
+            } catch (\Exception $e) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
+                    continue;
+                }
+
+                throw $e;
+            }
+        }
+
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
+    }
+
+    /**
+     * 列举Store列表.
+     *
+     * @tags admin
+     * @error InvalidParameter The input parameter {parameter_name} is not valid.
+     * @error Forbidden User not authorized to operate on the specified APIs.
+     * @error InternalError The request has been failed due to some unknown error.
+     *
+     * @throws \Exception
+     *
+     * @return AdminListStoresModel
+     */
+    public function adminListStores(AdminListStoresRequestModel $request, RuntimeOptions $runtime)
+    {
+        $request->validate();
+        $runtime->validate();
+        $_runtime = [
+            'timeouted'      => 'retry',
+            'readTimeout'    => $runtime->readTimeout,
+            'connectTimeout' => $runtime->connectTimeout,
+            'localAddr'      => $runtime->localAddr,
+            'httpProxy'      => $runtime->httpProxy,
+            'httpsProxy'     => $runtime->httpsProxy,
+            'noProxy'        => $runtime->noProxy,
+            'maxIdleConns'   => $runtime->maxIdleConns,
+            'socks5Proxy'    => $runtime->socks5Proxy,
+            'socks5NetWork'  => $runtime->socks5NetWork,
+            'retry'          => [
+                'retryable'   => $runtime->autoretry,
+                'maxAttempts' => Utils::defaultNumber($runtime->maxAttempts, 3),
+            ],
+            'backoff' => [
+                'policy' => Utils::defaultString($runtime->backoffPolicy, 'no'),
+                'period' => Utils::defaultNumber($runtime->backoffPeriod, 1),
+            ],
+            'ignoreSSL' => $runtime->ignoreSSL,
+        ];
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
+        while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
+            if ($_retryTimes > 0) {
+                $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
+                if ($_backoffTime > 0) {
+                    Tea::sleep($_backoffTime);
+                }
+            }
+            $_retryTimes = $_retryTimes + 1;
+
+            try {
+                $_request           = new Request();
+                $accesskeyId        = $this->getAccessKeyId();
+                $accessKeySecret    = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
+                $accessToken        = $this->getAccessToken();
+                $_request->protocol = Utils::defaultString($this->_protocol, 'https');
+                $_request->method   = 'POST';
+                $_request->pathname = $this->getPathname($this->_nickname, '/v2/domain/list_stores');
+                $_request->headers  = Tea::merge([
+                    'user-agent'   => $this->getUserAgent(),
+                    'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
+                    'content-type' => 'application/json; charset=utf-8',
+                ], $request->headers);
+                if (!Utils::empty_($accessToken)) {
+                    $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
+                        $_request->headers['x-acs-security-token'] = $securityToken;
+                    }
+                    $_request->headers['date']                    = Utils::getDateUTCString();
+                    $_request->headers['accept']                  = 'application/json';
+                    $_request->headers['x-acs-signature-method']  = 'HMAC-SHA1';
+                    $_request->headers['x-acs-signature-version'] = '1.0';
+                    $stringToSign                                 = RoaUtils::getStringToSign($_request);
+                    $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
+                }
+                $_request->body = Utils::toJSONString($request->body);
+                $_lastRequest   = $_request;
+                $_response      = Tea::send($_request, $_runtime);
+                $respMap        = null;
+                $obj            = null;
+                if (Utils::equalNumber($_response->statusCode, 200)) {
+                    $obj     = Utils::readAsJSON($_response->body);
+                    $respMap = Utils::assertAsMap($obj);
+
+                    return AdminListStoresModel::fromMap([
+                        'body'    => $respMap,
+                        'headers' => $_response->headers,
+                    ]);
+                }
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
+                    throw new TeaError([
+                        'data' => [
+                            'requestId'     => $_response->headers['x-ca-request-id'],
+                            'statusCode'    => $_response->statusCode,
+                            'statusMessage' => $_response->statusMessage,
+                        ],
+                        'message' => $_response->headers['x-ca-error-message'],
+                    ]);
+                }
+                $obj     = Utils::readAsJSON($_response->body);
+                $respMap = Utils::assertAsMap($obj);
+
+                throw new TeaError(Tea::merge([
+                    'data' => [
+                        'requestId'     => $_response->headers['x-ca-request-id'],
+                        'statusCode'    => $_response->statusCode,
+                        'statusMessage' => $_response->statusMessage,
+                    ],
+                ], $respMap));
+            } catch (\Exception $e) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
+                    continue;
+                }
+
+                throw $e;
+            }
+        }
+
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
+    }
+
+    /**
+     * 获取用户的accessToken.
+     *
+     * @tags admin
+     * @error undefined undefined
+     * @error undefined undefined
+     * @error undefined undefined
+     * @error undefined undefined
+     * @error undefined undefined
+     *
+     * @throws \Exception
+     *
+     * @return GetUserAccessTokenModel
+     */
+    public function getUserAccessToken(GetUserAccessTokenRequestModel $request, RuntimeOptions $runtime)
+    {
+        $request->validate();
+        $runtime->validate();
+        $_runtime = [
+            'timeouted'      => 'retry',
+            'readTimeout'    => $runtime->readTimeout,
+            'connectTimeout' => $runtime->connectTimeout,
+            'localAddr'      => $runtime->localAddr,
+            'httpProxy'      => $runtime->httpProxy,
+            'httpsProxy'     => $runtime->httpsProxy,
+            'noProxy'        => $runtime->noProxy,
+            'maxIdleConns'   => $runtime->maxIdleConns,
+            'socks5Proxy'    => $runtime->socks5Proxy,
+            'socks5NetWork'  => $runtime->socks5NetWork,
+            'retry'          => [
+                'retryable'   => $runtime->autoretry,
+                'maxAttempts' => Utils::defaultNumber($runtime->maxAttempts, 3),
+            ],
+            'backoff' => [
+                'policy' => Utils::defaultString($runtime->backoffPolicy, 'no'),
+                'period' => Utils::defaultNumber($runtime->backoffPeriod, 1),
+            ],
+            'ignoreSSL' => $runtime->ignoreSSL,
+        ];
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
+        while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
+            if ($_retryTimes > 0) {
+                $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
+                if ($_backoffTime > 0) {
+                    Tea::sleep($_backoffTime);
+                }
+            }
+            $_retryTimes = $_retryTimes + 1;
+
+            try {
+                $_request           = new Request();
+                $accesskeyId        = $this->getAccessKeyId();
+                $accessKeySecret    = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
+                $accessToken        = $this->getAccessToken();
+                $_request->protocol = Utils::defaultString($this->_protocol, 'https');
+                $_request->method   = 'POST';
+                $_request->pathname = $this->getPathname($this->_nickname, '/v2/user/get_access_token');
+                $_request->headers  = Tea::merge([
+                    'user-agent'   => $this->getUserAgent(),
+                    'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
+                    'content-type' => 'application/json; charset=utf-8',
+                ], $request->headers);
+                if (!Utils::empty_($accessToken)) {
+                    $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
+                        $_request->headers['x-acs-security-token'] = $securityToken;
+                    }
+                    $_request->headers['date']                    = Utils::getDateUTCString();
+                    $_request->headers['accept']                  = 'application/json';
+                    $_request->headers['x-acs-signature-method']  = 'HMAC-SHA1';
+                    $_request->headers['x-acs-signature-version'] = '1.0';
+                    $stringToSign                                 = RoaUtils::getStringToSign($_request);
+                    $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
+                }
+                $_request->body = Utils::toJSONString($request->body);
+                $_lastRequest   = $_request;
+                $_response      = Tea::send($_request, $_runtime);
+                $respMap        = null;
+                $obj            = null;
+                if (Utils::equalNumber($_response->statusCode, 200)) {
+                    $obj     = Utils::readAsJSON($_response->body);
+                    $respMap = Utils::assertAsMap($obj);
+
+                    return GetUserAccessTokenModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
                     ]);

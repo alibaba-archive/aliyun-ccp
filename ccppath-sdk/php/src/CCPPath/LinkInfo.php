@@ -9,6 +9,15 @@ use AlibabaCloud\Tea\Model;
 class LinkInfo extends Model
 {
     /**
+     * @description 额外的信息，比如type为mobile时，此字段为国家编号，不填默认86
+     *
+     * @example 1
+     *
+     * @var string
+     */
+    public $extra;
+
+    /**
      * @description 当前用户已存在的登录标识
      *
      * @example 15208345000
@@ -26,6 +35,7 @@ class LinkInfo extends Model
      */
     public $type;
     protected $_name = [
+        'extra'    => 'extra',
         'identity' => 'identity',
         'type'     => 'type',
     ];
@@ -37,6 +47,7 @@ class LinkInfo extends Model
     public function toMap()
     {
         $res             = [];
+        $res['extra']    = $this->extra;
         $res['identity'] = $this->identity;
         $res['type']     = $this->type;
 
@@ -51,6 +62,9 @@ class LinkInfo extends Model
     public static function fromMap($map = [])
     {
         $model = new self();
+        if (isset($map['extra'])) {
+            $model->extra = $map['extra'];
+        }
         if (isset($map['identity'])) {
             $model->identity = $map['identity'];
         }

@@ -6,29 +6,24 @@ namespace Aliyun\CCP\SDK\CCPPath;
 
 use AlibabaCloud\Tea\Model;
 
-class DeleteAppRequest extends Model
+class InnerSignInResponse extends Model
 {
     /**
-     * @description App ID
-     *
-     * @example CNMrhxwPJHAReExa
-     *
      * @var string
      */
-    public $appId;
+    public $goto;
     protected $_name = [
-        'appId' => 'app_id',
+        'goto' => 'goto',
     ];
 
     public function validate()
     {
-        Model::validateRequired('appId', $this->appId, true);
     }
 
     public function toMap()
     {
-        $res           = [];
-        $res['app_id'] = $this->appId;
+        $res         = [];
+        $res['goto'] = $this->goto;
 
         return $res;
     }
@@ -36,13 +31,13 @@ class DeleteAppRequest extends Model
     /**
      * @param array $map
      *
-     * @return DeleteAppRequest
+     * @return InnerSignInResponse
      */
     public static function fromMap($map = [])
     {
         $model = new self();
-        if (isset($map['app_id'])) {
-            $model->appId = $map['app_id'];
+        if (isset($map['goto'])) {
+            $model->goto = $map['goto'];
         }
 
         return $model;

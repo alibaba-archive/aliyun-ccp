@@ -79,6 +79,15 @@ class UserAuthentication extends Model
      * @var string
      */
     public $UserID;
+
+    /**
+     * @description 额外的信息，比如type为mobile时，此字段为国家编号，不填默认86
+     *
+     * @example 1
+     *
+     * @var string
+     */
+    public $extra;
     protected $_name = [
         'AuthenticationType' => 'AuthenticationType',
         'CreatedAt'          => 'CreatedAt',
@@ -88,6 +97,7 @@ class UserAuthentication extends Model
         'LastLoginTime'      => 'LastLoginTime',
         'Status'             => 'Status',
         'UserID'             => 'UserID',
+        'extra'              => 'extra',
     ];
 
     public function validate()
@@ -113,6 +123,7 @@ class UserAuthentication extends Model
         $res['LastLoginTime']      = $this->LastLoginTime;
         $res['Status']             = $this->Status;
         $res['UserID']             = $this->UserID;
+        $res['extra']              = $this->extra;
 
         return $res;
     }
@@ -148,6 +159,9 @@ class UserAuthentication extends Model
         }
         if (isset($map['UserID'])) {
             $model->UserID = $map['UserID'];
+        }
+        if (isset($map['extra'])) {
+            $model->extra = $map['extra'];
         }
 
         return $model;

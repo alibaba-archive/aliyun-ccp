@@ -18,16 +18,25 @@ class DefaultSetPasswordRequest extends Model
     public $appId;
 
     /**
-     * @description 新密码，必须包含数字和字母，长度8-32个字符
+     * @description AES-256对称加密密钥，通过App公钥加密后传输
      *
-     * @example 123456,abc
+     * @example 123456,Abc
+     *
+     * @var string
+     */
+    public $encryptedKey;
+
+    /**
+     * @description 新密码，必须包含数字和字母，长度8-20个字符，使用AES-256对称加密后传输（CBC模式, 填充算法为PKCS7Padding，生成base64字符串）
+     *
+     * @example 123456,Abc
      *
      * @var string
      */
     public $newPassword;
 
     /**
-     * @description 临时操作权限码
+     * @description 修改密码的临时授权码
      *
      * @example abc
      *
@@ -35,24 +44,27 @@ class DefaultSetPasswordRequest extends Model
      */
     public $state;
     protected $_name = [
-        'appId'       => 'app_id',
-        'newPassword' => 'new_password',
-        'state'       => 'state',
+        'appId'        => 'app_id',
+        'encryptedKey' => 'encrypted_key',
+        'newPassword'  => 'new_password',
+        'state'        => 'state',
     ];
 
     public function validate()
     {
         Model::validateRequired('appId', $this->appId, true);
+        Model::validateRequired('encryptedKey', $this->encryptedKey, true);
         Model::validateRequired('newPassword', $this->newPassword, true);
         Model::validateRequired('state', $this->state, true);
     }
 
     public function toMap()
     {
-        $res                 = [];
-        $res['app_id']       = $this->appId;
-        $res['new_password'] = $this->newPassword;
-        $res['state']        = $this->state;
+        $res                  = [];
+        $res['app_id']        = $this->appId;
+        $res['encrypted_key'] = $this->encryptedKey;
+        $res['new_password']  = $this->newPassword;
+        $res['state']         = $this->state;
 
         return $res;
     }
@@ -67,6 +79,9 @@ class DefaultSetPasswordRequest extends Model
         $model = new self();
         if (isset($map['app_id'])) {
             $model->appId = $map['app_id'];
+        }
+        if (isset($map['encrypted_key'])) {
+            $model->encryptedKey = $map['encrypted_key'];
         }
         if (isset($map['new_password'])) {
             $model->newPassword = $map['new_password'];

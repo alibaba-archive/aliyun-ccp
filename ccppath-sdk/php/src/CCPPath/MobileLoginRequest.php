@@ -45,6 +45,15 @@ class MobileLoginRequest extends Model
     public $captchaText;
 
     /**
+     * @description AES-256对称加密密钥，通过App公钥加密后传输
+     *
+     * @example 123456,Abc
+     *
+     * @var string
+     */
+    public $encryptedKey;
+
+    /**
      * @description 登录密码, 传入此参数则忽略短信验证码，不传此参数则默认使用短信登录。
      *
      * @example 123456
@@ -61,6 +70,15 @@ class MobileLoginRequest extends Model
      * @var string
      */
     public $phoneNumber;
+
+    /**
+     * @description 国家编号，默认86，不需要填+号，直接填数字
+     *
+     * @example 86
+     *
+     * @var string
+     */
+    public $phoneRegion;
 
     /**
      * @description 短信验证码内容，使用密码登录此参数不生效
@@ -84,8 +102,10 @@ class MobileLoginRequest extends Model
         'autoRegister' => 'auto_register',
         'captchaId'    => 'captcha_id',
         'captchaText'  => 'captcha_text',
+        'encryptedKey' => 'encrypted_key',
         'password'     => 'password',
         'phoneNumber'  => 'phone_number',
+        'phoneRegion'  => 'phone_region',
         'smsCode'      => 'sms_code',
         'smsCodeId'    => 'sms_code_id',
     ];
@@ -106,8 +126,10 @@ class MobileLoginRequest extends Model
         $res['auto_register'] = $this->autoRegister;
         $res['captcha_id']    = $this->captchaId;
         $res['captcha_text']  = $this->captchaText;
+        $res['encrypted_key'] = $this->encryptedKey;
         $res['password']      = $this->password;
         $res['phone_number']  = $this->phoneNumber;
+        $res['phone_region']  = $this->phoneRegion;
         $res['sms_code']      = $this->smsCode;
         $res['sms_code_id']   = $this->smsCodeId;
 
@@ -134,11 +156,17 @@ class MobileLoginRequest extends Model
         if (isset($map['captcha_text'])) {
             $model->captchaText = $map['captcha_text'];
         }
+        if (isset($map['encrypted_key'])) {
+            $model->encryptedKey = $map['encrypted_key'];
+        }
         if (isset($map['password'])) {
             $model->password = $map['password'];
         }
         if (isset($map['phone_number'])) {
             $model->phoneNumber = $map['phone_number'];
+        }
+        if (isset($map['phone_region'])) {
+            $model->phoneRegion = $map['phone_region'];
         }
         if (isset($map['sms_code'])) {
             $model->smsCode = $map['sms_code'];

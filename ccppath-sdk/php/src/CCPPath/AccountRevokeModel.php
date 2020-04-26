@@ -6,29 +6,26 @@ namespace Aliyun\CCP\SDK\CCPPath;
 
 use AlibabaCloud\Tea\Model;
 
-class GetAppRequest extends Model
+class AccountRevokeModel extends Model
 {
     /**
-     * @description App ID
+     * @description headers
      *
-     * @example CNMrhxwPJHAReExa
-     *
-     * @var string
+     * @var array
      */
-    public $appId;
+    public $headers;
     protected $_name = [
-        'appId' => 'app_id',
+        'headers' => 'headers',
     ];
 
     public function validate()
     {
-        Model::validateRequired('appId', $this->appId, true);
     }
 
     public function toMap()
     {
-        $res           = [];
-        $res['app_id'] = $this->appId;
+        $res            = [];
+        $res['headers'] = $this->headers;
 
         return $res;
     }
@@ -36,13 +33,13 @@ class GetAppRequest extends Model
     /**
      * @param array $map
      *
-     * @return GetAppRequest
+     * @return AccountRevokeModel
      */
     public static function fromMap($map = [])
     {
         $model = new self();
-        if (isset($map['app_id'])) {
-            $model->appId = $map['app_id'];
+        if (isset($map['headers'])) {
+            $model->headers = $map['headers'];
         }
 
         return $model;

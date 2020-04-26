@@ -6,7 +6,7 @@ namespace Aliyun\CCP\SDK\CCPPath;
 
 use AlibabaCloud\Tea\Model;
 
-class TokenModel extends Model
+class GetPublicKeyRequestModel extends Model
 {
     /**
      * @description headers
@@ -18,7 +18,7 @@ class TokenModel extends Model
     /**
      * @description body
      *
-     * @var AccountAccessTokenResponse
+     * @var GetAppPublicKeyRequest
      */
     public $body;
     protected $_name = [
@@ -43,7 +43,7 @@ class TokenModel extends Model
     /**
      * @param array $map
      *
-     * @return TokenModel
+     * @return GetPublicKeyRequestModel
      */
     public static function fromMap($map = [])
     {
@@ -52,7 +52,7 @@ class TokenModel extends Model
             $model->headers = $map['headers'];
         }
         if (isset($map['body'])) {
-            $model->body = AccountAccessTokenResponse::fromMap($map['body']);
+            $model->body = GetAppPublicKeyRequest::fromMap($map['body']);
         }
 
         return $model;
