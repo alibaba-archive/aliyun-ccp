@@ -138,16 +138,16 @@ func refreshAccessToken(endpoint, domainId, refreshToken, clientId, clientSecret
 	request.Protocol = tea.String("http")
 	request.Method = tea.String("POST")
 	request.Pathname = tea.String("/v2/oauth/token")
-	request.Headers = map[string]string{
-		"date":                    getRFC2616Date(),
-		"content-type":            "application/x-www-form-urlencoded",
-		"accept":                  "application/json",
-		"x-acs-signature-method":  "HMAC-SHA1",
-		"x-acs-signature-version": "1.0",
+	request.Headers = map[string]*string{
+		"date":                    tea.String(getRFC2616Date()),
+		"content-type":            tea.String("application/x-www-form-urlencoded"),
+		"accept":                  tea.String("application/json"),
+		"x-acs-signature-method":  tea.String("HMAC-SHA1"),
+		"x-acs-signature-version": tea.String("1.0"),
 	}
-	request.Headers["host"] = domainId + ".api.alicloudccp.com"
+	request.Headers["host"] = tea.String(domainId + ".api.alicloudccp.com")
 	if endpoint != "" {
-		request.Headers["host"] = endpoint
+		request.Headers["host"] = tea.String(endpoint)
 	}
 	bodyStr := "grant_type=refresh_token&refresh_token=" + refreshToken + "&client_id=" + clientId + "&client_secret=" + clientSecret
 	request.Body = strings.NewReader(bodyStr)
