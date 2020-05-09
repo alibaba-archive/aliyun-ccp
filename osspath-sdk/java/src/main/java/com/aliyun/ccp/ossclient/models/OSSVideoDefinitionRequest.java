@@ -15,6 +15,9 @@ public class OSSVideoDefinitionRequest extends TeaModel {
     @Validation(required = true)
     public String filePath;
 
+    @NameInMap("protection_scheme")
+    public String protectionScheme;
+
     @NameInMap("share_id")
     @Validation(pattern = "[0-9a-zA-Z-]+")
     public String shareId;

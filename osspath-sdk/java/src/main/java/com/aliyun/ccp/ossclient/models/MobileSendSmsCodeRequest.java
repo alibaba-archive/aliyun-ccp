@@ -21,6 +21,9 @@ public class MobileSendSmsCodeRequest extends TeaModel {
     @Validation(required = true)
     public String phoneNumber;
 
+    @NameInMap("phone_region")
+    public String phoneRegion;
+
     @NameInMap("type")
     @Validation(required = true)
     public String type;

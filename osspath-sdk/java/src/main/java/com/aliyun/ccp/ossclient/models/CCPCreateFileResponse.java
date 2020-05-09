@@ -8,19 +8,28 @@ import com.aliyun.tea.*;
  */
 public class CCPCreateFileResponse extends TeaModel {
     @NameInMap("domain_id")
-    @Validation(pattern = "[a-z0-9]{1, 50}")
+    @Validation(pattern = "[a-z0-9]{1,50}")
     public String domainId;
 
     @NameInMap("drive_id")
     @Validation(pattern = "[0-9]+")
     public String driveId;
 
+    @NameInMap("encrypt_mode")
+    public String encryptMode;
+
+    @NameInMap("exist")
+    public Boolean exist;
+
     @NameInMap("file_id")
-    @Validation(pattern = "[a-z0-9]{1, 50}")
+    @Validation(pattern = "[a-z0-9]{1,50}")
     public String fileId;
 
+    @NameInMap("file_name")
+    public String fileName;
+
     @NameInMap("parent_file_id")
-    @Validation(pattern = "[a-z0-9]{1, 50}")
+    @Validation(pattern = "[a-z0-9]{1,50}")
     public String parentFileId;
 
     @NameInMap("part_info_list")
@@ -28,6 +37,12 @@ public class CCPCreateFileResponse extends TeaModel {
 
     @NameInMap("rapid_upload")
     public Boolean rapidUpload;
+
+    @NameInMap("status")
+    public String status;
+
+    @NameInMap("streams_upload_info")
+    public java.util.Map<String, Object> streamsUploadInfo;
 
     @NameInMap("type")
     public String type;

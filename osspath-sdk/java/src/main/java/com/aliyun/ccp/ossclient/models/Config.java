@@ -8,7 +8,6 @@ public class Config extends TeaModel {
     public String endpoint;
 
     @NameInMap("domainId")
-    @Validation(required = true)
     public String domainId;
 
     @NameInMap("clientId")

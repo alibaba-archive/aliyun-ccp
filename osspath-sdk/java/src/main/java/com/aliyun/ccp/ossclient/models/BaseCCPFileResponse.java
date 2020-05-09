@@ -39,11 +39,14 @@ public class BaseCCPFileResponse extends TeaModel {
     @Validation(pattern = "[0-9]+")
     public String driveId;
 
+    @NameInMap("encrypt_mode")
+    public String encryptMode;
+
     @NameInMap("file_extension")
     public String fileExtension;
 
     @NameInMap("file_id")
-    @Validation(pattern = "[a-z0-9]{1, 50}")
+    @Validation(pattern = "[a-z0-9]{1,50}")
     public String fileId;
 
     @NameInMap("hidden")
@@ -59,11 +62,11 @@ public class BaseCCPFileResponse extends TeaModel {
     public String meta;
 
     @NameInMap("name")
-    @Validation(required = true, pattern = "[a-zA-Z0-9.-]{1,1024}")
+    @Validation(required = true, pattern = "[a-zA-Z0-9.-]{1,1000}")
     public String name;
 
     @NameInMap("parent_file_id")
-    @Validation(pattern = "[a-z0-9]{1, 50}")
+    @Validation(pattern = "[a-z0-9]{1,50}")
     public String parentFileId;
 
     @NameInMap("size")
@@ -74,6 +77,9 @@ public class BaseCCPFileResponse extends TeaModel {
 
     @NameInMap("status")
     public String status;
+
+    @NameInMap("streams_url_info")
+    public java.util.Map<String, Object> streamsUrlInfo;
 
     @NameInMap("thumbnail")
     public String thumbnail;
@@ -92,6 +98,12 @@ public class BaseCCPFileResponse extends TeaModel {
 
     @NameInMap("url")
     public String url;
+
+    @NameInMap("user_meta")
+    public String userMeta;
+
+    @NameInMap("video_media_metadata")
+    public VideoMediaResponse videoMediaMetadata;
 
     public static BaseCCPFileResponse build(java.util.Map<String, ?> map) throws Exception {
         BaseCCPFileResponse self = new BaseCCPFileResponse();

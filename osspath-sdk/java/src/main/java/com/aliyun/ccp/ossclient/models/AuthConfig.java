@@ -13,6 +13,9 @@ public class AuthConfig extends TeaModel {
     @NameInMap("app_secret")
     public String appSecret;
 
+    @NameInMap("callback_security")
+    public Boolean callbackSecurity;
+
     @NameInMap("enable")
     public Boolean enable;
 
