@@ -3,7 +3,7 @@ package com.aliyun.ccp.ossclient.models;
 
 import com.aliyun.tea.*;
 
-public class ListStoreFileRequestModel extends TeaModel {
+public class ListStorefileRequestModel extends TeaModel {
     @NameInMap("headers")
     public java.util.Map<String, String> headers;
 
@@ -11,8 +11,8 @@ public class ListStoreFileRequestModel extends TeaModel {
     @Validation(required = true)
     public ListStoreFileRequest body;
 
-    public static ListStoreFileRequestModel build(java.util.Map<String, ?> map) throws Exception {
-        ListStoreFileRequestModel self = new ListStoreFileRequestModel();
+    public static ListStorefileRequestModel build(java.util.Map<String, ?> map) throws Exception {
+        ListStorefileRequestModel self = new ListStorefileRequestModel();
         return TeaModel.build(map, self);
     }
 

@@ -7,6 +7,9 @@ import com.aliyun.tea.*;
  * 
  */
 public class LinkInfo extends TeaModel {
+    @NameInMap("extra")
+    public String extra;
+
     @NameInMap("identity")
     public String identity;
 

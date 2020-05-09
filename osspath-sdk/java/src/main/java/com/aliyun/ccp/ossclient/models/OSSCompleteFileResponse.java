@@ -43,11 +43,11 @@ public class OSSCompleteFileResponse extends TeaModel {
     public String filePath;
 
     @NameInMap("name")
-    @Validation(pattern = "[a-zA-Z0-9.-]{1,1024}")
+    @Validation(pattern = "[a-zA-Z0-9.-]{1,1000}")
     public String name;
 
     @NameInMap("parent_file_path")
-    @Validation(pattern = "[a-z0-9]{1, 50}")
+    @Validation(pattern = "[a-z0-9]{1,50}")
     public String parentFilePath;
 
     @NameInMap("share_id")

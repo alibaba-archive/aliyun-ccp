@@ -21,13 +21,6 @@ public class Client {
             ));
         }
 
-        if (com.aliyun.teautil.Common.empty(config.domainId)) {
-            throw new TeaException(TeaConverter.buildMap(
-                new TeaPair("name", "ParameterMissing"),
-                new TeaPair("message", "'config.domainId' can not be empty")
-            ));
-        }
-
         if (!com.aliyun.teautil.Common.empty(config.accessToken) || !com.aliyun.teautil.Common.empty(config.refreshToken)) {
             com.aliyun.ccpcredentials.models.Config accessConfig = com.aliyun.ccpcredentials.models.Config.build(TeaConverter.buildMap(
                 new TeaPair("accessToken", config.accessToken),
@@ -296,7 +289,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public ChangePasswordModel changePassword(DefaultChangePasswordRequestModel request, RuntimeOptions runtime) throws Exception {
+    public ChangePasswordModel changePassword(ChangePasswordRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -370,8 +363,11 @@ public class Client {
 
                 java.util.Map<String, Object> respMap = null;
                 Object obj = null;
-                if (com.aliyun.teautil.Common.equalNumber(response_.statusCode, 204)) {
+                if (com.aliyun.teautil.Common.equalNumber(response_.statusCode, 200)) {
+                    obj = com.aliyun.teautil.Common.readAsJSON(response_.body);
+                    respMap = com.aliyun.teautil.Common.assertAsMap(obj);
                     return TeaModel.toModel(TeaConverter.buildMap(
+                        new TeaPair("body", respMap),
                         new TeaPair("headers", response_.headers)
                     ), new ChangePasswordModel());
                 }
@@ -410,7 +406,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public SetPasswordModel setPassword(DefaultSetPasswordRequestModel request, RuntimeOptions runtime) throws Exception {
+    public SetPasswordModel setPassword(SetPasswordRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -488,6 +484,123 @@ public class Client {
                     return TeaModel.toModel(TeaConverter.buildMap(
                         new TeaPair("headers", response_.headers)
                     ), new SetPasswordModel());
+                }
+
+                if (!com.aliyun.teautil.Common.empty(response_.headers.get("x-ca-error-message"))) {
+                    throw new TeaException(TeaConverter.buildMap(
+                        new TeaPair("data", TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
+                            new TeaPair("statusCode", response_.statusCode),
+                            new TeaPair("statusMessage", response_.statusMessage)
+                        )),
+                        new TeaPair("message", response_.headers.get("x-ca-error-message"))
+                    ));
+                }
+
+                obj = com.aliyun.teautil.Common.readAsJSON(response_.body);
+                respMap = com.aliyun.teautil.Common.assertAsMap(obj);
+                throw new TeaException(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("data", TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
+                            new TeaPair("statusCode", response_.statusCode),
+                            new TeaPair("statusMessage", response_.statusMessage)
+                        ))
+                    ),
+                    respMap
+                ));
+            } catch (Exception e) {
+                if (Tea.isRetryable(e)) {
+                    continue;
+                }
+                throw e;
+            }
+        }
+
+        throw new TeaUnretryableException(_lastRequest);
+    }
+
+    public VerifyCodeModel verifyCode(VerifyCodeRequestModel request, RuntimeOptions runtime) throws Exception {
+        TeaModel.validateParams(request, "request");
+        TeaModel.validateParams(runtime, "runtime");
+        java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
+            new TeaPair("timeouted", "retry"),
+            new TeaPair("readTimeout", runtime.readTimeout),
+            new TeaPair("connectTimeout", runtime.connectTimeout),
+            new TeaPair("localAddr", runtime.localAddr),
+            new TeaPair("httpProxy", runtime.httpProxy),
+            new TeaPair("httpsProxy", runtime.httpsProxy),
+            new TeaPair("noProxy", runtime.noProxy),
+            new TeaPair("maxIdleConns", runtime.maxIdleConns),
+            new TeaPair("socks5Proxy", runtime.socks5Proxy),
+            new TeaPair("socks5NetWork", runtime.socks5NetWork),
+            new TeaPair("retry", TeaConverter.buildMap(
+                new TeaPair("retryable", runtime.autoretry),
+                new TeaPair("maxAttempts", com.aliyun.teautil.Common.defaultNumber(runtime.maxAttempts, 3))
+            )),
+            new TeaPair("backoff", TeaConverter.buildMap(
+                new TeaPair("policy", com.aliyun.teautil.Common.defaultString(runtime.backoffPolicy, "no")),
+                new TeaPair("period", com.aliyun.teautil.Common.defaultNumber(runtime.backoffPeriod, 1))
+            )),
+            new TeaPair("ignoreSSL", runtime.ignoreSSL)
+        );
+
+        TeaRequest _lastRequest = null;
+        long _now = System.currentTimeMillis();
+        int _retryTimes = 0;
+        while (Tea.allowRetry((java.util.Map<String, Object>) runtime_.get("retry"), _retryTimes, _now)) {
+            if (_retryTimes > 0) {
+                int backoffTime = Tea.getBackoffTime(runtime_.get("backoff"), _retryTimes);
+                if (backoffTime > 0) {
+                    Tea.sleep(backoffTime);
+                }
+            }
+            _retryTimes = _retryTimes + 1;
+            try {
+                TeaRequest request_ = new TeaRequest();
+                String accesskeyId = this.getAccessKeyId();
+                String accessKeySecret = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
+                String accessToken = this.getAccessToken();
+                request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
+                request_.method = "POST";
+                request_.pathname = this.getPathname(_nickname, "/v2/account/default/verify_code");
+                request_.headers = TeaConverter.merge(String.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.headers
+                );
+                if (!com.aliyun.teautil.Common.empty(accessToken)) {
+                    request_.headers.put("authorization", "Bearer " + accessToken + "");
+                } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
+                    if (!com.aliyun.teautil.Common.empty(securityToken)) {
+                        request_.headers.put("x-acs-security-token", securityToken);
+                    }
+
+                    request_.headers.put("date", com.aliyun.teautil.Common.getDateUTCString());
+                    request_.headers.put("accept", "application/json");
+                    request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
+                    request_.headers.put("x-acs-signature-version", "1.0");
+                    String stringToSign = com.aliyun.roautil.Client.getStringToSign(request_);
+                    request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
+                }
+
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request.body)));
+                _lastRequest = request_;
+                TeaResponse response_ = Tea.doAction(request_, runtime_);
+
+                java.util.Map<String, Object> respMap = null;
+                Object obj = null;
+                if (com.aliyun.teautil.Common.equalNumber(response_.statusCode, 200)) {
+                    obj = com.aliyun.teautil.Common.readAsJSON(response_.body);
+                    respMap = com.aliyun.teautil.Common.assertAsMap(obj);
+                    return TeaModel.toModel(TeaConverter.buildMap(
+                        new TeaPair("body", respMap),
+                        new TeaPair("headers", response_.headers)
+                    ), new VerifyCodeModel());
                 }
 
                 if (!com.aliyun.teautil.Common.empty(response_.headers.get("x-ca-error-message"))) {
@@ -758,7 +871,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public GetLinkInfoModel getLinkInfo(GetByLinkInfoRequestModel request, RuntimeOptions runtime) throws Exception {
+    public GetLinkInfoModel getLinkInfo(GetLinkInfoRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -875,7 +988,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public GetLinkInfoByUserIdModel getLinkInfoByUserId(GetLinkInfoByUserIDRequestModel request, RuntimeOptions runtime) throws Exception {
+    public GetLinkInfoByUserIdModel getLinkInfoByUserId(GetLinkInfoByUserIdRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -992,7 +1105,124 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public LinkModel link(AccountLinkRequestModel request, RuntimeOptions runtime) throws Exception {
+    public GetPublicKeyModel getPublicKey(GetPublicKeyRequestModel request, RuntimeOptions runtime) throws Exception {
+        TeaModel.validateParams(request, "request");
+        TeaModel.validateParams(runtime, "runtime");
+        java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
+            new TeaPair("timeouted", "retry"),
+            new TeaPair("readTimeout", runtime.readTimeout),
+            new TeaPair("connectTimeout", runtime.connectTimeout),
+            new TeaPair("localAddr", runtime.localAddr),
+            new TeaPair("httpProxy", runtime.httpProxy),
+            new TeaPair("httpsProxy", runtime.httpsProxy),
+            new TeaPair("noProxy", runtime.noProxy),
+            new TeaPair("maxIdleConns", runtime.maxIdleConns),
+            new TeaPair("socks5Proxy", runtime.socks5Proxy),
+            new TeaPair("socks5NetWork", runtime.socks5NetWork),
+            new TeaPair("retry", TeaConverter.buildMap(
+                new TeaPair("retryable", runtime.autoretry),
+                new TeaPair("maxAttempts", com.aliyun.teautil.Common.defaultNumber(runtime.maxAttempts, 3))
+            )),
+            new TeaPair("backoff", TeaConverter.buildMap(
+                new TeaPair("policy", com.aliyun.teautil.Common.defaultString(runtime.backoffPolicy, "no")),
+                new TeaPair("period", com.aliyun.teautil.Common.defaultNumber(runtime.backoffPeriod, 1))
+            )),
+            new TeaPair("ignoreSSL", runtime.ignoreSSL)
+        );
+
+        TeaRequest _lastRequest = null;
+        long _now = System.currentTimeMillis();
+        int _retryTimes = 0;
+        while (Tea.allowRetry((java.util.Map<String, Object>) runtime_.get("retry"), _retryTimes, _now)) {
+            if (_retryTimes > 0) {
+                int backoffTime = Tea.getBackoffTime(runtime_.get("backoff"), _retryTimes);
+                if (backoffTime > 0) {
+                    Tea.sleep(backoffTime);
+                }
+            }
+            _retryTimes = _retryTimes + 1;
+            try {
+                TeaRequest request_ = new TeaRequest();
+                String accesskeyId = this.getAccessKeyId();
+                String accessKeySecret = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
+                String accessToken = this.getAccessToken();
+                request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
+                request_.method = "POST";
+                request_.pathname = this.getPathname(_nickname, "/v2/account/get_public_key");
+                request_.headers = TeaConverter.merge(String.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.headers
+                );
+                if (!com.aliyun.teautil.Common.empty(accessToken)) {
+                    request_.headers.put("authorization", "Bearer " + accessToken + "");
+                } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
+                    if (!com.aliyun.teautil.Common.empty(securityToken)) {
+                        request_.headers.put("x-acs-security-token", securityToken);
+                    }
+
+                    request_.headers.put("date", com.aliyun.teautil.Common.getDateUTCString());
+                    request_.headers.put("accept", "application/json");
+                    request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
+                    request_.headers.put("x-acs-signature-version", "1.0");
+                    String stringToSign = com.aliyun.roautil.Client.getStringToSign(request_);
+                    request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
+                }
+
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request.body)));
+                _lastRequest = request_;
+                TeaResponse response_ = Tea.doAction(request_, runtime_);
+
+                java.util.Map<String, Object> respMap = null;
+                Object obj = null;
+                if (com.aliyun.teautil.Common.equalNumber(response_.statusCode, 200)) {
+                    obj = com.aliyun.teautil.Common.readAsJSON(response_.body);
+                    respMap = com.aliyun.teautil.Common.assertAsMap(obj);
+                    return TeaModel.toModel(TeaConverter.buildMap(
+                        new TeaPair("body", respMap),
+                        new TeaPair("headers", response_.headers)
+                    ), new GetPublicKeyModel());
+                }
+
+                if (!com.aliyun.teautil.Common.empty(response_.headers.get("x-ca-error-message"))) {
+                    throw new TeaException(TeaConverter.buildMap(
+                        new TeaPair("data", TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
+                            new TeaPair("statusCode", response_.statusCode),
+                            new TeaPair("statusMessage", response_.statusMessage)
+                        )),
+                        new TeaPair("message", response_.headers.get("x-ca-error-message"))
+                    ));
+                }
+
+                obj = com.aliyun.teautil.Common.readAsJSON(response_.body);
+                respMap = com.aliyun.teautil.Common.assertAsMap(obj);
+                throw new TeaException(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("data", TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
+                            new TeaPair("statusCode", response_.statusCode),
+                            new TeaPair("statusMessage", response_.statusMessage)
+                        ))
+                    ),
+                    respMap
+                ));
+            } catch (Exception e) {
+                if (Tea.isRetryable(e)) {
+                    continue;
+                }
+                throw e;
+            }
+        }
+
+        throw new TeaUnretryableException(_lastRequest);
+    }
+
+    public LinkModel link(LinkRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -1109,7 +1339,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public CheckExistModel checkExist(MobileCheckExistRequestModel request, RuntimeOptions runtime) throws Exception {
+    public CheckExistModel checkExist(CheckExistRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -1226,7 +1456,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public LoginModel login(MobileLoginRequestModel request, RuntimeOptions runtime) throws Exception {
+    public LoginModel login(LoginRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -1343,7 +1573,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public RegisterModel register(MobileRegisterRequestModel request, RuntimeOptions runtime) throws Exception {
+    public RegisterModel register(RegisterRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -1577,7 +1807,121 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public TokenModel token(TokenRequestModel request, RuntimeOptions runtime) throws Exception {
+    public AccountRevokeModel accountRevoke(AccountRevokeRequestModel request, RuntimeOptions runtime) throws Exception {
+        TeaModel.validateParams(request, "request");
+        TeaModel.validateParams(runtime, "runtime");
+        java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
+            new TeaPair("timeouted", "retry"),
+            new TeaPair("readTimeout", runtime.readTimeout),
+            new TeaPair("connectTimeout", runtime.connectTimeout),
+            new TeaPair("localAddr", runtime.localAddr),
+            new TeaPair("httpProxy", runtime.httpProxy),
+            new TeaPair("httpsProxy", runtime.httpsProxy),
+            new TeaPair("noProxy", runtime.noProxy),
+            new TeaPair("maxIdleConns", runtime.maxIdleConns),
+            new TeaPair("socks5Proxy", runtime.socks5Proxy),
+            new TeaPair("socks5NetWork", runtime.socks5NetWork),
+            new TeaPair("retry", TeaConverter.buildMap(
+                new TeaPair("retryable", runtime.autoretry),
+                new TeaPair("maxAttempts", com.aliyun.teautil.Common.defaultNumber(runtime.maxAttempts, 3))
+            )),
+            new TeaPair("backoff", TeaConverter.buildMap(
+                new TeaPair("policy", com.aliyun.teautil.Common.defaultString(runtime.backoffPolicy, "no")),
+                new TeaPair("period", com.aliyun.teautil.Common.defaultNumber(runtime.backoffPeriod, 1))
+            )),
+            new TeaPair("ignoreSSL", runtime.ignoreSSL)
+        );
+
+        TeaRequest _lastRequest = null;
+        long _now = System.currentTimeMillis();
+        int _retryTimes = 0;
+        while (Tea.allowRetry((java.util.Map<String, Object>) runtime_.get("retry"), _retryTimes, _now)) {
+            if (_retryTimes > 0) {
+                int backoffTime = Tea.getBackoffTime(runtime_.get("backoff"), _retryTimes);
+                if (backoffTime > 0) {
+                    Tea.sleep(backoffTime);
+                }
+            }
+            _retryTimes = _retryTimes + 1;
+            try {
+                TeaRequest request_ = new TeaRequest();
+                String accesskeyId = this.getAccessKeyId();
+                String accessKeySecret = this.getAccessKeySecret();
+                String securityToken = this.getSecurityToken();
+                String accessToken = this.getAccessToken();
+                request_.protocol = com.aliyun.teautil.Common.defaultString(_protocol, "https");
+                request_.method = "POST";
+                request_.pathname = this.getPathname(_nickname, "/v2/account/revoke");
+                request_.headers = TeaConverter.merge(String.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("user-agent", this.getUserAgent()),
+                        new TeaPair("host", com.aliyun.teautil.Common.defaultString(_endpoint, "" + _domainId + ".auth.alicloudccp.com")),
+                        new TeaPair("content-type", "application/json; charset=utf-8")
+                    ),
+                    request.headers
+                );
+                if (!com.aliyun.teautil.Common.empty(accessToken)) {
+                    request_.headers.put("authorization", "Bearer " + accessToken + "");
+                } else if (!com.aliyun.teautil.Common.empty(accesskeyId) && !com.aliyun.teautil.Common.empty(accessKeySecret)) {
+                    if (!com.aliyun.teautil.Common.empty(securityToken)) {
+                        request_.headers.put("x-acs-security-token", securityToken);
+                    }
+
+                    request_.headers.put("date", com.aliyun.teautil.Common.getDateUTCString());
+                    request_.headers.put("accept", "application/json");
+                    request_.headers.put("x-acs-signature-method", "HMAC-SHA1");
+                    request_.headers.put("x-acs-signature-version", "1.0");
+                    String stringToSign = com.aliyun.roautil.Client.getStringToSign(request_);
+                    request_.headers.put("authorization", "acs " + accesskeyId + ":" + com.aliyun.roautil.Client.getSignature(stringToSign, accessKeySecret) + "");
+                }
+
+                request_.body = Tea.toReadable(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(request.body)));
+                _lastRequest = request_;
+                TeaResponse response_ = Tea.doAction(request_, runtime_);
+
+                java.util.Map<String, Object> respMap = null;
+                Object obj = null;
+                if (com.aliyun.teautil.Common.equalNumber(response_.statusCode, 204)) {
+                    return TeaModel.toModel(TeaConverter.buildMap(
+                        new TeaPair("headers", response_.headers)
+                    ), new AccountRevokeModel());
+                }
+
+                if (!com.aliyun.teautil.Common.empty(response_.headers.get("x-ca-error-message"))) {
+                    throw new TeaException(TeaConverter.buildMap(
+                        new TeaPair("data", TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
+                            new TeaPair("statusCode", response_.statusCode),
+                            new TeaPair("statusMessage", response_.statusMessage)
+                        )),
+                        new TeaPair("message", response_.headers.get("x-ca-error-message"))
+                    ));
+                }
+
+                obj = com.aliyun.teautil.Common.readAsJSON(response_.body);
+                respMap = com.aliyun.teautil.Common.assertAsMap(obj);
+                throw new TeaException(TeaConverter.merge(Object.class,
+                    TeaConverter.buildMap(
+                        new TeaPair("data", TeaConverter.buildMap(
+                            new TeaPair("requestId", response_.headers.get("x-ca-request-id")),
+                            new TeaPair("statusCode", response_.statusCode),
+                            new TeaPair("statusMessage", response_.statusMessage)
+                        ))
+                    ),
+                    respMap
+                ));
+            } catch (Exception e) {
+                if (Tea.isRetryable(e)) {
+                    continue;
+                }
+                throw e;
+            }
+        }
+
+        throw new TeaUnretryableException(_lastRequest);
+    }
+
+    public AccountTokenModel accountToken(AccountTokenRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -1657,7 +2001,7 @@ public class Client {
                     return TeaModel.toModel(TeaConverter.buildMap(
                         new TeaPair("body", respMap),
                         new TeaPair("headers", response_.headers)
-                    ), new TokenModel());
+                    ), new AccountTokenModel());
                 }
 
                 if (!com.aliyun.teautil.Common.empty(response_.headers.get("x-ca-error-message"))) {
@@ -2393,7 +2737,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public ListDrivesModel listDrives(ListDriveRequestModel request, RuntimeOptions runtime) throws Exception {
+    public ListDrivesModel listDrives(ListDrivesRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -2510,7 +2854,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public ListMyDrivesModel listMyDrives(ListMyDriveRequestModel request, RuntimeOptions runtime) throws Exception {
+    public ListMyDrivesModel listMyDrives(ListMyDrivesRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -2744,7 +3088,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public CompleteFileModel completeFile(OSSCompleteFileRequestModel request, RuntimeOptions runtime) throws Exception {
+    public CompleteFileModel completeFile(CompleteFileRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -2861,7 +3205,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public CopyFileModel copyFile(OSSCopyFileRequestModel request, RuntimeOptions runtime) throws Exception {
+    public CopyFileModel copyFile(CopyFileRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -2978,7 +3322,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public CreateFileModel createFile(OSSCreateFileRequestModel request, RuntimeOptions runtime) throws Exception {
+    public CreateFileModel createFile(CreateFileRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -3095,7 +3439,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public DeleteFileModel deleteFile(OSSDeleteFileRequestModel request, RuntimeOptions runtime) throws Exception {
+    public DeleteFileModel deleteFile(DeleteFileRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -3209,7 +3553,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public GetFileModel getFile(OSSGetFileRequestModel request, RuntimeOptions runtime) throws Exception {
+    public GetFileModel getFile(GetFileRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -3326,7 +3670,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public GetDownloadUrlModel getDownloadUrl(OSSGetDownloadUrlRequestModel request, RuntimeOptions runtime) throws Exception {
+    public GetDownloadUrlModel getDownloadUrl(GetDownloadUrlRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -3443,7 +3787,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public GetSecureUrlModel getSecureUrl(OSSGetSecureUrlRequestModel request, RuntimeOptions runtime) throws Exception {
+    public GetSecureUrlModel getSecureUrl(GetSecureUrlRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -3560,7 +3904,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public GetUploadUrlModel getUploadUrl(OSSGetUploadUrlRequestModel request, RuntimeOptions runtime) throws Exception {
+    public GetUploadUrlModel getUploadUrl(GetUploadUrlRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -3677,7 +4021,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public ListFileModel listFile(OSSListFileRequestModel request, RuntimeOptions runtime) throws Exception {
+    public ListFileModel listFile(ListFileRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -3794,7 +4138,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public ListUploadedPartsModel listUploadedParts(OSSListUploadedPartRequestModel request, RuntimeOptions runtime) throws Exception {
+    public ListUploadedPartsModel listUploadedParts(ListUploadedPartsRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -3911,7 +4255,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public MoveFileModel moveFile(OSSMoveFileRequestModel request, RuntimeOptions runtime) throws Exception {
+    public MoveFileModel moveFile(MoveFileRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -4028,7 +4372,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public VideoDefinitionModel videoDefinition(OSSVideoDefinitionRequestModel request, RuntimeOptions runtime) throws Exception {
+    public VideoDefinitionModel videoDefinition(VideoDefinitionRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -4145,7 +4489,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public VideoM3u8Model videoM3u8(OSSVideoM3U8RequestModel request, RuntimeOptions runtime) throws Exception {
+    public VideoM3u8Model videoM3u8(VideoM3u8RequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -4261,7 +4605,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public VideoTranscodeModel videoTranscode(OSSVideoTranscodeRequestModel request, RuntimeOptions runtime) throws Exception {
+    public VideoTranscodeModel videoTranscode(VideoTranscodeRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -4966,7 +5310,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public ListStorefileModel listStorefile(ListStoreFileRequestModel request, RuntimeOptions runtime) throws Exception {
+    public ListStorefileModel listStorefile(ListStorefileRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(
@@ -5431,7 +5775,7 @@ public class Client {
         throw new TeaUnretryableException(_lastRequest);
     }
 
-    public ListUsersModel listUsers(ListUserRequestModel request, RuntimeOptions runtime) throws Exception {
+    public ListUsersModel listUsers(ListUsersRequestModel request, RuntimeOptions runtime) throws Exception {
         TeaModel.validateParams(request, "request");
         TeaModel.validateParams(runtime, "runtime");
         java.util.Map<String, Object> runtime_ = TeaConverter.buildMap(

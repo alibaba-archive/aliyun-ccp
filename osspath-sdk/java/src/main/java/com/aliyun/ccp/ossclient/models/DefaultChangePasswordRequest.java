@@ -11,6 +11,10 @@ public class DefaultChangePasswordRequest extends TeaModel {
     @Validation(required = true)
     public String appId;
 
+    @NameInMap("encrypted_key")
+    @Validation(required = true)
+    public String encryptedKey;
+
     @NameInMap("new_password")
     @Validation(required = true)
     public String newPassword;
@@ -19,13 +23,12 @@ public class DefaultChangePasswordRequest extends TeaModel {
     @Validation(required = true)
     public String phoneNumber;
 
-    @NameInMap("sms_code")
-    @Validation(required = true)
-    public String smsCode;
+    @NameInMap("phone_region")
+    public String phoneRegion;
 
-    @NameInMap("sms_code_id")
+    @NameInMap("state")
     @Validation(required = true)
-    public String smsCodeId;
+    public String state;
 
     public static DefaultChangePasswordRequest build(java.util.Map<String, ?> map) throws Exception {
         DefaultChangePasswordRequest self = new DefaultChangePasswordRequest();

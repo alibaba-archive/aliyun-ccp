@@ -7,6 +7,9 @@ import com.aliyun.tea.*;
  * 
  */
 public class GetAccessTokenByLinkInfoRequest extends TeaModel {
+    @NameInMap("extra")
+    public String extra;
+
     @NameInMap("identity")
     @Validation(required = true)
     public String identity;

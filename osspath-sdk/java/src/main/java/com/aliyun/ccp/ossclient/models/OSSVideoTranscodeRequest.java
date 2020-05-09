@@ -18,6 +18,9 @@ public class OSSVideoTranscodeRequest extends TeaModel {
     @NameInMap("hls_time")
     public Long hlsTime;
 
+    @NameInMap("protection_scheme")
+    public String protectionScheme;
+
     @NameInMap("remarks")
     public String remarks;
 

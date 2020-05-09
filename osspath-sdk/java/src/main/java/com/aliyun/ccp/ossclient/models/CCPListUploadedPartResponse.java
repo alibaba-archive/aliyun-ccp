@@ -8,7 +8,7 @@ import com.aliyun.tea.*;
  */
 public class CCPListUploadedPartResponse extends TeaModel {
     @NameInMap("file_id")
-    @Validation(pattern = "[a-z0-9]{1, 50}")
+    @Validation(pattern = "[a-z0-9]{1,50}")
     public String fileId;
 
     @NameInMap("next_part_number_marker")
