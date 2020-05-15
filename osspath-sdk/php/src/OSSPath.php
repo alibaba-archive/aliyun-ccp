@@ -12,106 +12,112 @@ use AlibabaCloud\Tea\RoaUtils\RoaUtils;
 use AlibabaCloud\Tea\Tea;
 use AlibabaCloud\Tea\Utils\Utils;
 use Aliyun\CCP\Credentials\CCPCredentials;
-use Aliyun\CCP\SDK\Models\AccountLinkRequestModel;
+use Aliyun\CCP\SDK\Models\AccountRevokeModel;
+use Aliyun\CCP\SDK\Models\AccountRevokeRequestModel;
+use Aliyun\CCP\SDK\Models\AccountTokenModel;
+use Aliyun\CCP\SDK\Models\AccountTokenRequestModel;
 use Aliyun\CCP\SDK\Models\AdminListStoresModel;
 use Aliyun\CCP\SDK\Models\AdminListStoresRequestModel;
 use Aliyun\CCP\SDK\Models\CancelLinkModel;
 use Aliyun\CCP\SDK\Models\CancelLinkRequestModel;
 use Aliyun\CCP\SDK\Models\ChangePasswordModel;
+use Aliyun\CCP\SDK\Models\ChangePasswordRequestModel;
 use Aliyun\CCP\SDK\Models\CheckExistModel;
+use Aliyun\CCP\SDK\Models\CheckExistRequestModel;
 use Aliyun\CCP\SDK\Models\CompleteFileModel;
+use Aliyun\CCP\SDK\Models\CompleteFileRequestModel;
 use Aliyun\CCP\SDK\Models\Config;
 use Aliyun\CCP\SDK\Models\ConfirmLinkModel;
 use Aliyun\CCP\SDK\Models\ConfirmLinkRequestModel;
 use Aliyun\CCP\SDK\Models\CopyFileModel;
+use Aliyun\CCP\SDK\Models\CopyFileRequestModel;
 use Aliyun\CCP\SDK\Models\CreateDriveModel;
 use Aliyun\CCP\SDK\Models\CreateDriveRequestModel;
 use Aliyun\CCP\SDK\Models\CreateFileModel;
+use Aliyun\CCP\SDK\Models\CreateFileRequestModel;
 use Aliyun\CCP\SDK\Models\CreateShareModel;
 use Aliyun\CCP\SDK\Models\CreateShareRequestModel;
 use Aliyun\CCP\SDK\Models\CreateUserModel;
 use Aliyun\CCP\SDK\Models\CreateUserRequestModel;
-use Aliyun\CCP\SDK\Models\DefaultChangePasswordRequestModel;
-use Aliyun\CCP\SDK\Models\DefaultSetPasswordRequestModel;
 use Aliyun\CCP\SDK\Models\DeleteDriveModel;
 use Aliyun\CCP\SDK\Models\DeleteDriveRequestModel;
 use Aliyun\CCP\SDK\Models\DeleteFileModel;
+use Aliyun\CCP\SDK\Models\DeleteFileRequestModel;
 use Aliyun\CCP\SDK\Models\DeleteShareModel;
 use Aliyun\CCP\SDK\Models\DeleteShareRequestModel;
 use Aliyun\CCP\SDK\Models\DeleteUserModel;
 use Aliyun\CCP\SDK\Models\DeleteUserRequestModel;
 use Aliyun\CCP\SDK\Models\GetAccessTokenByLinkInfoModel;
 use Aliyun\CCP\SDK\Models\GetAccessTokenByLinkInfoRequestModel;
-use Aliyun\CCP\SDK\Models\GetByLinkInfoRequestModel;
 use Aliyun\CCP\SDK\Models\GetCaptchaModel;
 use Aliyun\CCP\SDK\Models\GetCaptchaRequestModel;
 use Aliyun\CCP\SDK\Models\GetDefaultDriveModel;
 use Aliyun\CCP\SDK\Models\GetDefaultDriveRequestModel;
 use Aliyun\CCP\SDK\Models\GetDownloadUrlModel;
+use Aliyun\CCP\SDK\Models\GetDownloadUrlRequestModel;
 use Aliyun\CCP\SDK\Models\GetDriveModel;
 use Aliyun\CCP\SDK\Models\GetDriveRequestModel;
 use Aliyun\CCP\SDK\Models\GetFileModel;
+use Aliyun\CCP\SDK\Models\GetFileRequestModel;
 use Aliyun\CCP\SDK\Models\GetLinkInfoByUserIdModel;
-use Aliyun\CCP\SDK\Models\GetLinkInfoByUserIDRequestModel;
+use Aliyun\CCP\SDK\Models\GetLinkInfoByUserIdRequestModel;
 use Aliyun\CCP\SDK\Models\GetLinkInfoModel;
+use Aliyun\CCP\SDK\Models\GetLinkInfoRequestModel;
+use Aliyun\CCP\SDK\Models\GetPublicKeyModel;
+use Aliyun\CCP\SDK\Models\GetPublicKeyRequestModel;
 use Aliyun\CCP\SDK\Models\GetSecureUrlModel;
+use Aliyun\CCP\SDK\Models\GetSecureUrlRequestModel;
 use Aliyun\CCP\SDK\Models\GetShareModel;
 use Aliyun\CCP\SDK\Models\GetShareRequestModel;
 use Aliyun\CCP\SDK\Models\GetUploadUrlModel;
+use Aliyun\CCP\SDK\Models\GetUploadUrlRequestModel;
 use Aliyun\CCP\SDK\Models\GetUserAccessTokenModel;
 use Aliyun\CCP\SDK\Models\GetUserAccessTokenRequestModel;
 use Aliyun\CCP\SDK\Models\GetUserModel;
 use Aliyun\CCP\SDK\Models\GetUserRequestModel;
 use Aliyun\CCP\SDK\Models\LinkModel;
-use Aliyun\CCP\SDK\Models\ListDriveRequestModel;
+use Aliyun\CCP\SDK\Models\LinkRequestModel;
 use Aliyun\CCP\SDK\Models\ListDrivesModel;
+use Aliyun\CCP\SDK\Models\ListDrivesRequestModel;
 use Aliyun\CCP\SDK\Models\ListFileModel;
-use Aliyun\CCP\SDK\Models\ListMyDriveRequestModel;
+use Aliyun\CCP\SDK\Models\ListFileRequestModel;
 use Aliyun\CCP\SDK\Models\ListMyDrivesModel;
+use Aliyun\CCP\SDK\Models\ListMyDrivesRequestModel;
 use Aliyun\CCP\SDK\Models\ListShareModel;
 use Aliyun\CCP\SDK\Models\ListShareRequestModel;
 use Aliyun\CCP\SDK\Models\ListStorefileModel;
-use Aliyun\CCP\SDK\Models\ListStoreFileRequestModel;
+use Aliyun\CCP\SDK\Models\ListStorefileRequestModel;
 use Aliyun\CCP\SDK\Models\ListUploadedPartsModel;
-use Aliyun\CCP\SDK\Models\ListUserRequestModel;
+use Aliyun\CCP\SDK\Models\ListUploadedPartsRequestModel;
 use Aliyun\CCP\SDK\Models\ListUsersModel;
+use Aliyun\CCP\SDK\Models\ListUsersRequestModel;
 use Aliyun\CCP\SDK\Models\LoginModel;
-use Aliyun\CCP\SDK\Models\MobileCheckExistRequestModel;
-use Aliyun\CCP\SDK\Models\MobileLoginRequestModel;
-use Aliyun\CCP\SDK\Models\MobileRegisterRequestModel;
+use Aliyun\CCP\SDK\Models\LoginRequestModel;
 use Aliyun\CCP\SDK\Models\MobileSendSmsCodeModel;
 use Aliyun\CCP\SDK\Models\MobileSendSmsCodeRequestModel;
 use Aliyun\CCP\SDK\Models\MoveFileModel;
-use Aliyun\CCP\SDK\Models\OSSCompleteFileRequestModel;
-use Aliyun\CCP\SDK\Models\OSSCopyFileRequestModel;
-use Aliyun\CCP\SDK\Models\OSSCreateFileRequestModel;
-use Aliyun\CCP\SDK\Models\OSSDeleteFileRequestModel;
-use Aliyun\CCP\SDK\Models\OSSGetDownloadUrlRequestModel;
-use Aliyun\CCP\SDK\Models\OSSGetFileRequestModel;
-use Aliyun\CCP\SDK\Models\OSSGetSecureUrlRequestModel;
-use Aliyun\CCP\SDK\Models\OSSGetUploadUrlRequestModel;
-use Aliyun\CCP\SDK\Models\OSSListFileRequestModel;
-use Aliyun\CCP\SDK\Models\OSSListUploadedPartRequestModel;
-use Aliyun\CCP\SDK\Models\OSSMoveFileRequestModel;
-use Aliyun\CCP\SDK\Models\OSSVideoDefinitionRequestModel;
-use Aliyun\CCP\SDK\Models\OSSVideoM3U8RequestModel;
-use Aliyun\CCP\SDK\Models\OSSVideoTranscodeRequestModel;
+use Aliyun\CCP\SDK\Models\MoveFileRequestModel;
 use Aliyun\CCP\SDK\Models\RegisterModel;
+use Aliyun\CCP\SDK\Models\RegisterRequestModel;
 use Aliyun\CCP\SDK\Models\RuntimeOptions;
 use Aliyun\CCP\SDK\Models\SearchUserModel;
 use Aliyun\CCP\SDK\Models\SearchUserRequestModel;
 use Aliyun\CCP\SDK\Models\SetPasswordModel;
-use Aliyun\CCP\SDK\Models\TokenModel;
-use Aliyun\CCP\SDK\Models\TokenRequestModel;
+use Aliyun\CCP\SDK\Models\SetPasswordRequestModel;
 use Aliyun\CCP\SDK\Models\UpdateDriveModel;
 use Aliyun\CCP\SDK\Models\UpdateDriveRequestModel;
 use Aliyun\CCP\SDK\Models\UpdateShareModel;
 use Aliyun\CCP\SDK\Models\UpdateShareRequestModel;
 use Aliyun\CCP\SDK\Models\UpdateUserModel;
 use Aliyun\CCP\SDK\Models\UpdateUserRequestModel;
+use Aliyun\CCP\SDK\Models\VerifyCodeModel;
+use Aliyun\CCP\SDK\Models\VerifyCodeRequestModel;
 use Aliyun\CCP\SDK\Models\VideoDefinitionModel;
+use Aliyun\CCP\SDK\Models\VideoDefinitionRequestModel;
 use Aliyun\CCP\SDK\Models\VideoM3u8Model;
+use Aliyun\CCP\SDK\Models\VideoM3u8RequestModel;
 use Aliyun\CCP\SDK\Models\VideoTranscodeModel;
+use Aliyun\CCP\SDK\Models\VideoTranscodeRequestModel;
 
 class OSSPath
 {
@@ -135,12 +141,6 @@ class OSSPath
             throw new TeaError([
                 'name'    => 'ParameterMissing',
                 'message' => "'config' can not be unset",
-            ]);
-        }
-        if (Utils::empty_($config->domainId)) {
-            throw new TeaError([
-                'name'    => 'ParameterMissing',
-                'message' => "'config.domainId' can not be empty",
             ]);
         }
         if (!Utils::empty_($config->accessToken) || !Utils::empty_($config->refreshToken)) {
@@ -251,7 +251,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -304,6 +304,7 @@ class OSSPath
      *
      * @tags account
      * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+     * @error AccessTokenInvalid AccessToken is invalid. {message}
      * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
      * @error NotFound The resource {resource_name} cannot be found. Please check.
      * @error InternalError The request has been failed due to some unknown error.
@@ -377,7 +378,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -426,18 +427,19 @@ class OSSPath
     }
 
     /**
-     * 修改手机登录密码，密码必须包含数字和字母，长度8-32个字符.
+     * 修改手机登录密码，密码必须包含数字和字母，长度8-20个字符.
      *
      * @tags account
      * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
      * @error Forbidden User not authorized to operate on the specified APIs.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
      * @error InternalError The request has been failed due to some unknown error.
      *
      * @throws \Exception
      *
      * @return ChangePasswordModel
      */
-    public function changePassword(DefaultChangePasswordRequestModel $request, RuntimeOptions $runtime)
+    public function changePassword(ChangePasswordRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -502,13 +504,17 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
                 $obj            = null;
-                if (Utils::equalNumber($_response->statusCode, 204)) {
+                if (Utils::equalNumber($_response->statusCode, 200)) {
+                    $obj     = Utils::readAsJSON($_response->body);
+                    $respMap = Utils::assertAsMap($obj);
+
                     return ChangePasswordModel::fromMap([
+                        'body'    => $respMap,
                         'headers' => $_response->headers,
                     ]);
                 }
@@ -547,18 +553,19 @@ class OSSPath
     }
 
     /**
-     * 设置手机登录密码，密码必须包含数字和字母，长度8-32个字符.
+     * 设置手机登录密码，密码必须包含数字和字母，长度8-20个字符.
      *
      * @tags account
      * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
      * @error Forbidden User not authorized to operate on the specified APIs.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
      * @error InternalError The request has been failed due to some unknown error.
      *
      * @throws \Exception
      *
      * @return SetPasswordModel
      */
-    public function setPassword(DefaultSetPasswordRequestModel $request, RuntimeOptions $runtime)
+    public function setPassword(SetPasswordRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -623,13 +630,139 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
                 $obj            = null;
                 if (Utils::equalNumber($_response->statusCode, 204)) {
                     return SetPasswordModel::fromMap([
+                        'headers' => $_response->headers,
+                    ]);
+                }
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
+                    throw new TeaError([
+                        'data' => [
+                            'requestId'     => $_response->headers['x-ca-request-id'],
+                            'statusCode'    => $_response->statusCode,
+                            'statusMessage' => $_response->statusMessage,
+                        ],
+                        'message' => $_response->headers['x-ca-error-message'],
+                    ]);
+                }
+                $obj     = Utils::readAsJSON($_response->body);
+                $respMap = Utils::assertAsMap($obj);
+
+                throw new TeaError(Tea::merge([
+                    'data' => [
+                        'requestId'     => $_response->headers['x-ca-request-id'],
+                        'statusCode'    => $_response->statusCode,
+                        'statusMessage' => $_response->statusMessage,
+                    ],
+                ], $respMap));
+            } catch (\Exception $e) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
+                    continue;
+                }
+
+                throw $e;
+            }
+        }
+
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
+    }
+
+    /**
+     * 校验手机短信验证码，用于重置密码时校验手机，通过校验后返回state，可通过state重新设置密码
+     *
+     * @tags account
+     * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+     * @error Forbidden User not authorized to operate on the specified APIs.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
+     * @error InternalError The request has been failed due to some unknown error.
+     *
+     * @throws \Exception
+     *
+     * @return VerifyCodeModel
+     */
+    public function verifyCode(VerifyCodeRequestModel $request, RuntimeOptions $runtime)
+    {
+        $request->validate();
+        $runtime->validate();
+        $_runtime = [
+            'timeouted'      => 'retry',
+            'readTimeout'    => $runtime->readTimeout,
+            'connectTimeout' => $runtime->connectTimeout,
+            'localAddr'      => $runtime->localAddr,
+            'httpProxy'      => $runtime->httpProxy,
+            'httpsProxy'     => $runtime->httpsProxy,
+            'noProxy'        => $runtime->noProxy,
+            'maxIdleConns'   => $runtime->maxIdleConns,
+            'socks5Proxy'    => $runtime->socks5Proxy,
+            'socks5NetWork'  => $runtime->socks5NetWork,
+            'retry'          => [
+                'retryable'   => $runtime->autoretry,
+                'maxAttempts' => Utils::defaultNumber($runtime->maxAttempts, 3),
+            ],
+            'backoff' => [
+                'policy' => Utils::defaultString($runtime->backoffPolicy, 'no'),
+                'period' => Utils::defaultNumber($runtime->backoffPeriod, 1),
+            ],
+            'ignoreSSL' => $runtime->ignoreSSL,
+        ];
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
+        while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
+            if ($_retryTimes > 0) {
+                $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
+                if ($_backoffTime > 0) {
+                    Tea::sleep($_backoffTime);
+                }
+            }
+            $_retryTimes = $_retryTimes + 1;
+
+            try {
+                $_request           = new Request();
+                $accesskeyId        = $this->getAccessKeyId();
+                $accessKeySecret    = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
+                $accessToken        = $this->getAccessToken();
+                $_request->protocol = Utils::defaultString($this->_protocol, 'https');
+                $_request->method   = 'POST';
+                $_request->pathname = $this->getPathname($this->_nickname, '/v2/account/default/verify_code');
+                $_request->headers  = Tea::merge([
+                    'user-agent'   => $this->getUserAgent(),
+                    'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.auth.alicloudccp.com'),
+                    'content-type' => 'application/json; charset=utf-8',
+                ], $request->headers);
+                if (!Utils::empty_($accessToken)) {
+                    $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
+                        $_request->headers['x-acs-security-token'] = $securityToken;
+                    }
+                    $_request->headers['date']                    = Utils::getDateUTCString();
+                    $_request->headers['accept']                  = 'application/json';
+                    $_request->headers['x-acs-signature-method']  = 'HMAC-SHA1';
+                    $_request->headers['x-acs-signature-version'] = '1.0';
+                    $stringToSign                                 = RoaUtils::getStringToSign($_request);
+                    $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
+                }
+                $_request->body = Utils::toJSONString($request->body->toMap());
+                $_lastRequest   = $_request;
+                $_response      = Tea::send($_request, $_runtime);
+                $respMap        = null;
+                $obj            = null;
+                if (Utils::equalNumber($_response->statusCode, 200)) {
+                    $obj     = Utils::readAsJSON($_response->body);
+                    $respMap = Utils::assertAsMap($obj);
+
+                    return VerifyCodeModel::fromMap([
+                        'body'    => $respMap,
                         'headers' => $_response->headers,
                     ]);
                 }
@@ -745,7 +878,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -799,6 +932,7 @@ class OSSPath
      * @tags account
      * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
      * @error Forbidden User not authorized to operate on the specified APIs.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
      * @error InternalError The request has been failed due to some unknown error.
      *
      * @throws \Exception
@@ -870,7 +1004,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -931,7 +1065,7 @@ class OSSPath
      *
      * @return GetLinkInfoModel
      */
-    public function getLinkInfo(GetByLinkInfoRequestModel $request, RuntimeOptions $runtime)
+    public function getLinkInfo(GetLinkInfoRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -996,7 +1130,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -1056,7 +1190,7 @@ class OSSPath
      *
      * @return GetLinkInfoByUserIdModel
      */
-    public function getLinkInfoByUserId(GetLinkInfoByUserIDRequestModel $request, RuntimeOptions $runtime)
+    public function getLinkInfoByUserId(GetLinkInfoByUserIdRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -1121,7 +1255,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -1131,6 +1265,132 @@ class OSSPath
                     $respMap = Utils::assertAsMap($obj);
 
                     return GetLinkInfoByUserIdModel::fromMap([
+                        'body'    => $respMap,
+                        'headers' => $_response->headers,
+                    ]);
+                }
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
+                    throw new TeaError([
+                        'data' => [
+                            'requestId'     => $_response->headers['x-ca-request-id'],
+                            'statusCode'    => $_response->statusCode,
+                            'statusMessage' => $_response->statusMessage,
+                        ],
+                        'message' => $_response->headers['x-ca-error-message'],
+                    ]);
+                }
+                $obj     = Utils::readAsJSON($_response->body);
+                $respMap = Utils::assertAsMap($obj);
+
+                throw new TeaError(Tea::merge([
+                    'data' => [
+                        'requestId'     => $_response->headers['x-ca-request-id'],
+                        'statusCode'    => $_response->statusCode,
+                        'statusMessage' => $_response->statusMessage,
+                    ],
+                ], $respMap));
+            } catch (\Exception $e) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
+                    continue;
+                }
+
+                throw $e;
+            }
+        }
+
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
+    }
+
+    /**
+     * 获取公钥，用于加密对称密钥.
+     *
+     * @tags account
+     * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+     * @error Forbidden User not authorized to operate on the specified APIs.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
+     * @error InternalError The request has been failed due to some unknown error.
+     *
+     * @throws \Exception
+     *
+     * @return GetPublicKeyModel
+     */
+    public function getPublicKey(GetPublicKeyRequestModel $request, RuntimeOptions $runtime)
+    {
+        $request->validate();
+        $runtime->validate();
+        $_runtime = [
+            'timeouted'      => 'retry',
+            'readTimeout'    => $runtime->readTimeout,
+            'connectTimeout' => $runtime->connectTimeout,
+            'localAddr'      => $runtime->localAddr,
+            'httpProxy'      => $runtime->httpProxy,
+            'httpsProxy'     => $runtime->httpsProxy,
+            'noProxy'        => $runtime->noProxy,
+            'maxIdleConns'   => $runtime->maxIdleConns,
+            'socks5Proxy'    => $runtime->socks5Proxy,
+            'socks5NetWork'  => $runtime->socks5NetWork,
+            'retry'          => [
+                'retryable'   => $runtime->autoretry,
+                'maxAttempts' => Utils::defaultNumber($runtime->maxAttempts, 3),
+            ],
+            'backoff' => [
+                'policy' => Utils::defaultString($runtime->backoffPolicy, 'no'),
+                'period' => Utils::defaultNumber($runtime->backoffPeriod, 1),
+            ],
+            'ignoreSSL' => $runtime->ignoreSSL,
+        ];
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
+        while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
+            if ($_retryTimes > 0) {
+                $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
+                if ($_backoffTime > 0) {
+                    Tea::sleep($_backoffTime);
+                }
+            }
+            $_retryTimes = $_retryTimes + 1;
+
+            try {
+                $_request           = new Request();
+                $accesskeyId        = $this->getAccessKeyId();
+                $accessKeySecret    = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
+                $accessToken        = $this->getAccessToken();
+                $_request->protocol = Utils::defaultString($this->_protocol, 'https');
+                $_request->method   = 'POST';
+                $_request->pathname = $this->getPathname($this->_nickname, '/v2/account/get_public_key');
+                $_request->headers  = Tea::merge([
+                    'user-agent'   => $this->getUserAgent(),
+                    'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.auth.alicloudccp.com'),
+                    'content-type' => 'application/json; charset=utf-8',
+                ], $request->headers);
+                if (!Utils::empty_($accessToken)) {
+                    $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
+                        $_request->headers['x-acs-security-token'] = $securityToken;
+                    }
+                    $_request->headers['date']                    = Utils::getDateUTCString();
+                    $_request->headers['accept']                  = 'application/json';
+                    $_request->headers['x-acs-signature-method']  = 'HMAC-SHA1';
+                    $_request->headers['x-acs-signature-version'] = '1.0';
+                    $stringToSign                                 = RoaUtils::getStringToSign($_request);
+                    $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
+                }
+                $_request->body = Utils::toJSONString($request->body->toMap());
+                $_lastRequest   = $_request;
+                $_response      = Tea::send($_request, $_runtime);
+                $respMap        = null;
+                $obj            = null;
+                if (Utils::equalNumber($_response->statusCode, 200)) {
+                    $obj     = Utils::readAsJSON($_response->body);
+                    $respMap = Utils::assertAsMap($obj);
+
+                    return GetPublicKeyModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
                     ]);
@@ -1183,7 +1443,7 @@ class OSSPath
      *
      * @return LinkModel
      */
-    public function link(AccountLinkRequestModel $request, RuntimeOptions $runtime)
+    public function link(LinkRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -1248,7 +1508,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -1309,7 +1569,7 @@ class OSSPath
      *
      * @return CheckExistModel
      */
-    public function checkExist(MobileCheckExistRequestModel $request, RuntimeOptions $runtime)
+    public function checkExist(CheckExistRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -1374,7 +1634,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -1435,7 +1695,7 @@ class OSSPath
      *
      * @return LoginModel
      */
-    public function login(MobileLoginRequestModel $request, RuntimeOptions $runtime)
+    public function login(LoginRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -1500,7 +1760,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -1554,6 +1814,7 @@ class OSSPath
      * @tags account
      * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
      * @error Forbidden User not authorized to operate on the specified APIs.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
      * @error AlreadyExist {resource} has already exists. {extra_msg}
      * @error InternalError The request has been failed due to some unknown error.
      *
@@ -1561,7 +1822,7 @@ class OSSPath
      *
      * @return RegisterModel
      */
-    public function register(MobileRegisterRequestModel $request, RuntimeOptions $runtime)
+    public function register(RegisterRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -1626,7 +1887,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -1680,6 +1941,7 @@ class OSSPath
      * @tags account
      * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
      * @error Forbidden User not authorized to operate on the specified APIs.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
      * @error InternalError The request has been failed due to some unknown error.
      *
      * @throws \Exception
@@ -1751,7 +2013,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -1800,18 +2062,141 @@ class OSSPath
     }
 
     /**
+     * 用户退出登录.
+     *
+     * @tags account
+     * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+     * @error Forbidden User not authorized to operate on the specified APIs.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
+     * @error InternalError The request has been failed due to some unknown error.
+     *
+     * @throws \Exception
+     *
+     * @return AccountRevokeModel
+     */
+    public function accountRevoke(AccountRevokeRequestModel $request, RuntimeOptions $runtime)
+    {
+        $request->validate();
+        $runtime->validate();
+        $_runtime = [
+            'timeouted'      => 'retry',
+            'readTimeout'    => $runtime->readTimeout,
+            'connectTimeout' => $runtime->connectTimeout,
+            'localAddr'      => $runtime->localAddr,
+            'httpProxy'      => $runtime->httpProxy,
+            'httpsProxy'     => $runtime->httpsProxy,
+            'noProxy'        => $runtime->noProxy,
+            'maxIdleConns'   => $runtime->maxIdleConns,
+            'socks5Proxy'    => $runtime->socks5Proxy,
+            'socks5NetWork'  => $runtime->socks5NetWork,
+            'retry'          => [
+                'retryable'   => $runtime->autoretry,
+                'maxAttempts' => Utils::defaultNumber($runtime->maxAttempts, 3),
+            ],
+            'backoff' => [
+                'policy' => Utils::defaultString($runtime->backoffPolicy, 'no'),
+                'period' => Utils::defaultNumber($runtime->backoffPeriod, 1),
+            ],
+            'ignoreSSL' => $runtime->ignoreSSL,
+        ];
+        $_lastRequest   = null;
+        $_lastException = null;
+        $_now           = time();
+        $_retryTimes    = 0;
+        while (Tea::allowRetry($_runtime['retry'], $_retryTimes, $_now)) {
+            if ($_retryTimes > 0) {
+                $_backoffTime = Tea::getBackoffTime($_runtime['backoff'], $_retryTimes);
+                if ($_backoffTime > 0) {
+                    Tea::sleep($_backoffTime);
+                }
+            }
+            $_retryTimes = $_retryTimes + 1;
+
+            try {
+                $_request           = new Request();
+                $accesskeyId        = $this->getAccessKeyId();
+                $accessKeySecret    = $this->getAccessKeySecret();
+                $securityToken      = $this->getSecurityToken();
+                $accessToken        = $this->getAccessToken();
+                $_request->protocol = Utils::defaultString($this->_protocol, 'https');
+                $_request->method   = 'POST';
+                $_request->pathname = $this->getPathname($this->_nickname, '/v2/account/revoke');
+                $_request->headers  = Tea::merge([
+                    'user-agent'   => $this->getUserAgent(),
+                    'host'         => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.auth.alicloudccp.com'),
+                    'content-type' => 'application/json; charset=utf-8',
+                ], $request->headers);
+                if (!Utils::empty_($accessToken)) {
+                    $_request->headers['authorization'] = 'Bearer ' . $accessToken . '';
+                } elseif (!Utils::empty_($accesskeyId) && !Utils::empty_($accessKeySecret)) {
+                    if (!Utils::empty_($securityToken)) {
+                        $_request->headers['x-acs-security-token'] = $securityToken;
+                    }
+                    $_request->headers['date']                    = Utils::getDateUTCString();
+                    $_request->headers['accept']                  = 'application/json';
+                    $_request->headers['x-acs-signature-method']  = 'HMAC-SHA1';
+                    $_request->headers['x-acs-signature-version'] = '1.0';
+                    $stringToSign                                 = RoaUtils::getStringToSign($_request);
+                    $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
+                }
+                $_request->body = Utils::toJSONString($request->body->toMap());
+                $_lastRequest   = $_request;
+                $_response      = Tea::send($_request, $_runtime);
+                $respMap        = null;
+                $obj            = null;
+                if (Utils::equalNumber($_response->statusCode, 204)) {
+                    return AccountRevokeModel::fromMap([
+                        'headers' => $_response->headers,
+                    ]);
+                }
+                if (!Utils::empty_($_response->headers['x-ca-error-message'])) {
+                    throw new TeaError([
+                        'data' => [
+                            'requestId'     => $_response->headers['x-ca-request-id'],
+                            'statusCode'    => $_response->statusCode,
+                            'statusMessage' => $_response->statusMessage,
+                        ],
+                        'message' => $_response->headers['x-ca-error-message'],
+                    ]);
+                }
+                $obj     = Utils::readAsJSON($_response->body);
+                $respMap = Utils::assertAsMap($obj);
+
+                throw new TeaError(Tea::merge([
+                    'data' => [
+                        'requestId'     => $_response->headers['x-ca-request-id'],
+                        'statusCode'    => $_response->statusCode,
+                        'statusMessage' => $_response->statusMessage,
+                    ],
+                ], $respMap));
+            } catch (\Exception $e) {
+                if (Tea::isRetryable($e)) {
+                    $_lastException = $e;
+
+                    continue;
+                }
+
+                throw $e;
+            }
+        }
+
+        throw new TeaUnableRetryError($_lastRequest, $_lastException);
+    }
+
+    /**
      * 用户通过刷新令牌（refresh_token）获取访问令牌（access_token）.
      *
      * @tags account
      * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
      * @error Forbidden User not authorized to operate on the specified APIs.
+     * @error NotFound The resource {resource_name} cannot be found. Please check.
      * @error InternalError The request has been failed due to some unknown error.
      *
      * @throws \Exception
      *
-     * @return TokenModel
+     * @return AccountTokenModel
      */
-    public function token(TokenRequestModel $request, RuntimeOptions $runtime)
+    public function accountToken(AccountTokenRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -1876,7 +2261,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -1885,7 +2270,7 @@ class OSSPath
                     $obj     = Utils::readAsJSON($_response->body);
                     $respMap = Utils::assertAsMap($obj);
 
-                    return TokenModel::fromMap([
+                    return AccountTokenModel::fromMap([
                         'body'    => $respMap,
                         'headers' => $_response->headers,
                     ]);
@@ -2001,7 +2386,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -2128,7 +2513,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -2257,7 +2642,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -2384,7 +2769,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -2508,7 +2893,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -2637,7 +3022,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -2699,7 +3084,7 @@ class OSSPath
      *
      * @return ListDrivesModel
      */
-    public function listDrives(ListDriveRequestModel $request, RuntimeOptions $runtime)
+    public function listDrives(ListDrivesRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -2764,7 +3149,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -2826,7 +3211,7 @@ class OSSPath
      *
      * @return ListMyDrivesModel
      */
-    public function listMyDrives(ListMyDriveRequestModel $request, RuntimeOptions $runtime)
+    public function listMyDrives(ListMyDrivesRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -2891,7 +3276,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -3019,7 +3404,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -3082,7 +3467,7 @@ class OSSPath
      *
      * @return CompleteFileModel
      */
-    public function completeFile(OSSCompleteFileRequestModel $request, RuntimeOptions $runtime)
+    public function completeFile(CompleteFileRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -3147,7 +3532,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -3210,7 +3595,7 @@ class OSSPath
      *
      * @return CopyFileModel
      */
-    public function copyFile(OSSCopyFileRequestModel $request, RuntimeOptions $runtime)
+    public function copyFile(CopyFileRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -3275,7 +3660,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -3339,7 +3724,7 @@ class OSSPath
      *
      * @return CreateFileModel
      */
-    public function createFile(OSSCreateFileRequestModel $request, RuntimeOptions $runtime)
+    public function createFile(CreateFileRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -3404,7 +3789,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -3467,7 +3852,7 @@ class OSSPath
      *
      * @return DeleteFileModel
      */
-    public function deleteFile(OSSDeleteFileRequestModel $request, RuntimeOptions $runtime)
+    public function deleteFile(DeleteFileRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -3532,7 +3917,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -3591,7 +3976,7 @@ class OSSPath
      *
      * @return GetFileModel
      */
-    public function getFile(OSSGetFileRequestModel $request, RuntimeOptions $runtime)
+    public function getFile(GetFileRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -3656,7 +4041,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -3719,7 +4104,7 @@ class OSSPath
      *
      * @return GetDownloadUrlModel
      */
-    public function getDownloadUrl(OSSGetDownloadUrlRequestModel $request, RuntimeOptions $runtime)
+    public function getDownloadUrl(GetDownloadUrlRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -3784,7 +4169,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -3847,7 +4232,7 @@ class OSSPath
      *
      * @return GetSecureUrlModel
      */
-    public function getSecureUrl(OSSGetSecureUrlRequestModel $request, RuntimeOptions $runtime)
+    public function getSecureUrl(GetSecureUrlRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -3912,7 +4297,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -3975,7 +4360,7 @@ class OSSPath
      *
      * @return GetUploadUrlModel
      */
-    public function getUploadUrl(OSSGetUploadUrlRequestModel $request, RuntimeOptions $runtime)
+    public function getUploadUrl(GetUploadUrlRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -4040,7 +4425,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -4103,7 +4488,7 @@ class OSSPath
      *
      * @return ListFileModel
      */
-    public function listFile(OSSListFileRequestModel $request, RuntimeOptions $runtime)
+    public function listFile(ListFileRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -4168,7 +4553,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -4231,7 +4616,7 @@ class OSSPath
      *
      * @return ListUploadedPartsModel
      */
-    public function listUploadedParts(OSSListUploadedPartRequestModel $request, RuntimeOptions $runtime)
+    public function listUploadedParts(ListUploadedPartsRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -4296,7 +4681,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -4359,7 +4744,7 @@ class OSSPath
      *
      * @return MoveFileModel
      */
-    public function moveFile(OSSMoveFileRequestModel $request, RuntimeOptions $runtime)
+    public function moveFile(MoveFileRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -4424,7 +4809,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -4487,7 +4872,7 @@ class OSSPath
      *
      * @return VideoDefinitionModel
      */
-    public function videoDefinition(OSSVideoDefinitionRequestModel $request, RuntimeOptions $runtime)
+    public function videoDefinition(VideoDefinitionRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -4552,7 +4937,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -4615,7 +5000,7 @@ class OSSPath
      *
      * @return VideoM3u8Model
      */
-    public function videoM3u8(OSSVideoM3U8RequestModel $request, RuntimeOptions $runtime)
+    public function videoM3u8(VideoM3u8RequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -4680,7 +5065,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -4742,7 +5127,7 @@ class OSSPath
      *
      * @return VideoTranscodeModel
      */
-    public function videoTranscode(OSSVideoTranscodeRequestModel $request, RuntimeOptions $runtime)
+    public function videoTranscode(VideoTranscodeRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -4807,7 +5192,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -4940,7 +5325,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -5067,7 +5452,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -5191,7 +5576,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -5318,7 +5703,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -5446,7 +5831,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -5509,7 +5894,7 @@ class OSSPath
      *
      * @return ListStorefileModel
      */
-    public function listStorefile(ListStoreFileRequestModel $request, RuntimeOptions $runtime)
+    public function listStorefile(ListStorefileRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -5574,7 +5959,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -5700,7 +6085,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -5826,7 +6211,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -5949,7 +6334,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -6010,7 +6395,7 @@ class OSSPath
      *
      * @return ListUsersModel
      */
-    public function listUsers(ListUserRequestModel $request, RuntimeOptions $runtime)
+    public function listUsers(ListUsersRequestModel $request, RuntimeOptions $runtime)
     {
         $request->validate();
         $runtime->validate();
@@ -6075,7 +6460,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -6201,7 +6586,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -6328,7 +6713,7 @@ class OSSPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;

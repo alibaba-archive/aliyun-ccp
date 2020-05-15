@@ -112,6 +112,10 @@ class CCPSearchFileRequest extends Model
     {
         Model::validateRequired('driveId', $this->driveId, true);
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
+        Model::validateMaximum('limit', $this->limit, 100);
+        Model::validateMaximum('urlExpireSec', $this->urlExpireSec, 14400);
+        Model::validateMinimum('limit', $this->limit, 1);
+        Model::validateMinimum('urlExpireSec', $this->urlExpireSec, 10);
         Model::validateMaxLength('query', $this->query, 4096);
     }
 

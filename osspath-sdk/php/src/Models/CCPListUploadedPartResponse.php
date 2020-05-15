@@ -57,7 +57,7 @@ class CCPListUploadedPartResponse extends Model
     {
         Model::validateMaxLength('fileId', $this->fileId, 50);
         Model::validateMinLength('fileId', $this->fileId, 40);
-        Model::validatePattern('fileId', $this->fileId, '[a-z0-9]{1, 50}');
+        Model::validatePattern('fileId', $this->fileId, '[a-z0-9]{1,50}');
     }
 
     public function toMap()

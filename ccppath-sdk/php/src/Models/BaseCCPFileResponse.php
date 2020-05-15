@@ -315,6 +315,8 @@ class BaseCCPFileResponse extends Model
         Model::validateMinLength('fileId', $this->fileId, 40);
         Model::validateMinLength('parentFileId', $this->parentFileId, 40);
         Model::validateRequired('name', $this->name, true);
+        Model::validateMaximum('size', $this->size, 53687091200);
+        Model::validateMinimum('size', $this->size, 0);
     }
 
     public function toMap()

@@ -70,6 +70,8 @@ class OSSGetDownloadUrlRequest extends Model
     {
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
         Model::validatePattern('shareId', $this->shareId, '[0-9a-zA-Z-]+');
+        Model::validateMaximum('expireSec', $this->expireSec, 14400);
+        Model::validateMinimum('expireSec', $this->expireSec, 10);
         Model::validateRequired('filePath', $this->filePath, true);
         Model::validateMaxLength('filePath', $this->filePath, 1000);
         Model::validateMinLength('filePath', $this->filePath, 1);

@@ -263,7 +263,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -390,7 +390,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -516,7 +516,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -642,7 +642,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -764,7 +764,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -890,7 +890,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -1016,7 +1016,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -1142,7 +1142,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -1267,7 +1267,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -1393,7 +1393,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -1520,7 +1520,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -1646,7 +1646,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -1772,7 +1772,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -1899,7 +1899,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -2025,7 +2025,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -2151,7 +2151,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -2273,7 +2273,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -2398,7 +2398,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -2525,7 +2525,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -2654,7 +2654,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -2782,7 +2782,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -2911,7 +2911,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -3038,7 +3038,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -3162,7 +3162,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -3291,7 +3291,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -3418,7 +3418,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -3545,7 +3545,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -3673,7 +3673,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -3801,7 +3801,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -3929,7 +3929,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -4068,7 +4068,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -4196,7 +4196,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -4311,7 +4311,7 @@ class CCPPath
                 $_request->protocol = Utils::defaultString($this->_protocol, 'https');
                 $_request->method   = 'GET';
                 $_request->pathname = $this->getPathname($this->_nickname, '/v2/file/download');
-                $_request->query    = Utils::stringifyMapValue($request->query);
+                $_request->query    = Utils::stringifyMapValue($request->query->toMap());
                 $_request->headers  = Tea::merge([
                     'user-agent' => $this->getUserAgent(),
                     'host'       => Utils::defaultString($this->_endpoint, '' . $this->_domainId . '.api.alicloudccp.com'),
@@ -4447,7 +4447,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -4575,7 +4575,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -4703,7 +4703,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -4831,7 +4831,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -4959,7 +4959,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -5087,7 +5087,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -5215,7 +5215,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -5343,7 +5343,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -5471,7 +5471,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -5599,7 +5599,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -5727,7 +5727,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -5855,7 +5855,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -5984,7 +5984,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -6110,7 +6110,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -6236,7 +6236,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -6359,7 +6359,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -6485,7 +6485,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -6611,7 +6611,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -6738,7 +6738,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -6866,7 +6866,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -6994,7 +6994,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -7122,7 +7122,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -7250,7 +7250,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -7378,7 +7378,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;
@@ -7506,7 +7506,7 @@ class CCPPath
                     $stringToSign                                 = RoaUtils::getStringToSign($_request);
                     $_request->headers['authorization']           = 'acs ' . $accesskeyId . ':' . RoaUtils::getSignature($stringToSign, $accessKeySecret) . '';
                 }
-                $_request->body = Utils::toJSONString($request->body);
+                $_request->body = Utils::toJSONString($request->body->toMap());
                 $_lastRequest   = $_request;
                 $_response      = Tea::send($_request, $_runtime);
                 $respMap        = null;

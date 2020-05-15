@@ -39,6 +39,15 @@ class OSSVideoTranscodeRequest extends Model
     public $hlsTime;
 
     /**
+     * @description protection_scheme
+     *
+     * @example cbcs
+     *
+     * @var string
+     */
+    public $protectionScheme;
+
+    /**
      * @description remarks
      *
      * @example {"userID":"xxx"}
@@ -65,15 +74,17 @@ class OSSVideoTranscodeRequest extends Model
      */
     public $transcode;
     protected $_name = [
-        'driveId'   => 'drive_id',
-        'filePath'  => 'file_path',
-        'hlsTime'   => 'hls_time',
-        'remarks'   => 'remarks',
-        'shareId'   => 'share_id',
-        'transcode' => 'transcode',
+        'driveId'          => 'drive_id',
+        'filePath'         => 'file_path',
+        'hlsTime'          => 'hls_time',
+        'protectionScheme' => 'protection_scheme',
+        'remarks'          => 'remarks',
+        'shareId'          => 'share_id',
+        'transcode'        => 'transcode',
     ];
     protected $_default = [
-        'transcode' => 'false',
+        'protectionScheme' => 'none',
+        'transcode'        => 'false',
     ];
 
     public function validate()
@@ -87,13 +98,14 @@ class OSSVideoTranscodeRequest extends Model
 
     public function toMap()
     {
-        $res              = [];
-        $res['drive_id']  = $this->driveId;
-        $res['file_path'] = $this->filePath;
-        $res['hls_time']  = $this->hlsTime;
-        $res['remarks']   = $this->remarks;
-        $res['share_id']  = $this->shareId;
-        $res['transcode'] = $this->transcode;
+        $res                      = [];
+        $res['drive_id']          = $this->driveId;
+        $res['file_path']         = $this->filePath;
+        $res['hls_time']          = $this->hlsTime;
+        $res['protection_scheme'] = $this->protectionScheme;
+        $res['remarks']           = $this->remarks;
+        $res['share_id']          = $this->shareId;
+        $res['transcode']         = $this->transcode;
 
         return $res;
     }
@@ -114,6 +126,9 @@ class OSSVideoTranscodeRequest extends Model
         }
         if (isset($map['hls_time'])) {
             $model->hlsTime = $map['hls_time'];
+        }
+        if (isset($map['protection_scheme'])) {
+            $model->protectionScheme = $map['protection_scheme'];
         }
         if (isset($map['remarks'])) {
             $model->remarks = $map['remarks'];

@@ -73,6 +73,8 @@ class GetDownloadUrlRequest extends Model
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
         Model::validatePattern('fileId', $this->fileId, '[a-z0-9.-_]{1,50}');
         Model::validatePattern('fileName', $this->fileName, '[a-zA-Z0-9.-]{1,1000}');
+        Model::validateMaximum('expireSec', $this->expireSec, 14400);
+        Model::validateMinimum('expireSec', $this->expireSec, 0);
         Model::validateMaxLength('fileId', $this->fileId, 50);
         Model::validateMinLength('fileId', $this->fileId, 40);
     }

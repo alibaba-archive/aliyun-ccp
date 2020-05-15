@@ -30,6 +30,15 @@ class OSSVideoDefinitionRequest extends Model
     public $filePath;
 
     /**
+     * @description protection_scheme
+     *
+     * @example cbcs
+     *
+     * @var string
+     */
+    public $protectionScheme;
+
+    /**
      * @description share_id
      *
      * @example 3d336314-63c8-4d96-bce0-17aefb6833b6
@@ -38,9 +47,13 @@ class OSSVideoDefinitionRequest extends Model
      */
     public $shareId;
     protected $_name = [
-        'driveId'  => 'drive_id',
-        'filePath' => 'file_path',
-        'shareId'  => 'share_id',
+        'driveId'          => 'drive_id',
+        'filePath'         => 'file_path',
+        'protectionScheme' => 'protection_scheme',
+        'shareId'          => 'share_id',
+    ];
+    protected $_default = [
+        'protectionScheme' => 'none',
     ];
 
     public function validate()
@@ -54,10 +67,11 @@ class OSSVideoDefinitionRequest extends Model
 
     public function toMap()
     {
-        $res              = [];
-        $res['drive_id']  = $this->driveId;
-        $res['file_path'] = $this->filePath;
-        $res['share_id']  = $this->shareId;
+        $res                      = [];
+        $res['drive_id']          = $this->driveId;
+        $res['file_path']         = $this->filePath;
+        $res['protection_scheme'] = $this->protectionScheme;
+        $res['share_id']          = $this->shareId;
 
         return $res;
     }
@@ -75,6 +89,9 @@ class OSSVideoDefinitionRequest extends Model
         }
         if (isset($map['file_path'])) {
             $model->filePath = $map['file_path'];
+        }
+        if (isset($map['protection_scheme'])) {
+            $model->protectionScheme = $map['protection_scheme'];
         }
         if (isset($map['share_id'])) {
             $model->shareId = $map['share_id'];

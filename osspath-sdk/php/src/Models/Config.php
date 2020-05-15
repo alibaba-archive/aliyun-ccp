@@ -10,9 +10,6 @@ class Config extends Model
 {
     public $endpoint;
 
-    /**
-     * @var string
-     */
     public $domainId;
 
     public $clientId;
@@ -41,7 +38,6 @@ class Config extends Model
 
     public function validate()
     {
-        Model::validateRequired('domainId', $this->domainId, true);
     }
 
     public function toMap()

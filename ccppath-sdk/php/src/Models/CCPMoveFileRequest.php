@@ -70,6 +70,8 @@ class CCPMoveFileRequest extends Model
     {
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
         Model::validatePattern('fileId', $this->fileId, '[a-z0-9.-_]{1,50}');
+        Model::validateMaximum('newName', $this->newName, 1024);
+        Model::validateMinimum('newName', $this->newName, 1);
         Model::validateMaxLength('fileId', $this->fileId, 50);
         Model::validateMaxLength('toParentFileId', $this->toParentFileId, 50);
         Model::validateMinLength('fileId', $this->fileId, 40);

@@ -170,6 +170,8 @@ class CreateFileRequest extends Model
         Model::validateMinLength('parentFileId', $this->parentFileId, 40);
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
         Model::validatePattern('parentFileId', $this->parentFileId, '[a-z0-9]{1,50}');
+        Model::validateMaximum('size', $this->size, 53687091200);
+        Model::validateMinimum('size', $this->size, 0);
     }
 
     public function toMap()

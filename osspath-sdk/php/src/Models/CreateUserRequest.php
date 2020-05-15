@@ -109,6 +109,7 @@ class CreateUserRequest extends Model
 
     public function validate()
     {
+        Model::validateMaximum('description', $this->description, 1024);
         Model::validateRequired('userId', $this->userId, true);
     }
 

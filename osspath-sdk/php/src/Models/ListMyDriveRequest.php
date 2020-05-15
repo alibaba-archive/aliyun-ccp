@@ -38,6 +38,8 @@ class ListMyDriveRequest extends Model
 
     public function validate()
     {
+        Model::validateMaximum('limit', $this->limit, 100);
+        Model::validateMinimum('limit', $this->limit, 1);
     }
 
     public function toMap()

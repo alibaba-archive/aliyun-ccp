@@ -100,6 +100,15 @@ class BaseCCPFileResponse extends Model
     public $driveId;
 
     /**
+     * @description encrypt_mode
+     *
+     * @example pin
+     *
+     * @var string
+     */
+    public $encryptMode;
+
+    /**
      * @description file_extension
      *
      * @example jpg
@@ -141,10 +150,6 @@ class BaseCCPFileResponse extends Model
     public $labels;
 
     /**
-     * @description meta
-     *
-     * @example file meta
-     *
      * @var string
      */
     public $meta;
@@ -195,6 +200,13 @@ class BaseCCPFileResponse extends Model
     public $status;
 
     /**
+     * @description streams url info
+     *
+     * @var object
+     */
+    public $streamsUrlInfo;
+
+    /**
      * @description thumbnail
      *
      * @example https://ccp.data.aliyuncs.com/hz22%2F5d5b986facbec311ef844c25954f96821497b383%2F5d5b986f955410dd991646bb87c6b4e899eff525?Expires=xxx&OSSAccessKeyId=xxx&Signature=xxx
@@ -243,6 +255,20 @@ class BaseCCPFileResponse extends Model
      * @var string
      */
     public $url;
+
+    /**
+     * @description user_meta
+     *
+     * @example user_meta
+     *
+     * @var string
+     */
+    public $userMeta;
+
+    /**
+     * @var VideoMediaResponse
+     */
+    public $videoMediaMetadata;
     protected $_name = [
         'category'           => 'category',
         'contentHash'        => 'content_hash',
@@ -254,6 +280,7 @@ class BaseCCPFileResponse extends Model
         'domainId'           => 'domain_id',
         'downloadUrl'        => 'download_url',
         'driveId'            => 'drive_id',
+        'encryptMode'        => 'encrypt_mode',
         'fileExtension'      => 'file_extension',
         'fileId'             => 'file_id',
         'hidden'             => 'hidden',
@@ -265,26 +292,31 @@ class BaseCCPFileResponse extends Model
         'size'               => 'size',
         'starred'            => 'starred',
         'status'             => 'status',
+        'streamsUrlInfo'     => 'streams_url_info',
         'thumbnail'          => 'thumbnail',
         'trashedAt'          => 'trashed_at',
         'type'               => 'type',
         'updatedAt'          => 'updated_at',
         'uploadId'           => 'upload_id',
         'url'                => 'url',
+        'userMeta'           => 'user_meta',
+        'videoMediaMetadata' => 'video_media_metadata',
     ];
 
     public function validate()
     {
         Model::validatePattern('domainId', $this->domainId, '[a-z0-9A-Z]+');
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
-        Model::validatePattern('fileId', $this->fileId, '[a-z0-9]{1, 50}');
-        Model::validatePattern('name', $this->name, '[a-zA-Z0-9.-]{1,1024}');
-        Model::validatePattern('parentFileId', $this->parentFileId, '[a-z0-9]{1, 50}');
+        Model::validatePattern('fileId', $this->fileId, '[a-z0-9]{1,50}');
+        Model::validatePattern('name', $this->name, '[a-zA-Z0-9.-]{1,1000}');
+        Model::validatePattern('parentFileId', $this->parentFileId, '[a-z0-9]{1,50}');
         Model::validateMaxLength('fileId', $this->fileId, 50);
         Model::validateMaxLength('parentFileId', $this->parentFileId, 50);
         Model::validateMinLength('fileId', $this->fileId, 40);
         Model::validateMinLength('parentFileId', $this->parentFileId, 40);
         Model::validateRequired('name', $this->name, true);
+        Model::validateMaximum('size', $this->size, 53687091200);
+        Model::validateMinimum('size', $this->size, 0);
     }
 
     public function toMap()
@@ -300,6 +332,7 @@ class BaseCCPFileResponse extends Model
         $res['domain_id']            = $this->domainId;
         $res['download_url']         = $this->downloadUrl;
         $res['drive_id']             = $this->driveId;
+        $res['encrypt_mode']         = $this->encryptMode;
         $res['file_extension']       = $this->fileExtension;
         $res['file_id']              = $this->fileId;
         $res['hidden']               = $this->hidden;
@@ -308,18 +341,21 @@ class BaseCCPFileResponse extends Model
         if (null !== $this->labels) {
             $res['labels'] = $this->labels;
         }
-        $res['meta']           = $this->meta;
-        $res['name']           = $this->name;
-        $res['parent_file_id'] = $this->parentFileId;
-        $res['size']           = $this->size;
-        $res['starred']        = $this->starred;
-        $res['status']         = $this->status;
-        $res['thumbnail']      = $this->thumbnail;
-        $res['trashed_at']     = $this->trashedAt;
-        $res['type']           = $this->type;
-        $res['updated_at']     = $this->updatedAt;
-        $res['upload_id']      = $this->uploadId;
-        $res['url']            = $this->url;
+        $res['meta']                 = $this->meta;
+        $res['name']                 = $this->name;
+        $res['parent_file_id']       = $this->parentFileId;
+        $res['size']                 = $this->size;
+        $res['starred']              = $this->starred;
+        $res['status']               = $this->status;
+        $res['streams_url_info']     = $this->streamsUrlInfo;
+        $res['thumbnail']            = $this->thumbnail;
+        $res['trashed_at']           = $this->trashedAt;
+        $res['type']                 = $this->type;
+        $res['updated_at']           = $this->updatedAt;
+        $res['upload_id']            = $this->uploadId;
+        $res['url']                  = $this->url;
+        $res['user_meta']            = $this->userMeta;
+        $res['video_media_metadata'] = null !== $this->videoMediaMetadata ? $this->videoMediaMetadata->toMap() : null;
 
         return $res;
     }
@@ -362,6 +398,9 @@ class BaseCCPFileResponse extends Model
         if (isset($map['drive_id'])) {
             $model->driveId = $map['drive_id'];
         }
+        if (isset($map['encrypt_mode'])) {
+            $model->encryptMode = $map['encrypt_mode'];
+        }
         if (isset($map['file_extension'])) {
             $model->fileExtension = $map['file_extension'];
         }
@@ -398,6 +437,9 @@ class BaseCCPFileResponse extends Model
         if (isset($map['status'])) {
             $model->status = $map['status'];
         }
+        if (isset($map['streams_url_info'])) {
+            $model->streamsUrlInfo = $map['streams_url_info'];
+        }
         if (isset($map['thumbnail'])) {
             $model->thumbnail = $map['thumbnail'];
         }
@@ -415,6 +457,12 @@ class BaseCCPFileResponse extends Model
         }
         if (isset($map['url'])) {
             $model->url = $map['url'];
+        }
+        if (isset($map['user_meta'])) {
+            $model->userMeta = $map['user_meta'];
+        }
+        if (isset($map['video_media_metadata'])) {
+            $model->videoMediaMetadata = VideoMediaResponse::fromMap($map['video_media_metadata']);
         }
 
         return $model;

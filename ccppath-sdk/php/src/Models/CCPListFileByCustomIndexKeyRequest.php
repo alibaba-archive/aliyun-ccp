@@ -168,6 +168,10 @@ class CCPListFileByCustomIndexKeyRequest extends Model
     {
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
         Model::validatePattern('limit', $this->limit, '[0-9]{1,3}');
+        Model::validateMaximum('limit', $this->limit, 100);
+        Model::validateMaximum('urlExpireSec', $this->urlExpireSec, 14400);
+        Model::validateMinimum('limit', $this->limit, 0);
+        Model::validateMinimum('urlExpireSec', $this->urlExpireSec, 10);
     }
 
     public function toMap()

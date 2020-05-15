@@ -70,6 +70,8 @@ class StreamInfo extends Model
     {
         Model::validateRequired('contentMd5', $this->contentMd5, true);
         Model::validateRequired('size', $this->size, true);
+        Model::validateMaximum('size', $this->size, 53687091200);
+        Model::validateMinimum('size', $this->size, 0);
     }
 
     public function toMap()

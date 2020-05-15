@@ -48,6 +48,15 @@ class OSSVideoM3U8Request extends Model
     public $filePath;
 
     /**
+     * @description protection_scheme
+     *
+     * @example cbcs
+     *
+     * @var string
+     */
+    public $protectionScheme;
+
+    /**
      * @description share_id
      *
      * @example 3d336314-63c8-4d96-bce0-17aefb6833b6
@@ -65,22 +74,26 @@ class OSSVideoM3U8Request extends Model
      */
     public $signToken;
     protected $_name = [
-        'definition' => 'definition',
-        'driveId'    => 'drive_id',
-        'expireSec'  => 'expire_sec',
-        'filePath'   => 'file_path',
-        'shareId'    => 'share_id',
-        'signToken'  => 'sign_token',
+        'definition'       => 'definition',
+        'driveId'          => 'drive_id',
+        'expireSec'        => 'expire_sec',
+        'filePath'         => 'file_path',
+        'protectionScheme' => 'protection_scheme',
+        'shareId'          => 'share_id',
+        'signToken'        => 'sign_token',
     ];
     protected $_default = [
-        'definition' => 'Original',
-        'expireSec'  => 60,
+        'definition'       => 'Original',
+        'expireSec'        => 60,
+        'protectionScheme' => 'none',
     ];
 
     public function validate()
     {
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
         Model::validatePattern('shareId', $this->shareId, '[0-9a-zA-Z-]+');
+        Model::validateMaximum('expireSec', $this->expireSec, 86400);
+        Model::validateMinimum('expireSec', $this->expireSec, 60);
         Model::validateRequired('filePath', $this->filePath, true);
         Model::validateRequired('signToken', $this->signToken, true);
         Model::validateMaxLength('filePath', $this->filePath, 1000);
@@ -89,13 +102,14 @@ class OSSVideoM3U8Request extends Model
 
     public function toMap()
     {
-        $res               = [];
-        $res['definition'] = $this->definition;
-        $res['drive_id']   = $this->driveId;
-        $res['expire_sec'] = $this->expireSec;
-        $res['file_path']  = $this->filePath;
-        $res['share_id']   = $this->shareId;
-        $res['sign_token'] = $this->signToken;
+        $res                      = [];
+        $res['definition']        = $this->definition;
+        $res['drive_id']          = $this->driveId;
+        $res['expire_sec']        = $this->expireSec;
+        $res['file_path']         = $this->filePath;
+        $res['protection_scheme'] = $this->protectionScheme;
+        $res['share_id']          = $this->shareId;
+        $res['sign_token']        = $this->signToken;
 
         return $res;
     }
@@ -119,6 +133,9 @@ class OSSVideoM3U8Request extends Model
         }
         if (isset($map['file_path'])) {
             $model->filePath = $map['file_path'];
+        }
+        if (isset($map['protection_scheme'])) {
+            $model->protectionScheme = $map['protection_scheme'];
         }
         if (isset($map['share_id'])) {
             $model->shareId = $map['share_id'];

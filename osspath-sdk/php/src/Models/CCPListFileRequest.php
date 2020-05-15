@@ -184,6 +184,10 @@ class CCPListFileRequest extends Model
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
         Model::validatePattern('limit', $this->limit, '[0-9]{1,3}');
         Model::validatePattern('parentFileId', $this->parentFileId, '[a-z0-9.-_]{1,50}');
+        Model::validateMaximum('limit', $this->limit, 100);
+        Model::validateMaximum('urlExpireSec', $this->urlExpireSec, 14400);
+        Model::validateMinimum('limit', $this->limit, 0);
+        Model::validateMinimum('urlExpireSec', $this->urlExpireSec, 10);
         Model::validateMaxLength('parentFileId', $this->parentFileId, 50);
         Model::validateMinLength('parentFileId', $this->parentFileId, 40);
     }

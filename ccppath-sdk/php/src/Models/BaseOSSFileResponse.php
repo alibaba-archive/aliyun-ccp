@@ -237,6 +237,8 @@ class BaseOSSFileResponse extends Model
         Model::validateRequired('name', $this->name, true);
         Model::validateMaxLength('parentFilePath', $this->parentFilePath, 50);
         Model::validateMinLength('parentFilePath', $this->parentFilePath, 40);
+        Model::validateMaximum('size', $this->size, 53687091200);
+        Model::validateMinimum('size', $this->size, 0);
     }
 
     public function toMap()

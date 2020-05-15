@@ -90,6 +90,8 @@ class UpdateDriveRequest extends Model
 
     public function validate()
     {
+        Model::validateMaximum('description', $this->description, 1024);
+        Model::validateMaximum('driveName', $this->driveName, 1024);
         Model::validateRequired('driveId', $this->driveId, true);
     }
 

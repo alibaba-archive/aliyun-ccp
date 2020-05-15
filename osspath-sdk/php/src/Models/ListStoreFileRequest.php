@@ -64,6 +64,8 @@ class ListStoreFileRequest extends Model
 
     public function validate()
     {
+        Model::validateMaximum('limit', $this->limit, 1000);
+        Model::validateMinimum('limit', $this->limit, 1);
     }
 
     public function toMap()

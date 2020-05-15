@@ -77,6 +77,9 @@ class CCPListUploadedPartRequest extends Model
         Model::validatePattern('partNumberMarker', $this->partNumberMarker, '[0-9]+');
         Model::validateMaxLength('fileId', $this->fileId, 50);
         Model::validateMinLength('fileId', $this->fileId, 40);
+        Model::validateMaximum('limit', $this->limit, 1000);
+        Model::validateMinimum('limit', $this->limit, 1);
+        Model::validateMinimum('partNumberMarker', $this->partNumberMarker, 1);
     }
 
     public function toMap()

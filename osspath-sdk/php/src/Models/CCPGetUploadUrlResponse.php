@@ -77,7 +77,7 @@ class CCPGetUploadUrlResponse extends Model
     {
         Model::validatePattern('domainId', $this->domainId, '[a-z0-9A-Z]+');
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
-        Model::validatePattern('fileId', $this->fileId, '[a-z0-9]{1, 50}');
+        Model::validatePattern('fileId', $this->fileId, '[a-z0-9]{1,50}');
         Model::validateMaxLength('fileId', $this->fileId, 50);
         Model::validateMinLength('fileId', $this->fileId, 40);
     }

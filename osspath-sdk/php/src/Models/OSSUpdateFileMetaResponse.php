@@ -231,11 +231,13 @@ class OSSUpdateFileMetaResponse extends Model
     {
         Model::validatePattern('domainId', $this->domainId, '[a-z0-9A-Z]+');
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
-        Model::validatePattern('name', $this->name, '[a-zA-Z0-9.-]{1,1024}');
-        Model::validatePattern('parentFilePath', $this->parentFilePath, '[a-z0-9]{1, 50}');
+        Model::validatePattern('name', $this->name, '[a-zA-Z0-9.-]{1,1000}');
+        Model::validatePattern('parentFilePath', $this->parentFilePath, '[a-z0-9]{1,50}');
         Model::validatePattern('shareId', $this->shareId, '[0-9]+');
         Model::validateMaxLength('parentFilePath', $this->parentFilePath, 50);
         Model::validateMinLength('parentFilePath', $this->parentFilePath, 40);
+        Model::validateMaximum('size', $this->size, 53687091200);
+        Model::validateMinimum('size', $this->size, 0);
     }
 
     public function toMap()

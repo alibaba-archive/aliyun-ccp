@@ -73,6 +73,8 @@ class ListShareRequest extends Model
     {
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
         Model::validateRequired('limit', $this->limit, true);
+        Model::validateMaximum('limit', $this->limit, 100);
+        Model::validateMinimum('limit', $this->limit, 1);
     }
 
     public function toMap()

@@ -25,9 +25,19 @@ class MobileCheckExistRequest extends Model
      * @var string
      */
     public $phoneNumber;
+
+    /**
+     * @description 国家编号，默认86，不需要填+号，直接填数字
+     *
+     * @example 86
+     *
+     * @var string
+     */
+    public $phoneRegion;
     protected $_name = [
         'appId'       => 'app_id',
         'phoneNumber' => 'phone_number',
+        'phoneRegion' => 'phone_region',
     ];
 
     public function validate()
@@ -41,6 +51,7 @@ class MobileCheckExistRequest extends Model
         $res                 = [];
         $res['app_id']       = $this->appId;
         $res['phone_number'] = $this->phoneNumber;
+        $res['phone_region'] = $this->phoneRegion;
 
         return $res;
     }
@@ -58,6 +69,9 @@ class MobileCheckExistRequest extends Model
         }
         if (isset($map['phone_number'])) {
             $model->phoneNumber = $map['phone_number'];
+        }
+        if (isset($map['phone_region'])) {
+            $model->phoneRegion = $map['phone_region'];
         }
 
         return $model;

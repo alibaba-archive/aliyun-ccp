@@ -81,6 +81,8 @@ class OSSGetFileRequest extends Model
         Model::validateRequired('filePath', $this->filePath, true);
         Model::validateMaxLength('filePath', $this->filePath, 1000);
         Model::validateMinLength('filePath', $this->filePath, 1);
+        Model::validateMaximum('urlExpireSec', $this->urlExpireSec, 14400);
+        Model::validateMinimum('urlExpireSec', $this->urlExpireSec, 10);
     }
 
     public function toMap()
