@@ -97,6 +97,10 @@ class OSSCreateFileRequest extends Model
 
     public function validate()
     {
+        Model::validateMaximum('name', $this->name, 1024);
+        Model::validateMaximum('size', $this->size, 53687091200);
+        Model::validateMinimum('name', $this->name, 1);
+        Model::validateMinimum('size', $this->size, 0);
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
         Model::validatePattern('shareId', $this->shareId, '[0-9a-zA-Z-]+');
     }

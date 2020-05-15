@@ -120,6 +120,11 @@ class UpdateShareResponse extends Model
     public $shareName;
 
     /**
+     * @var array
+     */
+    public $sharePolicy;
+
+    /**
      * @description status
      *
      * @example enabled
@@ -149,6 +154,7 @@ class UpdateShareResponse extends Model
         'shareFilePath' => 'share_file_path',
         'shareId'       => 'share_id',
         'shareName'     => 'share_name',
+        'sharePolicy'   => 'share_policy',
         'status'        => 'status',
         'updatedAt'     => 'updated_at',
     ];
@@ -175,8 +181,15 @@ class UpdateShareResponse extends Model
         $res['share_file_path'] = $this->shareFilePath;
         $res['share_id']        = $this->shareId;
         $res['share_name']      = $this->shareName;
-        $res['status']          = $this->status;
-        $res['updated_at']      = $this->updatedAt;
+        $res['share_policy']    = [];
+        if (null !== $this->sharePolicy && \is_array($this->sharePolicy)) {
+            $n = 0;
+            foreach ($this->sharePolicy as $item) {
+                $res['share_policy'][$n++] = null !== $item ? $item->toMap() : $item;
+            }
+        }
+        $res['status']     = $this->status;
+        $res['updated_at'] = $this->updatedAt;
 
         return $res;
     }
@@ -227,6 +240,15 @@ class UpdateShareResponse extends Model
         }
         if (isset($map['share_name'])) {
             $model->shareName = $map['share_name'];
+        }
+        if (isset($map['share_policy'])) {
+            if (!empty($map['share_policy'])) {
+                $model->sharePolicy = [];
+                $n                  = 0;
+                foreach ($map['share_policy'] as $item) {
+                    $model->sharePolicy[$n++] = null !== $item ? SharePermissionPolicy::fromMap($item) : $item;
+                }
+            }
         }
         if (isset($map['status'])) {
             $model->status = $map['status'];

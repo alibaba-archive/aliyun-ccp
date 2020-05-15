@@ -244,6 +244,8 @@ class OSSCompleteFileResponse extends Model
         Model::validatePattern('shareId', $this->shareId, '[0-9]+');
         Model::validateMaxLength('parentFilePath', $this->parentFilePath, 50);
         Model::validateMinLength('parentFilePath', $this->parentFilePath, 40);
+        Model::validateMaximum('size', $this->size, 53687091200);
+        Model::validateMinimum('size', $this->size, 0);
     }
 
     public function toMap()

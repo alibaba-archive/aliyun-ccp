@@ -314,6 +314,8 @@ class CCPUpdateFileMetaResponse extends Model
         Model::validateMaxLength('parentFileId', $this->parentFileId, 50);
         Model::validateMinLength('fileId', $this->fileId, 40);
         Model::validateMinLength('parentFileId', $this->parentFileId, 40);
+        Model::validateMaximum('size', $this->size, 53687091200);
+        Model::validateMinimum('size', $this->size, 0);
     }
 
     public function toMap()

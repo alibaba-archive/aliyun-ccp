@@ -6,7 +6,7 @@ namespace Aliyun\CCP\SDK\Models;
 
 use AlibabaCloud\Tea\Model;
 
-class ListStoreFileRequestModel extends Model
+class ListStorefileRequestModel extends Model
 {
     /**
      * @description headers
@@ -43,7 +43,7 @@ class ListStoreFileRequestModel extends Model
     /**
      * @param array $map
      *
-     * @return ListStoreFileRequestModel
+     * @return ListStorefileRequestModel
      */
     public static function fromMap($map = [])
     {

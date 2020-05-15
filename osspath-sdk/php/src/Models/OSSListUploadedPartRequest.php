@@ -84,6 +84,9 @@ class OSSListUploadedPartRequest extends Model
         Model::validatePattern('shareId', $this->shareId, '[0-9a-zA-Z-]+');
         Model::validateRequired('filePath', $this->filePath, true);
         Model::validateRequired('limit', $this->limit, true);
+        Model::validateMaximum('limit', $this->limit, 1000);
+        Model::validateMinimum('limit', $this->limit, 1);
+        Model::validateMinimum('partNumberMarker', $this->partNumberMarker, 1);
     }
 
     public function toMap()

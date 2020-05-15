@@ -84,6 +84,8 @@ class CCPGetFileRequest extends Model
         Model::validatePattern('fileId', $this->fileId, '[a-z0-9.-_]{1,50}');
         Model::validateMaxLength('fileId', $this->fileId, 50);
         Model::validateMinLength('fileId', $this->fileId, 40);
+        Model::validateMaximum('urlExpireSec', $this->urlExpireSec, 14400);
+        Model::validateMinimum('urlExpireSec', $this->urlExpireSec, 10);
     }
 
     public function toMap()

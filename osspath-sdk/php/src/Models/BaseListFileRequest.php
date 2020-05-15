@@ -80,6 +80,8 @@ class BaseListFileRequest extends Model
     {
         Model::validatePattern('driveId', $this->driveId, '[0-9]+');
         Model::validatePattern('limit', $this->limit, '[0-9]{1,3}');
+        Model::validateMaximum('limit', $this->limit, 100);
+        Model::validateMinimum('limit', $this->limit, 0);
     }
 
     public function toMap()

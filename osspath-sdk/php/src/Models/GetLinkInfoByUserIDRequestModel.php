@@ -6,7 +6,7 @@ namespace Aliyun\CCP\SDK\Models;
 
 use AlibabaCloud\Tea\Model;
 
-class GetLinkInfoByUserIDRequestModel extends Model
+class GetLinkInfoByUserIdRequestModel extends Model
 {
     /**
      * @description headers
@@ -43,7 +43,7 @@ class GetLinkInfoByUserIDRequestModel extends Model
     /**
      * @param array $map
      *
-     * @return GetLinkInfoByUserIDRequestModel
+     * @return GetLinkInfoByUserIdRequestModel
      */
     public static function fromMap($map = [])
     {

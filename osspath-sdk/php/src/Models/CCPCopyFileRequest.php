@@ -89,6 +89,8 @@ class CCPCopyFileRequest extends Model
         Model::validateMaxLength('toParentFileId', $this->toParentFileId, 50);
         Model::validateMinLength('fileId', $this->fileId, 40);
         Model::validateMinLength('toParentFileId', $this->toParentFileId, 40);
+        Model::validateMaximum('newName', $this->newName, 1024);
+        Model::validateMinimum('newName', $this->newName, 1);
     }
 
     public function toMap()

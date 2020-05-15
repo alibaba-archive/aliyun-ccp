@@ -66,6 +66,16 @@ class GetDriveResponse extends Model
     public $driveType;
 
     /**
+     * @var bool
+     */
+    public $encryptDataAccess;
+
+    /**
+     * @var string
+     */
+    public $encryptMode;
+
+    /**
      * @description Drive 所有者
      *
      * @example ccp
@@ -119,18 +129,20 @@ class GetDriveResponse extends Model
      */
     public $usedSize;
     protected $_name = [
-        'creator'      => 'creator',
-        'description'  => 'description',
-        'domainId'     => 'domain_id',
-        'driveId'      => 'drive_id',
-        'driveName'    => 'drive_name',
-        'driveType'    => 'drive_type',
-        'owner'        => 'owner',
-        'relativePath' => 'relative_path',
-        'status'       => 'status',
-        'storeId'      => 'store_id',
-        'totalSize'    => 'total_size',
-        'usedSize'     => 'used_size',
+        'creator'           => 'creator',
+        'description'       => 'description',
+        'domainId'          => 'domain_id',
+        'driveId'           => 'drive_id',
+        'driveName'         => 'drive_name',
+        'driveType'         => 'drive_type',
+        'encryptDataAccess' => 'encrypt_data_access',
+        'encryptMode'       => 'encrypt_mode',
+        'owner'             => 'owner',
+        'relativePath'      => 'relative_path',
+        'status'            => 'status',
+        'storeId'           => 'store_id',
+        'totalSize'         => 'total_size',
+        'usedSize'          => 'used_size',
     ];
 
     public function validate()
@@ -139,19 +151,21 @@ class GetDriveResponse extends Model
 
     public function toMap()
     {
-        $res                  = [];
-        $res['creator']       = $this->creator;
-        $res['description']   = $this->description;
-        $res['domain_id']     = $this->domainId;
-        $res['drive_id']      = $this->driveId;
-        $res['drive_name']    = $this->driveName;
-        $res['drive_type']    = $this->driveType;
-        $res['owner']         = $this->owner;
-        $res['relative_path'] = $this->relativePath;
-        $res['status']        = $this->status;
-        $res['store_id']      = $this->storeId;
-        $res['total_size']    = $this->totalSize;
-        $res['used_size']     = $this->usedSize;
+        $res                        = [];
+        $res['creator']             = $this->creator;
+        $res['description']         = $this->description;
+        $res['domain_id']           = $this->domainId;
+        $res['drive_id']            = $this->driveId;
+        $res['drive_name']          = $this->driveName;
+        $res['drive_type']          = $this->driveType;
+        $res['encrypt_data_access'] = $this->encryptDataAccess;
+        $res['encrypt_mode']        = $this->encryptMode;
+        $res['owner']               = $this->owner;
+        $res['relative_path']       = $this->relativePath;
+        $res['status']              = $this->status;
+        $res['store_id']            = $this->storeId;
+        $res['total_size']          = $this->totalSize;
+        $res['used_size']           = $this->usedSize;
 
         return $res;
     }
@@ -181,6 +195,12 @@ class GetDriveResponse extends Model
         }
         if (isset($map['drive_type'])) {
             $model->driveType = $map['drive_type'];
+        }
+        if (isset($map['encrypt_data_access'])) {
+            $model->encryptDataAccess = $map['encrypt_data_access'];
+        }
+        if (isset($map['encrypt_mode'])) {
+            $model->encryptMode = $map['encrypt_mode'];
         }
         if (isset($map['owner'])) {
             $model->owner = $map['owner'];

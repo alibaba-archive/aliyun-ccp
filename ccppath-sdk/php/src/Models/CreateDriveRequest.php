@@ -117,6 +117,8 @@ class CreateDriveRequest extends Model
 
     public function validate()
     {
+        Model::validateMaximum('description', $this->description, 1024);
+        Model::validateMaximum('driveName', $this->driveName, 1024);
         Model::validateRequired('driveName', $this->driveName, true);
         Model::validateRequired('owner', $this->owner, true);
     }

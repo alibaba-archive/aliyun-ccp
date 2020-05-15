@@ -52,6 +52,10 @@ class UploadPartInfo extends Model
 
     public function validate()
     {
+        Model::validateMaximum('partNumber', $this->partNumber, 1);
+        Model::validateMaximum('partSize', $this->partSize, 5368709120);
+        Model::validateMinimum('partNumber', $this->partNumber, 10000);
+        Model::validateMinimum('partSize', $this->partSize, 102400);
         Model::validatePattern('partNumber', $this->partNumber, '[0-9]+');
     }
 
