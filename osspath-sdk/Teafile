@@ -1,7 +1,7 @@
 {
 	"scope": "alibabacloud",
 	"name": "OSSPath",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"main": "./oss.tea",
 	"releases": {
 		"go": "github.com/alibabacloud-go/osspath-sdk/client:v1.1.0",
