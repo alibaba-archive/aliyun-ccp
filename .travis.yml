@@ -40,3 +40,12 @@ jobs:
         - dotnet test tests/ /p:AltCover=true
       after_success:
         - bash <(curl -s https://codecov.io/bash) -cF credential-csharp
+    - language: node_js
+      node_js: 12
+      if: branch = master
+      script:
+        - cd credential/ts
+        - npm install
+        - npm run test-cov
+      after_success:
+        - bash <(curl -s https://codecov.io/bash) -cF node_js
