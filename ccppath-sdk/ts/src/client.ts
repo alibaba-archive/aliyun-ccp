@@ -1,7 +1,12 @@
 // This file is auto-generated, don't edit it
-import { Readable } from 'stream';
+/**
+ *
+ */
+import Util from '@alicloud/tea-util';
+import ROAUtil from '@alicloud/roa-util';
+import Credential, * as $Credential from '@alicloud/credentials';
+import AccessTokenCredential, * as $AccessTokenCredential from '@alicloud/ccp-credentials';
 import * as $tea from '@alicloud/tea-typescript';
-import BaseClient from '@alicloud/ccp-baseclient';
 
 export class RuntimeOptions extends $tea.Model {
   autoretry?: boolean;
@@ -63,33 +68,35 @@ export class RuntimeOptions extends $tea.Model {
 
 export class Config extends $tea.Model {
   endpoint?: string;
-  domainId: string;
-  protocol?: string;
-  credentialType?: string;
-  securityToken?: string;
-  accessKeyId?: string;
-  accessKeySecret?: string;
+  domainId?: string;
   clientId?: string;
   refreshToken?: string;
   clientSecret?: string;
   accessToken?: string;
   expireTime?: string;
+  protocol?: string;
+  type?: string;
+  securityToken?: string;
+  accessKeyId?: string;
+  accessKeySecret?: string;
   nickname?: string;
+  userAgent?: string;
   static names(): { [key: string]: string } {
     return {
       endpoint: 'endpoint',
       domainId: 'domainId',
-      protocol: 'protocol',
-      credentialType: 'credentialType',
-      securityToken: 'securityToken',
-      accessKeyId: 'accessKeyId',
-      accessKeySecret: 'accessKeySecret',
       clientId: 'clientId',
       refreshToken: 'refreshToken',
       clientSecret: 'clientSecret',
       accessToken: 'accessToken',
       expireTime: 'expireTime',
+      protocol: 'protocol',
+      type: 'type',
+      securityToken: 'securityToken',
+      accessKeyId: 'accessKeyId',
+      accessKeySecret: 'accessKeySecret',
       nickname: 'nickname',
+      userAgent: 'userAgent',
     };
   }
 
@@ -97,17 +104,18 @@ export class Config extends $tea.Model {
     return {
       endpoint: 'string',
       domainId: 'string',
-      protocol: 'string',
-      credentialType: 'string',
-      securityToken: 'string',
-      accessKeyId: 'string',
-      accessKeySecret: 'string',
       clientId: 'string',
       refreshToken: 'string',
       clientSecret: 'string',
       accessToken: 'string',
       expireTime: 'string',
+      protocol: 'string',
+      type: 'string',
+      securityToken: 'string',
+      accessKeyId: 'string',
+      accessKeySecret: 'string',
       nickname: 'string',
+      userAgent: 'string',
     };
   }
 
@@ -116,37 +124,831 @@ export class Config extends $tea.Model {
   }
 }
 
+export class CancelLinkRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CancelLinkRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CancelLinkRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class CancelLinkModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: AccountAccessTokenResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: AccountAccessTokenResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ConfirmLinkRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: ConfirmLinkRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: ConfirmLinkRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ConfirmLinkModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: AccountAccessTokenResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: AccountAccessTokenResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ChangePasswordRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: DefaultChangePasswordRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: DefaultChangePasswordRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ChangePasswordModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: AccountAccessTokenResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: AccountAccessTokenResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class SetPasswordRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: DefaultSetPasswordRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: DefaultSetPasswordRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class SetPasswordModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class VerifyCodeRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: VerifyCodeRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: VerifyCodeRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class VerifyCodeModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: VerifyCodeResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: VerifyCodeResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetAccessTokenByLinkInfoRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: GetAccessTokenByLinkInfoRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: GetAccessTokenByLinkInfoRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetAccessTokenByLinkInfoModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: AccountAccessTokenResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: AccountAccessTokenResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetCaptchaRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: GetCaptchaRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: GetCaptchaRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetCaptchaModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: Captcha;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: Captcha,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetLinkInfoRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: GetByLinkInfoRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: GetByLinkInfoRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetLinkInfoModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: LinkInfoResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: LinkInfoResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetLinkInfoByUserIdRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: GetLinkInfoByUserIDRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: GetLinkInfoByUserIDRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetLinkInfoByUserIdModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: LinkInfoListResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: LinkInfoListResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetPublicKeyRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: GetAppPublicKeyRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: GetAppPublicKeyRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetPublicKeyModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: GetAppPublicKeyResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: GetAppPublicKeyResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class LinkRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: AccountLinkRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: AccountLinkRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class LinkModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: AccountAccessTokenResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: AccountAccessTokenResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class CheckExistRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: MobileCheckExistRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: MobileCheckExistRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class CheckExistModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: MobileCheckExistResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: MobileCheckExistResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class LoginRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: MobileLoginRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: MobileLoginRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class LoginModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: AccountAccessTokenResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: AccountAccessTokenResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class RegisterRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: MobileRegisterRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: MobileRegisterRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class RegisterModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: AccountAccessTokenResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: AccountAccessTokenResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class MobileSendSmsCodeRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: MobileSendSmsCodeRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: MobileSendSmsCodeRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class MobileSendSmsCodeModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: MobileSendSmsCodeResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: MobileSendSmsCodeResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class AccountRevokeRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: RevokeRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: RevokeRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class AccountRevokeModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class AccountTokenRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: TokenRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: TokenRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class AccountTokenModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: AccountAccessTokenResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: AccountAccessTokenResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class AccessTokenResponse extends $tea.Model {
+  accessToken: string;
+  defaultDriveId: string;
+  expireTime: string;
+  expiresIn: number;
+  refreshToken: string;
+  role: string;
+  tokenType: string;
+  userId: string;
+  static names(): { [key: string]: string } {
+    return {
+      accessToken: 'access_token',
+      defaultDriveId: 'default_drive_id',
+      expireTime: 'expire_time',
+      expiresIn: 'expires_in',
+      refreshToken: 'refresh_token',
+      role: 'role',
+      tokenType: 'token_type',
+      userId: 'user_id',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      accessToken: 'string',
+      defaultDriveId: 'string',
+      expireTime: 'string',
+      expiresIn: 'number',
+      refreshToken: 'string',
+      role: 'string',
+      tokenType: 'string',
+      userId: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
 export class AccountAccessTokenResponse extends $tea.Model {
-  requestId?: string;
   accessToken: string;
   avatar?: string;
+  dataPinSaved?: boolean;
+  dataPinSetup?: boolean;
   defaultDriveId?: string;
   existLink?: LinkInfo[];
   expireTime?: string;
   expiresIn?: number;
+  isFirstLogin?: boolean;
   needLink: boolean;
   nickName?: string;
   refreshToken?: string;
   role?: string;
   state?: string;
   tokenType?: string;
+  userData?: {[key: string]: any};
   userId?: string;
   userName?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       accessToken: 'access_token',
       avatar: 'avatar',
+      dataPinSaved: 'data_pin_saved',
+      dataPinSetup: 'data_pin_setup',
       defaultDriveId: 'default_drive_id',
       existLink: 'exist_link',
       expireTime: 'expire_time',
       expiresIn: 'expires_in',
+      isFirstLogin: 'is_first_login',
       needLink: 'need_link',
       nickName: 'nick_name',
       refreshToken: 'refresh_token',
       role: 'role',
       state: 'state',
       tokenType: 'token_type',
+      userData: 'user_data',
       userId: 'user_id',
       userName: 'user_name',
     };
@@ -154,19 +956,22 @@ export class AccountAccessTokenResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       accessToken: 'string',
       avatar: 'string',
+      dataPinSaved: 'boolean',
+      dataPinSetup: 'boolean',
       defaultDriveId: 'string',
       existLink: { 'type': 'array', 'itemType': LinkInfo },
       expireTime: 'string',
       expiresIn: 'number',
+      isFirstLogin: 'boolean',
       needLink: 'boolean',
       nickName: 'string',
       refreshToken: 'string',
       role: 'string',
       state: 'string',
       tokenType: 'string',
+      userData: { 'type': 'map', 'keyType': 'string', 'valueType': 'any' },
       userId: 'string',
       userName: 'string',
     };
@@ -177,8 +982,12 @@ export class AccountAccessTokenResponse extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class AccountLinkRequest extends $tea.Model {
   detail?: string;
+  extra?: string;
   identity: string;
   status?: string;
   type: string;
@@ -186,6 +995,7 @@ export class AccountLinkRequest extends $tea.Model {
   static names(): { [key: string]: string } {
     return {
       detail: 'detail',
+      extra: 'extra',
       identity: 'identity',
       status: 'status',
       type: 'type',
@@ -196,6 +1006,7 @@ export class AccountLinkRequest extends $tea.Model {
   static types(): { [key: string]: any } {
     return {
       detail: 'string',
+      extra: 'string',
       identity: 'string',
       status: 'string',
       type: 'string',
@@ -208,35 +1019,35 @@ export class AccountLinkRequest extends $tea.Model {
   }
 }
 
-export class AddStoreRequest extends $tea.Model {
-  basePath?: string;
-  bucket?: string;
-  domainId: string;
-  endpoint: string;
-  ownership?: string;
-  roleArn?: string;
-  type: string;
+/**
+ * 
+ */
+export class AuthorizeRequest extends $tea.Model {
+  ClientID: string;
+  LoginType?: string;
+  RedirectUri: string;
+  ResponseType: string;
+  Scope?: string[];
+  State?: string;
   static names(): { [key: string]: string } {
     return {
-      basePath: 'base_path',
-      bucket: 'bucket',
-      domainId: 'domain_id',
-      endpoint: 'endpoint',
-      ownership: 'ownership',
-      roleArn: 'role_arn',
-      type: 'type',
+      ClientID: 'ClientID',
+      LoginType: 'LoginType',
+      RedirectUri: 'RedirectUri',
+      ResponseType: 'ResponseType',
+      Scope: 'Scope',
+      State: 'State',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
-      basePath: 'string',
-      bucket: 'string',
-      domainId: 'string',
-      endpoint: 'string',
-      ownership: 'string',
-      roleArn: 'string',
-      type: 'string',
+      ClientID: 'string',
+      LoginType: 'string',
+      RedirectUri: 'string',
+      ResponseType: 'string',
+      Scope: { 'type': 'array', 'itemType': 'string' },
+      State: 'string',
     };
   }
 
@@ -245,61 +1056,10 @@ export class AddStoreRequest extends $tea.Model {
   }
 }
 
-export class AppAccessStrategy extends $tea.Model {
-  effect?: string;
-  exceptAppIdList?: string[];
-  static names(): { [key: string]: string } {
-    return {
-      effect: 'effect',
-      exceptAppIdList: 'except_app_id_list',
-    };
-  }
-
-  static types(): { [key: string]: any } {
-    return {
-      effect: 'string',
-      exceptAppIdList: { 'type': 'array', 'itemType': 'string' },
-    };
-  }
-
-  constructor(map?: { [key: string]: any }) {
-    super(map);
-  }
-}
-
-export class AuthConfig extends $tea.Model {
-  appId?: string;
-  appSecret?: string;
-  enable?: boolean;
-  endpoint?: string;
-  enterpriseId?: string;
-  static names(): { [key: string]: string } {
-    return {
-      appId: 'app_id',
-      appSecret: 'app_secret',
-      enable: 'enable',
-      endpoint: 'endpoint',
-      enterpriseId: 'enterprise_id',
-    };
-  }
-
-  static types(): { [key: string]: any } {
-    return {
-      appId: 'string',
-      appSecret: 'string',
-      enable: 'boolean',
-      endpoint: 'string',
-      enterpriseId: 'string',
-    };
-  }
-
-  constructor(map?: { [key: string]: any }) {
-    super(map);
-  }
-}
-
+/**
+ * Base file response
+ */
 export class BaseCCPFileResponse extends $tea.Model {
-  requestId?: string;
   category?: string;
   contentHash?: string;
   contentHashName?: string;
@@ -310,6 +1070,7 @@ export class BaseCCPFileResponse extends $tea.Model {
   domainId?: string;
   downloadUrl?: string;
   driveId?: string;
+  encryptMode?: string;
   fileExtension?: string;
   fileId?: string;
   hidden?: boolean;
@@ -321,15 +1082,17 @@ export class BaseCCPFileResponse extends $tea.Model {
   size?: number;
   starred?: boolean;
   status?: string;
+  streamsUrlInfo?: {[key: string]: any};
   thumbnail?: string;
   trashedAt?: string;
   type?: string;
   updatedAt?: string;
   uploadId?: string;
   url?: string;
+  userMeta?: string;
+  videoMediaMetadata?: VideoMediaResponse;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       category: 'category',
       contentHash: 'content_hash',
       contentHashName: 'content_hash_name',
@@ -340,6 +1103,7 @@ export class BaseCCPFileResponse extends $tea.Model {
       domainId: 'domain_id',
       downloadUrl: 'download_url',
       driveId: 'drive_id',
+      encryptMode: 'encrypt_mode',
       fileExtension: 'file_extension',
       fileId: 'file_id',
       hidden: 'hidden',
@@ -351,18 +1115,20 @@ export class BaseCCPFileResponse extends $tea.Model {
       size: 'size',
       starred: 'starred',
       status: 'status',
+      streamsUrlInfo: 'streams_url_info',
       thumbnail: 'thumbnail',
       trashedAt: 'trashed_at',
       type: 'type',
       updatedAt: 'updated_at',
       uploadId: 'upload_id',
       url: 'url',
+      userMeta: 'user_meta',
+      videoMediaMetadata: 'video_media_metadata',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       category: 'string',
       contentHash: 'string',
       contentHashName: 'string',
@@ -373,6 +1139,7 @@ export class BaseCCPFileResponse extends $tea.Model {
       domainId: 'string',
       downloadUrl: 'string',
       driveId: 'string',
+      encryptMode: 'string',
       fileExtension: 'string',
       fileId: 'string',
       hidden: 'boolean',
@@ -384,12 +1151,15 @@ export class BaseCCPFileResponse extends $tea.Model {
       size: 'number',
       starred: 'boolean',
       status: 'string',
+      streamsUrlInfo: { 'type': 'map', 'keyType': 'string', 'valueType': 'any' },
       thumbnail: 'string',
       trashedAt: 'string',
       type: 'string',
       updatedAt: 'string',
       uploadId: 'string',
       url: 'string',
+      userMeta: 'string',
+      videoMediaMetadata: VideoMediaResponse,
     };
   }
 
@@ -398,14 +1168,18 @@ export class BaseCCPFileResponse extends $tea.Model {
   }
 }
 
+/**
+ * Base drive response
+ */
 export class BaseDriveResponse extends $tea.Model {
-  requestId?: string;
   creator?: string;
   description?: string;
   domainId?: string;
   driveId?: string;
   driveName?: string;
   driveType?: string;
+  encryptDataAccess?: boolean;
+  encryptMode?: string;
   owner?: string;
   relativePath?: string;
   status?: string;
@@ -414,13 +1188,14 @@ export class BaseDriveResponse extends $tea.Model {
   usedSize?: number;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       creator: 'creator',
       description: 'description',
       domainId: 'domain_id',
       driveId: 'drive_id',
       driveName: 'drive_name',
       driveType: 'drive_type',
+      encryptDataAccess: 'encrypt_data_access',
+      encryptMode: 'encrypt_mode',
       owner: 'owner',
       relativePath: 'relative_path',
       status: 'status',
@@ -432,13 +1207,14 @@ export class BaseDriveResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       creator: 'string',
       description: 'string',
       domainId: 'string',
       driveId: 'string',
       driveName: 'string',
       driveType: 'string',
+      encryptDataAccess: 'boolean',
+      encryptMode: 'string',
       owner: 'string',
       relativePath: 'string',
       status: 'string',
@@ -453,8 +1229,10 @@ export class BaseDriveResponse extends $tea.Model {
   }
 }
 
+/**
+ * Base file response
+ */
 export class BaseOSSFileResponse extends $tea.Model {
-  requestId?: string;
   contentHash?: string;
   contentHashName?: string;
   contentType?: string;
@@ -479,7 +1257,6 @@ export class BaseOSSFileResponse extends $tea.Model {
   url?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       contentHash: 'content_hash',
       contentHashName: 'content_hash_name',
       contentType: 'content_type',
@@ -507,7 +1284,6 @@ export class BaseOSSFileResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       contentHash: 'string',
       contentHashName: 'string',
       contentType: 'string',
@@ -538,8 +1314,10 @@ export class BaseOSSFileResponse extends $tea.Model {
   }
 }
 
+/**
+ * List share response
+ */
 export class BaseShareResponse extends $tea.Model {
-  requestId?: string;
   createdAt?: string;
   creator?: string;
   description?: string;
@@ -552,11 +1330,11 @@ export class BaseShareResponse extends $tea.Model {
   shareFilePath?: string;
   shareId?: string;
   shareName?: string;
+  sharePolicy?: SharePermissionPolicy[];
   status?: string;
   updatedAt?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       createdAt: 'created_at',
       creator: 'creator',
       description: 'description',
@@ -569,6 +1347,7 @@ export class BaseShareResponse extends $tea.Model {
       shareFilePath: 'share_file_path',
       shareId: 'share_id',
       shareName: 'share_name',
+      sharePolicy: 'share_policy',
       status: 'status',
       updatedAt: 'updated_at',
     };
@@ -576,7 +1355,6 @@ export class BaseShareResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       createdAt: 'string',
       creator: 'string',
       description: 'string',
@@ -589,6 +1367,7 @@ export class BaseShareResponse extends $tea.Model {
       shareFilePath: 'string',
       shareId: 'string',
       shareName: 'string',
+      sharePolicy: { 'type': 'array', 'itemType': SharePermissionPolicy },
       status: 'string',
       updatedAt: 'string',
     };
@@ -599,14 +1378,15 @@ export class BaseShareResponse extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class BatchSubResponse extends $tea.Model {
-  requestId?: string;
   body?: {[key: string]: any};
   id?: string;
   status?: number;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       body: 'body',
       id: 'id',
       status: 'status',
@@ -615,8 +1395,7 @@ export class BatchSubResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
-      body: '{[key: string]: any}',
+      body: { 'type': 'map', 'keyType': 'string', 'valueType': 'any' },
       id: 'string',
       status: 'number',
     };
@@ -627,19 +1406,19 @@ export class BatchSubResponse extends $tea.Model {
   }
 }
 
+/**
+ * batch operation response
+ */
 export class CCPBatchResponse extends $tea.Model {
-  requestId?: string;
   responses?: BatchSubResponse[];
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       responses: 'responses',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       responses: { 'type': 'array', 'itemType': BatchSubResponse },
     };
   }
@@ -649,8 +1428,10 @@ export class CCPBatchResponse extends $tea.Model {
   }
 }
 
+/**
+ * complete file response
+ */
 export class CCPCompleteFileResponse extends $tea.Model {
-  requestId?: string;
   category?: string;
   contentHash?: string;
   contentHashName?: string;
@@ -661,6 +1442,7 @@ export class CCPCompleteFileResponse extends $tea.Model {
   domainId?: string;
   downloadUrl?: string;
   driveId?: string;
+  encryptMode?: string;
   fileExtension?: string;
   fileId?: string;
   hidden?: boolean;
@@ -672,16 +1454,17 @@ export class CCPCompleteFileResponse extends $tea.Model {
   size?: number;
   starred?: boolean;
   status?: string;
+  streamsUrlInfo?: {[key: string]: any};
   thumbnail?: string;
   trashedAt?: string;
   type?: string;
   updatedAt?: string;
   uploadId?: string;
   url?: string;
-  crc?: string;
+  userMeta?: string;
+  videoMediaMetadata?: VideoMediaResponse;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       category: 'category',
       contentHash: 'content_hash',
       contentHashName: 'content_hash_name',
@@ -692,6 +1475,7 @@ export class CCPCompleteFileResponse extends $tea.Model {
       domainId: 'domain_id',
       downloadUrl: 'download_url',
       driveId: 'drive_id',
+      encryptMode: 'encrypt_mode',
       fileExtension: 'file_extension',
       fileId: 'file_id',
       hidden: 'hidden',
@@ -703,19 +1487,20 @@ export class CCPCompleteFileResponse extends $tea.Model {
       size: 'size',
       starred: 'starred',
       status: 'status',
+      streamsUrlInfo: 'streams_url_info',
       thumbnail: 'thumbnail',
       trashedAt: 'trashed_at',
       type: 'type',
       updatedAt: 'updated_at',
       uploadId: 'upload_id',
       url: 'url',
-      crc: 'crc',
+      userMeta: 'user_meta',
+      videoMediaMetadata: 'video_media_metadata',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       category: 'string',
       contentHash: 'string',
       contentHashName: 'string',
@@ -726,6 +1511,7 @@ export class CCPCompleteFileResponse extends $tea.Model {
       domainId: 'string',
       downloadUrl: 'string',
       driveId: 'string',
+      encryptMode: 'string',
       fileExtension: 'string',
       fileId: 'string',
       hidden: 'boolean',
@@ -737,13 +1523,15 @@ export class CCPCompleteFileResponse extends $tea.Model {
       size: 'number',
       starred: 'boolean',
       status: 'string',
+      streamsUrlInfo: { 'type': 'map', 'keyType': 'string', 'valueType': 'any' },
       thumbnail: 'string',
       trashedAt: 'string',
       type: 'string',
       updatedAt: 'string',
       uploadId: 'string',
       url: 'string',
-      crc: 'string',
+      userMeta: 'string',
+      videoMediaMetadata: VideoMediaResponse,
     };
   }
 
@@ -752,15 +1540,16 @@ export class CCPCompleteFileResponse extends $tea.Model {
   }
 }
 
+/**
+ * 文件拷贝 response
+ */
 export class CCPCopyFileResponse extends $tea.Model {
-  requestId?: string;
   asyncTaskId?: string;
   domainId?: string;
   driveId?: string;
   fileId?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       asyncTaskId: 'async_task_id',
       domainId: 'domain_id',
       driveId: 'drive_id',
@@ -770,7 +1559,6 @@ export class CCPCopyFileResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       asyncTaskId: 'string',
       domainId: 'string',
       driveId: 'string',
@@ -783,25 +1571,36 @@ export class CCPCopyFileResponse extends $tea.Model {
   }
 }
 
+/**
+ * Create file response
+ */
 export class CCPCreateFileResponse extends $tea.Model {
-  requestId?: string;
   domainId?: string;
   driveId?: string;
+  encryptMode?: string;
+  exist?: boolean;
   fileId?: string;
+  fileName?: string;
   parentFileId?: string;
   partInfoList?: UploadPartInfo[];
   rapidUpload?: boolean;
+  status?: string;
+  streamsUploadInfo?: {[key: string]: any};
   type?: string;
   uploadId?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       domainId: 'domain_id',
       driveId: 'drive_id',
+      encryptMode: 'encrypt_mode',
+      exist: 'exist',
       fileId: 'file_id',
+      fileName: 'file_name',
       parentFileId: 'parent_file_id',
       partInfoList: 'part_info_list',
       rapidUpload: 'rapid_upload',
+      status: 'status',
+      streamsUploadInfo: 'streams_upload_info',
       type: 'type',
       uploadId: 'upload_id',
     };
@@ -809,13 +1608,17 @@ export class CCPCreateFileResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       domainId: 'string',
       driveId: 'string',
+      encryptMode: 'string',
+      exist: 'boolean',
       fileId: 'string',
+      fileName: 'string',
       parentFileId: 'string',
       partInfoList: { 'type': 'array', 'itemType': UploadPartInfo },
       rapidUpload: 'boolean',
+      status: 'string',
+      streamsUploadInfo: { 'type': 'map', 'keyType': 'string', 'valueType': 'any' },
       type: 'string',
       uploadId: 'string',
     };
@@ -826,15 +1629,16 @@ export class CCPCreateFileResponse extends $tea.Model {
   }
 }
 
+/**
+ * 删除文件 response
+ */
 export class CCPDeleteFileResponse extends $tea.Model {
-  requestId?: string;
   asyncTaskId?: string;
   domainId?: string;
   driveId?: string;
   fileId?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       asyncTaskId: 'async_task_id',
       domainId: 'domain_id',
       driveId: 'drive_id',
@@ -844,7 +1648,6 @@ export class CCPDeleteFileResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       asyncTaskId: 'string',
       domainId: 'string',
       driveId: 'string',
@@ -857,14 +1660,15 @@ export class CCPDeleteFileResponse extends $tea.Model {
   }
 }
 
+/**
+ * 批量删除文件 response
+ */
 export class CCPDeleteFilesResponse extends $tea.Model {
-  requestId?: string;
   deletedFileIdList?: string[];
   domainId?: string;
   driveId?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       deletedFileIdList: 'deleted_file_id_list',
       domainId: 'domain_id',
       driveId: 'drive_id',
@@ -873,7 +1677,6 @@ export class CCPDeleteFilesResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       deletedFileIdList: { 'type': 'array', 'itemType': 'string' },
       domainId: 'string',
       driveId: 'string',
@@ -885,14 +1688,15 @@ export class CCPDeleteFilesResponse extends $tea.Model {
   }
 }
 
+/**
+ * Get AsyncTask Response
+ */
 export class CCPGetAsyncTaskResponse extends $tea.Model {
-  requestId?: string;
   asyncTaskId?: string;
   message?: string;
   state?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       asyncTaskId: 'async_task_id',
       message: 'message',
       state: 'state',
@@ -901,7 +1705,6 @@ export class CCPGetAsyncTaskResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       asyncTaskId: 'string',
       message: 'string',
       state: 'string',
@@ -913,25 +1716,31 @@ export class CCPGetAsyncTaskResponse extends $tea.Model {
   }
 }
 
+/**
+ * 获取download url response
+ */
 export class CCPGetDownloadUrlResponse extends $tea.Model {
-  requestId?: string;
   expiration?: string;
   method?: string;
+  size?: number;
+  streamsUrl?: {[key: string]: any};
   url?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       expiration: 'expiration',
       method: 'method',
+      size: 'size',
+      streamsUrl: 'streams_url',
       url: 'url',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       expiration: 'string',
       method: 'string',
+      size: 'number',
+      streamsUrl: { 'type': 'map', 'keyType': 'string', 'valueType': 'any' },
       url: 'string',
     };
   }
@@ -941,8 +1750,10 @@ export class CCPGetDownloadUrlResponse extends $tea.Model {
   }
 }
 
-export class CCPGetFileResponse extends $tea.Model {
-  requestId?: string;
+/**
+ * 根据路径获取文件元数据response
+ */
+export class CCPGetFileByPathResponse extends $tea.Model {
   category?: string;
   contentHash?: string;
   contentHashName?: string;
@@ -953,6 +1764,7 @@ export class CCPGetFileResponse extends $tea.Model {
   domainId?: string;
   downloadUrl?: string;
   driveId?: string;
+  encryptMode?: string;
   fileExtension?: string;
   fileId?: string;
   hidden?: boolean;
@@ -964,15 +1776,17 @@ export class CCPGetFileResponse extends $tea.Model {
   size?: number;
   starred?: boolean;
   status?: string;
+  streamsUrlInfo?: {[key: string]: any};
   thumbnail?: string;
   trashedAt?: string;
   type?: string;
   updatedAt?: string;
   uploadId?: string;
   url?: string;
+  userMeta?: string;
+  videoMediaMetadata?: VideoMediaResponse;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       category: 'category',
       contentHash: 'content_hash',
       contentHashName: 'content_hash_name',
@@ -983,6 +1797,7 @@ export class CCPGetFileResponse extends $tea.Model {
       domainId: 'domain_id',
       downloadUrl: 'download_url',
       driveId: 'drive_id',
+      encryptMode: 'encrypt_mode',
       fileExtension: 'file_extension',
       fileId: 'file_id',
       hidden: 'hidden',
@@ -994,18 +1809,20 @@ export class CCPGetFileResponse extends $tea.Model {
       size: 'size',
       starred: 'starred',
       status: 'status',
+      streamsUrlInfo: 'streams_url_info',
       thumbnail: 'thumbnail',
       trashedAt: 'trashed_at',
       type: 'type',
       updatedAt: 'updated_at',
       uploadId: 'upload_id',
       url: 'url',
+      userMeta: 'user_meta',
+      videoMediaMetadata: 'video_media_metadata',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       category: 'string',
       contentHash: 'string',
       contentHashName: 'string',
@@ -1016,6 +1833,7 @@ export class CCPGetFileResponse extends $tea.Model {
       domainId: 'string',
       downloadUrl: 'string',
       driveId: 'string',
+      encryptMode: 'string',
       fileExtension: 'string',
       fileId: 'string',
       hidden: 'boolean',
@@ -1027,12 +1845,15 @@ export class CCPGetFileResponse extends $tea.Model {
       size: 'number',
       starred: 'boolean',
       status: 'string',
+      streamsUrlInfo: { 'type': 'map', 'keyType': 'string', 'valueType': 'any' },
       thumbnail: 'string',
       trashedAt: 'string',
       type: 'string',
       updatedAt: 'string',
       uploadId: 'string',
       url: 'string',
+      userMeta: 'string',
+      videoMediaMetadata: VideoMediaResponse,
     };
   }
 
@@ -1041,8 +1862,122 @@ export class CCPGetFileResponse extends $tea.Model {
   }
 }
 
+/**
+ * 获取文件元数据response
+ */
+export class CCPGetFileResponse extends $tea.Model {
+  category?: string;
+  contentHash?: string;
+  contentHashName?: string;
+  contentType?: string;
+  crc64Hash?: string;
+  createdAt?: string;
+  description?: string;
+  domainId?: string;
+  downloadUrl?: string;
+  driveId?: string;
+  encryptMode?: string;
+  fileExtension?: string;
+  fileId?: string;
+  hidden?: boolean;
+  imageMediaMetadata?: ImageMediaResponse;
+  labels?: string[];
+  meta?: string;
+  name?: string;
+  parentFileId?: string;
+  size?: number;
+  starred?: boolean;
+  status?: string;
+  streamsUrlInfo?: {[key: string]: any};
+  thumbnail?: string;
+  trashedAt?: string;
+  type?: string;
+  updatedAt?: string;
+  uploadId?: string;
+  url?: string;
+  userMeta?: string;
+  videoMediaMetadata?: VideoMediaResponse;
+  static names(): { [key: string]: string } {
+    return {
+      category: 'category',
+      contentHash: 'content_hash',
+      contentHashName: 'content_hash_name',
+      contentType: 'content_type',
+      crc64Hash: 'crc64_hash',
+      createdAt: 'created_at',
+      description: 'description',
+      domainId: 'domain_id',
+      downloadUrl: 'download_url',
+      driveId: 'drive_id',
+      encryptMode: 'encrypt_mode',
+      fileExtension: 'file_extension',
+      fileId: 'file_id',
+      hidden: 'hidden',
+      imageMediaMetadata: 'image_media_metadata',
+      labels: 'labels',
+      meta: 'meta',
+      name: 'name',
+      parentFileId: 'parent_file_id',
+      size: 'size',
+      starred: 'starred',
+      status: 'status',
+      streamsUrlInfo: 'streams_url_info',
+      thumbnail: 'thumbnail',
+      trashedAt: 'trashed_at',
+      type: 'type',
+      updatedAt: 'updated_at',
+      uploadId: 'upload_id',
+      url: 'url',
+      userMeta: 'user_meta',
+      videoMediaMetadata: 'video_media_metadata',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      category: 'string',
+      contentHash: 'string',
+      contentHashName: 'string',
+      contentType: 'string',
+      crc64Hash: 'string',
+      createdAt: 'string',
+      description: 'string',
+      domainId: 'string',
+      downloadUrl: 'string',
+      driveId: 'string',
+      encryptMode: 'string',
+      fileExtension: 'string',
+      fileId: 'string',
+      hidden: 'boolean',
+      imageMediaMetadata: ImageMediaResponse,
+      labels: { 'type': 'array', 'itemType': 'string' },
+      meta: 'string',
+      name: 'string',
+      parentFileId: 'string',
+      size: 'number',
+      starred: 'boolean',
+      status: 'string',
+      streamsUrlInfo: { 'type': 'map', 'keyType': 'string', 'valueType': 'any' },
+      thumbnail: 'string',
+      trashedAt: 'string',
+      type: 'string',
+      updatedAt: 'string',
+      uploadId: 'string',
+      url: 'string',
+      userMeta: 'string',
+      videoMediaMetadata: VideoMediaResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * Get UploadUrl Response
+ */
 export class CCPGetUploadUrlResponse extends $tea.Model {
-  requestId?: string;
   createAt?: string;
   domainId?: string;
   driveId?: string;
@@ -1051,7 +1986,6 @@ export class CCPGetUploadUrlResponse extends $tea.Model {
   uploadId?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       createAt: 'create_at',
       domainId: 'domain_id',
       driveId: 'drive_id',
@@ -1063,7 +1997,6 @@ export class CCPGetUploadUrlResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       createAt: 'string',
       domainId: 'string',
       driveId: 'string',
@@ -1078,13 +2011,14 @@ export class CCPGetUploadUrlResponse extends $tea.Model {
   }
 }
 
+/**
+ * List file response
+ */
 export class CCPListFileResponse extends $tea.Model {
-  requestId?: string;
   items?: BaseCCPFileResponse[];
   nextMarker?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       items: 'items',
       nextMarker: 'next_marker',
     };
@@ -1092,7 +2026,6 @@ export class CCPListFileResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       items: { 'type': 'array', 'itemType': BaseCCPFileResponse },
       nextMarker: 'string',
     };
@@ -1103,15 +2036,16 @@ export class CCPListFileResponse extends $tea.Model {
   }
 }
 
+/**
+ * 获取签名 response
+ */
 export class CCPListUploadedPartResponse extends $tea.Model {
-  requestId?: string;
   fileId?: string;
   nextPartNumberMarker?: string;
   uploadId?: string;
   uploadedParts?: UploadPartInfo[];
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       fileId: 'file_id',
       nextPartNumberMarker: 'next_part_number_marker',
       uploadId: 'upload_id',
@@ -1121,7 +2055,6 @@ export class CCPListUploadedPartResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       fileId: 'string',
       nextPartNumberMarker: 'string',
       uploadId: 'string',
@@ -1134,15 +2067,16 @@ export class CCPListUploadedPartResponse extends $tea.Model {
   }
 }
 
+/**
+ * 文件移动 response
+ */
 export class CCPMoveFileResponse extends $tea.Model {
-  requestId?: string;
   asyncTaskId?: string;
   domainId?: string;
   driveId?: string;
   fileId?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       asyncTaskId: 'async_task_id',
       domainId: 'domain_id',
       driveId: 'drive_id',
@@ -1152,7 +2086,6 @@ export class CCPMoveFileResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       asyncTaskId: 'string',
       domainId: 'string',
       driveId: 'string',
@@ -1165,13 +2098,14 @@ export class CCPMoveFileResponse extends $tea.Model {
   }
 }
 
-export class CCPSearchFileResponse extends $tea.Model {
-  requestId?: string;
+/**
+ * scan file meta response
+ */
+export class CCPScanFileMetaResponse extends $tea.Model {
   items?: BaseCCPFileResponse[];
   nextMarker?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       items: 'items',
       nextMarker: 'next_marker',
     };
@@ -1179,7 +2113,6 @@ export class CCPSearchFileResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       items: { 'type': 'array', 'itemType': BaseCCPFileResponse },
       nextMarker: 'string',
     };
@@ -1190,8 +2123,35 @@ export class CCPSearchFileResponse extends $tea.Model {
   }
 }
 
+/**
+ * search file response
+ */
+export class CCPSearchFileResponse extends $tea.Model {
+  items?: BaseCCPFileResponse[];
+  nextMarker?: string;
+  static names(): { [key: string]: string } {
+    return {
+      items: 'items',
+      nextMarker: 'next_marker',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      items: { 'type': 'array', 'itemType': BaseCCPFileResponse },
+      nextMarker: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 更新文件元数据 response
+ */
 export class CCPUpdateFileMetaResponse extends $tea.Model {
-  requestId?: string;
   category?: string;
   contentHash?: string;
   contentHashName?: string;
@@ -1202,6 +2162,7 @@ export class CCPUpdateFileMetaResponse extends $tea.Model {
   domainId?: string;
   downloadUrl?: string;
   driveId?: string;
+  encryptMode?: string;
   fileExtension?: string;
   fileId?: string;
   hidden?: boolean;
@@ -1213,15 +2174,17 @@ export class CCPUpdateFileMetaResponse extends $tea.Model {
   size?: number;
   starred?: boolean;
   status?: string;
+  streamsUrlInfo?: {[key: string]: any};
   thumbnail?: string;
   trashedAt?: string;
   type?: string;
   updatedAt?: string;
   uploadId?: string;
   url?: string;
+  userMeta?: string;
+  videoMediaMetadata?: VideoMediaResponse;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       category: 'category',
       contentHash: 'content_hash',
       contentHashName: 'content_hash_name',
@@ -1232,6 +2195,7 @@ export class CCPUpdateFileMetaResponse extends $tea.Model {
       domainId: 'domain_id',
       downloadUrl: 'download_url',
       driveId: 'drive_id',
+      encryptMode: 'encrypt_mode',
       fileExtension: 'file_extension',
       fileId: 'file_id',
       hidden: 'hidden',
@@ -1243,18 +2207,20 @@ export class CCPUpdateFileMetaResponse extends $tea.Model {
       size: 'size',
       starred: 'starred',
       status: 'status',
+      streamsUrlInfo: 'streams_url_info',
       thumbnail: 'thumbnail',
       trashedAt: 'trashed_at',
       type: 'type',
       updatedAt: 'updated_at',
       uploadId: 'upload_id',
       url: 'url',
+      userMeta: 'user_meta',
+      videoMediaMetadata: 'video_media_metadata',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       category: 'string',
       contentHash: 'string',
       contentHashName: 'string',
@@ -1265,6 +2231,7 @@ export class CCPUpdateFileMetaResponse extends $tea.Model {
       domainId: 'string',
       downloadUrl: 'string',
       driveId: 'string',
+      encryptMode: 'string',
       fileExtension: 'string',
       fileId: 'string',
       hidden: 'boolean',
@@ -1276,12 +2243,15 @@ export class CCPUpdateFileMetaResponse extends $tea.Model {
       size: 'number',
       starred: 'boolean',
       status: 'string',
+      streamsUrlInfo: { 'type': 'map', 'keyType': 'string', 'valueType': 'any' },
       thumbnail: 'string',
       trashedAt: 'string',
       type: 'string',
       updatedAt: 'string',
       uploadId: 'string',
       url: 'string',
+      userMeta: 'string',
+      videoMediaMetadata: VideoMediaResponse,
     };
   }
 
@@ -1290,6 +2260,9 @@ export class CCPUpdateFileMetaResponse extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class CancelLinkRequest extends $tea.Model {
   temporaryToken: string;
   static names(): { [key: string]: string } {
@@ -1309,6 +2282,9 @@ export class CancelLinkRequest extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class Captcha extends $tea.Model {
   captcha: string;
   captchaFormat: string;
@@ -1334,6 +2310,9 @@ export class Captcha extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class ConfirmLinkRequest extends $tea.Model {
   temporaryToken: string;
   static names(): { [key: string]: string } {
@@ -1353,6 +2332,9 @@ export class ConfirmLinkRequest extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class CorsRule extends $tea.Model {
   allowedHeader?: string[];
   allowedMethod?: string[];
@@ -1384,144 +2366,14 @@ export class CorsRule extends $tea.Model {
   }
 }
 
-export class CreateAppRequest extends $tea.Model {
-  appName: string;
-  description?: string;
-  isThirdParty?: boolean;
-  logo: string;
-  redirectUri?: string;
-  scope: string[];
-  type: string;
-  static names(): { [key: string]: string } {
-    return {
-      appName: 'app_name',
-      description: 'description',
-      isThirdParty: 'is_third_party',
-      logo: 'logo',
-      redirectUri: 'redirect_uri',
-      scope: 'scope',
-      type: 'type',
-    };
-  }
-
-  static types(): { [key: string]: any } {
-    return {
-      appName: 'string',
-      description: 'string',
-      isThirdParty: 'boolean',
-      logo: 'string',
-      redirectUri: 'string',
-      scope: { 'type': 'array', 'itemType': 'string' },
-      type: 'string',
-    };
-  }
-
-  constructor(map?: { [key: string]: any }) {
-    super(map);
-  }
-}
-
-export class CreateDomainRequest extends $tea.Model {
-  authAlipayAppId?: string;
-  authAlipayEnbale?: boolean;
-  authAlipayPrivateKey?: string;
-  authConfig?: {[key: string]: any};
-  authDingdingAppId?: string;
-  authDingdingAppSecret?: string;
-  authDingdingEnable?: boolean;
-  authEndpointEnable?: boolean;
-  authRamAppId?: string;
-  authRamAppSecret?: string;
-  authRamEnable?: boolean;
-  dataHashName?: string;
-  description?: string;
-  domainName: string;
-  eventFilenameMatches?: string;
-  eventMnsEndpoint?: string;
-  eventMnsTopic?: string;
-  eventNames?: string[];
-  eventRoleArn?: string;
-  initDriveEnable?: boolean;
-  initDriveSize?: number;
-  pathType: string;
-  publishedAppAccessStrategy?: AppAccessStrategy;
-  sharable?: boolean;
-  storeLevel?: string;
-  storeRegionList: string[];
-  static names(): { [key: string]: string } {
-    return {
-      authAlipayAppId: 'auth_alipay_app_id',
-      authAlipayEnbale: 'auth_alipay_enbale',
-      authAlipayPrivateKey: 'auth_alipay_private_key',
-      authConfig: 'auth_config',
-      authDingdingAppId: 'auth_dingding_app_id',
-      authDingdingAppSecret: 'auth_dingding_app_secret',
-      authDingdingEnable: 'auth_dingding_enable',
-      authEndpointEnable: 'auth_endpoint_enable',
-      authRamAppId: 'auth_ram_app_id',
-      authRamAppSecret: 'auth_ram_app_secret',
-      authRamEnable: 'auth_ram_enable',
-      dataHashName: 'data_hash_name',
-      description: 'description',
-      domainName: 'domain_name',
-      eventFilenameMatches: 'event_filename_matches',
-      eventMnsEndpoint: 'event_mns_endpoint',
-      eventMnsTopic: 'event_mns_topic',
-      eventNames: 'event_names',
-      eventRoleArn: 'event_role_arn',
-      initDriveEnable: 'init_drive_enable',
-      initDriveSize: 'init_drive_size',
-      pathType: 'path_type',
-      publishedAppAccessStrategy: 'published_app_access_strategy',
-      sharable: 'sharable',
-      storeLevel: 'store_level',
-      storeRegionList: 'store_region_list',
-    };
-  }
-
-  static types(): { [key: string]: any } {
-    return {
-      authAlipayAppId: 'string',
-      authAlipayEnbale: 'boolean',
-      authAlipayPrivateKey: 'string',
-      authConfig: '{[key: string]: any}',
-      authDingdingAppId: 'string',
-      authDingdingAppSecret: 'string',
-      authDingdingEnable: 'boolean',
-      authEndpointEnable: 'boolean',
-      authRamAppId: 'string',
-      authRamAppSecret: 'string',
-      authRamEnable: 'boolean',
-      dataHashName: 'string',
-      description: 'string',
-      domainName: 'string',
-      eventFilenameMatches: 'string',
-      eventMnsEndpoint: 'string',
-      eventMnsTopic: 'string',
-      eventNames: { 'type': 'array', 'itemType': 'string' },
-      eventRoleArn: 'string',
-      initDriveEnable: 'boolean',
-      initDriveSize: 'number',
-      pathType: 'string',
-      publishedAppAccessStrategy: AppAccessStrategy,
-      sharable: 'boolean',
-      storeLevel: 'string',
-      storeRegionList: { 'type': 'array', 'itemType': 'string' },
-    };
-  }
-
-  constructor(map?: { [key: string]: any }) {
-    super(map);
-  }
-}
-
+/**
+ * Create drive response
+ */
 export class CreateDriveResponse extends $tea.Model {
-  requestId?: string;
   domainId?: string;
   driveId?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       domainId: 'domain_id',
       driveId: 'drive_id',
     };
@@ -1529,7 +2381,6 @@ export class CreateDriveResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       domainId: 'string',
       driveId: 'string',
     };
@@ -1540,13 +2391,14 @@ export class CreateDriveResponse extends $tea.Model {
   }
 }
 
+/**
+ * Create share response
+ */
 export class CreateShareResponse extends $tea.Model {
-  requestId?: string;
   domainId?: string;
   shareId?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       domainId: 'domain_id',
       shareId: 'share_id',
     };
@@ -1554,7 +2406,6 @@ export class CreateShareResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       domainId: 'string',
       shareId: 'string',
     };
@@ -1565,29 +2416,35 @@ export class CreateShareResponse extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class DefaultChangePasswordRequest extends $tea.Model {
   appId: string;
+  encryptedKey: string;
   newPassword: string;
   phoneNumber: string;
-  smsCode: string;
-  smsCodeId: string;
+  phoneRegion?: string;
+  state: string;
   static names(): { [key: string]: string } {
     return {
       appId: 'app_id',
+      encryptedKey: 'encrypted_key',
       newPassword: 'new_password',
       phoneNumber: 'phone_number',
-      smsCode: 'sms_code',
-      smsCodeId: 'sms_code_id',
+      phoneRegion: 'phone_region',
+      state: 'state',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
       appId: 'string',
+      encryptedKey: 'string',
       newPassword: 'string',
       phoneNumber: 'string',
-      smsCode: 'string',
-      smsCodeId: 'string',
+      phoneRegion: 'string',
+      state: 'string',
     };
   }
 
@@ -1596,13 +2453,18 @@ export class DefaultChangePasswordRequest extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class DefaultSetPasswordRequest extends $tea.Model {
   appId: string;
+  encryptedKey: string;
   newPassword: string;
   state: string;
   static names(): { [key: string]: string } {
     return {
       appId: 'app_id',
+      encryptedKey: 'encrypted_key',
       newPassword: 'new_password',
       state: 'state',
     };
@@ -1611,6 +2473,7 @@ export class DefaultSetPasswordRequest extends $tea.Model {
   static types(): { [key: string]: any } {
     return {
       appId: 'string',
+      encryptedKey: 'string',
       newPassword: 'string',
       state: 'string',
     };
@@ -1621,55 +2484,17 @@ export class DefaultSetPasswordRequest extends $tea.Model {
   }
 }
 
-export class DeleteAppRequest extends $tea.Model {
-  appId: string;
-  static names(): { [key: string]: string } {
-    return {
-      appId: 'app_id',
-    };
-  }
-
-  static types(): { [key: string]: any } {
-    return {
-      appId: 'string',
-    };
-  }
-
-  constructor(map?: { [key: string]: any }) {
-    super(map);
-  }
-}
-
-export class DeleteDomainRequest extends $tea.Model {
-  domainId: string;
-  static names(): { [key: string]: string } {
-    return {
-      domainId: 'domain_id',
-    };
-  }
-
-  static types(): { [key: string]: any } {
-    return {
-      domainId: 'string',
-    };
-  }
-
-  constructor(map?: { [key: string]: any }) {
-    super(map);
-  }
-}
-
+/**
+ * delete drive response
+ */
 export class DeleteDriveResponse extends $tea.Model {
-  requestId?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
     };
   }
 
@@ -1678,11 +2503,50 @@ export class DeleteDriveResponse extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
+export class DeviceAuthorizeRequest extends $tea.Model {
+  ClientID: string;
+  DeviceInfo?: string;
+  DeviceName: string;
+  LoginType?: string;
+  Scope?: string[];
+  static names(): { [key: string]: string } {
+    return {
+      ClientID: 'ClientID',
+      DeviceInfo: 'DeviceInfo',
+      DeviceName: 'DeviceName',
+      LoginType: 'LoginType',
+      Scope: 'Scope',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      ClientID: 'string',
+      DeviceInfo: 'string',
+      DeviceName: 'string',
+      LoginType: 'string',
+      Scope: { 'type': 'array', 'itemType': 'string' },
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
 export class GetAccessTokenByLinkInfoRequest extends $tea.Model {
+  extra?: string;
   identity: string;
   type: string;
   static names(): { [key: string]: string } {
     return {
+      extra: 'extra',
       identity: 'identity',
       type: 'type',
     };
@@ -1690,6 +2554,7 @@ export class GetAccessTokenByLinkInfoRequest extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
+      extra: 'string',
       identity: 'string',
       type: 'string',
     };
@@ -1700,8 +2565,11 @@ export class GetAccessTokenByLinkInfoRequest extends $tea.Model {
   }
 }
 
-export class GetAppRequest extends $tea.Model {
-  appId: string;
+/**
+ * 
+ */
+export class GetAppPublicKeyRequest extends $tea.Model {
+  appId?: string;
   static names(): { [key: string]: string } {
     return {
       appId: 'app_id',
@@ -1719,11 +2587,16 @@ export class GetAppRequest extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class GetByLinkInfoRequest extends $tea.Model {
+  extra?: string;
   identity: string;
   type: string;
   static names(): { [key: string]: string } {
     return {
+      extra: 'extra',
       identity: 'identity',
       type: 'type',
     };
@@ -1731,6 +2604,7 @@ export class GetByLinkInfoRequest extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
+      extra: 'string',
       identity: 'string',
       type: 'string',
     };
@@ -1741,6 +2615,9 @@ export class GetByLinkInfoRequest extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class GetCaptchaRequest extends $tea.Model {
   appId: string;
   static names(): { [key: string]: string } {
@@ -1760,33 +2637,18 @@ export class GetCaptchaRequest extends $tea.Model {
   }
 }
 
-export class GetDomainRequest extends $tea.Model {
-  domainId: string;
-  static names(): { [key: string]: string } {
-    return {
-      domainId: 'domain_id',
-    };
-  }
-
-  static types(): { [key: string]: any } {
-    return {
-      domainId: 'string',
-    };
-  }
-
-  constructor(map?: { [key: string]: any }) {
-    super(map);
-  }
-}
-
+/**
+ * Get drive response
+ */
 export class GetDriveResponse extends $tea.Model {
-  requestId?: string;
   creator?: string;
   description?: string;
   domainId?: string;
   driveId?: string;
   driveName?: string;
   driveType?: string;
+  encryptDataAccess?: boolean;
+  encryptMode?: string;
   owner?: string;
   relativePath?: string;
   status?: string;
@@ -1795,13 +2657,14 @@ export class GetDriveResponse extends $tea.Model {
   usedSize?: number;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       creator: 'creator',
       description: 'description',
       domainId: 'domain_id',
       driveId: 'drive_id',
       driveName: 'drive_name',
       driveType: 'drive_type',
+      encryptDataAccess: 'encrypt_data_access',
+      encryptMode: 'encrypt_mode',
       owner: 'owner',
       relativePath: 'relative_path',
       status: 'status',
@@ -1813,13 +2676,14 @@ export class GetDriveResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       creator: 'string',
       description: 'string',
       domainId: 'string',
       driveId: 'string',
       driveName: 'string',
       driveType: 'string',
+      encryptDataAccess: 'boolean',
+      encryptMode: 'string',
       owner: 'string',
       relativePath: 'string',
       status: 'string',
@@ -1834,6 +2698,9 @@ export class GetDriveResponse extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class GetLinkInfoByUserIDRequest extends $tea.Model {
   userId: string;
   static names(): { [key: string]: string } {
@@ -1853,8 +2720,38 @@ export class GetLinkInfoByUserIDRequest extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
+export class GetPublicKeyResponse extends $tea.Model {
+  appId: string;
+  keyPairId?: string;
+  publicKey: string;
+  static names(): { [key: string]: string } {
+    return {
+      appId: 'app_id',
+      keyPairId: 'key_pair_id',
+      publicKey: 'public_key',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      appId: 'string',
+      keyPairId: 'string',
+      publicKey: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * Get share response
+ */
 export class GetShareResponse extends $tea.Model {
-  requestId?: string;
   createdAt?: string;
   creator?: string;
   description?: string;
@@ -1867,11 +2764,11 @@ export class GetShareResponse extends $tea.Model {
   shareFilePath?: string;
   shareId?: string;
   shareName?: string;
+  sharePolicy?: SharePermissionPolicy[];
   status?: string;
   updatedAt?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       createdAt: 'created_at',
       creator: 'creator',
       description: 'description',
@@ -1884,6 +2781,7 @@ export class GetShareResponse extends $tea.Model {
       shareFilePath: 'share_file_path',
       shareId: 'share_id',
       shareName: 'share_name',
+      sharePolicy: 'share_policy',
       status: 'status',
       updatedAt: 'updated_at',
     };
@@ -1891,7 +2789,6 @@ export class GetShareResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       createdAt: 'string',
       creator: 'string',
       description: 'string',
@@ -1904,6 +2801,7 @@ export class GetShareResponse extends $tea.Model {
       shareFilePath: 'string',
       shareId: 'string',
       shareName: 'string',
+      sharePolicy: { 'type': 'array', 'itemType': SharePermissionPolicy },
       status: 'string',
       updatedAt: 'string',
     };
@@ -1914,25 +2812,52 @@ export class GetShareResponse extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class ImageMediaResponse extends $tea.Model {
-  requestId?: string;
+  addressLine?: string;
+  city?: string;
+  country?: string;
+  district?: string;
+  exif?: string;
+  faces?: string;
   height?: number;
+  location?: string;
+  province?: string;
   time?: string;
+  township?: string;
   width?: number;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
+      addressLine: 'address_line',
+      city: 'city',
+      country: 'country',
+      district: 'district',
+      exif: 'exif',
+      faces: 'faces',
       height: 'height',
+      location: 'location',
+      province: 'province',
       time: 'time',
+      township: 'township',
       width: 'width',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
+      addressLine: 'string',
+      city: 'string',
+      country: 'string',
+      district: 'string',
+      exif: 'string',
+      faces: 'string',
       height: 'number',
+      location: 'string',
+      province: 'string',
       time: 'string',
+      township: 'string',
       width: 'number',
     };
   }
@@ -1942,11 +2867,122 @@ export class ImageMediaResponse extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
+export class InnerConsentRequest extends $tea.Model {
+  UserCode?: string;
+  static names(): { [key: string]: string } {
+    return {
+      UserCode: 'UserCode',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      UserCode: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class InnerSignInRequest extends $tea.Model {
+  keyPairId?: string;
+  password?: string;
+  phoneNumber?: string;
+  phoneRegion?: string;
+  signInType?: string;
+  smsCode?: string;
+  smsCodeId?: string;
+  static names(): { [key: string]: string } {
+    return {
+      keyPairId: 'key_pair_id',
+      password: 'password',
+      phoneNumber: 'phone_number',
+      phoneRegion: 'phone_region',
+      signInType: 'sign_in_type',
+      smsCode: 'sms_code',
+      smsCodeId: 'sms_code_id',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      keyPairId: 'string',
+      password: 'string',
+      phoneNumber: 'string',
+      phoneRegion: 'string',
+      signInType: 'string',
+      smsCode: 'string',
+      smsCodeId: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class InnerSignInResponse extends $tea.Model {
+  goto?: string;
+  static names(): { [key: string]: string } {
+    return {
+      goto: 'goto',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      goto: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class InnerUserCodeAuthorizeRequest extends $tea.Model {
+  UserCode?: string;
+  static names(): { [key: string]: string } {
+    return {
+      UserCode: 'UserCode',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      UserCode: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
 export class LinkInfo extends $tea.Model {
+  extra?: string;
   identity?: string;
   type?: string;
   static names(): { [key: string]: string } {
     return {
+      extra: 'extra',
       identity: 'identity',
       type: 'type',
     };
@@ -1954,6 +2990,7 @@ export class LinkInfo extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
+      extra: 'string',
       identity: 'string',
       type: 'string',
     };
@@ -1964,19 +3001,19 @@ export class LinkInfo extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class LinkInfoListResponse extends $tea.Model {
-  requestId?: string;
   items: LinkInfoResponse[];
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       items: 'items',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       items: { 'type': 'array', 'itemType': LinkInfoResponse },
     };
   }
@@ -1986,21 +3023,24 @@ export class LinkInfoListResponse extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class LinkInfoResponse extends $tea.Model {
-  requestId?: string;
   authenticationType: string;
   createdAt: number;
   domainId: string;
+  extra?: string;
   identity: string;
   lastLoginTime: number;
   status: string;
   userId: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       authenticationType: 'authentication_type',
       createdAt: 'created_at',
       domainId: 'domain_id',
+      extra: 'extra',
       identity: 'identity',
       lastLoginTime: 'last_login_time',
       status: 'status',
@@ -2010,10 +3050,10 @@ export class LinkInfoResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       authenticationType: 'string',
       createdAt: 'number',
       domainId: 'string',
+      extra: 'string',
       identity: 'string',
       lastLoginTime: 'number',
       status: 'string',
@@ -2026,57 +3066,14 @@ export class LinkInfoResponse extends $tea.Model {
   }
 }
 
-export class ListAppsRequest extends $tea.Model {
-  limit?: number;
-  marker?: string;
-  static names(): { [key: string]: string } {
-    return {
-      limit: 'limit',
-      marker: 'marker',
-    };
-  }
-
-  static types(): { [key: string]: any } {
-    return {
-      limit: 'number',
-      marker: 'string',
-    };
-  }
-
-  constructor(map?: { [key: string]: any }) {
-    super(map);
-  }
-}
-
-export class ListDomainsRequest extends $tea.Model {
-  limit?: number;
-  marker?: string;
-  static names(): { [key: string]: string } {
-    return {
-      limit: 'limit',
-      marker: 'marker',
-    };
-  }
-
-  static types(): { [key: string]: any } {
-    return {
-      limit: 'number',
-      marker: 'string',
-    };
-  }
-
-  constructor(map?: { [key: string]: any }) {
-    super(map);
-  }
-}
-
+/**
+ * list drive response
+ */
 export class ListDriveResponse extends $tea.Model {
-  requestId?: string;
   items?: BaseDriveResponse[];
   nextMarker?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       items: 'items',
       nextMarker: 'next_marker',
     };
@@ -2084,7 +3081,6 @@ export class ListDriveResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       items: { 'type': 'array', 'itemType': BaseDriveResponse },
       nextMarker: 'string',
     };
@@ -2095,13 +3091,14 @@ export class ListDriveResponse extends $tea.Model {
   }
 }
 
+/**
+ * List share response
+ */
 export class ListShareResponse extends $tea.Model {
-  requestId?: string;
   items?: BaseShareResponse[];
   nextMarker?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       items: 'items',
       nextMarker: 'next_marker',
     };
@@ -2109,7 +3106,6 @@ export class ListShareResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       items: { 'type': 'array', 'itemType': BaseShareResponse },
       nextMarker: 'string',
     };
@@ -2120,13 +3116,14 @@ export class ListShareResponse extends $tea.Model {
   }
 }
 
+/**
+ * List storage file
+ */
 export class ListStoreFileResponse extends $tea.Model {
-  requestId?: string;
   items?: StoreFile[];
   nextMarker?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       items: 'items',
       nextMarker: 'next_marker',
     };
@@ -2134,7 +3131,6 @@ export class ListStoreFileResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       items: { 'type': 'array', 'itemType': StoreFile },
       nextMarker: 'string',
     };
@@ -2145,19 +3141,19 @@ export class ListStoreFileResponse extends $tea.Model {
   }
 }
 
+/**
+ * List storage
+ */
 export class ListStoreResponse extends $tea.Model {
-  requestId?: string;
   items?: StoreItemResponse[];
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       items: 'items',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       items: { 'type': 'array', 'itemType': StoreItemResponse },
     };
   }
@@ -2167,25 +3163,9 @@ export class ListStoreResponse extends $tea.Model {
   }
 }
 
-export class ListStoresRequest extends $tea.Model {
-  domainId: string;
-  static names(): { [key: string]: string } {
-    return {
-      domainId: 'domain_id',
-    };
-  }
-
-  static types(): { [key: string]: any } {
-    return {
-      domainId: 'string',
-    };
-  }
-
-  constructor(map?: { [key: string]: any }) {
-    super(map);
-  }
-}
-
+/**
+ * 
+ */
 export class LoginByCodeRequest extends $tea.Model {
   accessToken?: string;
   appId: string;
@@ -2214,13 +3194,18 @@ export class LoginByCodeRequest extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class MobileCheckExistRequest extends $tea.Model {
   appId: string;
   phoneNumber: string;
+  phoneRegion?: string;
   static names(): { [key: string]: string } {
     return {
       appId: 'app_id',
       phoneNumber: 'phone_number',
+      phoneRegion: 'phone_region',
     };
   }
 
@@ -2228,6 +3213,7 @@ export class MobileCheckExistRequest extends $tea.Model {
     return {
       appId: 'string',
       phoneNumber: 'string',
+      phoneRegion: 'string',
     };
   }
 
@@ -2236,23 +3222,26 @@ export class MobileCheckExistRequest extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class MobileCheckExistResponse extends $tea.Model {
-  requestId?: string;
   isExist: boolean;
   phoneNumber: string;
+  phoneRegion?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       isExist: 'is_exist',
       phoneNumber: 'phone_number',
+      phoneRegion: 'phone_region',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       isExist: 'boolean',
       phoneNumber: 'string',
+      phoneRegion: 'string',
     };
   }
 
@@ -2261,13 +3250,18 @@ export class MobileCheckExistResponse extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class MobileLoginRequest extends $tea.Model {
   appId: string;
   autoRegister?: boolean;
   captchaId?: string;
   captchaText?: string;
+  encryptedKey?: string;
   password?: string;
   phoneNumber: string;
+  phoneRegion?: string;
   smsCode?: string;
   smsCodeId?: string;
   static names(): { [key: string]: string } {
@@ -2276,8 +3270,10 @@ export class MobileLoginRequest extends $tea.Model {
       autoRegister: 'auto_register',
       captchaId: 'captcha_id',
       captchaText: 'captcha_text',
+      encryptedKey: 'encrypted_key',
       password: 'password',
       phoneNumber: 'phone_number',
+      phoneRegion: 'phone_region',
       smsCode: 'sms_code',
       smsCodeId: 'sms_code_id',
     };
@@ -2289,8 +3285,10 @@ export class MobileLoginRequest extends $tea.Model {
       autoRegister: 'boolean',
       captchaId: 'string',
       captchaText: 'string',
+      encryptedKey: 'string',
       password: 'string',
       phoneNumber: 'string',
+      phoneRegion: 'string',
       smsCode: 'string',
       smsCodeId: 'string',
     };
@@ -2301,15 +3299,20 @@ export class MobileLoginRequest extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class MobileRegisterRequest extends $tea.Model {
   appId: string;
   phoneNumber: string;
+  phoneRegion?: string;
   smsCode: string;
   smsCodeId: string;
   static names(): { [key: string]: string } {
     return {
       appId: 'app_id',
       phoneNumber: 'phone_number',
+      phoneRegion: 'phone_region',
       smsCode: 'sms_code',
       smsCodeId: 'sms_code_id',
     };
@@ -2319,6 +3322,7 @@ export class MobileRegisterRequest extends $tea.Model {
     return {
       appId: 'string',
       phoneNumber: 'string',
+      phoneRegion: 'string',
       smsCode: 'string',
       smsCodeId: 'string',
     };
@@ -2329,11 +3333,15 @@ export class MobileRegisterRequest extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class MobileSendSmsCodeRequest extends $tea.Model {
   appId: string;
   captchaId?: string;
   captchaText?: string;
   phoneNumber: string;
+  phoneRegion?: string;
   type: string;
   static names(): { [key: string]: string } {
     return {
@@ -2341,6 +3349,7 @@ export class MobileSendSmsCodeRequest extends $tea.Model {
       captchaId: 'captcha_id',
       captchaText: 'captcha_text',
       phoneNumber: 'phone_number',
+      phoneRegion: 'phone_region',
       type: 'type',
     };
   }
@@ -2351,6 +3360,7 @@ export class MobileSendSmsCodeRequest extends $tea.Model {
       captchaId: 'string',
       captchaText: 'string',
       phoneNumber: 'string',
+      phoneRegion: 'string',
       type: 'string',
     };
   }
@@ -2360,19 +3370,19 @@ export class MobileSendSmsCodeRequest extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class MobileSendSmsCodeResponse extends $tea.Model {
-  requestId?: string;
   smsCodeId: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       smsCodeId: 'sms_code_id',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       smsCodeId: 'string',
     };
   }
@@ -2382,8 +3392,10 @@ export class MobileSendSmsCodeResponse extends $tea.Model {
   }
 }
 
+/**
+ * complete file response
+ */
 export class OSSCompleteFileResponse extends $tea.Model {
-  requestId?: string;
   contentHash?: string;
   contentHashName?: string;
   contentType?: string;
@@ -2409,7 +3421,6 @@ export class OSSCompleteFileResponse extends $tea.Model {
   crc?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       contentHash: 'content_hash',
       contentHashName: 'content_hash_name',
       contentType: 'content_type',
@@ -2438,7 +3449,6 @@ export class OSSCompleteFileResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       contentHash: 'string',
       contentHashName: 'string',
       contentType: 'string',
@@ -2470,8 +3480,10 @@ export class OSSCompleteFileResponse extends $tea.Model {
   }
 }
 
+/**
+ * 文件拷贝 response
+ */
 export class OSSCopyFileResponse extends $tea.Model {
-  requestId?: string;
   asyncTaskId?: string;
   domainId?: string;
   driveId?: string;
@@ -2479,7 +3491,6 @@ export class OSSCopyFileResponse extends $tea.Model {
   shareId?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       asyncTaskId: 'async_task_id',
       domainId: 'domain_id',
       driveId: 'drive_id',
@@ -2490,7 +3501,6 @@ export class OSSCopyFileResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       asyncTaskId: 'string',
       domainId: 'string',
       driveId: 'string',
@@ -2504,8 +3514,10 @@ export class OSSCopyFileResponse extends $tea.Model {
   }
 }
 
+/**
+ * Create file response
+ */
 export class OSSCreateFileResponse extends $tea.Model {
-  requestId?: string;
   domainId?: string;
   driveId?: string;
   filePath?: string;
@@ -2515,7 +3527,6 @@ export class OSSCreateFileResponse extends $tea.Model {
   uploadId?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       domainId: 'domain_id',
       driveId: 'drive_id',
       filePath: 'file_path',
@@ -2528,7 +3539,6 @@ export class OSSCreateFileResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       domainId: 'string',
       driveId: 'string',
       filePath: 'string',
@@ -2544,8 +3554,10 @@ export class OSSCreateFileResponse extends $tea.Model {
   }
 }
 
+/**
+ * 删除文件 response
+ */
 export class OSSDeleteFileResponse extends $tea.Model {
-  requestId?: string;
   asyncTaskId?: string;
   domainId?: string;
   driveId?: string;
@@ -2553,7 +3565,6 @@ export class OSSDeleteFileResponse extends $tea.Model {
   shareId?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       asyncTaskId: 'async_task_id',
       domainId: 'domain_id',
       driveId: 'drive_id',
@@ -2564,7 +3575,6 @@ export class OSSDeleteFileResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       asyncTaskId: 'string',
       domainId: 'string',
       driveId: 'string',
@@ -2578,15 +3588,16 @@ export class OSSDeleteFileResponse extends $tea.Model {
   }
 }
 
+/**
+ * 批量删除文件 response
+ */
 export class OSSDeleteFilesResponse extends $tea.Model {
-  requestId?: string;
   deletedFileIdList?: string[];
   domainId?: string;
   driveId?: string;
   shareId?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       deletedFileIdList: 'deleted_file_id_list',
       domainId: 'domain_id',
       driveId: 'drive_id',
@@ -2596,7 +3607,6 @@ export class OSSDeleteFilesResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       deletedFileIdList: { 'type': 'array', 'itemType': 'string' },
       domainId: 'string',
       driveId: 'string',
@@ -2609,14 +3619,15 @@ export class OSSDeleteFilesResponse extends $tea.Model {
   }
 }
 
+/**
+ * 获取download url response
+ */
 export class OSSGetDownloadUrlResponse extends $tea.Model {
-  requestId?: string;
   expiration?: string;
   method?: string;
   url?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       expiration: 'expiration',
       method: 'method',
       url: 'url',
@@ -2625,7 +3636,6 @@ export class OSSGetDownloadUrlResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       expiration: 'string',
       method: 'string',
       url: 'string',
@@ -2637,8 +3647,10 @@ export class OSSGetDownloadUrlResponse extends $tea.Model {
   }
 }
 
+/**
+ * 获取文件元数据response
+ */
 export class OSSGetFileResponse extends $tea.Model {
-  requestId?: string;
   contentHash?: string;
   contentHashName?: string;
   contentType?: string;
@@ -2663,7 +3675,6 @@ export class OSSGetFileResponse extends $tea.Model {
   url?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       contentHash: 'content_hash',
       contentHashName: 'content_hash_name',
       contentType: 'content_type',
@@ -2691,7 +3702,6 @@ export class OSSGetFileResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       contentHash: 'string',
       contentHashName: 'string',
       contentType: 'string',
@@ -2722,8 +3732,35 @@ export class OSSGetFileResponse extends $tea.Model {
   }
 }
 
+/**
+ * 获取secure url response
+ */
+export class OSSGetSecureUrlResponse extends $tea.Model {
+  expiration?: string;
+  url?: string;
+  static names(): { [key: string]: string } {
+    return {
+      expiration: 'expiration',
+      url: 'url',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      expiration: 'string',
+      url: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * Get UploadUrl Response
+ */
 export class OSSGetUploadUrlResponse extends $tea.Model {
-  requestId?: string;
   createAt?: string;
   domainId?: string;
   driveId?: string;
@@ -2732,7 +3769,6 @@ export class OSSGetUploadUrlResponse extends $tea.Model {
   uploadId?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       createAt: 'create_at',
       domainId: 'domain_id',
       driveId: 'drive_id',
@@ -2744,7 +3780,6 @@ export class OSSGetUploadUrlResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       createAt: 'string',
       domainId: 'string',
       driveId: 'string',
@@ -2759,13 +3794,14 @@ export class OSSGetUploadUrlResponse extends $tea.Model {
   }
 }
 
+/**
+ * List file response
+ */
 export class OSSListFileResponse extends $tea.Model {
-  requestId?: string;
   items?: BaseOSSFileResponse[];
   nextMarker?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       items: 'items',
       nextMarker: 'next_marker',
     };
@@ -2773,7 +3809,6 @@ export class OSSListFileResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       items: { 'type': 'array', 'itemType': BaseOSSFileResponse },
       nextMarker: 'string',
     };
@@ -2784,15 +3819,16 @@ export class OSSListFileResponse extends $tea.Model {
   }
 }
 
+/**
+ * 获取签名 response
+ */
 export class OSSListUploadedPartResponse extends $tea.Model {
-  requestId?: string;
   filePath?: string;
   nextPartNumberMarker?: string;
   uploadId?: string;
   uploadedParts?: UploadPartInfo[];
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       filePath: 'file_path',
       nextPartNumberMarker: 'next_part_number_marker',
       uploadId: 'upload_id',
@@ -2802,7 +3838,6 @@ export class OSSListUploadedPartResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       filePath: 'string',
       nextPartNumberMarker: 'string',
       uploadId: 'string',
@@ -2815,8 +3850,10 @@ export class OSSListUploadedPartResponse extends $tea.Model {
   }
 }
 
+/**
+ * 文件移动 response
+ */
 export class OSSMoveFileResponse extends $tea.Model {
-  requestId?: string;
   asyncTaskId?: string;
   domainId?: string;
   driveId?: string;
@@ -2824,7 +3861,6 @@ export class OSSMoveFileResponse extends $tea.Model {
   shareId?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       asyncTaskId: 'async_task_id',
       domainId: 'domain_id',
       driveId: 'drive_id',
@@ -2835,7 +3871,6 @@ export class OSSMoveFileResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       asyncTaskId: 'string',
       domainId: 'string',
       driveId: 'string',
@@ -2849,13 +3884,14 @@ export class OSSMoveFileResponse extends $tea.Model {
   }
 }
 
+/**
+ * search file response
+ */
 export class OSSSearchFileResponse extends $tea.Model {
-  requestId?: string;
   items?: BaseOSSFileResponse[];
   nextMarker?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       items: 'items',
       nextMarker: 'next_marker',
     };
@@ -2863,7 +3899,6 @@ export class OSSSearchFileResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       items: { 'type': 'array', 'itemType': BaseOSSFileResponse },
       nextMarker: 'string',
     };
@@ -2874,8 +3909,10 @@ export class OSSSearchFileResponse extends $tea.Model {
   }
 }
 
+/**
+ * 更新文件元数据 response
+ */
 export class OSSUpdateFileMetaResponse extends $tea.Model {
-  requestId?: string;
   contentHash?: string;
   contentHashName?: string;
   contentType?: string;
@@ -2900,7 +3937,6 @@ export class OSSUpdateFileMetaResponse extends $tea.Model {
   url?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       contentHash: 'content_hash',
       contentHashName: 'content_hash_name',
       contentType: 'content_type',
@@ -2928,7 +3964,6 @@ export class OSSUpdateFileMetaResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       contentHash: 'string',
       contentHashName: 'string',
       contentType: 'string',
@@ -2959,8 +3994,60 @@ export class OSSUpdateFileMetaResponse extends $tea.Model {
   }
 }
 
+/**
+ * 转码接口response
+ */
+export class OSSVideoDefinitionResponse extends $tea.Model {
+  definitionList?: string[];
+  static names(): { [key: string]: string } {
+    return {
+      definitionList: 'definition_list',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      definitionList: { 'type': 'array', 'itemType': 'string' },
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 转码接口response
+ */
+export class OSSVideoTranscodeResponse extends $tea.Model {
+  definitionList?: string[];
+  duration?: number;
+  hlsTime?: number;
+  static names(): { [key: string]: string } {
+    return {
+      definitionList: 'definition_list',
+      duration: 'duration',
+      hlsTime: 'hls_time',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      definitionList: { 'type': 'array', 'itemType': 'string' },
+      duration: 'number',
+      hlsTime: 'number',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * Pre hash check Response
+ */
 export class PreHashCheckSuccessResponse extends $tea.Model {
-  requestId?: string;
   code?: string;
   fileName?: string;
   message?: string;
@@ -2968,7 +4055,6 @@ export class PreHashCheckSuccessResponse extends $tea.Model {
   preHash?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       code: 'code',
       fileName: 'file_name',
       message: 'message',
@@ -2979,7 +4065,6 @@ export class PreHashCheckSuccessResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       code: 'string',
       fileName: 'string',
       message: 'string',
@@ -2993,20 +4078,23 @@ export class PreHashCheckSuccessResponse extends $tea.Model {
   }
 }
 
-export class RemoveStoreRequest extends $tea.Model {
-  domainId: string;
-  storeId: string;
+/**
+ * 
+ */
+export class RevokeRequest extends $tea.Model {
+  appId: string;
+  refreshToken: string;
   static names(): { [key: string]: string } {
     return {
-      domainId: 'domain_id',
-      storeId: 'store_id',
+      appId: 'app_id',
+      refreshToken: 'refresh_token',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
-      domainId: 'string',
-      storeId: 'string',
+      appId: 'string',
+      refreshToken: 'string',
     };
   }
 
@@ -3015,23 +4103,29 @@ export class RemoveStoreRequest extends $tea.Model {
   }
 }
 
-export class SetStoreCorsRequest extends $tea.Model {
-  corsRule: CorsRule;
-  domainId: string;
-  storeId: string;
+/**
+ * 
+ */
+export class SharePermissionPolicy extends $tea.Model {
+  filePath?: string;
+  permissionInheritable?: boolean;
+  permissionList?: string[];
+  permissionType?: string;
   static names(): { [key: string]: string } {
     return {
-      corsRule: 'cors_rule',
-      domainId: 'domain_id',
-      storeId: 'store_id',
+      filePath: 'file_path',
+      permissionInheritable: 'permission_inheritable',
+      permissionList: 'permission_list',
+      permissionType: 'permission_type',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
-      corsRule: CorsRule,
-      domainId: 'string',
-      storeId: 'string',
+      filePath: 'string',
+      permissionInheritable: 'boolean',
+      permissionList: { 'type': 'array', 'itemType': 'string' },
+      permissionType: 'string',
     };
   }
 
@@ -3040,6 +4134,9 @@ export class SetStoreCorsRequest extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class StoreFile extends $tea.Model {
   domainId?: string;
   name?: string;
@@ -3071,8 +4168,10 @@ export class StoreFile extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class StoreItemResponse extends $tea.Model {
-  requestId?: string;
   accelerateEndpoint?: string;
   basePath?: string;
   bucket: string;
@@ -3087,7 +4186,6 @@ export class StoreItemResponse extends $tea.Model {
   type: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       accelerateEndpoint: 'accelerate_endpoint',
       basePath: 'base_path',
       bucket: 'bucket',
@@ -3105,7 +4203,6 @@ export class StoreItemResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       accelerateEndpoint: 'string',
       basePath: 'string',
       bucket: 'string',
@@ -3126,6 +4223,40 @@ export class StoreItemResponse extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
+export class StreamUploadInfo extends $tea.Model {
+  partInfoList?: UploadPartInfo[];
+  preRapidUpload?: boolean;
+  rapidUpload?: boolean;
+  uploadId?: string;
+  static names(): { [key: string]: string } {
+    return {
+      partInfoList: 'part_info_list',
+      preRapidUpload: 'pre_rapid_upload',
+      rapidUpload: 'rapid_upload',
+      uploadId: 'upload_id',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      partInfoList: { 'type': 'array', 'itemType': UploadPartInfo },
+      preRapidUpload: 'boolean',
+      rapidUpload: 'boolean',
+      uploadId: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
 export class TokenRequest extends $tea.Model {
   appId: string;
   grantType: string;
@@ -3151,145 +4282,18 @@ export class TokenRequest extends $tea.Model {
   }
 }
 
-export class UpdateAppRequest extends $tea.Model {
-  appId: string;
-  appName: string;
-  description?: string;
-  isThirdParty: boolean;
-  logo: string;
-  redirectUri: string;
-  scope: string[];
-  type: string;
-  static names(): { [key: string]: string } {
-    return {
-      appId: 'app_id',
-      appName: 'app_name',
-      description: 'description',
-      isThirdParty: 'is_third_party',
-      logo: 'logo',
-      redirectUri: 'redirect_uri',
-      scope: 'scope',
-      type: 'type',
-    };
-  }
-
-  static types(): { [key: string]: any } {
-    return {
-      appId: 'string',
-      appName: 'string',
-      description: 'string',
-      isThirdParty: 'boolean',
-      logo: 'string',
-      redirectUri: 'string',
-      scope: { 'type': 'array', 'itemType': 'string' },
-      type: 'string',
-    };
-  }
-
-  constructor(map?: { [key: string]: any }) {
-    super(map);
-  }
-}
-
-export class UpdateDomainRequest extends $tea.Model {
-  authAlipayAppId?: string;
-  authAlipayEnbale?: boolean;
-  authAlipayPrivateKey?: string;
-  authConfig?: {[key: string]: any};
-  authDingdingAppId?: string;
-  authDingdingAppSecret?: string;
-  authDingdingEnable?: boolean;
-  authEndpointEnable?: boolean;
-  authRamAppId?: string;
-  authRamAppSecret?: string;
-  authRamEnable?: boolean;
-  dataHashName?: string;
-  description?: string;
-  domainId: string;
-  domainName?: string;
-  eventFilenameMatches?: string;
-  eventMnsEndpoint?: string;
-  eventMnsTopic?: string;
-  eventNames?: string[];
-  eventRoleArn?: string;
-  initDriveEnable?: boolean;
-  initDriveSize?: number;
-  initDriveStoreId?: string;
-  publishedAppAccessStrategy?: AppAccessStrategy;
-  sharable?: boolean;
-  static names(): { [key: string]: string } {
-    return {
-      authAlipayAppId: 'auth_alipay_app_id',
-      authAlipayEnbale: 'auth_alipay_enbale',
-      authAlipayPrivateKey: 'auth_alipay_private_key',
-      authConfig: 'auth_config',
-      authDingdingAppId: 'auth_dingding_app_id',
-      authDingdingAppSecret: 'auth_dingding_app_secret',
-      authDingdingEnable: 'auth_dingding_enable',
-      authEndpointEnable: 'auth_endpoint_enable',
-      authRamAppId: 'auth_ram_app_id',
-      authRamAppSecret: 'auth_ram_app_secret',
-      authRamEnable: 'auth_ram_enable',
-      dataHashName: 'data_hash_name',
-      description: 'description',
-      domainId: 'domain_id',
-      domainName: 'domain_name',
-      eventFilenameMatches: 'event_filename_matches',
-      eventMnsEndpoint: 'event_mns_endpoint',
-      eventMnsTopic: 'event_mns_topic',
-      eventNames: 'event_names',
-      eventRoleArn: 'event_role_arn',
-      initDriveEnable: 'init_drive_enable',
-      initDriveSize: 'init_drive_size',
-      initDriveStoreId: 'init_drive_store_id',
-      publishedAppAccessStrategy: 'published_app_access_strategy',
-      sharable: 'sharable',
-    };
-  }
-
-  static types(): { [key: string]: any } {
-    return {
-      authAlipayAppId: 'string',
-      authAlipayEnbale: 'boolean',
-      authAlipayPrivateKey: 'string',
-      authConfig: '{[key: string]: any}',
-      authDingdingAppId: 'string',
-      authDingdingAppSecret: 'string',
-      authDingdingEnable: 'boolean',
-      authEndpointEnable: 'boolean',
-      authRamAppId: 'string',
-      authRamAppSecret: 'string',
-      authRamEnable: 'boolean',
-      dataHashName: 'string',
-      description: 'string',
-      domainId: 'string',
-      domainName: 'string',
-      eventFilenameMatches: 'string',
-      eventMnsEndpoint: 'string',
-      eventMnsTopic: 'string',
-      eventNames: { 'type': 'array', 'itemType': 'string' },
-      eventRoleArn: 'string',
-      initDriveEnable: 'boolean',
-      initDriveSize: 'number',
-      initDriveStoreId: 'string',
-      publishedAppAccessStrategy: AppAccessStrategy,
-      sharable: 'boolean',
-    };
-  }
-
-  constructor(map?: { [key: string]: any }) {
-    super(map);
-  }
-}
-
+/**
+ * Update drive response
+ */
 export class UpdateDriveResponse extends $tea.Model {
-  requestId?: string;
   creator?: string;
   description?: string;
   domainId?: string;
   driveId?: string;
   driveName?: string;
   driveType?: string;
+  encryptDataAccess?: boolean;
+  encryptMode?: string;
   owner?: string;
   relativePath?: string;
   status?: string;
@@ -3298,13 +4302,14 @@ export class UpdateDriveResponse extends $tea.Model {
   usedSize?: number;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       creator: 'creator',
       description: 'description',
       domainId: 'domain_id',
       driveId: 'drive_id',
       driveName: 'drive_name',
       driveType: 'drive_type',
+      encryptDataAccess: 'encrypt_data_access',
+      encryptMode: 'encrypt_mode',
       owner: 'owner',
       relativePath: 'relative_path',
       status: 'status',
@@ -3316,13 +4321,14 @@ export class UpdateDriveResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       creator: 'string',
       description: 'string',
       domainId: 'string',
       driveId: 'string',
       driveName: 'string',
       driveType: 'string',
+      encryptDataAccess: 'boolean',
+      encryptMode: 'string',
       owner: 'string',
       relativePath: 'string',
       status: 'string',
@@ -3337,8 +4343,10 @@ export class UpdateDriveResponse extends $tea.Model {
   }
 }
 
+/**
+ * Update share response
+ */
 export class UpdateShareResponse extends $tea.Model {
-  requestId?: string;
   createdAt?: string;
   creator?: string;
   description?: string;
@@ -3351,11 +4359,11 @@ export class UpdateShareResponse extends $tea.Model {
   shareFilePath?: string;
   shareId?: string;
   shareName?: string;
+  sharePolicy?: SharePermissionPolicy[];
   status?: string;
   updatedAt?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       createdAt: 'created_at',
       creator: 'creator',
       description: 'description',
@@ -3368,6 +4376,7 @@ export class UpdateShareResponse extends $tea.Model {
       shareFilePath: 'share_file_path',
       shareId: 'share_id',
       shareName: 'share_name',
+      sharePolicy: 'share_policy',
       status: 'status',
       updatedAt: 'updated_at',
     };
@@ -3375,7 +4384,6 @@ export class UpdateShareResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       createdAt: 'string',
       creator: 'string',
       description: 'string',
@@ -3388,6 +4396,7 @@ export class UpdateShareResponse extends $tea.Model {
       shareFilePath: 'string',
       shareId: 'string',
       shareName: 'string',
+      sharePolicy: { 'type': 'array', 'itemType': SharePermissionPolicy },
       status: 'string',
       updatedAt: 'string',
     };
@@ -3398,6 +4407,9 @@ export class UpdateShareResponse extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class UploadPartInfo extends $tea.Model {
   etag?: string;
   partNumber?: number;
@@ -3426,6 +4438,37 @@ export class UploadPartInfo extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
+export class UrlInfo extends $tea.Model {
+  downloadUrl?: string;
+  thumbnail?: string;
+  url?: string;
+  static names(): { [key: string]: string } {
+    return {
+      downloadUrl: 'download_url',
+      thumbnail: 'thumbnail',
+      url: 'url',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      downloadUrl: 'string',
+      thumbnail: 'string',
+      url: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
 export class UserAuthentication extends $tea.Model {
   AuthenticationType: string;
   CreatedAt: number;
@@ -3435,6 +4478,7 @@ export class UserAuthentication extends $tea.Model {
   LastLoginTime: number;
   Status: string;
   UserID: string;
+  extra?: string;
   static names(): { [key: string]: string } {
     return {
       AuthenticationType: 'AuthenticationType',
@@ -3445,6 +4489,7 @@ export class UserAuthentication extends $tea.Model {
       LastLoginTime: 'LastLoginTime',
       Status: 'Status',
       UserID: 'UserID',
+      extra: 'extra',
     };
   }
 
@@ -3458,6 +4503,7 @@ export class UserAuthentication extends $tea.Model {
       LastLoginTime: 'number',
       Status: 'string',
       UserID: 'string',
+      extra: 'string',
     };
   }
 
@@ -3466,8 +4512,2292 @@ export class UserAuthentication extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
+export class VerifyCodeRequest extends $tea.Model {
+  appId: string;
+  phoneNumber: string;
+  phoneRegion?: string;
+  smsCode: string;
+  smsCodeId: string;
+  verifyType?: string;
+  static names(): { [key: string]: string } {
+    return {
+      appId: 'app_id',
+      phoneNumber: 'phone_number',
+      phoneRegion: 'phone_region',
+      smsCode: 'sms_code',
+      smsCodeId: 'sms_code_id',
+      verifyType: 'verify_type',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      appId: 'string',
+      phoneNumber: 'string',
+      phoneRegion: 'string',
+      smsCode: 'string',
+      smsCodeId: 'string',
+      verifyType: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class VerifyCodeResponse extends $tea.Model {
+  state: string;
+  static names(): { [key: string]: string } {
+    return {
+      state: 'state',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      state: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class VideoMediaResponse extends $tea.Model {
+  addressLine?: string;
+  city?: string;
+  country?: string;
+  district?: string;
+  duration?: string;
+  location?: string;
+  province?: string;
+  time?: string;
+  township?: string;
+  static names(): { [key: string]: string } {
+    return {
+      addressLine: 'address_line',
+      city: 'city',
+      country: 'country',
+      district: 'district',
+      duration: 'duration',
+      location: 'location',
+      province: 'province',
+      time: 'time',
+      township: 'township',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      addressLine: 'string',
+      city: 'string',
+      country: 'string',
+      district: 'string',
+      duration: 'string',
+      location: 'string',
+      province: 'string',
+      time: 'string',
+      township: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class AdminListStoresRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: AdminListStoresRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: AdminListStoresRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class AdminListStoresModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: ListStoresResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: ListStoresResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetUserAccessTokenRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: GetUserAccessTokenRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: GetUserAccessTokenRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetUserAccessTokenModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: AccessTokenResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: AccessTokenResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class AddStoreResponse extends $tea.Model {
+  accelerateEndpoint?: string;
+  basePath?: string;
+  bucket: string;
+  customizedEndpoint?: string;
+  domainId: string;
+  endpoint: string;
+  internalEndpoint?: string;
+  ownership: string;
+  policy: string;
+  roleArn?: string;
+  storeId: string;
+  type: string;
+  static names(): { [key: string]: string } {
+    return {
+      accelerateEndpoint: 'accelerate_endpoint',
+      basePath: 'base_path',
+      bucket: 'bucket',
+      customizedEndpoint: 'customized_endpoint',
+      domainId: 'domain_id',
+      endpoint: 'endpoint',
+      internalEndpoint: 'internal_endpoint',
+      ownership: 'ownership',
+      policy: 'policy',
+      roleArn: 'role_arn',
+      storeId: 'store_id',
+      type: 'type',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      accelerateEndpoint: 'string',
+      basePath: 'string',
+      bucket: 'string',
+      customizedEndpoint: 'string',
+      domainId: 'string',
+      endpoint: 'string',
+      internalEndpoint: 'string',
+      ownership: 'string',
+      policy: 'string',
+      roleArn: 'string',
+      storeId: 'string',
+      type: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class AdminListStoresRequest extends $tea.Model {
+  static names(): { [key: string]: string } {
+    return {
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class AppAccessStrategy extends $tea.Model {
+  effect?: string;
+  exceptAppIdList?: string[];
+  static names(): { [key: string]: string } {
+    return {
+      effect: 'effect',
+      exceptAppIdList: 'except_app_id_list',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      effect: 'string',
+      exceptAppIdList: { 'type': 'array', 'itemType': 'string' },
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class AuthConfig extends $tea.Model {
+  appId?: string;
+  appSecret?: string;
+  callbackSecurity?: boolean;
+  enable?: boolean;
+  endpoint?: string;
+  enterpriseId?: string;
+  static names(): { [key: string]: string } {
+    return {
+      appId: 'app_id',
+      appSecret: 'app_secret',
+      callbackSecurity: 'callback_security',
+      enable: 'enable',
+      endpoint: 'endpoint',
+      enterpriseId: 'enterprise_id',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      appId: 'string',
+      appSecret: 'string',
+      callbackSecurity: 'boolean',
+      enable: 'boolean',
+      endpoint: 'string',
+      enterpriseId: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * base domain response
+ */
+export class BaseDomainResponse extends $tea.Model {
+  authAlipayAppId?: string;
+  authAlipayEnable?: boolean;
+  authAlipayPrivateKey?: string;
+  authConfig?: {[key: string]: any};
+  authDingdingAppId?: string;
+  authDingdingAppSecret?: string;
+  authDingdingEnable?: boolean;
+  authEndpointEnable?: boolean;
+  authRamAppId?: string;
+  authRamAppSecret?: string;
+  authRamEnable?: boolean;
+  createdAt?: string;
+  dataHashName?: string;
+  description?: string;
+  domainId?: string;
+  domainName?: string;
+  eventFilenameMatches?: string;
+  eventMnsEndpoint?: string;
+  eventMnsTopic?: string;
+  eventNames?: string[];
+  eventRoleArn?: string;
+  initDriveEnable?: boolean;
+  initDriveSize?: number;
+  initDriveStoreId?: string;
+  pathType?: string;
+  publishedAppAccessStrategy?: AppAccessStrategy;
+  sharable?: boolean;
+  storeLevel?: string;
+  storeRegionList?: string[];
+  updatedAt?: string;
+  static names(): { [key: string]: string } {
+    return {
+      authAlipayAppId: 'auth_alipay_app_id',
+      authAlipayEnable: 'auth_alipay_enable',
+      authAlipayPrivateKey: 'auth_alipay_private_key',
+      authConfig: 'auth_config',
+      authDingdingAppId: 'auth_dingding_app_id',
+      authDingdingAppSecret: 'auth_dingding_app_secret',
+      authDingdingEnable: 'auth_dingding_enable',
+      authEndpointEnable: 'auth_endpoint_enable',
+      authRamAppId: 'auth_ram_app_id',
+      authRamAppSecret: 'auth_ram_app_secret',
+      authRamEnable: 'auth_ram_enable',
+      createdAt: 'created_at',
+      dataHashName: 'data_hash_name',
+      description: 'description',
+      domainId: 'domain_id',
+      domainName: 'domain_name',
+      eventFilenameMatches: 'event_filename_matches',
+      eventMnsEndpoint: 'event_mns_endpoint',
+      eventMnsTopic: 'event_mns_topic',
+      eventNames: 'event_names',
+      eventRoleArn: 'event_role_arn',
+      initDriveEnable: 'init_drive_enable',
+      initDriveSize: 'init_drive_size',
+      initDriveStoreId: 'init_drive_store_id',
+      pathType: 'path_type',
+      publishedAppAccessStrategy: 'published_app_access_strategy',
+      sharable: 'sharable',
+      storeLevel: 'store_level',
+      storeRegionList: 'store_region_list',
+      updatedAt: 'updated_at',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      authAlipayAppId: 'string',
+      authAlipayEnable: 'boolean',
+      authAlipayPrivateKey: 'string',
+      authConfig: { 'type': 'map', 'keyType': 'string', 'valueType': 'any' },
+      authDingdingAppId: 'string',
+      authDingdingAppSecret: 'string',
+      authDingdingEnable: 'boolean',
+      authEndpointEnable: 'boolean',
+      authRamAppId: 'string',
+      authRamAppSecret: 'string',
+      authRamEnable: 'boolean',
+      createdAt: 'string',
+      dataHashName: 'string',
+      description: 'string',
+      domainId: 'string',
+      domainName: 'string',
+      eventFilenameMatches: 'string',
+      eventMnsEndpoint: 'string',
+      eventMnsTopic: 'string',
+      eventNames: { 'type': 'array', 'itemType': 'string' },
+      eventRoleArn: 'string',
+      initDriveEnable: 'boolean',
+      initDriveSize: 'number',
+      initDriveStoreId: 'string',
+      pathType: 'string',
+      publishedAppAccessStrategy: AppAccessStrategy,
+      sharable: 'boolean',
+      storeLevel: 'string',
+      storeRegionList: { 'type': 'array', 'itemType': 'string' },
+      updatedAt: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class BaseMediaResponse extends $tea.Model {
+  addressLine?: string;
+  city?: string;
+  country?: string;
+  district?: string;
+  location?: string;
+  province?: string;
+  time?: string;
+  township?: string;
+  static names(): { [key: string]: string } {
+    return {
+      addressLine: 'address_line',
+      city: 'city',
+      country: 'country',
+      district: 'district',
+      location: 'location',
+      province: 'province',
+      time: 'time',
+      township: 'township',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      addressLine: 'string',
+      city: 'string',
+      country: 'string',
+      district: 'string',
+      location: 'string',
+      province: 'string',
+      time: 'string',
+      township: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * create domain response
+ */
+export class CreateDomainResponse extends $tea.Model {
+  authAlipayAppId?: string;
+  authAlipayEnable?: boolean;
+  authAlipayPrivateKey?: string;
+  authConfig?: {[key: string]: any};
+  authDingdingAppId?: string;
+  authDingdingAppSecret?: string;
+  authDingdingEnable?: boolean;
+  authEndpointEnable?: boolean;
+  authRamAppId?: string;
+  authRamAppSecret?: string;
+  authRamEnable?: boolean;
+  createdAt?: string;
+  dataHashName?: string;
+  description?: string;
+  domainId?: string;
+  domainName?: string;
+  eventFilenameMatches?: string;
+  eventMnsEndpoint?: string;
+  eventMnsTopic?: string;
+  eventNames?: string[];
+  eventRoleArn?: string;
+  initDriveEnable?: boolean;
+  initDriveSize?: number;
+  initDriveStoreId?: string;
+  pathType?: string;
+  publishedAppAccessStrategy?: AppAccessStrategy;
+  sharable?: boolean;
+  storeLevel?: string;
+  storeRegionList?: string[];
+  updatedAt?: string;
+  static names(): { [key: string]: string } {
+    return {
+      authAlipayAppId: 'auth_alipay_app_id',
+      authAlipayEnable: 'auth_alipay_enable',
+      authAlipayPrivateKey: 'auth_alipay_private_key',
+      authConfig: 'auth_config',
+      authDingdingAppId: 'auth_dingding_app_id',
+      authDingdingAppSecret: 'auth_dingding_app_secret',
+      authDingdingEnable: 'auth_dingding_enable',
+      authEndpointEnable: 'auth_endpoint_enable',
+      authRamAppId: 'auth_ram_app_id',
+      authRamAppSecret: 'auth_ram_app_secret',
+      authRamEnable: 'auth_ram_enable',
+      createdAt: 'created_at',
+      dataHashName: 'data_hash_name',
+      description: 'description',
+      domainId: 'domain_id',
+      domainName: 'domain_name',
+      eventFilenameMatches: 'event_filename_matches',
+      eventMnsEndpoint: 'event_mns_endpoint',
+      eventMnsTopic: 'event_mns_topic',
+      eventNames: 'event_names',
+      eventRoleArn: 'event_role_arn',
+      initDriveEnable: 'init_drive_enable',
+      initDriveSize: 'init_drive_size',
+      initDriveStoreId: 'init_drive_store_id',
+      pathType: 'path_type',
+      publishedAppAccessStrategy: 'published_app_access_strategy',
+      sharable: 'sharable',
+      storeLevel: 'store_level',
+      storeRegionList: 'store_region_list',
+      updatedAt: 'updated_at',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      authAlipayAppId: 'string',
+      authAlipayEnable: 'boolean',
+      authAlipayPrivateKey: 'string',
+      authConfig: { 'type': 'map', 'keyType': 'string', 'valueType': 'any' },
+      authDingdingAppId: 'string',
+      authDingdingAppSecret: 'string',
+      authDingdingEnable: 'boolean',
+      authEndpointEnable: 'boolean',
+      authRamAppId: 'string',
+      authRamAppSecret: 'string',
+      authRamEnable: 'boolean',
+      createdAt: 'string',
+      dataHashName: 'string',
+      description: 'string',
+      domainId: 'string',
+      domainName: 'string',
+      eventFilenameMatches: 'string',
+      eventMnsEndpoint: 'string',
+      eventMnsTopic: 'string',
+      eventNames: { 'type': 'array', 'itemType': 'string' },
+      eventRoleArn: 'string',
+      initDriveEnable: 'boolean',
+      initDriveSize: 'number',
+      initDriveStoreId: 'string',
+      pathType: 'string',
+      publishedAppAccessStrategy: AppAccessStrategy,
+      sharable: 'boolean',
+      storeLevel: 'string',
+      storeRegionList: { 'type': 'array', 'itemType': 'string' },
+      updatedAt: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class GetAppPublicKeyResponse extends $tea.Model {
+  appId: string;
+  publicKey: string;
+  static names(): { [key: string]: string } {
+    return {
+      appId: 'app_id',
+      publicKey: 'public_key',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      appId: 'string',
+      publicKey: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class GetAppResponse extends $tea.Model {
+  aliOwnerId: string;
+  appId: string;
+  appName: string;
+  appSecret: string;
+  createdAt: string;
+  description: string;
+  logo: string;
+  provider: string;
+  redirectUri: string;
+  scope: string[];
+  screenshots: string[];
+  stage: string;
+  type: string;
+  updatedAt: string;
+  static names(): { [key: string]: string } {
+    return {
+      aliOwnerId: 'ali_owner_id',
+      appId: 'app_id',
+      appName: 'app_name',
+      appSecret: 'app_secret',
+      createdAt: 'created_at',
+      description: 'description',
+      logo: 'logo',
+      provider: 'provider',
+      redirectUri: 'redirect_uri',
+      scope: 'scope',
+      screenshots: 'screenshots',
+      stage: 'stage',
+      type: 'type',
+      updatedAt: 'updated_at',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      aliOwnerId: 'string',
+      appId: 'string',
+      appName: 'string',
+      appSecret: 'string',
+      createdAt: 'string',
+      description: 'string',
+      logo: 'string',
+      provider: 'string',
+      redirectUri: 'string',
+      scope: { 'type': 'array', 'itemType': 'string' },
+      screenshots: { 'type': 'array', 'itemType': 'string' },
+      stage: 'string',
+      type: 'string',
+      updatedAt: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * get domain response
+ */
+export class GetDomainResponse extends $tea.Model {
+  authAlipayAppId?: string;
+  authAlipayEnable?: boolean;
+  authAlipayPrivateKey?: string;
+  authConfig?: {[key: string]: any};
+  authDingdingAppId?: string;
+  authDingdingAppSecret?: string;
+  authDingdingEnable?: boolean;
+  authEndpointEnable?: boolean;
+  authRamAppId?: string;
+  authRamAppSecret?: string;
+  authRamEnable?: boolean;
+  createdAt?: string;
+  dataHashName?: string;
+  description?: string;
+  domainId?: string;
+  domainName?: string;
+  eventFilenameMatches?: string;
+  eventMnsEndpoint?: string;
+  eventMnsTopic?: string;
+  eventNames?: string[];
+  eventRoleArn?: string;
+  initDriveEnable?: boolean;
+  initDriveSize?: number;
+  initDriveStoreId?: string;
+  pathType?: string;
+  publishedAppAccessStrategy?: AppAccessStrategy;
+  sharable?: boolean;
+  storeLevel?: string;
+  storeRegionList?: string[];
+  updatedAt?: string;
+  static names(): { [key: string]: string } {
+    return {
+      authAlipayAppId: 'auth_alipay_app_id',
+      authAlipayEnable: 'auth_alipay_enable',
+      authAlipayPrivateKey: 'auth_alipay_private_key',
+      authConfig: 'auth_config',
+      authDingdingAppId: 'auth_dingding_app_id',
+      authDingdingAppSecret: 'auth_dingding_app_secret',
+      authDingdingEnable: 'auth_dingding_enable',
+      authEndpointEnable: 'auth_endpoint_enable',
+      authRamAppId: 'auth_ram_app_id',
+      authRamAppSecret: 'auth_ram_app_secret',
+      authRamEnable: 'auth_ram_enable',
+      createdAt: 'created_at',
+      dataHashName: 'data_hash_name',
+      description: 'description',
+      domainId: 'domain_id',
+      domainName: 'domain_name',
+      eventFilenameMatches: 'event_filename_matches',
+      eventMnsEndpoint: 'event_mns_endpoint',
+      eventMnsTopic: 'event_mns_topic',
+      eventNames: 'event_names',
+      eventRoleArn: 'event_role_arn',
+      initDriveEnable: 'init_drive_enable',
+      initDriveSize: 'init_drive_size',
+      initDriveStoreId: 'init_drive_store_id',
+      pathType: 'path_type',
+      publishedAppAccessStrategy: 'published_app_access_strategy',
+      sharable: 'sharable',
+      storeLevel: 'store_level',
+      storeRegionList: 'store_region_list',
+      updatedAt: 'updated_at',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      authAlipayAppId: 'string',
+      authAlipayEnable: 'boolean',
+      authAlipayPrivateKey: 'string',
+      authConfig: { 'type': 'map', 'keyType': 'string', 'valueType': 'any' },
+      authDingdingAppId: 'string',
+      authDingdingAppSecret: 'string',
+      authDingdingEnable: 'boolean',
+      authEndpointEnable: 'boolean',
+      authRamAppId: 'string',
+      authRamAppSecret: 'string',
+      authRamEnable: 'boolean',
+      createdAt: 'string',
+      dataHashName: 'string',
+      description: 'string',
+      domainId: 'string',
+      domainName: 'string',
+      eventFilenameMatches: 'string',
+      eventMnsEndpoint: 'string',
+      eventMnsTopic: 'string',
+      eventNames: { 'type': 'array', 'itemType': 'string' },
+      eventRoleArn: 'string',
+      initDriveEnable: 'boolean',
+      initDriveSize: 'number',
+      initDriveStoreId: 'string',
+      pathType: 'string',
+      publishedAppAccessStrategy: AppAccessStrategy,
+      sharable: 'boolean',
+      storeLevel: 'string',
+      storeRegionList: { 'type': 'array', 'itemType': 'string' },
+      updatedAt: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class GetUserAccessTokenRequest extends $tea.Model {
+  role?: string;
+  userId: string;
+  static names(): { [key: string]: string } {
+    return {
+      role: 'role',
+      userId: 'user_id',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      role: 'string',
+      userId: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class ListAppsResponse extends $tea.Model {
+  items: GetAppResponse[];
+  nextMarker?: string;
+  static names(): { [key: string]: string } {
+    return {
+      items: 'items',
+      nextMarker: 'next_marker',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      items: { 'type': 'array', 'itemType': GetAppResponse },
+      nextMarker: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * list domain cors response
+ */
+export class ListDomainCORSRuleResponse extends $tea.Model {
+  corsRuleList?: CorsRule[];
+  domainId?: string;
+  static names(): { [key: string]: string } {
+    return {
+      corsRuleList: 'cors_rule_list',
+      domainId: 'domain_id',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      corsRuleList: { 'type': 'array', 'itemType': CorsRule },
+      domainId: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * list domain response
+ */
+export class ListDomainsResponse extends $tea.Model {
+  items?: BaseDomainResponse[];
+  nextMarker?: string;
+  static names(): { [key: string]: string } {
+    return {
+      items: 'items',
+      nextMarker: 'next_marker',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      items: { 'type': 'array', 'itemType': BaseDomainResponse },
+      nextMarker: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class ListStoresResponse extends $tea.Model {
+  items: Store[];
+  static names(): { [key: string]: string } {
+    return {
+      items: 'items',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      items: { 'type': 'array', 'itemType': Store },
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class Store extends $tea.Model {
+  accelerateEndpoint?: string;
+  basePath?: string;
+  bucket: string;
+  customizedEndpoint?: string;
+  endpoint: string;
+  internalEndpoint?: string;
+  ownership: string;
+  policy: string;
+  roleArn?: string;
+  storeId: string;
+  type: string;
+  static names(): { [key: string]: string } {
+    return {
+      accelerateEndpoint: 'accelerate_endpoint',
+      basePath: 'base_path',
+      bucket: 'bucket',
+      customizedEndpoint: 'customized_endpoint',
+      endpoint: 'endpoint',
+      internalEndpoint: 'internal_endpoint',
+      ownership: 'ownership',
+      policy: 'policy',
+      roleArn: 'role_arn',
+      storeId: 'store_id',
+      type: 'type',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      accelerateEndpoint: 'string',
+      basePath: 'string',
+      bucket: 'string',
+      customizedEndpoint: 'string',
+      endpoint: 'string',
+      internalEndpoint: 'string',
+      ownership: 'string',
+      policy: 'string',
+      roleArn: 'string',
+      storeId: 'string',
+      type: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * create domain response
+ */
+export class UpdateDomainResponse extends $tea.Model {
+  authAlipayAppId?: string;
+  authAlipayEnable?: boolean;
+  authAlipayPrivateKey?: string;
+  authConfig?: {[key: string]: any};
+  authDingdingAppId?: string;
+  authDingdingAppSecret?: string;
+  authDingdingEnable?: boolean;
+  authEndpointEnable?: boolean;
+  authRamAppId?: string;
+  authRamAppSecret?: string;
+  authRamEnable?: boolean;
+  createdAt?: string;
+  dataHashName?: string;
+  description?: string;
+  domainId?: string;
+  domainName?: string;
+  eventFilenameMatches?: string;
+  eventMnsEndpoint?: string;
+  eventMnsTopic?: string;
+  eventNames?: string[];
+  eventRoleArn?: string;
+  initDriveEnable?: boolean;
+  initDriveSize?: number;
+  initDriveStoreId?: string;
+  pathType?: string;
+  publishedAppAccessStrategy?: AppAccessStrategy;
+  sharable?: boolean;
+  storeLevel?: string;
+  storeRegionList?: string[];
+  updatedAt?: string;
+  static names(): { [key: string]: string } {
+    return {
+      authAlipayAppId: 'auth_alipay_app_id',
+      authAlipayEnable: 'auth_alipay_enable',
+      authAlipayPrivateKey: 'auth_alipay_private_key',
+      authConfig: 'auth_config',
+      authDingdingAppId: 'auth_dingding_app_id',
+      authDingdingAppSecret: 'auth_dingding_app_secret',
+      authDingdingEnable: 'auth_dingding_enable',
+      authEndpointEnable: 'auth_endpoint_enable',
+      authRamAppId: 'auth_ram_app_id',
+      authRamAppSecret: 'auth_ram_app_secret',
+      authRamEnable: 'auth_ram_enable',
+      createdAt: 'created_at',
+      dataHashName: 'data_hash_name',
+      description: 'description',
+      domainId: 'domain_id',
+      domainName: 'domain_name',
+      eventFilenameMatches: 'event_filename_matches',
+      eventMnsEndpoint: 'event_mns_endpoint',
+      eventMnsTopic: 'event_mns_topic',
+      eventNames: 'event_names',
+      eventRoleArn: 'event_role_arn',
+      initDriveEnable: 'init_drive_enable',
+      initDriveSize: 'init_drive_size',
+      initDriveStoreId: 'init_drive_store_id',
+      pathType: 'path_type',
+      publishedAppAccessStrategy: 'published_app_access_strategy',
+      sharable: 'sharable',
+      storeLevel: 'store_level',
+      storeRegionList: 'store_region_list',
+      updatedAt: 'updated_at',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      authAlipayAppId: 'string',
+      authAlipayEnable: 'boolean',
+      authAlipayPrivateKey: 'string',
+      authConfig: { 'type': 'map', 'keyType': 'string', 'valueType': 'any' },
+      authDingdingAppId: 'string',
+      authDingdingAppSecret: 'string',
+      authDingdingEnable: 'boolean',
+      authEndpointEnable: 'boolean',
+      authRamAppId: 'string',
+      authRamAppSecret: 'string',
+      authRamEnable: 'boolean',
+      createdAt: 'string',
+      dataHashName: 'string',
+      description: 'string',
+      domainId: 'string',
+      domainName: 'string',
+      eventFilenameMatches: 'string',
+      eventMnsEndpoint: 'string',
+      eventMnsTopic: 'string',
+      eventNames: { 'type': 'array', 'itemType': 'string' },
+      eventRoleArn: 'string',
+      initDriveEnable: 'boolean',
+      initDriveSize: 'number',
+      initDriveStoreId: 'string',
+      pathType: 'string',
+      publishedAppAccessStrategy: AppAccessStrategy,
+      sharable: 'boolean',
+      storeLevel: 'string',
+      storeRegionList: { 'type': 'array', 'itemType': 'string' },
+      updatedAt: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetAsyncTaskInfoRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPGetAsyncTaskRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPGetAsyncTaskRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetAsyncTaskInfoModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPGetAsyncTaskResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPGetAsyncTaskResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class BatchOperationRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPBatchRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPBatchRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class BatchOperationModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPBatchResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPBatchResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class CreateDriveRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CreateDriveRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CreateDriveRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class CreateDriveModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CreateDriveResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CreateDriveResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class DeleteDriveRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: DeleteDriveRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: DeleteDriveRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class DeleteDriveModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetDriveRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: GetDriveRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: GetDriveRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetDriveModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: GetDriveResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: GetDriveResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetDefaultDriveRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: GetDefaultDriveRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: GetDefaultDriveRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetDefaultDriveModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: GetDriveResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: GetDriveResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListDrivesRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: ListDriveRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: ListDriveRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListDrivesModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: ListDriveResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: ListDriveResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListMyDrivesRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: ListMyDriveRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: ListMyDriveRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListMyDrivesModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: ListDriveResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: ListDriveResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class UpdateDriveRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: UpdateDriveRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: UpdateDriveRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class UpdateDriveModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: UpdateDriveResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: UpdateDriveResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class CompleteFileRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPCompleteFileRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPCompleteFileRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class CompleteFileModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPCompleteFileResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPCompleteFileResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class CopyFileRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPCopyFileRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPCopyFileRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class CopyFileModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPCopyFileResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPCopyFileResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class CreateFileRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPCreateFileRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPCreateFileRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class CreateFileModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPCreateFileResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPCreateFileResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class DeleteFileRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPDeleteFileRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPDeleteFileRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class DeleteFileModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPDeleteFileResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPDeleteFileResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class DownloadFileQuery extends $tea.Model {
+  DriveID: string;
+  FileID: string;
+  ImageThumbnailProcess?: string;
+  VideoThumbnailProcess?: string;
+  static names(): { [key: string]: string } {
+    return {
+      DriveID: 'DriveID',
+      FileID: 'FileID',
+      ImageThumbnailProcess: 'ImageThumbnailProcess',
+      VideoThumbnailProcess: 'VideoThumbnailProcess',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      DriveID: 'string',
+      FileID: 'string',
+      ImageThumbnailProcess: 'string',
+      VideoThumbnailProcess: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class DownloadFileRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  query: DownloadFileQuery;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      query: 'query',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      query: DownloadFileQuery,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class DownloadFileModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPGetDownloadUrlRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPGetDownloadUrlRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetFileRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPGetFileRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPGetFileRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetFileModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPGetFileResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPGetFileResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetFileByPathRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPGetFileByPathRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPGetFileByPathRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetFileByPathModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPGetFileByPathResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPGetFileByPathResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetDownloadUrlRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPGetDownloadUrlRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPGetDownloadUrlRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetDownloadUrlModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPGetDownloadUrlResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPGetDownloadUrlResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetLastCursorRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: GetLastCursorRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: GetLastCursorRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetLastCursorModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: GetLastCursorResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: GetLastCursorResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetUploadUrlRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPGetUploadUrlRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPGetUploadUrlRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetUploadUrlModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPGetUploadUrlResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPGetUploadUrlResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListFileRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPListFileRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPListFileRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListFileModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPListFileResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPListFileResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListFileByCustomIndexKeyRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPListFileByCustomIndexKeyRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPListFileByCustomIndexKeyRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListFileByCustomIndexKeyModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPListFileResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPListFileResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListFileDeltaRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: ListFileDeltaRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: ListFileDeltaRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListFileDeltaModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: ListFileDeltaResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: ListFileDeltaResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListUploadedPartsRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPListUploadedPartRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPListUploadedPartRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListUploadedPartsModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPListUploadedPartResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPListUploadedPartResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class MoveFileRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPMoveFileRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPMoveFileRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class MoveFileModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPMoveFileResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPMoveFileResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ScanFileMetaRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPScanFileMetaRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPScanFileMetaRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ScanFileMetaModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPScanFileMetaResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPScanFileMetaResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class SearchFileRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPSearchFileRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPSearchFileRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class SearchFileModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPSearchFileResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPSearchFileResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class UpdateFileRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPUpdateFileMetaRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPUpdateFileMetaRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class UpdateFileModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CCPUpdateFileMetaResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CCPUpdateFileMetaResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * complete file request
+ */
 export class BaseCompleteFileRequest extends $tea.Model {
-  driveId: string;
+  driveId?: string;
   partInfoList?: UploadPartInfo[];
   uploadId?: string;
   static names(): { [key: string]: string } {
@@ -3491,6 +6821,9 @@ export class BaseCompleteFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * create file request
+ */
 export class BaseCreateFileRequest extends $tea.Model {
   contentMd5: string;
   contentType: string;
@@ -3525,9 +6858,12 @@ export class BaseCreateFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * 获取文件上传URL
+ */
 export class BaseGetUploadUrlRequest extends $tea.Model {
   contentMd5?: string;
-  driveId: string;
+  driveId?: string;
   partInfoList?: UploadPartInfo[];
   uploadId: string;
   static names(): { [key: string]: string } {
@@ -3553,12 +6889,16 @@ export class BaseGetUploadUrlRequest extends $tea.Model {
   }
 }
 
+/**
+ * list file request
+ */
 export class BaseListFileRequest extends $tea.Model {
-  driveId: string;
+  driveId?: string;
   imageThumbnailProcess?: string;
   imageUrlProcess?: string;
   limit?: number;
   marker?: string;
+  videoThumbnailProcess?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -3566,6 +6906,7 @@ export class BaseListFileRequest extends $tea.Model {
       imageUrlProcess: 'image_url_process',
       limit: 'limit',
       marker: 'marker',
+      videoThumbnailProcess: 'video_thumbnail_process',
     };
   }
 
@@ -3576,6 +6917,7 @@ export class BaseListFileRequest extends $tea.Model {
       imageUrlProcess: 'string',
       limit: 'number',
       marker: 'string',
+      videoThumbnailProcess: 'string',
     };
   }
 
@@ -3584,6 +6926,9 @@ export class BaseListFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * 文件移动请求
+ */
 export class BaseMoveFileRequest extends $tea.Model {
   driveId: string;
   newName?: string;
@@ -3609,6 +6954,9 @@ export class BaseMoveFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * 
+ */
 export class BatchSubRequest extends $tea.Model {
   body?: {[key: string]: any};
   headers?: {[key: string]: any};
@@ -3627,8 +6975,8 @@ export class BatchSubRequest extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      body: '{[key: string]: any}',
-      headers: '{[key: string]: any}',
+      body: { 'type': 'map', 'keyType': 'string', 'valueType': 'any' },
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'any' },
       id: 'string',
       method: 'string',
       url: 'string',
@@ -3640,6 +6988,9 @@ export class BatchSubRequest extends $tea.Model {
   }
 }
 
+/**
+ * 批处理
+ */
 export class CCPBatchRequest extends $tea.Model {
   requests: BatchSubRequest[];
   resource: string;
@@ -3662,6 +7013,9 @@ export class CCPBatchRequest extends $tea.Model {
   }
 }
 
+/**
+ * 合并文件上传任务
+ */
 export class CCPCompleteFileRequest extends $tea.Model {
   driveId?: string;
   partInfoList?: UploadPartInfo[];
@@ -3690,6 +7044,9 @@ export class CCPCompleteFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * 文件拷贝
+ */
 export class CCPCopyFileRequest extends $tea.Model {
   autoRename?: boolean;
   driveId: string;
@@ -3724,6 +7081,9 @@ export class CCPCopyFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * 创建文件
+ */
 export class CCPCreateFileRequest extends $tea.Model {
   contentMd5?: string;
   contentType?: string;
@@ -3732,16 +7092,21 @@ export class CCPCreateFileRequest extends $tea.Model {
   size?: number;
   type?: string;
   autoRename?: boolean;
+  checkNameMode?: string;
   contentHash?: string;
   contentHashName?: string;
   description?: string;
   driveId?: string;
+  encryptMode?: string;
   fileId?: string;
   hidden?: boolean;
   labels?: string[];
+  lastUpdatedAt?: string;
   meta?: string;
   parentFileId?: string;
   preHash?: string;
+  streamsInfo?: {[key: string]: any};
+  userMeta?: string;
   static names(): { [key: string]: string } {
     return {
       contentMd5: 'content_md5',
@@ -3751,16 +7116,21 @@ export class CCPCreateFileRequest extends $tea.Model {
       size: 'size',
       type: 'type',
       autoRename: 'auto_rename',
+      checkNameMode: 'check_name_mode',
       contentHash: 'content_hash',
       contentHashName: 'content_hash_name',
       description: 'description',
       driveId: 'drive_id',
+      encryptMode: 'encrypt_mode',
       fileId: 'file_id',
       hidden: 'hidden',
       labels: 'labels',
+      lastUpdatedAt: 'last_updated_at',
       meta: 'meta',
       parentFileId: 'parent_file_id',
       preHash: 'pre_hash',
+      streamsInfo: 'streams_info',
+      userMeta: 'user_meta',
     };
   }
 
@@ -3773,16 +7143,21 @@ export class CCPCreateFileRequest extends $tea.Model {
       size: 'number',
       type: 'string',
       autoRename: 'boolean',
+      checkNameMode: 'string',
       contentHash: 'string',
       contentHashName: 'string',
       description: 'string',
       driveId: 'string',
+      encryptMode: 'string',
       fileId: 'string',
       hidden: 'boolean',
       labels: { 'type': 'array', 'itemType': 'string' },
+      lastUpdatedAt: 'string',
       meta: 'string',
       parentFileId: 'string',
       preHash: 'string',
+      streamsInfo: { 'type': 'map', 'keyType': 'string', 'valueType': 'any' },
+      userMeta: 'string',
     };
   }
 
@@ -3791,6 +7166,9 @@ export class CCPCreateFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * 删除文件请求
+ */
 export class CCPDeleteFileRequest extends $tea.Model {
   driveId: string;
   fileId: string;
@@ -3816,6 +7194,9 @@ export class CCPDeleteFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * 批量删除文件请求
+ */
 export class CCPDeleteFilesRequest extends $tea.Model {
   driveId: string;
   fileIdList: string[];
@@ -3838,6 +7219,9 @@ export class CCPDeleteFilesRequest extends $tea.Model {
   }
 }
 
+/**
+ * 获取异步人去信息
+ */
 export class CCPGetAsyncTaskRequest extends $tea.Model {
   asyncTaskId?: string;
   static names(): { [key: string]: string } {
@@ -3857,6 +7241,9 @@ export class CCPGetAsyncTaskRequest extends $tea.Model {
   }
 }
 
+/**
+ * 获取文件下载地址的请求body
+ */
 export class CCPGetDownloadUrlRequest extends $tea.Model {
   driveId: string;
   expireSec?: number;
@@ -3885,26 +7272,41 @@ export class CCPGetDownloadUrlRequest extends $tea.Model {
   }
 }
 
-export class CCPGetFileRequest extends $tea.Model {
+/**
+ * 根据路径获取 File 接口 body
+ */
+export class CCPGetFileByPathRequest extends $tea.Model {
   driveId: string;
+  fields?: string;
   fileId: string;
+  filePath?: string;
   imageThumbnailProcess?: string;
   imageUrlProcess?: string;
+  urlExpireSec?: number;
+  videoThumbnailProcess?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
+      fields: 'fields',
       fileId: 'file_id',
+      filePath: 'file_path',
       imageThumbnailProcess: 'image_thumbnail_process',
       imageUrlProcess: 'image_url_process',
+      urlExpireSec: 'url_expire_sec',
+      videoThumbnailProcess: 'video_thumbnail_process',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
       driveId: 'string',
+      fields: 'string',
       fileId: 'string',
+      filePath: 'string',
       imageThumbnailProcess: 'string',
       imageUrlProcess: 'string',
+      urlExpireSec: 'number',
+      videoThumbnailProcess: 'string',
     };
   }
 
@@ -3913,6 +7315,49 @@ export class CCPGetFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * 获取文件元数据
+ */
+export class CCPGetFileRequest extends $tea.Model {
+  driveId: string;
+  fields?: string;
+  fileId: string;
+  imageThumbnailProcess?: string;
+  imageUrlProcess?: string;
+  urlExpireSec?: number;
+  videoThumbnailProcess?: string;
+  static names(): { [key: string]: string } {
+    return {
+      driveId: 'drive_id',
+      fields: 'fields',
+      fileId: 'file_id',
+      imageThumbnailProcess: 'image_thumbnail_process',
+      imageUrlProcess: 'image_url_process',
+      urlExpireSec: 'url_expire_sec',
+      videoThumbnailProcess: 'video_thumbnail_process',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      driveId: 'string',
+      fields: 'string',
+      fileId: 'string',
+      imageThumbnailProcess: 'string',
+      imageUrlProcess: 'string',
+      urlExpireSec: 'number',
+      videoThumbnailProcess: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 获取文件上传URL
+ */
 export class CCPGetUploadUrlRequest extends $tea.Model {
   contentMd5?: string;
   driveId?: string;
@@ -3944,21 +7389,25 @@ export class CCPGetUploadUrlRequest extends $tea.Model {
   }
 }
 
-export class CCPListFileRequest extends $tea.Model {
+/**
+ * 列举文件
+ */
+export class CCPListFileByCustomIndexKeyRequest extends $tea.Model {
   driveId?: string;
   imageThumbnailProcess?: string;
   imageUrlProcess?: string;
   limit?: number;
   marker?: string;
+  videoThumbnailProcess?: string;
   Starred?: boolean;
-  all?: boolean;
   category?: string;
-  orderBy?: string;
+  customIndexKey?: string;
+  encryptMode?: string;
+  fields?: string;
   orderDirection?: string;
-  parentFileId?: string;
   status?: string;
   type?: string;
-  customIndexKey?: string;
+  urlExpireSec?: number;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -3966,15 +7415,16 @@ export class CCPListFileRequest extends $tea.Model {
       imageUrlProcess: 'image_url_process',
       limit: 'limit',
       marker: 'marker',
+      videoThumbnailProcess: 'video_thumbnail_process',
       Starred: 'Starred',
-      all: 'all',
       category: 'category',
-      orderBy: 'order_by',
+      customIndexKey: 'custom_index_key',
+      encryptMode: 'encrypt_mode',
+      fields: 'fields',
       orderDirection: 'order_direction',
-      parentFileId: 'parent_file_id',
       status: 'status',
       type: 'type',
-      customIndexKey: 'custom_index_key',
+      urlExpireSec: 'url_expire_sec',
     };
   }
 
@@ -3985,15 +7435,16 @@ export class CCPListFileRequest extends $tea.Model {
       imageUrlProcess: 'string',
       limit: 'number',
       marker: 'string',
+      videoThumbnailProcess: 'string',
       Starred: 'boolean',
-      all: 'boolean',
       category: 'string',
-      orderBy: 'string',
+      customIndexKey: 'string',
+      encryptMode: 'string',
+      fields: 'string',
       orderDirection: 'string',
-      parentFileId: 'string',
       status: 'string',
       type: 'string',
-      customIndexKey: 'string',
+      urlExpireSec: 'number',
     };
   }
 
@@ -4002,6 +7453,76 @@ export class CCPListFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * 列举文件
+ */
+export class CCPListFileRequest extends $tea.Model {
+  driveId?: string;
+  imageThumbnailProcess?: string;
+  imageUrlProcess?: string;
+  limit?: number;
+  marker?: string;
+  videoThumbnailProcess?: string;
+  Starred?: boolean;
+  all?: boolean;
+  category?: string;
+  fields?: string;
+  orderBy?: string;
+  orderDirection?: string;
+  parentFileId?: string;
+  status?: string;
+  type?: string;
+  urlExpireSec?: number;
+  static names(): { [key: string]: string } {
+    return {
+      driveId: 'drive_id',
+      imageThumbnailProcess: 'image_thumbnail_process',
+      imageUrlProcess: 'image_url_process',
+      limit: 'limit',
+      marker: 'marker',
+      videoThumbnailProcess: 'video_thumbnail_process',
+      Starred: 'Starred',
+      all: 'all',
+      category: 'category',
+      fields: 'fields',
+      orderBy: 'order_by',
+      orderDirection: 'order_direction',
+      parentFileId: 'parent_file_id',
+      status: 'status',
+      type: 'type',
+      urlExpireSec: 'url_expire_sec',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      driveId: 'string',
+      imageThumbnailProcess: 'string',
+      imageUrlProcess: 'string',
+      limit: 'number',
+      marker: 'string',
+      videoThumbnailProcess: 'string',
+      Starred: 'boolean',
+      all: 'boolean',
+      category: 'string',
+      fields: 'string',
+      orderBy: 'string',
+      orderDirection: 'string',
+      parentFileId: 'string',
+      status: 'string',
+      type: 'string',
+      urlExpireSec: 'number',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 列举uploadID对应的已上传分片
+ */
 export class CCPListUploadedPartRequest extends $tea.Model {
   driveId: string;
   fileId: string;
@@ -4033,6 +7554,9 @@ export class CCPListUploadedPartRequest extends $tea.Model {
   }
 }
 
+/**
+ * 文件移动请求
+ */
 export class CCPMoveFileRequest extends $tea.Model {
   driveId?: string;
   newName?: string;
@@ -4064,6 +7588,40 @@ export class CCPMoveFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * 全量获取file元信息的请求body
+ */
+export class CCPScanFileMetaRequest extends $tea.Model {
+  category?: string;
+  driveId: string;
+  limit?: number;
+  marker?: string;
+  static names(): { [key: string]: string } {
+    return {
+      category: 'category',
+      driveId: 'drive_id',
+      limit: 'limit',
+      marker: 'marker',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      category: 'string',
+      driveId: 'string',
+      limit: 'number',
+      marker: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 搜索文件元数据
+ */
 export class CCPSearchFileRequest extends $tea.Model {
   driveId: string;
   imageThumbnailProcess?: string;
@@ -4072,6 +7630,8 @@ export class CCPSearchFileRequest extends $tea.Model {
   marker?: string;
   orderBy?: string;
   query?: string;
+  urlExpireSec?: number;
+  videoThumbnailProcess?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -4081,6 +7641,8 @@ export class CCPSearchFileRequest extends $tea.Model {
       marker: 'marker',
       orderBy: 'order_by',
       query: 'query',
+      urlExpireSec: 'url_expire_sec',
+      videoThumbnailProcess: 'video_thumbnail_process',
     };
   }
 
@@ -4093,6 +7655,8 @@ export class CCPSearchFileRequest extends $tea.Model {
       marker: 'string',
       orderBy: 'string',
       query: 'string',
+      urlExpireSec: 'number',
+      videoThumbnailProcess: 'string',
     };
   }
 
@@ -4101,27 +7665,34 @@ export class CCPSearchFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * 更新文件元数据
+ */
 export class CCPUpdateFileMetaRequest extends $tea.Model {
   customIndexKey?: string;
   description?: string;
   driveId: string;
+  encryptMode?: string;
   fileId: string;
   hidden?: boolean;
   labels?: string[];
   meta?: string;
   name?: string;
   starred?: boolean;
+  userMeta?: string;
   static names(): { [key: string]: string } {
     return {
       customIndexKey: 'custom_index_key',
       description: 'description',
       driveId: 'drive_id',
+      encryptMode: 'encrypt_mode',
       fileId: 'file_id',
       hidden: 'hidden',
       labels: 'labels',
       meta: 'meta',
       name: 'name',
       starred: 'starred',
+      userMeta: 'user_meta',
     };
   }
 
@@ -4130,12 +7701,14 @@ export class CCPUpdateFileMetaRequest extends $tea.Model {
       customIndexKey: 'string',
       description: 'string',
       driveId: 'string',
+      encryptMode: 'string',
       fileId: 'string',
       hidden: 'boolean',
       labels: { 'type': 'array', 'itemType': 'string' },
       meta: 'string',
       name: 'string',
       starred: 'boolean',
+      userMeta: 'string',
     };
   }
 
@@ -4144,6 +7717,9 @@ export class CCPUpdateFileMetaRequest extends $tea.Model {
   }
 }
 
+/**
+ * complete file request
+ */
 export class CompleteFileRequest extends $tea.Model {
   driveId: string;
   fileId: string;
@@ -4178,6 +7754,9 @@ export class CompleteFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * copy file request
+ */
 export class CopyFileRequest extends $tea.Model {
   driveId: string;
   fileId: string;
@@ -4224,11 +7803,15 @@ export class CopyFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * create drive request
+ */
 export class CreateDriveRequest extends $tea.Model {
   default?: boolean;
   description?: string;
   driveName: string;
   driveType?: string;
+  encryptMode?: string;
   owner: string;
   relativePath?: string;
   status?: string;
@@ -4240,6 +7823,7 @@ export class CreateDriveRequest extends $tea.Model {
       description: 'description',
       driveName: 'drive_name',
       driveType: 'drive_type',
+      encryptMode: 'encrypt_mode',
       owner: 'owner',
       relativePath: 'relative_path',
       status: 'status',
@@ -4254,6 +7838,7 @@ export class CreateDriveRequest extends $tea.Model {
       description: 'string',
       driveName: 'string',
       driveType: 'string',
+      encryptMode: 'string',
       owner: 'string',
       relativePath: 'string',
       status: 'string',
@@ -4267,6 +7852,9 @@ export class CreateDriveRequest extends $tea.Model {
   }
 }
 
+/**
+ * create file request
+ */
 export class CreateFileRequest extends $tea.Model {
   contentHash?: string;
   contentHashName?: string;
@@ -4324,7 +7912,7 @@ export class CreateFileRequest extends $tea.Model {
       preHash: 'string',
       shareId: 'string',
       size: 'number',
-      tags: '{[key: string]: any}',
+      tags: { 'type': 'map', 'keyType': 'string', 'valueType': 'any' },
       type: 'string',
     };
   }
@@ -4334,6 +7922,9 @@ export class CreateFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * create share request
+ */
 export class CreateShareRequest extends $tea.Model {
   description?: string;
   driveId: string;
@@ -4342,6 +7933,7 @@ export class CreateShareRequest extends $tea.Model {
   permissions?: string[];
   shareFilePath: string;
   shareName?: string;
+  sharePolicy?: SharePermissionPolicy[];
   status?: string;
   static names(): { [key: string]: string } {
     return {
@@ -4352,6 +7944,7 @@ export class CreateShareRequest extends $tea.Model {
       permissions: 'permissions',
       shareFilePath: 'share_file_path',
       shareName: 'share_name',
+      sharePolicy: 'share_policy',
       status: 'status',
     };
   }
@@ -4365,6 +7958,7 @@ export class CreateShareRequest extends $tea.Model {
       permissions: { 'type': 'array', 'itemType': 'string' },
       shareFilePath: 'string',
       shareName: 'string',
+      sharePolicy: { 'type': 'array', 'itemType': SharePermissionPolicy },
       status: 'string',
     };
   }
@@ -4374,6 +7968,9 @@ export class CreateShareRequest extends $tea.Model {
   }
 }
 
+/**
+ * Delete drive request
+ */
 export class DeleteDriveRequest extends $tea.Model {
   driveId: string;
   static names(): { [key: string]: string } {
@@ -4393,6 +7990,9 @@ export class DeleteDriveRequest extends $tea.Model {
   }
 }
 
+/**
+ * 删除文件请求
+ */
 export class DeleteFileRequest extends $tea.Model {
   driveId: string;
   fileId: string;
@@ -4424,6 +8024,9 @@ export class DeleteFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * delete share request
+ */
 export class DeleteShareRequest extends $tea.Model {
   shareId: string;
   static names(): { [key: string]: string } {
@@ -4443,6 +8046,9 @@ export class DeleteShareRequest extends $tea.Model {
   }
 }
 
+/**
+ * 下载文件请求body
+ */
 export class DownloadRequest extends $tea.Model {
   DriveID: string;
   FileID: string;
@@ -4471,6 +8077,40 @@ export class DownloadRequest extends $tea.Model {
   }
 }
 
+/**
+ * the file op info
+ */
+export class FileDeltaResponse extends $tea.Model {
+  currentCategory?: string;
+  file?: BaseCCPFileResponse;
+  fileId?: string;
+  op?: string;
+  static names(): { [key: string]: string } {
+    return {
+      currentCategory: 'current_category',
+      file: 'file',
+      fileId: 'file_id',
+      op: 'op',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      currentCategory: 'string',
+      file: BaseCCPFileResponse,
+      fileId: 'string',
+      op: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 获取异步人去信息
+ */
 export class GetAsyncTaskRequest extends $tea.Model {
   asyncTaskId?: string;
   static names(): { [key: string]: string } {
@@ -4490,6 +8130,9 @@ export class GetAsyncTaskRequest extends $tea.Model {
   }
 }
 
+/**
+ * Get default drive request
+ */
 export class GetDefaultDriveRequest extends $tea.Model {
   userId?: string;
   static names(): { [key: string]: string } {
@@ -4509,6 +8152,9 @@ export class GetDefaultDriveRequest extends $tea.Model {
   }
 }
 
+/**
+ * 获取文件下载地址的请求body
+ */
 export class GetDownloadUrlRequest extends $tea.Model {
   driveId: string;
   expireSec?: number;
@@ -4543,6 +8189,9 @@ export class GetDownloadUrlRequest extends $tea.Model {
   }
 }
 
+/**
+ * Get drive request
+ */
 export class GetDriveRequest extends $tea.Model {
   driveId: string;
   static names(): { [key: string]: string } {
@@ -4562,6 +8211,9 @@ export class GetDriveRequest extends $tea.Model {
   }
 }
 
+/**
+ * 获取文件元数据
+ */
 export class GetFileRequest extends $tea.Model {
   driveId: string;
   fileId: string;
@@ -4596,6 +8248,53 @@ export class GetFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * 获取最新游标
+ */
+export class GetLastCursorRequest extends $tea.Model {
+  driveId: string;
+  static names(): { [key: string]: string } {
+    return {
+      driveId: 'drive_id',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      driveId: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * get last file op cursor response
+ */
+export class GetLastCursorResponse extends $tea.Model {
+  cursor?: string;
+  static names(): { [key: string]: string } {
+    return {
+      cursor: 'cursor',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      cursor: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * get share request
+ */
 export class GetShareRequest extends $tea.Model {
   shareId?: string;
   static names(): { [key: string]: string } {
@@ -4615,6 +8314,9 @@ export class GetShareRequest extends $tea.Model {
   }
 }
 
+/**
+ * 获取文件上传URL
+ */
 export class GetUploadUrlRequest extends $tea.Model {
   contentMd5?: string;
   driveId: string;
@@ -4652,6 +8354,9 @@ export class GetUploadUrlRequest extends $tea.Model {
   }
 }
 
+/**
+ * List drive request
+ */
 export class ListDriveRequest extends $tea.Model {
   limit?: number;
   marker?: string;
@@ -4677,6 +8382,65 @@ export class ListDriveRequest extends $tea.Model {
   }
 }
 
+/**
+ * 获取增量文件操作记录
+ */
+export class ListFileDeltaRequest extends $tea.Model {
+  cursor?: string;
+  driveId: string;
+  limit?: number;
+  static names(): { [key: string]: string } {
+    return {
+      cursor: 'cursor',
+      driveId: 'drive_id',
+      limit: 'limit',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      cursor: 'string',
+      driveId: 'string',
+      limit: 'number',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * list file op response
+ */
+export class ListFileDeltaResponse extends $tea.Model {
+  cursor?: string;
+  hasMore?: boolean;
+  items?: FileDeltaResponse[];
+  static names(): { [key: string]: string } {
+    return {
+      cursor: 'cursor',
+      hasMore: 'has_more',
+      items: 'items',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      cursor: 'string',
+      hasMore: 'boolean',
+      items: { 'type': 'array', 'itemType': FileDeltaResponse },
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * list file request
+ */
 export class ListFileRequest extends $tea.Model {
   all?: boolean;
   driveId: string;
@@ -4723,6 +8487,9 @@ export class ListFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * List my drive request
+ */
 export class ListMyDriveRequest extends $tea.Model {
   limit?: number;
   marker?: string;
@@ -4745,26 +8512,35 @@ export class ListMyDriveRequest extends $tea.Model {
   }
 }
 
+/**
+ * list share request
+ */
 export class ListShareRequest extends $tea.Model {
-  creator: string;
+  creator?: string;
+  driveId?: string;
   limit: number;
   marker?: string;
-  owner: string;
+  owner?: string;
+  shareFilePath?: string;
   static names(): { [key: string]: string } {
     return {
       creator: 'creator',
+      driveId: 'drive_id',
       limit: 'limit',
       marker: 'marker',
       owner: 'owner',
+      shareFilePath: 'share_file_path',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
       creator: 'string',
+      driveId: 'string',
       limit: 'number',
       marker: 'string',
       owner: 'string',
+      shareFilePath: 'string',
     };
   }
 
@@ -4773,6 +8549,9 @@ export class ListShareRequest extends $tea.Model {
   }
 }
 
+/**
+ * list store file
+ */
 export class ListStoreFileRequest extends $tea.Model {
   limit?: number;
   marker?: string;
@@ -4804,6 +8583,9 @@ export class ListStoreFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * list storage file
+ */
 export class ListStoreRequest extends $tea.Model {
   domainId?: string;
   static names(): { [key: string]: string } {
@@ -4823,6 +8605,9 @@ export class ListStoreRequest extends $tea.Model {
   }
 }
 
+/**
+ * complete file request
+ */
 export class OSSCompleteFileRequest extends $tea.Model {
   driveId?: string;
   partInfoList?: UploadPartInfo[];
@@ -4854,6 +8639,9 @@ export class OSSCompleteFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * copy file request
+ */
 export class OSSCopyFileRequest extends $tea.Model {
   driveId?: string;
   filePath?: string;
@@ -4894,6 +8682,9 @@ export class OSSCopyFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * create file request
+ */
 export class OSSCreateFileRequest extends $tea.Model {
   contentMd5?: string;
   contentType?: string;
@@ -4937,8 +8728,11 @@ export class OSSCreateFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * 删除文件请求
+ */
 export class OSSDeleteFileRequest extends $tea.Model {
-  driveId: string;
+  driveId?: string;
   filePath: string;
   permanently?: boolean;
   shareId?: string;
@@ -4965,12 +8759,15 @@ export class OSSDeleteFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * 获取文件下载地址的请求body
+ */
 export class OSSGetDownloadUrlRequest extends $tea.Model {
-  driveId: string;
+  driveId?: string;
   expireSec?: number;
   fileName?: string;
   filePath: string;
-  shareId: string;
+  shareId?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -4996,12 +8793,16 @@ export class OSSGetDownloadUrlRequest extends $tea.Model {
   }
 }
 
+/**
+ * 获取文件元数据
+ */
 export class OSSGetFileRequest extends $tea.Model {
-  driveId: string;
+  driveId?: string;
   filePath: string;
   imageThumbnailProcess?: string;
   imageUrlProcess?: string;
   shareId?: string;
+  urlExpireSec?: number;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -5009,6 +8810,7 @@ export class OSSGetFileRequest extends $tea.Model {
       imageThumbnailProcess: 'image_thumbnail_process',
       imageUrlProcess: 'image_url_process',
       shareId: 'share_id',
+      urlExpireSec: 'url_expire_sec',
     };
   }
 
@@ -5019,6 +8821,7 @@ export class OSSGetFileRequest extends $tea.Model {
       imageThumbnailProcess: 'string',
       imageUrlProcess: 'string',
       shareId: 'string',
+      urlExpireSec: 'number',
     };
   }
 
@@ -5027,6 +8830,43 @@ export class OSSGetFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * 获取文件安全地址的请求body
+ */
+export class OSSGetSecureUrlRequest extends $tea.Model {
+  driveId?: string;
+  expireSec?: number;
+  filePath: string;
+  secureIp?: string;
+  shareId?: string;
+  static names(): { [key: string]: string } {
+    return {
+      driveId: 'drive_id',
+      expireSec: 'expire_sec',
+      filePath: 'file_path',
+      secureIp: 'secure_ip',
+      shareId: 'share_id',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      driveId: 'string',
+      expireSec: 'number',
+      filePath: 'string',
+      secureIp: 'string',
+      shareId: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 获取文件上传URL
+ */
 export class OSSGetUploadUrlRequest extends $tea.Model {
   contentMd5?: string;
   driveId?: string;
@@ -5061,14 +8901,19 @@ export class OSSGetUploadUrlRequest extends $tea.Model {
   }
 }
 
+/**
+ * list file request
+ */
 export class OSSListFileRequest extends $tea.Model {
-  driveId: string;
+  driveId?: string;
   imageThumbnailProcess?: string;
   imageUrlProcess?: string;
   limit?: number;
   marker?: string;
   parentFilePath: string;
-  shareId: string;
+  shareId?: string;
+  urlExpireSec?: number;
+  videoThumbnailProcess?: string;
   static names(): { [key: string]: string } {
     return {
       driveId: 'drive_id',
@@ -5078,6 +8923,8 @@ export class OSSListFileRequest extends $tea.Model {
       marker: 'marker',
       parentFilePath: 'parent_file_path',
       shareId: 'share_id',
+      urlExpireSec: 'url_expire_sec',
+      videoThumbnailProcess: 'video_thumbnail_process',
     };
   }
 
@@ -5090,6 +8937,8 @@ export class OSSListFileRequest extends $tea.Model {
       marker: 'string',
       parentFilePath: 'string',
       shareId: 'string',
+      urlExpireSec: 'number',
+      videoThumbnailProcess: 'string',
     };
   }
 
@@ -5098,8 +8947,11 @@ export class OSSListFileRequest extends $tea.Model {
   }
 }
 
+/**
+ * 列举uploadID对应的已上传分片
+ */
 export class OSSListUploadedPartRequest extends $tea.Model {
-  driveId: string;
+  driveId?: string;
   filePath: string;
   limit: number;
   partNumberMarker?: number;
@@ -5132,8 +8984,11 @@ export class OSSListUploadedPartRequest extends $tea.Model {
   }
 }
 
+/**
+ * 文件移动请求
+ */
 export class OSSMoveFileRequest extends $tea.Model {
-  driveId: string;
+  driveId?: string;
   filePath?: string;
   newName: string;
   overwrite?: boolean;
@@ -5166,47 +9021,26 @@ export class OSSMoveFileRequest extends $tea.Model {
   }
 }
 
-export class Store extends $tea.Model {
-  accelerateEndpoint?: string;
-  basePath?: string;
-  bucket: string;
-  customizedEndpoint?: string;
-  endpoint: string;
-  internalEndpoint?: string;
-  ownership: string;
-  policy: string;
-  roleArn?: string;
-  storeId: string;
-  type: string;
+/**
+ * 获取视频分辨率列表
+ */
+export class OSSVideoDefinitionRequest extends $tea.Model {
+  driveId?: string;
+  filePath: string;
+  shareId?: string;
   static names(): { [key: string]: string } {
     return {
-      accelerateEndpoint: 'accelerate_endpoint',
-      basePath: 'base_path',
-      bucket: 'bucket',
-      customizedEndpoint: 'customized_endpoint',
-      endpoint: 'endpoint',
-      internalEndpoint: 'internal_endpoint',
-      ownership: 'ownership',
-      policy: 'policy',
-      roleArn: 'role_arn',
-      storeId: 'store_id',
-      type: 'type',
+      driveId: 'drive_id',
+      filePath: 'file_path',
+      shareId: 'share_id',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
-      accelerateEndpoint: 'string',
-      basePath: 'string',
-      bucket: 'string',
-      customizedEndpoint: 'string',
-      endpoint: 'string',
-      internalEndpoint: 'string',
-      ownership: 'string',
-      policy: 'string',
-      roleArn: 'string',
-      storeId: 'string',
-      type: 'string',
+      driveId: 'string',
+      filePath: 'string',
+      shareId: 'string',
     };
   }
 
@@ -5215,6 +9049,120 @@ export class Store extends $tea.Model {
   }
 }
 
+/**
+ * 获取视频的m3u8文件
+ */
+export class OSSVideoM3U8Request extends $tea.Model {
+  definition?: string;
+  driveId?: string;
+  expireSec?: number;
+  filePath: string;
+  shareId?: string;
+  signToken: string;
+  static names(): { [key: string]: string } {
+    return {
+      definition: 'definition',
+      driveId: 'drive_id',
+      expireSec: 'expire_sec',
+      filePath: 'file_path',
+      shareId: 'share_id',
+      signToken: 'sign_token',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      definition: 'string',
+      driveId: 'string',
+      expireSec: 'number',
+      filePath: 'string',
+      shareId: 'string',
+      signToken: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 启动视频转码请求
+ */
+export class OSSVideoTranscodeRequest extends $tea.Model {
+  driveId?: string;
+  filePath: string;
+  hlsTime?: number;
+  remarks?: string;
+  shareId?: string;
+  transcode?: boolean;
+  static names(): { [key: string]: string } {
+    return {
+      driveId: 'drive_id',
+      filePath: 'file_path',
+      hlsTime: 'hls_time',
+      remarks: 'remarks',
+      shareId: 'share_id',
+      transcode: 'transcode',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      driveId: 'string',
+      filePath: 'string',
+      hlsTime: 'number',
+      remarks: 'string',
+      shareId: 'string',
+      transcode: 'boolean',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class StreamInfo extends $tea.Model {
+  contentHash?: string;
+  contentHashName?: string;
+  contentMd5: string;
+  partInfoList?: UploadPartInfo[];
+  preHash?: string;
+  size: number;
+  static names(): { [key: string]: string } {
+    return {
+      contentHash: 'content_hash',
+      contentHashName: 'content_hash_name',
+      contentMd5: 'content_md5',
+      partInfoList: 'part_info_list',
+      preHash: 'pre_hash',
+      size: 'size',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      contentHash: 'string',
+      contentHashName: 'string',
+      contentMd5: 'string',
+      partInfoList: { 'type': 'array', 'itemType': UploadPartInfo },
+      preHash: 'string',
+      size: 'number',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * UCGetObjectInfoByObjectKeyRequest
+ */
 export class UCGetObjectInfoByObjectKeyRequest extends $tea.Model {
   objectKey?: string;
   static names(): { [key: string]: string } {
@@ -5234,6 +9182,9 @@ export class UCGetObjectInfoByObjectKeyRequest extends $tea.Model {
   }
 }
 
+/**
+ * UCGetObjectInfoBySha1Request
+ */
 export class UCGetObjectInfoBySha1Request extends $tea.Model {
   sha1?: string;
   static names(): { [key: string]: string } {
@@ -5253,10 +9204,15 @@ export class UCGetObjectInfoBySha1Request extends $tea.Model {
   }
 }
 
+/**
+ * Update drive request
+ */
 export class UpdateDriveRequest extends $tea.Model {
   description?: string;
   driveId: string;
   driveName?: string;
+  encryptDataAccess?: boolean;
+  encryptMode?: string;
   status?: string;
   totalSize?: number;
   static names(): { [key: string]: string } {
@@ -5264,6 +9220,8 @@ export class UpdateDriveRequest extends $tea.Model {
       description: 'description',
       driveId: 'drive_id',
       driveName: 'drive_name',
+      encryptDataAccess: 'encrypt_data_access',
+      encryptMode: 'encrypt_mode',
       status: 'status',
       totalSize: 'total_size',
     };
@@ -5274,6 +9232,8 @@ export class UpdateDriveRequest extends $tea.Model {
       description: 'string',
       driveId: 'string',
       driveName: 'string',
+      encryptDataAccess: 'boolean',
+      encryptMode: 'string',
       status: 'string',
       totalSize: 'number',
     };
@@ -5284,6 +9244,9 @@ export class UpdateDriveRequest extends $tea.Model {
   }
 }
 
+/**
+ * 更新文件元数据
+ */
 export class UpdateFileMetaRequest extends $tea.Model {
   description?: string;
   driveId: string;
@@ -5318,7 +9281,7 @@ export class UpdateFileMetaRequest extends $tea.Model {
       name: 'string',
       shareId: 'string',
       starred: 'boolean',
-      tags: '{[key: string]: any}',
+      tags: { 'type': 'map', 'keyType': 'string', 'valueType': 'any' },
     };
   }
 
@@ -5327,12 +9290,16 @@ export class UpdateFileMetaRequest extends $tea.Model {
   }
 }
 
+/**
+ * update share request
+ */
 export class UpdateShareRequest extends $tea.Model {
   description?: string;
   expiration?: string;
   permissions?: string[];
   shareId: string;
   shareName?: string;
+  sharePolicy?: SharePermissionPolicy[];
   status?: string;
   static names(): { [key: string]: string } {
     return {
@@ -5341,6 +9308,7 @@ export class UpdateShareRequest extends $tea.Model {
       permissions: 'permissions',
       shareId: 'share_id',
       shareName: 'share_name',
+      sharePolicy: 'share_policy',
       status: 'status',
     };
   }
@@ -5352,6 +9320,7 @@ export class UpdateShareRequest extends $tea.Model {
       permissions: { 'type': 'array', 'itemType': 'string' },
       shareId: 'string',
       shareName: 'string',
+      sharePolicy: { 'type': 'array', 'itemType': SharePermissionPolicy },
       status: 'string',
     };
   }
@@ -5361,8 +9330,271 @@ export class UpdateShareRequest extends $tea.Model {
   }
 }
 
+export class CreateUserRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CreateUserRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CreateUserRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class CreateUserModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: CreateUserResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: CreateUserResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class DeleteUserRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: DeleteUserRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: DeleteUserRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class DeleteUserModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetUserRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: GetUserRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: GetUserRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetUserModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: GetUserResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: GetUserResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListUsersRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: ListUserRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: ListUserRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListUsersModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: ListUserResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: ListUserResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class SearchUserRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: SearchUserRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: SearchUserRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class SearchUserModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: ListUserResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: ListUserResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class UpdateUserRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: UpdateUserRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: UpdateUserRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class UpdateUserModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: UpdateUserResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: UpdateUserResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * Base user response
+ */
 export class BaseUserResponse extends $tea.Model {
-  requestId?: string;
   avatar?: string;
   createdAt?: number;
   defaultDriveId?: string;
@@ -5378,7 +9610,6 @@ export class BaseUserResponse extends $tea.Model {
   userName?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       avatar: 'avatar',
       createdAt: 'created_at',
       defaultDriveId: 'default_drive_id',
@@ -5397,7 +9628,6 @@ export class BaseUserResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       avatar: 'string',
       createdAt: 'number',
       defaultDriveId: 'string',
@@ -5419,6 +9649,9 @@ export class BaseUserResponse extends $tea.Model {
   }
 }
 
+/**
+ * Create user request
+ */
 export class CreateUserRequest extends $tea.Model {
   avatar?: string;
   description?: string;
@@ -5462,8 +9695,10 @@ export class CreateUserRequest extends $tea.Model {
   }
 }
 
+/**
+ * Create user response
+ */
 export class CreateUserResponse extends $tea.Model {
-  requestId?: string;
   avatar?: string;
   createdAt?: number;
   defaultDriveId?: string;
@@ -5479,7 +9714,6 @@ export class CreateUserResponse extends $tea.Model {
   userName?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       avatar: 'avatar',
       createdAt: 'created_at',
       defaultDriveId: 'default_drive_id',
@@ -5498,7 +9732,6 @@ export class CreateUserResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       avatar: 'string',
       createdAt: 'number',
       defaultDriveId: 'string',
@@ -5520,6 +9753,9 @@ export class CreateUserResponse extends $tea.Model {
   }
 }
 
+/**
+ * Delete user request
+ */
 export class DeleteUserRequest extends $tea.Model {
   userId: string;
   static names(): { [key: string]: string } {
@@ -5539,17 +9775,17 @@ export class DeleteUserRequest extends $tea.Model {
   }
 }
 
+/**
+ * Delete user response
+ */
 export class DeleteUserResponse extends $tea.Model {
-  requestId?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
     };
   }
 
@@ -5558,6 +9794,9 @@ export class DeleteUserResponse extends $tea.Model {
   }
 }
 
+/**
+ * Get user request
+ */
 export class GetUserRequest extends $tea.Model {
   userId?: string;
   static names(): { [key: string]: string } {
@@ -5577,8 +9816,10 @@ export class GetUserRequest extends $tea.Model {
   }
 }
 
+/**
+ * Get user response
+ */
 export class GetUserResponse extends $tea.Model {
-  requestId?: string;
   avatar?: string;
   createdAt?: number;
   defaultDriveId?: string;
@@ -5594,7 +9835,6 @@ export class GetUserResponse extends $tea.Model {
   userName?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       avatar: 'avatar',
       createdAt: 'created_at',
       defaultDriveId: 'default_drive_id',
@@ -5613,7 +9853,6 @@ export class GetUserResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       avatar: 'string',
       createdAt: 'number',
       defaultDriveId: 'string',
@@ -5635,6 +9874,9 @@ export class GetUserResponse extends $tea.Model {
   }
 }
 
+/**
+ * List user request
+ */
 export class ListUserRequest extends $tea.Model {
   limit?: number;
   marker?: string;
@@ -5657,13 +9899,14 @@ export class ListUserRequest extends $tea.Model {
   }
 }
 
+/**
+ * List user response
+ */
 export class ListUserResponse extends $tea.Model {
-  requestId?: string;
   items?: BaseUserResponse[];
   nextMarker?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       items: 'items',
       nextMarker: 'next_marker',
     };
@@ -5671,7 +9914,6 @@ export class ListUserResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       items: { 'type': 'array', 'itemType': BaseUserResponse },
       nextMarker: 'string',
     };
@@ -5682,6 +9924,9 @@ export class ListUserResponse extends $tea.Model {
   }
 }
 
+/**
+ * Search user request
+ */
 export class SearchUserRequest extends $tea.Model {
   email?: string;
   limit?: number;
@@ -5722,6 +9967,9 @@ export class SearchUserRequest extends $tea.Model {
   }
 }
 
+/**
+ * Update user request
+ */
 export class UpdateUserRequest extends $tea.Model {
   avatar?: string;
   description?: string;
@@ -5762,8 +10010,10 @@ export class UpdateUserRequest extends $tea.Model {
   }
 }
 
+/**
+ * Update user response
+ */
 export class UpdateUserResponse extends $tea.Model {
-  requestId?: string;
   avatar?: string;
   createdAt?: number;
   defaultDriveId?: string;
@@ -5779,7 +10029,6 @@ export class UpdateUserResponse extends $tea.Model {
   userName?: string;
   static names(): { [key: string]: string } {
     return {
-      requestId: 'requestId',
       avatar: 'avatar',
       createdAt: 'created_at',
       defaultDriveId: 'default_drive_id',
@@ -5798,7 +10047,6 @@ export class UpdateUserResponse extends $tea.Model {
 
   static types(): { [key: string]: any } {
     return {
-      requestId: 'string',
       avatar: 'string',
       createdAt: 'number',
       defaultDriveId: 'string',
@@ -5820,23 +10068,710 @@ export class UpdateUserResponse extends $tea.Model {
   }
 }
 
-export class DownloadFileRequest extends $tea.Model {
-  DriveID: string;
-  FileID: string;
-  ImageProcess?: string;
+export class GetPhotoCountRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: GetImageCountRequest;
   static names(): { [key: string]: string } {
     return {
-      DriveID: 'DriveID',
-      FileID: 'FileID',
-      ImageProcess: 'ImageProcess',
+      headers: 'headers',
+      body: 'body',
     };
   }
 
   static types(): { [key: string]: any } {
     return {
-      DriveID: 'string',
-      FileID: 'string',
-      ImageProcess: 'string',
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: GetImageCountRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class GetPhotoCountModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: GetImageCountResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: GetImageCountResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListAddressGroupsRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: ListImageAddressGroupsRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: ListImageAddressGroupsRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListAddressGroupsModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: ListImageAddressGroupsResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: ListImageAddressGroupsResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListFaceGroupsRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: ListImageFaceGroupsRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: ListImageFaceGroupsRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListFaceGroupsModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: ListImageFaceGroupsResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: ListImageFaceGroupsResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListTagsRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: ListImageTagsRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: ListImageTagsRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class ListTagsModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: ListImageTagsResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: ListImageTagsResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class SearchAddressGroupsRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: SearchImageAddressGroupsRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: SearchImageAddressGroupsRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class SearchAddressGroupsModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: SearchImageAddressGroupsResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: SearchImageAddressGroupsResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class UpdateFacegroupInfoRequestModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: UpdateFaceGroupInfoRequest;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: UpdateFaceGroupInfoRequest,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+export class UpdateFacegroupInfoModel extends $tea.Model {
+  headers?: { [key: string]: string };
+  body: UpdateFaceGroupInfoResponse;
+  static names(): { [key: string]: string } {
+    return {
+      headers: 'headers',
+      body: 'body',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      headers: { 'type': 'map', 'keyType': 'string', 'valueType': 'string' },
+      body: UpdateFaceGroupInfoResponse,
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class Address extends $tea.Model {
+  city?: string;
+  country?: string;
+  district?: string;
+  province?: string;
+  township?: string;
+  static names(): { [key: string]: string } {
+    return {
+      city: 'city',
+      country: 'country',
+      district: 'district',
+      province: 'province',
+      township: 'township',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      city: 'string',
+      country: 'string',
+      district: 'string',
+      province: 'string',
+      township: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * Get photo count request
+ */
+export class GetImageCountRequest extends $tea.Model {
+  driveId: string;
+  static names(): { [key: string]: string } {
+    return {
+      driveId: 'drive_id',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      driveId: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 获取云照片个数结果
+ */
+export class GetImageCountResponse extends $tea.Model {
+  imageCount?: number;
+  static names(): { [key: string]: string } {
+    return {
+      imageCount: 'image_count',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      imageCount: 'number',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class ImageAddressResponse extends $tea.Model {
+  addressDetail?: Address;
+  count?: number;
+  coverUrl?: string;
+  location?: string;
+  name?: string;
+  static names(): { [key: string]: string } {
+    return {
+      addressDetail: 'address_detail',
+      count: 'count',
+      coverUrl: 'cover_url',
+      location: 'location',
+      name: 'name',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      addressDetail: Address,
+      count: 'number',
+      coverUrl: 'string',
+      location: 'string',
+      name: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class ImageFaceGroupResponse extends $tea.Model {
+  createdAt?: string;
+  faceCount?: number;
+  groupCoverUrl?: string;
+  groupId?: string;
+  groupName?: string;
+  imageCount?: number;
+  updatedAt?: string;
+  static names(): { [key: string]: string } {
+    return {
+      createdAt: 'created_at',
+      faceCount: 'face_count',
+      groupCoverUrl: 'group_cover_url',
+      groupId: 'group_id',
+      groupName: 'group_name',
+      imageCount: 'image_count',
+      updatedAt: 'updated_at',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      createdAt: 'string',
+      faceCount: 'number',
+      groupCoverUrl: 'string',
+      groupId: 'string',
+      groupName: 'string',
+      imageCount: 'number',
+      updatedAt: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 
+ */
+export class ImageTagResponse extends $tea.Model {
+  count?: number;
+  coverUrl?: string;
+  name?: string;
+  static names(): { [key: string]: string } {
+    return {
+      count: 'count',
+      coverUrl: 'cover_url',
+      name: 'name',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      count: 'number',
+      coverUrl: 'string',
+      name: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * List image address groups request
+ */
+export class ListImageAddressGroupsRequest extends $tea.Model {
+  driveId: string;
+  imageThumbnailProcess?: string;
+  limit?: number;
+  marker?: string;
+  static names(): { [key: string]: string } {
+    return {
+      driveId: 'drive_id',
+      imageThumbnailProcess: 'image_thumbnail_process',
+      limit: 'limit',
+      marker: 'marker',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      driveId: 'string',
+      imageThumbnailProcess: 'string',
+      limit: 'number',
+      marker: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 展示地点分组集合
+ */
+export class ListImageAddressGroupsResponse extends $tea.Model {
+  items?: ImageAddressResponse[];
+  nextMarker?: string;
+  static names(): { [key: string]: string } {
+    return {
+      items: 'items',
+      nextMarker: 'next_marker',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      items: { 'type': 'array', 'itemType': ImageAddressResponse },
+      nextMarker: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * List image face groups request
+ */
+export class ListImageFaceGroupsRequest extends $tea.Model {
+  driveId: string;
+  limit?: number;
+  marker?: string;
+  static names(): { [key: string]: string } {
+    return {
+      driveId: 'drive_id',
+      limit: 'limit',
+      marker: 'marker',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      driveId: 'string',
+      limit: 'number',
+      marker: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 展示人脸分组集合
+ */
+export class ListImageFaceGroupsResponse extends $tea.Model {
+  items?: ImageFaceGroupResponse[];
+  nextMarker?: string;
+  static names(): { [key: string]: string } {
+    return {
+      items: 'items',
+      nextMarker: 'next_marker',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      items: { 'type': 'array', 'itemType': ImageFaceGroupResponse },
+      nextMarker: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * List image tags request
+ */
+export class ListImageTagsRequest extends $tea.Model {
+  driveId: string;
+  imageThumbnailProcess?: string;
+  static names(): { [key: string]: string } {
+    return {
+      driveId: 'drive_id',
+      imageThumbnailProcess: 'image_thumbnail_process',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      driveId: 'string',
+      imageThumbnailProcess: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 展示标签集合
+ */
+export class ListImageTagsResponse extends $tea.Model {
+  tags?: ImageTagResponse[];
+  static names(): { [key: string]: string } {
+    return {
+      tags: 'tags',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      tags: { 'type': 'array', 'itemType': ImageTagResponse },
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * Search image address groups request
+ */
+export class SearchImageAddressGroupsRequest extends $tea.Model {
+  addressLevel?: string;
+  addressNames?: string[];
+  brGeoPoint?: string;
+  driveId: string;
+  imageThumbnailProcess?: string;
+  tlGeoPoint?: string;
+  static names(): { [key: string]: string } {
+    return {
+      addressLevel: 'address_level',
+      addressNames: 'address_names',
+      brGeoPoint: 'br_geo_point',
+      driveId: 'drive_id',
+      imageThumbnailProcess: 'image_thumbnail_process',
+      tlGeoPoint: 'tl_geo_point',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      addressLevel: 'string',
+      addressNames: { 'type': 'array', 'itemType': 'string' },
+      brGeoPoint: 'string',
+      driveId: 'string',
+      imageThumbnailProcess: 'string',
+      tlGeoPoint: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 展示地点分组列表
+ */
+export class SearchImageAddressGroupsResponse extends $tea.Model {
+  items?: ImageAddressResponse[];
+  static names(): { [key: string]: string } {
+    return {
+      items: 'items',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      items: { 'type': 'array', 'itemType': ImageAddressResponse },
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * Update face group info request
+ */
+export class UpdateFaceGroupInfoRequest extends $tea.Model {
+  driveId: string;
+  groupId: string;
+  groupName?: string;
+  static names(): { [key: string]: string } {
+    return {
+      driveId: 'drive_id',
+      groupId: 'group_id',
+      groupName: 'group_name',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      driveId: 'string',
+      groupId: 'string',
+      groupName: 'string',
+    };
+  }
+
+  constructor(map?: { [key: string]: any }) {
+    super(map);
+  }
+}
+
+/**
+ * 更新人脸分组信息结果
+ */
+export class UpdateFaceGroupInfoResponse extends $tea.Model {
+  driveId?: string;
+  groupId?: string;
+  static names(): { [key: string]: string } {
+    return {
+      driveId: 'drive_id',
+      groupId: 'group_id',
+    };
+  }
+
+  static types(): { [key: string]: any } {
+    return {
+      driveId: 'string',
+      groupId: 'string',
     };
   }
 
@@ -5846,12 +10781,65 @@ export class DownloadFileRequest extends $tea.Model {
 }
 
 
-export default class Client extends BaseClient {
+export default class Client {
+  _domainId: string;
+  _accessTokenCredential: AccessTokenCredential;
+  _endpoint: string;
+  _protocol: string;
+  _nickname: string;
+  _userAgent: string;
+  _credential: Credential;
+
   constructor(config: Config) {
-    super($tea.toMap(config));
+    if (Util.isUnset($tea.toMap(config))) {
+      throw $tea.newError({
+        name: "ParameterMissing",
+        message: "'config' can not be unset",
+      });
+    }
+
+    if (!Util.empty(config.accessToken) || !Util.empty(config.refreshToken)) {
+      let accessConfig = new $AccessTokenCredential.Config({
+        accessToken: config.accessToken,
+        endpoint: config.endpoint,
+        domainId: config.domainId,
+        clientId: config.clientId,
+        refreshToken: config.refreshToken,
+        clientSecret: config.clientSecret,
+        expireTime: config.expireTime,
+      });
+      this._accessTokenCredential = new AccessTokenCredential(accessConfig);
+    }
+
+    if (!Util.empty(config.accessKeyId)) {
+      if (Util.empty(config.type)) {
+        config.type = "access_key";
+      }
+
+      let credentialConfig = new $Credential.Config({
+        accessKeyId: config.accessKeyId,
+        type: config.type,
+        accessKeySecret: config.accessKeySecret,
+        securityToken: config.securityToken,
+      });
+      this._credential = new Credential(credentialConfig);
+    }
+
+    this._endpoint = config.endpoint;
+    this._protocol = config.protocol;
+    this._userAgent = config.userAgent;
+    this._nickname = config.nickname;
+    this._domainId = config.domainId;
   }
 
-  async cancelLink(request: CancelLinkRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse> {
+  /**
+   * 取消绑定关系，生成新用户，返回访问令牌
+   * @tags account
+   * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+   * @error Forbidden User not authorized to operate on the specified APIs.
+   * @error InternalError The request has been failed due to some unknown error.
+   */
+  async cancelLink(request: CancelLinkRequestModel, runtime: RuntimeOptions): Promise<CancelLinkModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -5865,11 +10853,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -5888,40 +10876,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/account/cancel_link`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/account/cancel_link`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<AccountAccessTokenResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new AccountAccessTokenResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<CancelLinkModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new CancelLinkModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -5932,7 +10930,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -5952,7 +10951,16 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async confirmLink(request: ConfirmLinkRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse> {
+  /**
+   * 确认绑定关系, 成功后返回访问令牌
+   * @tags account
+   * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   */
+  async confirmLink(request: ConfirmLinkRequestModel, runtime: RuntimeOptions): Promise<ConfirmLinkModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -5966,11 +10974,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -5989,40 +10997,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/account/confirm_link`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/account/confirm_link`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<AccountAccessTokenResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new AccountAccessTokenResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<ConfirmLinkModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new ConfirmLinkModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -6033,7 +11051,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -6053,7 +11072,15 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async changePassword(request: DefaultChangePasswordRequest, runtime: RuntimeOptions): Promise<void> {
+  /**
+   * 修改手机登录密码，密码必须包含数字和字母，长度8-20个字符
+   * @tags account
+   * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+   * @error Forbidden User not authorized to operate on the specified APIs.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   */
+  async changePassword(request: ChangePasswordRequestModel, runtime: RuntimeOptions): Promise<ChangePasswordModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -6067,11 +11094,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -6090,36 +11117,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/account/default/change_password`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/account/default/change_password`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 204)) {
-          return ;
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<ChangePasswordModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new ChangePasswordModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -6130,7 +11171,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -6150,7 +11192,15 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async setPassword(request: DefaultSetPasswordRequest, runtime: RuntimeOptions): Promise<void> {
+  /**
+   * 设置手机登录密码，密码必须包含数字和字母，长度8-20个字符
+   * @tags account
+   * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+   * @error Forbidden User not authorized to operate on the specified APIs.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   */
+  async setPassword(request: SetPasswordRequestModel, runtime: RuntimeOptions): Promise<SetPasswordModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -6164,11 +11214,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -6187,36 +11237,47 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/account/default/set_password`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/account/default/set_password`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 204)) {
-          return ;
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 204)) {
+          return $tea.cast<SetPasswordModel>({
+            headers: response_.headers,
+          }, new SetPasswordModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -6227,7 +11288,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -6247,7 +11309,15 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getAccessTokenByLinkInfo(request: GetAccessTokenByLinkInfoRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse> {
+  /**
+   * 校验手机短信验证码，用于重置密码时校验手机，通过校验后返回state，可通过state重新设置密码
+   * @tags account
+   * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+   * @error Forbidden User not authorized to operate on the specified APIs.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   */
+  async verifyCode(request: VerifyCodeRequestModel, runtime: RuntimeOptions): Promise<VerifyCodeModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -6261,11 +11331,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -6284,40 +11354,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/account/get_access_token_by_link_info`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/account/default/verify_code`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<AccountAccessTokenResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new AccountAccessTokenResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<VerifyCodeModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new VerifyCodeModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -6328,7 +11408,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -6348,7 +11429,15 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getCaptcha(request: GetCaptchaRequest, runtime: RuntimeOptions): Promise<Captcha> {
+  /**
+   * 管理员通过账号信息直接获取用户的访问令牌
+   * @tags account
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error Forbidden User not authorized to operate on the specified APIs.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   */
+  async getAccessTokenByLinkInfo(request: GetAccessTokenByLinkInfoRequestModel, runtime: RuntimeOptions): Promise<GetAccessTokenByLinkInfoModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -6362,11 +11451,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -6385,40 +11474,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/account/get_captcha`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/account/get_access_token_by_link_info`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<Captcha>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new Captcha({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<GetAccessTokenByLinkInfoModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new GetAccessTokenByLinkInfoModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -6429,7 +11528,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -6449,7 +11549,15 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getLinkInfo(request: GetByLinkInfoRequest, runtime: RuntimeOptions): Promise<LinkInfoResponse> {
+  /**
+   * 获取图片验证码，用于人机校验，默认不需要
+   * @tags account
+   * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+   * @error Forbidden User not authorized to operate on the specified APIs.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   */
+  async getCaptcha(request: GetCaptchaRequestModel, runtime: RuntimeOptions): Promise<GetCaptchaModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -6463,11 +11571,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -6486,40 +11594,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/account/get_link_info`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/account/get_captcha`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<LinkInfoResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new LinkInfoResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<GetCaptchaModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new GetCaptchaModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -6530,7 +11648,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -6550,7 +11669,15 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getLinkInfoByUserId(request: GetLinkInfoByUserIDRequest, runtime: RuntimeOptions): Promise<LinkInfoListResponse> {
+  /**
+   * 获取用户认证方式详情
+   * @tags account
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error Forbidden User not authorized to operate on the specified APIs.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   */
+  async getLinkInfo(request: GetLinkInfoRequestModel, runtime: RuntimeOptions): Promise<GetLinkInfoModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -6564,11 +11691,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -6587,40 +11714,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/account/get_link_info_by_user_id`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/account/get_link_info`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<LinkInfoListResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new LinkInfoListResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<GetLinkInfoModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new GetLinkInfoModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -6631,7 +11768,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -6651,7 +11789,14 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async link(request: AccountLinkRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse> {
+  /**
+   * 获取用户的所有绑定信息
+   * @tags account
+   * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+   * @error Forbidden User not authorized to operate on the specified APIs.
+   * @error InternalError The request has been failed due to some unknown error.
+   */
+  async getLinkInfoByUserId(request: GetLinkInfoByUserIdRequestModel, runtime: RuntimeOptions): Promise<GetLinkInfoByUserIdModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -6665,11 +11810,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -6688,40 +11833,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/account/link`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/account/get_link_info_by_user_id`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<AccountAccessTokenResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new AccountAccessTokenResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<GetLinkInfoByUserIdModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new GetLinkInfoByUserIdModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -6732,7 +11887,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -6752,7 +11908,15 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async checkExist(request: MobileCheckExistRequest, runtime: RuntimeOptions): Promise<MobileCheckExistResponse> {
+  /**
+   * 获取公钥，用于加密对称密钥
+   * @tags account
+   * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+   * @error Forbidden User not authorized to operate on the specified APIs.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   */
+  async getPublicKey(request: GetPublicKeyRequestModel, runtime: RuntimeOptions): Promise<GetPublicKeyModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -6766,11 +11930,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -6789,40 +11953,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/account/mobile/check_exist`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/account/get_public_key`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<MobileCheckExistResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new MobileCheckExistResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<GetPublicKeyModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new GetPublicKeyModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -6833,7 +12007,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -6853,7 +12028,16 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async login(request: MobileLoginRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse> {
+  /**
+   * 绑定用户认证方式
+   * @tags account
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error Forbidden User not authorized to operate on the specified APIs.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error AlreadyExist {resource} has already exists. {extra_msg}
+   * @error InternalError The request has been failed due to some unknown error.
+   */
+  async link(request: LinkRequestModel, runtime: RuntimeOptions): Promise<LinkModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -6867,11 +12051,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -6890,40 +12074,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/account/mobile/login`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/account/link`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<AccountAccessTokenResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new AccountAccessTokenResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<LinkModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new LinkModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -6934,7 +12128,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -6954,7 +12149,15 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async register(request: MobileRegisterRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse> {
+  /**
+   * 查询手机号是否已被注册
+   * @tags account
+   * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+   * @error Forbidden User not authorized to operate on the specified APIs.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   */
+  async checkExist(request: CheckExistRequestModel, runtime: RuntimeOptions): Promise<CheckExistModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -6968,11 +12171,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -6991,40 +12194,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/account/mobile/register`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/account/mobile/check_exist`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<AccountAccessTokenResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new AccountAccessTokenResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<CheckExistModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new CheckExistModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -7035,7 +12248,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -7055,7 +12269,15 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async mobileSendSmsCode(request: MobileSendSmsCodeRequest, runtime: RuntimeOptions): Promise<MobileSendSmsCodeResponse> {
+  /**
+   * 通过手机号+短信或密码登录，返回刷新令牌和访问令牌
+   * @tags account
+   * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+   * @error Forbidden User not authorized to operate on the specified APIs.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   */
+  async login(request: LoginRequestModel, runtime: RuntimeOptions): Promise<LoginModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -7069,11 +12291,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -7092,40 +12314,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/account/mobile/send_sms_code`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/account/mobile/login`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<MobileSendSmsCodeResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new MobileSendSmsCodeResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<LoginModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new LoginModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -7136,7 +12368,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -7156,7 +12389,16 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async token(request: TokenRequest, runtime: RuntimeOptions): Promise<AccountAccessTokenResponse> {
+  /**
+   * 通过手机号+短信验证码注册账号
+   * @tags account
+   * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+   * @error Forbidden User not authorized to operate on the specified APIs.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error AlreadyExist {resource} has already exists. {extra_msg}
+   * @error InternalError The request has been failed due to some unknown error.
+   */
+  async register(request: RegisterRequestModel, runtime: RuntimeOptions): Promise<RegisterModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -7170,11 +12412,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -7193,40 +12435,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/account/token`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/account/mobile/register`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<AccountAccessTokenResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new AccountAccessTokenResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<RegisterModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new RegisterModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -7237,7 +12489,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -7257,7 +12510,15 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getAsyncTaskInfo(request: CCPGetAsyncTaskRequest, runtime: RuntimeOptions): Promise<CCPGetAsyncTaskResponse> {
+  /**
+   * 发送短信验证码，用于登录、注册、修改密码、绑定等
+   * @tags account
+   * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+   * @error Forbidden User not authorized to operate on the specified APIs.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   */
+  async mobileSendSmsCode(request: MobileSendSmsCodeRequestModel, runtime: RuntimeOptions): Promise<MobileSendSmsCodeModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -7271,11 +12532,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -7294,40 +12555,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/async_task/get`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/account/mobile/send_sms_code`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<CCPGetAsyncTaskResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new CCPGetAsyncTaskResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<MobileSendSmsCodeModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new MobileSendSmsCodeModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -7338,7 +12609,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -7358,7 +12630,15 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async operation(request: CCPBatchRequest, runtime: RuntimeOptions): Promise<CCPBatchResponse> {
+  /**
+   * 用户退出登录
+   * @tags account
+   * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+   * @error Forbidden User not authorized to operate on the specified APIs.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   */
+  async accountRevoke(request: AccountRevokeRequestModel, runtime: RuntimeOptions): Promise<AccountRevokeModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -7372,11 +12652,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -7395,40 +12675,47 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/batch`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/account/revoke`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<CCPBatchResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new CCPBatchResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 204)) {
+          return $tea.cast<AccountRevokeModel>({
+            headers: response_.headers,
+          }, new AccountRevokeModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -7439,7 +12726,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -7459,7 +12747,15 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async createDrive(request: CreateDriveRequest, runtime: RuntimeOptions): Promise<CreateDriveResponse> {
+  /**
+   * 用户通过刷新令牌（refresh_token）获取访问令牌（access_token）
+   * @tags account
+   * @error InvalidParameterMissing The input parameter {parameter_name} is missing.
+   * @error Forbidden User not authorized to operate on the specified APIs.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   */
+  async accountToken(request: AccountTokenRequestModel, runtime: RuntimeOptions): Promise<AccountTokenModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -7473,11 +12769,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -7496,40 +12792,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/drive/create`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/account/token`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.auth.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 201)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<CreateDriveResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new CreateDriveResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<AccountTokenModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new AccountTokenModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -7540,7 +12846,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -7560,7 +12867,14 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async deleteDrive(request: DeleteDriveRequest, runtime: RuntimeOptions): Promise<void> {
+  /**
+   * 列举Store列表
+   * @tags admin
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error Forbidden User not authorized to operate on the specified APIs.
+   * @error InternalError The request has been failed due to some unknown error.
+   */
+  async adminListStores(request: AdminListStoresRequestModel, runtime: RuntimeOptions): Promise<AdminListStoresModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -7574,11 +12888,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -7597,36 +12911,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/drive/delete`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/domain/list_stores`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 204)) {
-          return ;
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<AdminListStoresModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new AdminListStoresModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -7637,7 +12965,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -7657,7 +12986,16 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getDrive(request: GetDriveRequest, runtime: RuntimeOptions): Promise<GetDriveResponse> {
+  /**
+   * 获取用户的accessToken
+   * @tags admin
+   * @error undefined undefined
+   * @error undefined undefined
+   * @error undefined undefined
+   * @error undefined undefined
+   * @error undefined undefined
+   */
+  async getUserAccessToken(request: GetUserAccessTokenRequestModel, runtime: RuntimeOptions): Promise<GetUserAccessTokenModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -7671,11 +13009,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -7694,40 +13032,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/drive/get`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/user/get_access_token`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<GetDriveResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new GetDriveResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<GetUserAccessTokenModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new GetUserAccessTokenModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -7738,7 +13086,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -7758,7 +13107,18 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getDefaultDrive(request: GetDefaultDriveRequest, runtime: RuntimeOptions): Promise<GetDriveResponse> {
+  /**
+   * 如果目录拷贝、目录删除不能在限定时间内完成，将访问一个异步任务id，
+  通过此接口获取异步任务的信息，以确定任务是否执行成功。
+   * @tags async_task
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async getAsyncTaskInfo(request: GetAsyncTaskInfoRequestModel, runtime: RuntimeOptions): Promise<GetAsyncTaskInfoModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -7772,11 +13132,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -7795,40 +13155,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/drive/get_default_drive`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/async_task/get`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<GetDriveResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new GetDriveResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<GetAsyncTaskInfoModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new GetAsyncTaskInfoModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -7839,7 +13209,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -7859,7 +13230,17 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async listDrives(request: ListDriveRequest, runtime: RuntimeOptions): Promise<ListDriveResponse> {
+  /**
+   * 对多个原子操作封装成一个批处理请求，服务端并行处理并打包返回每个操作的执行结果。
+  支持对文件和文件夹的移动、删除、修改，每个批处理请求最多包含100个原则操作。
+   * @tags batch
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async batchOperation(request: BatchOperationRequestModel, runtime: RuntimeOptions): Promise<BatchOperationModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -7873,11 +13254,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -7896,40 +13277,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/drive/list`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/batch`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<ListDriveResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new ListDriveResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<BatchOperationModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new BatchOperationModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -7940,7 +13331,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -7960,7 +13352,18 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async listMyDrives(request: ListMyDriveRequest, runtime: RuntimeOptions): Promise<ListDriveResponse> {
+  /**
+   * 支持normal和large两种drive，
+  large类型的drive用于文件数多的场景，不支持list操作，
+  当drive的文件数量大于1亿时，建议使用large类型。
+   * @tags drive
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async createDrive(request: CreateDriveRequestModel, runtime: RuntimeOptions): Promise<CreateDriveModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -7974,11 +13377,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -7997,40 +13400,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/drive/list_my_drives`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/drive/create`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<ListDriveResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new ListDriveResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 201)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<CreateDriveModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new CreateDriveModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -8041,7 +13454,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -8061,7 +13475,16 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async updateDrive(request: UpdateDriveRequest, runtime: RuntimeOptions): Promise<UpdateDriveResponse> {
+  /**
+   * 删除指定drive_id对应的Drive
+   * @tags drive
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async deleteDrive(request: DeleteDriveRequestModel, runtime: RuntimeOptions): Promise<DeleteDriveModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -8075,11 +13498,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -8098,40 +13521,47 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/drive/update`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/drive/delete`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<UpdateDriveResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new UpdateDriveResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 204)) {
+          return $tea.cast<DeleteDriveModel>({
+            headers: response_.headers,
+          }, new DeleteDriveModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -8142,7 +13572,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -8162,7 +13593,17 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async completeFile(request: CCPCompleteFileRequest, runtime: RuntimeOptions): Promise<CCPCompleteFileResponse> {
+  /**
+   * 获取指定drive_id对应的Drive详细信息。
+   * @tags drive
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async getDrive(request: GetDriveRequestModel, runtime: RuntimeOptions): Promise<GetDriveModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -8176,11 +13617,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -8199,40 +13640,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/file/complete`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/drive/get`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<CCPCompleteFileResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new CCPCompleteFileResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<GetDriveModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new GetDriveModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -8243,7 +13694,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -8263,7 +13715,18 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async copyFile(request: CCPCopyFileRequest, runtime: RuntimeOptions): Promise<CCPCopyFileResponse> {
+  /**
+   * 一个用户可拥有多个drive，在创建drive时通过参数指定是否为这个用户的默认drive，
+  每个用户只能设置一个默认drive。
+   * @tags drive
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async getDefaultDrive(request: GetDefaultDriveRequestModel, runtime: RuntimeOptions): Promise<GetDefaultDriveModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -8277,11 +13740,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -8300,48 +13763,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/file/copy`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/drive/get_default_drive`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 201)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<CCPCopyFileResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new CCPCopyFileResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<GetDefaultDriveModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new GetDefaultDriveModel({}));
         }
 
-        if (this._isStatusCode(response_, 202)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<CCPCopyFileResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new CCPCopyFileResponse({}));
-        }
-
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -8352,7 +13817,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -8372,7 +13838,16 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async createFile(request: CCPCreateFileRequest, runtime: RuntimeOptions): Promise<CCPCreateFileResponse> {
+  /**
+   * 管理员列举指定用户的Drive
+   * @tags drive
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async listDrives(request: ListDrivesRequestModel, runtime: RuntimeOptions): Promise<ListDrivesModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -8386,11 +13861,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -8409,40 +13884,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/file/create`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/drive/list`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 201)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<CCPCreateFileResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new CCPCreateFileResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<ListDrivesModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new ListDrivesModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -8453,7 +13938,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -8473,7 +13959,16 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async deleteFile(request: CCPDeleteFileRequest, runtime: RuntimeOptions): Promise<CCPDeleteFileResponse> {
+  /**
+   * 列举当前用户（访问令牌）的Drive
+   * @tags drive
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async listMyDrives(request: ListMyDrivesRequestModel, runtime: RuntimeOptions): Promise<ListMyDrivesModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -8487,11 +13982,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -8510,44 +14005,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/file/delete`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/drive/list_my_drives`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 202)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<CCPDeleteFileResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new CCPDeleteFileResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<ListMyDrivesModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new ListMyDrivesModel({}));
         }
 
-        if (this._isStatusCode(response_, 204)) {
-          return null;
-        }
-
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -8558,7 +14059,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -8578,7 +14080,17 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async downloadFile(request: DownloadFileRequest, runtime: RuntimeOptions): Promise<CCPGetDownloadUrlRequest> {
+  /**
+   * 更新指定drive_id的Drive信息
+   * @tags drive
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async updateDrive(request: UpdateDriveRequestModel, runtime: RuntimeOptions): Promise<UpdateDriveModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -8592,11 +14104,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -8615,31 +14127,667 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = this.getPathname(this._nickname, `/v2/drive/update`);
+        request_.headers = {
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+          ...request.headers,
+        };
+        if (!Util.empty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
+        }
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        let respMap : {[key: string]: any} = null;
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<UpdateDriveModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new UpdateDriveModel({}));
+        }
+
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...respMap,
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  /**
+   * 完成文件上传。
+   * @tags file
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async completeFile(request: CompleteFileRequestModel, runtime: RuntimeOptions): Promise<CompleteFileModel> {
+    let _runtime: { [key: string]: any } = {
+      timeouted: "retry",
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
+      retry: {
+        retryable: runtime.autoretry,
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
+      },
+      backoff: {
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
+      },
+      ignoreSSL: runtime.ignoreSSL,
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = this.getPathname(this._nickname, `/v2/file/complete`);
+        request_.headers = {
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+          ...request.headers,
+        };
+        if (!Util.empty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
+        }
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        let respMap : {[key: string]: any} = null;
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<CompleteFileModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new CompleteFileModel({}));
+        }
+
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...respMap,
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  /**
+   * 指定源文件或文件夹，拷贝到指定的文件夹。
+   * @tags file
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async copyFile(request: CopyFileRequestModel, runtime: RuntimeOptions): Promise<CopyFileModel> {
+    let _runtime: { [key: string]: any } = {
+      timeouted: "retry",
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
+      retry: {
+        retryable: runtime.autoretry,
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
+      },
+      backoff: {
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
+      },
+      ignoreSSL: runtime.ignoreSSL,
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = this.getPathname(this._nickname, `/v2/file/copy`);
+        request_.headers = {
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+          ...request.headers,
+        };
+        if (!Util.empty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
+        }
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        let respMap : {[key: string]: any} = null;
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 201)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<CopyFileModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new CopyFileModel({}));
+        }
+
+        if (Util.equalNumber(response_.statusCode, 202)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<CopyFileModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new CopyFileModel({}));
+        }
+
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...respMap,
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  /**
+   * 在指定文件夹下创建文件或者文件夹，
+  根文件夹用root表示，其他文件夹使用创建文件夹时返回的file_id。
+   * @tags file
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error AlreadyExist {resource} has already exists. {extra_msg}
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async createFile(request: CreateFileRequestModel, runtime: RuntimeOptions): Promise<CreateFileModel> {
+    let _runtime: { [key: string]: any } = {
+      timeouted: "retry",
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
+      retry: {
+        retryable: runtime.autoretry,
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
+      },
+      backoff: {
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
+      },
+      ignoreSSL: runtime.ignoreSSL,
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = this.getPathname(this._nickname, `/v2/file/create`);
+        request_.headers = {
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+          ...request.headers,
+        };
+        if (!Util.empty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
+        }
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        let respMap : {[key: string]: any} = null;
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 201)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<CreateFileModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new CreateFileModel({}));
+        }
+
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...respMap,
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  /**
+   * 指定文件或文件夹ID，删除文件或者文件夹。
+   * @tags file
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async deleteFile(request: DeleteFileRequestModel, runtime: RuntimeOptions): Promise<DeleteFileModel> {
+    let _runtime: { [key: string]: any } = {
+      timeouted: "retry",
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
+      retry: {
+        retryable: runtime.autoretry,
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
+      },
+      backoff: {
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
+      },
+      ignoreSSL: runtime.ignoreSSL,
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = this.getPathname(this._nickname, `/v2/file/delete`);
+        request_.headers = {
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+          ...request.headers,
+        };
+        if (!Util.empty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
+        }
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        let respMap : {[key: string]: any} = null;
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 202)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<DeleteFileModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new DeleteFileModel({}));
+        }
+
+        if (Util.equalNumber(response_.statusCode, 204)) {
+          return $tea.cast<DeleteFileModel>({
+            headers: response_.headers,
+          }, new DeleteFileModel({}));
+        }
+
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...respMap,
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  /**
+   * 指定文件ID，下载文件。
+   * @tags file
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async downloadFile(request: DownloadFileRequestModel, runtime: RuntimeOptions): Promise<DownloadFileModel> {
+    let _runtime: { [key: string]: any } = {
+      timeouted: "retry",
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
+      retry: {
+        retryable: runtime.autoretry,
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
+      },
+      backoff: {
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
+      },
+      ignoreSSL: runtime.ignoreSSL,
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "GET";
-        request_.pathname = this._getPathname(this._nickname, `/v2/file/download`);
-        request_.query = this._toQuery($tea.toMap(request));
+        request_.pathname = this.getPathname(this._nickname, `/v2/file/download`);
+        request_.query = Util.stringifyMapValue($tea.toMap(request.query));
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
+
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        let obj : any = null;
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -8650,7 +14798,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -8670,7 +14819,17 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getFile(request: CCPGetFileRequest, runtime: RuntimeOptions): Promise<CCPGetFileResponse> {
+  /**
+   * 获取指定文件或文件夹ID的信息。
+   * @tags file
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async getFile(request: GetFileRequestModel, runtime: RuntimeOptions): Promise<GetFileModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -8684,11 +14843,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -8707,40 +14866,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/file/get`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/file/get`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<CCPGetFileResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new CCPGetFileResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<GetFileModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new GetFileModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -8751,7 +14920,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -8771,7 +14941,17 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getDownloadUrl(request: CCPGetDownloadUrlRequest, runtime: RuntimeOptions): Promise<CCPGetDownloadUrlResponse> {
+  /**
+   * 根据路径获取指定文件或文件夹的信息。
+   * @tags file
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async getFileByPath(request: GetFileByPathRequestModel, runtime: RuntimeOptions): Promise<GetFileByPathModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -8785,11 +14965,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -8808,40 +14988,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/file/get_download_url`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/file/get_by_path`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<CCPGetDownloadUrlResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new CCPGetDownloadUrlResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<GetFileByPathModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new GetFileByPathModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -8852,7 +15042,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -8872,7 +15063,17 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getUploadUrl(request: CCPGetUploadUrlRequest, runtime: RuntimeOptions): Promise<CCPGetUploadUrlResponse> {
+  /**
+   * 获取文件的下载地址，调用者可自己设置range头并发下载。
+   * @tags file
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async getDownloadUrl(request: GetDownloadUrlRequestModel, runtime: RuntimeOptions): Promise<GetDownloadUrlModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -8886,11 +15087,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -8909,40 +15110,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/file/get_upload_url`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/file/get_download_url`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<CCPGetUploadUrlResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new CCPGetUploadUrlResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<GetDownloadUrlModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new GetDownloadUrlModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -8953,7 +15164,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -8973,7 +15185,17 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async listFile(request: CCPListFileRequest, runtime: RuntimeOptions): Promise<CCPListFileResponse> {
+  /**
+   * 获取drive内，增量数据最新的游标
+   * @tags file_delta
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async getLastCursor(request: GetLastCursorRequestModel, runtime: RuntimeOptions): Promise<GetLastCursorModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -8987,11 +15209,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -9010,40 +15232,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/file/list`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/file/get_last_cursor`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<CCPListFileResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new CCPListFileResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<GetLastCursorModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new GetLastCursorModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -9054,7 +15286,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -9074,7 +15307,17 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async listUploadedParts(request: CCPListUploadedPartRequest, runtime: RuntimeOptions): Promise<CCPListUploadedPartResponse> {
+  /**
+   * 可指定分片信息，一次获取多个分片的上传地址。
+   * @tags file
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async getUploadUrl(request: GetUploadUrlRequestModel, runtime: RuntimeOptions): Promise<GetUploadUrlModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -9088,11 +15331,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -9111,40 +15354,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/file/list_uploaded_parts`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/file/get_upload_url`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<CCPListUploadedPartResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new CCPListUploadedPartResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<GetUploadUrlModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new GetUploadUrlModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -9155,7 +15408,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -9175,7 +15429,17 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async moveFile(request: CCPMoveFileRequest, runtime: RuntimeOptions): Promise<CCPMoveFileResponse> {
+  /**
+   * 列举指定目录下的文件或文件夹。
+   * @tags file
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async listFile(request: ListFileRequestModel, runtime: RuntimeOptions): Promise<ListFileModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -9189,11 +15453,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -9212,40 +15476,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/file/move`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/file/list`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<CCPMoveFileResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new CCPMoveFileResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<ListFileModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new ListFileModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -9256,7 +15530,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -9276,7 +15551,17 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async searchFile(request: CCPSearchFileRequest, runtime: RuntimeOptions): Promise<CCPSearchFileResponse> {
+  /**
+   * 根据自定义同步索引键列举文件或文件夹。
+   * @tags file
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async listFileByCustomIndexKey(request: ListFileByCustomIndexKeyRequestModel, runtime: RuntimeOptions): Promise<ListFileByCustomIndexKeyModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -9290,11 +15575,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -9313,40 +15598,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/file/search`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/file/list_by_custom_index_key`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<CCPSearchFileResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new CCPSearchFileResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<ListFileByCustomIndexKeyModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new ListFileByCustomIndexKeyModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -9357,7 +15652,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -9377,7 +15673,17 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async updateFile(request: CCPUpdateFileMetaRequest, runtime: RuntimeOptions): Promise<CCPUpdateFileMetaResponse> {
+  /**
+   * 获取drive内，增量数据列表
+   * @tags file_delta
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async listFileDelta(request: ListFileDeltaRequestModel, runtime: RuntimeOptions): Promise<ListFileDeltaModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -9391,11 +15697,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -9414,40 +15720,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/file/update`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/file/list_delta`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<CCPUpdateFileMetaResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new CCPUpdateFileMetaResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<ListFileDeltaModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new ListFileDeltaModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -9458,7 +15774,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -9478,7 +15795,17 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async createUser(request: CreateUserRequest, runtime: RuntimeOptions): Promise<CreateUserResponse> {
+  /**
+   * 列举upload_id对应的已上传分片。
+   * @tags file
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async listUploadedParts(request: ListUploadedPartsRequestModel, runtime: RuntimeOptions): Promise<ListUploadedPartsModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -9492,11 +15819,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -9515,40 +15842,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/user/create`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/file/list_uploaded_parts`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 201)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<CreateUserResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new CreateUserResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<ListUploadedPartsModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new ListUploadedPartsModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -9559,7 +15896,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -9579,7 +15917,17 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async deleteUser(request: DeleteUserRequest, runtime: RuntimeOptions): Promise<void> {
+  /**
+   * 指定源文件或文件夹，移动到指定的文件夹。
+   * @tags file
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async moveFile(request: MoveFileRequestModel, runtime: RuntimeOptions): Promise<MoveFileModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -9593,11 +15941,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -9616,36 +15964,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/user/delete`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/file/move`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 204)) {
-          return ;
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<MoveFileModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new MoveFileModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -9656,7 +16018,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -9676,7 +16039,17 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async getUser(request: GetUserRequest, runtime: RuntimeOptions): Promise<GetUserResponse> {
+  /**
+   * 在指定drive下全量获取文件元信息。
+   * @tags file
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async scanFileMeta(request: ScanFileMetaRequestModel, runtime: RuntimeOptions): Promise<ScanFileMetaModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -9690,11 +16063,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -9713,40 +16086,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/user/get`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/file/scan`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<GetUserResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new GetUserResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<ScanFileMetaModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new ScanFileMetaModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -9757,7 +16140,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -9777,7 +16161,17 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async listUsers(request: ListUserRequest, runtime: RuntimeOptions): Promise<ListUserResponse> {
+  /**
+   * 根据筛选条件，在指定drive下搜索文件。
+   * @tags file
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async searchFile(request: SearchFileRequestModel, runtime: RuntimeOptions): Promise<SearchFileModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -9791,11 +16185,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -9814,40 +16208,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/user/list`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/file/search`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<ListUserResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new ListUserResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<SearchFileModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new SearchFileModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -9858,7 +16262,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -9878,7 +16283,18 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async searchUser(request: SearchUserRequest, runtime: RuntimeOptions): Promise<ListUserResponse> {
+  /**
+   * 对指定的文件或文件夹更新信息。
+   * @tags file
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error AlreadyExist {resource} has already exists. {extra_msg}
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async updateFile(request: UpdateFileRequestModel, runtime: RuntimeOptions): Promise<UpdateFileModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -9892,11 +16308,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -9915,40 +16331,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/user/search`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/file/update`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<ListUserResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new ListUserResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<UpdateFileModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new UpdateFileModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -9959,7 +16385,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -9979,7 +16406,15 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
-  async updateUser(request: UpdateUserRequest, runtime: RuntimeOptions): Promise<UpdateUserResponse> {
+  /**
+   * 该接口将会创建用户， 只有管理员可以调用
+   * @tags user
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async createUser(request: CreateUserRequestModel, runtime: RuntimeOptions): Promise<CreateUserModel> {
     let _runtime: { [key: string]: any } = {
       timeouted: "retry",
       readTimeout: runtime.readTimeout,
@@ -9993,11 +16428,11 @@ export default class Client extends BaseClient {
       socks5NetWork: runtime.socks5NetWork,
       retry: {
         retryable: runtime.autoretry,
-        maxAttempts: this._defaultNumber(runtime.maxAttempts, 3),
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
       },
       backoff: {
-        policy: this._default(runtime.backoffPolicy, "no"),
-        period: this._defaultNumber(runtime.backoffPeriod, 1),
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
       },
       ignoreSSL: runtime.ignoreSSL,
     }
@@ -10016,40 +16451,50 @@ export default class Client extends BaseClient {
       _retryTimes = _retryTimes + 1;
       try {
         let request_ = new $tea.Request();
-        let accesskeyId = await this._getAccessKeyId();
-        let accessKeySecret = await this._getAccessKeySecret();
-        let accessToken = await this._getAccessToken();
-        request_.protocol = this._getProtocol(this._protocol, "https");
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
         request_.method = "POST";
-        request_.pathname = this._getPathname(this._nickname, `/v2/user/update`);
+        request_.pathname = this.getPathname(this._nickname, `/v2/user/create`);
         request_.headers = {
-          'user-agent': this._getUserAgent(),
-          host: this._getHost(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
           'content-type': "application/json; charset=utf-8",
+          ...request.headers,
         };
-        if (this._notEmpty(accessToken)) {
+        if (!Util.empty(accessToken)) {
           request_.headers["authorization"] = `Bearer ${accessToken}`;
-        } else if (this._notEmpty(accesskeyId) && this._notEmpty(accessKeySecret)) {
-          request_.headers["date"] = this._getRFC2616Date();
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
           request_.headers["accept"] = "application/json";
           request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
           request_.headers["x-acs-signature-version"] = "1.0";
-          request_.headers["authorization"] = `acs ${accesskeyId}:${this._getSignature(request_)}`;
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
         }
-        request_.body = new $tea.BytesReadable(this._toJSONString($tea.toMap(request)));
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
         _lastRequest = request_;
         let response_ = await $tea.doAction(request_, _runtime);
 
         let respMap : {[key: string]: any} = null;
-        if (this._isStatusCode(response_, 200)) {
-          respMap = await this._readAsJSON(response_);
-          return $tea.cast<UpdateUserResponse>({
-            requestId: response_.headers["x-ca-request-id"],
-            ...respMap,
-          }, new UpdateUserResponse({}));
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 201)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<CreateUserModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new CreateUserModel({}));
         }
 
-        if (this._notEmpty(response_.headers["x-ca-error-message"])) {
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
           throw $tea.newError({
             data: {
               requestId: response_.headers["x-ca-request-id"],
@@ -10060,7 +16505,8 @@ export default class Client extends BaseClient {
           });
         }
 
-        respMap = await this._readAsJSON(response_);
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
         throw $tea.newError({
           data: {
             requestId: response_.headers["x-ca-request-id"],
@@ -10080,5 +16526,1434 @@ export default class Client extends BaseClient {
     throw $tea.newUnretryableError(_lastRequest);
   }
 
+  /**
+   * 该接口将会删除用户
+   * @tags user
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async deleteUser(request: DeleteUserRequestModel, runtime: RuntimeOptions): Promise<DeleteUserModel> {
+    let _runtime: { [key: string]: any } = {
+      timeouted: "retry",
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
+      retry: {
+        retryable: runtime.autoretry,
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
+      },
+      backoff: {
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
+      },
+      ignoreSSL: runtime.ignoreSSL,
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = this.getPathname(this._nickname, `/v2/user/delete`);
+        request_.headers = {
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+          ...request.headers,
+        };
+        if (!Util.empty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
+        }
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        let respMap : {[key: string]: any} = null;
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 204)) {
+          return $tea.cast<DeleteUserModel>({
+            headers: response_.headers,
+          }, new DeleteUserModel({}));
+        }
+
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...respMap,
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  /**
+   * 该接口将会查看用户详细信息
+   * @tags user
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async getUser(request: GetUserRequestModel, runtime: RuntimeOptions): Promise<GetUserModel> {
+    let _runtime: { [key: string]: any } = {
+      timeouted: "retry",
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
+      retry: {
+        retryable: runtime.autoretry,
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
+      },
+      backoff: {
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
+      },
+      ignoreSSL: runtime.ignoreSSL,
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = this.getPathname(this._nickname, `/v2/user/get`);
+        request_.headers = {
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+          ...request.headers,
+        };
+        if (!Util.empty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
+        }
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        let respMap : {[key: string]: any} = null;
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<GetUserModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new GetUserModel({}));
+        }
+
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...respMap,
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  /**
+   * 该接口将会展示用户列表
+   * @tags user
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async listUsers(request: ListUsersRequestModel, runtime: RuntimeOptions): Promise<ListUsersModel> {
+    let _runtime: { [key: string]: any } = {
+      timeouted: "retry",
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
+      retry: {
+        retryable: runtime.autoretry,
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
+      },
+      backoff: {
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
+      },
+      ignoreSSL: runtime.ignoreSSL,
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = this.getPathname(this._nickname, `/v2/user/list`);
+        request_.headers = {
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+          ...request.headers,
+        };
+        if (!Util.empty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
+        }
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        let respMap : {[key: string]: any} = null;
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<ListUsersModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new ListUsersModel({}));
+        }
+
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...respMap,
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  /**
+   * 该接口将会根据条件查询用户
+   * @tags user
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async searchUser(request: SearchUserRequestModel, runtime: RuntimeOptions): Promise<SearchUserModel> {
+    let _runtime: { [key: string]: any } = {
+      timeouted: "retry",
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
+      retry: {
+        retryable: runtime.autoretry,
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
+      },
+      backoff: {
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
+      },
+      ignoreSSL: runtime.ignoreSSL,
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = this.getPathname(this._nickname, `/v2/user/search`);
+        request_.headers = {
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+          ...request.headers,
+        };
+        if (!Util.empty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
+        }
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        let respMap : {[key: string]: any} = null;
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<SearchUserModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new SearchUserModel({}));
+        }
+
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...respMap,
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  /**
+   * 该接口将会更新用户信息
+   * @tags user
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async updateUser(request: UpdateUserRequestModel, runtime: RuntimeOptions): Promise<UpdateUserModel> {
+    let _runtime: { [key: string]: any } = {
+      timeouted: "retry",
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
+      retry: {
+        retryable: runtime.autoretry,
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
+      },
+      backoff: {
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
+      },
+      ignoreSSL: runtime.ignoreSSL,
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = this.getPathname(this._nickname, `/v2/user/update`);
+        request_.headers = {
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+          ...request.headers,
+        };
+        if (!Util.empty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
+        }
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        let respMap : {[key: string]: any} = null;
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<UpdateUserModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new UpdateUserModel({}));
+        }
+
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...respMap,
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  /**
+   * 该接口将返回用户Drive下的云照片个数
+   * @tags image
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async getPhotoCount(request: GetPhotoCountRequestModel, runtime: RuntimeOptions): Promise<GetPhotoCountModel> {
+    let _runtime: { [key: string]: any } = {
+      timeouted: "retry",
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
+      retry: {
+        retryable: runtime.autoretry,
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
+      },
+      backoff: {
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
+      },
+      ignoreSSL: runtime.ignoreSSL,
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = this.getPathname(this._nickname, `/v2/image/get_photo_count`);
+        request_.headers = {
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+          ...request.headers,
+        };
+        if (!Util.empty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
+        }
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        let respMap : {[key: string]: any} = null;
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<GetPhotoCountModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new GetPhotoCountModel({}));
+        }
+
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...respMap,
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  /**
+   * 该接口将会展示用户图片的地点分组
+   * @tags image
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async listAddressGroups(request: ListAddressGroupsRequestModel, runtime: RuntimeOptions): Promise<ListAddressGroupsModel> {
+    let _runtime: { [key: string]: any } = {
+      timeouted: "retry",
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
+      retry: {
+        retryable: runtime.autoretry,
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
+      },
+      backoff: {
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
+      },
+      ignoreSSL: runtime.ignoreSSL,
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = this.getPathname(this._nickname, `/v2/image/list_address_groups`);
+        request_.headers = {
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+          ...request.headers,
+        };
+        if (!Util.empty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
+        }
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        let respMap : {[key: string]: any} = null;
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<ListAddressGroupsModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new ListAddressGroupsModel({}));
+        }
+
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...respMap,
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  /**
+   * 该接口将会列举人脸分组
+   * @tags image
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async listFaceGroups(request: ListFaceGroupsRequestModel, runtime: RuntimeOptions): Promise<ListFaceGroupsModel> {
+    let _runtime: { [key: string]: any } = {
+      timeouted: "retry",
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
+      retry: {
+        retryable: runtime.autoretry,
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
+      },
+      backoff: {
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
+      },
+      ignoreSSL: runtime.ignoreSSL,
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = this.getPathname(this._nickname, `/v2/image/list_face_groups`);
+        request_.headers = {
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+          ...request.headers,
+        };
+        if (!Util.empty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
+        }
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        let respMap : {[key: string]: any} = null;
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<ListFaceGroupsModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new ListFaceGroupsModel({}));
+        }
+
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...respMap,
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  /**
+   * 该接口将会展示场景标记
+   * @tags image
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async listTags(request: ListTagsRequestModel, runtime: RuntimeOptions): Promise<ListTagsModel> {
+    let _runtime: { [key: string]: any } = {
+      timeouted: "retry",
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
+      retry: {
+        retryable: runtime.autoretry,
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
+      },
+      backoff: {
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
+      },
+      ignoreSSL: runtime.ignoreSSL,
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = this.getPathname(this._nickname, `/v2/image/list_tags`);
+        request_.headers = {
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+          ...request.headers,
+        };
+        if (!Util.empty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
+        }
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        let respMap : {[key: string]: any} = null;
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<ListTagsModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new ListTagsModel({}));
+        }
+
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...respMap,
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  /**
+   * 该接口将会展示用户图片的地点分组
+   * @tags image
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async searchAddressGroups(request: SearchAddressGroupsRequestModel, runtime: RuntimeOptions): Promise<SearchAddressGroupsModel> {
+    let _runtime: { [key: string]: any } = {
+      timeouted: "retry",
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
+      retry: {
+        retryable: runtime.autoretry,
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
+      },
+      backoff: {
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
+      },
+      ignoreSSL: runtime.ignoreSSL,
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = this.getPathname(this._nickname, `/v2/image/search_address_groups`);
+        request_.headers = {
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+          ...request.headers,
+        };
+        if (!Util.empty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
+        }
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        let respMap : {[key: string]: any} = null;
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<SearchAddressGroupsModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new SearchAddressGroupsModel({}));
+        }
+
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...respMap,
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  /**
+   * 该接口将会更新人脸分组信息
+   * @tags image
+   * @error InvalidParameter The input parameter {parameter_name} is not valid.
+   * @error AccessTokenInvalid AccessToken is invalid. {message}
+   * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+   * @error NotFound The resource {resource_name} cannot be found. Please check.
+   * @error InternalError The request has been failed due to some unknown error.
+   * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+   */
+  async updateFacegroupInfo(request: UpdateFacegroupInfoRequestModel, runtime: RuntimeOptions): Promise<UpdateFacegroupInfoModel> {
+    let _runtime: { [key: string]: any } = {
+      timeouted: "retry",
+      readTimeout: runtime.readTimeout,
+      connectTimeout: runtime.connectTimeout,
+      localAddr: runtime.localAddr,
+      httpProxy: runtime.httpProxy,
+      httpsProxy: runtime.httpsProxy,
+      noProxy: runtime.noProxy,
+      maxIdleConns: runtime.maxIdleConns,
+      socks5Proxy: runtime.socks5Proxy,
+      socks5NetWork: runtime.socks5NetWork,
+      retry: {
+        retryable: runtime.autoretry,
+        maxAttempts: Util.defaultNumber(runtime.maxAttempts, 3),
+      },
+      backoff: {
+        policy: Util.defaultString(runtime.backoffPolicy, "no"),
+        period: Util.defaultNumber(runtime.backoffPeriod, 1),
+      },
+      ignoreSSL: runtime.ignoreSSL,
+    }
+
+    let _lastRequest = null;
+    let _now = Date.now();
+    let _retryTimes = 0;
+    while ($tea.allowRetry(_runtime['retry'], _retryTimes, _now)) {
+      if (_retryTimes > 0) {
+        let _backoffTime = $tea.getBackoffTime(_runtime['backoff'], _retryTimes);
+        if (_backoffTime > 0) {
+          await $tea.sleep(_backoffTime);
+        }
+      }
+
+      _retryTimes = _retryTimes + 1;
+      try {
+        let request_ = new $tea.Request();
+        let accesskeyId = await this.getAccessKeyId();
+        let accessKeySecret = await this.getAccessKeySecret();
+        let securityToken = await this.getSecurityToken();
+        let accessToken = await this.getAccessToken();
+        request_.protocol = Util.defaultString(this._protocol, "https");
+        request_.method = "POST";
+        request_.pathname = this.getPathname(this._nickname, `/v2/image/update_facegroup_info`);
+        request_.headers = {
+          'user-agent': this.getUserAgent(),
+          host: Util.defaultString(this._endpoint, `${this._domainId}.api.alicloudccp.com`),
+          'content-type': "application/json; charset=utf-8",
+          ...request.headers,
+        };
+        if (!Util.empty(accessToken)) {
+          request_.headers["authorization"] = `Bearer ${accessToken}`;
+        } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+          if (!Util.empty(securityToken)) {
+            request_.headers["x-acs-security-token"] = securityToken;
+          }
+
+          request_.headers["date"] = Util.getDateUTCString();
+          request_.headers["accept"] = "application/json";
+          request_.headers["x-acs-signature-method"] = "HMAC-SHA1";
+          request_.headers["x-acs-signature-version"] = "1.0";
+          let stringToSign = ROAUtil.getStringToSign(request_);
+          request_.headers["authorization"] = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
+        }
+
+        request_.body = new $tea.BytesReadable(Util.toJSONString($tea.toMap(request.body)));
+        _lastRequest = request_;
+        let response_ = await $tea.doAction(request_, _runtime);
+
+        let respMap : {[key: string]: any} = null;
+        let obj : any = null;
+        if (Util.equalNumber(response_.statusCode, 200)) {
+          obj = await Util.readAsJSON(response_.body);
+          respMap = Util.assertAsMap(obj);
+          return $tea.cast<UpdateFacegroupInfoModel>({
+            body: respMap,
+            headers: response_.headers,
+          }, new UpdateFacegroupInfoModel({}));
+        }
+
+        if (!Util.empty(response_.headers["x-ca-error-message"])) {
+          throw $tea.newError({
+            data: {
+              requestId: response_.headers["x-ca-request-id"],
+              statusCode: response_.statusCode,
+              statusMessage: response_.statusMessage,
+            },
+            message: response_.headers["x-ca-error-message"],
+          });
+        }
+
+        obj = await Util.readAsJSON(response_.body);
+        respMap = Util.assertAsMap(obj);
+        throw $tea.newError({
+          data: {
+            requestId: response_.headers["x-ca-request-id"],
+            statusCode: response_.statusCode,
+            statusMessage: response_.statusMessage,
+          },
+          ...respMap,
+        });
+      } catch (ex) {
+        if ($tea.isRetryable(ex)) {
+          continue;
+        }
+        throw ex;
+      }
+    }
+
+    throw $tea.newUnretryableError(_lastRequest);
+  }
+
+  getPathname(nickname: string, path: string): string {
+    if (Util.empty(nickname)) {
+      return path;
+    }
+
+    return `/${nickname}${path}`;
+  }
+
+  async setExpireTime(expireTime: string): Promise<void> {
+    if (Util.isUnset(this._accessTokenCredential)) {
+      return ;
+    }
+
+    this._accessTokenCredential.setExpireTime(expireTime);
+  }
+
+  getExpireTime(): string {
+    if (Util.isUnset(this._accessTokenCredential)) {
+      return "";
+    }
+
+    let expireTime = this._accessTokenCredential.getExpireTime();
+    return expireTime;
+  }
+
+  setRefreshToken(token: string): void {
+    if (Util.isUnset(this._accessTokenCredential)) {
+      return ;
+    }
+
+    this._accessTokenCredential.setRefreshToken(token);
+  }
+
+  getRefreshToken(): string {
+    if (Util.isUnset(this._accessTokenCredential)) {
+      return "";
+    }
+
+    let token = this._accessTokenCredential.getRefreshToken();
+    return token;
+  }
+
+  setAccessToken(token: string): void {
+    if (Util.isUnset(this._accessTokenCredential)) {
+      return ;
+    }
+
+    this._accessTokenCredential.setAccessToken(token);
+  }
+
+  async getAccessToken(): Promise<string> {
+    if (Util.isUnset(this._accessTokenCredential)) {
+      return "";
+    }
+
+    let token = await this._accessTokenCredential.getAccessToken();
+    return token;
+  }
+
+  setUserAgent(userAgent: string): void {
+    this._userAgent = userAgent;
+  }
+
+  appendUserAgent(userAgent: string): void {
+    this._userAgent = `${this._userAgent} ${userAgent}`;
+  }
+
+  getUserAgent(): string {
+    let userAgent = Util.getUserAgent(this._userAgent);
+    return userAgent;
+  }
+
+  async getAccessKeyId(): Promise<string> {
+    if (Util.isUnset(this._credential)) {
+      return "";
+    }
+
+    let accessKeyId = await this._credential.getAccessKeyId();
+    return accessKeyId;
+  }
+
+  async getAccessKeySecret(): Promise<string> {
+    if (Util.isUnset(this._credential)) {
+      return "";
+    }
+
+    let secret = await this._credential.getAccessKeySecret();
+    return secret;
+  }
+
+  async getSecurityToken(): Promise<string> {
+    if (Util.isUnset(this._credential)) {
+      return "";
+    }
+
+    let token = await this._credential.getSecurityToken();
+    return token;
+  }
 
 }
