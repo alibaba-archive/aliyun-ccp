@@ -949,6 +949,7 @@ func ListDriveExample() {
 	listDriveRequest := new(client.ListDriveRequest)
 	listDriveRequest.SetLimit(10)
 	listDriveRequest.SetOwner("your accout id")
+	listDriveModel.SetBody(listDriveRequest)
 
 	response, err := ossClient.ListDrives(listDriveModel, runtime)
 	if err != nil {
