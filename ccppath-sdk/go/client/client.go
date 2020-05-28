@@ -1272,16 +1272,17 @@ type BaseCCPFileResponse struct {
 	DriveId            *string                `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	EncryptMode        *string                `json:"encrypt_mode" xml:"encrypt_mode"`
 	FileExtension      *string                `json:"file_extension" xml:"file_extension"`
-	FileId             *string                `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	FileId             *string                `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 	Hidden             *bool                  `json:"hidden" xml:"hidden"`
 	ImageMediaMetadata *ImageMediaResponse    `json:"image_media_metadata" xml:"image_media_metadata"`
 	Labels             []*string              `json:"labels" xml:"labels" type:"Repeated"`
 	Meta               *string                `json:"meta" xml:"meta"`
 	Name               *string                `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	ParentFileId       *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
-	Size               *int64                 `json:"size" xml:"size"`
+	ParentFileId       *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
+	Size               *int64                 `json:"size" xml:"size" maximum:"53687091200" minimum:"0"`
 	Starred            *bool                  `json:"starred" xml:"starred"`
 	Status             *string                `json:"status" xml:"status"`
+	StreamsInfo        map[string]interface{} `json:"streams_info" xml:"streams_info"`
 	StreamsUrlInfo     map[string]interface{} `json:"streams_url_info" xml:"streams_url_info"`
 	Thumbnail          *string                `json:"thumbnail" xml:"thumbnail"`
 	TrashedAt          *string                `json:"trashed_at" xml:"trashed_at"`
@@ -1408,6 +1409,11 @@ func (s *BaseCCPFileResponse) SetStarred(v bool) *BaseCCPFileResponse {
 
 func (s *BaseCCPFileResponse) SetStatus(v string) *BaseCCPFileResponse {
 	s.Status = &v
+	return s
+}
+
+func (s *BaseCCPFileResponse) SetStreamsInfo(v map[string]interface{}) *BaseCCPFileResponse {
+	s.StreamsInfo = v
 	return s
 }
 
@@ -1570,9 +1576,9 @@ type BaseOSSFileResponse struct {
 	FileExtension   *string `json:"file_extension" xml:"file_extension"`
 	FilePath        *string `json:"file_path" xml:"file_path"`
 	Name            *string `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	ParentFilePath  *string `json:"parent_file_path" xml:"parent_file_path" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	ParentFilePath  *string `json:"parent_file_path" xml:"parent_file_path" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 	ShareId         *string `json:"share_id" xml:"share_id" pattern:"[0-9]+"`
-	Size            *int64  `json:"size" xml:"size"`
+	Size            *int64  `json:"size" xml:"size" maximum:"53687091200" minimum:"0"`
 	Status          *string `json:"status" xml:"status"`
 	Thumbnail       *string `json:"thumbnail" xml:"thumbnail"`
 	TrashedAt       *string `json:"trashed_at" xml:"trashed_at"`
@@ -1872,16 +1878,17 @@ type CCPCompleteFileResponse struct {
 	DriveId            *string                `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	EncryptMode        *string                `json:"encrypt_mode" xml:"encrypt_mode"`
 	FileExtension      *string                `json:"file_extension" xml:"file_extension"`
-	FileId             *string                `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	FileId             *string                `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 	Hidden             *bool                  `json:"hidden" xml:"hidden"`
 	ImageMediaMetadata *ImageMediaResponse    `json:"image_media_metadata" xml:"image_media_metadata"`
 	Labels             []*string              `json:"labels" xml:"labels" type:"Repeated"`
 	Meta               *string                `json:"meta" xml:"meta"`
 	Name               *string                `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	ParentFileId       *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
-	Size               *int64                 `json:"size" xml:"size"`
+	ParentFileId       *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
+	Size               *int64                 `json:"size" xml:"size" maximum:"53687091200" minimum:"0"`
 	Starred            *bool                  `json:"starred" xml:"starred"`
 	Status             *string                `json:"status" xml:"status"`
+	StreamsInfo        map[string]interface{} `json:"streams_info" xml:"streams_info"`
 	StreamsUrlInfo     map[string]interface{} `json:"streams_url_info" xml:"streams_url_info"`
 	Thumbnail          *string                `json:"thumbnail" xml:"thumbnail"`
 	TrashedAt          *string                `json:"trashed_at" xml:"trashed_at"`
@@ -2011,6 +2018,11 @@ func (s *CCPCompleteFileResponse) SetStatus(v string) *CCPCompleteFileResponse {
 	return s
 }
 
+func (s *CCPCompleteFileResponse) SetStreamsInfo(v map[string]interface{}) *CCPCompleteFileResponse {
+	s.StreamsInfo = v
+	return s
+}
+
 func (s *CCPCompleteFileResponse) SetStreamsUrlInfo(v map[string]interface{}) *CCPCompleteFileResponse {
 	s.StreamsUrlInfo = v
 	return s
@@ -2063,7 +2075,7 @@ type CCPCopyFileResponse struct {
 	AsyncTaskId *string `json:"async_task_id" xml:"async_task_id"`
 	DomainId    *string `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
 	DriveId     *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	FileId      *string `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	FileId      *string `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 }
 
 func (s CCPCopyFileResponse) String() string {
@@ -2098,13 +2110,13 @@ func (s *CCPCopyFileResponse) SetFileId(v string) *CCPCopyFileResponse {
  * Create file response
  */
 type CCPCreateFileResponse struct {
-	DomainId          *string                `json:"domain_id" xml:"domain_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	DomainId          *string                `json:"domain_id" xml:"domain_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 	DriveId           *string                `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	EncryptMode       *string                `json:"encrypt_mode" xml:"encrypt_mode"`
 	Exist             *bool                  `json:"exist" xml:"exist"`
-	FileId            *string                `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
-	FileName          *string                `json:"file_name" xml:"file_name" maxLength:"255"`
-	ParentFileId      *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	FileId            *string                `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
+	FileName          *string                `json:"file_name" xml:"file_name" maxLength:"255" minLength:"1"`
+	ParentFileId      *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 	PartInfoList      []*UploadPartInfo      `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	RapidUpload       *bool                  `json:"rapid_upload" xml:"rapid_upload"`
 	Status            *string                `json:"status" xml:"status"`
@@ -2193,7 +2205,7 @@ type CCPDeleteFileResponse struct {
 	AsyncTaskId *string `json:"async_task_id" xml:"async_task_id"`
 	DomainId    *string `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
 	DriveId     *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	FileId      *string `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	FileId      *string `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 }
 
 func (s CCPDeleteFileResponse) String() string {
@@ -2348,16 +2360,17 @@ type CCPGetFileByPathResponse struct {
 	DriveId            *string                `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	EncryptMode        *string                `json:"encrypt_mode" xml:"encrypt_mode"`
 	FileExtension      *string                `json:"file_extension" xml:"file_extension"`
-	FileId             *string                `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	FileId             *string                `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 	Hidden             *bool                  `json:"hidden" xml:"hidden"`
 	ImageMediaMetadata *ImageMediaResponse    `json:"image_media_metadata" xml:"image_media_metadata"`
 	Labels             []*string              `json:"labels" xml:"labels" type:"Repeated"`
 	Meta               *string                `json:"meta" xml:"meta"`
 	Name               *string                `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	ParentFileId       *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
-	Size               *int64                 `json:"size" xml:"size"`
+	ParentFileId       *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
+	Size               *int64                 `json:"size" xml:"size" maximum:"53687091200" minimum:"0"`
 	Starred            *bool                  `json:"starred" xml:"starred"`
 	Status             *string                `json:"status" xml:"status"`
+	StreamsInfo        map[string]interface{} `json:"streams_info" xml:"streams_info"`
 	StreamsUrlInfo     map[string]interface{} `json:"streams_url_info" xml:"streams_url_info"`
 	Thumbnail          *string                `json:"thumbnail" xml:"thumbnail"`
 	TrashedAt          *string                `json:"trashed_at" xml:"trashed_at"`
@@ -2487,6 +2500,11 @@ func (s *CCPGetFileByPathResponse) SetStatus(v string) *CCPGetFileByPathResponse
 	return s
 }
 
+func (s *CCPGetFileByPathResponse) SetStreamsInfo(v map[string]interface{}) *CCPGetFileByPathResponse {
+	s.StreamsInfo = v
+	return s
+}
+
 func (s *CCPGetFileByPathResponse) SetStreamsUrlInfo(v map[string]interface{}) *CCPGetFileByPathResponse {
 	s.StreamsUrlInfo = v
 	return s
@@ -2548,16 +2566,17 @@ type CCPGetFileResponse struct {
 	DriveId            *string                `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	EncryptMode        *string                `json:"encrypt_mode" xml:"encrypt_mode"`
 	FileExtension      *string                `json:"file_extension" xml:"file_extension"`
-	FileId             *string                `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	FileId             *string                `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 	Hidden             *bool                  `json:"hidden" xml:"hidden"`
 	ImageMediaMetadata *ImageMediaResponse    `json:"image_media_metadata" xml:"image_media_metadata"`
 	Labels             []*string              `json:"labels" xml:"labels" type:"Repeated"`
 	Meta               *string                `json:"meta" xml:"meta"`
 	Name               *string                `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	ParentFileId       *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
-	Size               *int64                 `json:"size" xml:"size"`
+	ParentFileId       *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
+	Size               *int64                 `json:"size" xml:"size" maximum:"53687091200" minimum:"0"`
 	Starred            *bool                  `json:"starred" xml:"starred"`
 	Status             *string                `json:"status" xml:"status"`
+	StreamsInfo        map[string]interface{} `json:"streams_info" xml:"streams_info"`
 	StreamsUrlInfo     map[string]interface{} `json:"streams_url_info" xml:"streams_url_info"`
 	Thumbnail          *string                `json:"thumbnail" xml:"thumbnail"`
 	TrashedAt          *string                `json:"trashed_at" xml:"trashed_at"`
@@ -2687,6 +2706,11 @@ func (s *CCPGetFileResponse) SetStatus(v string) *CCPGetFileResponse {
 	return s
 }
 
+func (s *CCPGetFileResponse) SetStreamsInfo(v map[string]interface{}) *CCPGetFileResponse {
+	s.StreamsInfo = v
+	return s
+}
+
 func (s *CCPGetFileResponse) SetStreamsUrlInfo(v map[string]interface{}) *CCPGetFileResponse {
 	s.StreamsUrlInfo = v
 	return s
@@ -2739,7 +2763,7 @@ type CCPGetUploadUrlResponse struct {
 	CreateAt     *string           `json:"create_at" xml:"create_at"`
 	DomainId     *string           `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
 	DriveId      *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	FileId       *string           `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	FileId       *string           `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	UploadId     *string           `json:"upload_id" xml:"upload_id"`
 }
@@ -2812,7 +2836,7 @@ func (s *CCPListFileResponse) SetNextMarker(v string) *CCPListFileResponse {
  * 获取签名 response
  */
 type CCPListUploadedPartResponse struct {
-	FileId               *string           `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	FileId               *string           `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 	NextPartNumberMarker *string           `json:"next_part_number_marker" xml:"next_part_number_marker"`
 	UploadId             *string           `json:"upload_id" xml:"upload_id"`
 	UploadedParts        []*UploadPartInfo `json:"uploaded_parts" xml:"uploaded_parts" type:"Repeated"`
@@ -2853,7 +2877,7 @@ type CCPMoveFileResponse struct {
 	AsyncTaskId *string `json:"async_task_id" xml:"async_task_id"`
 	DomainId    *string `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
 	DriveId     *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	FileId      *string `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	FileId      *string `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 }
 
 func (s CCPMoveFileResponse) String() string {
@@ -2952,16 +2976,17 @@ type CCPUpdateFileMetaResponse struct {
 	DriveId            *string                `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	EncryptMode        *string                `json:"encrypt_mode" xml:"encrypt_mode"`
 	FileExtension      *string                `json:"file_extension" xml:"file_extension"`
-	FileId             *string                `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	FileId             *string                `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 	Hidden             *bool                  `json:"hidden" xml:"hidden"`
 	ImageMediaMetadata *ImageMediaResponse    `json:"image_media_metadata" xml:"image_media_metadata"`
 	Labels             []*string              `json:"labels" xml:"labels" type:"Repeated"`
 	Meta               *string                `json:"meta" xml:"meta"`
 	Name               *string                `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	ParentFileId       *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
-	Size               *int64                 `json:"size" xml:"size"`
+	ParentFileId       *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
+	Size               *int64                 `json:"size" xml:"size" maximum:"53687091200" minimum:"0"`
 	Starred            *bool                  `json:"starred" xml:"starred"`
 	Status             *string                `json:"status" xml:"status"`
+	StreamsInfo        map[string]interface{} `json:"streams_info" xml:"streams_info"`
 	StreamsUrlInfo     map[string]interface{} `json:"streams_url_info" xml:"streams_url_info"`
 	Thumbnail          *string                `json:"thumbnail" xml:"thumbnail"`
 	TrashedAt          *string                `json:"trashed_at" xml:"trashed_at"`
@@ -3088,6 +3113,11 @@ func (s *CCPUpdateFileMetaResponse) SetStarred(v bool) *CCPUpdateFileMetaRespons
 
 func (s *CCPUpdateFileMetaResponse) SetStatus(v string) *CCPUpdateFileMetaResponse {
 	s.Status = &v
+	return s
+}
+
+func (s *CCPUpdateFileMetaResponse) SetStreamsInfo(v map[string]interface{}) *CCPUpdateFileMetaResponse {
+	s.StreamsInfo = v
 	return s
 }
 
@@ -3451,6 +3481,44 @@ func (s *DeviceAuthorizeRequest) SetScope(v []*string) *DeviceAuthorizeRequest {
 }
 
 /**
+ * the file op info
+ */
+type FileDeltaResponse struct {
+	CurrentCategory *string              `json:"current_category" xml:"current_category"`
+	File            *BaseCCPFileResponse `json:"file" xml:"file"`
+	FileId          *string              `json:"file_id" xml:"file_id"`
+	Op              *string              `json:"op" xml:"op"`
+}
+
+func (s FileDeltaResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s FileDeltaResponse) GoString() string {
+	return s.String()
+}
+
+func (s *FileDeltaResponse) SetCurrentCategory(v string) *FileDeltaResponse {
+	s.CurrentCategory = &v
+	return s
+}
+
+func (s *FileDeltaResponse) SetFile(v *BaseCCPFileResponse) *FileDeltaResponse {
+	s.File = v
+	return s
+}
+
+func (s *FileDeltaResponse) SetFileId(v string) *FileDeltaResponse {
+	s.FileId = &v
+	return s
+}
+
+func (s *FileDeltaResponse) SetOp(v string) *FileDeltaResponse {
+	s.Op = &v
+	return s
+}
+
+/**
  *
  */
 type GetAccessTokenByLinkInfoRequest struct {
@@ -3653,6 +3721,26 @@ func (s *GetDriveResponse) SetUsedSize(v int64) *GetDriveResponse {
 }
 
 /**
+ * get last file op cursor response
+ */
+type GetLastCursorResponse struct {
+	Cursor *string `json:"cursor" xml:"cursor"`
+}
+
+func (s GetLastCursorResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetLastCursorResponse) GoString() string {
+	return s.String()
+}
+
+func (s *GetLastCursorResponse) SetCursor(v string) *GetLastCursorResponse {
+	s.Cursor = &v
+	return s
+}
+
+/**
  *
  */
 type GetLinkInfoByUserIDRequest struct {
@@ -3812,18 +3900,19 @@ func (s *GetShareResponse) SetUpdatedAt(v string) *GetShareResponse {
  *
  */
 type ImageMediaResponse struct {
-	AddressLine *string `json:"address_line" xml:"address_line"`
-	City        *string `json:"city" xml:"city"`
-	Country     *string `json:"country" xml:"country"`
-	District    *string `json:"district" xml:"district"`
-	Exif        *string `json:"exif" xml:"exif"`
-	Faces       *string `json:"faces" xml:"faces"`
-	Height      *int64  `json:"height" xml:"height"`
-	Location    *string `json:"location" xml:"location"`
-	Province    *string `json:"province" xml:"province"`
-	Time        *string `json:"time" xml:"time"`
-	Township    *string `json:"township" xml:"township"`
-	Width       *int64  `json:"width" xml:"width"`
+	AddressLine     *string `json:"address_line" xml:"address_line"`
+	City            *string `json:"city" xml:"city"`
+	Country         *string `json:"country" xml:"country"`
+	District        *string `json:"district" xml:"district"`
+	Exif            *string `json:"exif" xml:"exif"`
+	Faces           *string `json:"faces" xml:"faces"`
+	Height          *int64  `json:"height" xml:"height"`
+	Location        *string `json:"location" xml:"location"`
+	Province        *string `json:"province" xml:"province"`
+	StoryImageScore *int    `json:"story_image_score" xml:"story_image_score"`
+	Time            *string `json:"time" xml:"time"`
+	Township        *string `json:"township" xml:"township"`
+	Width           *int64  `json:"width" xml:"width"`
 }
 
 func (s ImageMediaResponse) String() string {
@@ -3879,6 +3968,11 @@ func (s *ImageMediaResponse) SetProvince(v string) *ImageMediaResponse {
 	return s
 }
 
+func (s *ImageMediaResponse) SetStoryImageScore(v int) *ImageMediaResponse {
+	s.StoryImageScore = &v
+	return s
+}
+
 func (s *ImageMediaResponse) SetTime(v string) *ImageMediaResponse {
 	s.Time = &v
 	return s
@@ -3891,122 +3985,6 @@ func (s *ImageMediaResponse) SetTownship(v string) *ImageMediaResponse {
 
 func (s *ImageMediaResponse) SetWidth(v int64) *ImageMediaResponse {
 	s.Width = &v
-	return s
-}
-
-/**
- *
- */
-type InnerConsentRequest struct {
-	UserCode *string `json:"UserCode" xml:"UserCode"`
-}
-
-func (s InnerConsentRequest) String() string {
-	return tea.Prettify(s)
-}
-
-func (s InnerConsentRequest) GoString() string {
-	return s.String()
-}
-
-func (s *InnerConsentRequest) SetUserCode(v string) *InnerConsentRequest {
-	s.UserCode = &v
-	return s
-}
-
-/**
- *
- */
-type InnerSignInRequest struct {
-	KeyPairId   *string `json:"key_pair_id" xml:"key_pair_id"`
-	Password    *string `json:"password" xml:"password"`
-	PhoneNumber *string `json:"phone_number" xml:"phone_number"`
-	PhoneRegion *string `json:"phone_region" xml:"phone_region"`
-	SignInType  *string `json:"sign_in_type" xml:"sign_in_type"`
-	SmsCode     *string `json:"sms_code" xml:"sms_code"`
-	SmsCodeId   *string `json:"sms_code_id" xml:"sms_code_id"`
-}
-
-func (s InnerSignInRequest) String() string {
-	return tea.Prettify(s)
-}
-
-func (s InnerSignInRequest) GoString() string {
-	return s.String()
-}
-
-func (s *InnerSignInRequest) SetKeyPairId(v string) *InnerSignInRequest {
-	s.KeyPairId = &v
-	return s
-}
-
-func (s *InnerSignInRequest) SetPassword(v string) *InnerSignInRequest {
-	s.Password = &v
-	return s
-}
-
-func (s *InnerSignInRequest) SetPhoneNumber(v string) *InnerSignInRequest {
-	s.PhoneNumber = &v
-	return s
-}
-
-func (s *InnerSignInRequest) SetPhoneRegion(v string) *InnerSignInRequest {
-	s.PhoneRegion = &v
-	return s
-}
-
-func (s *InnerSignInRequest) SetSignInType(v string) *InnerSignInRequest {
-	s.SignInType = &v
-	return s
-}
-
-func (s *InnerSignInRequest) SetSmsCode(v string) *InnerSignInRequest {
-	s.SmsCode = &v
-	return s
-}
-
-func (s *InnerSignInRequest) SetSmsCodeId(v string) *InnerSignInRequest {
-	s.SmsCodeId = &v
-	return s
-}
-
-/**
- *
- */
-type InnerSignInResponse struct {
-	Goto *string `json:"goto" xml:"goto"`
-}
-
-func (s InnerSignInResponse) String() string {
-	return tea.Prettify(s)
-}
-
-func (s InnerSignInResponse) GoString() string {
-	return s.String()
-}
-
-func (s *InnerSignInResponse) SetGoto(v string) *InnerSignInResponse {
-	s.Goto = &v
-	return s
-}
-
-/**
- *
- */
-type InnerUserCodeAuthorizeRequest struct {
-	UserCode *string `json:"UserCode" xml:"UserCode"`
-}
-
-func (s InnerUserCodeAuthorizeRequest) String() string {
-	return tea.Prettify(s)
-}
-
-func (s InnerUserCodeAuthorizeRequest) GoString() string {
-	return s.String()
-}
-
-func (s *InnerUserCodeAuthorizeRequest) SetUserCode(v string) *InnerUserCodeAuthorizeRequest {
-	s.UserCode = &v
 	return s
 }
 
@@ -4147,6 +4125,38 @@ func (s *ListDriveResponse) SetItems(v []*BaseDriveResponse) *ListDriveResponse 
 
 func (s *ListDriveResponse) SetNextMarker(v string) *ListDriveResponse {
 	s.NextMarker = &v
+	return s
+}
+
+/**
+ * list file op response
+ */
+type ListFileDeltaResponse struct {
+	Cursor  *string              `json:"cursor" xml:"cursor"`
+	HasMore *bool                `json:"has_more" xml:"has_more"`
+	Items   []*FileDeltaResponse `json:"items" xml:"items" type:"Repeated"`
+}
+
+func (s ListFileDeltaResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListFileDeltaResponse) GoString() string {
+	return s.String()
+}
+
+func (s *ListFileDeltaResponse) SetCursor(v string) *ListFileDeltaResponse {
+	s.Cursor = &v
+	return s
+}
+
+func (s *ListFileDeltaResponse) SetHasMore(v bool) *ListFileDeltaResponse {
+	s.HasMore = &v
+	return s
+}
+
+func (s *ListFileDeltaResponse) SetItems(v []*FileDeltaResponse) *ListFileDeltaResponse {
+	s.Items = v
 	return s
 }
 
@@ -4528,9 +4538,9 @@ type OSSCompleteFileResponse struct {
 	FileExtension   *string `json:"file_extension" xml:"file_extension"`
 	FilePath        *string `json:"file_path" xml:"file_path"`
 	Name            *string `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	ParentFilePath  *string `json:"parent_file_path" xml:"parent_file_path" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	ParentFilePath  *string `json:"parent_file_path" xml:"parent_file_path" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 	ShareId         *string `json:"share_id" xml:"share_id" pattern:"[0-9]+"`
-	Size            *int64  `json:"size" xml:"size"`
+	Size            *int64  `json:"size" xml:"size" maximum:"53687091200" minimum:"0"`
 	Status          *string `json:"status" xml:"status"`
 	Thumbnail       *string `json:"thumbnail" xml:"thumbnail"`
 	TrashedAt       *string `json:"trashed_at" xml:"trashed_at"`
@@ -4712,7 +4722,7 @@ func (s *OSSCopyFileResponse) SetShareId(v string) *OSSCopyFileResponse {
  * Create file response
  */
 type OSSCreateFileResponse struct {
-	DomainId     *string           `json:"domain_id" xml:"domain_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	DomainId     *string           `json:"domain_id" xml:"domain_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 	DriveId      *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	FilePath     *string           `json:"file_path" xml:"file_path"`
 	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
@@ -4894,9 +4904,9 @@ type OSSGetFileResponse struct {
 	FileExtension   *string `json:"file_extension" xml:"file_extension"`
 	FilePath        *string `json:"file_path" xml:"file_path"`
 	Name            *string `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	ParentFilePath  *string `json:"parent_file_path" xml:"parent_file_path" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	ParentFilePath  *string `json:"parent_file_path" xml:"parent_file_path" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 	ShareId         *string `json:"share_id" xml:"share_id" pattern:"[0-9]+"`
-	Size            *int64  `json:"size" xml:"size"`
+	Size            *int64  `json:"size" xml:"size" maximum:"53687091200" minimum:"0"`
 	Status          *string `json:"status" xml:"status"`
 	Thumbnail       *string `json:"thumbnail" xml:"thumbnail"`
 	TrashedAt       *string `json:"trashed_at" xml:"trashed_at"`
@@ -5250,9 +5260,9 @@ type OSSUpdateFileMetaResponse struct {
 	FileExtension   *string `json:"file_extension" xml:"file_extension"`
 	FilePath        *string `json:"file_path" xml:"file_path"`
 	Name            *string `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	ParentFilePath  *string `json:"parent_file_path" xml:"parent_file_path" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	ParentFilePath  *string `json:"parent_file_path" xml:"parent_file_path" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 	ShareId         *string `json:"share_id" xml:"share_id" pattern:"[0-9]+"`
-	Size            *int64  `json:"size" xml:"size"`
+	Size            *int64  `json:"size" xml:"size" maximum:"53687091200" minimum:"0"`
 	Status          *string `json:"status" xml:"status"`
 	Thumbnail       *string `json:"thumbnail" xml:"thumbnail"`
 	TrashedAt       *string `json:"trashed_at" xml:"trashed_at"`
@@ -5381,6 +5391,32 @@ func (s *OSSUpdateFileMetaResponse) SetUrl(v string) *OSSUpdateFileMetaResponse 
 }
 
 /**
+ * DRM License response
+ */
+type OSSVideoDRMLicenseResponse struct {
+	Data   *string `json:"data" xml:"data" require:"true"`
+	States *int64  `json:"states" xml:"states" require:"true"`
+}
+
+func (s OSSVideoDRMLicenseResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s OSSVideoDRMLicenseResponse) GoString() string {
+	return s.String()
+}
+
+func (s *OSSVideoDRMLicenseResponse) SetData(v string) *OSSVideoDRMLicenseResponse {
+	s.Data = &v
+	return s
+}
+
+func (s *OSSVideoDRMLicenseResponse) SetStates(v int64) *OSSVideoDRMLicenseResponse {
+	s.States = &v
+	return s
+}
+
+/**
  * 转码接口response
  */
 type OSSVideoDefinitionResponse struct {
@@ -5439,7 +5475,7 @@ type PreHashCheckSuccessResponse struct {
 	Code         *string `json:"code" xml:"code"`
 	FileName     *string `json:"file_name" xml:"file_name"`
 	Message      *string `json:"message" xml:"message"`
-	ParentFileId *string `json:"parent_file_id" xml:"parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	ParentFileId *string `json:"parent_file_id" xml:"parent_file_id" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 	PreHash      *string `json:"pre_hash" xml:"pre_hash"`
 }
 
@@ -5667,6 +5703,44 @@ func (s *StoreItemResponse) SetStoreId(v string) *StoreItemResponse {
 
 func (s *StoreItemResponse) SetType(v string) *StoreItemResponse {
 	s.Type = &v
+	return s
+}
+
+/**
+ *
+ */
+type StreamInfo struct {
+	Crc64Hash   *string `json:"crc64_hash" xml:"crc64_hash"`
+	DownloadUrl *string `json:"download_url" xml:"download_url"`
+	Thumbnail   *string `json:"thumbnail" xml:"thumbnail"`
+	Url         *string `json:"url" xml:"url"`
+}
+
+func (s StreamInfo) String() string {
+	return tea.Prettify(s)
+}
+
+func (s StreamInfo) GoString() string {
+	return s.String()
+}
+
+func (s *StreamInfo) SetCrc64Hash(v string) *StreamInfo {
+	s.Crc64Hash = &v
+	return s
+}
+
+func (s *StreamInfo) SetDownloadUrl(v string) *StreamInfo {
+	s.DownloadUrl = &v
+	return s
+}
+
+func (s *StreamInfo) SetThumbnail(v string) *StreamInfo {
+	s.Thumbnail = &v
+	return s
+}
+
+func (s *StreamInfo) SetUrl(v string) *StreamInfo {
+	s.Url = &v
 	return s
 }
 
@@ -5947,8 +6021,8 @@ func (s *UpdateShareResponse) SetUpdatedAt(v string) *UpdateShareResponse {
  */
 type UploadPartInfo struct {
 	Etag       *string `json:"etag" xml:"etag"`
-	PartNumber *int64  `json:"part_number" xml:"part_number" pattern:"[0-9]+"`
-	PartSize   *int64  `json:"part_size" xml:"part_size"`
+	PartNumber *int64  `json:"part_number" xml:"part_number" maximum:"1" minimum:"10000" pattern:"[0-9]+"`
+	PartSize   *int64  `json:"part_size" xml:"part_size" maximum:"5368709120" minimum:"102400"`
 	UploadUrl  *string `json:"upload_url" xml:"upload_url"`
 }
 
@@ -6159,10 +6233,12 @@ type VideoMediaResponse struct {
 	Country     *string `json:"country" xml:"country"`
 	District    *string `json:"district" xml:"district"`
 	Duration    *string `json:"duration" xml:"duration"`
+	Height      *int64  `json:"height" xml:"height"`
 	Location    *string `json:"location" xml:"location"`
 	Province    *string `json:"province" xml:"province"`
 	Time        *string `json:"time" xml:"time"`
 	Township    *string `json:"township" xml:"township"`
+	Width       *int64  `json:"width" xml:"width"`
 }
 
 func (s VideoMediaResponse) String() string {
@@ -6198,6 +6274,11 @@ func (s *VideoMediaResponse) SetDuration(v string) *VideoMediaResponse {
 	return s
 }
 
+func (s *VideoMediaResponse) SetHeight(v int64) *VideoMediaResponse {
+	s.Height = &v
+	return s
+}
+
 func (s *VideoMediaResponse) SetLocation(v string) *VideoMediaResponse {
 	s.Location = &v
 	return s
@@ -6215,6 +6296,11 @@ func (s *VideoMediaResponse) SetTime(v string) *VideoMediaResponse {
 
 func (s *VideoMediaResponse) SetTownship(v string) *VideoMediaResponse {
 	s.Township = &v
+	return s
+}
+
+func (s *VideoMediaResponse) SetWidth(v int64) *VideoMediaResponse {
+	s.Width = &v
 	return s
 }
 
@@ -6681,68 +6767,6 @@ func (s *BaseDomainResponse) SetUpdatedAt(v string) *BaseDomainResponse {
 }
 
 /**
- *
- */
-type BaseMediaResponse struct {
-	AddressLine *string `json:"address_line" xml:"address_line"`
-	City        *string `json:"city" xml:"city"`
-	Country     *string `json:"country" xml:"country"`
-	District    *string `json:"district" xml:"district"`
-	Location    *string `json:"location" xml:"location"`
-	Province    *string `json:"province" xml:"province"`
-	Time        *string `json:"time" xml:"time"`
-	Township    *string `json:"township" xml:"township"`
-}
-
-func (s BaseMediaResponse) String() string {
-	return tea.Prettify(s)
-}
-
-func (s BaseMediaResponse) GoString() string {
-	return s.String()
-}
-
-func (s *BaseMediaResponse) SetAddressLine(v string) *BaseMediaResponse {
-	s.AddressLine = &v
-	return s
-}
-
-func (s *BaseMediaResponse) SetCity(v string) *BaseMediaResponse {
-	s.City = &v
-	return s
-}
-
-func (s *BaseMediaResponse) SetCountry(v string) *BaseMediaResponse {
-	s.Country = &v
-	return s
-}
-
-func (s *BaseMediaResponse) SetDistrict(v string) *BaseMediaResponse {
-	s.District = &v
-	return s
-}
-
-func (s *BaseMediaResponse) SetLocation(v string) *BaseMediaResponse {
-	s.Location = &v
-	return s
-}
-
-func (s *BaseMediaResponse) SetProvince(v string) *BaseMediaResponse {
-	s.Province = &v
-	return s
-}
-
-func (s *BaseMediaResponse) SetTime(v string) *BaseMediaResponse {
-	s.Time = &v
-	return s
-}
-
-func (s *BaseMediaResponse) SetTownship(v string) *BaseMediaResponse {
-	s.Township = &v
-	return s
-}
-
-/**
  * create domain response
  */
 type CreateDomainResponse struct {
@@ -6968,10 +6992,10 @@ func (s *GetAppPublicKeyResponse) SetPublicKey(v string) *GetAppPublicKeyRespons
 type GetAppResponse struct {
 	AliOwnerId  *string   `json:"ali_owner_id" xml:"ali_owner_id" require:"true"`
 	AppId       *string   `json:"app_id" xml:"app_id" require:"true"`
-	AppName     *string   `json:"app_name" xml:"app_name" require:"true" maxLength:"128" pattern:"[0-9a-zA-Z]+"`
+	AppName     *string   `json:"app_name" xml:"app_name" require:"true" maxLength:"128" minLength:"1" pattern:"[0-9a-zA-Z]+"`
 	AppSecret   *string   `json:"app_secret" xml:"app_secret" require:"true"`
 	CreatedAt   *string   `json:"created_at" xml:"created_at" require:"true"`
-	Description *string   `json:"description" xml:"description" require:"true" maxLength:"128"`
+	Description *string   `json:"description" xml:"description" require:"true" maxLength:"128" minLength:"0"`
 	Logo        *string   `json:"logo" xml:"logo" require:"true"`
 	Provider    *string   `json:"provider" xml:"provider" require:"true"`
 	RedirectUri *string   `json:"redirect_uri" xml:"redirect_uri" require:"true"`
@@ -8961,9 +8985,9 @@ func (s *BaseCompleteFileRequest) SetUploadId(v string) *BaseCompleteFileRequest
 type BaseCreateFileRequest struct {
 	ContentMd5   *string           `json:"content_md5" xml:"content_md5" require:"true"`
 	ContentType  *string           `json:"content_type" xml:"content_type" require:"true"`
-	Name         *string           `json:"name" xml:"name" require:"true"`
+	Name         *string           `json:"name" xml:"name" require:"true" maximum:"1024" minimum:"1"`
 	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	Size         *int64            `json:"size" xml:"size" require:"true"`
+	Size         *int64            `json:"size" xml:"size" require:"true" maximum:"53687091200" minimum:"0"`
 	Type         *string           `json:"type" xml:"type" require:"true"`
 }
 
@@ -9050,7 +9074,7 @@ type BaseListFileRequest struct {
 	DriveId               *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
-	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1,3}"`
+	Limit                 *int64  `json:"limit" xml:"limit" maximum:"100" minimum:"0" pattern:"[0-9]{1,3}"`
 	Marker                *string `json:"marker" xml:"marker"`
 	VideoThumbnailProcess *string `json:"video_thumbnail_process" xml:"video_thumbnail_process"`
 }
@@ -9098,7 +9122,7 @@ func (s *BaseListFileRequest) SetVideoThumbnailProcess(v string) *BaseListFileRe
  */
 type BaseMoveFileRequest struct {
 	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	NewName   *string `json:"new_name" xml:"new_name"`
+	NewName   *string `json:"new_name" xml:"new_name" maximum:"1024" minimum:"1"`
 	Overwrite *bool   `json:"overwrite" xml:"overwrite"`
 }
 
@@ -9202,7 +9226,7 @@ type CCPCompleteFileRequest struct {
 	DriveId      *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	UploadId     *string           `json:"upload_id" xml:"upload_id"`
-	FileId       *string           `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	FileId       *string           `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 }
 
 func (s CCPCompleteFileRequest) String() string {
@@ -9239,10 +9263,10 @@ func (s *CCPCompleteFileRequest) SetFileId(v string) *CCPCompleteFileRequest {
 type CCPCopyFileRequest struct {
 	AutoRename     *bool   `json:"auto_rename" xml:"auto_rename"`
 	DriveId        *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId         *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	NewName        *string `json:"new_name" xml:"new_name"`
+	FileId         *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9.-_]{1,50}"`
+	NewName        *string `json:"new_name" xml:"new_name" maximum:"1024" minimum:"1"`
 	ToDriveId      *string `json:"to_drive_id" xml:"to_drive_id" pattern:"[0-9]+"`
-	ToParentFileId *string `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	ToParentFileId *string `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9.-_]{1,50}"`
 }
 
 func (s CCPCopyFileRequest) String() string {
@@ -9287,28 +9311,30 @@ func (s *CCPCopyFileRequest) SetToParentFileId(v string) *CCPCopyFileRequest {
  * 创建文件
  */
 type CCPCreateFileRequest struct {
-	ContentMd5      *string                `json:"content_md5" xml:"content_md5"`
-	ContentType     *string                `json:"content_type" xml:"content_type"`
-	Name            *string                `json:"name" xml:"name"`
-	PartInfoList    []*UploadPartInfo      `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	Size            *int64                 `json:"size" xml:"size"`
-	Type            *string                `json:"type" xml:"type"`
-	AutoRename      *bool                  `json:"auto_rename" xml:"auto_rename"`
-	CheckNameMode   *string                `json:"check_name_mode" xml:"check_name_mode"`
-	ContentHash     *string                `json:"content_hash" xml:"content_hash"`
-	ContentHashName *string                `json:"content_hash_name" xml:"content_hash_name"`
-	Description     *string                `json:"description" xml:"description" maxLength:"0"`
-	DriveId         *string                `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	EncryptMode     *string                `json:"encrypt_mode" xml:"encrypt_mode"`
-	FileId          *string                `json:"file_id" xml:"file_id"`
-	Hidden          *bool                  `json:"hidden" xml:"hidden"`
-	Labels          []*string              `json:"labels" xml:"labels" type:"Repeated"`
-	LastUpdatedAt   *string                `json:"last_updated_at" xml:"last_updated_at"`
-	Meta            *string                `json:"meta" xml:"meta"`
-	ParentFileId    *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
-	PreHash         *string                `json:"pre_hash" xml:"pre_hash"`
-	StreamsInfo     map[string]interface{} `json:"streams_info" xml:"streams_info"`
-	UserMeta        *string                `json:"user_meta" xml:"user_meta"`
+	ContentMd5         *string                `json:"content_md5" xml:"content_md5"`
+	ContentType        *string                `json:"content_type" xml:"content_type"`
+	Name               *string                `json:"name" xml:"name" maximum:"1024" minimum:"1"`
+	PartInfoList       []*UploadPartInfo      `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
+	Size               *int64                 `json:"size" xml:"size" maximum:"53687091200" minimum:"0"`
+	Type               *string                `json:"type" xml:"type"`
+	AutoRename         *bool                  `json:"auto_rename" xml:"auto_rename"`
+	CheckNameMode      *string                `json:"check_name_mode" xml:"check_name_mode"`
+	ContentHash        *string                `json:"content_hash" xml:"content_hash"`
+	ContentHashName    *string                `json:"content_hash_name" xml:"content_hash_name"`
+	Description        *string                `json:"description" xml:"description" maxLength:"0" minLength:"1024"`
+	DriveId            *string                `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	EncryptMode        *string                `json:"encrypt_mode" xml:"encrypt_mode"`
+	FileId             *string                `json:"file_id" xml:"file_id"`
+	Hidden             *bool                  `json:"hidden" xml:"hidden"`
+	ImageMediaMetadata *ImageMediaMetadata    `json:"image_media_metadata" xml:"image_media_metadata"`
+	Labels             []*string              `json:"labels" xml:"labels" type:"Repeated"`
+	LastUpdatedAt      *string                `json:"last_updated_at" xml:"last_updated_at"`
+	Meta               *string                `json:"meta" xml:"meta"`
+	ParentFileId       *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
+	PreHash            *string                `json:"pre_hash" xml:"pre_hash"`
+	StreamsInfo        map[string]interface{} `json:"streams_info" xml:"streams_info"`
+	UserMeta           *string                `json:"user_meta" xml:"user_meta"`
+	VideoMediaMetadata *VideoMediaMetadata    `json:"video_media_metadata" xml:"video_media_metadata"`
 }
 
 func (s CCPCreateFileRequest) String() string {
@@ -9394,6 +9420,11 @@ func (s *CCPCreateFileRequest) SetHidden(v bool) *CCPCreateFileRequest {
 	return s
 }
 
+func (s *CCPCreateFileRequest) SetImageMediaMetadata(v *ImageMediaMetadata) *CCPCreateFileRequest {
+	s.ImageMediaMetadata = v
+	return s
+}
+
 func (s *CCPCreateFileRequest) SetLabels(v []*string) *CCPCreateFileRequest {
 	s.Labels = v
 	return s
@@ -9429,12 +9460,17 @@ func (s *CCPCreateFileRequest) SetUserMeta(v string) *CCPCreateFileRequest {
 	return s
 }
 
+func (s *CCPCreateFileRequest) SetVideoMediaMetadata(v *VideoMediaMetadata) *CCPCreateFileRequest {
+	s.VideoMediaMetadata = v
+	return s
+}
+
 /**
  * 删除文件请求
  */
 type CCPDeleteFileRequest struct {
 	DriveId     *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId      *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	FileId      *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9.-_]{1,50}"`
 	Permanently *bool   `json:"permanently" xml:"permanently"`
 }
 
@@ -9512,9 +9548,9 @@ func (s *CCPGetAsyncTaskRequest) SetAsyncTaskId(v string) *CCPGetAsyncTaskReques
  */
 type CCPGetDownloadUrlRequest struct {
 	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
-	FileId    *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	FileName  *string `json:"file_name" xml:"file_name" maxLength:"1024"`
+	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec" maximum:"14400" minimum:"0"`
+	FileId    *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9.-_]{1,50}"`
+	FileName  *string `json:"file_name" xml:"file_name" maxLength:"1024" minLength:"1"`
 }
 
 func (s CCPGetDownloadUrlRequest) String() string {
@@ -9551,11 +9587,11 @@ func (s *CCPGetDownloadUrlRequest) SetFileName(v string) *CCPGetDownloadUrlReque
 type CCPGetFileByPathRequest struct {
 	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	Fields                *string `json:"fields" xml:"fields"`
-	FileId                *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	FileId                *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9.-_]{1,50}"`
 	FilePath              *string `json:"file_path" xml:"file_path"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
-	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec"`
+	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec" maximum:"14400" minimum:"10"`
 	VideoThumbnailProcess *string `json:"video_thumbnail_process" xml:"video_thumbnail_process"`
 }
 
@@ -9613,10 +9649,10 @@ func (s *CCPGetFileByPathRequest) SetVideoThumbnailProcess(v string) *CCPGetFile
 type CCPGetFileRequest struct {
 	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	Fields                *string `json:"fields" xml:"fields"`
-	FileId                *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	FileId                *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9.-_]{1,50}"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
-	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec"`
+	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec" maximum:"14400" minimum:"10"`
 	VideoThumbnailProcess *string `json:"video_thumbnail_process" xml:"video_thumbnail_process"`
 }
 
@@ -9671,7 +9707,7 @@ type CCPGetUploadUrlRequest struct {
 	DriveId      *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	UploadId     *string           `json:"upload_id" xml:"upload_id"`
-	FileId       *string           `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	FileId       *string           `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 }
 
 func (s CCPGetUploadUrlRequest) String() string {
@@ -9714,7 +9750,7 @@ type CCPListFileByCustomIndexKeyRequest struct {
 	DriveId               *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
-	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1,3}"`
+	Limit                 *int64  `json:"limit" xml:"limit" maximum:"100" minimum:"0" pattern:"[0-9]{1,3}"`
 	Marker                *string `json:"marker" xml:"marker"`
 	VideoThumbnailProcess *string `json:"video_thumbnail_process" xml:"video_thumbnail_process"`
 	Starred               *bool   `json:"Starred" xml:"Starred"`
@@ -9725,7 +9761,7 @@ type CCPListFileByCustomIndexKeyRequest struct {
 	OrderDirection        *string `json:"order_direction" xml:"order_direction"`
 	Status                *string `json:"status" xml:"status"`
 	Type                  *string `json:"type" xml:"type"`
-	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec"`
+	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec" maximum:"14400" minimum:"10"`
 }
 
 func (s CCPListFileByCustomIndexKeyRequest) String() string {
@@ -9818,7 +9854,7 @@ type CCPListFileRequest struct {
 	DriveId               *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
-	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1,3}"`
+	Limit                 *int64  `json:"limit" xml:"limit" maximum:"100" minimum:"0" pattern:"[0-9]{1,3}"`
 	Marker                *string `json:"marker" xml:"marker"`
 	VideoThumbnailProcess *string `json:"video_thumbnail_process" xml:"video_thumbnail_process"`
 	Starred               *bool   `json:"Starred" xml:"Starred"`
@@ -9827,10 +9863,10 @@ type CCPListFileRequest struct {
 	Fields                *string `json:"fields" xml:"fields"`
 	OrderBy               *string `json:"order_by" xml:"order_by"`
 	OrderDirection        *string `json:"order_direction" xml:"order_direction"`
-	ParentFileId          *string `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	ParentFileId          *string `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9.-_]{1,50}"`
 	Status                *string `json:"status" xml:"status"`
 	Type                  *string `json:"type" xml:"type"`
-	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec"`
+	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec" maximum:"14400" minimum:"10"`
 }
 
 func (s CCPListFileRequest) String() string {
@@ -9926,9 +9962,9 @@ func (s *CCPListFileRequest) SetUrlExpireSec(v int64) *CCPListFileRequest {
  */
 type CCPListUploadedPartRequest struct {
 	DriveId          *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId           *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	Limit            *int64  `json:"limit" xml:"limit" require:"true" pattern:"[0-9]+"`
-	PartNumberMarker *int64  `json:"part_number_marker" xml:"part_number_marker" pattern:"[0-9]+"`
+	FileId           *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9.-_]{1,50}"`
+	Limit            *int64  `json:"limit" xml:"limit" require:"true" maximum:"1000" minimum:"1" pattern:"[0-9]+"`
+	PartNumberMarker *int64  `json:"part_number_marker" xml:"part_number_marker" minimum:"1" pattern:"[0-9]+"`
 	UploadId         *string `json:"upload_id" xml:"upload_id"`
 }
 
@@ -9970,10 +10006,10 @@ func (s *CCPListUploadedPartRequest) SetUploadId(v string) *CCPListUploadedPartR
  */
 type CCPMoveFileRequest struct {
 	DriveId        *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	NewName        *string `json:"new_name" xml:"new_name"`
+	NewName        *string `json:"new_name" xml:"new_name" maximum:"1024" minimum:"1"`
 	Overwrite      *bool   `json:"overwrite" xml:"overwrite"`
-	FileId         *string `json:"file_id" xml:"file_id" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
-	ToParentFileId *string `json:"to_parent_file_id" xml:"to_parent_file_id" maxLength:"50"`
+	FileId         *string `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9.-_]{1,50}"`
+	ToParentFileId *string `json:"to_parent_file_id" xml:"to_parent_file_id" maxLength:"50" minLength:"40"`
 }
 
 func (s CCPMoveFileRequest) String() string {
@@ -10015,7 +10051,7 @@ func (s *CCPMoveFileRequest) SetToParentFileId(v string) *CCPMoveFileRequest {
 type CCPScanFileMetaRequest struct {
 	Category *string `json:"category" xml:"category"`
 	DriveId  *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	Limit    *int    `json:"limit" xml:"limit"`
+	Limit    *int    `json:"limit" xml:"limit" maximum:"5000" minimum:"1"`
 	Marker   *string `json:"marker" xml:"marker"`
 }
 
@@ -10054,11 +10090,11 @@ type CCPSearchFileRequest struct {
 	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
-	Limit                 *int    `json:"limit" xml:"limit"`
+	Limit                 *int    `json:"limit" xml:"limit" maximum:"100" minimum:"1"`
 	Marker                *string `json:"marker" xml:"marker"`
 	OrderBy               *string `json:"order_by" xml:"order_by"`
 	Query                 *string `json:"query" xml:"query" maxLength:"4096"`
-	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec"`
+	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec" maximum:"14400" minimum:"10"`
 	VideoThumbnailProcess *string `json:"video_thumbnail_process" xml:"video_thumbnail_process"`
 }
 
@@ -10123,11 +10159,11 @@ type CCPUpdateFileMetaRequest struct {
 	Description    *string   `json:"description" xml:"description" maxLength:"1024"`
 	DriveId        *string   `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	EncryptMode    *string   `json:"encrypt_mode" xml:"encrypt_mode"`
-	FileId         *string   `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	FileId         *string   `json:"file_id" xml:"file_id" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9.-_]{1,50}"`
 	Hidden         *bool     `json:"hidden" xml:"hidden"`
 	Labels         []*string `json:"labels" xml:"labels" type:"Repeated"`
 	Meta           *string   `json:"meta" xml:"meta"`
-	Name           *string   `json:"name" xml:"name" maxLength:"1024"`
+	Name           *string   `json:"name" xml:"name" maxLength:"1024" minLength:"1"`
 	Starred        *bool     `json:"starred" xml:"starred"`
 	UserMeta       *string   `json:"user_meta" xml:"user_meta"`
 }
@@ -10200,7 +10236,7 @@ func (s *CCPUpdateFileMetaRequest) SetUserMeta(v string) *CCPUpdateFileMetaReque
  */
 type CompleteFileRequest struct {
 	DriveId      *string           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId       *string           `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	FileId       *string           `json:"file_id" xml:"file_id" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 	FilePath     *string           `json:"file_path" xml:"file_path"`
 	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	ShareId      *string           `json:"share_id" xml:"share_id"`
@@ -10250,13 +10286,13 @@ func (s *CompleteFileRequest) SetUploadId(v string) *CompleteFileRequest {
  */
 type CopyFileRequest struct {
 	DriveId          *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId           *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	FileId           *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9.-_]{1,50}"`
 	FilePath         *string `json:"file_path" xml:"file_path"`
 	NewName          *string `json:"new_name" xml:"new_name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	Overwrite        *bool   `json:"overwrite" xml:"overwrite"`
 	ShareId          *string `json:"share_id" xml:"share_id"`
 	ToDriveId        *string `json:"to_drive_id" xml:"to_drive_id" require:"true" pattern:"[0-9]+"`
-	ToParentFileId   *string `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	ToParentFileId   *string `json:"to_parent_file_id" xml:"to_parent_file_id" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9.-_]{1,50}"`
 	ToParentFilePath *string `json:"to_parent_file_path" xml:"to_parent_file_path"`
 	ToShareId        *string `json:"to_share_id" xml:"to_share_id"`
 }
@@ -10324,8 +10360,8 @@ func (s *CopyFileRequest) SetToShareId(v string) *CopyFileRequest {
  */
 type CreateDriveRequest struct {
 	Default      *bool   `json:"default" xml:"default"`
-	Description  *string `json:"description" xml:"description"`
-	DriveName    *string `json:"drive_name" xml:"drive_name" require:"true"`
+	Description  *string `json:"description" xml:"description" maximum:"1024"`
+	DriveName    *string `json:"drive_name" xml:"drive_name" require:"true" maximum:"1024"`
 	DriveType    *string `json:"drive_type" xml:"drive_type"`
 	EncryptMode  *string `json:"encrypt_mode" xml:"encrypt_mode"`
 	Owner        *string `json:"owner" xml:"owner" require:"true"`
@@ -10401,17 +10437,17 @@ type CreateFileRequest struct {
 	ContentHashName *string                `json:"content_hash_name" xml:"content_hash_name"`
 	ContentMd5      *string                `json:"content_md5" xml:"content_md5" maxLength:"32"`
 	ContentType     *string                `json:"content_type" xml:"content_type" require:"true"`
-	Description     *string                `json:"description" xml:"description" maxLength:"0"`
+	Description     *string                `json:"description" xml:"description" maxLength:"0" minLength:"1024"`
 	DriveId         *string                `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	Hidden          *bool                  `json:"hidden" xml:"hidden"`
 	Meta            *string                `json:"meta" xml:"meta"`
 	Name            *string                `json:"name" xml:"name" require:"true"`
-	ParentFileId    *string                `json:"parent_file_id" xml:"parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	ParentFileId    *string                `json:"parent_file_id" xml:"parent_file_id" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 	ParentFilePath  *string                `json:"parent_file_path" xml:"parent_file_path"`
 	PartInfoList    []*UploadPartInfo      `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	PreHash         *string                `json:"pre_hash" xml:"pre_hash"`
 	ShareId         *string                `json:"share_id" xml:"share_id"`
-	Size            *int64                 `json:"size" xml:"size" require:"true"`
+	Size            *int64                 `json:"size" xml:"size" require:"true" maximum:"53687091200" minimum:"0"`
 	Tags            map[string]interface{} `json:"tags" xml:"tags"`
 	Type            *string                `json:"type" xml:"type" require:"true"`
 }
@@ -10602,7 +10638,7 @@ func (s *DeleteDriveRequest) SetDriveId(v string) *DeleteDriveRequest {
  */
 type DeleteFileRequest struct {
 	DriveId     *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId      *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	FileId      *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9.-_]{1,50}"`
 	FilePath    *string `json:"file_path" xml:"file_path"`
 	Permanently *bool   `json:"permanently" xml:"permanently"`
 	ShareId     *string `json:"share_id" xml:"share_id"`
@@ -10666,7 +10702,7 @@ func (s *DeleteShareRequest) SetShareId(v string) *DeleteShareRequest {
  */
 type DownloadRequest struct {
 	DriveID      *string `json:"DriveID" xml:"DriveID" require:"true" pattern:"[0-9]+"`
-	FileID       *string `json:"FileID" xml:"FileID" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	FileID       *string `json:"FileID" xml:"FileID" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9.-_]{1,50}"`
 	ImageProcess *string `json:"ImageProcess" xml:"ImageProcess"`
 	ShareID      *string `json:"ShareID" xml:"ShareID"`
 }
@@ -10696,44 +10732,6 @@ func (s *DownloadRequest) SetImageProcess(v string) *DownloadRequest {
 
 func (s *DownloadRequest) SetShareID(v string) *DownloadRequest {
 	s.ShareID = &v
-	return s
-}
-
-/**
- * the file op info
- */
-type FileDeltaResponse struct {
-	CurrentCategory *string              `json:"current_category" xml:"current_category"`
-	File            *BaseCCPFileResponse `json:"file" xml:"file"`
-	FileId          *string              `json:"file_id" xml:"file_id"`
-	Op              *string              `json:"op" xml:"op"`
-}
-
-func (s FileDeltaResponse) String() string {
-	return tea.Prettify(s)
-}
-
-func (s FileDeltaResponse) GoString() string {
-	return s.String()
-}
-
-func (s *FileDeltaResponse) SetCurrentCategory(v string) *FileDeltaResponse {
-	s.CurrentCategory = &v
-	return s
-}
-
-func (s *FileDeltaResponse) SetFile(v *BaseCCPFileResponse) *FileDeltaResponse {
-	s.File = v
-	return s
-}
-
-func (s *FileDeltaResponse) SetFileId(v string) *FileDeltaResponse {
-	s.FileId = &v
-	return s
-}
-
-func (s *FileDeltaResponse) SetOp(v string) *FileDeltaResponse {
-	s.Op = &v
 	return s
 }
 
@@ -10782,8 +10780,8 @@ func (s *GetDefaultDriveRequest) SetUserId(v string) *GetDefaultDriveRequest {
  */
 type GetDownloadUrlRequest struct {
 	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
-	FileId    *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec" maximum:"14400" minimum:"0"`
+	FileId    *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9.-_]{1,50}"`
 	FileName  *string `json:"file_name" xml:"file_name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
 	FilePath  *string `json:"file_path" xml:"file_path"`
 	ShareId   *string `json:"share_id" xml:"share_id"`
@@ -10852,7 +10850,7 @@ func (s *GetDriveRequest) SetDriveId(v string) *GetDriveRequest {
  */
 type GetFileRequest struct {
 	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId                *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	FileId                *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9.-_]{1,50}"`
 	FilePath              *string `json:"file_path" xml:"file_path"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
@@ -10918,26 +10916,6 @@ func (s *GetLastCursorRequest) SetDriveId(v string) *GetLastCursorRequest {
 }
 
 /**
- * get last file op cursor response
- */
-type GetLastCursorResponse struct {
-	Cursor *string `json:"cursor" xml:"cursor"`
-}
-
-func (s GetLastCursorResponse) String() string {
-	return tea.Prettify(s)
-}
-
-func (s GetLastCursorResponse) GoString() string {
-	return s.String()
-}
-
-func (s *GetLastCursorResponse) SetCursor(v string) *GetLastCursorResponse {
-	s.Cursor = &v
-	return s
-}
-
-/**
  * get share request
  */
 type GetShareRequest struct {
@@ -10963,7 +10941,7 @@ func (s *GetShareRequest) SetShareId(v string) *GetShareRequest {
 type GetUploadUrlRequest struct {
 	ContentMd5   *string           `json:"content_md5" xml:"content_md5" maxLength:"32"`
 	DriveId      *string           `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId       *string           `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9]{1,50}"`
+	FileId       *string           `json:"file_id" xml:"file_id" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
 	FilePath     *string           `json:"file_path" xml:"file_path"`
 	PartInfoList []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
 	ShareId      *string           `json:"share_id" xml:"share_id"`
@@ -11014,10 +10992,36 @@ func (s *GetUploadUrlRequest) SetUploadId(v string) *GetUploadUrlRequest {
 }
 
 /**
+ *
+ */
+type ImageMediaMetadata struct {
+	Height *int64 `json:"height" xml:"height"`
+	Width  *int64 `json:"width" xml:"width"`
+}
+
+func (s ImageMediaMetadata) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ImageMediaMetadata) GoString() string {
+	return s.String()
+}
+
+func (s *ImageMediaMetadata) SetHeight(v int64) *ImageMediaMetadata {
+	s.Height = &v
+	return s
+}
+
+func (s *ImageMediaMetadata) SetWidth(v int64) *ImageMediaMetadata {
+	s.Width = &v
+	return s
+}
+
+/**
  * List drive request
  */
 type ListDriveRequest struct {
-	Limit  *int    `json:"limit" xml:"limit"`
+	Limit  *int    `json:"limit" xml:"limit" maximum:"100" minimum:"1"`
 	Marker *string `json:"marker" xml:"marker"`
 	Owner  *string `json:"owner" xml:"owner"`
 }
@@ -11078,38 +11082,6 @@ func (s *ListFileDeltaRequest) SetLimit(v int) *ListFileDeltaRequest {
 }
 
 /**
- * list file op response
- */
-type ListFileDeltaResponse struct {
-	Cursor  *string              `json:"cursor" xml:"cursor"`
-	HasMore *bool                `json:"has_more" xml:"has_more"`
-	Items   []*FileDeltaResponse `json:"items" xml:"items" type:"Repeated"`
-}
-
-func (s ListFileDeltaResponse) String() string {
-	return tea.Prettify(s)
-}
-
-func (s ListFileDeltaResponse) GoString() string {
-	return s.String()
-}
-
-func (s *ListFileDeltaResponse) SetCursor(v string) *ListFileDeltaResponse {
-	s.Cursor = &v
-	return s
-}
-
-func (s *ListFileDeltaResponse) SetHasMore(v bool) *ListFileDeltaResponse {
-	s.HasMore = &v
-	return s
-}
-
-func (s *ListFileDeltaResponse) SetItems(v []*FileDeltaResponse) *ListFileDeltaResponse {
-	s.Items = v
-	return s
-}
-
-/**
  * list file request
  */
 type ListFileRequest struct {
@@ -11117,9 +11089,9 @@ type ListFileRequest struct {
 	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
-	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1,3}"`
+	Limit                 *int64  `json:"limit" xml:"limit" maximum:"100" minimum:"0" pattern:"[0-9]{1,3}"`
 	Marker                *string `json:"marker" xml:"marker"`
-	ParentFileId          *string `json:"parent_file_id" xml:"parent_file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	ParentFileId          *string `json:"parent_file_id" xml:"parent_file_id" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9.-_]{1,50}"`
 	ParentFilePath        *string `json:"parent_file_path" xml:"parent_file_path"`
 	ShareId               *string `json:"share_id" xml:"share_id"`
 	Status                *string `json:"status" xml:"status"`
@@ -11187,7 +11159,7 @@ func (s *ListFileRequest) SetStatus(v string) *ListFileRequest {
  * List my drive request
  */
 type ListMyDriveRequest struct {
-	Limit  *int    `json:"limit" xml:"limit"`
+	Limit  *int    `json:"limit" xml:"limit" maximum:"100" minimum:"1"`
 	Marker *string `json:"marker" xml:"marker"`
 }
 
@@ -11215,7 +11187,7 @@ func (s *ListMyDriveRequest) SetMarker(v string) *ListMyDriveRequest {
 type ListShareRequest struct {
 	Creator       *string `json:"creator" xml:"creator"`
 	DriveId       *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	Limit         *int    `json:"limit" xml:"limit" require:"true"`
+	Limit         *int    `json:"limit" xml:"limit" require:"true" maximum:"100" minimum:"1"`
 	Marker        *string `json:"marker" xml:"marker"`
 	Owner         *string `json:"owner" xml:"owner"`
 	ShareFilePath *string `json:"share_file_path" xml:"share_file_path"`
@@ -11263,7 +11235,7 @@ func (s *ListShareRequest) SetShareFilePath(v string) *ListShareRequest {
  * list store file
  */
 type ListStoreFileRequest struct {
-	Limit          *int64  `json:"limit" xml:"limit"`
+	Limit          *int64  `json:"limit" xml:"limit" maximum:"1000" minimum:"1"`
 	Marker         *string `json:"marker" xml:"marker"`
 	ParentFilePath *string `json:"parent_file_path" xml:"parent_file_path"`
 	StoreId        *string `json:"store_id" xml:"store_id"`
@@ -11435,9 +11407,9 @@ func (s *OSSCopyFileRequest) SetToShareId(v string) *OSSCopyFileRequest {
 type OSSCreateFileRequest struct {
 	ContentMd5     *string           `json:"content_md5" xml:"content_md5"`
 	ContentType    *string           `json:"content_type" xml:"content_type"`
-	Name           *string           `json:"name" xml:"name"`
+	Name           *string           `json:"name" xml:"name" maximum:"1024" minimum:"1"`
 	PartInfoList   []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	Size           *int64            `json:"size" xml:"size"`
+	Size           *int64            `json:"size" xml:"size" maximum:"53687091200" minimum:"0"`
 	Type           *string           `json:"type" xml:"type"`
 	DriveId        *string           `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	ParentFilePath *string           `json:"parent_file_path" xml:"parent_file_path"`
@@ -11502,7 +11474,7 @@ func (s *OSSCreateFileRequest) SetShareId(v string) *OSSCreateFileRequest {
  */
 type OSSDeleteFileRequest struct {
 	DriveId     *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	FilePath    *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
+	FilePath    *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000" minLength:"1"`
 	Permanently *bool   `json:"permanently" xml:"permanently"`
 	ShareId     *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
 }
@@ -11540,9 +11512,9 @@ func (s *OSSDeleteFileRequest) SetShareId(v string) *OSSDeleteFileRequest {
  */
 type OSSGetDownloadUrlRequest struct {
 	DriveId   *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
+	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec" maximum:"14400" minimum:"10"`
 	FileName  *string `json:"file_name" xml:"file_name"`
-	FilePath  *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
+	FilePath  *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000" minLength:"1"`
 	ShareId   *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
 }
 
@@ -11584,11 +11556,11 @@ func (s *OSSGetDownloadUrlRequest) SetShareId(v string) *OSSGetDownloadUrlReques
  */
 type OSSGetFileRequest struct {
 	DriveId               *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	FilePath              *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
+	FilePath              *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000" minLength:"1"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
 	ShareId               *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
-	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec"`
+	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec" maximum:"14400" minimum:"10"`
 }
 
 func (s OSSGetFileRequest) String() string {
@@ -11635,7 +11607,7 @@ func (s *OSSGetFileRequest) SetUrlExpireSec(v int64) *OSSGetFileRequest {
 type OSSGetSecureUrlRequest struct {
 	DriveId   *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec"`
-	FilePath  *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
+	FilePath  *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000" minLength:"1"`
 	SecureIp  *string `json:"secure_ip" xml:"secure_ip"`
 	ShareId   *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
 }
@@ -11730,11 +11702,11 @@ type OSSListFileRequest struct {
 	DriveId               *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
 	ImageUrlProcess       *string `json:"image_url_process" xml:"image_url_process"`
-	Limit                 *int64  `json:"limit" xml:"limit" pattern:"[0-9]{1,3}"`
+	Limit                 *int64  `json:"limit" xml:"limit" maximum:"100" minimum:"0" pattern:"[0-9]{1,3}"`
 	Marker                *string `json:"marker" xml:"marker"`
 	ParentFilePath        *string `json:"parent_file_path" xml:"parent_file_path" require:"true"`
 	ShareId               *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
-	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec"`
+	UrlExpireSec          *int64  `json:"url_expire_sec" xml:"url_expire_sec" maximum:"14400" minimum:"10"`
 	VideoThumbnailProcess *string `json:"video_thumbnail_process" xml:"video_thumbnail_process"`
 }
 
@@ -11797,8 +11769,8 @@ func (s *OSSListFileRequest) SetVideoThumbnailProcess(v string) *OSSListFileRequ
 type OSSListUploadedPartRequest struct {
 	DriveId          *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
 	FilePath         *string `json:"file_path" xml:"file_path" require:"true"`
-	Limit            *int64  `json:"limit" xml:"limit" require:"true" pattern:"[0-9]+"`
-	PartNumberMarker *int64  `json:"part_number_marker" xml:"part_number_marker" pattern:"[0-9]+"`
+	Limit            *int64  `json:"limit" xml:"limit" require:"true" maximum:"1000" minimum:"1" pattern:"[0-9]+"`
+	PartNumberMarker *int64  `json:"part_number_marker" xml:"part_number_marker" minimum:"1" pattern:"[0-9]+"`
 	ShareId          *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
 	UploadId         *string `json:"upload_id" xml:"upload_id"`
 }
@@ -11892,12 +11864,39 @@ func (s *OSSMoveFileRequest) SetToParentFilePath(v string) *OSSMoveFileRequest {
 }
 
 /**
+ * 获取视频DRM License
+ */
+type OSSVideoDRMLicenseRequest struct {
+	DrmType        *string `json:"drmType" xml:"drmType" require:"true"`
+	LicenseRequest *string `json:"licenseRequest" xml:"licenseRequest" require:"true"`
+}
+
+func (s OSSVideoDRMLicenseRequest) String() string {
+	return tea.Prettify(s)
+}
+
+func (s OSSVideoDRMLicenseRequest) GoString() string {
+	return s.String()
+}
+
+func (s *OSSVideoDRMLicenseRequest) SetDrmType(v string) *OSSVideoDRMLicenseRequest {
+	s.DrmType = &v
+	return s
+}
+
+func (s *OSSVideoDRMLicenseRequest) SetLicenseRequest(v string) *OSSVideoDRMLicenseRequest {
+	s.LicenseRequest = &v
+	return s
+}
+
+/**
  * 获取视频分辨率列表
  */
 type OSSVideoDefinitionRequest struct {
-	DriveId  *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	FilePath *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
-	ShareId  *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
+	DriveId          *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	FilePath         *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000" minLength:"1"`
+	ProtectionScheme *string `json:"protection_scheme" xml:"protection_scheme"`
+	ShareId          *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
 }
 
 func (s OSSVideoDefinitionRequest) String() string {
@@ -11918,6 +11917,11 @@ func (s *OSSVideoDefinitionRequest) SetFilePath(v string) *OSSVideoDefinitionReq
 	return s
 }
 
+func (s *OSSVideoDefinitionRequest) SetProtectionScheme(v string) *OSSVideoDefinitionRequest {
+	s.ProtectionScheme = &v
+	return s
+}
+
 func (s *OSSVideoDefinitionRequest) SetShareId(v string) *OSSVideoDefinitionRequest {
 	s.ShareId = &v
 	return s
@@ -11927,12 +11931,13 @@ func (s *OSSVideoDefinitionRequest) SetShareId(v string) *OSSVideoDefinitionRequ
  * 获取视频的m3u8文件
  */
 type OSSVideoM3U8Request struct {
-	Definition *string `json:"definition" xml:"definition"`
-	DriveId    *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	ExpireSec  *int64  `json:"expire_sec" xml:"expire_sec"`
-	FilePath   *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
-	ShareId    *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
-	SignToken  *string `json:"sign_token" xml:"sign_token" require:"true"`
+	Definition       *string `json:"definition" xml:"definition"`
+	DriveId          *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	ExpireSec        *int64  `json:"expire_sec" xml:"expire_sec" maximum:"86400" minimum:"60"`
+	FilePath         *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000" minLength:"1"`
+	ProtectionScheme *string `json:"protection_scheme" xml:"protection_scheme"`
+	ShareId          *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
+	SignToken        *string `json:"sign_token" xml:"sign_token" require:"true"`
 }
 
 func (s OSSVideoM3U8Request) String() string {
@@ -11963,6 +11968,11 @@ func (s *OSSVideoM3U8Request) SetFilePath(v string) *OSSVideoM3U8Request {
 	return s
 }
 
+func (s *OSSVideoM3U8Request) SetProtectionScheme(v string) *OSSVideoM3U8Request {
+	s.ProtectionScheme = &v
+	return s
+}
+
 func (s *OSSVideoM3U8Request) SetShareId(v string) *OSSVideoM3U8Request {
 	s.ShareId = &v
 	return s
@@ -11977,12 +11987,13 @@ func (s *OSSVideoM3U8Request) SetSignToken(v string) *OSSVideoM3U8Request {
  * 启动视频转码请求
  */
 type OSSVideoTranscodeRequest struct {
-	DriveId   *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	FilePath  *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000"`
-	HlsTime   *int64  `json:"hls_time" xml:"hls_time"`
-	Remarks   *string `json:"remarks" xml:"remarks"`
-	ShareId   *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
-	Transcode *bool   `json:"transcode" xml:"transcode"`
+	DriveId          *string `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	FilePath         *string `json:"file_path" xml:"file_path" require:"true" maxLength:"1000" minLength:"1"`
+	HlsTime          *int64  `json:"hls_time" xml:"hls_time"`
+	ProtectionScheme *string `json:"protection_scheme" xml:"protection_scheme"`
+	Remarks          *string `json:"remarks" xml:"remarks"`
+	ShareId          *string `json:"share_id" xml:"share_id" pattern:"[0-9a-zA-Z-]+"`
+	Transcode        *bool   `json:"transcode" xml:"transcode"`
 }
 
 func (s OSSVideoTranscodeRequest) String() string {
@@ -12008,6 +12019,11 @@ func (s *OSSVideoTranscodeRequest) SetHlsTime(v int64) *OSSVideoTranscodeRequest
 	return s
 }
 
+func (s *OSSVideoTranscodeRequest) SetProtectionScheme(v string) *OSSVideoTranscodeRequest {
+	s.ProtectionScheme = &v
+	return s
+}
+
 func (s *OSSVideoTranscodeRequest) SetRemarks(v string) *OSSVideoTranscodeRequest {
 	s.Remarks = &v
 	return s
@@ -12020,56 +12036,6 @@ func (s *OSSVideoTranscodeRequest) SetShareId(v string) *OSSVideoTranscodeReques
 
 func (s *OSSVideoTranscodeRequest) SetTranscode(v bool) *OSSVideoTranscodeRequest {
 	s.Transcode = &v
-	return s
-}
-
-/**
- *
- */
-type StreamInfo struct {
-	ContentHash     *string           `json:"content_hash" xml:"content_hash"`
-	ContentHashName *string           `json:"content_hash_name" xml:"content_hash_name"`
-	ContentMd5      *string           `json:"content_md5" xml:"content_md5" require:"true"`
-	PartInfoList    []*UploadPartInfo `json:"part_info_list" xml:"part_info_list" type:"Repeated"`
-	PreHash         *string           `json:"pre_hash" xml:"pre_hash"`
-	Size            *int64            `json:"size" xml:"size" require:"true"`
-}
-
-func (s StreamInfo) String() string {
-	return tea.Prettify(s)
-}
-
-func (s StreamInfo) GoString() string {
-	return s.String()
-}
-
-func (s *StreamInfo) SetContentHash(v string) *StreamInfo {
-	s.ContentHash = &v
-	return s
-}
-
-func (s *StreamInfo) SetContentHashName(v string) *StreamInfo {
-	s.ContentHashName = &v
-	return s
-}
-
-func (s *StreamInfo) SetContentMd5(v string) *StreamInfo {
-	s.ContentMd5 = &v
-	return s
-}
-
-func (s *StreamInfo) SetPartInfoList(v []*UploadPartInfo) *StreamInfo {
-	s.PartInfoList = v
-	return s
-}
-
-func (s *StreamInfo) SetPreHash(v string) *StreamInfo {
-	s.PreHash = &v
-	return s
-}
-
-func (s *StreamInfo) SetSize(v int64) *StreamInfo {
-	s.Size = &v
 	return s
 }
 
@@ -12117,9 +12083,9 @@ func (s *UCGetObjectInfoBySha1Request) SetSha1(v string) *UCGetObjectInfoBySha1R
  * Update drive request
  */
 type UpdateDriveRequest struct {
-	Description       *string `json:"description" xml:"description"`
+	Description       *string `json:"description" xml:"description" maximum:"1024"`
 	DriveId           *string `json:"drive_id" xml:"drive_id" require:"true"`
-	DriveName         *string `json:"drive_name" xml:"drive_name"`
+	DriveName         *string `json:"drive_name" xml:"drive_name" maximum:"1024"`
 	EncryptDataAccess *bool   `json:"encrypt_data_access" xml:"encrypt_data_access"`
 	EncryptMode       *string `json:"encrypt_mode" xml:"encrypt_mode"`
 	Status            *string `json:"status" xml:"status"`
@@ -12175,7 +12141,7 @@ func (s *UpdateDriveRequest) SetTotalSize(v int64) *UpdateDriveRequest {
 type UpdateFileMetaRequest struct {
 	Description *string                `json:"description" xml:"description" maxLength:"1000"`
 	DriveId     *string                `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
-	FileId      *string                `json:"file_id" xml:"file_id" require:"true" maxLength:"50" pattern:"[a-z0-9.-_]{1,50}"`
+	FileId      *string                `json:"file_id" xml:"file_id" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9.-_]{1,50}"`
 	Hidden      *bool                  `json:"hidden" xml:"hidden"`
 	Meta        *string                `json:"meta" xml:"meta"`
 	Name        *string                `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
@@ -12290,6 +12256,26 @@ func (s *UpdateShareRequest) SetSharePolicy(v []*SharePermissionPolicy) *UpdateS
 
 func (s *UpdateShareRequest) SetStatus(v string) *UpdateShareRequest {
 	s.Status = &v
+	return s
+}
+
+/**
+ *
+ */
+type VideoMediaMetadata struct {
+	Duration *string `json:"duration" xml:"duration"`
+}
+
+func (s VideoMediaMetadata) String() string {
+	return tea.Prettify(s)
+}
+
+func (s VideoMediaMetadata) GoString() string {
+	return s.String()
+}
+
+func (s *VideoMediaMetadata) SetDuration(v string) *VideoMediaMetadata {
+	s.Duration = &v
 	return s
 }
 
@@ -12567,19 +12553,20 @@ func (s *UpdateUserModel) SetBody(v *UpdateUserResponse) *UpdateUserModel {
  * Base user response
  */
 type BaseUserResponse struct {
-	Avatar         *string `json:"avatar" xml:"avatar"`
-	CreatedAt      *int64  `json:"created_at" xml:"created_at"`
-	DefaultDriveId *string `json:"default_drive_id" xml:"default_drive_id"`
-	Description    *string `json:"description" xml:"description"`
-	DomainId       *string `json:"domain_id" xml:"domain_id"`
-	Email          *string `json:"email" xml:"email"`
-	NickName       *string `json:"nick_name" xml:"nick_name"`
-	Phone          *string `json:"phone" xml:"phone"`
-	Role           *string `json:"role" xml:"role"`
-	Status         *string `json:"status" xml:"status"`
-	UpdatedAt      *int64  `json:"updated_at" xml:"updated_at"`
-	UserId         *string `json:"user_id" xml:"user_id"`
-	UserName       *string `json:"user_name" xml:"user_name"`
+	Avatar         *string                `json:"avatar" xml:"avatar"`
+	CreatedAt      *int64                 `json:"created_at" xml:"created_at"`
+	DefaultDriveId *string                `json:"default_drive_id" xml:"default_drive_id"`
+	Description    *string                `json:"description" xml:"description"`
+	DomainId       *string                `json:"domain_id" xml:"domain_id"`
+	Email          *string                `json:"email" xml:"email"`
+	NickName       *string                `json:"nick_name" xml:"nick_name"`
+	Phone          *string                `json:"phone" xml:"phone"`
+	Role           *string                `json:"role" xml:"role"`
+	Status         *string                `json:"status" xml:"status"`
+	UpdatedAt      *int64                 `json:"updated_at" xml:"updated_at"`
+	UserData       map[string]interface{} `json:"user_data" xml:"user_data"`
+	UserId         *string                `json:"user_id" xml:"user_id"`
+	UserName       *string                `json:"user_name" xml:"user_name"`
 }
 
 func (s BaseUserResponse) String() string {
@@ -12645,6 +12632,11 @@ func (s *BaseUserResponse) SetUpdatedAt(v int64) *BaseUserResponse {
 	return s
 }
 
+func (s *BaseUserResponse) SetUserData(v map[string]interface{}) *BaseUserResponse {
+	s.UserData = v
+	return s
+}
+
 func (s *BaseUserResponse) SetUserId(v string) *BaseUserResponse {
 	s.UserId = &v
 	return s
@@ -12659,15 +12651,16 @@ func (s *BaseUserResponse) SetUserName(v string) *BaseUserResponse {
  * Create user request
  */
 type CreateUserRequest struct {
-	Avatar      *string `json:"avatar" xml:"avatar"`
-	Description *string `json:"description" xml:"description"`
-	Email       *string `json:"email" xml:"email"`
-	NickName    *string `json:"nick_name" xml:"nick_name"`
-	Phone       *string `json:"phone" xml:"phone"`
-	Role        *string `json:"role" xml:"role"`
-	Status      *string `json:"status" xml:"status"`
-	UserId      *string `json:"user_id" xml:"user_id" require:"true"`
-	UserName    *string `json:"user_name" xml:"user_name"`
+	Avatar      *string                `json:"avatar" xml:"avatar"`
+	Description *string                `json:"description" xml:"description" maximum:"1024"`
+	Email       *string                `json:"email" xml:"email"`
+	NickName    *string                `json:"nick_name" xml:"nick_name"`
+	Phone       *string                `json:"phone" xml:"phone"`
+	Role        *string                `json:"role" xml:"role"`
+	Status      *string                `json:"status" xml:"status"`
+	UserData    map[string]interface{} `json:"user_data" xml:"user_data"`
+	UserId      *string                `json:"user_id" xml:"user_id" require:"true"`
+	UserName    *string                `json:"user_name" xml:"user_name"`
 }
 
 func (s CreateUserRequest) String() string {
@@ -12713,6 +12706,11 @@ func (s *CreateUserRequest) SetStatus(v string) *CreateUserRequest {
 	return s
 }
 
+func (s *CreateUserRequest) SetUserData(v map[string]interface{}) *CreateUserRequest {
+	s.UserData = v
+	return s
+}
+
 func (s *CreateUserRequest) SetUserId(v string) *CreateUserRequest {
 	s.UserId = &v
 	return s
@@ -12727,19 +12725,20 @@ func (s *CreateUserRequest) SetUserName(v string) *CreateUserRequest {
  * Create user response
  */
 type CreateUserResponse struct {
-	Avatar         *string `json:"avatar" xml:"avatar"`
-	CreatedAt      *int64  `json:"created_at" xml:"created_at"`
-	DefaultDriveId *string `json:"default_drive_id" xml:"default_drive_id"`
-	Description    *string `json:"description" xml:"description"`
-	DomainId       *string `json:"domain_id" xml:"domain_id"`
-	Email          *string `json:"email" xml:"email"`
-	NickName       *string `json:"nick_name" xml:"nick_name"`
-	Phone          *string `json:"phone" xml:"phone"`
-	Role           *string `json:"role" xml:"role"`
-	Status         *string `json:"status" xml:"status"`
-	UpdatedAt      *int64  `json:"updated_at" xml:"updated_at"`
-	UserId         *string `json:"user_id" xml:"user_id"`
-	UserName       *string `json:"user_name" xml:"user_name"`
+	Avatar         *string                `json:"avatar" xml:"avatar"`
+	CreatedAt      *int64                 `json:"created_at" xml:"created_at"`
+	DefaultDriveId *string                `json:"default_drive_id" xml:"default_drive_id"`
+	Description    *string                `json:"description" xml:"description"`
+	DomainId       *string                `json:"domain_id" xml:"domain_id"`
+	Email          *string                `json:"email" xml:"email"`
+	NickName       *string                `json:"nick_name" xml:"nick_name"`
+	Phone          *string                `json:"phone" xml:"phone"`
+	Role           *string                `json:"role" xml:"role"`
+	Status         *string                `json:"status" xml:"status"`
+	UpdatedAt      *int64                 `json:"updated_at" xml:"updated_at"`
+	UserData       map[string]interface{} `json:"user_data" xml:"user_data"`
+	UserId         *string                `json:"user_id" xml:"user_id"`
+	UserName       *string                `json:"user_name" xml:"user_name"`
 }
 
 func (s CreateUserResponse) String() string {
@@ -12802,6 +12801,11 @@ func (s *CreateUserResponse) SetStatus(v string) *CreateUserResponse {
 
 func (s *CreateUserResponse) SetUpdatedAt(v int64) *CreateUserResponse {
 	s.UpdatedAt = &v
+	return s
+}
+
+func (s *CreateUserResponse) SetUserData(v map[string]interface{}) *CreateUserResponse {
+	s.UserData = v
 	return s
 }
 
@@ -12873,19 +12877,20 @@ func (s *GetUserRequest) SetUserId(v string) *GetUserRequest {
  * Get user response
  */
 type GetUserResponse struct {
-	Avatar         *string `json:"avatar" xml:"avatar"`
-	CreatedAt      *int64  `json:"created_at" xml:"created_at"`
-	DefaultDriveId *string `json:"default_drive_id" xml:"default_drive_id"`
-	Description    *string `json:"description" xml:"description"`
-	DomainId       *string `json:"domain_id" xml:"domain_id"`
-	Email          *string `json:"email" xml:"email"`
-	NickName       *string `json:"nick_name" xml:"nick_name"`
-	Phone          *string `json:"phone" xml:"phone"`
-	Role           *string `json:"role" xml:"role"`
-	Status         *string `json:"status" xml:"status"`
-	UpdatedAt      *int64  `json:"updated_at" xml:"updated_at"`
-	UserId         *string `json:"user_id" xml:"user_id"`
-	UserName       *string `json:"user_name" xml:"user_name"`
+	Avatar         *string                `json:"avatar" xml:"avatar"`
+	CreatedAt      *int64                 `json:"created_at" xml:"created_at"`
+	DefaultDriveId *string                `json:"default_drive_id" xml:"default_drive_id"`
+	Description    *string                `json:"description" xml:"description"`
+	DomainId       *string                `json:"domain_id" xml:"domain_id"`
+	Email          *string                `json:"email" xml:"email"`
+	NickName       *string                `json:"nick_name" xml:"nick_name"`
+	Phone          *string                `json:"phone" xml:"phone"`
+	Role           *string                `json:"role" xml:"role"`
+	Status         *string                `json:"status" xml:"status"`
+	UpdatedAt      *int64                 `json:"updated_at" xml:"updated_at"`
+	UserData       map[string]interface{} `json:"user_data" xml:"user_data"`
+	UserId         *string                `json:"user_id" xml:"user_id"`
+	UserName       *string                `json:"user_name" xml:"user_name"`
 }
 
 func (s GetUserResponse) String() string {
@@ -12951,6 +12956,11 @@ func (s *GetUserResponse) SetUpdatedAt(v int64) *GetUserResponse {
 	return s
 }
 
+func (s *GetUserResponse) SetUserData(v map[string]interface{}) *GetUserResponse {
+	s.UserData = v
+	return s
+}
+
 func (s *GetUserResponse) SetUserId(v string) *GetUserResponse {
 	s.UserId = &v
 	return s
@@ -12965,7 +12975,7 @@ func (s *GetUserResponse) SetUserName(v string) *GetUserResponse {
  * List user request
  */
 type ListUserRequest struct {
-	Limit  *int    `json:"limit" xml:"limit"`
+	Limit  *int    `json:"limit" xml:"limit" maximum:"100" minimum:"1"`
 	Marker *string `json:"marker" xml:"marker"`
 }
 
@@ -13018,7 +13028,7 @@ func (s *ListUserResponse) SetNextMarker(v string) *ListUserResponse {
  */
 type SearchUserRequest struct {
 	Email    *string `json:"email" xml:"email"`
-	Limit    *int    `json:"limit" xml:"limit"`
+	Limit    *int    `json:"limit" xml:"limit" maximum:"100" minimum:"1"`
 	Marker   *string `json:"marker" xml:"marker"`
 	NickName *string `json:"nick_name" xml:"nick_name"`
 	Phone    *string `json:"phone" xml:"phone"`
@@ -13079,14 +13089,15 @@ func (s *SearchUserRequest) SetUserName(v string) *SearchUserRequest {
  * Update user request
  */
 type UpdateUserRequest struct {
-	Avatar      *string `json:"avatar" xml:"avatar"`
-	Description *string `json:"description" xml:"description"`
-	Email       *string `json:"email" xml:"email"`
-	NickName    *string `json:"nick_name" xml:"nick_name"`
-	Phone       *string `json:"phone" xml:"phone"`
-	Role        *string `json:"role" xml:"role"`
-	Status      *string `json:"status" xml:"status"`
-	UserId      *string `json:"user_id" xml:"user_id" require:"true"`
+	Avatar      *string                `json:"avatar" xml:"avatar"`
+	Description *string                `json:"description" xml:"description" maximum:"1024"`
+	Email       *string                `json:"email" xml:"email"`
+	NickName    *string                `json:"nick_name" xml:"nick_name"`
+	Phone       *string                `json:"phone" xml:"phone"`
+	Role        *string                `json:"role" xml:"role"`
+	Status      *string                `json:"status" xml:"status"`
+	UserData    map[string]interface{} `json:"user_data" xml:"user_data"`
+	UserId      *string                `json:"user_id" xml:"user_id" require:"true"`
 }
 
 func (s UpdateUserRequest) String() string {
@@ -13132,6 +13143,11 @@ func (s *UpdateUserRequest) SetStatus(v string) *UpdateUserRequest {
 	return s
 }
 
+func (s *UpdateUserRequest) SetUserData(v map[string]interface{}) *UpdateUserRequest {
+	s.UserData = v
+	return s
+}
+
 func (s *UpdateUserRequest) SetUserId(v string) *UpdateUserRequest {
 	s.UserId = &v
 	return s
@@ -13141,19 +13157,20 @@ func (s *UpdateUserRequest) SetUserId(v string) *UpdateUserRequest {
  * Update user response
  */
 type UpdateUserResponse struct {
-	Avatar         *string `json:"avatar" xml:"avatar"`
-	CreatedAt      *int64  `json:"created_at" xml:"created_at"`
-	DefaultDriveId *string `json:"default_drive_id" xml:"default_drive_id"`
-	Description    *string `json:"description" xml:"description"`
-	DomainId       *string `json:"domain_id" xml:"domain_id"`
-	Email          *string `json:"email" xml:"email"`
-	NickName       *string `json:"nick_name" xml:"nick_name"`
-	Phone          *string `json:"phone" xml:"phone"`
-	Role           *string `json:"role" xml:"role"`
-	Status         *string `json:"status" xml:"status"`
-	UpdatedAt      *int64  `json:"updated_at" xml:"updated_at"`
-	UserId         *string `json:"user_id" xml:"user_id"`
-	UserName       *string `json:"user_name" xml:"user_name"`
+	Avatar         *string                `json:"avatar" xml:"avatar"`
+	CreatedAt      *int64                 `json:"created_at" xml:"created_at"`
+	DefaultDriveId *string                `json:"default_drive_id" xml:"default_drive_id"`
+	Description    *string                `json:"description" xml:"description"`
+	DomainId       *string                `json:"domain_id" xml:"domain_id"`
+	Email          *string                `json:"email" xml:"email"`
+	NickName       *string                `json:"nick_name" xml:"nick_name"`
+	Phone          *string                `json:"phone" xml:"phone"`
+	Role           *string                `json:"role" xml:"role"`
+	Status         *string                `json:"status" xml:"status"`
+	UpdatedAt      *int64                 `json:"updated_at" xml:"updated_at"`
+	UserData       map[string]interface{} `json:"user_data" xml:"user_data"`
+	UserId         *string                `json:"user_id" xml:"user_id"`
+	UserName       *string                `json:"user_name" xml:"user_name"`
 }
 
 func (s UpdateUserResponse) String() string {
@@ -13219,6 +13236,11 @@ func (s *UpdateUserResponse) SetUpdatedAt(v int64) *UpdateUserResponse {
 	return s
 }
 
+func (s *UpdateUserResponse) SetUserData(v map[string]interface{}) *UpdateUserResponse {
+	s.UserData = v
+	return s
+}
+
 func (s *UpdateUserResponse) SetUserId(v string) *UpdateUserResponse {
 	s.UserId = &v
 	return s
@@ -13226,6 +13248,52 @@ func (s *UpdateUserResponse) SetUserId(v string) *UpdateUserResponse {
 
 func (s *UpdateUserResponse) SetUserName(v string) *UpdateUserResponse {
 	s.UserName = &v
+	return s
+}
+
+type CreateStoryRequestModel struct {
+	Headers map[string]*string  `json:"headers" xml:"headers"`
+	Body    *CreateStoryRequest `json:"body" xml:"body" require:"true"`
+}
+
+func (s CreateStoryRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CreateStoryRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *CreateStoryRequestModel) SetHeaders(v map[string]*string) *CreateStoryRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *CreateStoryRequestModel) SetBody(v *CreateStoryRequest) *CreateStoryRequestModel {
+	s.Body = v
+	return s
+}
+
+type CreateStoryModel struct {
+	Headers map[string]*string   `json:"headers" xml:"headers"`
+	Body    *CreateStoryResponse `json:"body" xml:"body" require:"true"`
+}
+
+func (s CreateStoryModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CreateStoryModel) GoString() string {
+	return s.String()
+}
+
+func (s *CreateStoryModel) SetHeaders(v map[string]*string) *CreateStoryModel {
+	s.Headers = v
+	return s
+}
+
+func (s *CreateStoryModel) SetBody(v *CreateStoryResponse) *CreateStoryModel {
+	s.Body = v
 	return s
 }
 
@@ -13271,6 +13339,52 @@ func (s *GetPhotoCountModel) SetHeaders(v map[string]*string) *GetPhotoCountMode
 }
 
 func (s *GetPhotoCountModel) SetBody(v *GetImageCountResponse) *GetPhotoCountModel {
+	s.Body = v
+	return s
+}
+
+type GetStoryDetailRequestModel struct {
+	Headers map[string]*string     `json:"headers" xml:"headers"`
+	Body    *GetStoryDetailRequest `json:"body" xml:"body" require:"true"`
+}
+
+func (s GetStoryDetailRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetStoryDetailRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *GetStoryDetailRequestModel) SetHeaders(v map[string]*string) *GetStoryDetailRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *GetStoryDetailRequestModel) SetBody(v *GetStoryDetailRequest) *GetStoryDetailRequestModel {
+	s.Body = v
+	return s
+}
+
+type GetStoryDetailModel struct {
+	Headers map[string]*string      `json:"headers" xml:"headers"`
+	Body    *GetStoryDetailResponse `json:"body" xml:"body" require:"true"`
+}
+
+func (s GetStoryDetailModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetStoryDetailModel) GoString() string {
+	return s.String()
+}
+
+func (s *GetStoryDetailModel) SetHeaders(v map[string]*string) *GetStoryDetailModel {
+	s.Headers = v
+	return s
+}
+
+func (s *GetStoryDetailModel) SetBody(v *GetStoryDetailResponse) *GetStoryDetailModel {
 	s.Body = v
 	return s
 }
@@ -13363,6 +13477,52 @@ func (s *ListFaceGroupsModel) SetHeaders(v map[string]*string) *ListFaceGroupsMo
 }
 
 func (s *ListFaceGroupsModel) SetBody(v *ListImageFaceGroupsResponse) *ListFaceGroupsModel {
+	s.Body = v
+	return s
+}
+
+type ListStoryRequestModel struct {
+	Headers map[string]*string `json:"headers" xml:"headers"`
+	Body    *ListStoryRequest  `json:"body" xml:"body" require:"true"`
+}
+
+func (s ListStoryRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListStoryRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *ListStoryRequestModel) SetHeaders(v map[string]*string) *ListStoryRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *ListStoryRequestModel) SetBody(v *ListStoryRequest) *ListStoryRequestModel {
+	s.Body = v
+	return s
+}
+
+type ListStoryModel struct {
+	Headers map[string]*string `json:"headers" xml:"headers"`
+	Body    *ListStoryResponse `json:"body" xml:"body" require:"true"`
+}
+
+func (s ListStoryModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListStoryModel) GoString() string {
+	return s.String()
+}
+
+func (s *ListStoryModel) SetHeaders(v map[string]*string) *ListStoryModel {
+	s.Headers = v
+	return s
+}
+
+func (s *ListStoryModel) SetBody(v *ListStoryResponse) *ListStoryModel {
 	s.Body = v
 	return s
 }
@@ -13550,6 +13710,46 @@ func (s *Address) SetTownship(v string) *Address {
 }
 
 /**
+ * Create story request
+ */
+type CreateStoryRequest struct {
+	DriveId *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+}
+
+func (s CreateStoryRequest) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CreateStoryRequest) GoString() string {
+	return s.String()
+}
+
+func (s *CreateStoryRequest) SetDriveId(v string) *CreateStoryRequest {
+	s.DriveId = &v
+	return s
+}
+
+/**
+ * 生成故事
+ */
+type CreateStoryResponse struct {
+	DriveId *string `json:"drive_id" xml:"drive_id"`
+}
+
+func (s CreateStoryResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CreateStoryResponse) GoString() string {
+	return s.String()
+}
+
+func (s *CreateStoryResponse) SetDriveId(v string) *CreateStoryResponse {
+	s.DriveId = &v
+	return s
+}
+
+/**
  * Get photo count request
  */
 type GetImageCountRequest struct {
@@ -13590,11 +13790,124 @@ func (s *GetImageCountResponse) SetImageCount(v int64) *GetImageCountResponse {
 }
 
 /**
+ * Get story detail request
+ */
+type GetStoryDetailRequest struct {
+	DriveId           *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	StoryId           *string `json:"story_id" xml:"story_id" require:"true"`
+	VideoUrlExpireSec *int64  `json:"video_url_expire_sec" xml:"video_url_expire_sec" maximum:"14400" minimum:"10"`
+}
+
+func (s GetStoryDetailRequest) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetStoryDetailRequest) GoString() string {
+	return s.String()
+}
+
+func (s *GetStoryDetailRequest) SetDriveId(v string) *GetStoryDetailRequest {
+	s.DriveId = &v
+	return s
+}
+
+func (s *GetStoryDetailRequest) SetStoryId(v string) *GetStoryDetailRequest {
+	s.StoryId = &v
+	return s
+}
+
+func (s *GetStoryDetailRequest) SetVideoUrlExpireSec(v int64) *GetStoryDetailRequest {
+	s.VideoUrlExpireSec = &v
+	return s
+}
+
+/**
+ * 故事详情
+ */
+type GetStoryDetailResponse struct {
+	CoverFileId          *string                `json:"cover_file_id" xml:"cover_file_id"`
+	CreatedAt            *string                `json:"created_at" xml:"created_at"`
+	Score                *int                   `json:"score" xml:"score"`
+	StoryId              *string                `json:"story_id" xml:"story_id"`
+	StoryImagesDateRange []*int                 `json:"story_images_date_range" xml:"story_images_date_range" type:"Repeated"`
+	SubTitle             *string                `json:"sub_title" xml:"sub_title"`
+	Title                *string                `json:"title" xml:"title"`
+	UpdatedAt            *string                `json:"updated_at" xml:"updated_at"`
+	VideoStatus          *string                `json:"video_status" xml:"video_status"`
+	VideoUrl             *string                `json:"video_url" xml:"video_url"`
+	Items                []*BaseCCPFileResponse `json:"items" xml:"items" type:"Repeated"`
+}
+
+func (s GetStoryDetailResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetStoryDetailResponse) GoString() string {
+	return s.String()
+}
+
+func (s *GetStoryDetailResponse) SetCoverFileId(v string) *GetStoryDetailResponse {
+	s.CoverFileId = &v
+	return s
+}
+
+func (s *GetStoryDetailResponse) SetCreatedAt(v string) *GetStoryDetailResponse {
+	s.CreatedAt = &v
+	return s
+}
+
+func (s *GetStoryDetailResponse) SetScore(v int) *GetStoryDetailResponse {
+	s.Score = &v
+	return s
+}
+
+func (s *GetStoryDetailResponse) SetStoryId(v string) *GetStoryDetailResponse {
+	s.StoryId = &v
+	return s
+}
+
+func (s *GetStoryDetailResponse) SetStoryImagesDateRange(v []*int) *GetStoryDetailResponse {
+	s.StoryImagesDateRange = v
+	return s
+}
+
+func (s *GetStoryDetailResponse) SetSubTitle(v string) *GetStoryDetailResponse {
+	s.SubTitle = &v
+	return s
+}
+
+func (s *GetStoryDetailResponse) SetTitle(v string) *GetStoryDetailResponse {
+	s.Title = &v
+	return s
+}
+
+func (s *GetStoryDetailResponse) SetUpdatedAt(v string) *GetStoryDetailResponse {
+	s.UpdatedAt = &v
+	return s
+}
+
+func (s *GetStoryDetailResponse) SetVideoStatus(v string) *GetStoryDetailResponse {
+	s.VideoStatus = &v
+	return s
+}
+
+func (s *GetStoryDetailResponse) SetVideoUrl(v string) *GetStoryDetailResponse {
+	s.VideoUrl = &v
+	return s
+}
+
+func (s *GetStoryDetailResponse) SetItems(v []*BaseCCPFileResponse) *GetStoryDetailResponse {
+	s.Items = v
+	return s
+}
+
+/**
  *
  */
 type ImageAddressResponse struct {
 	AddressDetail *Address `json:"address_detail" xml:"address_detail"`
 	Count         *int64   `json:"count" xml:"count"`
+	CoverFileId   *string  `json:"cover_file_id" xml:"cover_file_id"`
 	CoverUrl      *string  `json:"cover_url" xml:"cover_url"`
 	Location      *string  `json:"location" xml:"location"`
 	Name          *string  `json:"name" xml:"name"`
@@ -13618,6 +13931,11 @@ func (s *ImageAddressResponse) SetCount(v int64) *ImageAddressResponse {
 	return s
 }
 
+func (s *ImageAddressResponse) SetCoverFileId(v string) *ImageAddressResponse {
+	s.CoverFileId = &v
+	return s
+}
+
 func (s *ImageAddressResponse) SetCoverUrl(v string) *ImageAddressResponse {
 	s.CoverUrl = &v
 	return s
@@ -13637,6 +13955,7 @@ func (s *ImageAddressResponse) SetName(v string) *ImageAddressResponse {
  *
  */
 type ImageFaceGroupResponse struct {
+	CoverFileId   *string `json:"cover_file_id" xml:"cover_file_id"`
 	CreatedAt     *string `json:"created_at" xml:"created_at"`
 	FaceCount     *int64  `json:"face_count" xml:"face_count"`
 	GroupCoverUrl *string `json:"group_cover_url" xml:"group_cover_url"`
@@ -13652,6 +13971,11 @@ func (s ImageFaceGroupResponse) String() string {
 
 func (s ImageFaceGroupResponse) GoString() string {
 	return s.String()
+}
+
+func (s *ImageFaceGroupResponse) SetCoverFileId(v string) *ImageFaceGroupResponse {
+	s.CoverFileId = &v
+	return s
 }
 
 func (s *ImageFaceGroupResponse) SetCreatedAt(v string) *ImageFaceGroupResponse {
@@ -13693,9 +14017,10 @@ func (s *ImageFaceGroupResponse) SetUpdatedAt(v string) *ImageFaceGroupResponse 
  *
  */
 type ImageTagResponse struct {
-	Count    *int64  `json:"count" xml:"count"`
-	CoverUrl *string `json:"cover_url" xml:"cover_url"`
-	Name     *string `json:"name" xml:"name"`
+	Count       *int64  `json:"count" xml:"count"`
+	CoverFileId *string `json:"cover_file_id" xml:"cover_file_id"`
+	CoverUrl    *string `json:"cover_url" xml:"cover_url"`
+	Name        *string `json:"name" xml:"name"`
 }
 
 func (s ImageTagResponse) String() string {
@@ -13708,6 +14033,11 @@ func (s ImageTagResponse) GoString() string {
 
 func (s *ImageTagResponse) SetCount(v int64) *ImageTagResponse {
 	s.Count = &v
+	return s
+}
+
+func (s *ImageTagResponse) SetCoverFileId(v string) *ImageTagResponse {
+	s.CoverFileId = &v
 	return s
 }
 
@@ -13727,7 +14057,7 @@ func (s *ImageTagResponse) SetName(v string) *ImageTagResponse {
 type ListImageAddressGroupsRequest struct {
 	DriveId               *string `json:"drive_id" xml:"drive_id" require:"true"`
 	ImageThumbnailProcess *string `json:"image_thumbnail_process" xml:"image_thumbnail_process"`
-	Limit                 *int    `json:"limit" xml:"limit"`
+	Limit                 *int    `json:"limit" xml:"limit" maximum:"100" minimum:"1"`
 	Marker                *string `json:"marker" xml:"marker"`
 }
 
@@ -13790,7 +14120,7 @@ func (s *ListImageAddressGroupsResponse) SetNextMarker(v string) *ListImageAddre
  */
 type ListImageFaceGroupsRequest struct {
 	DriveId *string `json:"drive_id" xml:"drive_id" require:"true"`
-	Limit   *int64  `json:"limit" xml:"limit"`
+	Limit   *int64  `json:"limit" xml:"limit" maximum:"100" minimum:"1"`
 	Marker  *string `json:"marker" xml:"marker"`
 }
 
@@ -13890,6 +14220,64 @@ func (s *ListImageTagsResponse) SetTags(v []*ImageTagResponse) *ListImageTagsRes
 }
 
 /**
+ * List story request
+ */
+type ListStoryRequest struct {
+	DriveId *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	Limit   *int    `json:"limit" xml:"limit" maximum:"100" minimum:"1"`
+	Marker  *string `json:"marker" xml:"marker"`
+}
+
+func (s ListStoryRequest) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListStoryRequest) GoString() string {
+	return s.String()
+}
+
+func (s *ListStoryRequest) SetDriveId(v string) *ListStoryRequest {
+	s.DriveId = &v
+	return s
+}
+
+func (s *ListStoryRequest) SetLimit(v int) *ListStoryRequest {
+	s.Limit = &v
+	return s
+}
+
+func (s *ListStoryRequest) SetMarker(v string) *ListStoryRequest {
+	s.Marker = &v
+	return s
+}
+
+/**
+ * 故事列表
+ */
+type ListStoryResponse struct {
+	Items      []*StoryResponse `json:"items" xml:"items" type:"Repeated"`
+	NextMarker *string          `json:"next_marker" xml:"next_marker"`
+}
+
+func (s ListStoryResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s ListStoryResponse) GoString() string {
+	return s.String()
+}
+
+func (s *ListStoryResponse) SetItems(v []*StoryResponse) *ListStoryResponse {
+	s.Items = v
+	return s
+}
+
+func (s *ListStoryResponse) SetNextMarker(v string) *ListStoryResponse {
+	s.NextMarker = &v
+	return s
+}
+
+/**
  * Search image address groups request
  */
 type SearchImageAddressGroupsRequest struct {
@@ -13956,6 +14344,80 @@ func (s SearchImageAddressGroupsResponse) GoString() string {
 
 func (s *SearchImageAddressGroupsResponse) SetItems(v []*ImageAddressResponse) *SearchImageAddressGroupsResponse {
 	s.Items = v
+	return s
+}
+
+/**
+ *
+ */
+type StoryResponse struct {
+	CoverFileId          *string `json:"cover_file_id" xml:"cover_file_id"`
+	CreatedAt            *string `json:"created_at" xml:"created_at"`
+	Score                *int    `json:"score" xml:"score"`
+	StoryId              *string `json:"story_id" xml:"story_id"`
+	StoryImagesDateRange []*int  `json:"story_images_date_range" xml:"story_images_date_range" type:"Repeated"`
+	SubTitle             *string `json:"sub_title" xml:"sub_title"`
+	Title                *string `json:"title" xml:"title"`
+	UpdatedAt            *string `json:"updated_at" xml:"updated_at"`
+	VideoStatus          *string `json:"video_status" xml:"video_status"`
+	VideoUrl             *string `json:"video_url" xml:"video_url"`
+}
+
+func (s StoryResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s StoryResponse) GoString() string {
+	return s.String()
+}
+
+func (s *StoryResponse) SetCoverFileId(v string) *StoryResponse {
+	s.CoverFileId = &v
+	return s
+}
+
+func (s *StoryResponse) SetCreatedAt(v string) *StoryResponse {
+	s.CreatedAt = &v
+	return s
+}
+
+func (s *StoryResponse) SetScore(v int) *StoryResponse {
+	s.Score = &v
+	return s
+}
+
+func (s *StoryResponse) SetStoryId(v string) *StoryResponse {
+	s.StoryId = &v
+	return s
+}
+
+func (s *StoryResponse) SetStoryImagesDateRange(v []*int) *StoryResponse {
+	s.StoryImagesDateRange = v
+	return s
+}
+
+func (s *StoryResponse) SetSubTitle(v string) *StoryResponse {
+	s.SubTitle = &v
+	return s
+}
+
+func (s *StoryResponse) SetTitle(v string) *StoryResponse {
+	s.Title = &v
+	return s
+}
+
+func (s *StoryResponse) SetUpdatedAt(v string) *StoryResponse {
+	s.UpdatedAt = &v
+	return s
+}
+
+func (s *StoryResponse) SetVideoStatus(v string) *StoryResponse {
+	s.VideoStatus = &v
+	return s
+}
+
+func (s *StoryResponse) SetVideoUrl(v string) *StoryResponse {
+	s.VideoUrl = &v
 	return s
 }
 
@@ -21030,9 +21492,10 @@ func (client *Client) UpdateFile(request *UpdateFileRequestModel, runtime *Runti
 }
 
 /**
- * 该接口将会创建用户， 只有管理员可以调用
+ * 创建用户，只有管理员可以调用
  * @tags user
  * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
  * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
@@ -21180,9 +21643,10 @@ func (client *Client) CreateUser(request *CreateUserRequestModel, runtime *Runti
 }
 
 /**
- * 该接口将会删除用户
+ * 只有管理员可以调用
  * @tags user
  * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
  * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
@@ -21323,9 +21787,10 @@ func (client *Client) DeleteUser(request *DeleteUserRequestModel, runtime *Runti
 }
 
 /**
- * 该接口将会查看用户详细信息
+ * 获取用户详细信息，普通用户只能获取自己的信息，管理员可以获取任意用户的信息。
  * @tags user
  * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
  * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
  * @error NotFound The resource {resource_name} cannot be found. Please check.
  * @error InternalError The request has been failed due to some unknown error.
@@ -21474,9 +21939,10 @@ func (client *Client) GetUser(request *GetUserRequestModel, runtime *RuntimeOpti
 }
 
 /**
- * 该接口将会展示用户列表
+ * 只有管理员可以调用
  * @tags user
  * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
  * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
@@ -21624,9 +22090,10 @@ func (client *Client) ListUsers(request *ListUsersRequestModel, runtime *Runtime
 }
 
 /**
- * 该接口将会根据条件查询用户
+ * 该接口将会根据条件查询用户，只有管理员可以调用
  * @tags user
  * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
  * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
@@ -21774,14 +22241,17 @@ func (client *Client) SearchUser(request *SearchUserRequestModel, runtime *Runti
 }
 
 /**
- * 该接口将会更新用户信息
+ * 用户可以修改自己的description，nick_name，avatar；
+管理员在用户基础上还可修改status（可以修改任意用户）；
+超级管理员在管理员基础上还可修改role（可以修改任意用户）。
  * @tags user
  * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
  * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
  * @error NotFound The resource {resource_name} cannot be found. Please check.
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
- */
+*/
 func (client *Client) UpdateUser(request *UpdateUserRequestModel, runtime *RuntimeOptions) (_result *UpdateUserModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
@@ -21882,6 +22352,158 @@ func (client *Client) UpdateUser(request *UpdateUserRequestModel, runtime *Runti
 
 				respMap = util.AssertAsMap(obj)
 				_result = &UpdateUserModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !tea.BoolValue(util.Empty(response_.Headers["x-ca-error-message"])) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     tea.StringValue(response_.Headers["x-ca-request-id"]),
+						"statusCode":    tea.IntValue(response_.StatusCode),
+						"statusMessage": tea.StringValue(response_.StatusMessage),
+					},
+					"message": tea.StringValue(response_.Headers["x-ca-error-message"]),
+				})
+				return _result, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return _result, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     tea.StringValue(response_.Headers["x-ca-request-id"]),
+					"statusCode":    tea.IntValue(response_.StatusCode),
+					"statusMessage": tea.StringValue(response_.StatusMessage),
+				},
+			}, respMap))
+			return _result, _err
+		}()
+		if !tea.BoolValue(tea.Retryable(_err)) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 该接口将会获取故事列表
+ * @tags image
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
+ * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+ */
+func (client *Client) CreateStory(request *CreateStoryRequestModel, runtime *RuntimeOptions) (_result *CreateStoryModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return _result, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return _result, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": tea.IntValue(util.DefaultNumber(runtime.MaxAttempts, tea.Int(3))),
+		},
+		"backoff": map[string]interface{}{
+			"policy": tea.StringValue(util.DefaultString(runtime.BackoffPolicy, tea.String("no"))),
+			"period": tea.IntValue(util.DefaultNumber(runtime.BackoffPeriod, tea.Int(1))),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &CreateStoryModel{}
+	for _retryTimes := 0; tea.BoolValue(tea.AllowRetry(_runtime["retry"], tea.Int(_retryTimes))); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], tea.Int(_retryTimes))
+			if tea.IntValue(_backoffTime) > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*CreateStoryModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return _result, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return _result, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return _result, _err
+			}
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return _result, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, tea.String("https"))
+			request_.Method = tea.String("POST")
+			request_.Pathname = client.GetPathname(client.Nickname, tea.String("/v2/image/create_story"))
+			request_.Headers = tea.Merge(map[string]*string{
+				"user-agent":   client.GetUserAgent(),
+				"host":         util.DefaultString(client.Endpoint, tea.String(tea.StringValue(client.DomainId)+".api.alicloudccp.com")),
+				"content-type": tea.String("application/json; charset=utf-8"),
+			}, request.Headers)
+			if !tea.BoolValue(util.Empty(accessToken)) {
+				request_.Headers["authorization"] = tea.String("Bearer " + tea.StringValue(accessToken))
+			} else if !tea.BoolValue(util.Empty(accesskeyId)) && !tea.BoolValue(util.Empty(accessKeySecret)) {
+				if !tea.BoolValue(util.Empty(securityToken)) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
+				request_.Headers["accept"] = tea.String("application/json")
+				request_.Headers["x-acs-signature-method"] = tea.String("HMAC-SHA1")
+				request_.Headers["x-acs-signature-version"] = tea.String("1.0")
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = tea.String("acs " + tea.StringValue(accesskeyId) + ":" + tea.StringValue(roautil.GetSignature(stringToSign, accessKeySecret)))
+			}
+
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request.Body)))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return _result, _err
+			}
+			var respMap map[string]interface{}
+			var obj interface{}
+			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return _result, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &CreateStoryModel{}
 				_err = tea.Convert(map[string]interface{}{
 					"body":    respMap,
 					"headers": response_.Headers,
@@ -22034,6 +22656,158 @@ func (client *Client) GetPhotoCount(request *GetPhotoCountRequestModel, runtime 
 
 				respMap = util.AssertAsMap(obj)
 				_result = &GetPhotoCountModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !tea.BoolValue(util.Empty(response_.Headers["x-ca-error-message"])) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     tea.StringValue(response_.Headers["x-ca-request-id"]),
+						"statusCode":    tea.IntValue(response_.StatusCode),
+						"statusMessage": tea.StringValue(response_.StatusMessage),
+					},
+					"message": tea.StringValue(response_.Headers["x-ca-error-message"]),
+				})
+				return _result, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return _result, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     tea.StringValue(response_.Headers["x-ca-request-id"]),
+					"statusCode":    tea.IntValue(response_.StatusCode),
+					"statusMessage": tea.StringValue(response_.StatusMessage),
+				},
+			}, respMap))
+			return _result, _err
+		}()
+		if !tea.BoolValue(tea.Retryable(_err)) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 该接口将会获取故事列表
+ * @tags image
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
+ * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+ */
+func (client *Client) GetStoryDetail(request *GetStoryDetailRequestModel, runtime *RuntimeOptions) (_result *GetStoryDetailModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return _result, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return _result, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": tea.IntValue(util.DefaultNumber(runtime.MaxAttempts, tea.Int(3))),
+		},
+		"backoff": map[string]interface{}{
+			"policy": tea.StringValue(util.DefaultString(runtime.BackoffPolicy, tea.String("no"))),
+			"period": tea.IntValue(util.DefaultNumber(runtime.BackoffPeriod, tea.Int(1))),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &GetStoryDetailModel{}
+	for _retryTimes := 0; tea.BoolValue(tea.AllowRetry(_runtime["retry"], tea.Int(_retryTimes))); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], tea.Int(_retryTimes))
+			if tea.IntValue(_backoffTime) > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*GetStoryDetailModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return _result, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return _result, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return _result, _err
+			}
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return _result, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, tea.String("https"))
+			request_.Method = tea.String("POST")
+			request_.Pathname = client.GetPathname(client.Nickname, tea.String("/v2/image/get_story_detail"))
+			request_.Headers = tea.Merge(map[string]*string{
+				"user-agent":   client.GetUserAgent(),
+				"host":         util.DefaultString(client.Endpoint, tea.String(tea.StringValue(client.DomainId)+".api.alicloudccp.com")),
+				"content-type": tea.String("application/json; charset=utf-8"),
+			}, request.Headers)
+			if !tea.BoolValue(util.Empty(accessToken)) {
+				request_.Headers["authorization"] = tea.String("Bearer " + tea.StringValue(accessToken))
+			} else if !tea.BoolValue(util.Empty(accesskeyId)) && !tea.BoolValue(util.Empty(accessKeySecret)) {
+				if !tea.BoolValue(util.Empty(securityToken)) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
+				request_.Headers["accept"] = tea.String("application/json")
+				request_.Headers["x-acs-signature-method"] = tea.String("HMAC-SHA1")
+				request_.Headers["x-acs-signature-version"] = tea.String("1.0")
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = tea.String("acs " + tea.StringValue(accesskeyId) + ":" + tea.StringValue(roautil.GetSignature(stringToSign, accessKeySecret)))
+			}
+
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request.Body)))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return _result, _err
+			}
+			var respMap map[string]interface{}
+			var obj interface{}
+			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return _result, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &GetStoryDetailModel{}
 				_err = tea.Convert(map[string]interface{}{
 					"body":    respMap,
 					"headers": response_.Headers,
@@ -22338,6 +23112,158 @@ func (client *Client) ListFaceGroups(request *ListFaceGroupsRequestModel, runtim
 
 				respMap = util.AssertAsMap(obj)
 				_result = &ListFaceGroupsModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !tea.BoolValue(util.Empty(response_.Headers["x-ca-error-message"])) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     tea.StringValue(response_.Headers["x-ca-request-id"]),
+						"statusCode":    tea.IntValue(response_.StatusCode),
+						"statusMessage": tea.StringValue(response_.StatusMessage),
+					},
+					"message": tea.StringValue(response_.Headers["x-ca-error-message"]),
+				})
+				return _result, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return _result, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     tea.StringValue(response_.Headers["x-ca-request-id"]),
+					"statusCode":    tea.IntValue(response_.StatusCode),
+					"statusMessage": tea.StringValue(response_.StatusMessage),
+				},
+			}, respMap))
+			return _result, _err
+		}()
+		if !tea.BoolValue(tea.Retryable(_err)) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 该接口将会获取故事列表
+ * @tags image
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
+ * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+ */
+func (client *Client) ListStory(request *ListStoryRequestModel, runtime *RuntimeOptions) (_result *ListStoryModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return _result, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return _result, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": tea.IntValue(util.DefaultNumber(runtime.MaxAttempts, tea.Int(3))),
+		},
+		"backoff": map[string]interface{}{
+			"policy": tea.StringValue(util.DefaultString(runtime.BackoffPolicy, tea.String("no"))),
+			"period": tea.IntValue(util.DefaultNumber(runtime.BackoffPeriod, tea.Int(1))),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &ListStoryModel{}
+	for _retryTimes := 0; tea.BoolValue(tea.AllowRetry(_runtime["retry"], tea.Int(_retryTimes))); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], tea.Int(_retryTimes))
+			if tea.IntValue(_backoffTime) > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*ListStoryModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return _result, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return _result, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return _result, _err
+			}
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return _result, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, tea.String("https"))
+			request_.Method = tea.String("POST")
+			request_.Pathname = client.GetPathname(client.Nickname, tea.String("/v2/image/list_story"))
+			request_.Headers = tea.Merge(map[string]*string{
+				"user-agent":   client.GetUserAgent(),
+				"host":         util.DefaultString(client.Endpoint, tea.String(tea.StringValue(client.DomainId)+".api.alicloudccp.com")),
+				"content-type": tea.String("application/json; charset=utf-8"),
+			}, request.Headers)
+			if !tea.BoolValue(util.Empty(accessToken)) {
+				request_.Headers["authorization"] = tea.String("Bearer " + tea.StringValue(accessToken))
+			} else if !tea.BoolValue(util.Empty(accesskeyId)) && !tea.BoolValue(util.Empty(accessKeySecret)) {
+				if !tea.BoolValue(util.Empty(securityToken)) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
+				request_.Headers["accept"] = tea.String("application/json")
+				request_.Headers["x-acs-signature-method"] = tea.String("HMAC-SHA1")
+				request_.Headers["x-acs-signature-version"] = tea.String("1.0")
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = tea.String("acs " + tea.StringValue(accesskeyId) + ":" + tea.StringValue(roautil.GetSignature(stringToSign, accessKeySecret)))
+			}
+
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request.Body)))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return _result, _err
+			}
+			var respMap map[string]interface{}
+			var obj interface{}
+			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return _result, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &ListStoryModel{}
 				_err = tea.Convert(map[string]interface{}{
 					"body":    respMap,
 					"headers": response_.Headers,
