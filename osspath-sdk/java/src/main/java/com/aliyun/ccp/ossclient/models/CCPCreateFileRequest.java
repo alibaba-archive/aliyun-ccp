@@ -28,6 +28,9 @@ public class CCPCreateFileRequest extends TeaModel {
     @NameInMap("auto_rename")
     public Boolean autoRename;
 
+    @NameInMap("check_name_mode")
+    public String checkNameMode;
+
     @NameInMap("content_hash")
     public String contentHash;
 
@@ -50,6 +53,9 @@ public class CCPCreateFileRequest extends TeaModel {
     @NameInMap("hidden")
     public Boolean hidden;
 
+    @NameInMap("image_media_metadata")
+    public ImageMediaMetadata imageMediaMetadata;
+
     @NameInMap("labels")
     public java.util.List<String> labels;
 
@@ -67,10 +73,13 @@ public class CCPCreateFileRequest extends TeaModel {
     public String preHash;
 
     @NameInMap("streams_info")
-    public java.util.Map<String, Object> streamsInfo;
+    public java.util.Map<String, ?> streamsInfo;
 
     @NameInMap("user_meta")
     public String userMeta;
+
+    @NameInMap("video_media_metadata")
+    public VideoMediaMetadata videoMediaMetadata;
 
     public static CCPCreateFileRequest build(java.util.Map<String, ?> map) throws Exception {
         CCPCreateFileRequest self = new CCPCreateFileRequest();

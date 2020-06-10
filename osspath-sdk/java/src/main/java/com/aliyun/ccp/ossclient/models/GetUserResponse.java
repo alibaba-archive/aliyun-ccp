@@ -40,6 +40,9 @@ public class GetUserResponse extends TeaModel {
     @NameInMap("updated_at")
     public Long updatedAt;
 
+    @NameInMap("user_data")
+    public java.util.Map<String, ?> userData;
+
     @NameInMap("user_id")
     public String userId;
 

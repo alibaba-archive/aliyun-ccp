@@ -14,6 +14,9 @@ public class CCPScanFileMetaRequest extends TeaModel {
     @Validation(required = true, pattern = "[0-9]+")
     public String driveId;
 
+    @NameInMap("limit")
+    public Integer limit;
+
     @NameInMap("marker")
     public String marker;
 
