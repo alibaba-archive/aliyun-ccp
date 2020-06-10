@@ -34,6 +34,9 @@ public class ImageMediaResponse extends TeaModel {
     @NameInMap("province")
     public String province;
 
+    @NameInMap("story_image_score")
+    public Integer storyImageScore;
+
     @NameInMap("time")
     public String time;
 

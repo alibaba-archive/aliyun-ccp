@@ -55,7 +55,7 @@ public class AccountAccessTokenResponse extends TeaModel {
     public String tokenType;
 
     @NameInMap("user_data")
-    public java.util.Map<String, Object> userData;
+    public java.util.Map<String, ?> userData;
 
     @NameInMap("user_id")
     public String userId;

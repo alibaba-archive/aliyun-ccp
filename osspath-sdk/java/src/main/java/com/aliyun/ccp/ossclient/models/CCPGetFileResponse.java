@@ -78,8 +78,11 @@ public class CCPGetFileResponse extends TeaModel {
     @NameInMap("status")
     public String status;
 
+    @NameInMap("streams_info")
+    public java.util.Map<String, ?> streamsInfo;
+
     @NameInMap("streams_url_info")
-    public java.util.Map<String, Object> streamsUrlInfo;
+    public java.util.Map<String, ?> streamsUrlInfo;
 
     @NameInMap("thumbnail")
     public String thumbnail;

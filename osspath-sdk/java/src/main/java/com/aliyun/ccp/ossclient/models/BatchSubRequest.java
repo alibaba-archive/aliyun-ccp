@@ -8,10 +8,10 @@ import com.aliyun.tea.*;
  */
 public class BatchSubRequest extends TeaModel {
     @NameInMap("body")
-    public java.util.Map<String, Object> body;
+    public java.util.Map<String, ?> body;
 
     @NameInMap("headers")
-    public java.util.Map<String, Object> headers;
+    public java.util.Map<String, ?> headers;
 
     @NameInMap("id")
     @Validation(required = true)

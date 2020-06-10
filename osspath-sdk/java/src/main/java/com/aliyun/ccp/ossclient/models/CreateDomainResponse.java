@@ -17,7 +17,7 @@ public class CreateDomainResponse extends TeaModel {
     public String authAlipayPrivateKey;
 
     @NameInMap("auth_config")
-    public java.util.Map<String, Object> authConfig;
+    public java.util.Map<String, ?> authConfig;
 
     @NameInMap("auth_dingding_app_id")
     public String authDingdingAppId;

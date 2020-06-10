@@ -7,25 +7,17 @@ import com.aliyun.tea.*;
  * 
  */
 public class StreamInfo extends TeaModel {
-    @NameInMap("content_hash")
-    public String contentHash;
+    @NameInMap("crc64_hash")
+    public String crc64Hash;
 
-    @NameInMap("content_hash_name")
-    public String contentHashName;
+    @NameInMap("download_url")
+    public String downloadUrl;
 
-    @NameInMap("content_md5")
-    @Validation(required = true)
-    public String contentMd5;
+    @NameInMap("thumbnail")
+    public String thumbnail;
 
-    @NameInMap("part_info_list")
-    public java.util.List<UploadPartInfo> partInfoList;
-
-    @NameInMap("pre_hash")
-    public String preHash;
-
-    @NameInMap("size")
-    @Validation(required = true)
-    public Long size;
+    @NameInMap("url")
+    public String url;
 
     public static StreamInfo build(java.util.Map<String, ?> map) throws Exception {
         StreamInfo self = new StreamInfo();

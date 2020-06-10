@@ -42,7 +42,7 @@ public class CCPCreateFileResponse extends TeaModel {
     public String status;
 
     @NameInMap("streams_upload_info")
-    public java.util.Map<String, Object> streamsUploadInfo;
+    public java.util.Map<String, ?> streamsUploadInfo;
 
     @NameInMap("type")
     public String type;

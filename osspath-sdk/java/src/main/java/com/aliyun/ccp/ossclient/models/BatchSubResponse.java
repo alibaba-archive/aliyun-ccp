@@ -8,7 +8,7 @@ import com.aliyun.tea.*;
  */
 public class BatchSubResponse extends TeaModel {
     @NameInMap("body")
-    public java.util.Map<String, Object> body;
+    public java.util.Map<String, ?> body;
 
     @NameInMap("id")
     public String id;

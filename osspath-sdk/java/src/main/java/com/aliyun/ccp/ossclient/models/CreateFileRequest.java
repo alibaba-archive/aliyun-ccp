@@ -58,7 +58,7 @@ public class CreateFileRequest extends TeaModel {
     public Long size;
 
     @NameInMap("tags")
-    public java.util.Map<String, Object> tags;
+    public java.util.Map<String, ?> tags;
 
     @NameInMap("type")
     @Validation(required = true)

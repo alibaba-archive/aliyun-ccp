@@ -28,6 +28,9 @@ public class CreateUserRequest extends TeaModel {
     @NameInMap("status")
     public String status;
 
+    @NameInMap("user_data")
+    public java.util.Map<String, ?> userData;
+
     @NameInMap("user_id")
     @Validation(required = true)
     public String userId;

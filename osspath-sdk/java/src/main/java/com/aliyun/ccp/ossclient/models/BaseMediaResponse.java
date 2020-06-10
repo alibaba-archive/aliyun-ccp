@@ -19,6 +19,9 @@ public class BaseMediaResponse extends TeaModel {
     @NameInMap("district")
     public String district;
 
+    @NameInMap("height")
+    public Long height;
+
     @NameInMap("location")
     public String location;
 
@@ -30,6 +33,9 @@ public class BaseMediaResponse extends TeaModel {
 
     @NameInMap("township")
     public String township;
+
+    @NameInMap("width")
+    public Long width;
 
     public static BaseMediaResponse build(java.util.Map<String, ?> map) throws Exception {
         BaseMediaResponse self = new BaseMediaResponse();

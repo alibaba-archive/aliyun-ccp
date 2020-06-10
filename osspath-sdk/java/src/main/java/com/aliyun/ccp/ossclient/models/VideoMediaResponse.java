@@ -22,6 +22,9 @@ public class VideoMediaResponse extends TeaModel {
     @NameInMap("duration")
     public String duration;
 
+    @NameInMap("height")
+    public Long height;
+
     @NameInMap("location")
     public String location;
 
@@ -33,6 +36,9 @@ public class VideoMediaResponse extends TeaModel {
 
     @NameInMap("township")
     public String township;
+
+    @NameInMap("width")
+    public Long width;
 
     public static VideoMediaResponse build(java.util.Map<String, ?> map) throws Exception {
         VideoMediaResponse self = new VideoMediaResponse();
