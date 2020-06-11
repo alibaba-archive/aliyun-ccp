@@ -10,6 +10,9 @@ public class OSSVideoDefinitionResponse extends TeaModel {
     @NameInMap("definition_list")
     public java.util.List<String> definitionList;
 
+    @NameInMap("frame_rate")
+    public String frameRate;
+
     public static OSSVideoDefinitionResponse build(java.util.Map<String, ?> map) throws Exception {
         OSSVideoDefinitionResponse self = new OSSVideoDefinitionResponse();
         return TeaModel.build(map, self);
