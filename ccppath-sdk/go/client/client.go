@@ -5421,6 +5421,7 @@ func (s *OSSVideoDRMLicenseResponse) SetStates(v int64) *OSSVideoDRMLicenseRespo
  */
 type OSSVideoDefinitionResponse struct {
 	DefinitionList []*string `json:"definition_list" xml:"definition_list" type:"Repeated"`
+	FrameRate      *string   `json:"frame_rate" xml:"frame_rate"`
 }
 
 func (s OSSVideoDefinitionResponse) String() string {
@@ -5433,6 +5434,11 @@ func (s OSSVideoDefinitionResponse) GoString() string {
 
 func (s *OSSVideoDefinitionResponse) SetDefinitionList(v []*string) *OSSVideoDefinitionResponse {
 	s.DefinitionList = v
+	return s
+}
+
+func (s *OSSVideoDefinitionResponse) SetFrameRate(v string) *OSSVideoDefinitionResponse {
+	s.FrameRate = &v
 	return s
 }
 
@@ -17386,7 +17392,7 @@ func (client *Client) GetUserAccessToken(request *GetUserAccessTokenRequestModel
 
 /**
  * 如果目录拷贝、目录删除不能在限定时间内完成，将访问一个异步任务id，
-通过此接口获取异步任务的信息，以确定任务是否执行成功。
+ * 通过此接口获取异步任务的信息，以确定任务是否执行成功。
  * @tags async_task
  * @error InvalidParameter The input parameter {parameter_name} is not valid.
  * @error AccessTokenInvalid AccessToken is invalid. {message}
@@ -17394,7 +17400,7 @@ func (client *Client) GetUserAccessToken(request *GetUserAccessTokenRequestModel
  * @error NotFound The resource {resource_name} cannot be found. Please check.
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-*/
+ */
 func (client *Client) GetAsyncTaskInfo(request *GetAsyncTaskInfoRequestModel, runtime *RuntimeOptions) (_result *GetAsyncTaskInfoModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
@@ -17539,14 +17545,14 @@ func (client *Client) GetAsyncTaskInfo(request *GetAsyncTaskInfoRequestModel, ru
 
 /**
  * 对多个原子操作封装成一个批处理请求，服务端并行处理并打包返回每个操作的执行结果。
-支持对文件和文件夹的移动、删除、修改，每个批处理请求最多包含100个原则操作。
+ * 支持对文件和文件夹的移动、删除、修改，每个批处理请求最多包含100个原则操作。
  * @tags batch
  * @error InvalidParameter The input parameter {parameter_name} is not valid.
  * @error AccessTokenInvalid AccessToken is invalid. {message}
  * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-*/
+ */
 func (client *Client) BatchOperation(request *BatchOperationRequestModel, runtime *RuntimeOptions) (_result *BatchOperationModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
@@ -17691,15 +17697,15 @@ func (client *Client) BatchOperation(request *BatchOperationRequestModel, runtim
 
 /**
  * 支持normal和large两种drive，
-large类型的drive用于文件数多的场景，不支持list操作，
-当drive的文件数量大于1亿时，建议使用large类型。
+ * large类型的drive用于文件数多的场景，不支持list操作，
+ * 当drive的文件数量大于1亿时，建议使用large类型。
  * @tags drive
  * @error InvalidParameter The input parameter {parameter_name} is not valid.
  * @error AccessTokenInvalid AccessToken is invalid. {message}
  * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-*/
+ */
 func (client *Client) CreateDrive(request *CreateDriveRequestModel, runtime *RuntimeOptions) (_result *CreateDriveModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
@@ -18140,7 +18146,7 @@ func (client *Client) GetDrive(request *GetDriveRequestModel, runtime *RuntimeOp
 
 /**
  * 一个用户可拥有多个drive，在创建drive时通过参数指定是否为这个用户的默认drive，
-每个用户只能设置一个默认drive。
+ * 每个用户只能设置一个默认drive。
  * @tags drive
  * @error InvalidParameter The input parameter {parameter_name} is not valid.
  * @error AccessTokenInvalid AccessToken is invalid. {message}
@@ -18148,7 +18154,7 @@ func (client *Client) GetDrive(request *GetDriveRequestModel, runtime *RuntimeOp
  * @error NotFound The resource {resource_name} cannot be found. Please check.
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-*/
+ */
 func (client *Client) GetDefaultDrive(request *GetDefaultDriveRequestModel, runtime *RuntimeOptions) (_result *GetDefaultDriveModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
@@ -19066,7 +19072,7 @@ func (client *Client) CopyFile(request *CopyFileRequestModel, runtime *RuntimeOp
 
 /**
  * 在指定文件夹下创建文件或者文件夹，
-根文件夹用root表示，其他文件夹使用创建文件夹时返回的file_id。
+ * 根文件夹用root表示，其他文件夹使用创建文件夹时返回的file_id。
  * @tags file
  * @error InvalidParameter The input parameter {parameter_name} is not valid.
  * @error AccessTokenInvalid AccessToken is invalid. {message}
@@ -19075,7 +19081,7 @@ func (client *Client) CopyFile(request *CopyFileRequestModel, runtime *RuntimeOp
  * @error AlreadyExist {resource} has already exists. {extra_msg}
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-*/
+ */
 func (client *Client) CreateFile(request *CreateFileRequestModel, runtime *RuntimeOptions) (_result *CreateFileModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {
@@ -22242,8 +22248,8 @@ func (client *Client) SearchUser(request *SearchUserRequestModel, runtime *Runti
 
 /**
  * 用户可以修改自己的description，nick_name，avatar；
-管理员在用户基础上还可修改status（可以修改任意用户）；
-超级管理员在管理员基础上还可修改role（可以修改任意用户）。
+ * 管理员在用户基础上还可修改status（可以修改任意用户）；
+ * 超级管理员在管理员基础上还可修改role（可以修改任意用户）。
  * @tags user
  * @error InvalidParameter The input parameter {parameter_name} is not valid.
  * @error AccessTokenInvalid AccessToken is invalid. {message}
@@ -22251,7 +22257,7 @@ func (client *Client) SearchUser(request *SearchUserRequestModel, runtime *Runti
  * @error NotFound The resource {resource_name} cannot be found. Please check.
  * @error InternalError The request has been failed due to some unknown error.
  * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
-*/
+ */
 func (client *Client) UpdateUser(request *UpdateUserRequestModel, runtime *RuntimeOptions) (_result *UpdateUserModel, _err error) {
 	_err = tea.Validate(request)
 	if _err != nil {

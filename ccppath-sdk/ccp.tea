@@ -2840,6 +2840,7 @@ model OSSVideoDRMLicenseResponse {
  */
 model OSSVideoDefinitionResponse {
   definitionList?: [ string ](name='definition_list', description='definition_list', example='', items='{"type":"string"}'),
+  frameRate?: string(name='frame_rate', description='frame_rate'),
 }
 
 /**
@@ -3537,7 +3538,7 @@ model GetAsyncTaskInfoModel {
 
 /**
  * 如果目录拷贝、目录删除不能在限定时间内完成，将访问一个异步任务id，
-通过此接口获取异步任务的信息，以确定任务是否执行成功。
+ * 通过此接口获取异步任务的信息，以确定任务是否执行成功。
  * @tags async_task
  * @error InvalidParameter The input parameter {parameter_name} is not valid.
  * @error AccessTokenInvalid AccessToken is invalid. {message}
@@ -3641,7 +3642,7 @@ model BatchOperationModel {
 
 /**
  * 对多个原子操作封装成一个批处理请求，服务端并行处理并打包返回每个操作的执行结果。
-支持对文件和文件夹的移动、删除、修改，每个批处理请求最多包含100个原则操作。
+ * 支持对文件和文件夹的移动、删除、修改，每个批处理请求最多包含100个原则操作。
  * @tags batch
  * @error InvalidParameter The input parameter {parameter_name} is not valid.
  * @error AccessTokenInvalid AccessToken is invalid. {message}
@@ -3744,8 +3745,8 @@ model CreateDriveModel {
 
 /**
  * 支持normal和large两种drive，
-large类型的drive用于文件数多的场景，不支持list操作，
-当drive的文件数量大于1亿时，建议使用large类型。
+ * large类型的drive用于文件数多的场景，不支持list操作，
+ * 当drive的文件数量大于1亿时，建议使用large类型。
  * @tags drive
  * @error InvalidParameter The input parameter {parameter_name} is not valid.
  * @error AccessTokenInvalid AccessToken is invalid. {message}
@@ -4049,7 +4050,7 @@ model GetDefaultDriveModel {
 
 /**
  * 一个用户可拥有多个drive，在创建drive时通过参数指定是否为这个用户的默认drive，
-每个用户只能设置一个默认drive。
+ * 每个用户只能设置一个默认drive。
  * @tags drive
  * @error InvalidParameter The input parameter {parameter_name} is not valid.
  * @error AccessTokenInvalid AccessToken is invalid. {message}
@@ -4675,7 +4676,7 @@ model CreateFileModel {
 
 /**
  * 在指定文件夹下创建文件或者文件夹，
-根文件夹用root表示，其他文件夹使用创建文件夹时返回的file_id。
+ * 根文件夹用root表示，其他文件夹使用创建文件夹时返回的file_id。
  * @tags file
  * @error InvalidParameter The input parameter {parameter_name} is not valid.
  * @error AccessTokenInvalid AccessToken is invalid. {message}
@@ -7683,8 +7684,8 @@ model UpdateUserModel {
 
 /**
  * 用户可以修改自己的description，nick_name，avatar；
-管理员在用户基础上还可修改status（可以修改任意用户）；
-超级管理员在管理员基础上还可修改role（可以修改任意用户）。
+ * 管理员在用户基础上还可修改status（可以修改任意用户）；
+ * 超级管理员在管理员基础上还可修改role（可以修改任意用户）。
  * @tags user
  * @error InvalidParameter The input parameter {parameter_name} is not valid.
  * @error AccessTokenInvalid AccessToken is invalid. {message}
