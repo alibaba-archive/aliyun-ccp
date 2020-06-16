@@ -1260,38 +1260,38 @@ func (s *AuthorizeRequest) SetState(v string) *AuthorizeRequest {
  * Base file response
  */
 type BaseCCPFileResponse struct {
-	Category           *string                `json:"category" xml:"category"`
-	ContentHash        *string                `json:"content_hash" xml:"content_hash"`
-	ContentHashName    *string                `json:"content_hash_name" xml:"content_hash_name"`
-	ContentType        *string                `json:"content_type" xml:"content_type"`
-	Crc64Hash          *string                `json:"crc64_hash" xml:"crc64_hash"`
-	CreatedAt          *string                `json:"created_at" xml:"created_at"`
-	Description        *string                `json:"description" xml:"description"`
-	DomainId           *string                `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
-	DownloadUrl        *string                `json:"download_url" xml:"download_url"`
-	DriveId            *string                `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	EncryptMode        *string                `json:"encrypt_mode" xml:"encrypt_mode"`
-	FileExtension      *string                `json:"file_extension" xml:"file_extension"`
-	FileId             *string                `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
-	Hidden             *bool                  `json:"hidden" xml:"hidden"`
-	ImageMediaMetadata *ImageMediaResponse    `json:"image_media_metadata" xml:"image_media_metadata"`
-	Labels             []*string              `json:"labels" xml:"labels" type:"Repeated"`
-	Meta               *string                `json:"meta" xml:"meta"`
-	Name               *string                `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	ParentFileId       *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
-	Size               *int64                 `json:"size" xml:"size" maximum:"53687091200" minimum:"0"`
-	Starred            *bool                  `json:"starred" xml:"starred"`
-	Status             *string                `json:"status" xml:"status"`
-	StreamsInfo        map[string]interface{} `json:"streams_info" xml:"streams_info"`
-	StreamsUrlInfo     map[string]interface{} `json:"streams_url_info" xml:"streams_url_info"`
-	Thumbnail          *string                `json:"thumbnail" xml:"thumbnail"`
-	TrashedAt          *string                `json:"trashed_at" xml:"trashed_at"`
-	Type               *string                `json:"type" xml:"type"`
-	UpdatedAt          *string                `json:"updated_at" xml:"updated_at"`
-	UploadId           *string                `json:"upload_id" xml:"upload_id"`
-	Url                *string                `json:"url" xml:"url"`
-	UserMeta           *string                `json:"user_meta" xml:"user_meta"`
-	VideoMediaMetadata *VideoMediaResponse    `json:"video_media_metadata" xml:"video_media_metadata"`
+	Category             *string                `json:"category" xml:"category"`
+	ContentHash          *string                `json:"content_hash" xml:"content_hash"`
+	ContentHashName      *string                `json:"content_hash_name" xml:"content_hash_name"`
+	ContentType          *string                `json:"content_type" xml:"content_type"`
+	Crc64Hash            *string                `json:"crc64_hash" xml:"crc64_hash"`
+	CreatedAt            *string                `json:"created_at" xml:"created_at"`
+	Description          *string                `json:"description" xml:"description"`
+	DomainId             *string                `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
+	DownloadUrl          *string                `json:"download_url" xml:"download_url"`
+	DriveId              *string                `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	EncryptMode          *string                `json:"encrypt_mode" xml:"encrypt_mode"`
+	FileExtension        *string                `json:"file_extension" xml:"file_extension"`
+	FileId               *string                `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
+	Hidden               *bool                  `json:"hidden" xml:"hidden"`
+	ImageMediaMetadata   *ImageMediaResponse    `json:"image_media_metadata" xml:"image_media_metadata"`
+	Labels               []*string              `json:"labels" xml:"labels" type:"Repeated"`
+	Meta                 *string                `json:"meta" xml:"meta"`
+	Name                 *string                `json:"name" xml:"name" require:"true" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	ParentFileId         *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
+	Size                 *int64                 `json:"size" xml:"size" maximum:"53687091200" minimum:"0"`
+	Starred              *bool                  `json:"starred" xml:"starred"`
+	Status               *string                `json:"status" xml:"status"`
+	StreamsInfo          map[string]interface{} `json:"streams_info" xml:"streams_info"`
+	Thumbnail            *string                `json:"thumbnail" xml:"thumbnail"`
+	TrashedAt            *string                `json:"trashed_at" xml:"trashed_at"`
+	Type                 *string                `json:"type" xml:"type"`
+	UpdatedAt            *string                `json:"updated_at" xml:"updated_at"`
+	UploadId             *string                `json:"upload_id" xml:"upload_id"`
+	Url                  *string                `json:"url" xml:"url"`
+	UserMeta             *string                `json:"user_meta" xml:"user_meta"`
+	VideoMediaMetadata   *VideoMediaResponse    `json:"video_media_metadata" xml:"video_media_metadata"`
+	VideoPreviewMetadata *VideoPreviewResponse  `json:"video_preview_metadata" xml:"video_preview_metadata"`
 }
 
 func (s BaseCCPFileResponse) String() string {
@@ -1417,11 +1417,6 @@ func (s *BaseCCPFileResponse) SetStreamsInfo(v map[string]interface{}) *BaseCCPF
 	return s
 }
 
-func (s *BaseCCPFileResponse) SetStreamsUrlInfo(v map[string]interface{}) *BaseCCPFileResponse {
-	s.StreamsUrlInfo = v
-	return s
-}
-
 func (s *BaseCCPFileResponse) SetThumbnail(v string) *BaseCCPFileResponse {
 	s.Thumbnail = &v
 	return s
@@ -1459,6 +1454,11 @@ func (s *BaseCCPFileResponse) SetUserMeta(v string) *BaseCCPFileResponse {
 
 func (s *BaseCCPFileResponse) SetVideoMediaMetadata(v *VideoMediaResponse) *BaseCCPFileResponse {
 	s.VideoMediaMetadata = v
+	return s
+}
+
+func (s *BaseCCPFileResponse) SetVideoPreviewMetadata(v *VideoPreviewResponse) *BaseCCPFileResponse {
+	s.VideoPreviewMetadata = v
 	return s
 }
 
@@ -1866,38 +1866,38 @@ func (s *CCPBatchResponse) SetResponses(v []*BatchSubResponse) *CCPBatchResponse
  * complete file response
  */
 type CCPCompleteFileResponse struct {
-	Category           *string                `json:"category" xml:"category"`
-	ContentHash        *string                `json:"content_hash" xml:"content_hash"`
-	ContentHashName    *string                `json:"content_hash_name" xml:"content_hash_name"`
-	ContentType        *string                `json:"content_type" xml:"content_type"`
-	Crc64Hash          *string                `json:"crc64_hash" xml:"crc64_hash"`
-	CreatedAt          *string                `json:"created_at" xml:"created_at"`
-	Description        *string                `json:"description" xml:"description"`
-	DomainId           *string                `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
-	DownloadUrl        *string                `json:"download_url" xml:"download_url"`
-	DriveId            *string                `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	EncryptMode        *string                `json:"encrypt_mode" xml:"encrypt_mode"`
-	FileExtension      *string                `json:"file_extension" xml:"file_extension"`
-	FileId             *string                `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
-	Hidden             *bool                  `json:"hidden" xml:"hidden"`
-	ImageMediaMetadata *ImageMediaResponse    `json:"image_media_metadata" xml:"image_media_metadata"`
-	Labels             []*string              `json:"labels" xml:"labels" type:"Repeated"`
-	Meta               *string                `json:"meta" xml:"meta"`
-	Name               *string                `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	ParentFileId       *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
-	Size               *int64                 `json:"size" xml:"size" maximum:"53687091200" minimum:"0"`
-	Starred            *bool                  `json:"starred" xml:"starred"`
-	Status             *string                `json:"status" xml:"status"`
-	StreamsInfo        map[string]interface{} `json:"streams_info" xml:"streams_info"`
-	StreamsUrlInfo     map[string]interface{} `json:"streams_url_info" xml:"streams_url_info"`
-	Thumbnail          *string                `json:"thumbnail" xml:"thumbnail"`
-	TrashedAt          *string                `json:"trashed_at" xml:"trashed_at"`
-	Type               *string                `json:"type" xml:"type"`
-	UpdatedAt          *string                `json:"updated_at" xml:"updated_at"`
-	UploadId           *string                `json:"upload_id" xml:"upload_id"`
-	Url                *string                `json:"url" xml:"url"`
-	UserMeta           *string                `json:"user_meta" xml:"user_meta"`
-	VideoMediaMetadata *VideoMediaResponse    `json:"video_media_metadata" xml:"video_media_metadata"`
+	Category             *string                `json:"category" xml:"category"`
+	ContentHash          *string                `json:"content_hash" xml:"content_hash"`
+	ContentHashName      *string                `json:"content_hash_name" xml:"content_hash_name"`
+	ContentType          *string                `json:"content_type" xml:"content_type"`
+	Crc64Hash            *string                `json:"crc64_hash" xml:"crc64_hash"`
+	CreatedAt            *string                `json:"created_at" xml:"created_at"`
+	Description          *string                `json:"description" xml:"description"`
+	DomainId             *string                `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
+	DownloadUrl          *string                `json:"download_url" xml:"download_url"`
+	DriveId              *string                `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	EncryptMode          *string                `json:"encrypt_mode" xml:"encrypt_mode"`
+	FileExtension        *string                `json:"file_extension" xml:"file_extension"`
+	FileId               *string                `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
+	Hidden               *bool                  `json:"hidden" xml:"hidden"`
+	ImageMediaMetadata   *ImageMediaResponse    `json:"image_media_metadata" xml:"image_media_metadata"`
+	Labels               []*string              `json:"labels" xml:"labels" type:"Repeated"`
+	Meta                 *string                `json:"meta" xml:"meta"`
+	Name                 *string                `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	ParentFileId         *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
+	Size                 *int64                 `json:"size" xml:"size" maximum:"53687091200" minimum:"0"`
+	Starred              *bool                  `json:"starred" xml:"starred"`
+	Status               *string                `json:"status" xml:"status"`
+	StreamsInfo          map[string]interface{} `json:"streams_info" xml:"streams_info"`
+	Thumbnail            *string                `json:"thumbnail" xml:"thumbnail"`
+	TrashedAt            *string                `json:"trashed_at" xml:"trashed_at"`
+	Type                 *string                `json:"type" xml:"type"`
+	UpdatedAt            *string                `json:"updated_at" xml:"updated_at"`
+	UploadId             *string                `json:"upload_id" xml:"upload_id"`
+	Url                  *string                `json:"url" xml:"url"`
+	UserMeta             *string                `json:"user_meta" xml:"user_meta"`
+	VideoMediaMetadata   *VideoMediaResponse    `json:"video_media_metadata" xml:"video_media_metadata"`
+	VideoPreviewMetadata *VideoPreviewResponse  `json:"video_preview_metadata" xml:"video_preview_metadata"`
 }
 
 func (s CCPCompleteFileResponse) String() string {
@@ -2023,11 +2023,6 @@ func (s *CCPCompleteFileResponse) SetStreamsInfo(v map[string]interface{}) *CCPC
 	return s
 }
 
-func (s *CCPCompleteFileResponse) SetStreamsUrlInfo(v map[string]interface{}) *CCPCompleteFileResponse {
-	s.StreamsUrlInfo = v
-	return s
-}
-
 func (s *CCPCompleteFileResponse) SetThumbnail(v string) *CCPCompleteFileResponse {
 	s.Thumbnail = &v
 	return s
@@ -2065,6 +2060,11 @@ func (s *CCPCompleteFileResponse) SetUserMeta(v string) *CCPCompleteFileResponse
 
 func (s *CCPCompleteFileResponse) SetVideoMediaMetadata(v *VideoMediaResponse) *CCPCompleteFileResponse {
 	s.VideoMediaMetadata = v
+	return s
+}
+
+func (s *CCPCompleteFileResponse) SetVideoPreviewMetadata(v *VideoPreviewResponse) *CCPCompleteFileResponse {
+	s.VideoPreviewMetadata = v
 	return s
 }
 
@@ -2348,38 +2348,38 @@ func (s *CCPGetDownloadUrlResponse) SetUrl(v string) *CCPGetDownloadUrlResponse 
  * 根据路径获取文件元数据response
  */
 type CCPGetFileByPathResponse struct {
-	Category           *string                `json:"category" xml:"category"`
-	ContentHash        *string                `json:"content_hash" xml:"content_hash"`
-	ContentHashName    *string                `json:"content_hash_name" xml:"content_hash_name"`
-	ContentType        *string                `json:"content_type" xml:"content_type"`
-	Crc64Hash          *string                `json:"crc64_hash" xml:"crc64_hash"`
-	CreatedAt          *string                `json:"created_at" xml:"created_at"`
-	Description        *string                `json:"description" xml:"description"`
-	DomainId           *string                `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
-	DownloadUrl        *string                `json:"download_url" xml:"download_url"`
-	DriveId            *string                `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	EncryptMode        *string                `json:"encrypt_mode" xml:"encrypt_mode"`
-	FileExtension      *string                `json:"file_extension" xml:"file_extension"`
-	FileId             *string                `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
-	Hidden             *bool                  `json:"hidden" xml:"hidden"`
-	ImageMediaMetadata *ImageMediaResponse    `json:"image_media_metadata" xml:"image_media_metadata"`
-	Labels             []*string              `json:"labels" xml:"labels" type:"Repeated"`
-	Meta               *string                `json:"meta" xml:"meta"`
-	Name               *string                `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	ParentFileId       *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
-	Size               *int64                 `json:"size" xml:"size" maximum:"53687091200" minimum:"0"`
-	Starred            *bool                  `json:"starred" xml:"starred"`
-	Status             *string                `json:"status" xml:"status"`
-	StreamsInfo        map[string]interface{} `json:"streams_info" xml:"streams_info"`
-	StreamsUrlInfo     map[string]interface{} `json:"streams_url_info" xml:"streams_url_info"`
-	Thumbnail          *string                `json:"thumbnail" xml:"thumbnail"`
-	TrashedAt          *string                `json:"trashed_at" xml:"trashed_at"`
-	Type               *string                `json:"type" xml:"type"`
-	UpdatedAt          *string                `json:"updated_at" xml:"updated_at"`
-	UploadId           *string                `json:"upload_id" xml:"upload_id"`
-	Url                *string                `json:"url" xml:"url"`
-	UserMeta           *string                `json:"user_meta" xml:"user_meta"`
-	VideoMediaMetadata *VideoMediaResponse    `json:"video_media_metadata" xml:"video_media_metadata"`
+	Category             *string                `json:"category" xml:"category"`
+	ContentHash          *string                `json:"content_hash" xml:"content_hash"`
+	ContentHashName      *string                `json:"content_hash_name" xml:"content_hash_name"`
+	ContentType          *string                `json:"content_type" xml:"content_type"`
+	Crc64Hash            *string                `json:"crc64_hash" xml:"crc64_hash"`
+	CreatedAt            *string                `json:"created_at" xml:"created_at"`
+	Description          *string                `json:"description" xml:"description"`
+	DomainId             *string                `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
+	DownloadUrl          *string                `json:"download_url" xml:"download_url"`
+	DriveId              *string                `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	EncryptMode          *string                `json:"encrypt_mode" xml:"encrypt_mode"`
+	FileExtension        *string                `json:"file_extension" xml:"file_extension"`
+	FileId               *string                `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
+	Hidden               *bool                  `json:"hidden" xml:"hidden"`
+	ImageMediaMetadata   *ImageMediaResponse    `json:"image_media_metadata" xml:"image_media_metadata"`
+	Labels               []*string              `json:"labels" xml:"labels" type:"Repeated"`
+	Meta                 *string                `json:"meta" xml:"meta"`
+	Name                 *string                `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	ParentFileId         *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
+	Size                 *int64                 `json:"size" xml:"size" maximum:"53687091200" minimum:"0"`
+	Starred              *bool                  `json:"starred" xml:"starred"`
+	Status               *string                `json:"status" xml:"status"`
+	StreamsInfo          map[string]interface{} `json:"streams_info" xml:"streams_info"`
+	Thumbnail            *string                `json:"thumbnail" xml:"thumbnail"`
+	TrashedAt            *string                `json:"trashed_at" xml:"trashed_at"`
+	Type                 *string                `json:"type" xml:"type"`
+	UpdatedAt            *string                `json:"updated_at" xml:"updated_at"`
+	UploadId             *string                `json:"upload_id" xml:"upload_id"`
+	Url                  *string                `json:"url" xml:"url"`
+	UserMeta             *string                `json:"user_meta" xml:"user_meta"`
+	VideoMediaMetadata   *VideoMediaResponse    `json:"video_media_metadata" xml:"video_media_metadata"`
+	VideoPreviewMetadata *VideoPreviewResponse  `json:"video_preview_metadata" xml:"video_preview_metadata"`
 }
 
 func (s CCPGetFileByPathResponse) String() string {
@@ -2505,11 +2505,6 @@ func (s *CCPGetFileByPathResponse) SetStreamsInfo(v map[string]interface{}) *CCP
 	return s
 }
 
-func (s *CCPGetFileByPathResponse) SetStreamsUrlInfo(v map[string]interface{}) *CCPGetFileByPathResponse {
-	s.StreamsUrlInfo = v
-	return s
-}
-
 func (s *CCPGetFileByPathResponse) SetThumbnail(v string) *CCPGetFileByPathResponse {
 	s.Thumbnail = &v
 	return s
@@ -2550,42 +2545,47 @@ func (s *CCPGetFileByPathResponse) SetVideoMediaMetadata(v *VideoMediaResponse) 
 	return s
 }
 
+func (s *CCPGetFileByPathResponse) SetVideoPreviewMetadata(v *VideoPreviewResponse) *CCPGetFileByPathResponse {
+	s.VideoPreviewMetadata = v
+	return s
+}
+
 /**
  * 获取文件元数据response
  */
 type CCPGetFileResponse struct {
-	Category           *string                `json:"category" xml:"category"`
-	ContentHash        *string                `json:"content_hash" xml:"content_hash"`
-	ContentHashName    *string                `json:"content_hash_name" xml:"content_hash_name"`
-	ContentType        *string                `json:"content_type" xml:"content_type"`
-	Crc64Hash          *string                `json:"crc64_hash" xml:"crc64_hash"`
-	CreatedAt          *string                `json:"created_at" xml:"created_at"`
-	Description        *string                `json:"description" xml:"description"`
-	DomainId           *string                `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
-	DownloadUrl        *string                `json:"download_url" xml:"download_url"`
-	DriveId            *string                `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	EncryptMode        *string                `json:"encrypt_mode" xml:"encrypt_mode"`
-	FileExtension      *string                `json:"file_extension" xml:"file_extension"`
-	FileId             *string                `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
-	Hidden             *bool                  `json:"hidden" xml:"hidden"`
-	ImageMediaMetadata *ImageMediaResponse    `json:"image_media_metadata" xml:"image_media_metadata"`
-	Labels             []*string              `json:"labels" xml:"labels" type:"Repeated"`
-	Meta               *string                `json:"meta" xml:"meta"`
-	Name               *string                `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	ParentFileId       *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
-	Size               *int64                 `json:"size" xml:"size" maximum:"53687091200" minimum:"0"`
-	Starred            *bool                  `json:"starred" xml:"starred"`
-	Status             *string                `json:"status" xml:"status"`
-	StreamsInfo        map[string]interface{} `json:"streams_info" xml:"streams_info"`
-	StreamsUrlInfo     map[string]interface{} `json:"streams_url_info" xml:"streams_url_info"`
-	Thumbnail          *string                `json:"thumbnail" xml:"thumbnail"`
-	TrashedAt          *string                `json:"trashed_at" xml:"trashed_at"`
-	Type               *string                `json:"type" xml:"type"`
-	UpdatedAt          *string                `json:"updated_at" xml:"updated_at"`
-	UploadId           *string                `json:"upload_id" xml:"upload_id"`
-	Url                *string                `json:"url" xml:"url"`
-	UserMeta           *string                `json:"user_meta" xml:"user_meta"`
-	VideoMediaMetadata *VideoMediaResponse    `json:"video_media_metadata" xml:"video_media_metadata"`
+	Category             *string                `json:"category" xml:"category"`
+	ContentHash          *string                `json:"content_hash" xml:"content_hash"`
+	ContentHashName      *string                `json:"content_hash_name" xml:"content_hash_name"`
+	ContentType          *string                `json:"content_type" xml:"content_type"`
+	Crc64Hash            *string                `json:"crc64_hash" xml:"crc64_hash"`
+	CreatedAt            *string                `json:"created_at" xml:"created_at"`
+	Description          *string                `json:"description" xml:"description"`
+	DomainId             *string                `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
+	DownloadUrl          *string                `json:"download_url" xml:"download_url"`
+	DriveId              *string                `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	EncryptMode          *string                `json:"encrypt_mode" xml:"encrypt_mode"`
+	FileExtension        *string                `json:"file_extension" xml:"file_extension"`
+	FileId               *string                `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
+	Hidden               *bool                  `json:"hidden" xml:"hidden"`
+	ImageMediaMetadata   *ImageMediaResponse    `json:"image_media_metadata" xml:"image_media_metadata"`
+	Labels               []*string              `json:"labels" xml:"labels" type:"Repeated"`
+	Meta                 *string                `json:"meta" xml:"meta"`
+	Name                 *string                `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	ParentFileId         *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
+	Size                 *int64                 `json:"size" xml:"size" maximum:"53687091200" minimum:"0"`
+	Starred              *bool                  `json:"starred" xml:"starred"`
+	Status               *string                `json:"status" xml:"status"`
+	StreamsInfo          map[string]interface{} `json:"streams_info" xml:"streams_info"`
+	Thumbnail            *string                `json:"thumbnail" xml:"thumbnail"`
+	TrashedAt            *string                `json:"trashed_at" xml:"trashed_at"`
+	Type                 *string                `json:"type" xml:"type"`
+	UpdatedAt            *string                `json:"updated_at" xml:"updated_at"`
+	UploadId             *string                `json:"upload_id" xml:"upload_id"`
+	Url                  *string                `json:"url" xml:"url"`
+	UserMeta             *string                `json:"user_meta" xml:"user_meta"`
+	VideoMediaMetadata   *VideoMediaResponse    `json:"video_media_metadata" xml:"video_media_metadata"`
+	VideoPreviewMetadata *VideoPreviewResponse  `json:"video_preview_metadata" xml:"video_preview_metadata"`
 }
 
 func (s CCPGetFileResponse) String() string {
@@ -2711,11 +2711,6 @@ func (s *CCPGetFileResponse) SetStreamsInfo(v map[string]interface{}) *CCPGetFil
 	return s
 }
 
-func (s *CCPGetFileResponse) SetStreamsUrlInfo(v map[string]interface{}) *CCPGetFileResponse {
-	s.StreamsUrlInfo = v
-	return s
-}
-
 func (s *CCPGetFileResponse) SetThumbnail(v string) *CCPGetFileResponse {
 	s.Thumbnail = &v
 	return s
@@ -2753,6 +2748,11 @@ func (s *CCPGetFileResponse) SetUserMeta(v string) *CCPGetFileResponse {
 
 func (s *CCPGetFileResponse) SetVideoMediaMetadata(v *VideoMediaResponse) *CCPGetFileResponse {
 	s.VideoMediaMetadata = v
+	return s
+}
+
+func (s *CCPGetFileResponse) SetVideoPreviewMetadata(v *VideoPreviewResponse) *CCPGetFileResponse {
+	s.VideoPreviewMetadata = v
 	return s
 }
 
@@ -2803,6 +2803,82 @@ func (s *CCPGetUploadUrlResponse) SetPartInfoList(v []*UploadPartInfo) *CCPGetUp
 
 func (s *CCPGetUploadUrlResponse) SetUploadId(v string) *CCPGetUploadUrlResponse {
 	s.UploadId = &v
+	return s
+}
+
+/**
+ * 获取视频雪碧图地址 url response
+ */
+type CCPGetVideoPreviewSpriteURLResponse struct {
+	Col           *int64    `json:"col" xml:"col"`
+	Count         *int64    `json:"count" xml:"count"`
+	FrameCount    *int64    `json:"frame_count" xml:"frame_count"`
+	FrameHeight   *int64    `json:"frame_height" xml:"frame_height"`
+	FrameWidth    *int64    `json:"frame_width" xml:"frame_width"`
+	Row           *int64    `json:"row" xml:"row"`
+	SpriteUrlList []*string `json:"sprite_url_list" xml:"sprite_url_list" type:"Repeated"`
+}
+
+func (s CCPGetVideoPreviewSpriteURLResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPGetVideoPreviewSpriteURLResponse) GoString() string {
+	return s.String()
+}
+
+func (s *CCPGetVideoPreviewSpriteURLResponse) SetCol(v int64) *CCPGetVideoPreviewSpriteURLResponse {
+	s.Col = &v
+	return s
+}
+
+func (s *CCPGetVideoPreviewSpriteURLResponse) SetCount(v int64) *CCPGetVideoPreviewSpriteURLResponse {
+	s.Count = &v
+	return s
+}
+
+func (s *CCPGetVideoPreviewSpriteURLResponse) SetFrameCount(v int64) *CCPGetVideoPreviewSpriteURLResponse {
+	s.FrameCount = &v
+	return s
+}
+
+func (s *CCPGetVideoPreviewSpriteURLResponse) SetFrameHeight(v int64) *CCPGetVideoPreviewSpriteURLResponse {
+	s.FrameHeight = &v
+	return s
+}
+
+func (s *CCPGetVideoPreviewSpriteURLResponse) SetFrameWidth(v int64) *CCPGetVideoPreviewSpriteURLResponse {
+	s.FrameWidth = &v
+	return s
+}
+
+func (s *CCPGetVideoPreviewSpriteURLResponse) SetRow(v int64) *CCPGetVideoPreviewSpriteURLResponse {
+	s.Row = &v
+	return s
+}
+
+func (s *CCPGetVideoPreviewSpriteURLResponse) SetSpriteUrlList(v []*string) *CCPGetVideoPreviewSpriteURLResponse {
+	s.SpriteUrlList = v
+	return s
+}
+
+/**
+ * 获取视频文件播放 url response
+ */
+type CCPGetVideoPreviewURLResponse struct {
+	PreviewUrl *string `json:"preview_url" xml:"preview_url"`
+}
+
+func (s CCPGetVideoPreviewURLResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPGetVideoPreviewURLResponse) GoString() string {
+	return s.String()
+}
+
+func (s *CCPGetVideoPreviewURLResponse) SetPreviewUrl(v string) *CCPGetVideoPreviewURLResponse {
+	s.PreviewUrl = &v
 	return s
 }
 
@@ -2964,38 +3040,38 @@ func (s *CCPSearchFileResponse) SetNextMarker(v string) *CCPSearchFileResponse {
  * 更新文件元数据 response
  */
 type CCPUpdateFileMetaResponse struct {
-	Category           *string                `json:"category" xml:"category"`
-	ContentHash        *string                `json:"content_hash" xml:"content_hash"`
-	ContentHashName    *string                `json:"content_hash_name" xml:"content_hash_name"`
-	ContentType        *string                `json:"content_type" xml:"content_type"`
-	Crc64Hash          *string                `json:"crc64_hash" xml:"crc64_hash"`
-	CreatedAt          *string                `json:"created_at" xml:"created_at"`
-	Description        *string                `json:"description" xml:"description"`
-	DomainId           *string                `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
-	DownloadUrl        *string                `json:"download_url" xml:"download_url"`
-	DriveId            *string                `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
-	EncryptMode        *string                `json:"encrypt_mode" xml:"encrypt_mode"`
-	FileExtension      *string                `json:"file_extension" xml:"file_extension"`
-	FileId             *string                `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
-	Hidden             *bool                  `json:"hidden" xml:"hidden"`
-	ImageMediaMetadata *ImageMediaResponse    `json:"image_media_metadata" xml:"image_media_metadata"`
-	Labels             []*string              `json:"labels" xml:"labels" type:"Repeated"`
-	Meta               *string                `json:"meta" xml:"meta"`
-	Name               *string                `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
-	ParentFileId       *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
-	Size               *int64                 `json:"size" xml:"size" maximum:"53687091200" minimum:"0"`
-	Starred            *bool                  `json:"starred" xml:"starred"`
-	Status             *string                `json:"status" xml:"status"`
-	StreamsInfo        map[string]interface{} `json:"streams_info" xml:"streams_info"`
-	StreamsUrlInfo     map[string]interface{} `json:"streams_url_info" xml:"streams_url_info"`
-	Thumbnail          *string                `json:"thumbnail" xml:"thumbnail"`
-	TrashedAt          *string                `json:"trashed_at" xml:"trashed_at"`
-	Type               *string                `json:"type" xml:"type"`
-	UpdatedAt          *string                `json:"updated_at" xml:"updated_at"`
-	UploadId           *string                `json:"upload_id" xml:"upload_id"`
-	Url                *string                `json:"url" xml:"url"`
-	UserMeta           *string                `json:"user_meta" xml:"user_meta"`
-	VideoMediaMetadata *VideoMediaResponse    `json:"video_media_metadata" xml:"video_media_metadata"`
+	Category             *string                `json:"category" xml:"category"`
+	ContentHash          *string                `json:"content_hash" xml:"content_hash"`
+	ContentHashName      *string                `json:"content_hash_name" xml:"content_hash_name"`
+	ContentType          *string                `json:"content_type" xml:"content_type"`
+	Crc64Hash            *string                `json:"crc64_hash" xml:"crc64_hash"`
+	CreatedAt            *string                `json:"created_at" xml:"created_at"`
+	Description          *string                `json:"description" xml:"description"`
+	DomainId             *string                `json:"domain_id" xml:"domain_id" pattern:"[a-z0-9A-Z]+"`
+	DownloadUrl          *string                `json:"download_url" xml:"download_url"`
+	DriveId              *string                `json:"drive_id" xml:"drive_id" pattern:"[0-9]+"`
+	EncryptMode          *string                `json:"encrypt_mode" xml:"encrypt_mode"`
+	FileExtension        *string                `json:"file_extension" xml:"file_extension"`
+	FileId               *string                `json:"file_id" xml:"file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
+	Hidden               *bool                  `json:"hidden" xml:"hidden"`
+	ImageMediaMetadata   *ImageMediaResponse    `json:"image_media_metadata" xml:"image_media_metadata"`
+	Labels               []*string              `json:"labels" xml:"labels" type:"Repeated"`
+	Meta                 *string                `json:"meta" xml:"meta"`
+	Name                 *string                `json:"name" xml:"name" pattern:"[a-zA-Z0-9.-]{1,1000}"`
+	ParentFileId         *string                `json:"parent_file_id" xml:"parent_file_id" maxLength:"50" minLength:"40" pattern:"[a-z0-9]{1,50}"`
+	Size                 *int64                 `json:"size" xml:"size" maximum:"53687091200" minimum:"0"`
+	Starred              *bool                  `json:"starred" xml:"starred"`
+	Status               *string                `json:"status" xml:"status"`
+	StreamsInfo          map[string]interface{} `json:"streams_info" xml:"streams_info"`
+	Thumbnail            *string                `json:"thumbnail" xml:"thumbnail"`
+	TrashedAt            *string                `json:"trashed_at" xml:"trashed_at"`
+	Type                 *string                `json:"type" xml:"type"`
+	UpdatedAt            *string                `json:"updated_at" xml:"updated_at"`
+	UploadId             *string                `json:"upload_id" xml:"upload_id"`
+	Url                  *string                `json:"url" xml:"url"`
+	UserMeta             *string                `json:"user_meta" xml:"user_meta"`
+	VideoMediaMetadata   *VideoMediaResponse    `json:"video_media_metadata" xml:"video_media_metadata"`
+	VideoPreviewMetadata *VideoPreviewResponse  `json:"video_preview_metadata" xml:"video_preview_metadata"`
 }
 
 func (s CCPUpdateFileMetaResponse) String() string {
@@ -3121,11 +3197,6 @@ func (s *CCPUpdateFileMetaResponse) SetStreamsInfo(v map[string]interface{}) *CC
 	return s
 }
 
-func (s *CCPUpdateFileMetaResponse) SetStreamsUrlInfo(v map[string]interface{}) *CCPUpdateFileMetaResponse {
-	s.StreamsUrlInfo = v
-	return s
-}
-
 func (s *CCPUpdateFileMetaResponse) SetThumbnail(v string) *CCPUpdateFileMetaResponse {
 	s.Thumbnail = &v
 	return s
@@ -3163,6 +3234,11 @@ func (s *CCPUpdateFileMetaResponse) SetUserMeta(v string) *CCPUpdateFileMetaResp
 
 func (s *CCPUpdateFileMetaResponse) SetVideoMediaMetadata(v *VideoMediaResponse) *CCPUpdateFileMetaResponse {
 	s.VideoMediaMetadata = v
+	return s
+}
+
+func (s *CCPUpdateFileMetaResponse) SetVideoPreviewMetadata(v *VideoPreviewResponse) *CCPUpdateFileMetaResponse {
+	s.VideoPreviewMetadata = v
 	return s
 }
 
@@ -6063,38 +6139,6 @@ func (s *UploadPartInfo) SetUploadUrl(v string) *UploadPartInfo {
 /**
  *
  */
-type UrlInfo struct {
-	DownloadUrl *string `json:"download_url" xml:"download_url"`
-	Thumbnail   *string `json:"thumbnail" xml:"thumbnail"`
-	Url         *string `json:"url" xml:"url"`
-}
-
-func (s UrlInfo) String() string {
-	return tea.Prettify(s)
-}
-
-func (s UrlInfo) GoString() string {
-	return s.String()
-}
-
-func (s *UrlInfo) SetDownloadUrl(v string) *UrlInfo {
-	s.DownloadUrl = &v
-	return s
-}
-
-func (s *UrlInfo) SetThumbnail(v string) *UrlInfo {
-	s.Thumbnail = &v
-	return s
-}
-
-func (s *UrlInfo) SetUrl(v string) *UrlInfo {
-	s.Url = &v
-	return s
-}
-
-/**
- *
- */
 type UserAuthentication struct {
 	AuthenticationType *string `json:"AuthenticationType" xml:"AuthenticationType" require:"true"`
 	CreatedAt          *int64  `json:"CreatedAt" xml:"CreatedAt" require:"true"`
@@ -6307,6 +6351,162 @@ func (s *VideoMediaResponse) SetTownship(v string) *VideoMediaResponse {
 
 func (s *VideoMediaResponse) SetWidth(v int64) *VideoMediaResponse {
 	s.Width = &v
+	return s
+}
+
+/**
+ *
+ */
+type VideoPreviewResponse struct {
+	AudioFormat  *string                  `json:"audio_format" xml:"audio_format"`
+	Bitrate      *string                  `json:"bitrate" xml:"bitrate"`
+	Duration     *string                  `json:"duration" xml:"duration"`
+	FrameRate    *string                  `json:"frame_rate" xml:"frame_rate"`
+	Height       *int64                   `json:"height" xml:"height"`
+	SpriteInfo   *VideoPreviewSprite      `json:"sprite_info" xml:"sprite_info"`
+	TemplateList []*VideoPreviewTranscode `json:"template_list" xml:"template_list" type:"Repeated"`
+	Thumbnail    *string                  `json:"thumbnail" xml:"thumbnail"`
+	VideoFormat  *string                  `json:"video_format" xml:"video_format"`
+	Width        *int64                   `json:"width" xml:"width"`
+}
+
+func (s VideoPreviewResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s VideoPreviewResponse) GoString() string {
+	return s.String()
+}
+
+func (s *VideoPreviewResponse) SetAudioFormat(v string) *VideoPreviewResponse {
+	s.AudioFormat = &v
+	return s
+}
+
+func (s *VideoPreviewResponse) SetBitrate(v string) *VideoPreviewResponse {
+	s.Bitrate = &v
+	return s
+}
+
+func (s *VideoPreviewResponse) SetDuration(v string) *VideoPreviewResponse {
+	s.Duration = &v
+	return s
+}
+
+func (s *VideoPreviewResponse) SetFrameRate(v string) *VideoPreviewResponse {
+	s.FrameRate = &v
+	return s
+}
+
+func (s *VideoPreviewResponse) SetHeight(v int64) *VideoPreviewResponse {
+	s.Height = &v
+	return s
+}
+
+func (s *VideoPreviewResponse) SetSpriteInfo(v *VideoPreviewSprite) *VideoPreviewResponse {
+	s.SpriteInfo = v
+	return s
+}
+
+func (s *VideoPreviewResponse) SetTemplateList(v []*VideoPreviewTranscode) *VideoPreviewResponse {
+	s.TemplateList = v
+	return s
+}
+
+func (s *VideoPreviewResponse) SetThumbnail(v string) *VideoPreviewResponse {
+	s.Thumbnail = &v
+	return s
+}
+
+func (s *VideoPreviewResponse) SetVideoFormat(v string) *VideoPreviewResponse {
+	s.VideoFormat = &v
+	return s
+}
+
+func (s *VideoPreviewResponse) SetWidth(v int64) *VideoPreviewResponse {
+	s.Width = &v
+	return s
+}
+
+/**
+ *
+ */
+type VideoPreviewSprite struct {
+	Col         *int64  `json:"col" xml:"col"`
+	Count       *int64  `json:"count" xml:"count"`
+	FrameCount  *int64  `json:"frame_count" xml:"frame_count"`
+	FrameHeight *int64  `json:"frame_height" xml:"frame_height"`
+	FrameWidth  *int64  `json:"frame_width" xml:"frame_width"`
+	Row         *int64  `json:"row" xml:"row"`
+	Status      *string `json:"status" xml:"status"`
+}
+
+func (s VideoPreviewSprite) String() string {
+	return tea.Prettify(s)
+}
+
+func (s VideoPreviewSprite) GoString() string {
+	return s.String()
+}
+
+func (s *VideoPreviewSprite) SetCol(v int64) *VideoPreviewSprite {
+	s.Col = &v
+	return s
+}
+
+func (s *VideoPreviewSprite) SetCount(v int64) *VideoPreviewSprite {
+	s.Count = &v
+	return s
+}
+
+func (s *VideoPreviewSprite) SetFrameCount(v int64) *VideoPreviewSprite {
+	s.FrameCount = &v
+	return s
+}
+
+func (s *VideoPreviewSprite) SetFrameHeight(v int64) *VideoPreviewSprite {
+	s.FrameHeight = &v
+	return s
+}
+
+func (s *VideoPreviewSprite) SetFrameWidth(v int64) *VideoPreviewSprite {
+	s.FrameWidth = &v
+	return s
+}
+
+func (s *VideoPreviewSprite) SetRow(v int64) *VideoPreviewSprite {
+	s.Row = &v
+	return s
+}
+
+func (s *VideoPreviewSprite) SetStatus(v string) *VideoPreviewSprite {
+	s.Status = &v
+	return s
+}
+
+/**
+ *
+ */
+type VideoPreviewTranscode struct {
+	Status     *string `json:"status" xml:"status"`
+	TemplateId *string `json:"template_id" xml:"template_id"`
+}
+
+func (s VideoPreviewTranscode) String() string {
+	return tea.Prettify(s)
+}
+
+func (s VideoPreviewTranscode) GoString() string {
+	return s.String()
+}
+
+func (s *VideoPreviewTranscode) SetStatus(v string) *VideoPreviewTranscode {
+	s.Status = &v
+	return s
+}
+
+func (s *VideoPreviewTranscode) SetTemplateId(v string) *VideoPreviewTranscode {
+	s.TemplateId = &v
 	return s
 }
 
@@ -8585,6 +8785,98 @@ func (s *GetUploadUrlModel) SetBody(v *CCPGetUploadUrlResponse) *GetUploadUrlMod
 	return s
 }
 
+type GetVideoPreviewSpriteUrlRequestModel struct {
+	Headers map[string]*string                  `json:"headers" xml:"headers"`
+	Body    *CCPGetVideoPreviewSpriteURLRequest `json:"body" xml:"body" require:"true"`
+}
+
+func (s GetVideoPreviewSpriteUrlRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetVideoPreviewSpriteUrlRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *GetVideoPreviewSpriteUrlRequestModel) SetHeaders(v map[string]*string) *GetVideoPreviewSpriteUrlRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *GetVideoPreviewSpriteUrlRequestModel) SetBody(v *CCPGetVideoPreviewSpriteURLRequest) *GetVideoPreviewSpriteUrlRequestModel {
+	s.Body = v
+	return s
+}
+
+type GetVideoPreviewSpriteUrlModel struct {
+	Headers map[string]*string                   `json:"headers" xml:"headers"`
+	Body    *CCPGetVideoPreviewSpriteURLResponse `json:"body" xml:"body" require:"true"`
+}
+
+func (s GetVideoPreviewSpriteUrlModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetVideoPreviewSpriteUrlModel) GoString() string {
+	return s.String()
+}
+
+func (s *GetVideoPreviewSpriteUrlModel) SetHeaders(v map[string]*string) *GetVideoPreviewSpriteUrlModel {
+	s.Headers = v
+	return s
+}
+
+func (s *GetVideoPreviewSpriteUrlModel) SetBody(v *CCPGetVideoPreviewSpriteURLResponse) *GetVideoPreviewSpriteUrlModel {
+	s.Body = v
+	return s
+}
+
+type GetVideoPreviewUrlRequestModel struct {
+	Headers map[string]*string            `json:"headers" xml:"headers"`
+	Body    *CCPGetVideoPreviewURLRequest `json:"body" xml:"body" require:"true"`
+}
+
+func (s GetVideoPreviewUrlRequestModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetVideoPreviewUrlRequestModel) GoString() string {
+	return s.String()
+}
+
+func (s *GetVideoPreviewUrlRequestModel) SetHeaders(v map[string]*string) *GetVideoPreviewUrlRequestModel {
+	s.Headers = v
+	return s
+}
+
+func (s *GetVideoPreviewUrlRequestModel) SetBody(v *CCPGetVideoPreviewURLRequest) *GetVideoPreviewUrlRequestModel {
+	s.Body = v
+	return s
+}
+
+type GetVideoPreviewUrlModel struct {
+	Headers map[string]*string             `json:"headers" xml:"headers"`
+	Body    *CCPGetVideoPreviewURLResponse `json:"body" xml:"body" require:"true"`
+}
+
+func (s GetVideoPreviewUrlModel) String() string {
+	return tea.Prettify(s)
+}
+
+func (s GetVideoPreviewUrlModel) GoString() string {
+	return s.String()
+}
+
+func (s *GetVideoPreviewUrlModel) SetHeaders(v map[string]*string) *GetVideoPreviewUrlModel {
+	s.Headers = v
+	return s
+}
+
+func (s *GetVideoPreviewUrlModel) SetBody(v *CCPGetVideoPreviewURLResponse) *GetVideoPreviewUrlModel {
+	s.Body = v
+	return s
+}
+
 type ListFileRequestModel struct {
 	Headers map[string]*string  `json:"headers" xml:"headers"`
 	Body    *CCPListFileRequest `json:"body" xml:"body" require:"true"`
@@ -9746,6 +10038,76 @@ func (s *CCPGetUploadUrlRequest) SetUploadId(v string) *CCPGetUploadUrlRequest {
 
 func (s *CCPGetUploadUrlRequest) SetFileId(v string) *CCPGetUploadUrlRequest {
 	s.FileId = &v
+	return s
+}
+
+/**
+ * 获取视频雪碧图地址的请求body
+ */
+type CCPGetVideoPreviewSpriteURLRequest struct {
+	DriveId   *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	ExpireSec *int64  `json:"expire_sec" xml:"expire_sec" maximum:"14400" minimum:"0"`
+	FileId    *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9.-_]{1,50}"`
+}
+
+func (s CCPGetVideoPreviewSpriteURLRequest) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPGetVideoPreviewSpriteURLRequest) GoString() string {
+	return s.String()
+}
+
+func (s *CCPGetVideoPreviewSpriteURLRequest) SetDriveId(v string) *CCPGetVideoPreviewSpriteURLRequest {
+	s.DriveId = &v
+	return s
+}
+
+func (s *CCPGetVideoPreviewSpriteURLRequest) SetExpireSec(v int64) *CCPGetVideoPreviewSpriteURLRequest {
+	s.ExpireSec = &v
+	return s
+}
+
+func (s *CCPGetVideoPreviewSpriteURLRequest) SetFileId(v string) *CCPGetVideoPreviewSpriteURLRequest {
+	s.FileId = &v
+	return s
+}
+
+/**
+ * 获取视频文件播放地址的请求body
+ */
+type CCPGetVideoPreviewURLRequest struct {
+	DriveId    *string `json:"drive_id" xml:"drive_id" require:"true" pattern:"[0-9]+"`
+	ExpireSec  *int64  `json:"expire_sec" xml:"expire_sec" maximum:"14400" minimum:"0"`
+	FileId     *string `json:"file_id" xml:"file_id" require:"true" maxLength:"50" minLength:"40" pattern:"[a-z0-9.-_]{1,50}"`
+	TemplateId *string `json:"template_id" xml:"template_id"`
+}
+
+func (s CCPGetVideoPreviewURLRequest) String() string {
+	return tea.Prettify(s)
+}
+
+func (s CCPGetVideoPreviewURLRequest) GoString() string {
+	return s.String()
+}
+
+func (s *CCPGetVideoPreviewURLRequest) SetDriveId(v string) *CCPGetVideoPreviewURLRequest {
+	s.DriveId = &v
+	return s
+}
+
+func (s *CCPGetVideoPreviewURLRequest) SetExpireSec(v int64) *CCPGetVideoPreviewURLRequest {
+	s.ExpireSec = &v
+	return s
+}
+
+func (s *CCPGetVideoPreviewURLRequest) SetFileId(v string) *CCPGetVideoPreviewURLRequest {
+	s.FileId = &v
+	return s
+}
+
+func (s *CCPGetVideoPreviewURLRequest) SetTemplateId(v string) *CCPGetVideoPreviewURLRequest {
+	s.TemplateId = &v
 	return s
 }
 
@@ -12556,6 +12918,80 @@ func (s *UpdateUserModel) SetBody(v *UpdateUserResponse) *UpdateUserModel {
 }
 
 /**
+ *
+ */
+type BaseMediaResponse struct {
+	AddressLine *string `json:"address_line" xml:"address_line"`
+	City        *string `json:"city" xml:"city"`
+	Country     *string `json:"country" xml:"country"`
+	District    *string `json:"district" xml:"district"`
+	Height      *int64  `json:"height" xml:"height"`
+	Location    *string `json:"location" xml:"location"`
+	Province    *string `json:"province" xml:"province"`
+	Time        *string `json:"time" xml:"time"`
+	Township    *string `json:"township" xml:"township"`
+	Width       *int64  `json:"width" xml:"width"`
+}
+
+func (s BaseMediaResponse) String() string {
+	return tea.Prettify(s)
+}
+
+func (s BaseMediaResponse) GoString() string {
+	return s.String()
+}
+
+func (s *BaseMediaResponse) SetAddressLine(v string) *BaseMediaResponse {
+	s.AddressLine = &v
+	return s
+}
+
+func (s *BaseMediaResponse) SetCity(v string) *BaseMediaResponse {
+	s.City = &v
+	return s
+}
+
+func (s *BaseMediaResponse) SetCountry(v string) *BaseMediaResponse {
+	s.Country = &v
+	return s
+}
+
+func (s *BaseMediaResponse) SetDistrict(v string) *BaseMediaResponse {
+	s.District = &v
+	return s
+}
+
+func (s *BaseMediaResponse) SetHeight(v int64) *BaseMediaResponse {
+	s.Height = &v
+	return s
+}
+
+func (s *BaseMediaResponse) SetLocation(v string) *BaseMediaResponse {
+	s.Location = &v
+	return s
+}
+
+func (s *BaseMediaResponse) SetProvince(v string) *BaseMediaResponse {
+	s.Province = &v
+	return s
+}
+
+func (s *BaseMediaResponse) SetTime(v string) *BaseMediaResponse {
+	s.Time = &v
+	return s
+}
+
+func (s *BaseMediaResponse) SetTownship(v string) *BaseMediaResponse {
+	s.Township = &v
+	return s
+}
+
+func (s *BaseMediaResponse) SetWidth(v int64) *BaseMediaResponse {
+	s.Width = &v
+	return s
+}
+
+/**
  * Base user response
  */
 type BaseUserResponse struct {
@@ -14482,6 +14918,38 @@ func (s *UpdateFaceGroupInfoResponse) SetDriveId(v string) *UpdateFaceGroupInfoR
 
 func (s *UpdateFaceGroupInfoResponse) SetGroupId(v string) *UpdateFaceGroupInfoResponse {
 	s.GroupId = &v
+	return s
+}
+
+/**
+ *
+ */
+type UrlInfo struct {
+	DownloadUrl *string `json:"download_url" xml:"download_url"`
+	Thumbnail   *string `json:"thumbnail" xml:"thumbnail"`
+	Url         *string `json:"url" xml:"url"`
+}
+
+func (s UrlInfo) String() string {
+	return tea.Prettify(s)
+}
+
+func (s UrlInfo) GoString() string {
+	return s.String()
+}
+
+func (s *UrlInfo) SetDownloadUrl(v string) *UrlInfo {
+	s.DownloadUrl = &v
+	return s
+}
+
+func (s *UrlInfo) SetThumbnail(v string) *UrlInfo {
+	s.Thumbnail = &v
+	return s
+}
+
+func (s *UrlInfo) SetUrl(v string) *UrlInfo {
+	s.Url = &v
 	return s
 }
 
@@ -20238,6 +20706,310 @@ func (client *Client) GetUploadUrl(request *GetUploadUrlRequestModel, runtime *R
 
 				respMap = util.AssertAsMap(obj)
 				_result = &GetUploadUrlModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !tea.BoolValue(util.Empty(response_.Headers["x-ca-error-message"])) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     tea.StringValue(response_.Headers["x-ca-request-id"]),
+						"statusCode":    tea.IntValue(response_.StatusCode),
+						"statusMessage": tea.StringValue(response_.StatusMessage),
+					},
+					"message": tea.StringValue(response_.Headers["x-ca-error-message"]),
+				})
+				return _result, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return _result, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     tea.StringValue(response_.Headers["x-ca-request-id"]),
+					"statusCode":    tea.IntValue(response_.StatusCode),
+					"statusMessage": tea.StringValue(response_.StatusMessage),
+				},
+			}, respMap))
+			return _result, _err
+		}()
+		if !tea.BoolValue(tea.Retryable(_err)) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 获取视频雪碧图地址
+ * @tags file
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
+ * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+ */
+func (client *Client) GetVideoPreviewSpriteUrl(request *GetVideoPreviewSpriteUrlRequestModel, runtime *RuntimeOptions) (_result *GetVideoPreviewSpriteUrlModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return _result, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return _result, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": tea.IntValue(util.DefaultNumber(runtime.MaxAttempts, tea.Int(3))),
+		},
+		"backoff": map[string]interface{}{
+			"policy": tea.StringValue(util.DefaultString(runtime.BackoffPolicy, tea.String("no"))),
+			"period": tea.IntValue(util.DefaultNumber(runtime.BackoffPeriod, tea.Int(1))),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &GetVideoPreviewSpriteUrlModel{}
+	for _retryTimes := 0; tea.BoolValue(tea.AllowRetry(_runtime["retry"], tea.Int(_retryTimes))); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], tea.Int(_retryTimes))
+			if tea.IntValue(_backoffTime) > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*GetVideoPreviewSpriteUrlModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return _result, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return _result, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return _result, _err
+			}
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return _result, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, tea.String("https"))
+			request_.Method = tea.String("POST")
+			request_.Pathname = client.GetPathname(client.Nickname, tea.String("/v2/file/get_video_preview_sprite_url"))
+			request_.Headers = tea.Merge(map[string]*string{
+				"user-agent":   client.GetUserAgent(),
+				"host":         util.DefaultString(client.Endpoint, tea.String(tea.StringValue(client.DomainId)+".api.alicloudccp.com")),
+				"content-type": tea.String("application/json; charset=utf-8"),
+			}, request.Headers)
+			if !tea.BoolValue(util.Empty(accessToken)) {
+				request_.Headers["authorization"] = tea.String("Bearer " + tea.StringValue(accessToken))
+			} else if !tea.BoolValue(util.Empty(accesskeyId)) && !tea.BoolValue(util.Empty(accessKeySecret)) {
+				if !tea.BoolValue(util.Empty(securityToken)) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
+				request_.Headers["accept"] = tea.String("application/json")
+				request_.Headers["x-acs-signature-method"] = tea.String("HMAC-SHA1")
+				request_.Headers["x-acs-signature-version"] = tea.String("1.0")
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = tea.String("acs " + tea.StringValue(accesskeyId) + ":" + tea.StringValue(roautil.GetSignature(stringToSign, accessKeySecret)))
+			}
+
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request.Body)))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return _result, _err
+			}
+			var respMap map[string]interface{}
+			var obj interface{}
+			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return _result, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &GetVideoPreviewSpriteUrlModel{}
+				_err = tea.Convert(map[string]interface{}{
+					"body":    respMap,
+					"headers": response_.Headers,
+				}, &_result)
+				return _result, _err
+			}
+
+			if !tea.BoolValue(util.Empty(response_.Headers["x-ca-error-message"])) {
+				_err = tea.NewSDKError(map[string]interface{}{
+					"data": map[string]interface{}{
+						"requestId":     tea.StringValue(response_.Headers["x-ca-request-id"]),
+						"statusCode":    tea.IntValue(response_.StatusCode),
+						"statusMessage": tea.StringValue(response_.StatusMessage),
+					},
+					"message": tea.StringValue(response_.Headers["x-ca-error-message"]),
+				})
+				return _result, _err
+			}
+
+			obj, _err = util.ReadAsJSON(response_.Body)
+			if _err != nil {
+				return _result, _err
+			}
+
+			respMap = util.AssertAsMap(obj)
+			_err = tea.NewSDKError(tea.ToMap(map[string]interface{}{
+				"data": map[string]interface{}{
+					"requestId":     tea.StringValue(response_.Headers["x-ca-request-id"]),
+					"statusCode":    tea.IntValue(response_.StatusCode),
+					"statusMessage": tea.StringValue(response_.StatusMessage),
+				},
+			}, respMap))
+			return _result, _err
+		}()
+		if !tea.BoolValue(tea.Retryable(_err)) {
+			break
+		}
+	}
+
+	return _resp, _err
+}
+
+/**
+ * 获取视频播放地址
+ * @tags file
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
+ * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+ */
+func (client *Client) GetVideoPreviewUrl(request *GetVideoPreviewUrlRequestModel, runtime *RuntimeOptions) (_result *GetVideoPreviewUrlModel, _err error) {
+	_err = tea.Validate(request)
+	if _err != nil {
+		return _result, _err
+	}
+	_err = tea.Validate(runtime)
+	if _err != nil {
+		return _result, _err
+	}
+	_runtime := map[string]interface{}{
+		"timeouted":      "retry",
+		"readTimeout":    tea.IntValue(runtime.ReadTimeout),
+		"connectTimeout": tea.IntValue(runtime.ConnectTimeout),
+		"localAddr":      tea.StringValue(runtime.LocalAddr),
+		"httpProxy":      tea.StringValue(runtime.HttpProxy),
+		"httpsProxy":     tea.StringValue(runtime.HttpsProxy),
+		"noProxy":        tea.StringValue(runtime.NoProxy),
+		"maxIdleConns":   tea.IntValue(runtime.MaxIdleConns),
+		"socks5Proxy":    tea.StringValue(runtime.Socks5Proxy),
+		"socks5NetWork":  tea.StringValue(runtime.Socks5NetWork),
+		"retry": map[string]interface{}{
+			"retryable":   tea.BoolValue(runtime.Autoretry),
+			"maxAttempts": tea.IntValue(util.DefaultNumber(runtime.MaxAttempts, tea.Int(3))),
+		},
+		"backoff": map[string]interface{}{
+			"policy": tea.StringValue(util.DefaultString(runtime.BackoffPolicy, tea.String("no"))),
+			"period": tea.IntValue(util.DefaultNumber(runtime.BackoffPeriod, tea.Int(1))),
+		},
+		"ignoreSSL": tea.BoolValue(runtime.IgnoreSSL),
+	}
+
+	_resp := &GetVideoPreviewUrlModel{}
+	for _retryTimes := 0; tea.BoolValue(tea.AllowRetry(_runtime["retry"], tea.Int(_retryTimes))); _retryTimes++ {
+		if _retryTimes > 0 {
+			_backoffTime := tea.GetBackoffTime(_runtime["backoff"], tea.Int(_retryTimes))
+			if tea.IntValue(_backoffTime) > 0 {
+				tea.Sleep(_backoffTime)
+			}
+		}
+
+		_resp, _err = func() (*GetVideoPreviewUrlModel, error) {
+			request_ := tea.NewRequest()
+			accesskeyId, _err := client.GetAccessKeyId()
+			if _err != nil {
+				return _result, _err
+			}
+
+			accessKeySecret, _err := client.GetAccessKeySecret()
+			if _err != nil {
+				return _result, _err
+			}
+
+			securityToken, _err := client.GetSecurityToken()
+			if _err != nil {
+				return _result, _err
+			}
+
+			accessToken, _err := client.GetAccessToken()
+			if _err != nil {
+				return _result, _err
+			}
+
+			request_.Protocol = util.DefaultString(client.Protocol, tea.String("https"))
+			request_.Method = tea.String("POST")
+			request_.Pathname = client.GetPathname(client.Nickname, tea.String("/v2/file/get_video_preview_url"))
+			request_.Headers = tea.Merge(map[string]*string{
+				"user-agent":   client.GetUserAgent(),
+				"host":         util.DefaultString(client.Endpoint, tea.String(tea.StringValue(client.DomainId)+".api.alicloudccp.com")),
+				"content-type": tea.String("application/json; charset=utf-8"),
+			}, request.Headers)
+			if !tea.BoolValue(util.Empty(accessToken)) {
+				request_.Headers["authorization"] = tea.String("Bearer " + tea.StringValue(accessToken))
+			} else if !tea.BoolValue(util.Empty(accesskeyId)) && !tea.BoolValue(util.Empty(accessKeySecret)) {
+				if !tea.BoolValue(util.Empty(securityToken)) {
+					request_.Headers["x-acs-security-token"] = securityToken
+				}
+
+				request_.Headers["date"] = util.GetDateUTCString()
+				request_.Headers["accept"] = tea.String("application/json")
+				request_.Headers["x-acs-signature-method"] = tea.String("HMAC-SHA1")
+				request_.Headers["x-acs-signature-version"] = tea.String("1.0")
+				stringToSign := roautil.GetStringToSign(request_)
+				request_.Headers["authorization"] = tea.String("acs " + tea.StringValue(accesskeyId) + ":" + tea.StringValue(roautil.GetSignature(stringToSign, accessKeySecret)))
+			}
+
+			request_.Body = tea.ToReader(util.ToJSONString(tea.ToMap(request.Body)))
+			response_, _err := tea.DoRequest(request_, _runtime)
+			if _err != nil {
+				return _result, _err
+			}
+			var respMap map[string]interface{}
+			var obj interface{}
+			if tea.BoolValue(util.EqualNumber(response_.StatusCode, tea.Int(200))) {
+				obj, _err = util.ReadAsJSON(response_.Body)
+				if _err != nil {
+					return _result, _err
+				}
+
+				respMap = util.AssertAsMap(obj)
+				_result = &GetVideoPreviewUrlModel{}
 				_err = tea.Convert(map[string]interface{}{
 					"body":    respMap,
 					"headers": response_.Headers,

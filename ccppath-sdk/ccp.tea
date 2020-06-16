@@ -1888,8 +1888,7 @@ type: boolean', enum='false, true', example=false),
   starred?: boolean(name='starred', description='starred
 type: boolean', example=false),
   status?: string(name='status', description='status', enum='uploading, available', example='available'),
-  streamsInfo?: object(name='streams_info', additionalProperties='{"$ref":"#/definitions/StreamInfo"}'),
-  streamsUrlInfo?: object(name='streams_url_info', additionalProperties='{"$ref":"#/definitions/UrlInfo"}', description='@Deprecated streams url info'),
+  streamsInfo?: object(name='streams_info', additionalProperties='{"$ref":"#/definitions/StreamInfo"}', description='@Deprecated streams url info'),
   thumbnail?: string(name='thumbnail', description='thumbnail', example='https://ccp.data.aliyuncs.com/hz22%2F5d5b986facbec311ef844c25954f96821497b383%2F5d5b986f955410dd991646bb87c6b4e899eff525?Expires=xxx&OSSAccessKeyId=xxx&Signature=xxx'),
   trashedAt?: string(name='trashed_at', description='trashed_at', format='date-time'),
   type?: string(name='type', description='type', enum='file, folder', example='file'),
@@ -1898,6 +1897,7 @@ type: boolean', example=false),
   url?: string(name='url', description='url', example='https://ccp.data.aliyuncs.com/hz22%2F5d5b986facbec311ef844c25954f96821497b383%2F5d5b986f955410dd991646bb87c6b4e899eff525?Expires=xxx&OSSAccessKeyId=xxx&Signature=xxx'),
   userMeta?: string(name='user_meta', description='user_meta', example='user_meta'),
   videoMediaMetadata?: VideoMediaResponse(name='video_media_metadata'),
+  videoPreviewMetadata?: VideoPreviewResponse(name='video_preview_metadata'),
 }
 
 /**
@@ -2013,8 +2013,7 @@ type: boolean', enum='false, true', example=false),
   starred?: boolean(name='starred', description='starred
 type: boolean', example=false),
   status?: string(name='status', description='status', enum='uploading, available', example='available'),
-  streamsInfo?: object(name='streams_info', additionalProperties='{"$ref":"#/definitions/StreamInfo"}'),
-  streamsUrlInfo?: object(name='streams_url_info', additionalProperties='{"$ref":"#/definitions/UrlInfo"}', description='@Deprecated streams url info'),
+  streamsInfo?: object(name='streams_info', additionalProperties='{"$ref":"#/definitions/StreamInfo"}', description='@Deprecated streams url info'),
   thumbnail?: string(name='thumbnail', description='thumbnail', example='https://ccp.data.aliyuncs.com/hz22%2F5d5b986facbec311ef844c25954f96821497b383%2F5d5b986f955410dd991646bb87c6b4e899eff525?Expires=xxx&OSSAccessKeyId=xxx&Signature=xxx'),
   trashedAt?: string(name='trashed_at', description='trashed_at', format='date-time'),
   type?: string(name='type', description='type', enum='file, folder', example='file'),
@@ -2023,6 +2022,7 @@ type: boolean', example=false),
   url?: string(name='url', description='url', example='https://ccp.data.aliyuncs.com/hz22%2F5d5b986facbec311ef844c25954f96821497b383%2F5d5b986f955410dd991646bb87c6b4e899eff525?Expires=xxx&OSSAccessKeyId=xxx&Signature=xxx'),
   userMeta?: string(name='user_meta', description='user_meta', example='user_meta'),
   videoMediaMetadata?: VideoMediaResponse(name='video_media_metadata'),
+  videoPreviewMetadata?: VideoPreviewResponse(name='video_preview_metadata'),
 }
 
 /**
@@ -2124,8 +2124,7 @@ type: boolean', enum='false, true', example=false),
   starred?: boolean(name='starred', description='starred
 type: boolean', example=false),
   status?: string(name='status', description='status', enum='uploading, available', example='available'),
-  streamsInfo?: object(name='streams_info', additionalProperties='{"$ref":"#/definitions/StreamInfo"}'),
-  streamsUrlInfo?: object(name='streams_url_info', additionalProperties='{"$ref":"#/definitions/UrlInfo"}', description='@Deprecated streams url info'),
+  streamsInfo?: object(name='streams_info', additionalProperties='{"$ref":"#/definitions/StreamInfo"}', description='@Deprecated streams url info'),
   thumbnail?: string(name='thumbnail', description='thumbnail', example='https://ccp.data.aliyuncs.com/hz22%2F5d5b986facbec311ef844c25954f96821497b383%2F5d5b986f955410dd991646bb87c6b4e899eff525?Expires=xxx&OSSAccessKeyId=xxx&Signature=xxx'),
   trashedAt?: string(name='trashed_at', description='trashed_at', format='date-time'),
   type?: string(name='type', description='type', enum='file, folder', example='file'),
@@ -2134,6 +2133,7 @@ type: boolean', example=false),
   url?: string(name='url', description='url', example='https://ccp.data.aliyuncs.com/hz22%2F5d5b986facbec311ef844c25954f96821497b383%2F5d5b986f955410dd991646bb87c6b4e899eff525?Expires=xxx&OSSAccessKeyId=xxx&Signature=xxx'),
   userMeta?: string(name='user_meta', description='user_meta', example='user_meta'),
   videoMediaMetadata?: VideoMediaResponse(name='video_media_metadata'),
+  videoPreviewMetadata?: VideoPreviewResponse(name='video_preview_metadata'),
 }
 
 /**
@@ -2164,8 +2164,7 @@ type: boolean', enum='false, true', example=false),
   starred?: boolean(name='starred', description='starred
 type: boolean', example=false),
   status?: string(name='status', description='status', enum='uploading, available', example='available'),
-  streamsInfo?: object(name='streams_info', additionalProperties='{"$ref":"#/definitions/StreamInfo"}'),
-  streamsUrlInfo?: object(name='streams_url_info', additionalProperties='{"$ref":"#/definitions/UrlInfo"}', description='@Deprecated streams url info'),
+  streamsInfo?: object(name='streams_info', additionalProperties='{"$ref":"#/definitions/StreamInfo"}', description='@Deprecated streams url info'),
   thumbnail?: string(name='thumbnail', description='thumbnail', example='https://ccp.data.aliyuncs.com/hz22%2F5d5b986facbec311ef844c25954f96821497b383%2F5d5b986f955410dd991646bb87c6b4e899eff525?Expires=xxx&OSSAccessKeyId=xxx&Signature=xxx'),
   trashedAt?: string(name='trashed_at', description='trashed_at', format='date-time'),
   type?: string(name='type', description='type', enum='file, folder', example='file'),
@@ -2174,6 +2173,7 @@ type: boolean', example=false),
   url?: string(name='url', description='url', example='https://ccp.data.aliyuncs.com/hz22%2F5d5b986facbec311ef844c25954f96821497b383%2F5d5b986f955410dd991646bb87c6b4e899eff525?Expires=xxx&OSSAccessKeyId=xxx&Signature=xxx'),
   userMeta?: string(name='user_meta', description='user_meta', example='user_meta'),
   videoMediaMetadata?: VideoMediaResponse(name='video_media_metadata'),
+  videoPreviewMetadata?: VideoPreviewResponse(name='video_preview_metadata'),
 }
 
 /**
@@ -2186,6 +2186,26 @@ model CCPGetUploadUrlResponse {
   fileId?: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9]{1,50}'),
   partInfoList?: [ UploadPartInfo ](name='part_info_list', description='part_info_list', example='', items='{"$ref":"#/definitions/UploadPartInfo"}'),
   uploadId?: string(name='upload_id', description='upload_id', example='F3C25CDFA5C74ECB8DE32672F6211FD4'),
+}
+
+/**
+ * 获取视频雪碧图地址 url response
+ */
+model CCPGetVideoPreviewSpriteURLResponse {
+  col?: long(name='col', description='col', example=10, format='int64'),
+  count?: long(name='count', description='count', example=4, format='int64'),
+  frameCount?: long(name='frame_count', description='frame_count', example=450, format='int64'),
+  frameHeight?: long(name='frame_height', description='frame_height', example=90, format='int64'),
+  frameWidth?: long(name='frame_width', description='frame_width', example=160, format='int64'),
+  row?: long(name='row', description='row', example=10, format='int64'),
+  spriteUrlList?: [ string ](name='sprite_url_list', description='sprite_url_list', example='[https://ccp.data.aliyuncs.com/hz22%2F5d79219b0aa9a7c995a94a96993ba3205cd91c5a%2F5d79219bf3261a5d38744da0834ed489b677a27a?Expires=xxxOSSAccessKeyId=xxx&Signature=xxx&response-content-disposition=attachment%3Bfilename%3DtBiZAoJPC2c8b13450eda4292b7f5f8010618e078.txt]', items='{"type":"string"}'),
+}
+
+/**
+ * 获取视频文件播放 url response
+ */
+model CCPGetVideoPreviewURLResponse {
+  previewUrl?: string(name='preview_url', description='preview_url', example='https://ccp.data.aliyuncs.com/hz22%2F5d79219b0aa9a7c995a94a96993ba3205cd91c5a%2F5d79219bf3261a5d38744da0834ed489b677a27a?Expires=xxxOSSAccessKeyId=xxx&Signature=xxx&response-content-disposition=attachment%3Bfilename%3DtBiZAoJPC2c8b13450eda4292b7f5f8010618e078.txt'),
 }
 
 /**
@@ -2260,8 +2280,7 @@ type: boolean', enum='false, true', example=false),
   starred?: boolean(name='starred', description='starred
 type: boolean', example=false),
   status?: string(name='status', description='status', enum='uploading, available', example='available'),
-  streamsInfo?: object(name='streams_info', additionalProperties='{"$ref":"#/definitions/StreamInfo"}'),
-  streamsUrlInfo?: object(name='streams_url_info', additionalProperties='{"$ref":"#/definitions/UrlInfo"}', description='@Deprecated streams url info'),
+  streamsInfo?: object(name='streams_info', additionalProperties='{"$ref":"#/definitions/StreamInfo"}', description='@Deprecated streams url info'),
   thumbnail?: string(name='thumbnail', description='thumbnail', example='https://ccp.data.aliyuncs.com/hz22%2F5d5b986facbec311ef844c25954f96821497b383%2F5d5b986f955410dd991646bb87c6b4e899eff525?Expires=xxx&OSSAccessKeyId=xxx&Signature=xxx'),
   trashedAt?: string(name='trashed_at', description='trashed_at', format='date-time'),
   type?: string(name='type', description='type', enum='file, folder', example='file'),
@@ -2270,6 +2289,7 @@ type: boolean', example=false),
   url?: string(name='url', description='url', example='https://ccp.data.aliyuncs.com/hz22%2F5d5b986facbec311ef844c25954f96821497b383%2F5d5b986f955410dd991646bb87c6b4e899eff525?Expires=xxx&OSSAccessKeyId=xxx&Signature=xxx'),
   userMeta?: string(name='user_meta', description='user_meta', example='user_meta'),
   videoMediaMetadata?: VideoMediaResponse(name='video_media_metadata'),
+  videoPreviewMetadata?: VideoPreviewResponse(name='video_preview_metadata'),
 }
 
 /**
@@ -2840,7 +2860,7 @@ model OSSVideoDRMLicenseResponse {
  */
 model OSSVideoDefinitionResponse {
   definitionList?: [ string ](name='definition_list', description='definition_list', example='', items='{"type":"string"}'),
-  frameRate?: string(name='frame_rate', description='frame_rate'),
+  frameRate?: string(name='frame_rate', description='frame_rate', example='30000/1001'),
 }
 
 /**
@@ -2995,15 +3015,6 @@ model UploadPartInfo {
 /**
  * 
  */
-model UrlInfo {
-  downloadUrl?: string(name='download_url', description='download_url', example='https://ccp.data.aliyuncs.com/hz22%2F5d5b986facbec311ef844c25954f96821497b383%2F5d5b986f955410dd991646bb87c6b4e899eff525?Expires=xxx&OSSAccessKeyId=xxx&Signature=xxx'),
-  thumbnail?: string(name='thumbnail', description='thumbnail', example='https://ccp.data.aliyuncs.com/hz22%2F5d5b986facbec311ef844c25954f96821497b383%2F5d5b986f955410dd991646bb87c6b4e899eff525?Expires=xxx&OSSAccessKeyId=xxx&Signature=xxx'),
-  url?: string(name='url', description='url', example='https://ccp.data.aliyuncs.com/hz22%2F5d5b986facbec311ef844c25954f96821497b383%2F5d5b986f955410dd991646bb87c6b4e899eff525?Expires=xxx&OSSAccessKeyId=xxx&Signature=xxx'),
-}
-
-/**
- * 
- */
 model UserAuthentication {
   AuthenticationType: string(name='AuthenticationType', description='认证类型', example='mobile'),
   CreatedAt: long(name='CreatedAt', description='创建时间', example=1556163159820, format='int64'),
@@ -3050,6 +3061,43 @@ model VideoMediaResponse {
   time?: string(name='time', description='time', format='date-time'),
   township?: string(name='township', description='township', example='沙河镇'),
   width?: long(name='width', default=0, description='width', example=1024, format='int64'),
+}
+
+/**
+ * 
+ */
+model VideoPreviewResponse {
+  audioFormat?: string(name='audio_format', description='audio_format', example='"AAC"'),
+  bitrate?: string(name='bitrate', description='bitrate', example='"39101896"'),
+  duration?: string(name='duration', description='duration', example='"8053"'),
+  frameRate?: string(name='frame_rate', description='frame_rate', example='"239.877"'),
+  height?: long(name='height', description='height', example=1280, format='int64'),
+  spriteInfo?: VideoPreviewSprite(name='sprite_info'),
+  templateList?: [ VideoPreviewTranscode ](name='template_list', description='template_list', items='{"$ref":"#/definitions/VideoPreviewTranscode"}'),
+  thumbnail?: string(name='thumbnail', description='thumbnail', example='https://ccp.data.aliyuncs.com/hz22%2F5d5b986facbec311ef844c25954f96821497b383%2F5d5b986f955410dd991646bb87c6b4e899eff525?Expires=xxx&OSSAccessKeyId=xxx&Signature=xxx'),
+  videoFormat?: string(name='video_format', description='video_format', example='"H264"'),
+  width?: long(name='width', description='width', example=720, format='int64'),
+}
+
+/**
+ * 
+ */
+model VideoPreviewSprite {
+  col?: long(name='col', description='col', example=10, format='int64'),
+  count?: long(name='count', description='count', example=4, format='int64'),
+  frameCount?: long(name='frame_count', description='frame_count', example=333, format='int64'),
+  frameHeight?: long(name='frame_height', description='frame_height', example=90, format='int64'),
+  frameWidth?: long(name='frame_width', description='frame_width', example=160, format='int64'),
+  row?: long(name='row', description='row', example=10, format='int64'),
+  status?: string(name='status', description='status', example='finished'),
+}
+
+/**
+ * 
+ */
+model VideoPreviewTranscode {
+  status?: string(name='status', description='status', example='finished'),
+  templateId?: string(name='template_id', description='template_id', example='"Original"'),
 }
 
 model AdminListStoresRequestModel {
@@ -5494,6 +5542,212 @@ api getUploadUrl(request: GetUploadUrlRequestModel, runtime: RuntimeOptions): Ge
   ignoreSSL = runtime.ignoreSSL
 }
 
+model GetVideoPreviewSpriteUrlRequestModel {
+  headers?: map[string]string(description='headers', name='headers'),
+  body: CCPGetVideoPreviewSpriteURLRequest(description='body', name='body'),
+}
+
+model GetVideoPreviewSpriteUrlModel {
+  headers?: map[string]string(description='headers', name='headers'),
+  body: CCPGetVideoPreviewSpriteURLResponse(description='body', name='body'),
+}
+
+/**
+ * 获取视频雪碧图地址
+ * @tags file
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
+ * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+ */
+api getVideoPreviewSpriteUrl(request: GetVideoPreviewSpriteUrlRequestModel, runtime: RuntimeOptions): GetVideoPreviewSpriteUrlModel  {
+  var accesskeyId = getAccessKeyId();
+  var accessKeySecret = getAccessKeySecret();
+  var securityToken = getSecurityToken();
+  var accessToken = getAccessToken();
+  __request.protocol = Util.defaultString(@protocol, 'https');
+  __request.method = 'POST';
+  __request.pathname = getPathname(@nickname, `/v2/file/get_video_preview_sprite_url`);
+  __request.headers = {
+    user-agent = getUserAgent(),
+    host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
+    content-type = 'application/json; charset=utf-8',
+    ...request.headers
+  };
+
+  if (!Util.empty(accessToken)) {
+    __request.headers.authorization = `Bearer ${accessToken}`;
+  } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+    if (!Util.empty(securityToken)) {
+      __request.headers.x-acs-security-token = securityToken;
+    }
+    __request.headers.date = Util.getDateUTCString();
+    __request.headers.accept = 'application/json';
+    __request.headers.x-acs-signature-method = 'HMAC-SHA1';
+    __request.headers.x-acs-signature-version = '1.0';
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
+  }
+  __request.body = Util.toJSONString(request.body);
+} returns {
+  var respMap : object = null;
+  var obj : any = null;
+  if (Util.equalNumber(__response.statusCode, 200)) {
+    obj = Util.readAsJSON(__response.body);
+    respMap = Util.assertAsMap(obj);
+    return {
+      body = respMap,
+      headers =  __response.headers,
+    };
+  }
+
+  if (!Util.empty(__response.headers.x-ca-error-message)) {
+    throw {
+      data = {
+        requestId = __response.headers.x-ca-request-id,
+        statusCode = __response.statusCode,
+        statusMessage = __response.statusMessage,
+      },
+      message = __response.headers.x-ca-error-message,
+    };
+  }
+  obj = Util.readAsJSON(__response.body);
+  respMap = Util.assertAsMap(obj);
+  throw {
+    data = {
+      requestId = __response.headers.x-ca-request-id,
+      statusCode = __response.statusCode,
+      statusMessage = __response.statusMessage,
+    },
+    ...respMap,
+  };
+} runtime {
+  timeouted = 'retry',
+  readTimeout = runtime.readTimeout,
+  connectTimeout = runtime.connectTimeout,
+  localAddr = runtime.localAddr,
+  httpProxy = runtime.httpProxy,
+  httpsProxy = runtime.httpsProxy,
+  noProxy = runtime.noProxy,
+  maxIdleConns = runtime.maxIdleConns,
+  socks5Proxy = runtime.socks5Proxy,
+  socks5NetWork = runtime.socks5NetWork,
+  retry = {
+    retryable = runtime.autoretry,
+    maxAttempts = Util.defaultNumber(runtime.maxAttempts, 3),
+  },
+  backoff = {
+    policy = Util.defaultString(runtime.backoffPolicy, 'no'),
+    period = Util.defaultNumber(runtime.backoffPeriod, 1),
+  },
+  ignoreSSL = runtime.ignoreSSL
+}
+
+model GetVideoPreviewUrlRequestModel {
+  headers?: map[string]string(description='headers', name='headers'),
+  body: CCPGetVideoPreviewURLRequest(description='body', name='body'),
+}
+
+model GetVideoPreviewUrlModel {
+  headers?: map[string]string(description='headers', name='headers'),
+  body: CCPGetVideoPreviewURLResponse(description='body', name='body'),
+}
+
+/**
+ * 获取视频播放地址
+ * @tags file
+ * @error InvalidParameter The input parameter {parameter_name} is not valid.
+ * @error AccessTokenInvalid AccessToken is invalid. {message}
+ * @error ForbiddenNoPermission No Permission to access resource {resource_name}.
+ * @error NotFound The resource {resource_name} cannot be found. Please check.
+ * @error InternalError The request has been failed due to some unknown error.
+ * @error ServiceUnavailable The request has failed due to a temporary failure of the server.
+ */
+api getVideoPreviewUrl(request: GetVideoPreviewUrlRequestModel, runtime: RuntimeOptions): GetVideoPreviewUrlModel  {
+  var accesskeyId = getAccessKeyId();
+  var accessKeySecret = getAccessKeySecret();
+  var securityToken = getSecurityToken();
+  var accessToken = getAccessToken();
+  __request.protocol = Util.defaultString(@protocol, 'https');
+  __request.method = 'POST';
+  __request.pathname = getPathname(@nickname, `/v2/file/get_video_preview_url`);
+  __request.headers = {
+    user-agent = getUserAgent(),
+    host = Util.defaultString(@endpoint, `${@domainId}.api.alicloudccp.com`),
+    content-type = 'application/json; charset=utf-8',
+    ...request.headers
+  };
+
+  if (!Util.empty(accessToken)) {
+    __request.headers.authorization = `Bearer ${accessToken}`;
+  } else if (!Util.empty(accesskeyId) && !Util.empty(accessKeySecret)) {
+    if (!Util.empty(securityToken)) {
+      __request.headers.x-acs-security-token = securityToken;
+    }
+    __request.headers.date = Util.getDateUTCString();
+    __request.headers.accept = 'application/json';
+    __request.headers.x-acs-signature-method = 'HMAC-SHA1';
+    __request.headers.x-acs-signature-version = '1.0';
+    var stringToSign = ROAUtil.getStringToSign(__request);
+    __request.headers.authorization = `acs ${accesskeyId}:${ROAUtil.getSignature(stringToSign, accessKeySecret)}`;
+  }
+  __request.body = Util.toJSONString(request.body);
+} returns {
+  var respMap : object = null;
+  var obj : any = null;
+  if (Util.equalNumber(__response.statusCode, 200)) {
+    obj = Util.readAsJSON(__response.body);
+    respMap = Util.assertAsMap(obj);
+    return {
+      body = respMap,
+      headers =  __response.headers,
+    };
+  }
+
+  if (!Util.empty(__response.headers.x-ca-error-message)) {
+    throw {
+      data = {
+        requestId = __response.headers.x-ca-request-id,
+        statusCode = __response.statusCode,
+        statusMessage = __response.statusMessage,
+      },
+      message = __response.headers.x-ca-error-message,
+    };
+  }
+  obj = Util.readAsJSON(__response.body);
+  respMap = Util.assertAsMap(obj);
+  throw {
+    data = {
+      requestId = __response.headers.x-ca-request-id,
+      statusCode = __response.statusCode,
+      statusMessage = __response.statusMessage,
+    },
+    ...respMap,
+  };
+} runtime {
+  timeouted = 'retry',
+  readTimeout = runtime.readTimeout,
+  connectTimeout = runtime.connectTimeout,
+  localAddr = runtime.localAddr,
+  httpProxy = runtime.httpProxy,
+  httpsProxy = runtime.httpsProxy,
+  noProxy = runtime.noProxy,
+  maxIdleConns = runtime.maxIdleConns,
+  socks5Proxy = runtime.socks5Proxy,
+  socks5NetWork = runtime.socks5NetWork,
+  retry = {
+    retryable = runtime.autoretry,
+    maxAttempts = Util.defaultNumber(runtime.maxAttempts, 3),
+  },
+  backoff = {
+    policy = Util.defaultString(runtime.backoffPolicy, 'no'),
+    period = Util.defaultNumber(runtime.backoffPeriod, 1),
+  },
+  ignoreSSL = runtime.ignoreSSL
+}
+
 model ListFileRequestModel {
   headers?: map[string]string(description='headers', name='headers'),
   body: CCPListFileRequest(description='body', name='body'),
@@ -6523,6 +6777,25 @@ model CCPGetUploadUrlRequest {
   partInfoList?: [ UploadPartInfo ](name='part_info_list', description='upload_part_list', example='', items='{"$ref":"#/definitions/UploadPartInfo"}'),
   uploadId?: string(name='upload_id', description='upload_id', example='3920F2BE4D9446D6967E2ED505A97EFD'),
   fileId?: string(name='file_id', description='file_id', example='5d5b846942cf94fa72324c14a4bda34e81da635d', maxLength=50, minLength=40, pattern='[a-z0-9]{1,50}'),
+}
+
+/**
+ * 获取视频雪碧图地址的请求body
+ */
+model CCPGetVideoPreviewSpriteURLRequest {
+  driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
+  expireSec?: long(name='expire_sec', default=900, description='expire_sec', example=15, format='int64', maximum=14400, minimum=0),
+  fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
+}
+
+/**
+ * 获取视频文件播放地址的请求body
+ */
+model CCPGetVideoPreviewURLRequest {
+  driveId: string(name='drive_id', description='drive_id', example='1', pattern='[0-9]+'),
+  expireSec?: long(name='expire_sec', default=900, description='expire_sec', example=15, format='int64', maximum=14400, minimum=0),
+  fileId: string(name='file_id', description='file_id', maxLength=50, minLength=40, pattern='[a-z0-9.-_]{1,50}'),
+  templateId?: string(name='template_id', description='template_id', example='SD'),
 }
 
 /**
@@ -7775,6 +8048,22 @@ api updateUser(request: UpdateUserRequestModel, runtime: RuntimeOptions): Update
     period = Util.defaultNumber(runtime.backoffPeriod, 1),
   },
   ignoreSSL = runtime.ignoreSSL
+}
+
+/**
+ * 
+ */
+model BaseMediaResponse {
+  addressLine?: string(name='address_line', description='address_line', example='北京市昌平区白各庄新村路'),
+  city?: string(name='city', description='city', example='杭州'),
+  country?: string(name='country', description='country', example='中国'),
+  district?: string(name='district', description='district', example='余杭区'),
+  height?: long(name='height', default=0, description='height', example=720, format='int64'),
+  location?: string(name='location', description='location', example='40.110333,116.349311'),
+  province?: string(name='province', description='province', example='浙江省'),
+  time?: string(name='time', description='time', format='date-time'),
+  township?: string(name='township', description='township', example='沙河镇'),
+  width?: long(name='width', default=0, description='width', example=1024, format='int64'),
 }
 
 /**
@@ -9087,6 +9376,15 @@ model UpdateFaceGroupInfoRequest {
 model UpdateFaceGroupInfoResponse {
   driveId?: string(name='drive_id', description='drive_id', example='"101"'),
   groupId?: string(name='group_id', description='group_id', example='"group-aas11002ddeac"'),
+}
+
+/**
+ * 
+ */
+model UrlInfo {
+  downloadUrl?: string(name='download_url', description='download_url', example='https://ccp.data.aliyuncs.com/hz22%2F5d5b986facbec311ef844c25954f96821497b383%2F5d5b986f955410dd991646bb87c6b4e899eff525?Expires=xxx&OSSAccessKeyId=xxx&Signature=xxx'),
+  thumbnail?: string(name='thumbnail', description='thumbnail', example='https://ccp.data.aliyuncs.com/hz22%2F5d5b986facbec311ef844c25954f96821497b383%2F5d5b986f955410dd991646bb87c6b4e899eff525?Expires=xxx&OSSAccessKeyId=xxx&Signature=xxx'),
+  url?: string(name='url', description='url', example='https://ccp.data.aliyuncs.com/hz22%2F5d5b986facbec311ef844c25954f96821497b383%2F5d5b986f955410dd991646bb87c6b4e899eff525?Expires=xxx&OSSAccessKeyId=xxx&Signature=xxx'),
 }
 
 function getPathname(nickname: string, path: string): string {
