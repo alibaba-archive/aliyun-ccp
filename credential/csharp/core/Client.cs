@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using AlibabaCloud.AccessTokenCredential.Models;
@@ -116,6 +117,10 @@ namespace AlibabaCloud.AccessTokenCredential
                 accessToken = DictUtils.GetDicValue(bodyDict, "access_token").ToSafeString();
                 refreshToken = DictUtils.GetDicValue(bodyDict, "refresh_token").ToSafeString();
             }
+            else
+            {
+                throw new WebException("http request is failed.");
+            }
         }
 
         internal async Task RefreshAccessTokenAsync()
@@ -145,6 +150,10 @@ namespace AlibabaCloud.AccessTokenCredential
                 expireTime = DictUtils.GetDicValue(bodyDict, "expire_time").ToSafeString();
                 accessToken = DictUtils.GetDicValue(bodyDict, "access_token").ToSafeString();
                 refreshToken = DictUtils.GetDicValue(bodyDict, "refresh_token").ToSafeString();
+            }
+            else
+            {
+                throw new WebException("http request is failed.");
             }
         }
 
