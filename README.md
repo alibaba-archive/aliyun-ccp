@@ -13,13 +13,11 @@ English | [简体中文](README-CN.md)
 
 - [ccppath-sdk](./ccppath-sdk/java/README.md)
 - [osspath-sdk](./osspath-sdk/java/README.md)
-- [mgmt-sdk](./mgmt-sdk/java/README.md)
 
 ### Go
 
 - [ccppath-sdk](./ccppath-sdk/go/README.md)
 - [osspath-sdk](./osspath-sdk/go/README.md)
-- [mgmt-sdk](./mgmt-sdk/go/README.md)
 
 ### .Net
 
@@ -35,7 +33,6 @@ English | [简体中文](README-CN.md)
 
 - [ccppath-sdk](./ccppath-sdk/php/README-CN.md)
 - [osspath-sdk](./osspath-sdk/php/README-CN.md)
-- [mgmt-sdk](./mgmt-sdk/php/README-CN.md)
 
 ## Issues
 
