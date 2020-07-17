@@ -49,3 +49,19 @@ jobs:
         - npm run test-cov
       after_success:
         - bash <(curl -s https://codecov.io/bash) -cF node_js
+    - language: python
+      python:
+        - "3.4"
+        - "3.5"
+        - "3.6"
+        - "3.7"
+        - "3.8"
+      if: branch = master
+      install:
+        - pip install alibabacloud-tea
+        - pip install coverage
+      script:
+        - cd credential/python
+        - coverage run --source="alibabacloud_ccp_credentials" -m pytest tests/test_*
+      after_success:
+        - bash <(curl -s https://codecov.io/bash) -cF python
