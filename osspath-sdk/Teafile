@@ -8,7 +8,8 @@
 		"ts": "@alicloud/osspath-sdk:^1.2.0",
 		"csharp": "Aliyun.SDK.CCP.OSS.Client:2.0.5",
 		"java": "com.aliyun:ccp-oss-client:2.2.6",
-		"php": "alibabacloud/osspath-sdk:^0.1.0"
+		"php": "alibabacloud/osspath-sdk:^0.1.0",
+		"python": "alibabacloud_osspath_sdk:0.0.1"
 	},
 	"java": {
 		"package": "com.aliyun.ccp.ossclient"
@@ -16,6 +17,17 @@
 	"csharp": {
 		"namespace": "Aliyun.SDK.CCP.OSSClient"
 	},
+  "python": {
+    "package": "alibabacloud_osspath_sdk",
+    "clientName": "client",
+    "packageInfo": {
+      "name": "alibabacloud_osspath_sdk",
+      "desc": "Alibaba Cloud OSS Path SDK Library for Python",
+      "github": "https://github.com/aliyun/aliyun-ccp",
+      "author": "Alibaba Cloud SDK",
+      "email": "sdk-team@alibabacloud.com"
+    }
+  },
 	"php": {
 		"package": "Aliyun.CCP.SDK",
 		"clientName": "OSSPath",

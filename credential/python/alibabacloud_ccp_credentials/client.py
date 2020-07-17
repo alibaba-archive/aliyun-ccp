@@ -1,13 +1,13 @@
-import requests
 import json
 import time
 
 from datetime import datetime
 from Tea.request import TeaRequest
 from Tea.core import TeaCore
+from Tea.exceptions import TeaException
 
 
-class AccessTokenCredential():
+class Client:
 
     def __init__(self, config):
         self.__endpoint = config.endpoint
@@ -34,15 +34,14 @@ class AccessTokenCredential():
         self.__access_token = access_token
 
     def get_access_token(self):
-        if self.__access_token is None or self.__with_should_refresh():
+        if not self.__access_token or self.__with_should_refresh():
             self.__refresh_access_token()
 
         return self.__access_token
 
     def __refresh_access_token(self):
         tea_request = TeaRequest()
-        tea_request.protocol = "http"
-        tea_request.set_method("POST")
+        tea_request.method = "POST"
         tea_request.pathname = "/v2/oauth/token"
         headers = {
             "host": self.__get_host(self.__endpoint, self.__domain_id + ".api.alicloudccp.com"),
@@ -57,23 +56,30 @@ class AccessTokenCredential():
             self.__refresh_token, self.__client_id, self.__client_secret)
         tea_request.body = bytes(body_str, encoding="utf-8")
         response = TeaCore.do_action(tea_request)
-        if response.status_code == 200:
-            dic = json.loads(str(response.content, encoding="utf-8"))
+        dic = json.loads(str(response.body, encoding="utf-8"))
+        if 400 <= response.status_code < 600:
+            raise TeaException({
+                        "code": str(dic.get('code')) + "Error",
+                        "message": "code: " + str(response.status_code) + ", " + str(dic.get('message')) +
+                                   " requestid: " + str(dic.get('requestId')),
+                        "data": dic
+                    })
+        else:
             self.__expire_time = dic.get("expire_time")
             self.__access_token = dic.get("access_token")
             self.__refresh_token = dic.get("refresh_token")
 
     def __get_host(self, endpoint, domain):
-        if endpoint is not None and endpoint != "":
+        if endpoint:
             return endpoint
         else:
             return domain
 
     def __with_should_refresh(self):
-        if self.__refresh_token == "" or self.__expire_time == "":
+        if not self.__refresh_token or not self.__expire_time:
             return False
 
         expire_time_str = self.__expire_time.replace('T', ' ').replace('Z', '')
-        timeArray = time.strptime(expire_time_str, "%Y-%m-%d %H:%M:%S")
-        timeStamp = int(time.mktime(timeArray))
-        return int(time.mktime(time.localtime())) >= (timeStamp - 180)
+        time_array = time.strptime(expire_time_str, "%Y-%m-%d %H:%M:%S")
+        time_stamp = int(time.mktime(time_array))
+        return int(time.mktime(time.localtime())) >= (time_stamp - 180)
