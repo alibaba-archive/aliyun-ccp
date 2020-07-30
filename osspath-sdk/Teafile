@@ -1,7 +1,7 @@
 {
 	"scope": "alibabacloud",
 	"name": "OSSPath",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"main": "./oss.tea",
 	"releases": {
 		"go": "github.com/alibabacloud-go/osspath-sdk/client:v1.1.0",
@@ -9,7 +9,7 @@
 		"csharp": "Aliyun.SDK.CCP.OSS.Client:2.0.5",
 		"java": "com.aliyun:ccp-oss-client:2.2.6",
 		"php": "alibabacloud/osspath-sdk:^0.1.0",
-		"python": "alibabacloud_osspath_sdk:0.0.1"
+		"python": "alibabacloud_osspath_sdk:0.0.2"
 	},
 	"java": {
 		"package": "com.aliyun.ccp.ossclient"

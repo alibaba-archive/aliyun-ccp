@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # This file is auto-generated, don't edit it. Thanks.
 import time
 
@@ -15,11 +16,12 @@ from alibabacloud_roa_util.client import Client as ROAUtilClient
 from Tea.exceptions import UnretryableException
 
 
-class Client:
+class Client(object):
     """
     *
     """
-    def __init__(self, config, _domain_id=None, _access_token_credential=None, _endpoint=None, _protocol=None, _nickname=None, _user_agent=None, _credential=None):
+    def __init__(self, config, _domain_id=None, _access_token_credential=None, _endpoint=None, _protocol=None,
+                 _nickname=None, _user_agent=None, _credential=None):
         self._domain_id = _domain_id
         self._access_token_credential = _access_token_credential
         self._endpoint = _endpoint
