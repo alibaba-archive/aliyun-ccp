@@ -1,7 +1,7 @@
 {
 	"scope": "alibabacloud",
 	"name": "CCPPath",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"main": "./ccp.tea",
 	"maintainers": [
 		{
@@ -15,7 +15,7 @@
 		"java": "com.aliyun:ccp-client:2.3.0",
 		"csharp": "Aliyun.SDK.CCP.Client:2.0.4",
 		"php": "alibabacloud/ccp-sdk:^0.1.0",
-    "python": "alibabacloud_ccppath_sdk:0.0.1"
+		"python": "alibabacloud_ccppath_sdk:0.0.2"
 	},
 	"java": {
 		"package": "com.aliyun.ccp.ccpclient"

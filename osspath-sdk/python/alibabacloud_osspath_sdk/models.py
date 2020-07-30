@@ -1,22 +1,39 @@
+# -*- coding: utf-8 -*-
 # This file is auto-generated, don't edit it. Thanks.
 from Tea.model import TeaModel
 
 
 class RuntimeOptions(TeaModel):
-    def __init__(self, autoretry=None, ignore_ssl=None, max_attempts=None, backoff_policy=None, backoff_period=None, read_timeout=None, connect_timeout=None, http_proxy=None, https_proxy=None, no_proxy=None, max_idle_conns=None, local_addr=None, socks_5proxy=None, socks_5net_work=None):
+    def __init__(self, autoretry=None, ignore_ssl=None, max_attempts=None, backoff_policy=None, backoff_period=None,
+                 read_timeout=None, connect_timeout=None, http_proxy=None, https_proxy=None, no_proxy=None, max_idle_conns=None,
+                 local_addr=None, socks_5proxy=None, socks_5net_work=None):
+        # whether to try again
         self.autoretry = autoretry
+        # ignore SSL validation
         self.ignore_ssl = ignore_ssl
+        # maximum number of retries
         self.max_attempts = max_attempts
+        # backoff policy
         self.backoff_policy = backoff_policy
+        # backoff period
         self.backoff_period = backoff_period
+        # read timeout
         self.read_timeout = read_timeout
+        # connect timeout
         self.connect_timeout = connect_timeout
+        # http proxy url
         self.http_proxy = http_proxy
+        # https Proxy url
         self.https_proxy = https_proxy
+        # agent blacklist
         self.no_proxy = no_proxy
+        # maximum number of connections
         self.max_idle_conns = max_idle_conns
+        # local addr
         self.local_addr = local_addr
+        # SOCKS5 proxy
         self.socks_5proxy = socks_5proxy
+        # SOCKS5 netWork
         self.socks_5net_work = socks_5net_work
 
     def validate(self):
@@ -59,7 +76,9 @@ class RuntimeOptions(TeaModel):
 
 
 class Config(TeaModel):
-    def __init__(self, endpoint=None, domain_id=None, client_id=None, refresh_token=None, client_secret=None, access_token=None, expire_time=None, protocol=None, type=None, security_token=None, access_key_id=None, access_key_secret=None, nickname=None, user_agent=None):
+    def __init__(self, endpoint=None, domain_id=None, client_id=None, refresh_token=None, client_secret=None,
+                 access_token=None, expire_time=None, protocol=None, type=None, security_token=None, access_key_id=None,
+                 access_key_secret=None, nickname=None, user_agent=None):
         self.endpoint = endpoint
         self.domain_id = domain_id
         self.client_id = client_id
@@ -116,7 +135,9 @@ class Config(TeaModel):
 
 class CancelLinkRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -145,7 +166,9 @@ class CancelLinkRequestModel(TeaModel):
 
 class CancelLinkModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -174,7 +197,9 @@ class CancelLinkModel(TeaModel):
 
 class ConfirmLinkRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -203,7 +228,9 @@ class ConfirmLinkRequestModel(TeaModel):
 
 class ConfirmLinkModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -232,7 +259,9 @@ class ConfirmLinkModel(TeaModel):
 
 class ChangePasswordRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -261,7 +290,9 @@ class ChangePasswordRequestModel(TeaModel):
 
 class ChangePasswordModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -290,7 +321,9 @@ class ChangePasswordModel(TeaModel):
 
 class SetPasswordRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -319,7 +352,8 @@ class SetPasswordRequestModel(TeaModel):
 
 class SetPasswordModel(TeaModel):
     def __init__(self, headers=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
 
     def validate(self):
         pass
@@ -336,7 +370,9 @@ class SetPasswordModel(TeaModel):
 
 class VerifyCodeRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -365,7 +401,9 @@ class VerifyCodeRequestModel(TeaModel):
 
 class VerifyCodeModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -394,7 +432,9 @@ class VerifyCodeModel(TeaModel):
 
 class GetAccessTokenByLinkInfoRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -423,7 +463,9 @@ class GetAccessTokenByLinkInfoRequestModel(TeaModel):
 
 class GetAccessTokenByLinkInfoModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -452,7 +494,9 @@ class GetAccessTokenByLinkInfoModel(TeaModel):
 
 class GetCaptchaRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -481,7 +525,9 @@ class GetCaptchaRequestModel(TeaModel):
 
 class GetCaptchaModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -510,7 +556,9 @@ class GetCaptchaModel(TeaModel):
 
 class GetLinkInfoRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -539,7 +587,9 @@ class GetLinkInfoRequestModel(TeaModel):
 
 class GetLinkInfoModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -568,7 +618,9 @@ class GetLinkInfoModel(TeaModel):
 
 class GetLinkInfoByUserIdRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -597,7 +649,9 @@ class GetLinkInfoByUserIdRequestModel(TeaModel):
 
 class GetLinkInfoByUserIdModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -626,7 +680,9 @@ class GetLinkInfoByUserIdModel(TeaModel):
 
 class GetPublicKeyRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -655,7 +711,9 @@ class GetPublicKeyRequestModel(TeaModel):
 
 class GetPublicKeyModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -684,7 +742,9 @@ class GetPublicKeyModel(TeaModel):
 
 class LinkRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -713,7 +773,9 @@ class LinkRequestModel(TeaModel):
 
 class LinkModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -742,7 +804,9 @@ class LinkModel(TeaModel):
 
 class CheckExistRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -771,7 +835,9 @@ class CheckExistRequestModel(TeaModel):
 
 class CheckExistModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -800,7 +866,9 @@ class CheckExistModel(TeaModel):
 
 class LoginRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -829,7 +897,9 @@ class LoginRequestModel(TeaModel):
 
 class LoginModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -858,7 +928,9 @@ class LoginModel(TeaModel):
 
 class RegisterRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -887,7 +959,9 @@ class RegisterRequestModel(TeaModel):
 
 class RegisterModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -916,7 +990,9 @@ class RegisterModel(TeaModel):
 
 class MobileSendSmsCodeRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -945,7 +1021,9 @@ class MobileSendSmsCodeRequestModel(TeaModel):
 
 class MobileSendSmsCodeModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -974,7 +1052,9 @@ class MobileSendSmsCodeModel(TeaModel):
 
 class AccountRevokeRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -1003,7 +1083,8 @@ class AccountRevokeRequestModel(TeaModel):
 
 class AccountRevokeModel(TeaModel):
     def __init__(self, headers=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
 
     def validate(self):
         pass
@@ -1020,7 +1101,9 @@ class AccountRevokeModel(TeaModel):
 
 class AccountTokenRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -1049,7 +1132,9 @@ class AccountTokenRequestModel(TeaModel):
 
 class AccountTokenModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -1080,14 +1165,23 @@ class AccessTokenResponse(TeaModel):
     """
     *
     """
-    def __init__(self, access_token=None, default_drive_id=None, expire_time=None, expires_in=None, refresh_token=None, role=None, token_type=None, user_id=None):
+    def __init__(self, access_token=None, default_drive_id=None, expire_time=None, expires_in=None,
+                 refresh_token=None, role=None, token_type=None, user_id=None):
+        # 用于调用业务接口的accessToken
         self.access_token = access_token
+        # Default Drive ID
         self.default_drive_id = default_drive_id
+        # accessToken过期时间，ISO时间
         self.expire_time = expire_time
+        # accessToken过期时间，单位秒
         self.expires_in = expires_in
+        # 用于刷新accessToken
         self.refresh_token = refresh_token
+        # 当前用户角色
         self.role = role
+        # accessToken类型，Bearer
         self.token_type = token_type
+        # 当前用户ID
         self.user_id = user_id
 
     def validate(self):
@@ -1128,31 +1222,52 @@ class AccountAccessTokenResponse(TeaModel):
     """
     *
     """
-    def __init__(self, access_token=None, avatar=None, data_pin_saved=None, data_pin_setup=None, default_drive_id=None, exist_link=None, expire_time=None, expires_in=None, is_first_login=None, need_link=None, nick_name=None, refresh_token=None, role=None, state=None, token_type=None, user_data=None, user_id=None, user_name=None):
+    def __init__(self, access_token=None, avatar=None, data_pin_saved=None, data_pin_setup=None,
+                 default_drive_id=None, exist_link=None, expire_time=None, expires_in=None, is_first_login=None, need_link=None,
+                 nick_name=None, refresh_token=None, role=None, state=None, token_type=None, user_data=None, user_id=None,
+                 user_name=None):
+        # 用于调用业务接口的accessToken
         self.access_token = access_token
+        # 当前用户头像
         self.avatar = avatar
+        # 用户的数据密码是否保存服务端
         self.data_pin_saved = data_pin_saved
+        # 用户的数据密码是否设置过
         self.data_pin_setup = data_pin_setup
+        # Default Drive ID
         self.default_drive_id = default_drive_id
-        self.exist_link = []
+        # 当前用户已存在的登录方式
+        self.exist_link = exist_link
+        # accessToken过期时间，ISO时间
         self.expire_time = expire_time
+        # accessToken过期时间，单位秒
         self.expires_in = expires_in
+        # 用户是否为第一次登录
         self.is_first_login = is_first_login
+        # 是否需要绑定
         self.need_link = need_link
+        # 当前用户昵称
         self.nick_name = nick_name
+        # 用于刷新accessToken
         self.refresh_token = refresh_token
+        # 当前用户角色
         self.role = role
+        # 临时权限，用于登录成功后设置密码
         self.state = state
+        # accessToken类型，Bearer
         self.token_type = token_type
+        # 用户自定义数据，格式为json，可用于配置项、少量临时数据等存储，不超过1K
         self.user_data = user_data
+        # 当前用户ID
         self.user_id = user_id
+        # 当前用户名
         self.user_name = user_name
 
     def validate(self):
         self.validate_required(self.access_token, 'access_token')
         if self.exist_link:
             for k in self.exist_link:
-                if k :
+                if k:
                     k.validate()
         self.validate_required(self.need_link, 'need_link')
 
@@ -1217,11 +1332,17 @@ class AccountLinkRequest(TeaModel):
     *
     """
     def __init__(self, detail=None, extra=None, identity=None, status=None, type=None, user_id=None):
+        # 账号信息
         self.detail = detail
+        # 额外的信息，比如type为mobile时，此字段为国家编号，不填默认86
         self.extra = extra
+        # 唯一身份标识
         self.identity = identity
+        # 状态
         self.status = status
+        # 认证类型
         self.type = type
+        # 绑定的user_id
         self.user_id = user_id
 
     def validate(self):
@@ -1253,12 +1374,19 @@ class AuthorizeRequest(TeaModel):
     """
     *
     """
-    def __init__(self, client_id=None, login_type=None, redirect_uri=None, response_type=None, scope=None, state=None):
+    def __init__(self, client_id=None, login_type=None, redirect_uri=None, response_type=None, scope=None,
+                 state=None):
+        # Client ID, 此处填写创建App时返回的AppID
         self.client_id = client_id
+        # 鉴权方式，目前支持ding,ram鉴权
         self.login_type = login_type
+        # 回调地址, 此处填写创建App时填写的回调地址
         self.redirect_uri = redirect_uri
+        # 返回类型, 只能填写code
         self.response_type = response_type
-        self.scope = []
+        # 申请的权限列表, 默认为所有权限
+        self.scope = scope
+        # 用户自定义字段，会在鉴权成功后的callback带回
         self.state = state
 
     def validate(self):
@@ -1300,37 +1428,72 @@ class BaseCCPFileResponse(TeaModel):
     """
     Base file response
     """
-    def __init__(self, category=None, content_hash=None, content_hash_name=None, content_type=None, crc_64hash=None, created_at=None, description=None, domain_id=None, download_url=None, drive_id=None, encrypt_mode=None, file_extension=None, file_id=None, hidden=None, image_media_metadata=None, labels=None, meta=None, name=None, parent_file_id=None, size=None, starred=None, status=None, streams_info=None, streams_url_info=None, thumbnail=None, trashed_at=None, type=None, updated_at=None, upload_id=None, url=None, user_meta=None, video_media_metadata=None):
+    def __init__(self, category=None, content_hash=None, content_hash_name=None, content_type=None, crc_64hash=None,
+                 created_at=None, description=None, domain_id=None, download_url=None, drive_id=None, encrypt_mode=None,
+                 file_extension=None, file_id=None, hidden=None, image_media_metadata=None, labels=None, meta=None, name=None,
+                 parent_file_id=None, size=None, starred=None, status=None, streams_info=None, streams_url_info=None,
+                 thumbnail=None, trashed_at=None, type=None, updated_at=None, upload_id=None, url=None, user_meta=None,
+                 video_media_metadata=None):
+        # category
         self.category = category
+        # Content Hash
         self.content_hash = content_hash
+        # content_hash_name
         self.content_hash_name = content_hash_name
+        # content_type
         self.content_type = content_type
+        # crc64_hash
         self.crc_64hash = crc_64hash
+        # created_at
         self.created_at = created_at
+        # description
         self.description = description
+        # DomainID
         self.domain_id = domain_id
+        # download_url
         self.download_url = download_url
+        # drive_id
         self.drive_id = drive_id
+        # encrypt_mode
         self.encrypt_mode = encrypt_mode
+        # file_extension
         self.file_extension = file_extension
+        # file_id
         self.file_id = file_id
+        # Hidden
+        # type: boolean
         self.hidden = hidden
         self.image_media_metadata = image_media_metadata
-        self.labels = []
+        # labels
+        self.labels = labels
         self.meta = meta
+        # name
         self.name = name
+        # parent_file_id
         self.parent_file_id = parent_file_id
+        # Size
         self.size = size
+        # starred
+        # type: boolean
         self.starred = starred
+        # status
         self.status = status
         self.streams_info = streams_info
+        # @Deprecated streams url info
         self.streams_url_info = streams_url_info
+        # thumbnail
         self.thumbnail = thumbnail
+        # trashed_at
         self.trashed_at = trashed_at
+        # type
         self.type = type
+        # updated_at
         self.updated_at = updated_at
+        # upload_id
         self.upload_id = upload_id
+        # url
         self.url = url
+        # user_meta
         self.user_meta = user_meta
         self.video_media_metadata = video_media_metadata
 
@@ -1451,20 +1614,34 @@ class BaseDriveResponse(TeaModel):
     """
     Base drive response
     """
-    def __init__(self, creator=None, description=None, domain_id=None, drive_id=None, drive_name=None, drive_type=None, encrypt_data_access=None, encrypt_mode=None, owner=None, relative_path=None, status=None, store_id=None, total_size=None, used_size=None):
+    def __init__(self, creator=None, description=None, domain_id=None, drive_id=None, drive_name=None,
+                 drive_type=None, encrypt_data_access=None, encrypt_mode=None, owner=None, relative_path=None, status=None,
+                 store_id=None, total_size=None, used_size=None):
+        # Drive 创建者
         self.creator = creator
+        # Drive 备注信息
         self.description = description
+        # Domain ID
         self.domain_id = domain_id
+        # Drive ID
         self.drive_id = drive_id
+        # Drive 名称
         self.drive_name = drive_name
+        # Drive 类型
         self.drive_type = drive_type
         self.encrypt_data_access = encrypt_data_access
         self.encrypt_mode = encrypt_mode
+        # Drive 所有者
         self.owner = owner
+        # Drive存储基于store的相对路径，domain的PathType为OSSPath时返回
         self.relative_path = relative_path
+        # Drive 状态
         self.status = status
+        # 存储 ID, domain的PathType为OSSPath时返回
         self.store_id = store_id
+        # Drive 空间总量
         self.total_size = total_size
+        # Drive 空间已使用量
         self.used_size = used_size
 
     def validate(self):
@@ -1510,28 +1687,53 @@ class BaseOSSFileResponse(TeaModel):
     """
     Base file response
     """
-    def __init__(self, content_hash=None, content_hash_name=None, content_type=None, crc_64hash=None, created_at=None, description=None, domain_id=None, download_url=None, drive_id=None, file_extension=None, file_path=None, name=None, parent_file_path=None, share_id=None, size=None, status=None, thumbnail=None, trashed_at=None, type=None, updated_at=None, upload_id=None, url=None):
+    def __init__(self, content_hash=None, content_hash_name=None, content_type=None, crc_64hash=None,
+                 created_at=None, description=None, domain_id=None, download_url=None, drive_id=None, file_extension=None,
+                 file_path=None, name=None, parent_file_path=None, share_id=None, size=None, status=None, thumbnail=None,
+                 trashed_at=None, type=None, updated_at=None, upload_id=None, url=None):
+        # Content Hash
         self.content_hash = content_hash
+        # content_hash_name
         self.content_hash_name = content_hash_name
+        # content_type
         self.content_type = content_type
+        # crc64_hash
         self.crc_64hash = crc_64hash
+        # created_at
         self.created_at = created_at
+        # description
         self.description = description
+        # domain_id
         self.domain_id = domain_id
+        # download_url
         self.download_url = download_url
+        # drive_id
         self.drive_id = drive_id
+        # file_extension
         self.file_extension = file_extension
+        # file_path
         self.file_path = file_path
+        # name
         self.name = name
+        # parent_file_id
         self.parent_file_path = parent_file_path
+        # share_id
         self.share_id = share_id
+        # Size
         self.size = size
+        # status
         self.status = status
+        # thumbnail
         self.thumbnail = thumbnail
+        # trashed_at
         self.trashed_at = trashed_at
+        # type
         self.type = type
+        # updated_at
         self.updated_at = updated_at
+        # upload_id
         self.upload_id = upload_id
+        # url
         self.url = url
 
     def validate(self):
@@ -1603,27 +1805,43 @@ class BaseShareResponse(TeaModel):
     """
     List share response
     """
-    def __init__(self, created_at=None, creator=None, description=None, domain_id=None, drive_id=None, expiration=None, expired=None, owner=None, permissions=None, share_file_path=None, share_id=None, share_name=None, share_policy=None, status=None, updated_at=None):
+    def __init__(self, created_at=None, creator=None, description=None, domain_id=None, drive_id=None,
+                 expiration=None, expired=None, owner=None, permissions=None, share_file_path=None, share_id=None,
+                 share_name=None, share_policy=None, status=None, updated_at=None):
+        # created_at
         self.created_at = created_at
+        # creator
         self.creator = creator
+        # description
         self.description = description
+        # domain_id
         self.domain_id = domain_id
+        # drive_id
         self.drive_id = drive_id
+        # expiration
         self.expiration = expiration
+        # expired
         self.expired = expired
+        # owner
         self.owner = owner
-        self.permissions = []
+        # permissions
+        self.permissions = permissions
+        # share_path
         self.share_file_path = share_file_path
+        # share_id
         self.share_id = share_id
+        # share_name
         self.share_name = share_name
-        self.share_policy = []
+        self.share_policy = share_policy
+        # status
         self.status = status
+        # updated_at
         self.updated_at = updated_at
 
     def validate(self):
         if self.share_policy:
             for k in self.share_policy:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -1691,8 +1909,11 @@ class BatchSubResponse(TeaModel):
     *
     """
     def __init__(self, body=None, id=None, status=None):
+        # body 子请求的返回结果，可参考对于子请求文档 json 字符串
         self.body = body
+        # id 请求带过来的id, 可以跟 request 进行关联
         self.id = id
+        # status 子请求的返回状态码，可参考对于子请求文档
         self.status = status
 
     def validate(self):
@@ -1717,12 +1938,13 @@ class CCPBatchResponse(TeaModel):
     batch operation response
     """
     def __init__(self, responses=None):
-        self.responses = []
+        # responses 返回结果合集
+        self.responses = responses
 
     def validate(self):
         if self.responses:
             for k in self.responses:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -1751,37 +1973,72 @@ class CCPCompleteFileResponse(TeaModel):
     """
     complete file response
     """
-    def __init__(self, category=None, content_hash=None, content_hash_name=None, content_type=None, crc_64hash=None, created_at=None, description=None, domain_id=None, download_url=None, drive_id=None, encrypt_mode=None, file_extension=None, file_id=None, hidden=None, image_media_metadata=None, labels=None, meta=None, name=None, parent_file_id=None, size=None, starred=None, status=None, streams_info=None, streams_url_info=None, thumbnail=None, trashed_at=None, type=None, updated_at=None, upload_id=None, url=None, user_meta=None, video_media_metadata=None):
+    def __init__(self, category=None, content_hash=None, content_hash_name=None, content_type=None, crc_64hash=None,
+                 created_at=None, description=None, domain_id=None, download_url=None, drive_id=None, encrypt_mode=None,
+                 file_extension=None, file_id=None, hidden=None, image_media_metadata=None, labels=None, meta=None, name=None,
+                 parent_file_id=None, size=None, starred=None, status=None, streams_info=None, streams_url_info=None,
+                 thumbnail=None, trashed_at=None, type=None, updated_at=None, upload_id=None, url=None, user_meta=None,
+                 video_media_metadata=None):
+        # category
         self.category = category
+        # Content Hash
         self.content_hash = content_hash
+        # content_hash_name
         self.content_hash_name = content_hash_name
+        # content_type
         self.content_type = content_type
+        # crc64_hash
         self.crc_64hash = crc_64hash
+        # created_at
         self.created_at = created_at
+        # description
         self.description = description
+        # DomainID
         self.domain_id = domain_id
+        # download_url
         self.download_url = download_url
+        # drive_id
         self.drive_id = drive_id
+        # encrypt_mode
         self.encrypt_mode = encrypt_mode
+        # file_extension
         self.file_extension = file_extension
+        # file_id
         self.file_id = file_id
+        # Hidden
+        # type: boolean
         self.hidden = hidden
         self.image_media_metadata = image_media_metadata
-        self.labels = []
+        # labels
+        self.labels = labels
         self.meta = meta
+        # name
         self.name = name
+        # parent_file_id
         self.parent_file_id = parent_file_id
+        # Size
         self.size = size
+        # starred
+        # type: boolean
         self.starred = starred
+        # status
         self.status = status
         self.streams_info = streams_info
+        # @Deprecated streams url info
         self.streams_url_info = streams_url_info
+        # thumbnail
         self.thumbnail = thumbnail
+        # trashed_at
         self.trashed_at = trashed_at
+        # type
         self.type = type
+        # updated_at
         self.updated_at = updated_at
+        # upload_id
         self.upload_id = upload_id
+        # url
         self.url = url
+        # user_meta
         self.user_meta = user_meta
         self.video_media_metadata = video_media_metadata
 
@@ -1902,9 +2159,13 @@ class CCPCopyFileResponse(TeaModel):
     文件拷贝 response
     """
     def __init__(self, async_task_id=None, domain_id=None, drive_id=None, file_id=None):
+        # async_task_id
         self.async_task_id = async_task_id
+        # DomainID
         self.domain_id = domain_id
+        # drive_id
         self.drive_id = drive_id
+        # file_id
         self.file_id = file_id
 
     def validate(self):
@@ -1935,19 +2196,36 @@ class CCPCreateFileResponse(TeaModel):
     """
     Create file response
     """
-    def __init__(self, domain_id=None, drive_id=None, encrypt_mode=None, exist=None, file_id=None, file_name=None, parent_file_id=None, part_info_list=None, rapid_upload=None, status=None, streams_upload_info=None, type=None, upload_id=None):
+    def __init__(self, domain_id=None, drive_id=None, encrypt_mode=None, exist=None, file_id=None, file_name=None,
+                 parent_file_id=None, part_info_list=None, rapid_upload=None, status=None, streams_upload_info=None, type=None,
+                 upload_id=None):
+        # domain_id
         self.domain_id = domain_id
+        # drive_id
         self.drive_id = drive_id
+        # encrypt_mode
         self.encrypt_mode = encrypt_mode
+        # exist
+        # type: boolean
         self.exist = exist
+        # file_id
         self.file_id = file_id
+        # file_name
         self.file_name = file_name
+        # parent_file_id
         self.parent_file_id = parent_file_id
-        self.part_info_list = []
+        # part_info_list
+        self.part_info_list = part_info_list
+        # rapid_upload
+        # type: boolean
         self.rapid_upload = rapid_upload
+        # status
         self.status = status
+        # streams_upload_info
         self.streams_upload_info = streams_upload_info
+        # type
         self.type = type
+        # upload_id
         self.upload_id = upload_id
 
     def validate(self):
@@ -1963,7 +2241,7 @@ class CCPCreateFileResponse(TeaModel):
             self.validate_pattern(self.parent_file_id, 'parent_file_id', '[a-z0-9]{1,50}')
         if self.part_info_list:
             for k in self.part_info_list:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -2017,9 +2295,13 @@ class CCPDeleteFileResponse(TeaModel):
     删除文件 response
     """
     def __init__(self, async_task_id=None, domain_id=None, drive_id=None, file_id=None):
+        # async_task_id
         self.async_task_id = async_task_id
+        # domain_id
         self.domain_id = domain_id
+        # drive_id
         self.drive_id = drive_id
+        # file_id
         self.file_id = file_id
 
     def validate(self):
@@ -2051,8 +2333,11 @@ class CCPDeleteFilesResponse(TeaModel):
     批量删除文件 response
     """
     def __init__(self, deleted_file_id_list=None, domain_id=None, drive_id=None):
-        self.deleted_file_id_list = []
+        # deleted_file_id_list
+        self.deleted_file_id_list = deleted_file_id_list
+        # domain_id
         self.domain_id = domain_id
+        # drive_id
         self.drive_id = drive_id
 
     def validate(self):
@@ -2090,8 +2375,12 @@ class CCPGetAsyncTaskResponse(TeaModel):
     Get AsyncTask Response
     """
     def __init__(self, async_task_id=None, message=None, state=None):
+        # async_task_id
+        # type:string
         self.async_task_id = async_task_id
+        # message
         self.message = message
+        # state
         self.state = state
 
     def validate(self):
@@ -2116,10 +2405,15 @@ class CCPGetDownloadUrlResponse(TeaModel):
     获取download url response
     """
     def __init__(self, expiration=None, method=None, size=None, streams_url=None, url=None):
+        # expiration
         self.expiration = expiration
+        # method
         self.method = method
+        # size
         self.size = size
+        # streams url info
         self.streams_url = streams_url
+        # url
         self.url = url
 
     def validate(self):
@@ -2147,37 +2441,72 @@ class CCPGetFileByPathResponse(TeaModel):
     """
     根据路径获取文件元数据response
     """
-    def __init__(self, category=None, content_hash=None, content_hash_name=None, content_type=None, crc_64hash=None, created_at=None, description=None, domain_id=None, download_url=None, drive_id=None, encrypt_mode=None, file_extension=None, file_id=None, hidden=None, image_media_metadata=None, labels=None, meta=None, name=None, parent_file_id=None, size=None, starred=None, status=None, streams_info=None, streams_url_info=None, thumbnail=None, trashed_at=None, type=None, updated_at=None, upload_id=None, url=None, user_meta=None, video_media_metadata=None):
+    def __init__(self, category=None, content_hash=None, content_hash_name=None, content_type=None, crc_64hash=None,
+                 created_at=None, description=None, domain_id=None, download_url=None, drive_id=None, encrypt_mode=None,
+                 file_extension=None, file_id=None, hidden=None, image_media_metadata=None, labels=None, meta=None, name=None,
+                 parent_file_id=None, size=None, starred=None, status=None, streams_info=None, streams_url_info=None,
+                 thumbnail=None, trashed_at=None, type=None, updated_at=None, upload_id=None, url=None, user_meta=None,
+                 video_media_metadata=None):
+        # category
         self.category = category
+        # Content Hash
         self.content_hash = content_hash
+        # content_hash_name
         self.content_hash_name = content_hash_name
+        # content_type
         self.content_type = content_type
+        # crc64_hash
         self.crc_64hash = crc_64hash
+        # created_at
         self.created_at = created_at
+        # description
         self.description = description
+        # DomainID
         self.domain_id = domain_id
+        # download_url
         self.download_url = download_url
+        # drive_id
         self.drive_id = drive_id
+        # encrypt_mode
         self.encrypt_mode = encrypt_mode
+        # file_extension
         self.file_extension = file_extension
+        # file_id
         self.file_id = file_id
+        # Hidden
+        # type: boolean
         self.hidden = hidden
         self.image_media_metadata = image_media_metadata
-        self.labels = []
+        # labels
+        self.labels = labels
         self.meta = meta
+        # name
         self.name = name
+        # parent_file_id
         self.parent_file_id = parent_file_id
+        # Size
         self.size = size
+        # starred
+        # type: boolean
         self.starred = starred
+        # status
         self.status = status
         self.streams_info = streams_info
+        # @Deprecated streams url info
         self.streams_url_info = streams_url_info
+        # thumbnail
         self.thumbnail = thumbnail
+        # trashed_at
         self.trashed_at = trashed_at
+        # type
         self.type = type
+        # updated_at
         self.updated_at = updated_at
+        # upload_id
         self.upload_id = upload_id
+        # url
         self.url = url
+        # user_meta
         self.user_meta = user_meta
         self.video_media_metadata = video_media_metadata
 
@@ -2297,37 +2626,72 @@ class CCPGetFileResponse(TeaModel):
     """
     获取文件元数据response
     """
-    def __init__(self, category=None, content_hash=None, content_hash_name=None, content_type=None, crc_64hash=None, created_at=None, description=None, domain_id=None, download_url=None, drive_id=None, encrypt_mode=None, file_extension=None, file_id=None, hidden=None, image_media_metadata=None, labels=None, meta=None, name=None, parent_file_id=None, size=None, starred=None, status=None, streams_info=None, streams_url_info=None, thumbnail=None, trashed_at=None, type=None, updated_at=None, upload_id=None, url=None, user_meta=None, video_media_metadata=None):
+    def __init__(self, category=None, content_hash=None, content_hash_name=None, content_type=None, crc_64hash=None,
+                 created_at=None, description=None, domain_id=None, download_url=None, drive_id=None, encrypt_mode=None,
+                 file_extension=None, file_id=None, hidden=None, image_media_metadata=None, labels=None, meta=None, name=None,
+                 parent_file_id=None, size=None, starred=None, status=None, streams_info=None, streams_url_info=None,
+                 thumbnail=None, trashed_at=None, type=None, updated_at=None, upload_id=None, url=None, user_meta=None,
+                 video_media_metadata=None):
+        # category
         self.category = category
+        # Content Hash
         self.content_hash = content_hash
+        # content_hash_name
         self.content_hash_name = content_hash_name
+        # content_type
         self.content_type = content_type
+        # crc64_hash
         self.crc_64hash = crc_64hash
+        # created_at
         self.created_at = created_at
+        # description
         self.description = description
+        # DomainID
         self.domain_id = domain_id
+        # download_url
         self.download_url = download_url
+        # drive_id
         self.drive_id = drive_id
+        # encrypt_mode
         self.encrypt_mode = encrypt_mode
+        # file_extension
         self.file_extension = file_extension
+        # file_id
         self.file_id = file_id
+        # Hidden
+        # type: boolean
         self.hidden = hidden
         self.image_media_metadata = image_media_metadata
-        self.labels = []
+        # labels
+        self.labels = labels
         self.meta = meta
+        # name
         self.name = name
+        # parent_file_id
         self.parent_file_id = parent_file_id
+        # Size
         self.size = size
+        # starred
+        # type: boolean
         self.starred = starred
+        # status
         self.status = status
         self.streams_info = streams_info
+        # @Deprecated streams url info
         self.streams_url_info = streams_url_info
+        # thumbnail
         self.thumbnail = thumbnail
+        # trashed_at
         self.trashed_at = trashed_at
+        # type
         self.type = type
+        # updated_at
         self.updated_at = updated_at
+        # upload_id
         self.upload_id = upload_id
+        # url
         self.url = url
+        # user_meta
         self.user_meta = user_meta
         self.video_media_metadata = video_media_metadata
 
@@ -2447,12 +2811,19 @@ class CCPGetUploadUrlResponse(TeaModel):
     """
     Get UploadUrl Response
     """
-    def __init__(self, create_at=None, domain_id=None, drive_id=None, file_id=None, part_info_list=None, upload_id=None):
+    def __init__(self, create_at=None, domain_id=None, drive_id=None, file_id=None, part_info_list=None,
+                 upload_id=None):
+        # created_at
         self.create_at = create_at
+        # domain_id
         self.domain_id = domain_id
+        # drive_id
         self.drive_id = drive_id
+        # file_id
         self.file_id = file_id
-        self.part_info_list = []
+        # part_info_list
+        self.part_info_list = part_info_list
+        # upload_id
         self.upload_id = upload_id
 
     def validate(self):
@@ -2464,7 +2835,7 @@ class CCPGetUploadUrlResponse(TeaModel):
             self.validate_pattern(self.file_id, 'file_id', '[a-z0-9]{1,50}')
         if self.part_info_list:
             for k in self.part_info_list:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -2504,13 +2875,15 @@ class CCPListFileResponse(TeaModel):
     List file response
     """
     def __init__(self, items=None, next_marker=None):
-        self.items = []
+        # items
+        self.items = items
+        # next_marker
         self.next_marker = next_marker
 
     def validate(self):
         if self.items:
             for k in self.items:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -2542,17 +2915,21 @@ class CCPListUploadedPartResponse(TeaModel):
     获取签名 response
     """
     def __init__(self, file_id=None, next_part_number_marker=None, upload_id=None, uploaded_parts=None):
+        # file_id
         self.file_id = file_id
+        # next_part_number_marker
         self.next_part_number_marker = next_part_number_marker
+        # upload_id
         self.upload_id = upload_id
-        self.uploaded_parts = []
+        # uploaded_parts
+        self.uploaded_parts = uploaded_parts
 
     def validate(self):
         if self.file_id:
             self.validate_pattern(self.file_id, 'file_id', '[a-z0-9]{1,50}')
         if self.uploaded_parts:
             for k in self.uploaded_parts:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -2588,9 +2965,13 @@ class CCPMoveFileResponse(TeaModel):
     文件移动 response
     """
     def __init__(self, async_task_id=None, domain_id=None, drive_id=None, file_id=None):
+        # async_task_id
         self.async_task_id = async_task_id
+        # DomainID
         self.domain_id = domain_id
+        # drive_id
         self.drive_id = drive_id
+        # file_id
         self.file_id = file_id
 
     def validate(self):
@@ -2622,13 +3003,15 @@ class CCPScanFileMetaResponse(TeaModel):
     scan file meta response
     """
     def __init__(self, items=None, next_marker=None):
-        self.items = []
+        # items
+        self.items = items
+        # next_marker
         self.next_marker = next_marker
 
     def validate(self):
         if self.items:
             for k in self.items:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -2660,13 +3043,15 @@ class CCPSearchFileResponse(TeaModel):
     search file response
     """
     def __init__(self, items=None, next_marker=None):
-        self.items = []
+        # items
+        self.items = items
+        # next_marker
         self.next_marker = next_marker
 
     def validate(self):
         if self.items:
             for k in self.items:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -2697,37 +3082,72 @@ class CCPUpdateFileMetaResponse(TeaModel):
     """
     更新文件元数据 response
     """
-    def __init__(self, category=None, content_hash=None, content_hash_name=None, content_type=None, crc_64hash=None, created_at=None, description=None, domain_id=None, download_url=None, drive_id=None, encrypt_mode=None, file_extension=None, file_id=None, hidden=None, image_media_metadata=None, labels=None, meta=None, name=None, parent_file_id=None, size=None, starred=None, status=None, streams_info=None, streams_url_info=None, thumbnail=None, trashed_at=None, type=None, updated_at=None, upload_id=None, url=None, user_meta=None, video_media_metadata=None):
+    def __init__(self, category=None, content_hash=None, content_hash_name=None, content_type=None, crc_64hash=None,
+                 created_at=None, description=None, domain_id=None, download_url=None, drive_id=None, encrypt_mode=None,
+                 file_extension=None, file_id=None, hidden=None, image_media_metadata=None, labels=None, meta=None, name=None,
+                 parent_file_id=None, size=None, starred=None, status=None, streams_info=None, streams_url_info=None,
+                 thumbnail=None, trashed_at=None, type=None, updated_at=None, upload_id=None, url=None, user_meta=None,
+                 video_media_metadata=None):
+        # category
         self.category = category
+        # Content Hash
         self.content_hash = content_hash
+        # content_hash_name
         self.content_hash_name = content_hash_name
+        # content_type
         self.content_type = content_type
+        # crc64_hash
         self.crc_64hash = crc_64hash
+        # created_at
         self.created_at = created_at
+        # description
         self.description = description
+        # DomainID
         self.domain_id = domain_id
+        # download_url
         self.download_url = download_url
+        # drive_id
         self.drive_id = drive_id
+        # encrypt_mode
         self.encrypt_mode = encrypt_mode
+        # file_extension
         self.file_extension = file_extension
+        # file_id
         self.file_id = file_id
+        # Hidden
+        # type: boolean
         self.hidden = hidden
         self.image_media_metadata = image_media_metadata
-        self.labels = []
+        # labels
+        self.labels = labels
         self.meta = meta
+        # name
         self.name = name
+        # parent_file_id
         self.parent_file_id = parent_file_id
+        # Size
         self.size = size
+        # starred
+        # type: boolean
         self.starred = starred
+        # status
         self.status = status
         self.streams_info = streams_info
+        # @Deprecated streams url info
         self.streams_url_info = streams_url_info
+        # thumbnail
         self.thumbnail = thumbnail
+        # trashed_at
         self.trashed_at = trashed_at
+        # type
         self.type = type
+        # updated_at
         self.updated_at = updated_at
+        # upload_id
         self.upload_id = upload_id
+        # url
         self.url = url
+        # user_meta
         self.user_meta = user_meta
         self.video_media_metadata = video_media_metadata
 
@@ -2848,6 +3268,7 @@ class CancelLinkRequest(TeaModel):
     *
     """
     def __init__(self, temporary_token=None):
+        # 待绑定的临时token，此token只能访问绑定、取消绑定接口
         self.temporary_token = temporary_token
 
     def validate(self):
@@ -2868,8 +3289,11 @@ class Captcha(TeaModel):
     *
     """
     def __init__(self, captcha=None, captcha_format=None, captcha_id=None):
+        # 图片验证码，base64格式
         self.captcha = captcha
+        # 图片格式
         self.captcha_format = captcha_format
+        # 图片验证码ID
         self.captcha_id = captcha_id
 
     def validate(self):
@@ -2896,6 +3320,7 @@ class ConfirmLinkRequest(TeaModel):
     *
     """
     def __init__(self, temporary_token=None):
+        # 待绑定的临时token，此token只能访问绑定、取消绑定接口
         self.temporary_token = temporary_token
 
     def validate(self):
@@ -2915,11 +3340,17 @@ class CorsRule(TeaModel):
     """
     *
     """
-    def __init__(self, allowed_header=None, allowed_method=None, allowed_origin=None, expose_header=None, max_age_seconds=None):
-        self.allowed_header = []
-        self.allowed_method = []
-        self.allowed_origin = []
-        self.expose_header = []
+    def __init__(self, allowed_header=None, allowed_method=None, allowed_origin=None, expose_header=None,
+                 max_age_seconds=None):
+        # AllowedHeader
+        self.allowed_header = allowed_header
+        # AllowedMethod
+        self.allowed_method = allowed_method
+        # AllowedOrigin
+        self.allowed_origin = allowed_origin
+        # ExposeHeader
+        self.expose_header = expose_header
+        # MaxAgeSeconds
         self.max_age_seconds = max_age_seconds
 
     def validate(self):
@@ -2988,7 +3419,9 @@ class CreateDriveResponse(TeaModel):
     Create drive response
     """
     def __init__(self, domain_id=None, drive_id=None):
+        # Domain ID
         self.domain_id = domain_id
+        # Drive ID
         self.drive_id = drive_id
 
     def validate(self):
@@ -3011,7 +3444,9 @@ class CreateShareResponse(TeaModel):
     Create share response
     """
     def __init__(self, domain_id=None, share_id=None):
+        # domain_id
         self.domain_id = domain_id
+        # share_id
         self.share_id = share_id
 
     def validate(self):
@@ -3033,12 +3468,19 @@ class DefaultChangePasswordRequest(TeaModel):
     """
     *
     """
-    def __init__(self, app_id=None, encrypted_key=None, new_password=None, phone_number=None, phone_region=None, state=None):
+    def __init__(self, app_id=None, encrypted_key=None, new_password=None, phone_number=None, phone_region=None,
+                 state=None):
+        # App ID, 当前访问的App
         self.app_id = app_id
+        # AES-256对称加密密钥，通过App公钥加密后传输
         self.encrypted_key = encrypted_key
+        # 新密码，必须包含数字和字母，长度8-20个字符
         self.new_password = new_password
+        # 手机号
         self.phone_number = phone_number
+        # 国家编号，默认86，不需要填+号，直接填数字
         self.phone_region = phone_region
+        # 修改密码的临时授权码
         self.state = state
 
     def validate(self):
@@ -3073,9 +3515,13 @@ class DefaultSetPasswordRequest(TeaModel):
     *
     """
     def __init__(self, app_id=None, encrypted_key=None, new_password=None, state=None):
+        # App ID, 当前访问的App
         self.app_id = app_id
+        # AES-256对称加密密钥，通过App公钥加密后传输
         self.encrypted_key = encrypted_key
+        # 新密码，必须包含数字和字母，长度8-20个字符，使用AES-256对称加密后传输（CBC模式, 填充算法为PKCS7Padding，生成base64字符串）
         self.new_password = new_password
+        # 修改密码的临时授权码
         self.state = state
 
     def validate(self):
@@ -3123,11 +3569,16 @@ class DeviceAuthorizeRequest(TeaModel):
     *
     """
     def __init__(self, client_id=None, device_info=None, device_name=None, login_type=None, scope=None):
+        # Client ID, 此处填写创建App时返回的AppID
         self.client_id = client_id
+        # 设备信息，用于用户识别设备
         self.device_info = device_info
+        # 设备名，实现方需保证不同设备的设备名不重复（推荐用硬件名称+硬件型号作为设备名）
         self.device_name = device_name
+        # 鉴权方式，目前支持ding,ram鉴权
         self.login_type = login_type
-        self.scope = []
+        # 申请的权限列表, 默认为所有权限
+        self.scope = scope
 
     def validate(self):
         self.validate_required(self.client_id, 'client_id')
@@ -3203,8 +3654,11 @@ class GetAccessTokenByLinkInfoRequest(TeaModel):
     *
     """
     def __init__(self, extra=None, identity=None, type=None):
+        # 额外的信息，比如type为mobile时，此字段为国家编号，不填默认86
         self.extra = extra
+        # 唯一身份标识
         self.identity = identity
+        # 认证类型
         self.type = type
 
     def validate(self):
@@ -3230,6 +3684,7 @@ class GetAppPublicKeyRequest(TeaModel):
     *
     """
     def __init__(self, app_id=None):
+        # App ID
         self.app_id = app_id
 
     def validate(self):
@@ -3250,8 +3705,11 @@ class GetByLinkInfoRequest(TeaModel):
     *
     """
     def __init__(self, extra=None, identity=None, type=None):
+        # 额外的信息，比如type为mobile时，此字段为国家编号，不填默认86
         self.extra = extra
+        # 唯一身份标识
         self.identity = identity
+        # 认证类型
         self.type = type
 
     def validate(self):
@@ -3277,6 +3735,7 @@ class GetCaptchaRequest(TeaModel):
     *
     """
     def __init__(self, app_id=None):
+        # App ID, 当前访问的App
         self.app_id = app_id
 
     def validate(self):
@@ -3296,20 +3755,34 @@ class GetDriveResponse(TeaModel):
     """
     Get drive response
     """
-    def __init__(self, creator=None, description=None, domain_id=None, drive_id=None, drive_name=None, drive_type=None, encrypt_data_access=None, encrypt_mode=None, owner=None, relative_path=None, status=None, store_id=None, total_size=None, used_size=None):
+    def __init__(self, creator=None, description=None, domain_id=None, drive_id=None, drive_name=None,
+                 drive_type=None, encrypt_data_access=None, encrypt_mode=None, owner=None, relative_path=None, status=None,
+                 store_id=None, total_size=None, used_size=None):
+        # Drive 创建者
         self.creator = creator
+        # Drive 备注信息
         self.description = description
+        # Domain ID
         self.domain_id = domain_id
+        # Drive ID
         self.drive_id = drive_id
+        # Drive 名称
         self.drive_name = drive_name
+        # Drive 类型
         self.drive_type = drive_type
         self.encrypt_data_access = encrypt_data_access
         self.encrypt_mode = encrypt_mode
+        # Drive 所有者
         self.owner = owner
+        # Drive存储基于store的相对路径，domain的PathType为OSSPath时返回
         self.relative_path = relative_path
+        # Drive 状态
         self.status = status
+        # 存储 ID, domain的PathType为OSSPath时返回
         self.store_id = store_id
+        # Drive 空间总量
         self.total_size = total_size
+        # Drive 空间已使用量
         self.used_size = used_size
 
     def validate(self):
@@ -3376,6 +3849,7 @@ class GetLinkInfoByUserIDRequest(TeaModel):
     *
     """
     def __init__(self, user_id=None):
+        # user ID
         self.user_id = user_id
 
     def validate(self):
@@ -3396,8 +3870,10 @@ class GetPublicKeyResponse(TeaModel):
     *
     """
     def __init__(self, app_id=None, key_pair_id=None, public_key=None):
+        # App ID
         self.app_id = app_id
         self.key_pair_id = key_pair_id
+        # RSA加密算法的公钥, PEM格式
         self.public_key = public_key
 
     def validate(self):
@@ -3422,27 +3898,43 @@ class GetShareResponse(TeaModel):
     """
     Get share response
     """
-    def __init__(self, created_at=None, creator=None, description=None, domain_id=None, drive_id=None, expiration=None, expired=None, owner=None, permissions=None, share_file_path=None, share_id=None, share_name=None, share_policy=None, status=None, updated_at=None):
+    def __init__(self, created_at=None, creator=None, description=None, domain_id=None, drive_id=None,
+                 expiration=None, expired=None, owner=None, permissions=None, share_file_path=None, share_id=None,
+                 share_name=None, share_policy=None, status=None, updated_at=None):
+        # created_at
         self.created_at = created_at
+        # creator
         self.creator = creator
+        # description
         self.description = description
+        # domain_id
         self.domain_id = domain_id
+        # drive_id
         self.drive_id = drive_id
+        # expiration
         self.expiration = expiration
+        # expired
         self.expired = expired
+        # owner
         self.owner = owner
-        self.permissions = []
+        # permissions
+        self.permissions = permissions
+        # share_path
         self.share_file_path = share_file_path
+        # share_id
         self.share_id = share_id
+        # share_name
         self.share_name = share_name
-        self.share_policy = []
+        self.share_policy = share_policy
+        # status
         self.status = status
+        # updated_at
         self.updated_at = updated_at
 
     def validate(self):
         if self.share_policy:
             for k in self.share_policy:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -3509,19 +4001,33 @@ class ImageMediaResponse(TeaModel):
     """
     *
     """
-    def __init__(self, address_line=None, city=None, country=None, district=None, exif=None, faces=None, height=None, location=None, province=None, story_image_score=None, time=None, township=None, width=None):
+    def __init__(self, address_line=None, city=None, country=None, district=None, exif=None, faces=None, height=None,
+                 location=None, province=None, story_image_score=None, time=None, township=None, width=None):
+        # address_line
         self.address_line = address_line
+        # city
         self.city = city
+        # country
         self.country = country
+        # district
         self.district = district
+        # exif json string
         self.exif = exif
+        # faces json string
         self.faces = faces
+        # height
         self.height = height
+        # location
         self.location = location
+        # province
         self.province = province
+        # story_image_score
         self.story_image_score = story_image_score
+        # time
         self.time = time
+        # township
         self.township = township
+        # width
         self.width = width
 
     def validate(self):
@@ -3566,8 +4072,11 @@ class LinkInfo(TeaModel):
     *
     """
     def __init__(self, extra=None, identity=None, type=None):
+        # 额外的信息，比如type为mobile时，此字段为国家编号，不填默认86
         self.extra = extra
+        # 当前用户已存在的登录标识
         self.identity = identity
+        # 当前用户已存在的登录方式
         self.type = type
 
     def validate(self):
@@ -3592,13 +4101,14 @@ class LinkInfoListResponse(TeaModel):
     *
     """
     def __init__(self, items=None):
-        self.items = []
+        # items
+        self.items = items
 
     def validate(self):
         self.validate_required(self.items, 'items')
         if self.items:
             for k in self.items:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -3627,14 +4137,23 @@ class LinkInfoResponse(TeaModel):
     """
     *
     """
-    def __init__(self, authentication_type=None, created_at=None, domain_id=None, extra=None, identity=None, last_login_time=None, status=None, user_id=None):
+    def __init__(self, authentication_type=None, created_at=None, domain_id=None, extra=None, identity=None,
+                 last_login_time=None, status=None, user_id=None):
+        # 认证类型
         self.authentication_type = authentication_type
+        # 创建时间
         self.created_at = created_at
+        # Domain ID
         self.domain_id = domain_id
+        # 额外的信息，比如type为mobile时，此字段为国家编号，不填默认86
         self.extra = extra
+        # 唯一身份标识
         self.identity = identity
+        # 最后登录时间
         self.last_login_time = last_login_time
+        # 状态
         self.status = status
+        # 用户ID
         self.user_id = user_id
 
     def validate(self):
@@ -3675,13 +4194,15 @@ class ListDriveResponse(TeaModel):
     list drive response
     """
     def __init__(self, items=None, next_marker=None):
-        self.items = []
+        # Drive 列表
+        self.items = items
+        # 翻页标记
         self.next_marker = next_marker
 
     def validate(self):
         if self.items:
             for k in self.items:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -3713,14 +4234,17 @@ class ListFileDeltaResponse(TeaModel):
     list file op response
     """
     def __init__(self, cursor=None, has_more=None, items=None):
+        # cursor
         self.cursor = cursor
+        # has_more
         self.has_more = has_more
-        self.items = []
+        # items
+        self.items = items
 
     def validate(self):
         if self.items:
             for k in self.items:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -3754,13 +4278,15 @@ class ListShareResponse(TeaModel):
     List share response
     """
     def __init__(self, items=None, next_marker=None):
-        self.items = []
+        # items
+        self.items = items
+        # next_marker
         self.next_marker = next_marker
 
     def validate(self):
         if self.items:
             for k in self.items:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -3792,13 +4318,15 @@ class ListStoreFileResponse(TeaModel):
     List storage file
     """
     def __init__(self, items=None, next_marker=None):
-        self.items = []
+        # items
+        # file list
+        self.items = items
         self.next_marker = next_marker
 
     def validate(self):
         if self.items:
             for k in self.items:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -3830,12 +4358,13 @@ class ListStoreResponse(TeaModel):
     List storage
     """
     def __init__(self, items=None):
-        self.items = []
+        # items
+        self.items = items
 
     def validate(self):
         if self.items:
             for k in self.items:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -3865,9 +4394,13 @@ class LoginByCodeRequest(TeaModel):
     *
     """
     def __init__(self, access_token=None, app_id=None, auth_code=None, type=None):
+        # 鉴权后返回的accessToken，淘宝登录需要此字段
         self.access_token = access_token
+        # App ID, 当前访问的App
         self.app_id = app_id
+        # 鉴权后返回的AuthCode，支付宝登录需要此字段
         self.auth_code = auth_code
+        # 鉴权类型，淘宝、支付宝
         self.type = type
 
     def validate(self):
@@ -3895,8 +4428,11 @@ class MobileCheckExistRequest(TeaModel):
     *
     """
     def __init__(self, app_id=None, phone_number=None, phone_region=None):
+        # App ID, 当前访问的App
         self.app_id = app_id
+        # 待查询的手机号
         self.phone_number = phone_number
+        # 国家编号，默认86，不需要填+号，直接填数字
         self.phone_region = phone_region
 
     def validate(self):
@@ -3922,8 +4458,11 @@ class MobileCheckExistResponse(TeaModel):
     *
     """
     def __init__(self, is_exist=None, phone_number=None, phone_region=None):
+        # 当前手机号是否存在
         self.is_exist = is_exist
+        # 待查询的手机号
         self.phone_number = phone_number
+        # 国家编号，默认86，不需要填+号，直接填数字
         self.phone_region = phone_region
 
     def validate(self):
@@ -3948,16 +4487,27 @@ class MobileLoginRequest(TeaModel):
     """
     *
     """
-    def __init__(self, app_id=None, auto_register=None, captcha_id=None, captcha_text=None, encrypted_key=None, password=None, phone_number=None, phone_region=None, sms_code=None, sms_code_id=None):
+    def __init__(self, app_id=None, auto_register=None, captcha_id=None, captcha_text=None, encrypted_key=None,
+                 password=None, phone_number=None, phone_region=None, sms_code=None, sms_code_id=None):
+        # App ID, 当前访问的App
         self.app_id = app_id
+        # 是否自动注册用户，使用密码登录此参数不生效
         self.auto_register = auto_register
+        # 图片验证码ID, 密码登录需要此参数
         self.captcha_id = captcha_id
+        # 用户输入的验证码值, 密码登录需要此参数
         self.captcha_text = captcha_text
+        # AES-256对称加密密钥，通过App公钥加密后传输
         self.encrypted_key = encrypted_key
+        # 登录密码, 传入此参数则忽略短信验证码，不传此参数则默认使用短信登录。
         self.password = password
+        # 待查询的手机号
         self.phone_number = phone_number
+        # 国家编号，默认86，不需要填+号，直接填数字
         self.phone_region = phone_region
+        # 短信验证码内容，使用密码登录此参数不生效
         self.sms_code = sms_code
+        # 短信验证码ID，使用密码登录此参数不生效
         self.sms_code_id = sms_code_id
 
     def validate(self):
@@ -3997,10 +4547,15 @@ class MobileRegisterRequest(TeaModel):
     *
     """
     def __init__(self, app_id=None, phone_number=None, phone_region=None, sms_code=None, sms_code_id=None):
+        # App ID, 当前访问的App
         self.app_id = app_id
+        # 待查询的手机号
         self.phone_number = phone_number
+        # 国家编号，默认86，不需要填+号，直接填数字
         self.phone_region = phone_region
+        # 短信验证码内容
         self.sms_code = sms_code
+        # 短信验证码ID
         self.sms_code_id = sms_code_id
 
     def validate(self):
@@ -4031,12 +4586,19 @@ class MobileSendSmsCodeRequest(TeaModel):
     """
     *
     """
-    def __init__(self, app_id=None, captcha_id=None, captcha_text=None, phone_number=None, phone_region=None, type=None):
+    def __init__(self, app_id=None, captcha_id=None, captcha_text=None, phone_number=None, phone_region=None,
+                 type=None):
+        # App ID, 当前访问的App
         self.app_id = app_id
+        # 图片验证码ID
         self.captcha_id = captcha_id
+        # 用户输入的验证码值
         self.captcha_text = captcha_text
+        # 待发送验证短信的手机号
         self.phone_number = phone_number
+        # 国家编号，默认86，不需要填+号，直接填数字
         self.phone_region = phone_region
+        # 验证码用途, 可下发: login、register、change_password
         self.type = type
 
     def validate(self):
@@ -4069,6 +4631,7 @@ class MobileSendSmsCodeResponse(TeaModel):
     *
     """
     def __init__(self, sms_code_id=None):
+        # 短信验证码ID
         self.sms_code_id = sms_code_id
 
     def validate(self):
@@ -4088,29 +4651,55 @@ class OSSCompleteFileResponse(TeaModel):
     """
     complete file response
     """
-    def __init__(self, content_hash=None, content_hash_name=None, content_type=None, crc_64hash=None, created_at=None, description=None, domain_id=None, download_url=None, drive_id=None, file_extension=None, file_path=None, name=None, parent_file_path=None, share_id=None, size=None, status=None, thumbnail=None, trashed_at=None, type=None, updated_at=None, upload_id=None, url=None, crc=None):
+    def __init__(self, content_hash=None, content_hash_name=None, content_type=None, crc_64hash=None,
+                 created_at=None, description=None, domain_id=None, download_url=None, drive_id=None, file_extension=None,
+                 file_path=None, name=None, parent_file_path=None, share_id=None, size=None, status=None, thumbnail=None,
+                 trashed_at=None, type=None, updated_at=None, upload_id=None, url=None, crc=None):
+        # Content Hash
         self.content_hash = content_hash
+        # content_hash_name
         self.content_hash_name = content_hash_name
+        # content_type
         self.content_type = content_type
+        # crc64_hash
         self.crc_64hash = crc_64hash
+        # created_at
         self.created_at = created_at
+        # description
         self.description = description
+        # domain_id
         self.domain_id = domain_id
+        # download_url
         self.download_url = download_url
+        # drive_id
         self.drive_id = drive_id
+        # file_extension
         self.file_extension = file_extension
+        # file_path
         self.file_path = file_path
+        # name
         self.name = name
+        # parent_file_id
         self.parent_file_path = parent_file_path
+        # share_id
         self.share_id = share_id
+        # Size
         self.size = size
+        # status
         self.status = status
+        # thumbnail
         self.thumbnail = thumbnail
+        # trashed_at
         self.trashed_at = trashed_at
+        # type
         self.type = type
+        # updated_at
         self.updated_at = updated_at
+        # upload_id
         self.upload_id = upload_id
+        # url
         self.url = url
+        # crc
         self.crc = crc
 
     def validate(self):
@@ -4184,10 +4773,15 @@ class OSSCopyFileResponse(TeaModel):
     文件拷贝 response
     """
     def __init__(self, async_task_id=None, domain_id=None, drive_id=None, file_path=None, share_id=None):
+        # async_task_id
         self.async_task_id = async_task_id
+        # domain_id
         self.domain_id = domain_id
+        # drive_id
         self.drive_id = drive_id
+        # file_path
         self.file_path = file_path
+        # drive_id
         self.share_id = share_id
 
     def validate(self):
@@ -4220,13 +4814,21 @@ class OSSCreateFileResponse(TeaModel):
     """
     Create file response
     """
-    def __init__(self, domain_id=None, drive_id=None, file_path=None, part_info_list=None, share_id=None, type=None, upload_id=None):
+    def __init__(self, domain_id=None, drive_id=None, file_path=None, part_info_list=None, share_id=None, type=None,
+                 upload_id=None):
+        # domain_id
         self.domain_id = domain_id
+        # drive_id
         self.drive_id = drive_id
+        # file_path
         self.file_path = file_path
-        self.part_info_list = []
+        # part_info_list
+        self.part_info_list = part_info_list
+        # share_id
         self.share_id = share_id
+        # type
         self.type = type
+        # upload_id
         self.upload_id = upload_id
 
     def validate(self):
@@ -4236,7 +4838,7 @@ class OSSCreateFileResponse(TeaModel):
             self.validate_pattern(self.drive_id, 'drive_id', '[0-9]+')
         if self.part_info_list:
             for k in self.part_info_list:
-                if k :
+                if k:
                     k.validate()
         if self.share_id:
             self.validate_pattern(self.share_id, 'share_id', '[0-9]+')
@@ -4280,10 +4882,15 @@ class OSSDeleteFileResponse(TeaModel):
     删除文件 response
     """
     def __init__(self, async_task_id=None, domain_id=None, drive_id=None, file_path=None, share_id=None):
+        # async_task_id
         self.async_task_id = async_task_id
+        # domain_id
         self.domain_id = domain_id
+        # drive_id
         self.drive_id = drive_id
+        # file_path
         self.file_path = file_path
+        # share_id
         self.share_id = share_id
 
     def validate(self):
@@ -4317,9 +4924,13 @@ class OSSDeleteFilesResponse(TeaModel):
     批量删除文件 response
     """
     def __init__(self, deleted_file_id_list=None, domain_id=None, drive_id=None, share_id=None):
-        self.deleted_file_id_list = []
+        # deleted_file_id_list
+        self.deleted_file_id_list = deleted_file_id_list
+        # domain_id
         self.domain_id = domain_id
+        # drive_id
         self.drive_id = drive_id
+        # share_id
         self.share_id = share_id
 
     def validate(self):
@@ -4361,8 +4972,11 @@ class OSSGetDownloadUrlResponse(TeaModel):
     获取download url response
     """
     def __init__(self, expiration=None, method=None, url=None):
+        # expiration
         self.expiration = expiration
+        # method
         self.method = method
+        # url
         self.url = url
 
     def validate(self):
@@ -4386,28 +5000,53 @@ class OSSGetFileResponse(TeaModel):
     """
     获取文件元数据response
     """
-    def __init__(self, content_hash=None, content_hash_name=None, content_type=None, crc_64hash=None, created_at=None, description=None, domain_id=None, download_url=None, drive_id=None, file_extension=None, file_path=None, name=None, parent_file_path=None, share_id=None, size=None, status=None, thumbnail=None, trashed_at=None, type=None, updated_at=None, upload_id=None, url=None):
+    def __init__(self, content_hash=None, content_hash_name=None, content_type=None, crc_64hash=None,
+                 created_at=None, description=None, domain_id=None, download_url=None, drive_id=None, file_extension=None,
+                 file_path=None, name=None, parent_file_path=None, share_id=None, size=None, status=None, thumbnail=None,
+                 trashed_at=None, type=None, updated_at=None, upload_id=None, url=None):
+        # Content Hash
         self.content_hash = content_hash
+        # content_hash_name
         self.content_hash_name = content_hash_name
+        # content_type
         self.content_type = content_type
+        # crc64_hash
         self.crc_64hash = crc_64hash
+        # created_at
         self.created_at = created_at
+        # description
         self.description = description
+        # domain_id
         self.domain_id = domain_id
+        # download_url
         self.download_url = download_url
+        # drive_id
         self.drive_id = drive_id
+        # file_extension
         self.file_extension = file_extension
+        # file_path
         self.file_path = file_path
+        # name
         self.name = name
+        # parent_file_id
         self.parent_file_path = parent_file_path
+        # share_id
         self.share_id = share_id
+        # Size
         self.size = size
+        # status
         self.status = status
+        # thumbnail
         self.thumbnail = thumbnail
+        # trashed_at
         self.trashed_at = trashed_at
+        # type
         self.type = type
+        # updated_at
         self.updated_at = updated_at
+        # upload_id
         self.upload_id = upload_id
+        # url
         self.url = url
 
     def validate(self):
@@ -4479,7 +5118,9 @@ class OSSGetSecureUrlResponse(TeaModel):
     获取secure url response
     """
     def __init__(self, expiration=None, url=None):
+        # expiration
         self.expiration = expiration
+        # url
         self.url = url
 
     def validate(self):
@@ -4501,12 +5142,19 @@ class OSSGetUploadUrlResponse(TeaModel):
     """
     Get UploadUrl Response
     """
-    def __init__(self, create_at=None, domain_id=None, drive_id=None, file_path=None, part_info_list=None, upload_id=None):
+    def __init__(self, create_at=None, domain_id=None, drive_id=None, file_path=None, part_info_list=None,
+                 upload_id=None):
+        # created_at
         self.create_at = create_at
+        # domain_id
         self.domain_id = domain_id
+        # drive_id
         self.drive_id = drive_id
+        # file_path
         self.file_path = file_path
-        self.part_info_list = []
+        # part_info_list
+        self.part_info_list = part_info_list
+        # upload_id
         self.upload_id = upload_id
 
     def validate(self):
@@ -4516,7 +5164,7 @@ class OSSGetUploadUrlResponse(TeaModel):
             self.validate_pattern(self.drive_id, 'drive_id', '[0-9]+')
         if self.part_info_list:
             for k in self.part_info_list:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -4556,13 +5204,15 @@ class OSSListFileResponse(TeaModel):
     List file response
     """
     def __init__(self, items=None, next_marker=None):
-        self.items = []
+        # items
+        self.items = items
+        # next_marker
         self.next_marker = next_marker
 
     def validate(self):
         if self.items:
             for k in self.items:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -4594,15 +5244,19 @@ class OSSListUploadedPartResponse(TeaModel):
     获取签名 response
     """
     def __init__(self, file_path=None, next_part_number_marker=None, upload_id=None, uploaded_parts=None):
+        # file_path
         self.file_path = file_path
+        # next_part_number_marker
         self.next_part_number_marker = next_part_number_marker
+        # upload_id
         self.upload_id = upload_id
-        self.uploaded_parts = []
+        # uploaded_parts
+        self.uploaded_parts = uploaded_parts
 
     def validate(self):
         if self.uploaded_parts:
             for k in self.uploaded_parts:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -4638,10 +5292,15 @@ class OSSMoveFileResponse(TeaModel):
     文件移动 response
     """
     def __init__(self, async_task_id=None, domain_id=None, drive_id=None, file_path=None, share_id=None):
+        # async_task_id
         self.async_task_id = async_task_id
+        # domain_id
         self.domain_id = domain_id
+        # drive_id
         self.drive_id = drive_id
+        # file_path
         self.file_path = file_path
+        # drive_id
         self.share_id = share_id
 
     def validate(self):
@@ -4675,13 +5334,15 @@ class OSSSearchFileResponse(TeaModel):
     search file response
     """
     def __init__(self, items=None, next_marker=None):
-        self.items = []
+        # items
+        self.items = items
+        # next_marker
         self.next_marker = next_marker
 
     def validate(self):
         if self.items:
             for k in self.items:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -4712,28 +5373,53 @@ class OSSUpdateFileMetaResponse(TeaModel):
     """
     更新文件元数据 response
     """
-    def __init__(self, content_hash=None, content_hash_name=None, content_type=None, crc_64hash=None, created_at=None, description=None, domain_id=None, download_url=None, drive_id=None, file_extension=None, file_path=None, name=None, parent_file_path=None, share_id=None, size=None, status=None, thumbnail=None, trashed_at=None, type=None, updated_at=None, upload_id=None, url=None):
+    def __init__(self, content_hash=None, content_hash_name=None, content_type=None, crc_64hash=None,
+                 created_at=None, description=None, domain_id=None, download_url=None, drive_id=None, file_extension=None,
+                 file_path=None, name=None, parent_file_path=None, share_id=None, size=None, status=None, thumbnail=None,
+                 trashed_at=None, type=None, updated_at=None, upload_id=None, url=None):
+        # Content Hash
         self.content_hash = content_hash
+        # content_hash_name
         self.content_hash_name = content_hash_name
+        # content_type
         self.content_type = content_type
+        # crc64_hash
         self.crc_64hash = crc_64hash
+        # created_at
         self.created_at = created_at
+        # description
         self.description = description
+        # domain_id
         self.domain_id = domain_id
+        # download_url
         self.download_url = download_url
+        # drive_id
         self.drive_id = drive_id
+        # file_extension
         self.file_extension = file_extension
+        # file_path
         self.file_path = file_path
+        # name
         self.name = name
+        # parent_file_id
         self.parent_file_path = parent_file_path
+        # share_id
         self.share_id = share_id
+        # Size
         self.size = size
+        # status
         self.status = status
+        # thumbnail
         self.thumbnail = thumbnail
+        # trashed_at
         self.trashed_at = trashed_at
+        # type
         self.type = type
+        # updated_at
         self.updated_at = updated_at
+        # upload_id
         self.upload_id = upload_id
+        # url
         self.url = url
 
     def validate(self):
@@ -4805,7 +5491,9 @@ class OSSVideoDRMLicenseResponse(TeaModel):
     DRM License response
     """
     def __init__(self, data=None, states=None):
+        # drm_data
         self.data = data
+        # states
         self.states = states
 
     def validate(self):
@@ -4829,7 +5517,9 @@ class OSSVideoDefinitionResponse(TeaModel):
     转码接口response
     """
     def __init__(self, definition_list=None, frame_rate=None):
-        self.definition_list = []
+        # definition_list
+        self.definition_list = definition_list
+        # frame_rate
         self.frame_rate = frame_rate
 
     def validate(self):
@@ -4862,8 +5552,11 @@ class OSSVideoTranscodeResponse(TeaModel):
     转码接口response
     """
     def __init__(self, definition_list=None, duration=None, hls_time=None):
-        self.definition_list = []
+        # definition_list
+        self.definition_list = definition_list
+        # duration
         self.duration = duration
+        # hls_time
         self.hls_time = hls_time
 
     def validate(self):
@@ -4898,10 +5591,15 @@ class PreHashCheckSuccessResponse(TeaModel):
     Pre hash check Response
     """
     def __init__(self, code=None, file_name=None, message=None, parent_file_id=None, pre_hash=None):
+        # code
         self.code = code
+        # file_name
         self.file_name = file_name
+        # message
         self.message = message
+        # parent_file_id
         self.parent_file_id = parent_file_id
+        # pre_hash
         self.pre_hash = pre_hash
 
     def validate(self):
@@ -4932,7 +5630,9 @@ class RevokeRequest(TeaModel):
     *
     """
     def __init__(self, app_id=None, refresh_token=None):
+        # App ID, 当前访问的App
         self.app_id = app_id
+        # refresh token, 登录时返回的
         self.refresh_token = refresh_token
 
     def validate(self):
@@ -4958,7 +5658,7 @@ class SharePermissionPolicy(TeaModel):
     def __init__(self, file_path=None, permission_inheritable=None, permission_list=None, permission_type=None):
         self.file_path = file_path
         self.permission_inheritable = permission_inheritable
-        self.permission_list = []
+        self.permission_list = permission_list
         self.permission_type = permission_type
 
     def validate(self):
@@ -5026,18 +5726,31 @@ class StoreItemResponse(TeaModel):
     """
     *
     """
-    def __init__(self, accelerate_endpoint=None, base_path=None, bucket=None, customized_endpoint=None, domain_id=None, endpoint=None, internal_endpoint=None, ownership=None, policy=None, role_arn=None, store_id=None, type=None):
+    def __init__(self, accelerate_endpoint=None, base_path=None, bucket=None, customized_endpoint=None,
+                 domain_id=None, endpoint=None, internal_endpoint=None, ownership=None, policy=None, role_arn=None,
+                 store_id=None, type=None):
+        # 全球加速域名
         self.accelerate_endpoint = accelerate_endpoint
+        # 存储公共前缀
         self.base_path = base_path
+        # bucket名称
         self.bucket = bucket
+        # 用户自定义绑定存储地址
         self.customized_endpoint = customized_endpoint
         self.domain_id = domain_id
+        # 存储访问地址
         self.endpoint = endpoint
+        # 内网存储地址
         self.internal_endpoint = internal_endpoint
+        # 存储归属，system表示系统提供，custom表示使用自己的存储
         self.ownership = ownership
+        # Policy授权,system类型store会将bucket权限授予当前云账号
         self.policy = policy
+        # 访问Bucket的角色ARN
         self.role_arn = role_arn
+        # store ID
         self.store_id = store_id
+        # 存储类型，当前只支持oss
         self.type = type
 
     def validate(self):
@@ -5085,9 +5798,13 @@ class StreamInfo(TeaModel):
     *
     """
     def __init__(self, crc_64hash=None, download_url=None, thumbnail=None, url=None):
+        # crc64_hash
         self.crc_64hash = crc_64hash
+        # download_url
         self.download_url = download_url
+        # thumbnail
         self.thumbnail = thumbnail
+        # url
         self.url = url
 
     def validate(self):
@@ -5114,15 +5831,21 @@ class StreamUploadInfo(TeaModel):
     *
     """
     def __init__(self, part_info_list=None, pre_rapid_upload=None, rapid_upload=None, upload_id=None):
-        self.part_info_list = []
+        # part_info_list
+        self.part_info_list = part_info_list
+        # pre_rapid_upload
+        # type: boolean
         self.pre_rapid_upload = pre_rapid_upload
+        # rapid_upload
+        # type: boolean
         self.rapid_upload = rapid_upload
+        # upload_id
         self.upload_id = upload_id
 
     def validate(self):
         if self.part_info_list:
             for k in self.part_info_list:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -5158,8 +5881,11 @@ class TokenRequest(TeaModel):
     *
     """
     def __init__(self, app_id=None, grant_type=None, refresh_token=None):
+        # App ID, 当前访问的App
         self.app_id = app_id
+        # 只能填refresh_token
         self.grant_type = grant_type
+        # refresh token, 登录时返回的
         self.refresh_token = refresh_token
 
     def validate(self):
@@ -5185,20 +5911,34 @@ class UpdateDriveResponse(TeaModel):
     """
     Update drive response
     """
-    def __init__(self, creator=None, description=None, domain_id=None, drive_id=None, drive_name=None, drive_type=None, encrypt_data_access=None, encrypt_mode=None, owner=None, relative_path=None, status=None, store_id=None, total_size=None, used_size=None):
+    def __init__(self, creator=None, description=None, domain_id=None, drive_id=None, drive_name=None,
+                 drive_type=None, encrypt_data_access=None, encrypt_mode=None, owner=None, relative_path=None, status=None,
+                 store_id=None, total_size=None, used_size=None):
+        # Drive 创建者
         self.creator = creator
+        # Drive 备注信息
         self.description = description
+        # Domain ID
         self.domain_id = domain_id
+        # Drive ID
         self.drive_id = drive_id
+        # Drive 名称
         self.drive_name = drive_name
+        # Drive 类型
         self.drive_type = drive_type
         self.encrypt_data_access = encrypt_data_access
         self.encrypt_mode = encrypt_mode
+        # Drive 所有者
         self.owner = owner
+        # Drive存储基于store的相对路径，domain的PathType为OSSPath时返回
         self.relative_path = relative_path
+        # Drive 状态
         self.status = status
+        # 存储 ID, domain的PathType为OSSPath时返回
         self.store_id = store_id
+        # Drive 空间总量
         self.total_size = total_size
+        # Drive 空间已使用量
         self.used_size = used_size
 
     def validate(self):
@@ -5244,27 +5984,43 @@ class UpdateShareResponse(TeaModel):
     """
     Update share response
     """
-    def __init__(self, created_at=None, creator=None, description=None, domain_id=None, drive_id=None, expiration=None, expired=None, owner=None, permissions=None, share_file_path=None, share_id=None, share_name=None, share_policy=None, status=None, updated_at=None):
+    def __init__(self, created_at=None, creator=None, description=None, domain_id=None, drive_id=None,
+                 expiration=None, expired=None, owner=None, permissions=None, share_file_path=None, share_id=None,
+                 share_name=None, share_policy=None, status=None, updated_at=None):
+        # created_at
         self.created_at = created_at
+        # creator
         self.creator = creator
+        # description
         self.description = description
+        # domain_id
         self.domain_id = domain_id
+        # drive_id
         self.drive_id = drive_id
+        # expiration
         self.expiration = expiration
+        # expired
         self.expired = expired
+        # owner
         self.owner = owner
-        self.permissions = []
+        # permissions
+        self.permissions = permissions
+        # share_path
         self.share_file_path = share_file_path
+        # share_id
         self.share_id = share_id
+        # share_name
         self.share_name = share_name
-        self.share_policy = []
+        self.share_policy = share_policy
+        # status
         self.status = status
+        # updated_at
         self.updated_at = updated_at
 
     def validate(self):
         if self.share_policy:
             for k in self.share_policy:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -5332,9 +6088,13 @@ class UploadPartInfo(TeaModel):
     *
     """
     def __init__(self, etag=None, part_number=None, part_size=None, upload_url=None):
+        # etag
         self.etag = etag
+        # PartNumber
         self.part_number = part_number
+        # PartSize：
         self.part_size = part_size
+        # upload_url
         self.upload_url = upload_url
 
     def validate(self):
@@ -5362,8 +6122,11 @@ class UrlInfo(TeaModel):
     *
     """
     def __init__(self, download_url=None, thumbnail=None, url=None):
+        # download_url
         self.download_url = download_url
+        # thumbnail
         self.thumbnail = thumbnail
+        # url
         self.url = url
 
     def validate(self):
@@ -5387,15 +6150,25 @@ class UserAuthentication(TeaModel):
     """
     *
     """
-    def __init__(self, authentication_type=None, created_at=None, detail=None, domain_id=None, identity=None, last_login_time=None, status=None, user_id=None, extra=None):
+    def __init__(self, authentication_type=None, created_at=None, detail=None, domain_id=None, identity=None,
+                 last_login_time=None, status=None, user_id=None, extra=None):
+        # 认证类型
         self.authentication_type = authentication_type
+        # 创建时间
         self.created_at = created_at
+        # 详情
         self.detail = detail
+        # Domain ID
         self.domain_id = domain_id
+        # 唯一身份标识
         self.identity = identity
+        # 最后登录时间
         self.last_login_time = last_login_time
+        # 状态
         self.status = status
+        # 用户ID
         self.user_id = user_id
+        # 额外的信息，比如type为mobile时，此字段为国家编号，不填默认86
         self.extra = extra
 
     def validate(self):
@@ -5438,12 +6211,19 @@ class VerifyCodeRequest(TeaModel):
     """
     *
     """
-    def __init__(self, app_id=None, phone_number=None, phone_region=None, sms_code=None, sms_code_id=None, verify_type=None):
+    def __init__(self, app_id=None, phone_number=None, phone_region=None, sms_code=None, sms_code_id=None,
+                 verify_type=None):
+        # App ID, 当前访问的App
         self.app_id = app_id
+        # 手机号
         self.phone_number = phone_number
+        # 国家编号，默认86，不需要填+号，直接填数字
         self.phone_region = phone_region
+        # 短信验证码内容
         self.sms_code = sms_code
+        # 短信验证码ID
         self.sms_code_id = sms_code_id
+        # 需要被校验内容的类型
         self.verify_type = verify_type
 
     def validate(self):
@@ -5477,6 +6257,7 @@ class VerifyCodeResponse(TeaModel):
     *
     """
     def __init__(self, state=None):
+        # 修改密码的临时授权码
         self.state = state
 
     def validate(self):
@@ -5496,17 +6277,29 @@ class VideoMediaResponse(TeaModel):
     """
     *
     """
-    def __init__(self, address_line=None, city=None, country=None, district=None, duration=None, height=None, location=None, province=None, time=None, township=None, width=None):
+    def __init__(self, address_line=None, city=None, country=None, district=None, duration=None, height=None,
+                 location=None, province=None, time=None, township=None, width=None):
+        # address_line
         self.address_line = address_line
+        # city
         self.city = city
+        # country
         self.country = country
+        # district
         self.district = district
+        # duration 单位 秒
         self.duration = duration
+        # height
         self.height = height
+        # location
         self.location = location
+        # province
         self.province = province
+        # time
         self.time = time
+        # township
         self.township = township
+        # width
         self.width = width
 
     def validate(self):
@@ -5544,7 +6337,9 @@ class VideoMediaResponse(TeaModel):
 
 class AdminListStoresRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -5573,7 +6368,9 @@ class AdminListStoresRequestModel(TeaModel):
 
 class AdminListStoresModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -5602,7 +6399,9 @@ class AdminListStoresModel(TeaModel):
 
 class GetUserAccessTokenRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -5631,7 +6430,9 @@ class GetUserAccessTokenRequestModel(TeaModel):
 
 class GetUserAccessTokenModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -5662,18 +6463,32 @@ class AddStoreResponse(TeaModel):
     """
     *
     """
-    def __init__(self, accelerate_endpoint=None, base_path=None, bucket=None, customized_endpoint=None, domain_id=None, endpoint=None, internal_endpoint=None, ownership=None, policy=None, role_arn=None, store_id=None, type=None):
+    def __init__(self, accelerate_endpoint=None, base_path=None, bucket=None, customized_endpoint=None,
+                 domain_id=None, endpoint=None, internal_endpoint=None, ownership=None, policy=None, role_arn=None,
+                 store_id=None, type=None):
+        # 全球加速域名
         self.accelerate_endpoint = accelerate_endpoint
+        # 存储公共前缀
         self.base_path = base_path
+        # bucket名称
         self.bucket = bucket
+        # 用户自定义绑定存储地址
         self.customized_endpoint = customized_endpoint
+        # domain ID
         self.domain_id = domain_id
+        # 存储访问地址
         self.endpoint = endpoint
+        # 内网存储地址
         self.internal_endpoint = internal_endpoint
+        # 存储归属，system表示系统提供，custom表示使用自己的存储
         self.ownership = ownership
+        # Policy授权,system类型store会将bucket权限授予当前云账号
         self.policy = policy
+        # 访问Bucket的角色ARN
         self.role_arn = role_arn
+        # store ID
         self.store_id = store_id
+        # 存储类型，当前只支持oss
         self.type = type
 
     def validate(self):
@@ -5741,7 +6556,7 @@ class AppAccessStrategy(TeaModel):
     """
     def __init__(self, effect=None, except_app_id_list=None):
         self.effect = effect
-        self.except_app_id_list = []
+        self.except_app_id_list = except_app_id_list
 
     def validate(self):
         pass
@@ -5772,7 +6587,8 @@ class AuthConfig(TeaModel):
     """
     *
     """
-    def __init__(self, app_id=None, app_secret=None, callback_security=None, enable=None, endpoint=None, enterprise_id=None):
+    def __init__(self, app_id=None, app_secret=None, callback_security=None, enable=None, endpoint=None,
+                 enterprise_id=None):
         self.app_id = app_id
         self.app_secret = app_secret
         self.callback_security = callback_security
@@ -5807,36 +6623,70 @@ class BaseDomainResponse(TeaModel):
     """
     base domain response
     """
-    def __init__(self, auth_alipay_app_id=None, auth_alipay_enable=None, auth_alipay_private_key=None, auth_config=None, auth_dingding_app_id=None, auth_dingding_app_secret=None, auth_dingding_enable=None, auth_endpoint_enable=None, auth_ram_app_id=None, auth_ram_app_secret=None, auth_ram_enable=None, created_at=None, data_hash_name=None, description=None, domain_id=None, domain_name=None, event_filename_matches=None, event_mns_endpoint=None, event_mns_topic=None, event_names=None, event_role_arn=None, init_drive_enable=None, init_drive_size=None, init_drive_store_id=None, path_type=None, published_app_access_strategy=None, sharable=None, store_level=None, store_region_list=None, updated_at=None):
+    def __init__(self, auth_alipay_app_id=None, auth_alipay_enable=None, auth_alipay_private_key=None,
+                 auth_config=None, auth_dingding_app_id=None, auth_dingding_app_secret=None, auth_dingding_enable=None,
+                 auth_endpoint_enable=None, auth_ram_app_id=None, auth_ram_app_secret=None, auth_ram_enable=None, created_at=None,
+                 data_hash_name=None, description=None, domain_id=None, domain_name=None, event_filename_matches=None,
+                 event_mns_endpoint=None, event_mns_topic=None, event_names=None, event_role_arn=None, init_drive_enable=None,
+                 init_drive_size=None, init_drive_store_id=None, path_type=None, published_app_access_strategy=None, sharable=None,
+                 store_level=None, store_region_list=None, updated_at=None):
+        # 支付宝 App Id
         self.auth_alipay_app_id = auth_alipay_app_id
+        # 是否开启了支付宝认证
         self.auth_alipay_enable = auth_alipay_enable
+        # 支付宝 App Secret
         self.auth_alipay_private_key = auth_alipay_private_key
+        # 登录相关信息
         self.auth_config = auth_config
+        # 钉钉 App Id
         self.auth_dingding_app_id = auth_dingding_app_id
+        # 钉钉 App Secret
         self.auth_dingding_app_secret = auth_dingding_app_secret
+        # 是否开启了钉钉认证
         self.auth_dingding_enable = auth_dingding_enable
         self.auth_endpoint_enable = auth_endpoint_enable
+        # RAM App Id
         self.auth_ram_app_id = auth_ram_app_id
+        # RAM App Secret
         self.auth_ram_app_secret = auth_ram_app_secret
+        # 是否开启了 RAM 认证
         self.auth_ram_enable = auth_ram_enable
+        # Domain 创建时间
         self.created_at = created_at
+        # 数据 Hash 算法
         self.data_hash_name = data_hash_name
+        # Domain 描述
         self.description = description
+        # Domain ID
         self.domain_id = domain_id
+        # Domain 描述
         self.domain_name = domain_name
+        # 事件通知 MNS 匹配文件名
         self.event_filename_matches = event_filename_matches
+        # 事件通知 MNS Endpoint
         self.event_mns_endpoint = event_mns_endpoint
+        # 事件通知 MNS Topic
         self.event_mns_topic = event_mns_topic
-        self.event_names = []
+        # 事件名列表
+        self.event_names = event_names
+        # 事件通知 Role Arn
         self.event_role_arn = event_role_arn
+        # 是否开启了自动初始化 Drive
         self.init_drive_enable = init_drive_enable
+        # 自动初始化 Drive 大小
         self.init_drive_size = init_drive_size
+        # 自动初始化 Drive 所用 Store ID
         self.init_drive_store_id = init_drive_store_id
+        # Domain 类型
         self.path_type = path_type
         self.published_app_access_strategy = published_app_access_strategy
+        # 是否开启了分享
         self.sharable = sharable
+        # 存储级别
         self.store_level = store_level
-        self.store_region_list = []
+        # 存储 Region 列表
+        self.store_region_list = store_region_list
+        # Domain 更新时间
         self.updated_at = updated_at
 
     def validate(self):
@@ -5942,36 +6792,70 @@ class CreateDomainResponse(TeaModel):
     """
     create domain response
     """
-    def __init__(self, auth_alipay_app_id=None, auth_alipay_enable=None, auth_alipay_private_key=None, auth_config=None, auth_dingding_app_id=None, auth_dingding_app_secret=None, auth_dingding_enable=None, auth_endpoint_enable=None, auth_ram_app_id=None, auth_ram_app_secret=None, auth_ram_enable=None, created_at=None, data_hash_name=None, description=None, domain_id=None, domain_name=None, event_filename_matches=None, event_mns_endpoint=None, event_mns_topic=None, event_names=None, event_role_arn=None, init_drive_enable=None, init_drive_size=None, init_drive_store_id=None, path_type=None, published_app_access_strategy=None, sharable=None, store_level=None, store_region_list=None, updated_at=None):
+    def __init__(self, auth_alipay_app_id=None, auth_alipay_enable=None, auth_alipay_private_key=None,
+                 auth_config=None, auth_dingding_app_id=None, auth_dingding_app_secret=None, auth_dingding_enable=None,
+                 auth_endpoint_enable=None, auth_ram_app_id=None, auth_ram_app_secret=None, auth_ram_enable=None, created_at=None,
+                 data_hash_name=None, description=None, domain_id=None, domain_name=None, event_filename_matches=None,
+                 event_mns_endpoint=None, event_mns_topic=None, event_names=None, event_role_arn=None, init_drive_enable=None,
+                 init_drive_size=None, init_drive_store_id=None, path_type=None, published_app_access_strategy=None, sharable=None,
+                 store_level=None, store_region_list=None, updated_at=None):
+        # 支付宝 App Id
         self.auth_alipay_app_id = auth_alipay_app_id
+        # 是否开启了支付宝认证
         self.auth_alipay_enable = auth_alipay_enable
+        # 支付宝 App Secret
         self.auth_alipay_private_key = auth_alipay_private_key
+        # 登录相关信息
         self.auth_config = auth_config
+        # 钉钉 App Id
         self.auth_dingding_app_id = auth_dingding_app_id
+        # 钉钉 App Secret
         self.auth_dingding_app_secret = auth_dingding_app_secret
+        # 是否开启了钉钉认证
         self.auth_dingding_enable = auth_dingding_enable
         self.auth_endpoint_enable = auth_endpoint_enable
+        # RAM App Id
         self.auth_ram_app_id = auth_ram_app_id
+        # RAM App Secret
         self.auth_ram_app_secret = auth_ram_app_secret
+        # 是否开启了 RAM 认证
         self.auth_ram_enable = auth_ram_enable
+        # Domain 创建时间
         self.created_at = created_at
+        # 数据 Hash 算法
         self.data_hash_name = data_hash_name
+        # Domain 描述
         self.description = description
+        # Domain ID
         self.domain_id = domain_id
+        # Domain 描述
         self.domain_name = domain_name
+        # 事件通知 MNS 匹配文件名
         self.event_filename_matches = event_filename_matches
+        # 事件通知 MNS Endpoint
         self.event_mns_endpoint = event_mns_endpoint
+        # 事件通知 MNS Topic
         self.event_mns_topic = event_mns_topic
-        self.event_names = []
+        # 事件名列表
+        self.event_names = event_names
+        # 事件通知 Role Arn
         self.event_role_arn = event_role_arn
+        # 是否开启了自动初始化 Drive
         self.init_drive_enable = init_drive_enable
+        # 自动初始化 Drive 大小
         self.init_drive_size = init_drive_size
+        # 自动初始化 Drive 所用 Store ID
         self.init_drive_store_id = init_drive_store_id
+        # Domain 类型
         self.path_type = path_type
         self.published_app_access_strategy = published_app_access_strategy
+        # 是否开启了分享
         self.sharable = sharable
+        # 存储级别
         self.store_level = store_level
-        self.store_region_list = []
+        # 存储 Region 列表
+        self.store_region_list = store_region_list
+        # Domain 更新时间
         self.updated_at = updated_at
 
     def validate(self):
@@ -6078,7 +6962,9 @@ class GetAppPublicKeyResponse(TeaModel):
     *
     """
     def __init__(self, app_id=None, public_key=None):
+        # App ID
         self.app_id = app_id
+        # RSA加密算法的公钥, PEM格式
         self.public_key = public_key
 
     def validate(self):
@@ -6101,20 +6987,36 @@ class GetAppResponse(TeaModel):
     """
     *
     """
-    def __init__(self, ali_owner_id=None, app_id=None, app_name=None, app_secret=None, created_at=None, description=None, logo=None, provider=None, redirect_uri=None, scope=None, screenshots=None, stage=None, type=None, updated_at=None):
+    def __init__(self, ali_owner_id=None, app_id=None, app_name=None, app_secret=None, created_at=None,
+                 description=None, logo=None, provider=None, redirect_uri=None, scope=None, screenshots=None, stage=None,
+                 type=None, updated_at=None):
+        # App 拥有者
         self.ali_owner_id = ali_owner_id
+        # App ID
         self.app_id = app_id
+        # App名称
         self.app_name = app_name
+        # App 秘钥
         self.app_secret = app_secret
+        # App 创建时间
         self.created_at = created_at
+        # App描述
         self.description = description
+        # App图标
         self.logo = logo
+        # App 提供方
         self.provider = provider
+        # App回调地址
         self.redirect_uri = redirect_uri
-        self.scope = []
-        self.screenshots = []
+        # App权限列表
+        self.scope = scope
+        # App 屏幕截图
+        self.screenshots = screenshots
+        # App 当前阶段
         self.stage = stage
+        # App类型
         self.type = type
+        # App 修改时间
         self.updated_at = updated_at
 
     def validate(self):
@@ -6197,36 +7099,70 @@ class GetDomainResponse(TeaModel):
     """
     get domain response
     """
-    def __init__(self, auth_alipay_app_id=None, auth_alipay_enable=None, auth_alipay_private_key=None, auth_config=None, auth_dingding_app_id=None, auth_dingding_app_secret=None, auth_dingding_enable=None, auth_endpoint_enable=None, auth_ram_app_id=None, auth_ram_app_secret=None, auth_ram_enable=None, created_at=None, data_hash_name=None, description=None, domain_id=None, domain_name=None, event_filename_matches=None, event_mns_endpoint=None, event_mns_topic=None, event_names=None, event_role_arn=None, init_drive_enable=None, init_drive_size=None, init_drive_store_id=None, path_type=None, published_app_access_strategy=None, sharable=None, store_level=None, store_region_list=None, updated_at=None):
+    def __init__(self, auth_alipay_app_id=None, auth_alipay_enable=None, auth_alipay_private_key=None,
+                 auth_config=None, auth_dingding_app_id=None, auth_dingding_app_secret=None, auth_dingding_enable=None,
+                 auth_endpoint_enable=None, auth_ram_app_id=None, auth_ram_app_secret=None, auth_ram_enable=None, created_at=None,
+                 data_hash_name=None, description=None, domain_id=None, domain_name=None, event_filename_matches=None,
+                 event_mns_endpoint=None, event_mns_topic=None, event_names=None, event_role_arn=None, init_drive_enable=None,
+                 init_drive_size=None, init_drive_store_id=None, path_type=None, published_app_access_strategy=None, sharable=None,
+                 store_level=None, store_region_list=None, updated_at=None):
+        # 支付宝 App Id
         self.auth_alipay_app_id = auth_alipay_app_id
+        # 是否开启了支付宝认证
         self.auth_alipay_enable = auth_alipay_enable
+        # 支付宝 App Secret
         self.auth_alipay_private_key = auth_alipay_private_key
+        # 登录相关信息
         self.auth_config = auth_config
+        # 钉钉 App Id
         self.auth_dingding_app_id = auth_dingding_app_id
+        # 钉钉 App Secret
         self.auth_dingding_app_secret = auth_dingding_app_secret
+        # 是否开启了钉钉认证
         self.auth_dingding_enable = auth_dingding_enable
         self.auth_endpoint_enable = auth_endpoint_enable
+        # RAM App Id
         self.auth_ram_app_id = auth_ram_app_id
+        # RAM App Secret
         self.auth_ram_app_secret = auth_ram_app_secret
+        # 是否开启了 RAM 认证
         self.auth_ram_enable = auth_ram_enable
+        # Domain 创建时间
         self.created_at = created_at
+        # 数据 Hash 算法
         self.data_hash_name = data_hash_name
+        # Domain 描述
         self.description = description
+        # Domain ID
         self.domain_id = domain_id
+        # Domain 描述
         self.domain_name = domain_name
+        # 事件通知 MNS 匹配文件名
         self.event_filename_matches = event_filename_matches
+        # 事件通知 MNS Endpoint
         self.event_mns_endpoint = event_mns_endpoint
+        # 事件通知 MNS Topic
         self.event_mns_topic = event_mns_topic
-        self.event_names = []
+        # 事件名列表
+        self.event_names = event_names
+        # 事件通知 Role Arn
         self.event_role_arn = event_role_arn
+        # 是否开启了自动初始化 Drive
         self.init_drive_enable = init_drive_enable
+        # 自动初始化 Drive 大小
         self.init_drive_size = init_drive_size
+        # 自动初始化 Drive 所用 Store ID
         self.init_drive_store_id = init_drive_store_id
+        # Domain 类型
         self.path_type = path_type
         self.published_app_access_strategy = published_app_access_strategy
+        # 是否开启了分享
         self.sharable = sharable
+        # 存储级别
         self.store_level = store_level
-        self.store_region_list = []
+        # 存储 Region 列表
+        self.store_region_list = store_region_list
+        # Domain 更新时间
         self.updated_at = updated_at
 
     def validate(self):
@@ -6333,7 +7269,9 @@ class GetUserAccessTokenRequest(TeaModel):
     *
     """
     def __init__(self, role=None, user_id=None):
+        # 角色
         self.role = role
+        # 用户 ID
         self.user_id = user_id
 
     def validate(self):
@@ -6356,14 +7294,16 @@ class ListAppsResponse(TeaModel):
     *
     """
     def __init__(self, items=None, next_marker=None):
-        self.items = []
+        # App 列表
+        self.items = items
+        # App 分批查询游标
         self.next_marker = next_marker
 
     def validate(self):
         self.validate_required(self.items, 'items')
         if self.items:
             for k in self.items:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -6395,13 +7335,15 @@ class ListDomainCORSRuleResponse(TeaModel):
     list domain cors response
     """
     def __init__(self, cors_rule_list=None, domain_id=None):
-        self.cors_rule_list = []
+        # cors rule 列表
+        self.cors_rule_list = cors_rule_list
+        # Domain ID
         self.domain_id = domain_id
 
     def validate(self):
         if self.cors_rule_list:
             for k in self.cors_rule_list:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -6433,13 +7375,15 @@ class ListDomainsResponse(TeaModel):
     list domain response
     """
     def __init__(self, items=None, next_marker=None):
-        self.items = []
+        # domain 列表
+        self.items = items
+        # 下次分页查询游标
         self.next_marker = next_marker
 
     def validate(self):
         if self.items:
             for k in self.items:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -6471,13 +7415,14 @@ class ListStoresResponse(TeaModel):
     *
     """
     def __init__(self, items=None):
-        self.items = []
+        # Store 列表
+        self.items = items
 
     def validate(self):
         self.validate_required(self.items, 'items')
         if self.items:
             for k in self.items:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -6506,17 +7451,29 @@ class Store(TeaModel):
     """
     *
     """
-    def __init__(self, accelerate_endpoint=None, base_path=None, bucket=None, customized_endpoint=None, endpoint=None, internal_endpoint=None, ownership=None, policy=None, role_arn=None, store_id=None, type=None):
+    def __init__(self, accelerate_endpoint=None, base_path=None, bucket=None, customized_endpoint=None,
+                 endpoint=None, internal_endpoint=None, ownership=None, policy=None, role_arn=None, store_id=None, type=None):
+        # 全球加速域名
         self.accelerate_endpoint = accelerate_endpoint
+        # 存储公共前缀
         self.base_path = base_path
+        # bucket名称
         self.bucket = bucket
+        # 用户自定义绑定存储地址
         self.customized_endpoint = customized_endpoint
+        # 存储访问地址
         self.endpoint = endpoint
+        # 内网存储地址
         self.internal_endpoint = internal_endpoint
+        # 存储归属，system表示系统提供，custom表示使用自己的存储
         self.ownership = ownership
+        # Policy授权,system类型store会将bucket权限授予当前云账号
         self.policy = policy
+        # 访问Bucket的角色ARN
         self.role_arn = role_arn
+        # store ID
         self.store_id = store_id
+        # 存储类型，当前只支持oss
         self.type = type
 
     def validate(self):
@@ -6561,36 +7518,70 @@ class UpdateDomainResponse(TeaModel):
     """
     create domain response
     """
-    def __init__(self, auth_alipay_app_id=None, auth_alipay_enable=None, auth_alipay_private_key=None, auth_config=None, auth_dingding_app_id=None, auth_dingding_app_secret=None, auth_dingding_enable=None, auth_endpoint_enable=None, auth_ram_app_id=None, auth_ram_app_secret=None, auth_ram_enable=None, created_at=None, data_hash_name=None, description=None, domain_id=None, domain_name=None, event_filename_matches=None, event_mns_endpoint=None, event_mns_topic=None, event_names=None, event_role_arn=None, init_drive_enable=None, init_drive_size=None, init_drive_store_id=None, path_type=None, published_app_access_strategy=None, sharable=None, store_level=None, store_region_list=None, updated_at=None):
+    def __init__(self, auth_alipay_app_id=None, auth_alipay_enable=None, auth_alipay_private_key=None,
+                 auth_config=None, auth_dingding_app_id=None, auth_dingding_app_secret=None, auth_dingding_enable=None,
+                 auth_endpoint_enable=None, auth_ram_app_id=None, auth_ram_app_secret=None, auth_ram_enable=None, created_at=None,
+                 data_hash_name=None, description=None, domain_id=None, domain_name=None, event_filename_matches=None,
+                 event_mns_endpoint=None, event_mns_topic=None, event_names=None, event_role_arn=None, init_drive_enable=None,
+                 init_drive_size=None, init_drive_store_id=None, path_type=None, published_app_access_strategy=None, sharable=None,
+                 store_level=None, store_region_list=None, updated_at=None):
+        # 支付宝 App Id
         self.auth_alipay_app_id = auth_alipay_app_id
+        # 是否开启了支付宝认证
         self.auth_alipay_enable = auth_alipay_enable
+        # 支付宝 App Secret
         self.auth_alipay_private_key = auth_alipay_private_key
+        # 登录相关信息
         self.auth_config = auth_config
+        # 钉钉 App Id
         self.auth_dingding_app_id = auth_dingding_app_id
+        # 钉钉 App Secret
         self.auth_dingding_app_secret = auth_dingding_app_secret
+        # 是否开启了钉钉认证
         self.auth_dingding_enable = auth_dingding_enable
         self.auth_endpoint_enable = auth_endpoint_enable
+        # RAM App Id
         self.auth_ram_app_id = auth_ram_app_id
+        # RAM App Secret
         self.auth_ram_app_secret = auth_ram_app_secret
+        # 是否开启了 RAM 认证
         self.auth_ram_enable = auth_ram_enable
+        # Domain 创建时间
         self.created_at = created_at
+        # 数据 Hash 算法
         self.data_hash_name = data_hash_name
+        # Domain 描述
         self.description = description
+        # Domain ID
         self.domain_id = domain_id
+        # Domain 描述
         self.domain_name = domain_name
+        # 事件通知 MNS 匹配文件名
         self.event_filename_matches = event_filename_matches
+        # 事件通知 MNS Endpoint
         self.event_mns_endpoint = event_mns_endpoint
+        # 事件通知 MNS Topic
         self.event_mns_topic = event_mns_topic
-        self.event_names = []
+        # 事件名列表
+        self.event_names = event_names
+        # 事件通知 Role Arn
         self.event_role_arn = event_role_arn
+        # 是否开启了自动初始化 Drive
         self.init_drive_enable = init_drive_enable
+        # 自动初始化 Drive 大小
         self.init_drive_size = init_drive_size
+        # 自动初始化 Drive 所用 Store ID
         self.init_drive_store_id = init_drive_store_id
+        # Domain 类型
         self.path_type = path_type
         self.published_app_access_strategy = published_app_access_strategy
+        # 是否开启了分享
         self.sharable = sharable
+        # 存储级别
         self.store_level = store_level
-        self.store_region_list = []
+        # 存储 Region 列表
+        self.store_region_list = store_region_list
+        # Domain 更新时间
         self.updated_at = updated_at
 
     def validate(self):
@@ -6694,7 +7685,9 @@ class UpdateDomainResponse(TeaModel):
 
 class CreateDriveRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -6723,7 +7716,9 @@ class CreateDriveRequestModel(TeaModel):
 
 class CreateDriveModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -6752,7 +7747,9 @@ class CreateDriveModel(TeaModel):
 
 class DeleteDriveRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -6781,7 +7778,8 @@ class DeleteDriveRequestModel(TeaModel):
 
 class DeleteDriveModel(TeaModel):
     def __init__(self, headers=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
 
     def validate(self):
         pass
@@ -6798,7 +7796,9 @@ class DeleteDriveModel(TeaModel):
 
 class GetDriveRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -6827,7 +7827,9 @@ class GetDriveRequestModel(TeaModel):
 
 class GetDriveModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -6856,7 +7858,9 @@ class GetDriveModel(TeaModel):
 
 class GetDefaultDriveRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -6885,7 +7889,9 @@ class GetDefaultDriveRequestModel(TeaModel):
 
 class GetDefaultDriveModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -6914,7 +7920,9 @@ class GetDefaultDriveModel(TeaModel):
 
 class ListDrivesRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -6943,7 +7951,9 @@ class ListDrivesRequestModel(TeaModel):
 
 class ListDrivesModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -6972,7 +7982,9 @@ class ListDrivesModel(TeaModel):
 
 class ListMyDrivesRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7001,7 +8013,9 @@ class ListMyDrivesRequestModel(TeaModel):
 
 class ListMyDrivesModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7030,7 +8044,9 @@ class ListMyDrivesModel(TeaModel):
 
 class UpdateDriveRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7059,7 +8075,9 @@ class UpdateDriveRequestModel(TeaModel):
 
 class UpdateDriveModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7088,7 +8106,9 @@ class UpdateDriveModel(TeaModel):
 
 class CompleteFileRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7117,7 +8137,9 @@ class CompleteFileRequestModel(TeaModel):
 
 class CompleteFileModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7146,7 +8168,9 @@ class CompleteFileModel(TeaModel):
 
 class CopyFileRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7175,7 +8199,9 @@ class CopyFileRequestModel(TeaModel):
 
 class CopyFileModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7204,7 +8230,9 @@ class CopyFileModel(TeaModel):
 
 class CreateFileRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7233,7 +8261,9 @@ class CreateFileRequestModel(TeaModel):
 
 class CreateFileModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7262,7 +8292,9 @@ class CreateFileModel(TeaModel):
 
 class DeleteFileRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7291,7 +8323,8 @@ class DeleteFileRequestModel(TeaModel):
 
 class DeleteFileModel(TeaModel):
     def __init__(self, headers=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
 
     def validate(self):
         pass
@@ -7308,7 +8341,9 @@ class DeleteFileModel(TeaModel):
 
 class GetFileRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7337,7 +8372,9 @@ class GetFileRequestModel(TeaModel):
 
 class GetFileModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7366,7 +8403,9 @@ class GetFileModel(TeaModel):
 
 class GetDownloadUrlRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7395,7 +8434,9 @@ class GetDownloadUrlRequestModel(TeaModel):
 
 class GetDownloadUrlModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7424,7 +8465,9 @@ class GetDownloadUrlModel(TeaModel):
 
 class GetSecureUrlRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7453,7 +8496,9 @@ class GetSecureUrlRequestModel(TeaModel):
 
 class GetSecureUrlModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7482,7 +8527,9 @@ class GetSecureUrlModel(TeaModel):
 
 class GetUploadUrlRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7511,7 +8558,9 @@ class GetUploadUrlRequestModel(TeaModel):
 
 class GetUploadUrlModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7540,7 +8589,9 @@ class GetUploadUrlModel(TeaModel):
 
 class ListFileRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7569,7 +8620,9 @@ class ListFileRequestModel(TeaModel):
 
 class ListFileModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7598,7 +8651,9 @@ class ListFileModel(TeaModel):
 
 class ListUploadedPartsRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7627,7 +8682,9 @@ class ListUploadedPartsRequestModel(TeaModel):
 
 class ListUploadedPartsModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7656,7 +8713,9 @@ class ListUploadedPartsModel(TeaModel):
 
 class MoveFileRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7685,7 +8744,9 @@ class MoveFileRequestModel(TeaModel):
 
 class MoveFileModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7714,7 +8775,9 @@ class MoveFileModel(TeaModel):
 
 class VideoDefinitionRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7743,7 +8806,9 @@ class VideoDefinitionRequestModel(TeaModel):
 
 class VideoDefinitionModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7772,7 +8837,9 @@ class VideoDefinitionModel(TeaModel):
 
 class VideoLicenseRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7801,7 +8868,9 @@ class VideoLicenseRequestModel(TeaModel):
 
 class VideoLicenseModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7830,7 +8899,9 @@ class VideoLicenseModel(TeaModel):
 
 class VideoM3u8RequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7859,7 +8930,9 @@ class VideoM3u8RequestModel(TeaModel):
 
 class VideoM3u8Model(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7879,7 +8952,9 @@ class VideoM3u8Model(TeaModel):
 
 class VideoTranscodeRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7908,7 +8983,9 @@ class VideoTranscodeRequestModel(TeaModel):
 
 class VideoTranscodeModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7937,7 +9014,9 @@ class VideoTranscodeModel(TeaModel):
 
 class CreateShareRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7966,7 +9045,9 @@ class CreateShareRequestModel(TeaModel):
 
 class CreateShareModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -7995,7 +9076,9 @@ class CreateShareModel(TeaModel):
 
 class DeleteShareRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -8024,7 +9107,8 @@ class DeleteShareRequestModel(TeaModel):
 
 class DeleteShareModel(TeaModel):
     def __init__(self, headers=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
 
     def validate(self):
         pass
@@ -8041,7 +9125,9 @@ class DeleteShareModel(TeaModel):
 
 class GetShareRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -8070,7 +9156,9 @@ class GetShareRequestModel(TeaModel):
 
 class GetShareModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -8099,7 +9187,9 @@ class GetShareModel(TeaModel):
 
 class ListShareRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -8128,7 +9218,9 @@ class ListShareRequestModel(TeaModel):
 
 class ListShareModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -8157,7 +9249,9 @@ class ListShareModel(TeaModel):
 
 class UpdateShareRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -8186,7 +9280,9 @@ class UpdateShareRequestModel(TeaModel):
 
 class UpdateShareModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -8215,7 +9311,9 @@ class UpdateShareModel(TeaModel):
 
 class ListStorefileRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -8244,7 +9342,9 @@ class ListStorefileRequestModel(TeaModel):
 
 class ListStorefileModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -8276,8 +9376,11 @@ class BaseCompleteFileRequest(TeaModel):
     complete file request
     """
     def __init__(self, drive_id=None, part_info_list=None, upload_id=None):
+        # drive_id
         self.drive_id = drive_id
-        self.part_info_list = []
+        # part_info_list
+        self.part_info_list = part_info_list
+        # upload_id
         self.upload_id = upload_id
 
     def validate(self):
@@ -8285,7 +9388,7 @@ class BaseCompleteFileRequest(TeaModel):
             self.validate_pattern(self.drive_id, 'drive_id', '[0-9]+')
         if self.part_info_list:
             for k in self.part_info_list:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -8319,11 +9422,17 @@ class BaseCreateFileRequest(TeaModel):
     create file request
     """
     def __init__(self, content_md_5=None, content_type=None, name=None, part_info_list=None, size=None, type=None):
+        # ContentMd5
         self.content_md_5 = content_md_5
+        # ContentType
         self.content_type = content_type
+        # Name
         self.name = name
-        self.part_info_list = []
+        # part_info_list
+        self.part_info_list = part_info_list
+        # Size
         self.size = size
+        # Type
         self.type = type
 
     def validate(self):
@@ -8332,7 +9441,7 @@ class BaseCreateFileRequest(TeaModel):
         self.validate_required(self.name, 'name')
         if self.part_info_list:
             for k in self.part_info_list:
-                if k :
+                if k:
                     k.validate()
         self.validate_required(self.size, 'size')
         self.validate_required(self.type, 'type')
@@ -8374,9 +9483,13 @@ class BaseGetUploadUrlRequest(TeaModel):
     获取文件上传URL
     """
     def __init__(self, content_md_5=None, drive_id=None, part_info_list=None, upload_id=None):
+        # content_md5
         self.content_md_5 = content_md_5
+        # drive_id
         self.drive_id = drive_id
-        self.part_info_list = []
+        # upload_part_list
+        self.part_info_list = part_info_list
+        # upload_id
         self.upload_id = upload_id
 
     def validate(self):
@@ -8386,7 +9499,7 @@ class BaseGetUploadUrlRequest(TeaModel):
             self.validate_pattern(self.drive_id, 'drive_id', '[0-9]+')
         if self.part_info_list:
             for k in self.part_info_list:
-                if k :
+                if k:
                     k.validate()
         self.validate_required(self.upload_id, 'upload_id')
 
@@ -8422,12 +9535,20 @@ class BaseListFileRequest(TeaModel):
     """
     list file request
     """
-    def __init__(self, drive_id=None, image_thumbnail_process=None, image_url_process=None, limit=None, marker=None, video_thumbnail_process=None):
+    def __init__(self, drive_id=None, image_thumbnail_process=None, image_url_process=None, limit=None, marker=None,
+                 video_thumbnail_process=None):
+        # drive_id
         self.drive_id = drive_id
+        # image_thumbnail_process
         self.image_thumbnail_process = image_thumbnail_process
+        # image_url_process
         self.image_url_process = image_url_process
+        # limit
         self.limit = limit
+        # marker
         self.marker = marker
+        # video_thumbnail_process
+        # type:string
         self.video_thumbnail_process = video_thumbnail_process
 
     def validate(self):
@@ -8460,16 +9581,27 @@ class BaseMediaResponse(TeaModel):
     """
     *
     """
-    def __init__(self, address_line=None, city=None, country=None, district=None, height=None, location=None, province=None, time=None, township=None, width=None):
+    def __init__(self, address_line=None, city=None, country=None, district=None, height=None, location=None,
+                 province=None, time=None, township=None, width=None):
+        # address_line
         self.address_line = address_line
+        # city
         self.city = city
+        # country
         self.country = country
+        # district
         self.district = district
+        # height
         self.height = height
+        # location
         self.location = location
+        # province
         self.province = province
+        # time
         self.time = time
+        # township
         self.township = township
+        # width
         self.width = width
 
     def validate(self):
@@ -8508,8 +9640,12 @@ class BaseMoveFileRequest(TeaModel):
     文件移动请求
     """
     def __init__(self, drive_id=None, new_name=None, overwrite=None):
+        # drive_id
         self.drive_id = drive_id
+        # new_name
         self.new_name = new_name
+        # overwrite
+        # type: boolean
         self.overwrite = overwrite
 
     def validate(self):
@@ -8536,10 +9672,15 @@ class BatchSubRequest(TeaModel):
     *
     """
     def __init__(self, body=None, headers=None, id=None, method=None, url=None):
+        # body 子请求的请求参数 json 字符串，可参考对于子请求文档, 当指定了body 必须传headers ： "Content-Type" 对应的类型，目前子请求入参是"application/json"
         self.body = body
+        # headers 请求头，表示body传入数据的类型
         self.headers = headers
+        # id 用于request 和 response关联， 不允许重复
         self.id = id
+        # method
         self.method = method
+        # url 子请求的api path路径， 可参考对于子请求文档
         self.url = url
 
     def validate(self):
@@ -8570,14 +9711,16 @@ class CCPBatchRequest(TeaModel):
     批处理
     """
     def __init__(self, requests=None, resource=None):
-        self.requests = []
+        # Requests 请求合集
+        self.requests = requests
+        # 支持的资源类型
         self.resource = resource
 
     def validate(self):
         self.validate_required(self.requests, 'requests')
         if self.requests:
             for k in self.requests:
-                if k :
+                if k:
                     k.validate()
         self.validate_required(self.resource, 'resource')
 
@@ -8610,9 +9753,13 @@ class CCPCompleteFileRequest(TeaModel):
     合并文件上传任务
     """
     def __init__(self, drive_id=None, part_info_list=None, upload_id=None, file_id=None):
+        # drive_id
         self.drive_id = drive_id
-        self.part_info_list = []
+        # part_info_list
+        self.part_info_list = part_info_list
+        # upload_id
         self.upload_id = upload_id
+        # file_id
         self.file_id = file_id
 
     def validate(self):
@@ -8620,7 +9767,7 @@ class CCPCompleteFileRequest(TeaModel):
             self.validate_pattern(self.drive_id, 'drive_id', '[0-9]+')
         if self.part_info_list:
             for k in self.part_info_list:
-                if k :
+                if k:
                     k.validate()
         if self.file_id:
             self.validate_pattern(self.file_id, 'file_id', '[a-z0-9]{1,50}')
@@ -8657,12 +9804,20 @@ class CCPCopyFileRequest(TeaModel):
     """
     文件拷贝
     """
-    def __init__(self, auto_rename=None, drive_id=None, file_id=None, new_name=None, to_drive_id=None, to_parent_file_id=None):
+    def __init__(self, auto_rename=None, drive_id=None, file_id=None, new_name=None, to_drive_id=None,
+                 to_parent_file_id=None):
+        # auto_rename
+        # type: boolean
         self.auto_rename = auto_rename
+        # drive_id
         self.drive_id = drive_id
+        # file_id
         self.file_id = file_id
+        # new_name
         self.new_name = new_name
+        # to_drive_id
         self.to_drive_id = to_drive_id
+        # to_parent_file_id
         self.to_parent_file_id = to_parent_file_id
 
     def validate(self):
@@ -8702,36 +9857,60 @@ class CCPCreateFileRequest(TeaModel):
     """
     创建文件
     """
-    def __init__(self, content_md_5=None, content_type=None, name=None, part_info_list=None, size=None, type=None, auto_rename=None, check_name_mode=None, content_hash=None, content_hash_name=None, description=None, drive_id=None, encrypt_mode=None, file_id=None, hidden=None, image_media_metadata=None, labels=None, last_updated_at=None, meta=None, parent_file_id=None, pre_hash=None, streams_info=None, user_meta=None, video_media_metadata=None):
+    def __init__(self, content_md_5=None, content_type=None, name=None, part_info_list=None, size=None, type=None,
+                 auto_rename=None, check_name_mode=None, content_hash=None, content_hash_name=None, description=None,
+                 drive_id=None, encrypt_mode=None, file_id=None, hidden=None, image_media_metadata=None, labels=None,
+                 last_updated_at=None, meta=None, parent_file_id=None, pre_hash=None, streams_info=None, user_meta=None,
+                 video_media_metadata=None):
+        # ContentMd5
         self.content_md_5 = content_md_5
+        # ContentType
         self.content_type = content_type
+        # Name
         self.name = name
-        self.part_info_list = []
+        # part_info_list
+        self.part_info_list = part_info_list
+        # Size
         self.size = size
+        # Type
         self.type = type
         self.auto_rename = auto_rename
+        # check_name_mode
         self.check_name_mode = check_name_mode
+        # content_hash
         self.content_hash = content_hash
+        # content_hash_name
         self.content_hash_name = content_hash_name
+        # description
         self.description = description
+        # drive_id
         self.drive_id = drive_id
+        # encrypt_mode
         self.encrypt_mode = encrypt_mode
+        # file_id
         self.file_id = file_id
+        # hidden
         self.hidden = hidden
         self.image_media_metadata = image_media_metadata
-        self.labels = []
+        # labels
+        self.labels = labels
+        # last_updated_at
         self.last_updated_at = last_updated_at
         self.meta = meta
+        # parent_file_id
         self.parent_file_id = parent_file_id
+        # pre_hash
         self.pre_hash = pre_hash
+        # streams_info
         self.streams_info = streams_info
+        # user_meta
         self.user_meta = user_meta
         self.video_media_metadata = video_media_metadata
 
     def validate(self):
         if self.part_info_list:
             for k in self.part_info_list:
-                if k :
+                if k:
                     k.validate()
         if self.description:
             self.validate_max_length(self.description, 'description', 0)
@@ -8841,8 +10020,12 @@ class CCPDeleteFileRequest(TeaModel):
     删除文件请求
     """
     def __init__(self, drive_id=None, file_id=None, permanently=None):
+        # drive_id
         self.drive_id = drive_id
+        # file_id
         self.file_id = file_id
+        # permanently
+        # type: false
         self.permanently = permanently
 
     def validate(self):
@@ -8872,8 +10055,10 @@ class CCPDeleteFilesRequest(TeaModel):
     批量删除文件请求
     """
     def __init__(self, drive_id=None, file_id_list=None):
+        # drive_id
         self.drive_id = drive_id
-        self.file_id_list = []
+        # file_id_list
+        self.file_id_list = file_id_list
 
     def validate(self):
         self.validate_required(self.drive_id, 'drive_id')
@@ -8908,6 +10093,8 @@ class CCPGetAsyncTaskRequest(TeaModel):
     获取异步人去信息
     """
     def __init__(self, async_task_id=None):
+        # async_task_id
+        # type:string
         self.async_task_id = async_task_id
 
     def validate(self):
@@ -8928,9 +10115,13 @@ class CCPGetDownloadUrlRequest(TeaModel):
     获取文件下载地址的请求body
     """
     def __init__(self, drive_id=None, expire_sec=None, file_id=None, file_name=None):
+        # drive_id
         self.drive_id = drive_id
+        # expire_sec
         self.expire_sec = expire_sec
+        # file_id
         self.file_id = file_id
+        # file_name
         self.file_name = file_name
 
     def validate(self):
@@ -8963,14 +10154,26 @@ class CCPGetFileByPathRequest(TeaModel):
     """
     根据路径获取 File 接口 body
     """
-    def __init__(self, drive_id=None, fields=None, file_id=None, file_path=None, image_thumbnail_process=None, image_url_process=None, url_expire_sec=None, video_thumbnail_process=None):
+    def __init__(self, drive_id=None, fields=None, file_id=None, file_path=None, image_thumbnail_process=None,
+                 image_url_process=None, url_expire_sec=None, video_thumbnail_process=None):
+        # drive_id
         self.drive_id = drive_id
+        # fields
         self.fields = fields
+        # file_id
         self.file_id = file_id
+        # file_path
         self.file_path = file_path
+        # image_thumbnail_process
+        # type:string
         self.image_thumbnail_process = image_thumbnail_process
+        # image_thumbnail_process
+        # type:string
         self.image_url_process = image_url_process
+        # url_expire_sec
         self.url_expire_sec = url_expire_sec
+        # video_thumbnail_process
+        # type:string
         self.video_thumbnail_process = video_thumbnail_process
 
     def validate(self):
@@ -9009,13 +10212,24 @@ class CCPGetFileRequest(TeaModel):
     """
     获取文件元数据
     """
-    def __init__(self, drive_id=None, fields=None, file_id=None, image_thumbnail_process=None, image_url_process=None, url_expire_sec=None, video_thumbnail_process=None):
+    def __init__(self, drive_id=None, fields=None, file_id=None, image_thumbnail_process=None,
+                 image_url_process=None, url_expire_sec=None, video_thumbnail_process=None):
+        # drive_id
         self.drive_id = drive_id
+        # fields
         self.fields = fields
+        # file_id
         self.file_id = file_id
+        # image_thumbnail_process
+        # type:string
         self.image_thumbnail_process = image_thumbnail_process
+        # image_thumbnail_process
+        # type:string
         self.image_url_process = image_url_process
+        # url_expire_sec
         self.url_expire_sec = url_expire_sec
+        # video_thumbnail_process
+        # type:string
         self.video_thumbnail_process = video_thumbnail_process
 
     def validate(self):
@@ -9053,10 +10267,15 @@ class CCPGetUploadUrlRequest(TeaModel):
     获取文件上传URL
     """
     def __init__(self, content_md_5=None, drive_id=None, part_info_list=None, upload_id=None, file_id=None):
+        # content_md5
         self.content_md_5 = content_md_5
+        # drive_id
         self.drive_id = drive_id
-        self.part_info_list = []
+        # upload_part_list
+        self.part_info_list = part_info_list
+        # upload_id
         self.upload_id = upload_id
+        # file_id
         self.file_id = file_id
 
     def validate(self):
@@ -9066,7 +10285,7 @@ class CCPGetUploadUrlRequest(TeaModel):
             self.validate_pattern(self.drive_id, 'drive_id', '[0-9]+')
         if self.part_info_list:
             for k in self.part_info_list:
-                if k :
+                if k:
                     k.validate()
         if self.file_id:
             self.validate_pattern(self.file_id, 'file_id', '[a-z0-9]{1,50}')
@@ -9105,21 +10324,39 @@ class CCPListFileByCustomIndexKeyRequest(TeaModel):
     """
     列举文件
     """
-    def __init__(self, drive_id=None, image_thumbnail_process=None, image_url_process=None, limit=None, marker=None, video_thumbnail_process=None, starred=None, category=None, custom_index_key=None, encrypt_mode=None, fields=None, order_direction=None, status=None, type=None, url_expire_sec=None):
+    def __init__(self, drive_id=None, image_thumbnail_process=None, image_url_process=None, limit=None, marker=None,
+                 video_thumbnail_process=None, starred=None, category=None, custom_index_key=None, encrypt_mode=None, fields=None,
+                 order_direction=None, status=None, type=None, url_expire_sec=None):
+        # drive_id
         self.drive_id = drive_id
+        # image_thumbnail_process
         self.image_thumbnail_process = image_thumbnail_process
+        # image_url_process
         self.image_url_process = image_url_process
+        # limit
         self.limit = limit
+        # marker
         self.marker = marker
+        # video_thumbnail_process
+        # type:string
         self.video_thumbnail_process = video_thumbnail_process
+        # starred
         self.starred = starred
+        # category
         self.category = category
+        # custom_index_key
         self.custom_index_key = custom_index_key
+        # encrypt_mode
         self.encrypt_mode = encrypt_mode
+        # fields
         self.fields = fields
+        # order_direction
         self.order_direction = order_direction
+        # status
         self.status = status
+        # type
         self.type = type
+        # url_expire_sec
         self.url_expire_sec = url_expire_sec
 
     def validate(self):
@@ -9170,22 +10407,41 @@ class CCPListFileRequest(TeaModel):
     """
     列举文件
     """
-    def __init__(self, drive_id=None, image_thumbnail_process=None, image_url_process=None, limit=None, marker=None, video_thumbnail_process=None, starred=None, all=None, category=None, fields=None, order_by=None, order_direction=None, parent_file_id=None, status=None, type=None, url_expire_sec=None):
+    def __init__(self, drive_id=None, image_thumbnail_process=None, image_url_process=None, limit=None, marker=None,
+                 video_thumbnail_process=None, starred=None, all=None, category=None, fields=None, order_by=None, order_direction=None,
+                 parent_file_id=None, status=None, type=None, url_expire_sec=None):
+        # drive_id
         self.drive_id = drive_id
+        # image_thumbnail_process
         self.image_thumbnail_process = image_thumbnail_process
+        # image_url_process
         self.image_url_process = image_url_process
+        # limit
         self.limit = limit
+        # marker
         self.marker = marker
+        # video_thumbnail_process
+        # type:string
         self.video_thumbnail_process = video_thumbnail_process
+        # starred
         self.starred = starred
+        # all
         self.all = all
+        # category
         self.category = category
+        # fields
         self.fields = fields
+        # order_by
         self.order_by = order_by
+        # order_direction
         self.order_direction = order_direction
+        # ParentFileID
         self.parent_file_id = parent_file_id
+        # status
         self.status = status
+        # type
         self.type = type
+        # url_expire_sec
         self.url_expire_sec = url_expire_sec
 
     def validate(self):
@@ -9241,10 +10497,15 @@ class CCPListUploadedPartRequest(TeaModel):
     列举uploadID对应的已上传分片
     """
     def __init__(self, drive_id=None, file_id=None, limit=None, part_number_marker=None, upload_id=None):
+        # drive_id
         self.drive_id = drive_id
+        # file_id
         self.file_id = file_id
+        # limit
         self.limit = limit
+        # part_number_marker
         self.part_number_marker = part_number_marker
+        # upload_id
         self.upload_id = upload_id
 
     def validate(self):
@@ -9283,10 +10544,16 @@ class CCPMoveFileRequest(TeaModel):
     文件移动请求
     """
     def __init__(self, drive_id=None, new_name=None, overwrite=None, file_id=None, to_parent_file_id=None):
+        # drive_id
         self.drive_id = drive_id
+        # new_name
         self.new_name = new_name
+        # overwrite
+        # type: boolean
         self.overwrite = overwrite
+        # file_id
         self.file_id = file_id
+        # to_parent_file_id
         self.to_parent_file_id = to_parent_file_id
 
     def validate(self):
@@ -9320,9 +10587,13 @@ class CCPScanFileMetaRequest(TeaModel):
     全量获取file元信息的请求body
     """
     def __init__(self, category=None, drive_id=None, limit=None, marker=None):
+        # category
         self.category = category
+        # drive_id
         self.drive_id = drive_id
+        # limit
         self.limit = limit
+        # marker
         self.marker = marker
 
     def validate(self):
@@ -9350,15 +10621,26 @@ class CCPSearchFileRequest(TeaModel):
     """
     搜索文件元数据
     """
-    def __init__(self, drive_id=None, image_thumbnail_process=None, image_url_process=None, limit=None, marker=None, order_by=None, query=None, url_expire_sec=None, video_thumbnail_process=None):
+    def __init__(self, drive_id=None, image_thumbnail_process=None, image_url_process=None, limit=None, marker=None,
+                 order_by=None, query=None, url_expire_sec=None, video_thumbnail_process=None):
+        # drive_id
         self.drive_id = drive_id
+        # image_thumbnail_process
         self.image_thumbnail_process = image_thumbnail_process
+        # image_url_process
         self.image_url_process = image_url_process
+        # limit
         self.limit = limit
+        # Marker
         self.marker = marker
+        # order_by
         self.order_by = order_by
+        # query
         self.query = query
+        # url_expire_sec
         self.url_expire_sec = url_expire_sec
+        # video_thumbnail_process
+        # type:string
         self.video_thumbnail_process = video_thumbnail_process
 
     def validate(self):
@@ -9398,17 +10680,29 @@ class CCPUpdateFileMetaRequest(TeaModel):
     """
     更新文件元数据
     """
-    def __init__(self, custom_index_key=None, description=None, drive_id=None, encrypt_mode=None, file_id=None, hidden=None, labels=None, meta=None, name=None, starred=None, user_meta=None):
+    def __init__(self, custom_index_key=None, description=None, drive_id=None, encrypt_mode=None, file_id=None,
+                 hidden=None, labels=None, meta=None, name=None, starred=None, user_meta=None):
         self.custom_index_key = custom_index_key
+        # description
+        # type: string
         self.description = description
+        # drive_id
         self.drive_id = drive_id
         self.encrypt_mode = encrypt_mode
+        # file_id
         self.file_id = file_id
+        # hidden
+        # type: boolean
         self.hidden = hidden
-        self.labels = []
+        # labels
+        self.labels = labels
         self.meta = meta
+        # name
         self.name = name
+        # starred
+        # type: boolean
         self.starred = starred
+        # user_meta
         self.user_meta = user_meta
 
     def validate(self):
@@ -9467,12 +10761,17 @@ class CompleteFileRequest(TeaModel):
     """
     complete file request
     """
-    def __init__(self, drive_id=None, file_id=None, file_path=None, part_info_list=None, share_id=None, upload_id=None):
+    def __init__(self, drive_id=None, file_id=None, file_path=None, part_info_list=None, share_id=None,
+                 upload_id=None):
+        # drive_id
         self.drive_id = drive_id
+        # file_id
         self.file_id = file_id
         self.file_path = file_path
-        self.part_info_list = []
+        # part_info_list
+        self.part_info_list = part_info_list
         self.share_id = share_id
+        # upload_id
         self.upload_id = upload_id
 
     def validate(self):
@@ -9484,7 +10783,7 @@ class CompleteFileRequest(TeaModel):
             self.validate_pattern(self.file_id, 'file_id', '[a-z0-9]{1,50}')
         if self.part_info_list:
             for k in self.part_info_list:
-                if k :
+                if k:
                     k.validate()
         self.validate_required(self.upload_id, 'upload_id')
 
@@ -9524,14 +10823,22 @@ class CopyFileRequest(TeaModel):
     """
     copy file request
     """
-    def __init__(self, drive_id=None, file_id=None, file_path=None, new_name=None, overwrite=None, share_id=None, to_drive_id=None, to_parent_file_id=None, to_parent_file_path=None, to_share_id=None):
+    def __init__(self, drive_id=None, file_id=None, file_path=None, new_name=None, overwrite=None, share_id=None,
+                 to_drive_id=None, to_parent_file_id=None, to_parent_file_path=None, to_share_id=None):
+        # drive_id
         self.drive_id = drive_id
+        # file_id
         self.file_id = file_id
         self.file_path = file_path
+        # new_name
         self.new_name = new_name
+        # overwrite
+        # type: boolean
         self.overwrite = overwrite
         self.share_id = share_id
+        # to_drive_id
         self.to_drive_id = to_drive_id
+        # to_parent_file_id
         self.to_parent_file_id = to_parent_file_id
         self.to_parent_file_path = to_parent_file_path
         self.to_share_id = to_share_id
@@ -9585,16 +10892,26 @@ class CreateDriveRequest(TeaModel):
     """
     create drive request
     """
-    def __init__(self, default_=None, description=None, drive_name=None, drive_type=None, encrypt_mode=None, owner=None, relative_path=None, status=None, store_id=None, total_size=None):
+    def __init__(self, default_=None, description=None, drive_name=None, drive_type=None, encrypt_mode=None,
+                 owner=None, relative_path=None, status=None, store_id=None, total_size=None):
+        # 是否默认drive, 只允许设置一个默认drive
         self.default_ = default_
+        # 描述信息
         self.description = description
+        # Drive 名称
         self.drive_name = drive_name
+        # Drive类型
         self.drive_type = drive_type
         self.encrypt_mode = encrypt_mode
+        # 所属者
         self.owner = owner
+        # domain的PathType为OSSPath时必选。 Drive存储基于store的相对路径
         self.relative_path = relative_path
+        # 状态
         self.status = status
+        # StoreID , domain的PathType为OSSPath时必选
         self.store_id = store_id
+        # 总大小,单位Byte [如果设置 -1 代表不限制]
         self.total_size = total_size
 
     def validate(self):
@@ -9633,23 +10950,42 @@ class CreateFileRequest(TeaModel):
     """
     create file request
     """
-    def __init__(self, content_hash=None, content_hash_name=None, content_md_5=None, content_type=None, description=None, drive_id=None, hidden=None, meta=None, name=None, parent_file_id=None, parent_file_path=None, part_info_list=None, pre_hash=None, share_id=None, size=None, tags=None, type=None):
+    def __init__(self, content_hash=None, content_hash_name=None, content_md_5=None, content_type=None,
+                 description=None, drive_id=None, hidden=None, meta=None, name=None, parent_file_id=None, parent_file_path=None,
+                 part_info_list=None, pre_hash=None, share_id=None, size=None, tags=None, type=None):
+        # ContentHash
         self.content_hash = content_hash
+        # ContentHashName
         self.content_hash_name = content_hash_name
+        # ContentMd5
         self.content_md_5 = content_md_5
+        # ContentType
         self.content_type = content_type
+        # Description
         self.description = description
+        # DriveID
         self.drive_id = drive_id
+        # Hidden
         self.hidden = hidden
+        # Meta
         self.meta = meta
+        # name
         self.name = name
+        # parent_file_id
         self.parent_file_id = parent_file_id
+        # ParentFilePath
         self.parent_file_path = parent_file_path
-        self.part_info_list = []
+        # part_info_list
+        self.part_info_list = part_info_list
+        # pre_hash
         self.pre_hash = pre_hash
+        # ShareID
         self.share_id = share_id
+        # Size
         self.size = size
+        # tags
         self.tags = tags
+        # Type
         self.type = type
 
     def validate(self):
@@ -9667,7 +11003,7 @@ class CreateFileRequest(TeaModel):
             self.validate_pattern(self.parent_file_id, 'parent_file_id', '[a-z0-9]{1,50}')
         if self.part_info_list:
             for k in self.part_info_list:
-                if k :
+                if k:
                     k.validate()
         self.validate_required(self.size, 'size')
         self.validate_required(self.type, 'type')
@@ -9730,15 +11066,27 @@ class CreateShareRequest(TeaModel):
     """
     create share request
     """
-    def __init__(self, description=None, drive_id=None, expiration=None, owner=None, permissions=None, share_file_path=None, share_name=None, share_policy=None, status=None):
+    def __init__(self, description=None, drive_id=None, expiration=None, owner=None, permissions=None,
+                 share_file_path=None, share_name=None, share_policy=None, status=None):
+        # description
         self.description = description
+        # drive_id
         self.drive_id = drive_id
+        # expiration
         self.expiration = expiration
+        # creator
         self.owner = owner
-        self.permissions = []
+        # permissions
+        self.permissions = permissions
+        # share_file_path
         self.share_file_path = share_file_path
+        # share_name
         self.share_name = share_name
-        self.share_policy = []
+        # share create policy
+        # 
+        # share_policy
+        self.share_policy = share_policy
+        # status
         self.status = status
 
     def validate(self):
@@ -9749,7 +11097,7 @@ class CreateShareRequest(TeaModel):
         self.validate_required(self.share_file_path, 'share_file_path')
         if self.share_policy:
             for k in self.share_policy:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -9805,6 +11153,7 @@ class DeleteDriveRequest(TeaModel):
     Delete drive request
     """
     def __init__(self, drive_id=None):
+        # Drive ID
         self.drive_id = drive_id
 
     def validate(self):
@@ -9825,7 +11174,9 @@ class DeleteFileRequest(TeaModel):
     删除文件请求
     """
     def __init__(self, drive_id=None, file_id=None, file_path=None, permanently=None, share_id=None):
+        # drive_id
         self.drive_id = drive_id
+        # file_id
         self.file_id = file_id
         self.file_path = file_path
         self.permanently = permanently
@@ -9862,6 +11213,7 @@ class DeleteShareRequest(TeaModel):
     delete share request
     """
     def __init__(self, share_id=None):
+        # share_id
         self.share_id = share_id
 
     def validate(self):
@@ -9882,8 +11234,11 @@ class DownloadRequest(TeaModel):
     下载文件请求body
     """
     def __init__(self, drive_id=None, file_id=None, image_process=None, share_id=None):
+        # drive_id
         self.drive_id = drive_id
+        # file_id
         self.file_id = file_id
+        # image_process
         self.image_process = image_process
         self.share_id = share_id
 
@@ -9916,6 +11271,8 @@ class GetAsyncTaskRequest(TeaModel):
     获取异步人去信息
     """
     def __init__(self, async_task_id=None):
+        # async_task_id
+        # type:string
         self.async_task_id = async_task_id
 
     def validate(self):
@@ -9936,6 +11293,7 @@ class GetDefaultDriveRequest(TeaModel):
     Get default drive request
     """
     def __init__(self, user_id=None):
+        # 用户ID
         self.user_id = user_id
 
     def validate(self):
@@ -9956,9 +11314,13 @@ class GetDownloadUrlRequest(TeaModel):
     获取文件下载地址的请求body
     """
     def __init__(self, drive_id=None, expire_sec=None, file_id=None, file_name=None, file_path=None, share_id=None):
+        # drive_id
         self.drive_id = drive_id
+        # expire_sec
         self.expire_sec = expire_sec
+        # file_id
         self.file_id = file_id
+        # file_name
         self.file_name = file_name
         self.file_path = file_path
         self.share_id = share_id
@@ -9998,6 +11360,7 @@ class GetDriveRequest(TeaModel):
     Get drive request
     """
     def __init__(self, drive_id=None):
+        # Drive ID
         self.drive_id = drive_id
 
     def validate(self):
@@ -10017,11 +11380,18 @@ class GetFileRequest(TeaModel):
     """
     获取文件元数据
     """
-    def __init__(self, drive_id=None, file_id=None, file_path=None, image_thumbnail_process=None, image_url_process=None, share_id=None):
+    def __init__(self, drive_id=None, file_id=None, file_path=None, image_thumbnail_process=None,
+                 image_url_process=None, share_id=None):
+        # drive_id
         self.drive_id = drive_id
+        # file_id
         self.file_id = file_id
         self.file_path = file_path
+        # image_thumbnail_process
+        # type:string
         self.image_thumbnail_process = image_thumbnail_process
+        # image_thumbnail_process
+        # type:string
         self.image_url_process = image_url_process
         self.share_id = share_id
 
@@ -10058,6 +11428,7 @@ class GetLastCursorRequest(TeaModel):
     获取最新游标
     """
     def __init__(self, drive_id=None):
+        # drive_id
         self.drive_id = drive_id
 
     def validate(self):
@@ -10080,6 +11451,7 @@ class GetShareRequest(TeaModel):
     get share request
     """
     def __init__(self, share_id=None):
+        # share_id
         self.share_id = share_id
 
     def validate(self):
@@ -10099,13 +11471,19 @@ class GetUploadUrlRequest(TeaModel):
     """
     获取文件上传URL
     """
-    def __init__(self, content_md_5=None, drive_id=None, file_id=None, file_path=None, part_info_list=None, share_id=None, upload_id=None):
+    def __init__(self, content_md_5=None, drive_id=None, file_id=None, file_path=None, part_info_list=None,
+                 share_id=None, upload_id=None):
+        # content_md5
         self.content_md_5 = content_md_5
+        # drive_id
         self.drive_id = drive_id
+        # file_id
         self.file_id = file_id
         self.file_path = file_path
-        self.part_info_list = []
+        # upload_part_list
+        self.part_info_list = part_info_list
         self.share_id = share_id
+        # upload_id
         self.upload_id = upload_id
 
     def validate(self):
@@ -10119,7 +11497,7 @@ class GetUploadUrlRequest(TeaModel):
             self.validate_pattern(self.file_id, 'file_id', '[a-z0-9]{1,50}')
         if self.part_info_list:
             for k in self.part_info_list:
-                if k :
+                if k:
                     k.validate()
         self.validate_required(self.upload_id, 'upload_id')
 
@@ -10162,7 +11540,9 @@ class ImageMediaMetadata(TeaModel):
     *
     """
     def __init__(self, height=None, width=None):
+        # height
         self.height = height
+        # width：
         self.width = width
 
     def validate(self):
@@ -10185,8 +11565,11 @@ class ListDriveRequest(TeaModel):
     List drive request
     """
     def __init__(self, limit=None, marker=None, owner=None):
+        # 每页大小限制
         self.limit = limit
+        # 翻页标记, 接口返回的标记值
         self.marker = marker
+        # 所属者
         self.owner = owner
 
     def validate(self):
@@ -10211,8 +11594,12 @@ class ListFileDeltaRequest(TeaModel):
     获取增量文件操作记录
     """
     def __init__(self, cursor=None, drive_id=None, limit=None):
+        # cursor 游标
         self.cursor = cursor
+        # drive_id
         self.drive_id = drive_id
+        # limit
+        # default 100
         self.limit = limit
 
     def validate(self):
@@ -10238,16 +11625,25 @@ class ListFileRequest(TeaModel):
     """
     list file request
     """
-    def __init__(self, all=None, drive_id=None, image_thumbnail_process=None, image_url_process=None, limit=None, marker=None, parent_file_id=None, parent_file_path=None, share_id=None, status=None):
+    def __init__(self, all=None, drive_id=None, image_thumbnail_process=None, image_url_process=None, limit=None,
+                 marker=None, parent_file_id=None, parent_file_path=None, share_id=None, status=None):
+        # all
         self.all = all
+        # drive_id
         self.drive_id = drive_id
+        # image_thumbnail_process
         self.image_thumbnail_process = image_thumbnail_process
+        # image_url_process
         self.image_url_process = image_url_process
+        # limit
         self.limit = limit
+        # marker
         self.marker = marker
+        # ParentFileID
         self.parent_file_id = parent_file_id
         self.parent_file_path = parent_file_path
         self.share_id = share_id
+        # status
         self.status = status
 
     def validate(self):
@@ -10293,7 +11689,9 @@ class ListMyDriveRequest(TeaModel):
     List my drive request
     """
     def __init__(self, limit=None, marker=None):
+        # 每页大小限制
         self.limit = limit
+        # 翻页标记, 接口返回的标记值
         self.marker = marker
 
     def validate(self):
@@ -10316,11 +11714,16 @@ class ListShareRequest(TeaModel):
     list share request
     """
     def __init__(self, creator=None, drive_id=None, limit=None, marker=None, owner=None, share_file_path=None):
+        # creator
         self.creator = creator
         self.drive_id = drive_id
+        # limit
         self.limit = limit
+        # marker
         self.marker = marker
+        # Owner
         self.owner = owner
+        # share_file_path
         self.share_file_path = share_file_path
 
     def validate(self):
@@ -10353,10 +11756,15 @@ class ListStoreFileRequest(TeaModel):
     list store file
     """
     def __init__(self, limit=None, marker=None, parent_file_path=None, store_id=None, type=None):
+        # limit
         self.limit = limit
+        # marker
         self.marker = marker
+        # parent_file_path
         self.parent_file_path = parent_file_path
+        # store_id
         self.store_id = store_id
+        # type
         self.type = type
 
     def validate(self):
@@ -10385,6 +11793,7 @@ class ListStoreRequest(TeaModel):
     list storage file
     """
     def __init__(self, domain_id=None):
+        # domain_id
         self.domain_id = domain_id
 
     def validate(self):
@@ -10405,8 +11814,11 @@ class OSSCompleteFileRequest(TeaModel):
     complete file request
     """
     def __init__(self, drive_id=None, part_info_list=None, upload_id=None, file_path=None, share_id=None):
+        # drive_id
         self.drive_id = drive_id
-        self.part_info_list = []
+        # part_info_list
+        self.part_info_list = part_info_list
+        # upload_id
         self.upload_id = upload_id
         self.file_path = file_path
         self.share_id = share_id
@@ -10416,7 +11828,7 @@ class OSSCompleteFileRequest(TeaModel):
             self.validate_pattern(self.drive_id, 'drive_id', '[0-9]+')
         if self.part_info_list:
             for k in self.part_info_list:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -10453,14 +11865,24 @@ class OSSCopyFileRequest(TeaModel):
     """
     copy file request
     """
-    def __init__(self, drive_id=None, file_path=None, new_name=None, overwrite=None, share_id=None, to_drive_id=None, to_parent_file_path=None, to_share_id=None):
+    def __init__(self, drive_id=None, file_path=None, new_name=None, overwrite=None, share_id=None, to_drive_id=None,
+                 to_parent_file_path=None, to_share_id=None):
+        # drive_id
         self.drive_id = drive_id
+        # file_path
         self.file_path = file_path
+        # new_name
         self.new_name = new_name
+        # overwrite
+        # type: boolean
         self.overwrite = overwrite
+        # share_id
         self.share_id = share_id
+        # to_drive_id
         self.to_drive_id = to_drive_id
+        # to_parent_file_path
         self.to_parent_file_path = to_parent_file_path
+        # share_id
         self.to_share_id = to_share_id
 
     def validate(self):
@@ -10503,21 +11925,31 @@ class OSSCreateFileRequest(TeaModel):
     """
     create file request
     """
-    def __init__(self, content_md_5=None, content_type=None, name=None, part_info_list=None, size=None, type=None, drive_id=None, parent_file_path=None, share_id=None):
+    def __init__(self, content_md_5=None, content_type=None, name=None, part_info_list=None, size=None, type=None,
+                 drive_id=None, parent_file_path=None, share_id=None):
+        # ContentMd5
         self.content_md_5 = content_md_5
+        # ContentType
         self.content_type = content_type
+        # Name
         self.name = name
-        self.part_info_list = []
+        # part_info_list
+        self.part_info_list = part_info_list
+        # Size
         self.size = size
+        # Type
         self.type = type
+        # drive_id
         self.drive_id = drive_id
+        # parent_file_path
         self.parent_file_path = parent_file_path
+        # share_id
         self.share_id = share_id
 
     def validate(self):
         if self.part_info_list:
             for k in self.part_info_list:
-                if k :
+                if k:
                     k.validate()
         if self.drive_id:
             self.validate_pattern(self.drive_id, 'drive_id', '[0-9]+')
@@ -10567,9 +11999,14 @@ class OSSDeleteFileRequest(TeaModel):
     删除文件请求
     """
     def __init__(self, drive_id=None, file_path=None, permanently=None, share_id=None):
+        # drive_id
         self.drive_id = drive_id
+        # file_path
         self.file_path = file_path
+        # permanently
+        # type: false
         self.permanently = permanently
+        # share_id
         self.share_id = share_id
 
     def validate(self):
@@ -10602,10 +12039,15 @@ class OSSGetDownloadUrlRequest(TeaModel):
     获取文件下载地址的请求body
     """
     def __init__(self, drive_id=None, expire_sec=None, file_name=None, file_path=None, share_id=None):
+        # drive_id
         self.drive_id = drive_id
+        # expire_sec
         self.expire_sec = expire_sec
+        # file_name
         self.file_name = file_name
+        # file_path
         self.file_path = file_path
+        # share_id
         self.share_id = share_id
 
     def validate(self):
@@ -10639,12 +12081,21 @@ class OSSGetFileRequest(TeaModel):
     """
     获取文件元数据
     """
-    def __init__(self, drive_id=None, file_path=None, image_thumbnail_process=None, image_url_process=None, share_id=None, url_expire_sec=None):
+    def __init__(self, drive_id=None, file_path=None, image_thumbnail_process=None, image_url_process=None,
+                 share_id=None, url_expire_sec=None):
+        # drive_id
         self.drive_id = drive_id
+        # file_id
         self.file_path = file_path
+        # image_thumbnail_process
+        # type:string
         self.image_thumbnail_process = image_thumbnail_process
+        # image_thumbnail_process
+        # type:string
         self.image_url_process = image_url_process
+        # share_id
         self.share_id = share_id
+        # url_expire_sec
         self.url_expire_sec = url_expire_sec
 
     def validate(self):
@@ -10681,10 +12132,15 @@ class OSSGetSecureUrlRequest(TeaModel):
     获取文件安全地址的请求body
     """
     def __init__(self, drive_id=None, expire_sec=None, file_path=None, secure_ip=None, share_id=None):
+        # drive_id
         self.drive_id = drive_id
+        # expire_sec 单位秒
         self.expire_sec = expire_sec
+        # file_path
         self.file_path = file_path
+        # secure_ip
         self.secure_ip = secure_ip
+        # share_id
         self.share_id = share_id
 
     def validate(self):
@@ -10718,12 +12174,19 @@ class OSSGetUploadUrlRequest(TeaModel):
     """
     获取文件上传URL
     """
-    def __init__(self, content_md_5=None, drive_id=None, part_info_list=None, upload_id=None, file_path=None, share_id=None):
+    def __init__(self, content_md_5=None, drive_id=None, part_info_list=None, upload_id=None, file_path=None,
+                 share_id=None):
+        # content_md5
         self.content_md_5 = content_md_5
+        # drive_id
         self.drive_id = drive_id
-        self.part_info_list = []
+        # upload_part_list
+        self.part_info_list = part_info_list
+        # upload_id
         self.upload_id = upload_id
+        # file_path
         self.file_path = file_path
+        # share_id
         self.share_id = share_id
 
     def validate(self):
@@ -10733,7 +12196,7 @@ class OSSGetUploadUrlRequest(TeaModel):
             self.validate_pattern(self.drive_id, 'drive_id', '[0-9]+')
         if self.part_info_list:
             for k in self.part_info_list:
-                if k :
+                if k:
                     k.validate()
         if self.share_id:
             self.validate_pattern(self.share_id, 'share_id', '[0-9a-zA-Z-]+')
@@ -10774,15 +12237,26 @@ class OSSListFileRequest(TeaModel):
     """
     list file request
     """
-    def __init__(self, drive_id=None, image_thumbnail_process=None, image_url_process=None, limit=None, marker=None, parent_file_path=None, share_id=None, url_expire_sec=None, video_thumbnail_process=None):
+    def __init__(self, drive_id=None, image_thumbnail_process=None, image_url_process=None, limit=None, marker=None,
+                 parent_file_path=None, share_id=None, url_expire_sec=None, video_thumbnail_process=None):
+        # drive_id
         self.drive_id = drive_id
+        # image_thumbnail_process
         self.image_thumbnail_process = image_thumbnail_process
+        # image_url_process
         self.image_url_process = image_url_process
+        # limit
         self.limit = limit
+        # marker
         self.marker = marker
+        # ParentFilePath
         self.parent_file_path = parent_file_path
+        # share_id
         self.share_id = share_id
+        # url_expire_sec
         self.url_expire_sec = url_expire_sec
+        # video_thumbnail_process
+        # type:string
         self.video_thumbnail_process = video_thumbnail_process
 
     def validate(self):
@@ -10824,12 +12298,19 @@ class OSSListUploadedPartRequest(TeaModel):
     """
     列举uploadID对应的已上传分片
     """
-    def __init__(self, drive_id=None, file_path=None, limit=None, part_number_marker=None, share_id=None, upload_id=None):
+    def __init__(self, drive_id=None, file_path=None, limit=None, part_number_marker=None, share_id=None,
+                 upload_id=None):
+        # drive_id
         self.drive_id = drive_id
+        # file_path
         self.file_path = file_path
+        # limit
         self.limit = limit
+        # part_number_marker
         self.part_number_marker = part_number_marker
+        # share_id
         self.share_id = share_id
+        # upload_id
         self.upload_id = upload_id
 
     def validate(self):
@@ -10868,12 +12349,20 @@ class OSSMoveFileRequest(TeaModel):
     """
     文件移动请求
     """
-    def __init__(self, drive_id=None, file_path=None, new_name=None, overwrite=None, share_id=None, to_parent_file_path=None):
+    def __init__(self, drive_id=None, file_path=None, new_name=None, overwrite=None, share_id=None,
+                 to_parent_file_path=None):
+        # drive_id
         self.drive_id = drive_id
+        # file_path
         self.file_path = file_path
+        # new_name
         self.new_name = new_name
+        # overwrite
+        # type: boolean
         self.overwrite = overwrite
+        # share_id
         self.share_id = share_id
+        # file_path
         self.to_parent_file_path = to_parent_file_path
 
     def validate(self):
@@ -10908,7 +12397,9 @@ class OSSVideoDRMLicenseRequest(TeaModel):
     获取视频DRM License
     """
     def __init__(self, drm_type=None, license_request=None):
+        # drmType
         self.drm_type = drm_type
+        # licenseRequest
         self.license_request = license_request
 
     def validate(self):
@@ -10932,9 +12423,13 @@ class OSSVideoDefinitionRequest(TeaModel):
     获取视频分辨率列表
     """
     def __init__(self, drive_id=None, file_path=None, protection_scheme=None, share_id=None):
+        # drive_id
         self.drive_id = drive_id
+        # file_path
         self.file_path = file_path
+        # protection_scheme
         self.protection_scheme = protection_scheme
+        # share_id
         self.share_id = share_id
 
     def validate(self):
@@ -10966,13 +12461,21 @@ class OSSVideoM3U8Request(TeaModel):
     """
     获取视频的m3u8文件
     """
-    def __init__(self, definition=None, drive_id=None, expire_sec=None, file_path=None, protection_scheme=None, share_id=None, sign_token=None):
+    def __init__(self, definition=None, drive_id=None, expire_sec=None, file_path=None, protection_scheme=None,
+                 share_id=None, sign_token=None):
+        # definition
         self.definition = definition
+        # drive_id
         self.drive_id = drive_id
+        # expire_sec
         self.expire_sec = expire_sec
+        # file_path
         self.file_path = file_path
+        # protection_scheme
         self.protection_scheme = protection_scheme
+        # share_id
         self.share_id = share_id
+        # sign_token
         self.sign_token = sign_token
 
     def validate(self):
@@ -11011,13 +12514,21 @@ class OSSVideoTranscodeRequest(TeaModel):
     """
     启动视频转码请求
     """
-    def __init__(self, drive_id=None, file_path=None, hls_time=None, protection_scheme=None, remarks=None, share_id=None, transcode=None):
+    def __init__(self, drive_id=None, file_path=None, hls_time=None, protection_scheme=None, remarks=None,
+                 share_id=None, transcode=None):
+        # drive_id
         self.drive_id = drive_id
+        # file_path
         self.file_path = file_path
+        # hls_time
         self.hls_time = hls_time
+        # protection_scheme
         self.protection_scheme = protection_scheme
+        # remarks
         self.remarks = remarks
+        # share_id
         self.share_id = share_id
+        # transcode
         self.transcode = transcode
 
     def validate(self):
@@ -11095,13 +12606,21 @@ class UpdateDriveRequest(TeaModel):
     """
     Update drive request
     """
-    def __init__(self, description=None, drive_id=None, drive_name=None, encrypt_data_access=None, encrypt_mode=None, status=None, total_size=None):
+    def __init__(self, description=None, drive_id=None, drive_name=None, encrypt_data_access=None,
+                 encrypt_mode=None, status=None, total_size=None):
+        # 描述信息
         self.description = description
+        # Drive ID
         self.drive_id = drive_id
+        # Drive 名称
         self.drive_name = drive_name
+        # 授权访问加密数据
         self.encrypt_data_access = encrypt_data_access
+        # 加密模式
         self.encrypt_mode = encrypt_mode
+        # 状态
         self.status = status
+        # 总大小,单位Byte [如果设置 -1 代表不限制]
         self.total_size = total_size
 
     def validate(self):
@@ -11133,15 +12652,27 @@ class UpdateFileMetaRequest(TeaModel):
     """
     更新文件元数据
     """
-    def __init__(self, description=None, drive_id=None, file_id=None, hidden=None, meta=None, name=None, share_id=None, starred=None, tags=None):
+    def __init__(self, description=None, drive_id=None, file_id=None, hidden=None, meta=None, name=None,
+                 share_id=None, starred=None, tags=None):
+        # description
+        # type: string
         self.description = description
+        # drive_id
         self.drive_id = drive_id
+        # file_id
         self.file_id = file_id
+        # hidden
+        # type: boolean
         self.hidden = hidden
+        # meta
         self.meta = meta
+        # name
         self.name = name
         self.share_id = share_id
+        # starred
+        # type: boolean
         self.starred = starred
+        # tags
         self.tags = tags
 
     def validate(self):
@@ -11187,13 +12718,21 @@ class UpdateShareRequest(TeaModel):
     """
     update share request
     """
-    def __init__(self, description=None, expiration=None, permissions=None, share_id=None, share_name=None, share_policy=None, status=None):
+    def __init__(self, description=None, expiration=None, permissions=None, share_id=None, share_name=None,
+                 share_policy=None, status=None):
+        # description
         self.description = description
+        # expiration
         self.expiration = expiration
-        self.permissions = []
+        # permissions
+        self.permissions = permissions
+        # share_id
         self.share_id = share_id
+        # share_name
         self.share_name = share_name
-        self.share_policy = []
+        # share_policy
+        self.share_policy = share_policy
+        # status
         self.status = status
 
     def validate(self):
@@ -11202,7 +12741,7 @@ class UpdateShareRequest(TeaModel):
         self.validate_required(self.share_id, 'share_id')
         if self.share_policy:
             for k in self.share_policy:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -11254,6 +12793,7 @@ class VideoMediaMetadata(TeaModel):
     *
     """
     def __init__(self, duration=None):
+        # Duration
         self.duration = duration
 
     def validate(self):
@@ -11271,7 +12811,9 @@ class VideoMediaMetadata(TeaModel):
 
 class CreateUserRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -11300,7 +12842,9 @@ class CreateUserRequestModel(TeaModel):
 
 class CreateUserModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -11329,7 +12873,9 @@ class CreateUserModel(TeaModel):
 
 class DeleteUserRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -11358,7 +12904,8 @@ class DeleteUserRequestModel(TeaModel):
 
 class DeleteUserModel(TeaModel):
     def __init__(self, headers=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
 
     def validate(self):
         pass
@@ -11375,7 +12922,9 @@ class DeleteUserModel(TeaModel):
 
 class GetUserRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -11404,7 +12953,9 @@ class GetUserRequestModel(TeaModel):
 
 class GetUserModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -11433,7 +12984,9 @@ class GetUserModel(TeaModel):
 
 class ListUsersRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -11462,7 +13015,9 @@ class ListUsersRequestModel(TeaModel):
 
 class ListUsersModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -11491,7 +13046,9 @@ class ListUsersModel(TeaModel):
 
 class SearchUserRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -11520,7 +13077,9 @@ class SearchUserRequestModel(TeaModel):
 
 class SearchUserModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -11549,7 +13108,9 @@ class SearchUserModel(TeaModel):
 
 class UpdateUserRequestModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -11578,7 +13139,9 @@ class UpdateUserRequestModel(TeaModel):
 
 class UpdateUserModel(TeaModel):
     def __init__(self, headers=None, body=None):
-        self.headers = {}
+        # headers
+        self.headers = headers
+        # body
         self.body = body
 
     def validate(self):
@@ -11609,20 +13172,36 @@ class BaseUserResponse(TeaModel):
     """
     Base user response
     """
-    def __init__(self, avatar=None, created_at=None, default_drive_id=None, description=None, domain_id=None, email=None, nick_name=None, phone=None, role=None, status=None, updated_at=None, user_data=None, user_id=None, user_name=None):
+    def __init__(self, avatar=None, created_at=None, default_drive_id=None, description=None, domain_id=None,
+                 email=None, nick_name=None, phone=None, role=None, status=None, updated_at=None, user_data=None,
+                 user_id=None, user_name=None):
+        # 头像
         self.avatar = avatar
+        # 用户创建时间
         self.created_at = created_at
+        # 默认 Drive ID
         self.default_drive_id = default_drive_id
+        # 用户备注信息
         self.description = description
+        # Domain ID
         self.domain_id = domain_id
+        # 邮箱
         self.email = email
+        # 昵称
         self.nick_name = nick_name
+        # 电话
         self.phone = phone
+        # 角色
         self.role = role
+        # 用户状态
         self.status = status
+        # 用户修改时间
         self.updated_at = updated_at
+        # 用户自定义数据，格式为json，可用于配置项、少量临时数据等存储，不超过1K
         self.user_data = user_data
+        # 用户 ID
         self.user_id = user_id
+        # 用户名称
         self.user_name = user_name
 
     def validate(self):
@@ -11668,16 +13247,27 @@ class CreateUserRequest(TeaModel):
     """
     Create user request
     """
-    def __init__(self, avatar=None, description=None, email=None, nick_name=None, phone=None, role=None, status=None, user_data=None, user_id=None, user_name=None):
+    def __init__(self, avatar=None, description=None, email=None, nick_name=None, phone=None, role=None, status=None,
+                 user_data=None, user_id=None, user_name=None):
+        # 头像
         self.avatar = avatar
+        # 描述信息
         self.description = description
+        # 邮箱
         self.email = email
+        # 昵称
         self.nick_name = nick_name
+        # 电话号码
         self.phone = phone
+        # 角色
         self.role = role
+        # 状态
         self.status = status
+        # 用户自定义数据，格式为json，可用于配置项、少量临时数据等存储，不超过1K
         self.user_data = user_data
+        # 用户 ID
         self.user_id = user_id
+        # 用户名称
         self.user_name = user_name
 
     def validate(self):
@@ -11715,20 +13305,36 @@ class CreateUserResponse(TeaModel):
     """
     Create user response
     """
-    def __init__(self, avatar=None, created_at=None, default_drive_id=None, description=None, domain_id=None, email=None, nick_name=None, phone=None, role=None, status=None, updated_at=None, user_data=None, user_id=None, user_name=None):
+    def __init__(self, avatar=None, created_at=None, default_drive_id=None, description=None, domain_id=None,
+                 email=None, nick_name=None, phone=None, role=None, status=None, updated_at=None, user_data=None,
+                 user_id=None, user_name=None):
+        # 头像
         self.avatar = avatar
+        # 用户创建时间
         self.created_at = created_at
+        # 默认 Drive ID
         self.default_drive_id = default_drive_id
+        # 用户备注信息
         self.description = description
+        # Domain ID
         self.domain_id = domain_id
+        # 邮箱
         self.email = email
+        # 昵称
         self.nick_name = nick_name
+        # 电话
         self.phone = phone
+        # 角色
         self.role = role
+        # 用户状态
         self.status = status
+        # 用户修改时间
         self.updated_at = updated_at
+        # 用户自定义数据，格式为json，可用于配置项、少量临时数据等存储，不超过1K
         self.user_data = user_data
+        # 用户 ID
         self.user_id = user_id
+        # 用户名称
         self.user_name = user_name
 
     def validate(self):
@@ -11775,6 +13381,7 @@ class DeleteUserRequest(TeaModel):
     Delete user request
     """
     def __init__(self, user_id=None):
+        # 用户 ID
         self.user_id = user_id
 
     def validate(self):
@@ -11813,6 +13420,8 @@ class GetUserRequest(TeaModel):
     Get user request
     """
     def __init__(self, user_id=None):
+        # 用户 ID, 使用ak方式访问，该项必传, access_token访问如果不传，默认取自己的user信息
+        # example
         self.user_id = user_id
 
     def validate(self):
@@ -11832,20 +13441,36 @@ class GetUserResponse(TeaModel):
     """
     Get user response
     """
-    def __init__(self, avatar=None, created_at=None, default_drive_id=None, description=None, domain_id=None, email=None, nick_name=None, phone=None, role=None, status=None, updated_at=None, user_data=None, user_id=None, user_name=None):
+    def __init__(self, avatar=None, created_at=None, default_drive_id=None, description=None, domain_id=None,
+                 email=None, nick_name=None, phone=None, role=None, status=None, updated_at=None, user_data=None,
+                 user_id=None, user_name=None):
+        # 头像
         self.avatar = avatar
+        # 用户创建时间
         self.created_at = created_at
+        # 默认 Drive ID
         self.default_drive_id = default_drive_id
+        # 用户备注信息
         self.description = description
+        # Domain ID
         self.domain_id = domain_id
+        # 邮箱
         self.email = email
+        # 昵称
         self.nick_name = nick_name
+        # 电话
         self.phone = phone
+        # 角色
         self.role = role
+        # 用户状态
         self.status = status
+        # 用户修改时间
         self.updated_at = updated_at
+        # 用户自定义数据，格式为json，可用于配置项、少量临时数据等存储，不超过1K
         self.user_data = user_data
+        # 用户 ID
         self.user_id = user_id
+        # 用户名称
         self.user_name = user_name
 
     def validate(self):
@@ -11892,7 +13517,9 @@ class ListUserRequest(TeaModel):
     List user request
     """
     def __init__(self, limit=None, marker=None):
+        # 每页大小限制
         self.limit = limit
+        # 翻页标记
         self.marker = marker
 
     def validate(self):
@@ -11915,13 +13542,14 @@ class ListUserResponse(TeaModel):
     List user response
     """
     def __init__(self, items=None, next_marker=None):
-        self.items = []
+        self.items = items
+        # 翻页标记
         self.next_marker = next_marker
 
     def validate(self):
         if self.items:
             for k in self.items:
-                if k :
+                if k:
                     k.validate()
 
     def to_map(self):
@@ -11952,14 +13580,23 @@ class SearchUserRequest(TeaModel):
     """
     Search user request
     """
-    def __init__(self, email=None, limit=None, marker=None, nick_name=None, phone=None, role=None, status=None, user_name=None):
+    def __init__(self, email=None, limit=None, marker=None, nick_name=None, phone=None, role=None, status=None,
+                 user_name=None):
+        # 邮箱
         self.email = email
+        # 每页大小限制
         self.limit = limit
+        # 翻页标记
         self.marker = marker
+        # 昵称
         self.nick_name = nick_name
+        # 电话号码
         self.phone = phone
+        # 角色
         self.role = role
+        # 状态
         self.status = status
+        # 用户名
         self.user_name = user_name
 
     def validate(self):
@@ -11993,15 +13630,25 @@ class UpdateUserRequest(TeaModel):
     """
     Update user request
     """
-    def __init__(self, avatar=None, description=None, email=None, nick_name=None, phone=None, role=None, status=None, user_data=None, user_id=None):
+    def __init__(self, avatar=None, description=None, email=None, nick_name=None, phone=None, role=None, status=None,
+                 user_data=None, user_id=None):
+        # 头像
         self.avatar = avatar
+        # 描述信息
         self.description = description
+        # 邮箱
         self.email = email
+        # 昵称
         self.nick_name = nick_name
+        # 电话号码
         self.phone = phone
+        # 角色
         self.role = role
+        # 状态
         self.status = status
+        # 用户自定义数据，格式为json，可用于配置项、少量临时数据等存储，不超过1K
         self.user_data = user_data
+        # 用户 ID
         self.user_id = user_id
 
     def validate(self):
@@ -12037,20 +13684,36 @@ class UpdateUserResponse(TeaModel):
     """
     Update user response
     """
-    def __init__(self, avatar=None, created_at=None, default_drive_id=None, description=None, domain_id=None, email=None, nick_name=None, phone=None, role=None, status=None, updated_at=None, user_data=None, user_id=None, user_name=None):
+    def __init__(self, avatar=None, created_at=None, default_drive_id=None, description=None, domain_id=None,
+                 email=None, nick_name=None, phone=None, role=None, status=None, updated_at=None, user_data=None,
+                 user_id=None, user_name=None):
+        # 头像
         self.avatar = avatar
+        # 用户创建时间
         self.created_at = created_at
+        # 默认 Drive ID
         self.default_drive_id = default_drive_id
+        # 用户备注信息
         self.description = description
+        # Domain ID
         self.domain_id = domain_id
+        # 邮箱
         self.email = email
+        # 昵称
         self.nick_name = nick_name
+        # 电话
         self.phone = phone
+        # 角色
         self.role = role
+        # 用户状态
         self.status = status
+        # 用户修改时间
         self.updated_at = updated_at
+        # 用户自定义数据，格式为json，可用于配置项、少量临时数据等存储，不超过1K
         self.user_data = user_data
+        # 用户 ID
         self.user_id = user_id
+        # 用户名称
         self.user_name = user_name
 
     def validate(self):
