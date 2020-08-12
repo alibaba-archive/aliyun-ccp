@@ -19,6 +19,39 @@ jobs:
         - go test -race -coverprofile=coverage.txt -covermode=atomic ./service/...
       after_success:
         - bash <(curl -s https://codecov.io/bash) -cF go
+    - language: go
+      go: 1.13.x
+      if: branch = master
+      install:
+        - export GO111MODULE=on
+      script:
+        - cd credential/golang
+        - go mod tidy
+        - go test -race -coverprofile=coverage.txt -covermode=atomic ./service/...
+      after_success:
+        - bash <(curl -s https://codecov.io/bash) -cF go
+    - language: go
+      go: 1.14.x
+      if: branch = master
+      install:
+        - export GO111MODULE=on
+      script:
+        - cd credential/golang
+        - go mod tidy
+        - go test -race -coverprofile=coverage.txt -covermode=atomic ./service/...
+      after_success:
+        - bash <(curl -s https://codecov.io/bash) -cF go
+    - language: go
+      go: 1.15.x
+      if: branch = master
+      install:
+        - export GO111MODULE=on
+      script:
+        - cd credential/golang
+        - go mod tidy
+        - go test -race -coverprofile=coverage.txt -covermode=atomic ./service/...
+      after_success:
+        - bash <(curl -s https://codecov.io/bash) -cF go            
     - language: csharp
       mono: none
       dist: xenial
