@@ -1,5 +1,6 @@
 import json
 import time
+import calendar
 
 from datetime import datetime
 from Tea.request import TeaRequest
@@ -81,5 +82,5 @@ class Client:
 
         expire_time_str = self.__expire_time.replace('T', ' ').replace('Z', '')
         time_array = time.strptime(expire_time_str, "%Y-%m-%d %H:%M:%S")
-        time_stamp = int(time.mktime(time_array))
+        time_stamp = calendar.timegm(time_array)
         return int(time.mktime(time.localtime())) >= (time_stamp - 180)
